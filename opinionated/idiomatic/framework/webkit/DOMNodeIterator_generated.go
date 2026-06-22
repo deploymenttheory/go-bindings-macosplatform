@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,66 +50,51 @@ func NewDOMNodeIterator() *DOMNodeIterator {
 }
 
 // NextNode wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) NextNode() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextNode"))
+func (dni *DOMNodeIterator) NextNode() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("nextNode"))
 	return DOMNodeFromID(_r)
 }
 
 // PreviousNode wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) PreviousNode() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousNode"))
+func (dni *DOMNodeIterator) PreviousNode() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("previousNode"))
 	return DOMNodeFromID(_r)
 }
 
 // Detach wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) Detach() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detach"))
+func (dni *DOMNodeIterator) Detach() {
+	objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("detach"))
 }
 
 // Root wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) Root() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("root"))
+func (dni *DOMNodeIterator) Root() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("root"))
 	return DOMNodeFromID(_r)
 }
 
 // WhatToShow wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) WhatToShow() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("whatToShow"))
+func (dni *DOMNodeIterator) WhatToShow() int {
+	_r := objc.Send[int](objref.IDOf(dni), objc.RegisterName("whatToShow"))
 	return _r
 }
 
 // ExpandEntityReferences wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) ExpandEntityReferences() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("expandEntityReferences"))
+func (dni *DOMNodeIterator) ExpandEntityReferences() bool {
+	_r := objc.Send[bool](objref.IDOf(dni), objc.RegisterName("expandEntityReferences"))
 	return _r
 }
 
 // ReferenceNode wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) ReferenceNode() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceNode"))
+func (dni *DOMNodeIterator) ReferenceNode() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("referenceNode"))
 	return DOMNodeFromID(_r)
 }
 
 // PointerBeforeReferenceNode wraps the corresponding Objective-C method.
-func (x *DOMNodeIterator) PointerBeforeReferenceNode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pointerBeforeReferenceNode"))
+func (dni *DOMNodeIterator) PointerBeforeReferenceNode() bool {
+	_r := objc.Send[bool](objref.IDOf(dni), objc.RegisterName("pointerBeforeReferenceNode"))
 	return _r
 }
-
-// DOMNodeIteratorable is the interface implemented by [DOMNodeIterator], for mocking and DI.
-type DOMNodeIteratorable interface {
-	obj.Object
-	NextNode() *DOMNode
-	PreviousNode() *DOMNode
-	Detach()
-	Root() *DOMNode
-	WhatToShow() int
-	ExpandEntityReferences() bool
-	ReferenceNode() *DOMNode
-	PointerBeforeReferenceNode() bool
-}
-
-var _ DOMNodeIteratorable = (*DOMNodeIterator)(nil)
 
 var _ DOMObjectProvider = (*DOMNodeIterator)(nil)
 

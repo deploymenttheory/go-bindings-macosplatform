@@ -46,24 +46,24 @@ func indexExtensionRequestHandlerAdopt(id objc.ID) *IndexExtensionRequestHandler
 }
 
 // Description returns the object's -description text.
-func (x *IndexExtensionRequestHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ierh *IndexExtensionRequestHandler) Description() string {
+	return rt.Description(objref.IDOf(ierh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IndexExtensionRequestHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ierh *IndexExtensionRequestHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ierh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IndexExtensionRequestHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ierh *IndexExtensionRequestHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ierh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IndexExtensionRequestHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ierh *IndexExtensionRequestHandler) String() string {
+	return rt.Description(objref.IDOf(ierh))
 }
 
 // NewIndexExtensionRequestHandler creates a new IndexExtensionRequestHandler.
@@ -71,10 +71,3 @@ func NewIndexExtensionRequestHandler() *IndexExtensionRequestHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("CSIndexExtensionRequestHandler")), objc.RegisterName("new"))
 	return indexExtensionRequestHandlerAdopt(_id)
 }
-
-// IndexExtensionRequestHandlerable is the interface implemented by [IndexExtensionRequestHandler], for mocking and DI.
-type IndexExtensionRequestHandlerable interface {
-	obj.Object
-}
-
-var _ IndexExtensionRequestHandlerable = (*IndexExtensionRequestHandler)(nil)

@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,92 +49,58 @@ func NewAvoidOccluderConstraint() *AvoidOccluderConstraint {
 	return avoidOccluderConstraintAdopt(_id)
 }
 
-// WithTarget defines the target node
-func (x *AvoidOccluderConstraint) WithTarget(target NodeProvider) *AvoidOccluderConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets defines the target node
+func (aoc *AvoidOccluderConstraint) WithTarget(target NodeProvider) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return aoc
 }
 
-// WithOccluderCategoryBitMask defines the category of node to consider as occluder. Defaults to 1.
-func (x *AvoidOccluderConstraint) WithOccluderCategoryBitMask(occluderCategoryBitMask int) *AvoidOccluderConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
-	return x
+// WithOccluderCategoryBitMask sets defines the category of node to consider as occluder. Defaults to 1.
+func (aoc *AvoidOccluderConstraint) WithOccluderCategoryBitMask(occluderCategoryBitMask int) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
+	return aoc
 }
 
-// WithBias defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
-func (x *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+// WithBias sets defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
+func (aoc *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setBias:"), bias)
+	return aoc
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (aoc *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setEnabled:"), enabled)
+	return aoc
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (aoc *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return aoc
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccluderConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (aoc *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setIncremental:"), incremental)
+	return aoc
 }
 
 // Target defines the target node
-func (x *AvoidOccluderConstraint) Target() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (aoc *AvoidOccluderConstraint) Target() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *AvoidOccluderConstraint) SetTarget(target *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
 // OccluderCategoryBitMask defines the category of node to consider as occluder. Defaults to 1.
-func (x *AvoidOccluderConstraint) OccluderCategoryBitMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occluderCategoryBitMask"))
+func (aoc *AvoidOccluderConstraint) OccluderCategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(aoc), objc.RegisterName("occluderCategoryBitMask"))
 	return _r
-}
-
-// SetOccluderCategoryBitMask wraps the corresponding Objective-C method.
-func (x *AvoidOccluderConstraint) SetOccluderCategoryBitMask(occluderCategoryBitMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
 }
 
 // Bias defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
-func (x *AvoidOccluderConstraint) Bias() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bias"))
+func (aoc *AvoidOccluderConstraint) Bias() float64 {
+	_r := objc.Send[float64](objref.IDOf(aoc), objc.RegisterName("bias"))
 	return _r
 }
-
-// SetBias wraps the corresponding Objective-C method.
-func (x *AvoidOccluderConstraint) SetBias(bias float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-}
-
-// AvoidOccluderConstraintable is the interface implemented by [AvoidOccluderConstraint], for mocking and DI.
-type AvoidOccluderConstraintable interface {
-	obj.Object
-	WithTarget(target NodeProvider) *AvoidOccluderConstraint
-	WithOccluderCategoryBitMask(occluderCategoryBitMask int) *AvoidOccluderConstraint
-	WithBias(bias float64) *AvoidOccluderConstraint
-	WithEnabled(enabled bool) *AvoidOccluderConstraint
-	WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint
-	WithIncremental(incremental bool) *AvoidOccluderConstraint
-	Target() *Node
-	SetTarget(target *Node)
-	OccluderCategoryBitMask() int
-	SetOccluderCategoryBitMask(occluderCategoryBitMask int)
-	Bias() float64
-	SetBias(bias float64)
-}
-
-var _ AvoidOccluderConstraintable = (*AvoidOccluderConstraint)(nil)
 
 var _ ConstraintProvider = (*AvoidOccluderConstraint)(nil)

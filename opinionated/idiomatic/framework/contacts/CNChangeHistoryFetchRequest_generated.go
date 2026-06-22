@@ -52,127 +52,78 @@ func NewChangeHistoryFetchRequest() *ChangeHistoryFetchRequest {
 	return changeHistoryFetchRequestAdopt(_id)
 }
 
-// WithStartingToken an opaque token that indicates a point in history in the user’s Contacts database.
-func (x *ChangeHistoryFetchRequest) WithStartingToken(startingToken obj.Object) *ChangeHistoryFetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingToken:"), objref.IDOf(startingToken))
-	return x
+// WithStartingToken sets an opaque token that indicates a point in history in the user’s Contacts database.
+func (chfr *ChangeHistoryFetchRequest) WithStartingToken(startingToken obj.Object) *ChangeHistoryFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setStartingToken:"), objref.IDOf(startingToken))
+	return chfr
 }
 
-// WithShouldUnifyResults a Boolean value that indicates whether the fetch should return contact changes as unified contacts.
-func (x *ChangeHistoryFetchRequest) WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUnifyResults:"), shouldUnifyResults)
-	return x
+// WithShouldUnifyResults sets a Boolean value that indicates whether the fetch should return contact changes as unified contacts.
+func (chfr *ChangeHistoryFetchRequest) WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setShouldUnifyResults:"), shouldUnifyResults)
+	return chfr
 }
 
-// WithMutableObjects a Boolean value that indicates whether the fetch should return mutable contacts and groups.
-func (x *ChangeHistoryFetchRequest) WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableObjects:"), mutableObjects)
-	return x
+// WithMutableObjects sets a Boolean value that indicates whether the fetch should return mutable contacts and groups.
+func (chfr *ChangeHistoryFetchRequest) WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setMutableObjects:"), mutableObjects)
+	return chfr
 }
 
-// WithIncludeGroupChanges a Boolean value that indicates whether the fetch should also return group changes.
-func (x *ChangeHistoryFetchRequest) WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeGroupChanges:"), includeGroupChanges)
-	return x
+// WithIncludeGroupChanges sets a Boolean value that indicates whether the fetch should also return group changes.
+func (chfr *ChangeHistoryFetchRequest) WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setIncludeGroupChanges:"), includeGroupChanges)
+	return chfr
 }
 
-// WithExcludedTransactionAuthors an array of strings that identify transaction authors to exclude from the fetch results.
-func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...obj.Object) *ChangeHistoryFetchRequest {
+// WithExcludedTransactionAuthors sets an array of strings that identify transaction authors to exclude from the fetch results.
+func (chfr *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...obj.Object) *ChangeHistoryFetchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedTransactionAuthors:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setExcludedTransactionAuthors:"), _arr)
+	return chfr
 }
 
-// StartingToken request changes made after a certain point. If non-nil, only changes made after this point in history will be returned. If nil, a
-func (x *ChangeHistoryFetchRequest) StartingToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startingToken"))
+// StartingToken returns request changes made after a certain point. If non-nil, only changes made after this point in history will be returned. If nil, a
+func (chfr *ChangeHistoryFetchRequest) StartingToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("startingToken"))
 	return obj.Wrap(_r)
 }
 
-// SetStartingToken wraps the corresponding Objective-C method.
-func (x *ChangeHistoryFetchRequest) SetStartingToken(startingToken obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingToken:"), objref.IDOf(startingToken))
-}
-
-// AdditionalContactKeyDescriptors additional keys to include in the fetched contacts. By default, only
-func (x *ChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalContactKeyDescriptors"))
+// AdditionalContactKeyDescriptors returns additional keys to include in the fetched contacts. By default, only
+func (chfr *ChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("additionalContactKeyDescriptors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetAdditionalContactKeyDescriptors wraps the corresponding Objective-C method.
-func (x *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalContactKeyDescriptors:"), purego.SliceToNSArray(additionalContactKeyDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (chfr *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setAdditionalContactKeyDescriptors:"), purego.SliceToNSArray(additionalContactKeyDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ShouldUnifyResults returns contact changes as unified contacts. If
-func (x *ChangeHistoryFetchRequest) ShouldUnifyResults() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldUnifyResults"))
+// ShouldUnifyResults reports whether returns contact changes as unified contacts. If
+func (chfr *ChangeHistoryFetchRequest) ShouldUnifyResults() bool {
+	_r := objc.Send[bool](objref.IDOf(chfr), objc.RegisterName("shouldUnifyResults"))
 	return _r
 }
 
-// SetShouldUnifyResults wraps the corresponding Objective-C method.
-func (x *ChangeHistoryFetchRequest) SetShouldUnifyResults(shouldUnifyResults bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUnifyResults:"), shouldUnifyResults)
-}
-
-// MutableObjects to return mutable contacts and groups. If
-func (x *ChangeHistoryFetchRequest) MutableObjects() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mutableObjects"))
+// MutableObjects reports whether to return mutable contacts and groups. If
+func (chfr *ChangeHistoryFetchRequest) MutableObjects() bool {
+	_r := objc.Send[bool](objref.IDOf(chfr), objc.RegisterName("mutableObjects"))
 	return _r
 }
 
-// SetMutableObjects wraps the corresponding Objective-C method.
-func (x *ChangeHistoryFetchRequest) SetMutableObjects(mutableObjects bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutableObjects:"), mutableObjects)
-}
-
-// IncludeGroupChanges set to
-func (x *ChangeHistoryFetchRequest) IncludeGroupChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeGroupChanges"))
+// IncludeGroupChanges reports whether set to
+func (chfr *ChangeHistoryFetchRequest) IncludeGroupChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(chfr), objc.RegisterName("includeGroupChanges"))
 	return _r
 }
 
-// SetIncludeGroupChanges wraps the corresponding Objective-C method.
-func (x *ChangeHistoryFetchRequest) SetIncludeGroupChanges(includeGroupChanges bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeGroupChanges:"), includeGroupChanges)
-}
-
-// ExcludedTransactionAuthors exclude changes made by certain authors. If set, transactions made by the specified authors will be excluded from the results. Use this, in conjunction with
+// ExcludedTransactionAuthors returns exclude changes made by certain authors. If set, transactions made by the specified authors will be excluded from the results. Use this, in conjunction with
 //
 // ExcludedTransactionAuthors returns the collection as a Go slice.
-func (x *ChangeHistoryFetchRequest) ExcludedTransactionAuthors() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedTransactionAuthors"))
+func (chfr *ChangeHistoryFetchRequest) ExcludedTransactionAuthors() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("excludedTransactionAuthors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetExcludedTransactionAuthors wraps the corresponding Objective-C method.
-func (x *ChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransactionAuthors []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedTransactionAuthors:"), purego.SliceToNSArray(excludedTransactionAuthors, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// ChangeHistoryFetchRequestable is the interface implemented by [ChangeHistoryFetchRequest], for mocking and DI.
-type ChangeHistoryFetchRequestable interface {
-	obj.Object
-	WithStartingToken(startingToken obj.Object) *ChangeHistoryFetchRequest
-	WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest
-	WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest
-	WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest
-	WithExcludedTransactionAuthors(items ...obj.Object) *ChangeHistoryFetchRequest
-	StartingToken() obj.Object
-	SetStartingToken(startingToken obj.Object)
-	AdditionalContactKeyDescriptors() []obj.Object
-	SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors []obj.Object)
-	ShouldUnifyResults() bool
-	SetShouldUnifyResults(shouldUnifyResults bool)
-	MutableObjects() bool
-	SetMutableObjects(mutableObjects bool)
-	IncludeGroupChanges() bool
-	SetIncludeGroupChanges(includeGroupChanges bool)
-	ExcludedTransactionAuthors() []string
-	SetExcludedTransactionAuthors(excludedTransactionAuthors []string)
-}
-
-var _ ChangeHistoryFetchRequestable = (*ChangeHistoryFetchRequest)(nil)
 
 var _ FetchRequestProvider = (*ChangeHistoryFetchRequest)(nil)

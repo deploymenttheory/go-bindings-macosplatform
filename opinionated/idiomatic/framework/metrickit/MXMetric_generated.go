@@ -48,50 +48,41 @@ func metricAdopt(id objc.ID) *Metric {
 }
 
 // Description returns the object's -description text.
-func (x *Metric) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Metric) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Metric) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Metric) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Metric) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Metric) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Metric) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Metric) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // JSONRepresentation returns the contents of the metric in JSON format.
-func (x *Metric) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+func (m *Metric) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the contents of a metric as a dictionary.
-func (x *Metric) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+func (m *Metric) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// Metricable is the interface implemented by [Metric], for mocking and DI.
-type Metricable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-}
-
-var _ Metricable = (*Metric)(nil)
 
 // isMetric marks Metric — and, by embedding promotion, its
 // subclasses — as a member of the Metric hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Metric) isMetric() {}
+func (m *Metric) isMetric() {}
 
 var _ MetricProvider = (*Metric)(nil)

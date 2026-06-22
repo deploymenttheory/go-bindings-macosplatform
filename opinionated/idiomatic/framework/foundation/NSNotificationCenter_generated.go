@@ -48,73 +48,60 @@ func notificationCenterAdopt(id objc.ID) *NotificationCenter {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NotificationCenter) Description() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nc *NotificationCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nc *NotificationCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NotificationCenter) String() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *NotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *NotificationCenter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (nc *NotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *NotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return nc
 }
 
 // PostNotification wraps the corresponding Objective-C method.
-func (x *NotificationCenter) PostNotification(notification *Notification) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotification:"), objref.IDOf(notification))
+func (nc *NotificationCenter) PostNotification(notification *Notification) {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotification:"), objref.IDOf(notification))
 }
 
 // PostNotificationNameObject wraps the corresponding Objective-C method.
-func (x *NotificationCenter) PostNotificationNameObject(aName *String, anObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
+func (nc *NotificationCenter) PostNotificationNameObject(aName *String, anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotificationName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
 }
 
 // PostNotificationNameObjectUserInfo wraps the corresponding Objective-C method.
-func (x *NotificationCenter) PostNotificationNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
+func (nc *NotificationCenter) PostNotificationNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotificationName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
 }
 
 // RemoveObserver wraps the corresponding Objective-C method.
-func (x *NotificationCenter) RemoveObserver(observer obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:"), objref.IDOf(observer))
+func (nc *NotificationCenter) RemoveObserver(observer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:"), objref.IDOf(observer))
 }
 
 // RemoveObserverNameObject wraps the corresponding Objective-C method.
-func (x *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName *String, anObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), objref.IDOf(aName), objref.IDOf(anObject))
+func (nc *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName *String, anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), objref.IDOf(aName), objref.IDOf(anObject))
 }
-
-// NotificationCenterable is the interface implemented by [NotificationCenter], for mocking and DI.
-type NotificationCenterable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *NotificationCenter
-	PostNotification(notification *Notification)
-	PostNotificationNameObject(aName *String, anObject obj.Object)
-	PostNotificationNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object)
-	RemoveObserver(observer obj.Object)
-	RemoveObserverNameObject(observer obj.Object, aName *String, anObject obj.Object)
-}
-
-var _ NotificationCenterable = (*NotificationCenter)(nil)
 
 // isNotificationCenter marks NotificationCenter — and, by embedding promotion, its
 // subclasses — as a member of the NotificationCenter hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NotificationCenter) isNotificationCenter() {}
+func (nc *NotificationCenter) isNotificationCenter() {}
 
 var _ NotificationCenterProvider = (*NotificationCenter)(nil)

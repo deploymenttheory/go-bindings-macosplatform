@@ -52,155 +52,112 @@ func NewClickGestureRecognizer() *ClickGestureRecognizer {
 	return clickGestureRecognizerAdopt(_id)
 }
 
-// WithButtonMask a bit mask of the button (or buttons) required to recognize this click.
-func (x *ClickGestureRecognizer) WithButtonMask(buttonMask int) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonMask:"), buttonMask)
-	return x
+// WithButtonMask sets a bit mask of the button (or buttons) required to recognize this click.
+func (cgr *ClickGestureRecognizer) WithButtonMask(buttonMask int) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	return cgr
 }
 
-// WithNumberOfClicksRequired the number of clicks required to match.
-func (x *ClickGestureRecognizer) WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfClicksRequired:"), numberOfClicksRequired)
-	return x
+// WithNumberOfClicksRequired sets the number of clicks required to match.
+func (cgr *ClickGestureRecognizer) WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setNumberOfClicksRequired:"), numberOfClicksRequired)
+	return cgr
 }
 
-// WithNumberOfTouchesRequired the number of touches required in an NSTouchBar object for the gesture recognizer to match.
-func (x *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
-	return x
+// WithNumberOfTouchesRequired sets the number of touches required in an NSTouchBar object for the gesture recognizer to match.
+func (cgr *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	return cgr
 }
 
-// WithTarget the object that implements the action method.
-func (x *ClickGestureRecognizer) WithTarget(target obj.Object) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that implements the action method.
+func (cgr *ClickGestureRecognizer) WithTarget(target obj.Object) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return cgr
 }
 
-// WithState the current state of the gesture recognizer.
-func (x *ClickGestureRecognizer) WithState(state GestureRecognizerState) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current state of the gesture recognizer.
+func (cgr *ClickGestureRecognizer) WithState(state GestureRecognizerState) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setState:"), state)
+	return cgr
 }
 
-// WithEnabled a Boolean value indicating whether the gesture recognizer is able to handle events.
-func (x *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
+func (cgr *ClickGestureRecognizer) WithEnabled(enabled bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setEnabled:"), enabled)
+	return cgr
 }
 
-// WithPressureConfiguration configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
-func (x *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+// WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+func (cgr *ClickGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return cgr
 }
 
-// WithDelaysPrimaryMouseButtonEvents a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
-func (x *ClickGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
-	return x
+// WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+func (cgr *ClickGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	return cgr
 }
 
-// WithDelaysSecondaryMouseButtonEvents a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
-func (x *ClickGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
-	return x
+// WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+func (cgr *ClickGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	return cgr
 }
 
-// WithDelaysOtherMouseButtonEvents a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
-func (x *ClickGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
-	return x
+// WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+func (cgr *ClickGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	return cgr
 }
 
-// WithDelaysKeyEvents a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
-func (x *ClickGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
-	return x
+// WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+func (cgr *ClickGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	return cgr
 }
 
-// WithDelaysMagnificationEvents a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
-func (x *ClickGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
-	return x
+// WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+func (cgr *ClickGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	return cgr
 }
 
-// WithDelaysRotationEvents a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
-func (x *ClickGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-	return x
+// WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+func (cgr *ClickGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	return cgr
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *ClickGestureRecognizer) WithName(name string) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (cgr *ClickGestureRecognizer) WithName(name string) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setName:"), purego.NSString(name))
+	return cgr
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClickGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (cgr *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClickGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return cgr
 }
 
 // ButtonMask wraps the corresponding Objective-C method.
-func (x *ClickGestureRecognizer) ButtonMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonMask"))
+func (cgr *ClickGestureRecognizer) ButtonMask() int {
+	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("buttonMask"))
 	return _r
-}
-
-// SetButtonMask wraps the corresponding Objective-C method.
-func (x *ClickGestureRecognizer) SetButtonMask(buttonMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonMask:"), buttonMask)
 }
 
 // NumberOfClicksRequired wraps the corresponding Objective-C method.
-func (x *ClickGestureRecognizer) NumberOfClicksRequired() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClicksRequired"))
+func (cgr *ClickGestureRecognizer) NumberOfClicksRequired() int {
+	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfClicksRequired"))
 	return _r
-}
-
-// SetNumberOfClicksRequired wraps the corresponding Objective-C method.
-func (x *ClickGestureRecognizer) SetNumberOfClicksRequired(numberOfClicksRequired int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfClicksRequired:"), numberOfClicksRequired)
 }
 
 // NumberOfTouchesRequired wraps the corresponding Objective-C method.
-func (x *ClickGestureRecognizer) NumberOfTouchesRequired() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTouchesRequired"))
+func (cgr *ClickGestureRecognizer) NumberOfTouchesRequired() int {
+	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfTouchesRequired"))
 	return _r
 }
-
-// SetNumberOfTouchesRequired wraps the corresponding Objective-C method.
-func (x *ClickGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
-}
-
-// ClickGestureRecognizerable is the interface implemented by [ClickGestureRecognizer], for mocking and DI.
-type ClickGestureRecognizerable interface {
-	obj.Object
-	WithButtonMask(buttonMask int) *ClickGestureRecognizer
-	WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer
-	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer
-	WithTarget(target obj.Object) *ClickGestureRecognizer
-	WithState(state GestureRecognizerState) *ClickGestureRecognizer
-	WithEnabled(enabled bool) *ClickGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer
-	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *ClickGestureRecognizer
-	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *ClickGestureRecognizer
-	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *ClickGestureRecognizer
-	WithDelaysKeyEvents(delaysKeyEvents bool) *ClickGestureRecognizer
-	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer
-	WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer
-	WithName(name string) *ClickGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClickGestureRecognizer
-	ButtonMask() int
-	SetButtonMask(buttonMask int)
-	NumberOfClicksRequired() int
-	SetNumberOfClicksRequired(numberOfClicksRequired int)
-	NumberOfTouchesRequired() int
-	SetNumberOfTouchesRequired(numberOfTouchesRequired int)
-}
-
-var _ ClickGestureRecognizerable = (*ClickGestureRecognizer)(nil)
 
 var _ GestureRecognizerProvider = (*ClickGestureRecognizer)(nil)

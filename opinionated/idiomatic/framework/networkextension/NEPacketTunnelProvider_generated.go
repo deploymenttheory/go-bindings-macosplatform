@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,23 +49,23 @@ func nEPacketTunnelProviderAdopt(id objc.ID) *NEPacketTunnelProvider {
 	return x
 }
 
-// WithReasserting indicate to the system that the tunnel is being re-established.
-func (x *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketTunnelProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
-	return x
+// WithReasserting sets indicate to the system that the tunnel is being re-established.
+func (nptp *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketTunnelProvider {
+	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("setReasserting:"), reasserting)
+	return nptp
 }
 
 // StartTunnelWithOptions start the network tunnel.
 //
 // StartTunnelWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options obj.Object) error {
+func (nptp *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTunnelWithOptions:completionHandler:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("startTunnelWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -76,12 +77,12 @@ func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, opt
 // StopTunnelWithReason stop the network tunnel.
 //
 // StopTunnelWithReason blocks until the operation completes or ctx is cancelled.
-func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
+func (nptp *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTunnelWithReason:completionHandler:"), reason, _block)
+	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("stopTunnelWithReason:completionHandler:"), reason, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -90,34 +91,22 @@ func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reaso
 	}
 }
 
-// PacketFlow an NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
-func (x *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("packetFlow"))
+// PacketFlow returns an NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
+func (nptp *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
+	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("packetFlow"))
 	return NEPacketTunnelFlowFromID(_r)
 }
 
-// VirtualInterface the virtual network interface used to route packets to the packet tunnel provider. For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
-func (x *NEPacketTunnelProvider) VirtualInterface() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualInterface"))
+// VirtualInterface returns the virtual network interface used to route packets to the packet tunnel provider. For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
+func (nptp *NEPacketTunnelProvider) VirtualInterface() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("virtualInterface"))
 	return obj.Wrap(_r)
 }
-
-// NEPacketTunnelProviderable is the interface implemented by [NEPacketTunnelProvider], for mocking and DI.
-type NEPacketTunnelProviderable interface {
-	obj.Object
-	WithReasserting(reasserting bool) *NEPacketTunnelProvider
-	StartTunnelWithOptions(ctx context.Context, options obj.Object) error
-	StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error
-	PacketFlow() *NEPacketTunnelFlow
-	VirtualInterface() obj.Object
-}
-
-var _ NEPacketTunnelProviderable = (*NEPacketTunnelProvider)(nil)
 
 // isNEPacketTunnelProvider marks NEPacketTunnelProvider — and, by embedding promotion, its
 // subclasses — as a member of the NEPacketTunnelProvider hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEPacketTunnelProvider) isNEPacketTunnelProvider() {}
+func (nptp *NEPacketTunnelProvider) isNEPacketTunnelProvider() {}
 
 var _ NEPacketTunnelProviderProvider = (*NEPacketTunnelProvider)(nil)
 

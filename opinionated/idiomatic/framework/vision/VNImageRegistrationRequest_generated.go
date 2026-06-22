@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,45 +46,34 @@ func imageRegistrationRequestAdopt(id objc.ID) *ImageRegistrationRequest {
 	return x
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *ImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (irr *ImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(irr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return irr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *ImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (irr *ImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(irr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return irr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *ImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (irr *ImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(irr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return irr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *ImageRegistrationRequest) WithRevision(revision int) *ImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (irr *ImageRegistrationRequest) WithRevision(revision int) *ImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(irr), objc.RegisterName("setRevision:"), revision)
+	return irr
 }
-
-// ImageRegistrationRequestable is the interface implemented by [ImageRegistrationRequest], for mocking and DI.
-type ImageRegistrationRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *ImageRegistrationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *ImageRegistrationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *ImageRegistrationRequest
-	WithRevision(revision int) *ImageRegistrationRequest
-}
-
-var _ ImageRegistrationRequestable = (*ImageRegistrationRequest)(nil)
 
 // isImageRegistrationRequest marks ImageRegistrationRequest — and, by embedding promotion, its
 // subclasses — as a member of the ImageRegistrationRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageRegistrationRequest) isImageRegistrationRequest() {}
+func (irr *ImageRegistrationRequest) isImageRegistrationRequest() {}
 
 var _ ImageRegistrationRequestProvider = (*ImageRegistrationRequest)(nil)
 

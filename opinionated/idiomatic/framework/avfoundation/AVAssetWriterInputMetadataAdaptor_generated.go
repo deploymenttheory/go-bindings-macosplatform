@@ -46,24 +46,24 @@ func assetWriterInputMetadataAdaptorAdopt(id objc.ID) *AssetWriterInputMetadataA
 }
 
 // Description returns the object's -description text.
-func (x *AssetWriterInputMetadataAdaptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (awima *AssetWriterInputMetadataAdaptor) Description() string {
+	return rt.Description(objref.IDOf(awima))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetWriterInputMetadataAdaptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (awima *AssetWriterInputMetadataAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(awima), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetWriterInputMetadataAdaptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (awima *AssetWriterInputMetadataAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(awima), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetWriterInputMetadataAdaptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (awima *AssetWriterInputMetadataAdaptor) String() string {
+	return rt.Description(objref.IDOf(awima))
 }
 
 // NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a metadata group adaptor to append timed metadata groups to write to an output file.
@@ -74,22 +74,13 @@ func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *AssetWriterIn
 }
 
 // AppendTimedMetadataGroup appends a timed metadata group to the adaptor.
-func (x *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendTimedMetadataGroup:"), objref.IDOf(timedMetadataGroup))
+func (awima *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool {
+	_r := objc.Send[bool](objref.IDOf(awima), objc.RegisterName("appendTimedMetadataGroup:"), objref.IDOf(timedMetadataGroup))
 	return _r
 }
 
-// AssetWriterInput the asset writer input to which the receiver should append timed metadata groups.
-func (x *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
+// AssetWriterInput returns the asset writer input to which the receiver should append timed metadata groups.
+func (awima *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := objc.Send[objc.ID](objref.IDOf(awima), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)
 }
-
-// AssetWriterInputMetadataAdaptorable is the interface implemented by [AssetWriterInputMetadataAdaptor], for mocking and DI.
-type AssetWriterInputMetadataAdaptorable interface {
-	obj.Object
-	AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool
-	AssetWriterInput() *AssetWriterInput
-}
-
-var _ AssetWriterInputMetadataAdaptorable = (*AssetWriterInputMetadataAdaptor)(nil)

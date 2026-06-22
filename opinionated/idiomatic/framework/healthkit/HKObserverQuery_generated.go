@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewObserverQuery() *ObserverQuery {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKObserverQuery")), objc.RegisterName("new"))
 	return observerQueryAdopt(_id)
 }
-
-// ObserverQueryable is the interface implemented by [ObserverQuery], for mocking and DI.
-type ObserverQueryable interface {
-	obj.Object
-}
-
-var _ ObserverQueryable = (*ObserverQuery)(nil)
 
 var _ QueryProvider = (*ObserverQuery)(nil)

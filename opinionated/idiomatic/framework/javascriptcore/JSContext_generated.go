@@ -46,24 +46,24 @@ func contextAdopt(id objc.ID) *Context {
 }
 
 // Description returns the object's -description text.
-func (x *Context) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Context) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Context) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Context) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Context) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Context) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Context) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Context) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewContext creates a new Context.
@@ -79,133 +79,88 @@ func NewContextWithVirtualMachine(virtualMachine *VirtualMachine) *Context {
 	return contextAdopt(_id)
 }
 
-// WithException a JavaScript exception to be thrown in evaluation of the script.
-func (x *Context) WithException(exception *Value) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setException:"), objref.IDOf(exception))
-	return x
+// WithException sets a JavaScript exception to be thrown in evaluation of the script.
+func (c *Context) WithException(exception *Value) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setException:"), objref.IDOf(exception))
+	return c
 }
 
-// WithExceptionHandler a block to be invoked should evaluating a script result in a JavaScript exception being thrown.
-func (x *Context) WithExceptionHandler(exceptionHandler func(obj.Object, obj.Object)) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { exceptionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithExceptionHandler sets a block to be invoked should evaluating a script result in a JavaScript exception being thrown.
+func (c *Context) WithExceptionHandler(exceptionHandler func(obj.Object, obj.Object)) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setExceptionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { exceptionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return c
 }
 
-// WithName a descriptive name for the context.
-func (x *Context) WithName(name string) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a descriptive name for the context.
+func (c *Context) WithName(name string) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), purego.NSString(name))
+	return c
 }
 
-// WithInspectable a Boolean value that indicates whether you can inspect the JavaScript context with Safari Web Inspector.
-func (x *Context) WithInspectable(inspectable bool) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInspectable:"), inspectable)
-	return x
+// WithInspectable sets a Boolean value that indicates whether you can inspect the JavaScript context with Safari Web Inspector.
+func (c *Context) WithInspectable(inspectable bool) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setInspectable:"), inspectable)
+	return c
 }
 
 // EvaluateScript executes the specified JavaScript code.
-func (x *Context) EvaluateScript(script string) *Value {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluateScript:"), purego.NSString(script))
+func (c *Context) EvaluateScript(script string) *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("evaluateScript:"), purego.NSString(script))
 	return ValueFromID(_r)
 }
 
 // EvaluateScriptWithSourceURL executes the specified JavaScript code, treating the specified URL as its source location.
-func (x *Context) EvaluateScriptWithSourceURL(script string, sourceURL string) *Value {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluateScript:withSourceURL:"), purego.NSString(script), rt.FileURL(sourceURL))
+func (c *Context) EvaluateScriptWithSourceURL(script string, sourceURL string) *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("evaluateScript:withSourceURL:"), purego.NSString(script), rt.FileURL(sourceURL))
 	return ValueFromID(_r)
 }
 
 // GlobalObject get the global object of the context. This method retrieves the global object of the JavaScript execution context. Instances of JSContext originating from WebKit will return a reference to the WindowProxy object.
-func (x *Context) GlobalObject() *Value {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalObject"))
+func (c *Context) GlobalObject() *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("globalObject"))
 	return ValueFromID(_r)
 }
 
-// Exception the <code>exception</code> property may be used to throw an exception to JavaScript. Before a callback is made from JavaScript to an Objective-C block or method, the prior value of the exception property will be preserved and the property will be set to nil. After the callback has completed the new value of the exception property will be read, and prior value restored. If the new value of exception is not nil, the callback will result in that value being thrown. This property may also be used to check for uncaught exceptions arising from API function calls (since the default behaviour of <code>exceptionHandler</code> is to assign an uncaught exception to this property).
-func (x *Context) Exception() *Value {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exception"))
+// Exception returns the <code>exception</code> property may be used to throw an exception to JavaScript. Before a callback is made from JavaScript to an Objective-C block or method, the prior value of the exception property will be preserved and the property will be set to nil. After the callback has completed the new value of the exception property will be read, and prior value restored. If the new value of exception is not nil, the callback will result in that value being thrown. This property may also be used to check for uncaught exceptions arising from API function calls (since the default behaviour of <code>exceptionHandler</code> is to assign an uncaught exception to this property).
+func (c *Context) Exception() *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("exception"))
 	return ValueFromID(_r)
 }
 
-// SetException wraps the corresponding Objective-C method.
-func (x *Context) SetException(exception *Value) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setException:"), objref.IDOf(exception))
-}
-
-// SetExceptionHandler wraps the corresponding Objective-C method.
-func (x *Context) SetExceptionHandler(exceptionHandler func(obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { exceptionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-}
-
-// VirtualMachine all instances of JSContext are associated with a JSVirtualMachine.
-func (x *Context) VirtualMachine() *VirtualMachine {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMachine"))
+// VirtualMachine returns all instances of JSContext are associated with a JSVirtualMachine.
+func (c *Context) VirtualMachine() *VirtualMachine {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("virtualMachine"))
 	return VirtualMachineFromID(_r)
 }
 
-// Name name of the JSContext. Exposed when inspecting the context.
-func (x *Context) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of the JSContext. Exposed when inspecting the context.
+func (c *Context) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *Context) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// IsInspectable controls whether this
-func (x *Context) IsInspectable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInspectable"))
+// IsInspectable reports whether controls whether this
+func (c *Context) IsInspectable() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isInspectable"))
 	return _r
 }
 
-// SetInspectable wraps the corresponding Objective-C method.
-func (x *Context) SetInspectable(inspectable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInspectable:"), inspectable)
-}
-
 // ObjectForKeyedSubscript returns the value of the specified JavaScript property in the context’s global object, allowing subscript getter syntax.
-func (x *Context) ObjectForKeyedSubscript(key obj.Object) *Value {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
+func (c *Context) ObjectForKeyedSubscript(key obj.Object) *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return ValueFromID(_r)
 }
 
 // SetObjectForKeyedSubscript sets the specified JavaScript property of the context’s global object, allowing subscript setter syntax.
-func (x *Context) SetObjectForKeyedSubscript(object obj.Object, key obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(object), objref.IDOf(key))
+func (c *Context) SetObjectForKeyedSubscript(object obj.Object, key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(object), objref.IDOf(key))
 }
 
 // JSGlobalContextRef wraps the corresponding Objective-C method.
-func (x *Context) JSGlobalContextRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSGlobalContextRef"))
+func (c *Context) JSGlobalContextRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("JSGlobalContextRef"))
 	return obj.Wrap(_r)
 }
-
-// Contextable is the interface implemented by [Context], for mocking and DI.
-type Contextable interface {
-	obj.Object
-	WithException(exception *Value) *Context
-	WithExceptionHandler(exceptionHandler func(obj.Object, obj.Object)) *Context
-	WithName(name string) *Context
-	WithInspectable(inspectable bool) *Context
-	EvaluateScript(script string) *Value
-	EvaluateScriptWithSourceURL(script string, sourceURL string) *Value
-	GlobalObject() *Value
-	Exception() *Value
-	SetException(exception *Value)
-	SetExceptionHandler(exceptionHandler func(obj.Object, obj.Object))
-	VirtualMachine() *VirtualMachine
-	Name() string
-	SetName(name string)
-	IsInspectable() bool
-	SetInspectable(inspectable bool)
-	ObjectForKeyedSubscript(key obj.Object) *Value
-	SetObjectForKeyedSubscript(object obj.Object, key obj.Object)
-	JSGlobalContextRef() obj.Object
-}
-
-var _ Contextable = (*Context)(nil)

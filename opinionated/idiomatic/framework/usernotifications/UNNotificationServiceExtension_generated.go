@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func notificationServiceExtensionAdopt(id objc.ID) *NotificationServiceExtension
 }
 
 // Description returns the object's -description text.
-func (x *NotificationServiceExtension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nse *NotificationServiceExtension) Description() string {
+	return rt.Description(objref.IDOf(nse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationServiceExtension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nse *NotificationServiceExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationServiceExtension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nse *NotificationServiceExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationServiceExtension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nse *NotificationServiceExtension) String() string {
+	return rt.Description(objref.IDOf(nse))
 }
 
 // NewNotificationServiceExtension creates a new NotificationServiceExtension.
@@ -76,7 +77,7 @@ func NewNotificationServiceExtension() *NotificationServiceExtension {
 // DidReceiveNotificationRequestWithContentHandler asks you to make any needed changes to the notification and notify the system when you’re done.
 //
 // DidReceiveNotificationRequestWithContentHandler blocks until the operation completes or ctx is cancelled.
-func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (result *NotificationContent, err error) {
+func (nse *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (result *NotificationContent, err error) {
 	type _result struct {
 		val *NotificationContent
 		err error
@@ -87,7 +88,7 @@ func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentH
 		_o.val = NotificationContentFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didReceiveNotificationRequest:withContentHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(nse), objc.RegisterName("didReceiveNotificationRequest:withContentHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,15 +99,6 @@ func (x *NotificationServiceExtension) DidReceiveNotificationRequestWithContentH
 }
 
 // ServiceExtensionTimeWillExpire tells you that the system is terminating your extension.
-func (x *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceExtensionTimeWillExpire"))
+func (nse *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
+	objc.Send[objc.ID](objref.IDOf(nse), objc.RegisterName("serviceExtensionTimeWillExpire"))
 }
-
-// NotificationServiceExtensionable is the interface implemented by [NotificationServiceExtension], for mocking and DI.
-type NotificationServiceExtensionable interface {
-	obj.Object
-	DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (*NotificationContent, error)
-	ServiceExtensionTimeWillExpire()
-}
-
-var _ NotificationServiceExtensionable = (*NotificationServiceExtension)(nil)

@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,46 +51,34 @@ func NewMetadataFaceObject() *MetadataFaceObject {
 	return metadataFaceObjectAdopt(_id)
 }
 
-// FaceID a unique number associated with the receiver. The value of this property is an NSInteger indicating the unique identifier of this face in the picture. When a new face enters the picture, it is assigned a new unique identifier. faceIDs are not re-used as faces leave the picture and new ones enter. Faces that leave the picture then re-enter are assigned a new faceID.
-func (x *MetadataFaceObject) FaceID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceID"))
+// FaceID returns a unique number associated with the receiver. The value of this property is an NSInteger indicating the unique identifier of this face in the picture. When a new face enters the picture, it is assigned a new unique identifier. faceIDs are not re-used as faces leave the picture and new ones enter. Faces that leave the picture then re-enter are assigned a new faceID.
+func (mfo *MetadataFaceObject) FaceID() int {
+	_r := objc.Send[int](objref.IDOf(mfo), objc.RegisterName("faceID"))
 	return _r
 }
 
-// HasRollAngle a BOOL indicating whether the rollAngle property is valid for this receiver.
-func (x *MetadataFaceObject) HasRollAngle() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRollAngle"))
+// HasRollAngle reports whether a BOOL indicating whether the rollAngle property is valid for this receiver.
+func (mfo *MetadataFaceObject) HasRollAngle() bool {
+	_r := objc.Send[bool](objref.IDOf(mfo), objc.RegisterName("hasRollAngle"))
 	return _r
 }
 
-// RollAngle the roll angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of roll (or tilt) in degrees. A value of 0.0 indicates that the face is level in the picture. If -hasRollAngle returns NO, then reading this property throws an NSGenericException.
-func (x *MetadataFaceObject) RollAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rollAngle"))
+// RollAngle returns the roll angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of roll (or tilt) in degrees. A value of 0.0 indicates that the face is level in the picture. If -hasRollAngle returns NO, then reading this property throws an NSGenericException.
+func (mfo *MetadataFaceObject) RollAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(mfo), objc.RegisterName("rollAngle"))
 	return _r
 }
 
-// HasYawAngle a BOOL indicating whether the yawAngle property is valid for this receiver.
-func (x *MetadataFaceObject) HasYawAngle() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasYawAngle"))
+// HasYawAngle reports whether a BOOL indicating whether the yawAngle property is valid for this receiver.
+func (mfo *MetadataFaceObject) HasYawAngle() bool {
+	_r := objc.Send[bool](objref.IDOf(mfo), objc.RegisterName("hasYawAngle"))
 	return _r
 }
 
-// YawAngle the yaw angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of yaw (or turn) in degrees. A value of 0.0 indicates that the face is straight on in the picture. If -hasYawAngle returns NO, then reading this property throws an NSGenericException.
-func (x *MetadataFaceObject) YawAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yawAngle"))
+// YawAngle returns the yaw angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of yaw (or turn) in degrees. A value of 0.0 indicates that the face is straight on in the picture. If -hasYawAngle returns NO, then reading this property throws an NSGenericException.
+func (mfo *MetadataFaceObject) YawAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(mfo), objc.RegisterName("yawAngle"))
 	return _r
 }
-
-// MetadataFaceObjectable is the interface implemented by [MetadataFaceObject], for mocking and DI.
-type MetadataFaceObjectable interface {
-	obj.Object
-	FaceID() int
-	HasRollAngle() bool
-	RollAngle() float64
-	HasYawAngle() bool
-	YawAngle() float64
-}
-
-var _ MetadataFaceObjectable = (*MetadataFaceObject)(nil)
 
 var _ MetadataObjectProvider = (*MetadataFaceObject)(nil)

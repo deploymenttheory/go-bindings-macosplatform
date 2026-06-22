@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,14 +50,14 @@ func NewDOMMediaList() *DOMMediaList {
 }
 
 // WithMediaText sets the property and returns the receiver so calls can be chained.
-func (x *DOMMediaList) WithMediaText(mediaText string) *DOMMediaList {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaText:"), purego.NSString(mediaText))
-	return x
+func (dml *DOMMediaList) WithMediaText(mediaText string) *DOMMediaList {
+	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("setMediaText:"), purego.NSString(mediaText))
+	return dml
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMMediaList) Item(index int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dml *DOMMediaList) Item(index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("item:"), index)
 	if _r == 0 {
 		return ""
 	}
@@ -66,48 +65,29 @@ func (x *DOMMediaList) Item(index int) string {
 }
 
 // DeleteMedium wraps the corresponding Objective-C method.
-func (x *DOMMediaList) DeleteMedium(oldMedium string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteMedium:"), purego.NSString(oldMedium))
+func (dml *DOMMediaList) DeleteMedium(oldMedium string) {
+	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("deleteMedium:"), purego.NSString(oldMedium))
 }
 
 // AppendMedium wraps the corresponding Objective-C method.
-func (x *DOMMediaList) AppendMedium(newMedium string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendMedium:"), purego.NSString(newMedium))
+func (dml *DOMMediaList) AppendMedium(newMedium string) {
+	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("appendMedium:"), purego.NSString(newMedium))
 }
 
 // MediaText wraps the corresponding Objective-C method.
-func (x *DOMMediaList) MediaText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaText"))
+func (dml *DOMMediaList) MediaText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("mediaText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMediaText wraps the corresponding Objective-C method.
-func (x *DOMMediaList) SetMediaText(mediaText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaText:"), purego.NSString(mediaText))
-}
-
 // Length wraps the corresponding Objective-C method.
-func (x *DOMMediaList) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dml *DOMMediaList) Length() int {
+	_r := objc.Send[int](objref.IDOf(dml), objc.RegisterName("length"))
 	return _r
 }
-
-// DOMMediaListable is the interface implemented by [DOMMediaList], for mocking and DI.
-type DOMMediaListable interface {
-	obj.Object
-	WithMediaText(mediaText string) *DOMMediaList
-	Item(index int) string
-	DeleteMedium(oldMedium string)
-	AppendMedium(newMedium string)
-	MediaText() string
-	SetMediaText(mediaText string)
-	Length() int
-}
-
-var _ DOMMediaListable = (*DOMMediaList)(nil)
 
 var _ DOMObjectProvider = (*DOMMediaList)(nil)
 

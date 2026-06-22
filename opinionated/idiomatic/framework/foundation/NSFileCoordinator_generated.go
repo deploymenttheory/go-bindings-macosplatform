@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func fileCoordinatorAdopt(id objc.ID) *FileCoordinator {
 }
 
 // Description returns the object's -description text.
-func (x *FileCoordinator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fc *FileCoordinator) Description() string {
+	return rt.Description(objref.IDOf(fc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileCoordinator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fc *FileCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileCoordinator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fc *FileCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileCoordinator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fc *FileCoordinator) String() string {
+	return rt.Description(objref.IDOf(fc))
 }
 
 // NewFileCoordinator creates a new FileCoordinator.
@@ -74,29 +75,29 @@ func NewFileCoordinator() *FileCoordinator {
 	return fileCoordinatorAdopt(_id)
 }
 
-// WithPurposeIdentifier a string that uniquely identifies the file access that was performed by this file coordinator.
-func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier StringProvider) *FileCoordinator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurposeIdentifier:"), objref.IDOf(purposeIdentifier))
-	return x
+// WithPurposeIdentifier sets a string that uniquely identifies the file access that was performed by this file coordinator.
+func (fc *FileCoordinator) WithPurposeIdentifier(purposeIdentifier StringProvider) *FileCoordinator {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setPurposeIdentifier:"), objref.IDOf(purposeIdentifier))
+	return fc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *FileCoordinator) WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (fc *FileCoordinator) WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return fc
 }
 
 // CoordinateAccessWithIntentsQueueByAccessor performs a number of coordinated-read or -write operations asynchronously.
 //
 // CoordinateAccessWithIntentsQueueByAccessor blocks until the operation completes or ctx is cancelled.
-func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents []*FileAccessIntent, queue *OperationQueue) error {
+func (fc *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents []*FileAccessIntent, queue *OperationQueue) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateAccessWithIntents:queue:byAccessor:"), purego.SliceToNSArray(intents, func(_v *FileAccessIntent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), _block)
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("coordinateAccessWithIntents:queue:byAccessor:"), purego.SliceToNSArray(intents, func(_v *FileAccessIntent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -106,51 +107,30 @@ func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context
 }
 
 // ItemAtURLWillMoveToURL announces that your app is moving a file to a new URL.
-func (x *FileCoordinator) ItemAtURLWillMoveToURL(oldURL string, newURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:willMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
+func (fc *FileCoordinator) ItemAtURLWillMoveToURL(oldURL string, newURL string) {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("itemAtURL:willMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
 }
 
 // ItemAtURLDidMoveToURL notifies relevant file presenters that the location of a file or directory changed.
-func (x *FileCoordinator) ItemAtURLDidMoveToURL(oldURL string, newURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:didMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
+func (fc *FileCoordinator) ItemAtURLDidMoveToURL(oldURL string, newURL string) {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("itemAtURL:didMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
 }
 
 // ItemAtURLDidChangeUbiquityAttributes tells observing file providers that the item’s ubiquity attributes have changed.
-func (x *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:didChangeUbiquityAttributes:"), rt.FileURL(url), objref.IDOf(attributes))
+func (fc *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("itemAtURL:didChangeUbiquityAttributes:"), rt.FileURL(url), objref.IDOf(attributes))
 }
 
 // Cancel cancels any active file coordination calls.
-func (x *FileCoordinator) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (fc *FileCoordinator) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("cancel"))
 }
 
 // PurposeIdentifier wraps the corresponding Objective-C method.
-func (x *FileCoordinator) PurposeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("purposeIdentifier"))
+func (fc *FileCoordinator) PurposeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("purposeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetPurposeIdentifier wraps the corresponding Objective-C method.
-func (x *FileCoordinator) SetPurposeIdentifier(purposeIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurposeIdentifier:"), purego.NSString(purposeIdentifier))
-}
-
-// FileCoordinatorable is the interface implemented by [FileCoordinator], for mocking and DI.
-type FileCoordinatorable interface {
-	obj.Object
-	WithPurposeIdentifier(purposeIdentifier StringProvider) *FileCoordinator
-	WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator
-	CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents []*FileAccessIntent, queue *OperationQueue) error
-	ItemAtURLWillMoveToURL(oldURL string, newURL string)
-	ItemAtURLDidMoveToURL(oldURL string, newURL string)
-	ItemAtURLDidChangeUbiquityAttributes(url string, attributes obj.Object)
-	Cancel()
-	PurposeIdentifier() string
-	SetPurposeIdentifier(purposeIdentifier string)
-}
-
-var _ FileCoordinatorable = (*FileCoordinator)(nil)

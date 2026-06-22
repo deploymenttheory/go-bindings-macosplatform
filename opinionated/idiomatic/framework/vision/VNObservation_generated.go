@@ -48,50 +48,41 @@ func observationAdopt(id objc.ID) *Observation {
 }
 
 // Description returns the object's -description text.
-func (x *Observation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Observation) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Observation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Observation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Observation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Observation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Observation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Observation) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
-// Uuid the unique identifier assigned to an observation.
-func (x *Observation) Uuid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+// UUID returns the unique identifier assigned to an observation.
+func (o *Observation) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// Confidence the level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
-func (x *Observation) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+// Confidence returns the level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
+func (o *Observation) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("confidence"))
 	return _r
 }
-
-// Observationable is the interface implemented by [Observation], for mocking and DI.
-type Observationable interface {
-	obj.Object
-	Uuid() obj.Object
-	Confidence() float32
-}
-
-var _ Observationable = (*Observation)(nil)
 
 // isObservation marks Observation — and, by embedding promotion, its
 // subclasses — as a member of the Observation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Observation) isObservation() {}
+func (o *Observation) isObservation() {}
 
 var _ ObservationProvider = (*Observation)(nil)

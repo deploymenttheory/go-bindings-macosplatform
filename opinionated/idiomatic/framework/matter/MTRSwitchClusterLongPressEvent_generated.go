@@ -44,24 +44,24 @@ func mTRSwitchClusterLongPressEventAdopt(id objc.ID) *MTRSwitchClusterLongPressE
 }
 
 // Description returns the object's -description text.
-func (x *MTRSwitchClusterLongPressEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msclpe *MTRSwitchClusterLongPressEvent) Description() string {
+	return rt.Description(objref.IDOf(msclpe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSwitchClusterLongPressEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msclpe *MTRSwitchClusterLongPressEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msclpe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSwitchClusterLongPressEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msclpe *MTRSwitchClusterLongPressEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msclpe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSwitchClusterLongPressEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msclpe *MTRSwitchClusterLongPressEvent) String() string {
+	return rt.Description(objref.IDOf(msclpe))
 }
 
 // NewMTRSwitchClusterLongPressEvent creates a new MTRSwitchClusterLongPressEvent.
@@ -71,28 +71,13 @@ func NewMTRSwitchClusterLongPressEvent() *MTRSwitchClusterLongPressEvent {
 }
 
 // WithNewPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
-	return x
+func (msclpe *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent {
+	objc.Send[objc.ID](objref.IDOf(msclpe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
+	return msclpe
 }
 
 // GetNewPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterLongPressEvent) GetNewPosition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
+func (msclpe *MTRSwitchClusterLongPressEvent) GetNewPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msclpe), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
-
-// SetNewPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterLongPressEvent) SetNewPosition(newPosition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
-}
-
-// MTRSwitchClusterLongPressEventable is the interface implemented by [MTRSwitchClusterLongPressEvent], for mocking and DI.
-type MTRSwitchClusterLongPressEventable interface {
-	obj.Object
-	WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent
-	GetNewPosition() obj.Object
-	SetNewPosition(newPosition obj.Object)
-}
-
-var _ MTRSwitchClusterLongPressEventable = (*MTRSwitchClusterLongPressEvent)(nil)

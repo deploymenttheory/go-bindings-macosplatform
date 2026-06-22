@@ -46,24 +46,24 @@ func uRLQueryItemAdopt(id objc.ID) *URLQueryItem {
 }
 
 // Description returns the object's -description text.
-func (x *URLQueryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uqi *URLQueryItem) Description() string {
+	return rt.Description(objref.IDOf(uqi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLQueryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uqi *URLQueryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uqi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLQueryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uqi *URLQueryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uqi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLQueryItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uqi *URLQueryItem) String() string {
+	return rt.Description(objref.IDOf(uqi))
 }
 
 // NewURLQueryItemWithNameValue initializes a newly allocated query item with the specified name and value.
@@ -74,14 +74,14 @@ func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLQueryItem) WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uqi *URLQueryItem) WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem {
+	objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uqi
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *URLQueryItem) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (uqi *URLQueryItem) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,20 +89,10 @@ func (x *URLQueryItem) Name() string {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *URLQueryItem) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (uqi *URLQueryItem) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// URLQueryItemable is the interface implemented by [URLQueryItem], for mocking and DI.
-type URLQueryItemable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem
-	Name() string
-	Value() string
-}
-
-var _ URLQueryItemable = (*URLQueryItem)(nil)

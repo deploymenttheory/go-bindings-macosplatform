@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewChangeHistoryRemoveSubgroupFromGroupEvent() *ChangeHistoryRemoveSubgroup
 }
 
 // Subgroup wraps the corresponding Objective-C method.
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Subgroup() *Group {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroup"))
+func (chrsfge *ChangeHistoryRemoveSubgroupFromGroupEvent) Subgroup() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(chrsfge), objc.RegisterName("subgroup"))
 	return GroupFromID(_r)
 }
 
 // Group wraps the corresponding Objective-C method.
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Group() *Group {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+func (chrsfge *ChangeHistoryRemoveSubgroupFromGroupEvent) Group() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(chrsfge), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
-
-// ChangeHistoryRemoveSubgroupFromGroupEventable is the interface implemented by [ChangeHistoryRemoveSubgroupFromGroupEvent], for mocking and DI.
-type ChangeHistoryRemoveSubgroupFromGroupEventable interface {
-	obj.Object
-	Subgroup() *Group
-	Group() *Group
-}
-
-var _ ChangeHistoryRemoveSubgroupFromGroupEventable = (*ChangeHistoryRemoveSubgroupFromGroupEvent)(nil)
 
 var _ ChangeHistoryEventProvider = (*ChangeHistoryRemoveSubgroupFromGroupEvent)(nil)

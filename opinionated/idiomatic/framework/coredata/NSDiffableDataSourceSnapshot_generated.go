@@ -44,24 +44,24 @@ func diffableDataSourceSnapshotAdopt(id objc.ID) *DiffableDataSourceSnapshot {
 }
 
 // Description returns the object's -description text.
-func (x *DiffableDataSourceSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ddss *DiffableDataSourceSnapshot) Description() string {
+	return rt.Description(objref.IDOf(ddss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DiffableDataSourceSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ddss *DiffableDataSourceSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ddss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DiffableDataSourceSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ddss *DiffableDataSourceSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ddss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DiffableDataSourceSnapshot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ddss *DiffableDataSourceSnapshot) String() string {
+	return rt.Description(objref.IDOf(ddss))
 }
 
 // NewDiffableDataSourceSnapshot creates a new DiffableDataSourceSnapshot.
@@ -69,10 +69,3 @@ func NewDiffableDataSourceSnapshot() *DiffableDataSourceSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDiffableDataSourceSnapshot")), objc.RegisterName("new"))
 	return diffableDataSourceSnapshotAdopt(_id)
 }
-
-// DiffableDataSourceSnapshotable is the interface implemented by [DiffableDataSourceSnapshot], for mocking and DI.
-type DiffableDataSourceSnapshotable interface {
-	obj.Object
-}
-
-var _ DiffableDataSourceSnapshotable = (*DiffableDataSourceSnapshot)(nil)

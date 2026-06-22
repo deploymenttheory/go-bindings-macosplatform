@@ -46,24 +46,24 @@ func zoomRangeAdopt(id objc.ID) *ZoomRange {
 }
 
 // Description returns the object's -description text.
-func (x *ZoomRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (zr *ZoomRange) Description() string {
+	return rt.Description(objref.IDOf(zr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ZoomRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (zr *ZoomRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(zr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ZoomRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (zr *ZoomRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(zr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ZoomRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (zr *ZoomRange) String() string {
+	return rt.Description(objref.IDOf(zr))
 }
 
 // NewZoomRange creates a new ZoomRange.
@@ -73,29 +73,19 @@ func NewZoomRange() *ZoomRange {
 }
 
 // ContainsZoomFactor returns a Boolean value that indicates whether the specified zoom factor exists in the range.
-func (x *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsZoomFactor:"), zoomFactor)
+func (zr *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
+	_r := objc.Send[bool](objref.IDOf(zr), objc.RegisterName("containsZoomFactor:"), zoomFactor)
 	return _r
 }
 
-// MinZoomFactor a CGFloat indicating the minimum zoom factor supported by this range.
-func (x *ZoomRange) MinZoomFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minZoomFactor"))
+// MinZoomFactor returns a CGFloat indicating the minimum zoom factor supported by this range.
+func (zr *ZoomRange) MinZoomFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(zr), objc.RegisterName("minZoomFactor"))
 	return _r
 }
 
-// MaxZoomFactor a CGFloat indicating the maximum zoom factor supported by this range.
-func (x *ZoomRange) MaxZoomFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxZoomFactor"))
+// MaxZoomFactor returns a CGFloat indicating the maximum zoom factor supported by this range.
+func (zr *ZoomRange) MaxZoomFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(zr), objc.RegisterName("maxZoomFactor"))
 	return _r
 }
-
-// ZoomRangeable is the interface implemented by [ZoomRange], for mocking and DI.
-type ZoomRangeable interface {
-	obj.Object
-	ContainsZoomFactor(zoomFactor float64) bool
-	MinZoomFactor() float64
-	MaxZoomFactor() float64
-}
-
-var _ ZoomRangeable = (*ZoomRange)(nil)

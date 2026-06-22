@@ -6,13 +6,14 @@ package virtualization
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // VirtualMachine is an idiomatic wrapper over the Objective-C class VZVirtualMachine.
@@ -49,24 +50,24 @@ func virtualMachineAdopt(id objc.ID) *VirtualMachine {
 }
 
 // Description returns the object's -description text.
-func (x *VirtualMachine) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vm *VirtualMachine) Description() string {
+	return rt.Description(objref.IDOf(vm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualMachine) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vm *VirtualMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualMachine) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vm *VirtualMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualMachine) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vm *VirtualMachine) String() string {
+	return rt.Description(objref.IDOf(vm))
 }
 
 // NewVirtualMachineWithConfiguration creates the VM and configures it with the specified data.
@@ -86,14 +87,14 @@ func NewVirtualMachineWithConfigurationQueue(configuration *VirtualMachineConfig
 // Start starts the VM and notifies the specified completion handler if startup was successful.
 //
 // Start blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) Start(ctx context.Context) error {
+func (vm *VirtualMachine) Start(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("startWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -105,14 +106,14 @@ func (x *VirtualMachine) Start(ctx context.Context) error {
 // StartWithOptions starts the VM with the options and a completion handler you provide.
 //
 // StartWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error {
+func (vm *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithOptions:completionHandler:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("startWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -124,14 +125,14 @@ func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *VirtualM
 // Stop stops a VM that’s in either a running or paused state.
 //
 // Stop blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) Stop(ctx context.Context) error {
+func (vm *VirtualMachine) Stop(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("stopWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -143,14 +144,14 @@ func (x *VirtualMachine) Stop(ctx context.Context) error {
 // Pause pauses a running VM and notifies the specified completion handler of the results.
 //
 // Pause blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) Pause(ctx context.Context) error {
+func (vm *VirtualMachine) Pause(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("pauseWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -162,14 +163,14 @@ func (x *VirtualMachine) Pause(ctx context.Context) error {
 // Resume resumes a paused VM and notifies the specified completion handler of the results.
 //
 // Resume blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) Resume(ctx context.Context) error {
+func (vm *VirtualMachine) Resume(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("resumeWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -181,14 +182,14 @@ func (x *VirtualMachine) Resume(ctx context.Context) error {
 // RestoreMachineStateFromURL restores a VM from a previously saved state.
 //
 // RestoreMachineStateFromURL blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
+func (vm *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreMachineStateFromURL:completionHandler:"), rt.FileURL(saveFileURL), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("restoreMachineStateFromURL:completionHandler:"), rt.FileURL(saveFileURL), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -200,14 +201,14 @@ func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFil
 // SaveMachineStateToURL saves the state of a VM.
 //
 // SaveMachineStateToURL blocks until the operation completes or ctx is cancelled.
-func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
+func (vm *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveMachineStateToURL:completionHandler:"), rt.FileURL(saveFileURL), _block)
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("saveMachineStateToURL:completionHandler:"), rt.FileURL(saveFileURL), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -219,138 +220,109 @@ func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL 
 // RequestStop asks the guest operating system to stop running.
 //
 // RequestStop returns an error if the operation did not succeed.
-func (x *VirtualMachine) RequestStop() error {
+func (vm *VirtualMachine) RequestStop() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("requestStopWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(vm), objc.RegisterName("requestStopWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// Queue the queue associated with this virtual machine. This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
-func (x *VirtualMachine) Queue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+// Queue returns the queue associated with this virtual machine. This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
+func (vm *VirtualMachine) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
 
-// State execution state of the virtual machine.
-func (x *VirtualMachine) State() VirtualMachineState {
-	_r := objc.Send[VirtualMachineState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns execution state of the virtual machine.
+func (vm *VirtualMachine) State() VirtualMachineState {
+	_r := objc.Send[VirtualMachineState](objref.IDOf(vm), objc.RegisterName("state"))
 	return _r
 }
 
-// CanStart return YES if the machine is in a state that can be started.
-func (x *VirtualMachine) CanStart() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStart"))
+// CanStart reports whether the machine is in a state that can be started.
+func (vm *VirtualMachine) CanStart() bool {
+	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canStart"))
 	return _r
 }
 
-// CanStop return YES if the machine is in a state that can be stopped.
-func (x *VirtualMachine) CanStop() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStop"))
+// CanStop reports whether the machine is in a state that can be stopped.
+func (vm *VirtualMachine) CanStop() bool {
+	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canStop"))
 	return _r
 }
 
-// CanPause return YES if the machine is in a state that can be paused.
-func (x *VirtualMachine) CanPause() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPause"))
+// CanPause reports whether the machine is in a state that can be paused.
+func (vm *VirtualMachine) CanPause() bool {
+	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canPause"))
 	return _r
 }
 
-// CanResume return YES if the machine is in a state that can be resumed.
-func (x *VirtualMachine) CanResume() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canResume"))
+// CanResume reports whether the machine is in a state that can be resumed.
+func (vm *VirtualMachine) CanResume() bool {
+	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canResume"))
 	return _r
 }
 
-// CanRequestStop returns whether the machine is in a state where the guest can be asked to stop.
-func (x *VirtualMachine) CanRequestStop() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRequestStop"))
+// CanRequestStop reports whether the machine is in a state where the guest can be asked to stop.
+func (vm *VirtualMachine) CanRequestStop() bool {
+	_r := objc.Send[bool](objref.IDOf(vm), objc.RegisterName("canRequestStop"))
 	return _r
 }
 
-// ConsoleDevices return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured.
+// ConsoleDevices returns the list of console devices configured on this virtual machine. Return an empty array if no console device is configured.
 //
 // ConsoleDevices returns the collection as a Go slice.
-func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("consoleDevices"))
+func (vm *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("consoleDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDevice { return ConsoleDeviceFromID(_id) })
 }
 
-// DirectorySharingDevices return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
+// DirectorySharingDevices returns the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured.
 //
 // DirectorySharingDevices returns the collection as a Go slice.
-func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directorySharingDevices"))
+func (vm *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("directorySharingDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DirectorySharingDevice { return DirectorySharingDeviceFromID(_id) })
 }
 
-// GraphicsDevices return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured.
+// GraphicsDevices returns the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured.
 //
 // GraphicsDevices returns the collection as a Go slice.
-func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graphicsDevices"))
+func (vm *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("graphicsDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDevice { return GraphicsDeviceFromID(_id) })
 }
 
-// MemoryBalloonDevices return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured.
+// MemoryBalloonDevices returns the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured.
 //
 // MemoryBalloonDevices returns the collection as a Go slice.
-func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryBalloonDevices"))
+func (vm *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("memoryBalloonDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MemoryBalloonDevice { return MemoryBalloonDeviceFromID(_id) })
 }
 
-// NetworkDevices return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured.
+// NetworkDevices returns the list of network devices configured on this virtual machine. Return an empty array if no network device is configured.
 //
 // NetworkDevices returns the collection as a Go slice.
-func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkDevices"))
+func (vm *VirtualMachine) NetworkDevices() []*NetworkDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("networkDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NetworkDevice { return NetworkDeviceFromID(_id) })
 }
 
-// SocketDevices return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured.
+// SocketDevices returns the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured.
 //
 // SocketDevices returns the collection as a Go slice.
-func (x *VirtualMachine) SocketDevices() []*SocketDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("socketDevices"))
+func (vm *VirtualMachine) SocketDevices() []*SocketDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("socketDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SocketDevice { return SocketDeviceFromID(_id) })
 }
 
-// UsbControllers return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured.
+// USBControllers returns the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured.
 //
-// UsbControllers returns the collection as a Go slice.
-func (x *VirtualMachine) UsbControllers() []*USBController {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbControllers"))
+// USBControllers returns the collection as a Go slice.
+func (vm *VirtualMachine) USBControllers() []*USBController {
+	_arr := objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("usbControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *USBController { return USBControllerFromID(_id) })
 }
-
-// VirtualMachineable is the interface implemented by [VirtualMachine], for mocking and DI.
-type VirtualMachineable interface {
-	obj.Object
-	Start(ctx context.Context) error
-	StartWithOptions(ctx context.Context, options *VirtualMachineStartOptions) error
-	Stop(ctx context.Context) error
-	Pause(ctx context.Context) error
-	Resume(ctx context.Context) error
-	RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error
-	SaveMachineStateToURL(ctx context.Context, saveFileURL string) error
-	RequestStop() error
-	Queue() obj.Object
-	State() VirtualMachineState
-	CanStart() bool
-	CanStop() bool
-	CanPause() bool
-	CanResume() bool
-	CanRequestStop() bool
-	ConsoleDevices() []*ConsoleDevice
-	DirectorySharingDevices() []*DirectorySharingDevice
-	GraphicsDevices() []*GraphicsDevice
-	MemoryBalloonDevices() []*MemoryBalloonDevice
-	NetworkDevices() []*NetworkDevice
-	SocketDevices() []*SocketDevice
-	UsbControllers() []*USBController
-}
-
-var _ VirtualMachineable = (*VirtualMachine)(nil)

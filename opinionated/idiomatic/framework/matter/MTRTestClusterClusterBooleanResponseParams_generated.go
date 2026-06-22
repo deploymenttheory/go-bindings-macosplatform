@@ -51,24 +51,15 @@ func NewMTRTestClusterClusterBooleanResponseParams() *MTRTestClusterClusterBoole
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterBooleanResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterBooleanResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mtccbrp *MTRTestClusterClusterBooleanResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterBooleanResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccbrp), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mtccbrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterBooleanResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtccbrp *MTRTestClusterClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterBooleanResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccbrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtccbrp
 }
-
-// MTRTestClusterClusterBooleanResponseParamsable is the interface implemented by [MTRTestClusterClusterBooleanResponseParams], for mocking and DI.
-type MTRTestClusterClusterBooleanResponseParamsable interface {
-	obj.Object
-	WithValue(value obj.Object) *MTRTestClusterClusterBooleanResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterBooleanResponseParams
-}
-
-var _ MTRTestClusterClusterBooleanResponseParamsable = (*MTRTestClusterClusterBooleanResponseParams)(nil)
 
 var _ MTRUnitTestingClusterBooleanResponseParamsProvider = (*MTRTestClusterClusterBooleanResponseParams)(nil)

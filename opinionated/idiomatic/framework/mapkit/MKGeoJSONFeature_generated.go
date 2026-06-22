@@ -46,24 +46,24 @@ func geoJSONFeatureAdopt(id objc.ID) *GeoJSONFeature {
 }
 
 // Description returns the object's -description text.
-func (x *GeoJSONFeature) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gjf *GeoJSONFeature) Description() string {
+	return rt.Description(objref.IDOf(gjf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeoJSONFeature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gjf *GeoJSONFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gjf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeoJSONFeature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gjf *GeoJSONFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gjf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GeoJSONFeature) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gjf *GeoJSONFeature) String() string {
+	return rt.Description(objref.IDOf(gjf))
 }
 
 // NewGeoJSONFeature creates a new GeoJSONFeature.
@@ -73,8 +73,8 @@ func NewGeoJSONFeature() *GeoJSONFeature {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *GeoJSONFeature) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (gjf *GeoJSONFeature) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,25 +82,15 @@ func (x *GeoJSONFeature) Identifier() string {
 }
 
 // Properties wraps the corresponding Objective-C method.
-func (x *GeoJSONFeature) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (gjf *GeoJSONFeature) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // Geometry wraps the corresponding Objective-C method.
 //
 // Geometry returns the collection as a Go slice.
-func (x *GeoJSONFeature) Geometry() []*Shape {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
+func (gjf *GeoJSONFeature) Geometry() []*Shape {
+	_arr := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("geometry"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }
-
-// GeoJSONFeatureable is the interface implemented by [GeoJSONFeature], for mocking and DI.
-type GeoJSONFeatureable interface {
-	obj.Object
-	Identifier() string
-	Properties() obj.Object
-	Geometry() []*Shape
-}
-
-var _ GeoJSONFeatureable = (*GeoJSONFeature)(nil)

@@ -5,13 +5,14 @@
 package opendirectory
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Query is an idiomatic wrapper over the Objective-C class ODQuery.
@@ -48,24 +49,24 @@ func queryAdopt(id objc.ID) *Query {
 }
 
 // Description returns the object's -description text.
-func (x *Query) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Query) Description() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Query) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (q *Query) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Query) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (q *Query) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Query) String() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Query) String() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a query object with provided parameters.
@@ -79,16 +80,16 @@ func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributes
 	return queryAdopt(_id), nil
 }
 
-// WithOperationQueue the queue on which asynchronous results are delivered to the delegate.
-func (x *Query) WithOperationQueue(operationQueue obj.Object) *Query {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
-	return x
+// WithOperationQueue sets the queue on which asynchronous results are delivered to the delegate.
+func (q *Query) WithOperationQueue(operationQueue obj.Object) *Query {
+	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
+	return q
 }
 
 // ResultsAllowingPartialError returns results from a query synchronously.
-func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (result obj.Object, err error) {
+func (q *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultsAllowingPartial:error:"), inAllowPartialResults, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("resultsAllowingPartial:error:"), inAllowPartialResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -96,41 +97,22 @@ func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (result 
 }
 
 // ScheduleInRunLoopForMode retrieves results from a query asynchronously by scheduling the query in a run loop.
-func (x *Query) ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
+func (q *Query) ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string) {
+	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
 // RemoveFromRunLoopForMode removes the query from a specified run loop.
-func (x *Query) RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
+func (q *Query) RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string) {
+	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
 // Synchronize restarts a query, disposing of any results it has obtained.
-func (x *Query) Synchronize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronize"))
+func (q *Query) Synchronize() {
+	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("synchronize"))
 }
 
-// OperationQueue the NSOperationQueue on which asynchronous results are delivered to the delegate. The NSOperationQueue on which asynchronous results are delivered to the delegate.
-func (x *Query) OperationQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationQueue"))
+// OperationQueue returns the NSOperationQueue on which asynchronous results are delivered to the delegate. The NSOperationQueue on which asynchronous results are delivered to the delegate.
+func (q *Query) OperationQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("operationQueue"))
 	return obj.Wrap(_r)
 }
-
-// SetOperationQueue wraps the corresponding Objective-C method.
-func (x *Query) SetOperationQueue(operationQueue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
-}
-
-// Queryable is the interface implemented by [Query], for mocking and DI.
-type Queryable interface {
-	obj.Object
-	WithOperationQueue(operationQueue obj.Object) *Query
-	ResultsAllowingPartialError(inAllowPartialResults bool) (result obj.Object, err error)
-	ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string)
-	RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string)
-	Synchronize()
-	OperationQueue() obj.Object
-	SetOperationQueue(operationQueue obj.Object)
-}
-
-var _ Queryable = (*Query)(nil)

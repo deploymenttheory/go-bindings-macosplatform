@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventAdopt(id objc.ID) *MTRSmok
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacisae *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) Description() string {
+	return rt.Description(objref.IDOf(mscacisae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscacisae *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscacisae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscacisae *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscacisae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacisae *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) String() string {
+	return rt.Description(objref.IDOf(mscacisae))
 }
 
 // NewMTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent creates a new MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent.
@@ -71,28 +71,13 @@ func NewMTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent() *MTRSmokeCOAlarmClus
 }
 
 // WithAlarmSeverityLevel sets the property and returns the receiver so calls can be chained.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
-	return x
+func (mscacisae *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
+	objc.Send[objc.ID](objref.IDOf(mscacisae), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
+	return mscacisae
 }
 
 // AlarmSeverityLevel wraps the corresponding Objective-C method.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) AlarmSeverityLevel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmSeverityLevel"))
+func (mscacisae *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) AlarmSeverityLevel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mscacisae), objc.RegisterName("alarmSeverityLevel"))
 	return obj.Wrap(_r)
 }
-
-// SetAlarmSeverityLevel wraps the corresponding Objective-C method.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) SetAlarmSeverityLevel(alarmSeverityLevel obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
-}
-
-// MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventable is the interface implemented by [MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventable interface {
-	obj.Object
-	WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent
-	AlarmSeverityLevel() obj.Object
-	SetAlarmSeverityLevel(alarmSeverityLevel obj.Object)
-}
-
-var _ MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventable = (*MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent)(nil)

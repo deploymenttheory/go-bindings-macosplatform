@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,35 +50,35 @@ func nEProviderAdopt(id objc.ID) *NEProvider {
 }
 
 // Description returns the object's -description text.
-func (x *NEProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NEProvider) Description() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (np *NEProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (np *NEProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NEProvider) String() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // Sleep handle a sleep event.
 //
 // Sleep blocks until the operation completes or ctx is cancelled.
-func (x *NEProvider) Sleep(ctx context.Context) error {
+func (np *NEProvider) Sleep(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sleepWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("sleepWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -87,35 +88,24 @@ func (x *NEProvider) Sleep(ctx context.Context) error {
 }
 
 // Wake handle a wake event.
-func (x *NEProvider) Wake() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wake"))
+func (np *NEProvider) Wake() {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("wake"))
 }
 
 // DisplayMessageCompletionHandler call this method from your NEProvider subclass if you want to display a message to the person using the app.
-func (x *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayMessage:completionHandler:"), purego.NSString(message), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (np *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("displayMessage:completionHandler:"), purego.NSString(message), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // DefaultPath wraps the corresponding Objective-C method.
-func (x *NEProvider) DefaultPath() *NWPath {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultPath"))
+func (np *NEProvider) DefaultPath() *NWPath {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("defaultPath"))
 	return NWPathFromID(_r)
 }
-
-// NEProviderable is the interface implemented by [NEProvider], for mocking and DI.
-type NEProviderable interface {
-	obj.Object
-	Sleep(ctx context.Context) error
-	Wake()
-	DisplayMessageCompletionHandler(message string, completionHandler func(bool))
-	DefaultPath() *NWPath
-}
-
-var _ NEProviderable = (*NEProvider)(nil)
 
 // isNEProvider marks NEProvider — and, by embedding promotion, its
 // subclasses — as a member of the NEProvider hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEProvider) isNEProvider() {}
+func (np *NEProvider) isNEProvider() {}
 
 var _ NEProviderProvider = (*NEProvider)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,38 +47,28 @@ func imageScaleAdopt(id objc.ID) *ImageScale {
 	return x
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageScale) WithOffset(offset mpscore.MPSOffset) *ImageScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (is *ImageScale) WithOffset(offset mpscore.MPSOffset) *ImageScale {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setOffset:"), offset)
+	return is
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageScale) WithClipRect(clipRect metal.MTLRegion) *ImageScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (is *ImageScale) WithClipRect(clipRect metal.MTLRegion) *ImageScale {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setClipRect:"), clipRect)
+	return is
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageScale) WithLabel(label string) *ImageScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (is *ImageScale) WithLabel(label string) *ImageScale {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return is
 }
-
-// ImageScaleable is the interface implemented by [ImageScale], for mocking and DI.
-type ImageScaleable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageScale
-	WithClipRect(clipRect metal.MTLRegion) *ImageScale
-	WithLabel(label string) *ImageScale
-}
-
-var _ ImageScaleable = (*ImageScale)(nil)
 
 // isImageScale marks ImageScale — and, by embedding promotion, its
 // subclasses — as a member of the ImageScale hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageScale) isImageScale() {}
+func (is *ImageScale) isImageScale() {}
 
 var _ ImageScaleProvider = (*ImageScale)(nil)
 

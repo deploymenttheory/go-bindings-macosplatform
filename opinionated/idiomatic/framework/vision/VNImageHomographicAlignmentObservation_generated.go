@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewImageHomographicAlignmentObservation() *ImageHomographicAlignmentObserva
 	_id := objc.Send[objc.ID](objc.ID(_class("VNImageHomographicAlignmentObservation")), objc.RegisterName("new"))
 	return imageHomographicAlignmentObservationAdopt(_id)
 }
-
-// ImageHomographicAlignmentObservationable is the interface implemented by [ImageHomographicAlignmentObservation], for mocking and DI.
-type ImageHomographicAlignmentObservationable interface {
-	obj.Object
-}
-
-var _ ImageHomographicAlignmentObservationable = (*ImageHomographicAlignmentObservation)(nil)
 
 var _ ImageAlignmentObservationProvider = (*ImageHomographicAlignmentObservation)(nil)
 

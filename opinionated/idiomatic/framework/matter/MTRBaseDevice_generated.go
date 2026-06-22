@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,24 +47,24 @@ func mTRBaseDeviceAdopt(id objc.ID) *MTRBaseDevice {
 }
 
 // Description returns the object's -description text.
-func (x *MTRBaseDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbd *MTRBaseDevice) Description() string {
+	return rt.Description(objref.IDOf(mbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBaseDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbd *MTRBaseDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBaseDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbd *MTRBaseDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBaseDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbd *MTRBaseDevice) String() string {
+	return rt.Description(objref.IDOf(mbd))
 }
 
 // NewMTRBaseDevice creates a new MTRBaseDevice.
@@ -73,14 +74,14 @@ func NewMTRBaseDevice() *MTRBaseDevice {
 }
 
 // DeregisterReportHandlersWithQueueCompletion deregister all local report handlers for a remote device This method is applicable only for a remote device. For a local device, the stack has to be shutdown to stop report handlers. There could be multiple clients accessing a node through a remote controller object and hence it is not appropriate for one of those clients to shut down the entire stack to stop receiving reports.
-func (x *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue obj.Object, completion func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deregisterReportHandlersWithQueue:completion:"), objref.IDOf(queue), completion)
+func (mbd *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue obj.Object, completion func()) {
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithQueue:completion:"), objref.IDOf(queue), completion)
 }
 
 // DownloadLogOfTypeTimeoutQueueCompletion download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
 //
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
+func (mbd *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -92,7 +93,7 @@ func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadLogOfType:timeout:queue:completion:"), type_, timeout, objref.IDOf(queue), _block)
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("downloadLogOfType:timeout:queue:completion:"), type_, timeout, objref.IDOf(queue), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,24 +103,13 @@ func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Cont
 	}
 }
 
-// SessionTransportType the transport used by the current session with this device, or `MTRTransportTypeUndefined` if no session is currently active.
-func (x *MTRBaseDevice) SessionTransportType() MTRTransportType {
-	_r := objc.Send[MTRTransportType](objref.IDOf(x), objc.RegisterName("sessionTransportType"))
+// SessionTransportType returns the transport used by the current session with this device, or `MTRTransportTypeUndefined` if no session is currently active.
+func (mbd *MTRBaseDevice) SessionTransportType() MTRTransportType {
+	_r := objc.Send[MTRTransportType](objref.IDOf(mbd), objc.RegisterName("sessionTransportType"))
 	return _r
 }
 
 // DeregisterReportHandlersWithClientQueueCompletion wraps the corresponding Objective-C method.
-func (x *MTRBaseDevice) DeregisterReportHandlersWithClientQueueCompletion(queue obj.Object, completion func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:"), objref.IDOf(queue), completion)
+func (mbd *MTRBaseDevice) DeregisterReportHandlersWithClientQueueCompletion(queue obj.Object, completion func()) {
+	objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("deregisterReportHandlersWithClientQueue:completion:"), objref.IDOf(queue), completion)
 }
-
-// MTRBaseDeviceable is the interface implemented by [MTRBaseDevice], for mocking and DI.
-type MTRBaseDeviceable interface {
-	obj.Object
-	DeregisterReportHandlersWithQueueCompletion(queue obj.Object, completion func())
-	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (obj.Object, error)
-	SessionTransportType() MTRTransportType
-	DeregisterReportHandlersWithClientQueueCompletion(queue obj.Object, completion func())
-}
-
-var _ MTRBaseDeviceable = (*MTRBaseDevice)(nil)

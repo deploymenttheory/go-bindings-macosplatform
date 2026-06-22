@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,24 +45,16 @@ func mTL4AccelerationStructureDescriptorAdopt(id objc.ID) *MTL4AccelerationStruc
 	return x
 }
 
-// WithUsage the options that describe how you intend to use the acceleration structure.
-func (x *MTL4AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
-	return x
+// WithUsage sets the options that describe how you intend to use the acceleration structure.
+func (masd *MTL4AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masd), objc.RegisterName("setUsage:"), usage)
+	return masd
 }
-
-// MTL4AccelerationStructureDescriptorable is the interface implemented by [MTL4AccelerationStructureDescriptor], for mocking and DI.
-type MTL4AccelerationStructureDescriptorable interface {
-	obj.Object
-	WithUsage(usage AccelerationStructureUsage) *MTL4AccelerationStructureDescriptor
-}
-
-var _ MTL4AccelerationStructureDescriptorable = (*MTL4AccelerationStructureDescriptor)(nil)
 
 // isMTL4AccelerationStructureDescriptor marks MTL4AccelerationStructureDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the MTL4AccelerationStructureDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTL4AccelerationStructureDescriptor) isMTL4AccelerationStructureDescriptor() {}
+func (masd *MTL4AccelerationStructureDescriptor) isMTL4AccelerationStructureDescriptor() {}
 
 var _ MTL4AccelerationStructureDescriptorProvider = (*MTL4AccelerationStructureDescriptor)(nil)
 

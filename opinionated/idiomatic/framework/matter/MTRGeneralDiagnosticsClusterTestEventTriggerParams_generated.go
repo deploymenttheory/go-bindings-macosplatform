@@ -44,24 +44,24 @@ func mTRGeneralDiagnosticsClusterTestEventTriggerParamsAdopt(id objc.ID) *MTRGen
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) Description() string {
+	return rt.Description(objref.IDOf(mgdctetp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdctetp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdctetp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) String() string {
+	return rt.Description(objref.IDOf(mgdctetp))
 }
 
 // NewMTRGeneralDiagnosticsClusterTestEventTriggerParams creates a new MTRGeneralDiagnosticsClusterTestEventTriggerParams.
@@ -71,88 +71,49 @@ func NewMTRGeneralDiagnosticsClusterTestEventTriggerParams() *MTRGeneralDiagnost
 }
 
 // WithEnableKey sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
-	return x
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
+	return mgdctetp
 }
 
 // WithEventTrigger sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEventTrigger(eventTrigger obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventTrigger:"), objref.IDOf(eventTrigger))
-	return x
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEventTrigger(eventTrigger obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEventTrigger:"), objref.IDOf(eventTrigger))
+	return mgdctetp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mgdctetp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
+	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mgdctetp
 }
 
 // EnableKey wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableKey"))
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("enableKey"))
 	return obj.Wrap(_r)
-}
-
-// SetEnableKey wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetEnableKey(enableKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 }
 
 // EventTrigger wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventTrigger"))
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("eventTrigger"))
 	return obj.Wrap(_r)
 }
 
-// SetEventTrigger wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetEventTrigger(eventTrigger obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventTrigger:"), objref.IDOf(eventTrigger))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterTestEventTriggerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRGeneralDiagnosticsClusterTestEventTriggerParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTestEventTriggerParams], for mocking and DI.
-type MTRGeneralDiagnosticsClusterTestEventTriggerParamsable interface {
-	obj.Object
-	WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
-	WithEventTrigger(eventTrigger obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams
-	EnableKey() obj.Object
-	SetEnableKey(enableKey obj.Object)
-	EventTrigger() obj.Object
-	SetEventTrigger(eventTrigger obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterTestEventTriggerParamsable = (*MTRGeneralDiagnosticsClusterTestEventTriggerParams)(nil)

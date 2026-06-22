@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,24 +51,15 @@ func NewAnimatedVector3ArrayWithElementCount(arrayElementCount int) *AnimatedVec
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedVector3Array) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (ava *AnimatedVector3Array) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array {
+	objc.Send[objc.ID](objref.IDOf(ava), objc.RegisterName("setInterpolation:"), interpolation)
+	return ava
 }
 
 // ElementCount wraps the corresponding Objective-C method.
-func (x *AnimatedVector3Array) ElementCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+func (ava *AnimatedVector3Array) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("elementCount"))
 	return _r
 }
-
-// AnimatedVector3Arrayable is the interface implemented by [AnimatedVector3Array], for mocking and DI.
-type AnimatedVector3Arrayable interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array
-	ElementCount() int
-}
-
-var _ AnimatedVector3Arrayable = (*AnimatedVector3Array)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedVector3Array)(nil)

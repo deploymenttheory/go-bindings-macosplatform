@@ -47,24 +47,24 @@ func vectorAdopt(id objc.ID) *Vector {
 }
 
 // Description returns the object's -description text.
-func (x *Vector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Vector) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Vector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *Vector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Vector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *Vector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Vector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Vector) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewVectorWithX initialize a Core Image vector object with one value.
@@ -124,81 +124,64 @@ func NewVectorWithString(representation string) *Vector {
 }
 
 // ValueAtIndex returns a value from a specific position in the vector.
-func (x *Vector) ValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueAtIndex:"), index)
+func (v_ *Vector) ValueAtIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("valueAtIndex:"), index)
 	return _r
 }
 
-// Count the number of items in the vector.
-func (x *Vector) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of items in the vector.
+func (v_ *Vector) Count() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("count"))
 	return _r
 }
 
-// X the value located in the first position in the vector.
-func (x *Vector) X() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("X"))
+// X returns the value located in the first position in the vector.
+func (v_ *Vector) X() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("X"))
 	return _r
 }
 
-// Y the value located in the second position in the vector.
-func (x *Vector) Y() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("Y"))
+// Y returns the value located in the second position in the vector.
+func (v_ *Vector) Y() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("Y"))
 	return _r
 }
 
-// Z the value located in the third position in the vector.
-func (x *Vector) Z() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("Z"))
+// Z returns the value located in the third position in the vector.
+func (v_ *Vector) Z() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("Z"))
 	return _r
 }
 
-// W the value located in the forth position in the vector.
-func (x *Vector) W() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("W"))
+// W returns the value located in the forth position in the vector.
+func (v_ *Vector) W() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("W"))
 	return _r
 }
 
 // CGPointValue returns the values in the vector as a `CGPoint` structure. - Returns: Reading this property returns a `CGPoint` structure from the `X` and `Y` values from the vector.
-func (x *Vector) CGPointValue() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("CGPointValue"))
+func (v_ *Vector) CGPointValue() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("CGPointValue"))
 	return _r
 }
 
 // CGRectValue returns the values in the vector as a `CGRect` structure. - Returns: Reading this property creates a `CGRect` structure whose origin is the `X`, `Y`, `Z` and `W` values from the vector.
-func (x *Vector) CGRectValue() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("CGRectValue"))
+func (v_ *Vector) CGRectValue() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("CGRectValue"))
 	return _r
 }
 
 // CGAffineTransformValue returns the values in the vector as a `CGAffineTransformValue` structure. - Returns: Reading this property creates a `CGAffineTransformValue` structure from the first six values in the vector.
-func (x *Vector) CGAffineTransformValue() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("CGAffineTransformValue"))
+func (v_ *Vector) CGAffineTransformValue() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(v_), objc.RegisterName("CGAffineTransformValue"))
 	return _r
 }
 
 // StringRepresentation returns a formatted string with all the values of a `CIVector`. Some example string representations of vectors: `CIVector`                               | `stringRepresentation` ---------------------------------------- | -------------- `[CIVector vectorWithX:1.0 Y:0.5 Z:0.3]` | `"[1.0 0.5 0.3]"` `[CIVector vectorWithX:10.0 Y:23.0]`     | `"[10.0 23.0]"` To create a “CIVector“ object from a string representation, use the “vectorWithString:“ method.
-func (x *Vector) StringRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+func (v_ *Vector) StringRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Vectorable is the interface implemented by [Vector], for mocking and DI.
-type Vectorable interface {
-	obj.Object
-	ValueAtIndex(index int) float64
-	Count() int
-	X() float64
-	Y() float64
-	Z() float64
-	W() float64
-	CGPointValue() corefoundation.CGPoint
-	CGRectValue() corefoundation.CGRect
-	CGAffineTransformValue() corefoundation.CGAffineTransform
-	StringRepresentation() string
-}
-
-var _ Vectorable = (*Vector)(nil)

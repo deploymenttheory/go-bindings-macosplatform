@@ -46,24 +46,24 @@ func argumentDescriptorAdopt(id objc.ID) *ArgumentDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ArgumentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *ArgumentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArgumentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ad *ArgumentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArgumentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ad *ArgumentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ArgumentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *ArgumentDescriptor) String() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // NewArgumentDescriptor creates a new ArgumentDescriptor.
@@ -72,129 +72,74 @@ func NewArgumentDescriptor() *ArgumentDescriptor {
 	return argumentDescriptorAdopt(_id)
 }
 
-// WithDataType the data type of the argument.
-func (x *ArgumentDescriptor) WithDataType(dataType DataType) *ArgumentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
-	return x
+// WithDataType sets the data type of the argument.
+func (ad *ArgumentDescriptor) WithDataType(dataType DataType) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setDataType:"), dataType)
+	return ad
 }
 
-// WithIndex the index ID of the argument.
-func (x *ArgumentDescriptor) WithIndex(index int) *ArgumentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
-	return x
+// WithIndex sets the index ID of the argument.
+func (ad *ArgumentDescriptor) WithIndex(index int) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setIndex:"), index)
+	return ad
 }
 
-// WithArrayLength the length of an array argument.
-func (x *ArgumentDescriptor) WithArrayLength(arrayLength int) *ArgumentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrayLength:"), arrayLength)
-	return x
+// WithArrayLength sets the length of an array argument.
+func (ad *ArgumentDescriptor) WithArrayLength(arrayLength int) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setArrayLength:"), arrayLength)
+	return ad
 }
 
-// WithAccess the access permissions of the argument.
-func (x *ArgumentDescriptor) WithAccess(access BindingAccess) *ArgumentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccess:"), access)
-	return x
+// WithAccess sets the access permissions of the argument.
+func (ad *ArgumentDescriptor) WithAccess(access BindingAccess) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setAccess:"), access)
+	return ad
 }
 
-// WithTextureType the texture type of a texture argument.
-func (x *ArgumentDescriptor) WithTextureType(textureType TextureType) *ArgumentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
-	return x
+// WithTextureType sets the texture type of a texture argument.
+func (ad *ArgumentDescriptor) WithTextureType(textureType TextureType) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setTextureType:"), textureType)
+	return ad
 }
 
-// WithConstantBlockAlignment the alignment of the constant block.
-func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment int) *ArgumentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantBlockAlignment:"), constantBlockAlignment)
-	return x
+// WithConstantBlockAlignment sets the alignment of the constant block.
+func (ad *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment int) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setConstantBlockAlignment:"), constantBlockAlignment)
+	return ad
 }
 
-// DataType for constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
-func (x *ArgumentDescriptor) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns for constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
+func (ad *ArgumentDescriptor) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(ad), objc.RegisterName("dataType"))
 	return _r
 }
 
-// SetDataType wraps the corresponding Objective-C method.
-func (x *ArgumentDescriptor) SetDataType(dataType DataType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
-}
-
-// Index the binding point index of the argument
-func (x *ArgumentDescriptor) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+// Index returns the binding point index of the argument
+func (ad *ArgumentDescriptor) Index() int {
+	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("index"))
 	return _r
 }
 
-// SetIndex wraps the corresponding Objective-C method.
-func (x *ArgumentDescriptor) SetIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
-}
-
-// ArrayLength the length of an array of constants, textures, or samplers, or 0 for non-array arguments
-func (x *ArgumentDescriptor) ArrayLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
+// ArrayLength returns the length of an array of constants, textures, or samplers, or 0 for non-array arguments
+func (ad *ArgumentDescriptor) ArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("arrayLength"))
 	return _r
 }
 
-// SetArrayLength wraps the corresponding Objective-C method.
-func (x *ArgumentDescriptor) SetArrayLength(arrayLength int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrayLength:"), arrayLength)
-}
-
-// Access access flags for the argument
-func (x *ArgumentDescriptor) Access() BindingAccess {
-	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+// Access returns access flags for the argument
+func (ad *ArgumentDescriptor) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(ad), objc.RegisterName("access"))
 	return _r
 }
 
-// SetAccess wraps the corresponding Objective-C method.
-func (x *ArgumentDescriptor) SetAccess(access BindingAccess) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccess:"), access)
-}
-
-// TextureType for texture arguments, the texture type
-func (x *ArgumentDescriptor) TextureType() TextureType {
-	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+// TextureType returns for texture arguments, the texture type
+func (ad *ArgumentDescriptor) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(ad), objc.RegisterName("textureType"))
 	return _r
 }
 
-// SetTextureType wraps the corresponding Objective-C method.
-func (x *ArgumentDescriptor) SetTextureType(textureType TextureType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
-}
-
-// ConstantBlockAlignment if set forces the constant block to be aligned to the given alignment Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
-func (x *ArgumentDescriptor) ConstantBlockAlignment() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("constantBlockAlignment"))
+// ConstantBlockAlignment returns if set forces the constant block to be aligned to the given alignment Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
+func (ad *ArgumentDescriptor) ConstantBlockAlignment() int {
+	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("constantBlockAlignment"))
 	return _r
 }
-
-// SetConstantBlockAlignment wraps the corresponding Objective-C method.
-func (x *ArgumentDescriptor) SetConstantBlockAlignment(constantBlockAlignment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantBlockAlignment:"), constantBlockAlignment)
-}
-
-// ArgumentDescriptorable is the interface implemented by [ArgumentDescriptor], for mocking and DI.
-type ArgumentDescriptorable interface {
-	obj.Object
-	WithDataType(dataType DataType) *ArgumentDescriptor
-	WithIndex(index int) *ArgumentDescriptor
-	WithArrayLength(arrayLength int) *ArgumentDescriptor
-	WithAccess(access BindingAccess) *ArgumentDescriptor
-	WithTextureType(textureType TextureType) *ArgumentDescriptor
-	WithConstantBlockAlignment(constantBlockAlignment int) *ArgumentDescriptor
-	DataType() DataType
-	SetDataType(dataType DataType)
-	Index() int
-	SetIndex(index int)
-	ArrayLength() int
-	SetArrayLength(arrayLength int)
-	Access() BindingAccess
-	SetAccess(access BindingAccess)
-	TextureType() TextureType
-	SetTextureType(textureType TextureType)
-	ConstantBlockAlignment() int
-	SetConstantBlockAlignment(constantBlockAlignment int)
-}
-
-var _ ArgumentDescriptorable = (*ArgumentDescriptor)(nil)

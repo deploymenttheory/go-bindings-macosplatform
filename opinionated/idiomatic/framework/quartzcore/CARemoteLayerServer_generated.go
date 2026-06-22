@@ -46,24 +46,24 @@ func remoteLayerServerAdopt(id objc.ID) *RemoteLayerServer {
 }
 
 // Description returns the object's -description text.
-func (x *RemoteLayerServer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rls *RemoteLayerServer) Description() string {
+	return rt.Description(objref.IDOf(rls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RemoteLayerServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rls *RemoteLayerServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RemoteLayerServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rls *RemoteLayerServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RemoteLayerServer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rls *RemoteLayerServer) String() string {
+	return rt.Description(objref.IDOf(rls))
 }
 
 // NewRemoteLayerServer creates a new RemoteLayerServer.
@@ -73,15 +73,7 @@ func NewRemoteLayerServer() *RemoteLayerServer {
 }
 
 // ServerPort wraps the corresponding Objective-C method.
-func (x *RemoteLayerServer) ServerPort() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("serverPort"))
+func (rls *RemoteLayerServer) ServerPort() int {
+	_r := objc.Send[int](objref.IDOf(rls), objc.RegisterName("serverPort"))
 	return _r
 }
-
-// RemoteLayerServerable is the interface implemented by [RemoteLayerServer], for mocking and DI.
-type RemoteLayerServerable interface {
-	obj.Object
-	ServerPort() int
-}
-
-var _ RemoteLayerServerable = (*RemoteLayerServer)(nil)

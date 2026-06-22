@@ -62,38 +62,27 @@ func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservati
 }
 
 // LodgingBusinessLocation wraps the corresponding Objective-C method.
-func (x *LodgingReservation) LodgingBusinessLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lodgingBusinessLocation"))
+func (lr *LodgingReservation) LodgingBusinessLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("lodgingBusinessLocation"))
 	return obj.Wrap(_r)
 }
 
 // ReservationDuration wraps the corresponding Objective-C method.
-func (x *LodgingReservation) ReservationDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationDuration"))
+func (lr *LodgingReservation) ReservationDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // NumberOfAdults wraps the corresponding Objective-C method.
-func (x *LodgingReservation) NumberOfAdults() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfAdults"))
+func (lr *LodgingReservation) NumberOfAdults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("numberOfAdults"))
 	return obj.Wrap(_r)
 }
 
 // NumberOfChildren wraps the corresponding Objective-C method.
-func (x *LodgingReservation) NumberOfChildren() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfChildren"))
+func (lr *LodgingReservation) NumberOfChildren() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("numberOfChildren"))
 	return obj.Wrap(_r)
 }
-
-// LodgingReservationable is the interface implemented by [LodgingReservation], for mocking and DI.
-type LodgingReservationable interface {
-	obj.Object
-	LodgingBusinessLocation() obj.Object
-	ReservationDuration() *DateComponentsRange
-	NumberOfAdults() obj.Object
-	NumberOfChildren() obj.Object
-}
-
-var _ LodgingReservationable = (*LodgingReservation)(nil)
 
 var _ ReservationProvider = (*LodgingReservation)(nil)

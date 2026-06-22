@@ -46,24 +46,24 @@ func turnBasedExchangeReplyAdopt(id objc.ID) *TurnBasedExchangeReply {
 }
 
 // Description returns the object's -description text.
-func (x *TurnBasedExchangeReply) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tber *TurnBasedExchangeReply) Description() string {
+	return rt.Description(objref.IDOf(tber))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TurnBasedExchangeReply) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tber *TurnBasedExchangeReply) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tber), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TurnBasedExchangeReply) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tber *TurnBasedExchangeReply) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tber), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TurnBasedExchangeReply) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tber *TurnBasedExchangeReply) String() string {
+	return rt.Description(objref.IDOf(tber))
 }
 
 // NewTurnBasedExchangeReply creates a new TurnBasedExchangeReply.
@@ -73,14 +73,14 @@ func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
 }
 
 // Recipient wraps the corresponding Objective-C method.
-func (x *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipient"))
+func (tber *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
+	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("recipient"))
 	return TurnBasedParticipantFromID(_r)
 }
 
 // Message wraps the corresponding Objective-C method.
-func (x *TurnBasedExchangeReply) Message() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+func (tber *TurnBasedExchangeReply) Message() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,24 +88,13 @@ func (x *TurnBasedExchangeReply) Message() string {
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *TurnBasedExchangeReply) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (tber *TurnBasedExchangeReply) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
 // ReplyDate wraps the corresponding Objective-C method.
-func (x *TurnBasedExchangeReply) ReplyDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyDate"))
+func (tber *TurnBasedExchangeReply) ReplyDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("replyDate"))
 	return obj.Wrap(_r)
 }
-
-// TurnBasedExchangeReplyable is the interface implemented by [TurnBasedExchangeReply], for mocking and DI.
-type TurnBasedExchangeReplyable interface {
-	obj.Object
-	Recipient() *TurnBasedParticipant
-	Message() string
-	Data() obj.Object
-	ReplyDate() obj.Object
-}
-
-var _ TurnBasedExchangeReplyable = (*TurnBasedExchangeReply)(nil)

@@ -44,24 +44,24 @@ func mTREnergyEVSEModeClusterModeTagStructAdopt(id objc.ID) *MTREnergyEVSEModeCl
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(meemcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(meemcmts))
 }
 
 // NewMTREnergyEVSEModeClusterModeTagStruct creates a new MTREnergyEVSEModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTREnergyEVSEModeClusterModeTagStruct() *MTREnergyEVSEModeClusterModeTag
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return meemcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return meemcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTREnergyEVSEModeClusterModeTagStructable is the interface implemented by [MTREnergyEVSEModeClusterModeTagStruct], for mocking and DI.
-type MTREnergyEVSEModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTREnergyEVSEModeClusterModeTagStructable = (*MTREnergyEVSEModeClusterModeTagStruct)(nil)

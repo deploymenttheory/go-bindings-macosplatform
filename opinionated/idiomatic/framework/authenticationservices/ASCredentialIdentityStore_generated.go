@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func credentialIdentityStoreAdopt(id objc.ID) *CredentialIdentityStore {
 }
 
 // Description returns the object's -description text.
-func (x *CredentialIdentityStore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cis *CredentialIdentityStore) Description() string {
+	return rt.Description(objref.IDOf(cis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CredentialIdentityStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cis *CredentialIdentityStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CredentialIdentityStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cis *CredentialIdentityStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CredentialIdentityStore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cis *CredentialIdentityStore) String() string {
+	return rt.Description(objref.IDOf(cis))
 }
 
 // NewCredentialIdentityStore creates a new CredentialIdentityStore.
@@ -76,7 +77,7 @@ func NewCredentialIdentityStore() *CredentialIdentityStore {
 // GetCredentialIdentityStoreStateWithCompletion gets the state of the credential identity store.
 //
 // GetCredentialIdentityStoreStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (result *CredentialIdentityStoreState, err error) {
+func (cis *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (result *CredentialIdentityStoreState, err error) {
 	type _result struct {
 		val *CredentialIdentityStoreState
 		err error
@@ -87,7 +88,7 @@ func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(
 		_o.val = CredentialIdentityStoreStateFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCredentialIdentityStoreStateWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("getCredentialIdentityStoreStateWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -100,7 +101,7 @@ func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(
 // GetCredentialIdentitiesForServiceCredentialIdentityTypes retrieves an array of all previously saved credential identities in the store for your extension.
 //
 // GetCredentialIdentitiesForServiceCredentialIdentityTypes blocks until the operation completes or ctx is cancelled.
-func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *CredentialServiceIdentifier, credentialIdentityTypes CredentialIdentityTypes) (result obj.Object, err error) {
+func (cis *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *CredentialServiceIdentifier, credentialIdentityTypes CredentialIdentityTypes) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -111,7 +112,7 @@ func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIde
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCredentialIdentitiesForService:credentialIdentityTypes:completionHandler:"), objref.IDOf(serviceIdentifier), credentialIdentityTypes, _block)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("getCredentialIdentitiesForService:credentialIdentityTypes:completionHandler:"), objref.IDOf(serviceIdentifier), credentialIdentityTypes, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -120,12 +121,3 @@ func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIde
 		return _zero, ctx.Err()
 	}
 }
-
-// CredentialIdentityStoreable is the interface implemented by [CredentialIdentityStore], for mocking and DI.
-type CredentialIdentityStoreable interface {
-	obj.Object
-	GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (*CredentialIdentityStoreState, error)
-	GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *CredentialServiceIdentifier, credentialIdentityTypes CredentialIdentityTypes) (obj.Object, error)
-}
-
-var _ CredentialIdentityStoreable = (*CredentialIdentityStore)(nil)

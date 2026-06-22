@@ -46,24 +46,24 @@ func motionAdopt(id objc.ID) *Motion {
 }
 
 // Description returns the object's -description text.
-func (x *Motion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Motion) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Motion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Motion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Motion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Motion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Motion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Motion) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMotion creates a new Motion.
@@ -72,77 +72,55 @@ func NewMotion() *Motion {
 	return motionAdopt(_id)
 }
 
-// WithSensorsActive a Boolean value that indicates whether the sensors that compute the motion data are active.
-func (x *Motion) WithSensorsActive(sensorsActive bool) *Motion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorsActive:"), sensorsActive)
-	return x
+// WithSensorsActive sets a Boolean value that indicates whether the sensors that compute the motion data are active.
+func (m *Motion) WithSensorsActive(sensorsActive bool) *Motion {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSensorsActive:"), sensorsActive)
+	return m
 }
 
 // SetStateFromMotion copies the input values from a specified motion profile to a snapshot of a motion profile.
-func (x *Motion) SetStateFromMotion(motion *Motion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateFromMotion:"), objref.IDOf(motion))
+func (m *Motion) SetStateFromMotion(motion *Motion) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setStateFromMotion:"), objref.IDOf(motion))
 }
 
-// Controller a profile keeps a reference to the controller that it is mapping input from.
-func (x *Motion) Controller() *Controller {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
+// Controller returns a profile keeps a reference to the controller that it is mapping input from.
+func (m *Motion) Controller() *Controller {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
-// SensorsRequireManualActivation if this property is returns YES, you are responsible for setting sensorsActive to YES when you need motion data from the controller. Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property will return NO.
-func (x *Motion) SensorsRequireManualActivation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sensorsRequireManualActivation"))
+// SensorsRequireManualActivation reports whether if this property is returns true, you are responsible for setting sensorsActive to true when you need motion data from the controller. Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property will return false.
+func (m *Motion) SensorsRequireManualActivation() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("sensorsRequireManualActivation"))
 	return _r
 }
 
-// SensorsActive set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors will be disabled and the GCMotion profile will not be updated.
-func (x *Motion) SensorsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sensorsActive"))
+// SensorsActive reports whether set this property to true when you wish to receive motion data from the controller. When you set this property to false, the motion sensors will be disabled and the GCMotion profile will not be updated.
+func (m *Motion) SensorsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("sensorsActive"))
 	return _r
 }
 
-// SetSensorsActive wraps the corresponding Objective-C method.
-func (x *Motion) SetSensorsActive(sensorsActive bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorsActive:"), sensorsActive)
-}
-
-// HasGravityAndUserAcceleration returns YES if the controller is capable of reporting gravity and user acceleration separately.
-func (x *Motion) HasGravityAndUserAcceleration() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasGravityAndUserAcceleration"))
+// HasGravityAndUserAcceleration reports whether the controller is capable of reporting gravity and user acceleration separately.
+func (m *Motion) HasGravityAndUserAcceleration() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasGravityAndUserAcceleration"))
 	return _r
 }
 
-// HasAttitudeAndRotationRate the controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
-func (x *Motion) HasAttitudeAndRotationRate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttitudeAndRotationRate"))
+// HasAttitudeAndRotationRate reports whether the controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
+func (m *Motion) HasAttitudeAndRotationRate() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasAttitudeAndRotationRate"))
 	return _r
 }
 
-// HasAttitude the controller generating the motion data has sensors that can accurately determine the current attitude. If this is enabled the motion data for attitude is usable for inputs.
-func (x *Motion) HasAttitude() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttitude"))
+// HasAttitude reports whether the controller generating the motion data has sensors that can accurately determine the current attitude. If this is enabled the motion data for attitude is usable for inputs.
+func (m *Motion) HasAttitude() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasAttitude"))
 	return _r
 }
 
-// HasRotationRate the controller generating the motion data has sensors that can accurately determine the current rotation rate. If this is enabled the motion data for rotation rate is usable for inputs.
-func (x *Motion) HasRotationRate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRotationRate"))
+// HasRotationRate reports whether the controller generating the motion data has sensors that can accurately determine the current rotation rate. If this is enabled the motion data for rotation rate is usable for inputs.
+func (m *Motion) HasRotationRate() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasRotationRate"))
 	return _r
 }
-
-// Motionable is the interface implemented by [Motion], for mocking and DI.
-type Motionable interface {
-	obj.Object
-	WithSensorsActive(sensorsActive bool) *Motion
-	SetStateFromMotion(motion *Motion)
-	Controller() *Controller
-	SensorsRequireManualActivation() bool
-	SensorsActive() bool
-	SetSensorsActive(sensorsActive bool)
-	HasGravityAndUserAcceleration() bool
-	HasAttitudeAndRotationRate() bool
-	HasAttitude() bool
-	HasRotationRate() bool
-}
-
-var _ Motionable = (*Motion)(nil)

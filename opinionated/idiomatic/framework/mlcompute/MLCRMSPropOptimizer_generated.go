@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,53 +51,40 @@ func NewRMSPropOptimizer() *RMSPropOptimizer {
 	return rMSPropOptimizerAdopt(_id)
 }
 
-// WithLearningRate the learning rate.
-func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learning rate.
+func (rpo *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
+	objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("setLearningRate:"), learningRate)
+	return rpo
 }
 
-// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
-func (x *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
-	return x
+// WithAppliesGradientClipping sets a Boolean value that indicates whether you apply gradient clipping.
+func (rpo *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {
+	objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
+	return rpo
 }
 
-// MomentumScale the momentum factor.  A hyper-parameter. The default is 0.0.
-func (x *RMSPropOptimizer) MomentumScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
+// MomentumScale returns the momentum factor.  A hyper-parameter. The default is 0.0.
+func (rpo *RMSPropOptimizer) MomentumScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(rpo), objc.RegisterName("momentumScale"))
 	return _r
 }
 
-// Alpha the smoothing constant. The default is 0.99.
-func (x *RMSPropOptimizer) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the smoothing constant. The default is 0.99.
+func (rpo *RMSPropOptimizer) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(rpo), objc.RegisterName("alpha"))
 	return _r
 }
 
-// Epsilon a term added to improve numerical stability. The default is 1e-8.
-func (x *RMSPropOptimizer) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns a term added to improve numerical stability. The default is 1e-8.
+func (rpo *RMSPropOptimizer) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(rpo), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// IsCentered if True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. The default is false.
-func (x *RMSPropOptimizer) IsCentered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCentered"))
+// IsCentered reports whether if True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. The default is false.
+func (rpo *RMSPropOptimizer) IsCentered() bool {
+	_r := objc.Send[bool](objref.IDOf(rpo), objc.RegisterName("isCentered"))
 	return _r
 }
-
-// RMSPropOptimizerable is the interface implemented by [RMSPropOptimizer], for mocking and DI.
-type RMSPropOptimizerable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *RMSPropOptimizer
-	WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer
-	MomentumScale() float32
-	Alpha() float32
-	Epsilon() float32
-	IsCentered() bool
-}
-
-var _ RMSPropOptimizerable = (*RMSPropOptimizer)(nil)
 
 var _ OptimizerProvider = (*RMSPropOptimizer)(nil)

@@ -45,24 +45,24 @@ func webViewAdopt(id objc.ID) *WebView {
 }
 
 // Description returns the object's -description text.
-func (x *WebView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wv *WebView) Description() string {
+	return rt.Description(objref.IDOf(wv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wv *WebView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wv *WebView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wv *WebView) String() string {
+	return rt.Description(objref.IDOf(wv))
 }
 
 // NewWebViewWithFrameFrameNameGroupName the designated initializer for WebView. Initialize a WebView with the supplied parameters. This method will create a main WebFrame with the view. Passing a top level frame name is useful if you handle a targetted frame navigation that would normally open a window in some other way that still ends up creating a new WebView.
@@ -72,139 +72,139 @@ func NewWebViewWithFrameFrameNameGroupName(frame corefoundation.CGRect, frameNam
 	return webViewAdopt(_id)
 }
 
-// WithShouldCloseWithWindow whether the receiver closes when either it's window or hostWindow closes. Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
-func (x *WebView) WithShouldCloseWithWindow(shouldCloseWithWindow bool) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
-	return x
+// WithShouldCloseWithWindow sets whether the receiver closes when either it's window or hostWindow closes. Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
+func (wv *WebView) WithShouldCloseWithWindow(shouldCloseWithWindow bool) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
+	return wv
 }
 
-// WithTextSizeMultiplier the text size multipler.
-func (x *WebView) WithTextSizeMultiplier(textSizeMultiplier float32) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextSizeMultiplier:"), textSizeMultiplier)
-	return x
+// WithTextSizeMultiplier sets the text size multipler.
+func (wv *WebView) WithTextSizeMultiplier(textSizeMultiplier float32) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setTextSizeMultiplier:"), textSizeMultiplier)
+	return wv
 }
 
-// WithApplicationNameForUserAgent the name of the application as used in the user-agent string.
-func (x *WebView) WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationNameForUserAgent:"), purego.NSString(applicationNameForUserAgent))
-	return x
+// WithApplicationNameForUserAgent sets the name of the application as used in the user-agent string.
+func (wv *WebView) WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setApplicationNameForUserAgent:"), purego.NSString(applicationNameForUserAgent))
+	return wv
 }
 
-// WithCustomUserAgent the custom user-agent string or nil if no custom user-agent string has been set. Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
-func (x *WebView) WithCustomUserAgent(customUserAgent string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomUserAgent:"), purego.NSString(customUserAgent))
-	return x
+// WithCustomUserAgent sets the custom user-agent string or nil if no custom user-agent string has been set. Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
+func (wv *WebView) WithCustomUserAgent(customUserAgent string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setCustomUserAgent:"), purego.NSString(customUserAgent))
+	return wv
 }
 
-// WithCustomTextEncodingName the custom text encoding name or nil if no custom text encoding name has been set. Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
-func (x *WebView) WithCustomTextEncodingName(customTextEncodingName string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomTextEncodingName:"), purego.NSString(customTextEncodingName))
-	return x
+// WithCustomTextEncodingName sets the custom text encoding name or nil if no custom text encoding name has been set. Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
+func (wv *WebView) WithCustomTextEncodingName(customTextEncodingName string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setCustomTextEncodingName:"), purego.NSString(customTextEncodingName))
+	return wv
 }
 
-// WithMediaStyle the media style for the WebView. The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
-func (x *WebView) WithMediaStyle(mediaStyle string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaStyle:"), purego.NSString(mediaStyle))
-	return x
+// WithMediaStyle sets the media style for the WebView. The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
+func (wv *WebView) WithMediaStyle(mediaStyle string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setMediaStyle:"), purego.NSString(mediaStyle))
+	return wv
 }
 
-// WithPreferences the preferences used by this WebView. This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
-func (x *WebView) WithPreferences(preferences *WebPreferences) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
-	return x
+// WithPreferences sets the preferences used by this WebView. This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
+func (wv *WebView) WithPreferences(preferences *WebPreferences) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
+	return wv
 }
 
-// WithPreferencesIdentifier the WebPreferences key prefix. If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
-func (x *WebView) WithPreferencesIdentifier(preferencesIdentifier string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferencesIdentifier:"), purego.NSString(preferencesIdentifier))
-	return x
+// WithPreferencesIdentifier sets the WebPreferences key prefix. If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
+func (wv *WebView) WithPreferencesIdentifier(preferencesIdentifier string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setPreferencesIdentifier:"), purego.NSString(preferencesIdentifier))
+	return wv
 }
 
-// WithHostWindow the host window for the web view. Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
-func (x *WebView) WithHostWindow(hostWindow obj.Object) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostWindow:"), objref.IDOf(hostWindow))
-	return x
+// WithHostWindow sets the host window for the web view. Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
+func (wv *WebView) WithHostWindow(hostWindow obj.Object) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setHostWindow:"), objref.IDOf(hostWindow))
+	return wv
 }
 
-// WithGroupName the group name for this WebView. JavaScript may access named frames within the same group.
-func (x *WebView) WithGroupName(groupName string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
-	return x
+// WithGroupName sets the group name for this WebView. JavaScript may access named frames within the same group.
+func (wv *WebView) WithGroupName(groupName string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
+	return wv
 }
 
-// WithDrawsBackground whether the receiver draws a default white background when the loaded page has no background specified.
-func (x *WebView) WithDrawsBackground(drawsBackground bool) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets whether the receiver draws a default white background when the loaded page has no background specified.
+func (wv *WebView) WithDrawsBackground(drawsBackground bool) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return wv
 }
 
-// WithShouldUpdateWhileOffscreen whether the WebView is always updated even when it is not in a window that is currently visible. If set to NO, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is YES, hidden web views are always updated. This is the default.
-func (x *WebView) WithShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUpdateWhileOffscreen:"), shouldUpdateWhileOffscreen)
-	return x
+// WithShouldUpdateWhileOffscreen sets whether the WebView is always updated even when it is not in a window that is currently visible. If set to NO, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is YES, hidden web views are always updated. This is the default.
+func (wv *WebView) WithShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setShouldUpdateWhileOffscreen:"), shouldUpdateWhileOffscreen)
+	return wv
 }
 
-// WithMainFrameURL the main frame's current URL.
-func (x *WebView) WithMainFrameURL(mainFrameURL string) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainFrameURL:"), purego.NSString(mainFrameURL))
-	return x
+// WithMainFrameURL sets the main frame's current URL.
+func (wv *WebView) WithMainFrameURL(mainFrameURL string) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setMainFrameURL:"), purego.NSString(mainFrameURL))
+	return wv
 }
 
 // WithEditable sets the property and returns the receiver so calls can be chained.
-func (x *WebView) WithEditable(editable bool) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+func (wv *WebView) WithEditable(editable bool) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setEditable:"), editable)
+	return wv
 }
 
 // WithTypingStyle sets the property and returns the receiver so calls can be chained.
-func (x *WebView) WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypingStyle:"), objref.IDOf(typingStyle))
-	return x
+func (wv *WebView) WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setTypingStyle:"), objref.IDOf(typingStyle))
+	return wv
 }
 
 // WithSmartInsertDeleteEnabled sets the property and returns the receiver so calls can be chained.
-func (x *WebView) WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmartInsertDeleteEnabled:"), smartInsertDeleteEnabled)
-	return x
+func (wv *WebView) WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setSmartInsertDeleteEnabled:"), smartInsertDeleteEnabled)
+	return wv
 }
 
 // WithContinuousSpellCheckingEnabled sets the property and returns the receiver so calls can be chained.
-func (x *WebView) WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *WebView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuousSpellCheckingEnabled:"), continuousSpellCheckingEnabled)
-	return x
+func (wv *WebView) WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *WebView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setContinuousSpellCheckingEnabled:"), continuousSpellCheckingEnabled)
+	return wv
 }
 
 // Close closes the receiver, unloading its web page and canceling any pending loads. Once the receiver has closed, it will no longer respond to requests or fire delegate methods. (However, the -close method itself may fire delegate methods.) A garbage collected application is required to call close when the receiver is no longer needed. The close method will be called automatically when the window or hostWindow closes and shouldCloseWithWindow returns YES. A non-garbage collected application can still call close, providing a convenient way to prevent receiver from doing any more loading and firing any future delegate methods.
-func (x *WebView) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (wv *WebView) Close() {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("close"))
 }
 
 // SetMaintainsBackForwardList enable or disable the use of a backforward list for this webView.
-func (x *WebView) SetMaintainsBackForwardList(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaintainsBackForwardList:"), flag)
+func (wv *WebView) SetMaintainsBackForwardList(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setMaintainsBackForwardList:"), flag)
 }
 
-// GoBack go back to the previous URL in the backforward list.
-func (x *WebView) GoBack() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("goBack"))
+// GoBack reports whether go back to the previous URL in the backforward list.
+func (wv *WebView) GoBack() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("goBack"))
 	return _r
 }
 
-// GoForward go forward to the next URL in the backforward list.
-func (x *WebView) GoForward() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("goForward"))
+// GoForward reports whether go forward to the next URL in the backforward list.
+func (wv *WebView) GoForward() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("goForward"))
 	return _r
 }
 
 // GoToBackForwardItem go back or forward to an item in the backforward list.
-func (x *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("goToBackForwardItem:"), objref.IDOf(item))
+func (wv *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("goToBackForwardItem:"), objref.IDOf(item))
 	return _r
 }
 
 // UserAgentForURL get the appropriate user-agent string for a particular URL.
-func (x *WebView) UserAgentForURL(uRL string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userAgentForURL:"), rt.FileURL(uRL))
+func (wv *WebView) UserAgentForURL(uRL string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("userAgentForURL:"), rt.FileURL(uRL))
 	if _r == 0 {
 		return ""
 	}
@@ -212,8 +212,8 @@ func (x *WebView) UserAgentForURL(uRL string) string {
 }
 
 // StringByEvaluatingJavaScriptFromString wraps the corresponding Objective-C method.
-func (x *WebView) StringByEvaluatingJavaScriptFromString(script string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringByEvaluatingJavaScriptFromString:"), purego.NSString(script))
+func (wv *WebView) StringByEvaluatingJavaScriptFromString(script string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stringByEvaluatingJavaScriptFromString:"), purego.NSString(script))
 	if _r == 0 {
 		return ""
 	}
@@ -221,740 +221,517 @@ func (x *WebView) StringByEvaluatingJavaScriptFromString(script string) string {
 }
 
 // SearchForDirectionCaseSensitiveWrap searches a document view for a string and highlights the string if it is found. Starts the search from the current selection.  Will search across all frames.
-func (x *WebView) SearchForDirectionCaseSensitiveWrap(string_ string, forward bool, caseFlag bool, wrapFlag bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("searchFor:direction:caseSensitive:wrap:"), purego.NSString(string_), forward, caseFlag, wrapFlag)
+func (wv *WebView) SearchForDirectionCaseSensitiveWrap(string_ string, forward bool, caseFlag bool, wrapFlag bool) bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("searchFor:direction:caseSensitive:wrap:"), purego.NSString(string_), forward, caseFlag, wrapFlag)
 	return _r
 }
 
 // ElementAtPoint wraps the corresponding Objective-C method.
-func (x *WebView) ElementAtPoint(point corefoundation.CGPoint) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementAtPoint:"), point)
+func (wv *WebView) ElementAtPoint(point corefoundation.CGPoint) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("elementAtPoint:"), point)
 	return obj.Wrap(_r)
 }
 
 // WriteSelectionWithPasteboardTypesToPasteboard writes the current selection to the pasteboard
-func (x *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types obj.Object, pasteboard obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeSelectionWithPasteboardTypes:toPasteboard:"), objref.IDOf(types), objref.IDOf(pasteboard))
+func (wv *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types obj.Object, pasteboard obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("writeSelectionWithPasteboardTypes:toPasteboard:"), objref.IDOf(types), objref.IDOf(pasteboard))
 }
 
 // PasteboardTypesForElement returns the pasteboard types that WebView can use for an element
-func (x *WebView) PasteboardTypesForElement(element obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteboardTypesForElement:"), objref.IDOf(element))
+func (wv *WebView) PasteboardTypesForElement(element obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteboardTypesForElement:"), objref.IDOf(element))
 	return obj.Wrap(_r)
 }
 
 // WriteElementWithPasteboardTypesToPasteboard writes an element to the pasteboard
-func (x *WebView) WriteElementWithPasteboardTypesToPasteboard(element obj.Object, types obj.Object, pasteboard obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeElement:withPasteboardTypes:toPasteboard:"), objref.IDOf(element), objref.IDOf(types), objref.IDOf(pasteboard))
+func (wv *WebView) WriteElementWithPasteboardTypesToPasteboard(element obj.Object, types obj.Object, pasteboard obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("writeElement:withPasteboardTypes:toPasteboard:"), objref.IDOf(element), objref.IDOf(types), objref.IDOf(pasteboard))
 }
 
 // MoveDragCaretToPoint this method moves the caret that shows where something being dragged will be dropped. It may cause the WebView to scroll to make the new position of the drag caret visible.
-func (x *WebView) MoveDragCaretToPoint(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveDragCaretToPoint:"), point)
+func (wv *WebView) MoveDragCaretToPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveDragCaretToPoint:"), point)
 }
 
 // RemoveDragCaret removes the drag caret from the WebView
-func (x *WebView) RemoveDragCaret() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDragCaret"))
+func (wv *WebView) RemoveDragCaret() {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("removeDragCaret"))
 }
 
-// ShouldCloseWithWindow whether the receiver closes when either it's window or hostWindow closes. Defaults to YES in garbage collected applications, otherwise NO to maintain backwards compatibility.
-func (x *WebView) ShouldCloseWithWindow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCloseWithWindow"))
+// ShouldCloseWithWindow reports whether the receiver closes when either it's window or hostWindow closes. Defaults to true in garbage collected applications, otherwise false to maintain backwards compatibility.
+func (wv *WebView) ShouldCloseWithWindow() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("shouldCloseWithWindow"))
 	return _r
 }
 
-// SetShouldCloseWithWindow wraps the corresponding Objective-C method.
-func (x *WebView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
-}
-
-// MainFrame the top level frame. Note that even documents that are not framesets will have a mainFrame.
-func (x *WebView) MainFrame() *WebFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainFrame"))
+// MainFrame returns the top level frame. Note that even documents that are not framesets will have a mainFrame.
+func (wv *WebView) MainFrame() *WebFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("mainFrame"))
 	return WebFrameFromID(_r)
 }
 
-// SelectedFrame the frame that has the active selection. Returns the frame that contains the first responder, if any. Otherwise returns the frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
-func (x *WebView) SelectedFrame() *WebFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedFrame"))
+// SelectedFrame returns the frame that has the active selection. Returns the frame that contains the first responder, if any. Otherwise returns the frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
+func (wv *WebView) SelectedFrame() *WebFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("selectedFrame"))
 	return WebFrameFromID(_r)
 }
 
-// BackForwardList the backforward list for this WebView.
-func (x *WebView) BackForwardList() *WebBackForwardList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backForwardList"))
+// BackForwardList returns the backforward list for this WebView.
+func (wv *WebView) BackForwardList() *WebBackForwardList {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("backForwardList"))
 	return WebBackForwardListFromID(_r)
 }
 
-// TextSizeMultiplier the text size multipler.
-func (x *WebView) TextSizeMultiplier() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("textSizeMultiplier"))
+// TextSizeMultiplier returns the text size multipler.
+func (wv *WebView) TextSizeMultiplier() float32 {
+	_r := objc.Send[float32](objref.IDOf(wv), objc.RegisterName("textSizeMultiplier"))
 	return _r
 }
 
-// SetTextSizeMultiplier wraps the corresponding Objective-C method.
-func (x *WebView) SetTextSizeMultiplier(textSizeMultiplier float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextSizeMultiplier:"), textSizeMultiplier)
-}
-
-// ApplicationNameForUserAgent the name of the application as used in the user-agent string.
-func (x *WebView) ApplicationNameForUserAgent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationNameForUserAgent"))
+// ApplicationNameForUserAgent returns the name of the application as used in the user-agent string.
+func (wv *WebView) ApplicationNameForUserAgent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("applicationNameForUserAgent"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetApplicationNameForUserAgent wraps the corresponding Objective-C method.
-func (x *WebView) SetApplicationNameForUserAgent(applicationNameForUserAgent string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationNameForUserAgent:"), purego.NSString(applicationNameForUserAgent))
-}
-
-// CustomUserAgent the custom user-agent string or nil if no custom user-agent string has been set. Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
-func (x *WebView) CustomUserAgent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customUserAgent"))
+// CustomUserAgent returns the custom user-agent string or nil if no custom user-agent string has been set. Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
+func (wv *WebView) CustomUserAgent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("customUserAgent"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCustomUserAgent wraps the corresponding Objective-C method.
-func (x *WebView) SetCustomUserAgent(customUserAgent string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomUserAgent:"), purego.NSString(customUserAgent))
-}
-
-// SupportsTextEncoding if the document view of the current web page can support different text encodings.
-func (x *WebView) SupportsTextEncoding() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsTextEncoding"))
+// SupportsTextEncoding reports whether if the document view of the current web page can support different text encodings.
+func (wv *WebView) SupportsTextEncoding() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("supportsTextEncoding"))
 	return _r
 }
 
-// CustomTextEncodingName the custom text encoding name or nil if no custom text encoding name has been set. Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
-func (x *WebView) CustomTextEncodingName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customTextEncodingName"))
+// CustomTextEncodingName returns the custom text encoding name or nil if no custom text encoding name has been set. Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
+func (wv *WebView) CustomTextEncodingName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("customTextEncodingName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCustomTextEncodingName wraps the corresponding Objective-C method.
-func (x *WebView) SetCustomTextEncodingName(customTextEncodingName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomTextEncodingName:"), purego.NSString(customTextEncodingName))
-}
-
-// MediaStyle the media style for the WebView. The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
-func (x *WebView) MediaStyle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaStyle"))
+// MediaStyle returns the media style for the WebView. The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
+func (wv *WebView) MediaStyle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("mediaStyle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMediaStyle wraps the corresponding Objective-C method.
-func (x *WebView) SetMediaStyle(mediaStyle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaStyle:"), purego.NSString(mediaStyle))
-}
-
-// WindowScriptObject a WebScriptObject that represents the window object from the script environment.
-func (x *WebView) WindowScriptObject() *WebScriptObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowScriptObject"))
+// WindowScriptObject returns a WebScriptObject that represents the window object from the script environment.
+func (wv *WebView) WindowScriptObject() *WebScriptObject {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("windowScriptObject"))
 	return WebScriptObjectFromID(_r)
 }
 
-// Preferences the preferences used by this WebView. This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
-func (x *WebView) Preferences() *WebPreferences {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferences"))
+// Preferences returns the preferences used by this WebView. This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
+func (wv *WebView) Preferences() *WebPreferences {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("preferences"))
 	return WebPreferencesFromID(_r)
 }
 
-// SetPreferences wraps the corresponding Objective-C method.
-func (x *WebView) SetPreferences(preferences *WebPreferences) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
-}
-
-// PreferencesIdentifier the WebPreferences key prefix. If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
-func (x *WebView) PreferencesIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferencesIdentifier"))
+// PreferencesIdentifier returns the WebPreferences key prefix. If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
+func (wv *WebView) PreferencesIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("preferencesIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPreferencesIdentifier wraps the corresponding Objective-C method.
-func (x *WebView) SetPreferencesIdentifier(preferencesIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferencesIdentifier:"), purego.NSString(preferencesIdentifier))
-}
-
-// HostWindow the host window for the web view. Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
-func (x *WebView) HostWindow() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostWindow"))
+// HostWindow returns the host window for the web view. Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
+func (wv *WebView) HostWindow() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("hostWindow"))
 	return obj.Wrap(_r)
 }
 
-// SetHostWindow wraps the corresponding Objective-C method.
-func (x *WebView) SetHostWindow(hostWindow obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostWindow:"), objref.IDOf(hostWindow))
-}
-
-// GroupName the group name for this WebView. JavaScript may access named frames within the same group.
-func (x *WebView) GroupName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
+// GroupName returns the group name for this WebView. JavaScript may access named frames within the same group.
+func (wv *WebView) GroupName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetGroupName wraps the corresponding Objective-C method.
-func (x *WebView) SetGroupName(groupName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
-}
-
-// EstimatedProgress an estimate of the percent complete for a document load.  This value will range from 0 to 1.0 and, once a load completes, will remain at 1.0 until a new load starts, at which point it will be reset to 0.  The value is an estimate based on the total number of bytes expected to be received for a document, including all it's possible subresources.  For more accurate progress indication it is recommended that you implement a WebFrameLoadDelegate and a WebResourceLoadDelegate.
-func (x *WebView) EstimatedProgress() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("estimatedProgress"))
+// EstimatedProgress returns an estimate of the percent complete for a document load.  This value will range from 0 to 1.0 and, once a load completes, will remain at 1.0 until a new load starts, at which point it will be reset to 0.  The value is an estimate based on the total number of bytes expected to be received for a document, including all it's possible subresources.  For more accurate progress indication it is recommended that you implement a WebFrameLoadDelegate and a WebResourceLoadDelegate.
+func (wv *WebView) EstimatedProgress() float64 {
+	_r := objc.Send[float64](objref.IDOf(wv), objc.RegisterName("estimatedProgress"))
 	return _r
 }
 
-// IsLoading whether there are any pending loads in this WebView.
-func (x *WebView) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+// IsLoading reports whether there are any pending loads in this WebView.
+func (wv *WebView) IsLoading() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isLoading"))
 	return _r
 }
 
-// PasteboardTypesForSelection the pasteboard types that the WebView can use for the current selection
-func (x *WebView) PasteboardTypesForSelection() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteboardTypesForSelection"))
+// PasteboardTypesForSelection returns the pasteboard types that the WebView can use for the current selection
+func (wv *WebView) PasteboardTypesForSelection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteboardTypesForSelection"))
 	return obj.Wrap(_r)
 }
 
-// DrawsBackground whether the receiver draws a default white background when the loaded page has no background specified.
-func (x *WebView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+// DrawsBackground reports whether the receiver draws a default white background when the loaded page has no background specified.
+func (wv *WebView) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
-// SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *WebView) SetDrawsBackground(drawsBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-}
-
-// ShouldUpdateWhileOffscreen whether the WebView is always updated even when it is not in a window that is currently visible. If set to NO, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is YES, hidden web views are always updated. This is the default.
-func (x *WebView) ShouldUpdateWhileOffscreen() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldUpdateWhileOffscreen"))
+// ShouldUpdateWhileOffscreen reports whether the WebView is always updated even when it is not in a window that is currently visible. If set to false, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is true, hidden web views are always updated. This is the default.
+func (wv *WebView) ShouldUpdateWhileOffscreen() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("shouldUpdateWhileOffscreen"))
 	return _r
 }
 
-// SetShouldUpdateWhileOffscreen wraps the corresponding Objective-C method.
-func (x *WebView) SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUpdateWhileOffscreen:"), shouldUpdateWhileOffscreen)
-}
-
-// MainFrameURL the main frame's current URL.
-func (x *WebView) MainFrameURL() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainFrameURL"))
+// MainFrameURL returns the main frame's current URL.
+func (wv *WebView) MainFrameURL() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("mainFrameURL"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMainFrameURL wraps the corresponding Objective-C method.
-func (x *WebView) SetMainFrameURL(mainFrameURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainFrameURL:"), purego.NSString(mainFrameURL))
-}
-
-// MainFrameDocument the main frame's DOMDocument.
-func (x *WebView) MainFrameDocument() *DOMDocument {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainFrameDocument"))
+// MainFrameDocument returns the main frame's DOMDocument.
+func (wv *WebView) MainFrameDocument() *DOMDocument {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("mainFrameDocument"))
 	return DOMDocumentFromID(_r)
 }
 
-// MainFrameTitle the main frame's title if any, otherwise an empty string.
-func (x *WebView) MainFrameTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainFrameTitle"))
+// MainFrameTitle returns the main frame's title if any, otherwise an empty string.
+func (wv *WebView) MainFrameTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("mainFrameTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MainFrameIcon the site icon for the current page loaded in the mainFrame, or nil.
-func (x *WebView) MainFrameIcon() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainFrameIcon"))
+// MainFrameIcon returns the site icon for the current page loaded in the mainFrame, or nil.
+func (wv *WebView) MainFrameIcon() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("mainFrameIcon"))
 	return obj.Wrap(_r)
 }
 
 // TakeStringURLFrom wraps the corresponding Objective-C method.
-func (x *WebView) TakeStringURLFrom(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeStringURLFrom:"), objref.IDOf(sender))
+func (wv *WebView) TakeStringURLFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("takeStringURLFrom:"), objref.IDOf(sender))
 }
 
 // StopLoading wraps the corresponding Objective-C method.
-func (x *WebView) StopLoading(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
+func (wv *WebView) StopLoading(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
 }
 
 // Reload wraps the corresponding Objective-C method.
-func (x *WebView) Reload(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reload:"), objref.IDOf(sender))
+func (wv *WebView) Reload(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("reload:"), objref.IDOf(sender))
 }
 
 // ReloadFromOrigin wraps the corresponding Objective-C method.
-func (x *WebView) ReloadFromOrigin(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadFromOrigin:"), objref.IDOf(sender))
+func (wv *WebView) ReloadFromOrigin(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("reloadFromOrigin:"), objref.IDOf(sender))
 }
 
 // GoBack2 wraps the corresponding Objective-C method.
-func (x *WebView) GoBack2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goBack:"), objref.IDOf(sender))
+func (wv *WebView) GoBack2(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("goBack:"), objref.IDOf(sender))
 }
 
 // GoForward2 wraps the corresponding Objective-C method.
-func (x *WebView) GoForward2(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goForward:"), objref.IDOf(sender))
+func (wv *WebView) GoForward2(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("goForward:"), objref.IDOf(sender))
 }
 
 // MakeTextLarger wraps the corresponding Objective-C method.
-func (x *WebView) MakeTextLarger(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeTextLarger:"), objref.IDOf(sender))
+func (wv *WebView) MakeTextLarger(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextLarger:"), objref.IDOf(sender))
 }
 
 // MakeTextSmaller wraps the corresponding Objective-C method.
-func (x *WebView) MakeTextSmaller(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeTextSmaller:"), objref.IDOf(sender))
+func (wv *WebView) MakeTextSmaller(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextSmaller:"), objref.IDOf(sender))
 }
 
 // MakeTextStandardSize wraps the corresponding Objective-C method.
-func (x *WebView) MakeTextStandardSize(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeTextStandardSize:"), objref.IDOf(sender))
+func (wv *WebView) MakeTextStandardSize(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextStandardSize:"), objref.IDOf(sender))
 }
 
 // ToggleContinuousSpellChecking wraps the corresponding Objective-C method.
-func (x *WebView) ToggleContinuousSpellChecking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
+func (wv *WebView) ToggleContinuousSpellChecking(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
 }
 
 // ToggleSmartInsertDelete wraps the corresponding Objective-C method.
-func (x *WebView) ToggleSmartInsertDelete(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
+func (wv *WebView) ToggleSmartInsertDelete(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
 }
 
 // CanGoBack wraps the corresponding Objective-C method.
-func (x *WebView) CanGoBack() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoBack"))
+func (wv *WebView) CanGoBack() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("canGoBack"))
 	return _r
 }
 
 // CanGoForward wraps the corresponding Objective-C method.
-func (x *WebView) CanGoForward() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoForward"))
+func (wv *WebView) CanGoForward() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("canGoForward"))
 	return _r
 }
 
 // CanMakeTextLarger wraps the corresponding Objective-C method.
-func (x *WebView) CanMakeTextLarger() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canMakeTextLarger"))
+func (wv *WebView) CanMakeTextLarger() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("canMakeTextLarger"))
 	return _r
 }
 
 // CanMakeTextSmaller wraps the corresponding Objective-C method.
-func (x *WebView) CanMakeTextSmaller() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canMakeTextSmaller"))
+func (wv *WebView) CanMakeTextSmaller() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("canMakeTextSmaller"))
 	return _r
 }
 
 // CanMakeTextStandardSize wraps the corresponding Objective-C method.
-func (x *WebView) CanMakeTextStandardSize() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canMakeTextStandardSize"))
+func (wv *WebView) CanMakeTextStandardSize() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("canMakeTextStandardSize"))
 	return _r
 }
 
 // ComputedStyleForElementPseudoElement wraps the corresponding Objective-C method.
-func (x *WebView) ComputedStyleForElementPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computedStyleForElement:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
+func (wv *WebView) ComputedStyleForElementPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("computedStyleForElement:pseudoElement:"), objref.IDOf(element), purego.NSString(pseudoElement))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
 // EditableDOMRangeForPoint wraps the corresponding Objective-C method.
-func (x *WebView) EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editableDOMRangeForPoint:"), point)
+func (wv *WebView) EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRange {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("editableDOMRangeForPoint:"), point)
 	return DOMRangeFromID(_r)
 }
 
 // StyleDeclarationWithText wraps the corresponding Objective-C method.
-func (x *WebView) StyleDeclarationWithText(text string) *DOMCSSStyleDeclaration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("styleDeclarationWithText:"), purego.NSString(text))
+func (wv *WebView) StyleDeclarationWithText(text string) *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("styleDeclarationWithText:"), purego.NSString(text))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
 // SelectedDOMRange wraps the corresponding Objective-C method.
-func (x *WebView) SelectedDOMRange() *DOMRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedDOMRange"))
+func (wv *WebView) SelectedDOMRange() *DOMRange {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("selectedDOMRange"))
 	return DOMRangeFromID(_r)
 }
 
 // MaintainsInactiveSelection wraps the corresponding Objective-C method.
-func (x *WebView) MaintainsInactiveSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("maintainsInactiveSelection"))
+func (wv *WebView) MaintainsInactiveSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("maintainsInactiveSelection"))
 	return _r
 }
 
 // IsEditable wraps the corresponding Objective-C method.
-func (x *WebView) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (wv *WebView) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isEditable"))
 	return _r
-}
-
-// SetEditable wraps the corresponding Objective-C method.
-func (x *WebView) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
 // TypingStyle wraps the corresponding Objective-C method.
-func (x *WebView) TypingStyle() *DOMCSSStyleDeclaration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typingStyle"))
+func (wv *WebView) TypingStyle() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("typingStyle"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// SetTypingStyle wraps the corresponding Objective-C method.
-func (x *WebView) SetTypingStyle(typingStyle *DOMCSSStyleDeclaration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypingStyle:"), objref.IDOf(typingStyle))
-}
-
 // SmartInsertDeleteEnabled wraps the corresponding Objective-C method.
-func (x *WebView) SmartInsertDeleteEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("smartInsertDeleteEnabled"))
+func (wv *WebView) SmartInsertDeleteEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("smartInsertDeleteEnabled"))
 	return _r
-}
-
-// SetSmartInsertDeleteEnabled wraps the corresponding Objective-C method.
-func (x *WebView) SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSmartInsertDeleteEnabled:"), smartInsertDeleteEnabled)
 }
 
 // IsContinuousSpellCheckingEnabled wraps the corresponding Objective-C method.
-func (x *WebView) IsContinuousSpellCheckingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContinuousSpellCheckingEnabled"))
+func (wv *WebView) IsContinuousSpellCheckingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isContinuousSpellCheckingEnabled"))
 	return _r
 }
 
-// SetContinuousSpellCheckingEnabled wraps the corresponding Objective-C method.
-func (x *WebView) SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuousSpellCheckingEnabled:"), continuousSpellCheckingEnabled)
-}
-
 // SpellCheckerDocumentTag wraps the corresponding Objective-C method.
-func (x *WebView) SpellCheckerDocumentTag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("spellCheckerDocumentTag"))
+func (wv *WebView) SpellCheckerDocumentTag() int {
+	_r := objc.Send[int](objref.IDOf(wv), objc.RegisterName("spellCheckerDocumentTag"))
 	return _r
 }
 
 // ReplaceSelectionWithNode wraps the corresponding Objective-C method.
-func (x *WebView) ReplaceSelectionWithNode(node *DOMNode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceSelectionWithNode:"), objref.IDOf(node))
+func (wv *WebView) ReplaceSelectionWithNode(node *DOMNode) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithNode:"), objref.IDOf(node))
 }
 
 // ReplaceSelectionWithText wraps the corresponding Objective-C method.
-func (x *WebView) ReplaceSelectionWithText(text string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceSelectionWithText:"), purego.NSString(text))
+func (wv *WebView) ReplaceSelectionWithText(text string) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithText:"), purego.NSString(text))
 }
 
 // ReplaceSelectionWithMarkupString wraps the corresponding Objective-C method.
-func (x *WebView) ReplaceSelectionWithMarkupString(markupString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceSelectionWithMarkupString:"), purego.NSString(markupString))
+func (wv *WebView) ReplaceSelectionWithMarkupString(markupString string) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithMarkupString:"), purego.NSString(markupString))
 }
 
 // ReplaceSelectionWithArchive wraps the corresponding Objective-C method.
-func (x *WebView) ReplaceSelectionWithArchive(archive *WebArchive) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceSelectionWithArchive:"), objref.IDOf(archive))
+func (wv *WebView) ReplaceSelectionWithArchive(archive *WebArchive) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithArchive:"), objref.IDOf(archive))
 }
 
 // DeleteSelection wraps the corresponding Objective-C method.
-func (x *WebView) DeleteSelection() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSelection"))
+func (wv *WebView) DeleteSelection() {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("deleteSelection"))
 }
 
 // ApplyStyle wraps the corresponding Objective-C method.
-func (x *WebView) ApplyStyle(style *DOMCSSStyleDeclaration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyStyle:"), objref.IDOf(style))
+func (wv *WebView) ApplyStyle(style *DOMCSSStyleDeclaration) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("applyStyle:"), objref.IDOf(style))
 }
 
 // Copy wraps the corresponding Objective-C method.
-func (x *WebView) Copy(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copy:"), objref.IDOf(sender))
+func (wv *WebView) Copy(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("copy:"), objref.IDOf(sender))
 }
 
 // Cut wraps the corresponding Objective-C method.
-func (x *WebView) Cut(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cut:"), objref.IDOf(sender))
+func (wv *WebView) Cut(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("cut:"), objref.IDOf(sender))
 }
 
 // Paste wraps the corresponding Objective-C method.
-func (x *WebView) Paste(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paste:"), objref.IDOf(sender))
+func (wv *WebView) Paste(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("paste:"), objref.IDOf(sender))
 }
 
 // CopyFont wraps the corresponding Objective-C method.
-func (x *WebView) CopyFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyFont:"), objref.IDOf(sender))
+func (wv *WebView) CopyFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("copyFont:"), objref.IDOf(sender))
 }
 
 // PasteFont wraps the corresponding Objective-C method.
-func (x *WebView) PasteFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
+func (wv *WebView) PasteFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
 }
 
 // Delete wraps the corresponding Objective-C method.
-func (x *WebView) Delete(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delete:"), objref.IDOf(sender))
+func (wv *WebView) Delete(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("delete:"), objref.IDOf(sender))
 }
 
 // PasteAsPlainText wraps the corresponding Objective-C method.
-func (x *WebView) PasteAsPlainText(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteAsPlainText:"), objref.IDOf(sender))
+func (wv *WebView) PasteAsPlainText(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteAsPlainText:"), objref.IDOf(sender))
 }
 
 // PasteAsRichText wraps the corresponding Objective-C method.
-func (x *WebView) PasteAsRichText(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
+func (wv *WebView) PasteAsRichText(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
 }
 
 // ChangeFont wraps the corresponding Objective-C method.
-func (x *WebView) ChangeFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeFont:"), objref.IDOf(sender))
+func (wv *WebView) ChangeFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeFont:"), objref.IDOf(sender))
 }
 
 // ChangeAttributes wraps the corresponding Objective-C method.
-func (x *WebView) ChangeAttributes(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeAttributes:"), objref.IDOf(sender))
+func (wv *WebView) ChangeAttributes(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeAttributes:"), objref.IDOf(sender))
 }
 
 // ChangeDocumentBackgroundColor wraps the corresponding Objective-C method.
-func (x *WebView) ChangeDocumentBackgroundColor(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDocumentBackgroundColor:"), objref.IDOf(sender))
+func (wv *WebView) ChangeDocumentBackgroundColor(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeDocumentBackgroundColor:"), objref.IDOf(sender))
 }
 
 // ChangeColor wraps the corresponding Objective-C method.
-func (x *WebView) ChangeColor(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeColor:"), objref.IDOf(sender))
+func (wv *WebView) ChangeColor(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeColor:"), objref.IDOf(sender))
 }
 
 // AlignCenter wraps the corresponding Objective-C method.
-func (x *WebView) AlignCenter(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
+func (wv *WebView) AlignCenter(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
 }
 
 // AlignJustified wraps the corresponding Objective-C method.
-func (x *WebView) AlignJustified(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignJustified:"), objref.IDOf(sender))
+func (wv *WebView) AlignJustified(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignJustified:"), objref.IDOf(sender))
 }
 
 // AlignLeft wraps the corresponding Objective-C method.
-func (x *WebView) AlignLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
+func (wv *WebView) AlignLeft(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
 }
 
 // AlignRight wraps the corresponding Objective-C method.
-func (x *WebView) AlignRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignRight:"), objref.IDOf(sender))
+func (wv *WebView) AlignRight(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignRight:"), objref.IDOf(sender))
 }
 
 // CheckSpelling wraps the corresponding Objective-C method.
-func (x *WebView) CheckSpelling(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
+func (wv *WebView) CheckSpelling(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 }
 
 // ShowGuessPanel wraps the corresponding Objective-C method.
-func (x *WebView) ShowGuessPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
+func (wv *WebView) ShowGuessPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 }
 
 // PerformFindPanelAction wraps the corresponding Objective-C method.
-func (x *WebView) PerformFindPanelAction(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
+func (wv *WebView) PerformFindPanelAction(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
 }
 
 // StartSpeaking wraps the corresponding Objective-C method.
-func (x *WebView) StartSpeaking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
+func (wv *WebView) StartSpeaking(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
 }
 
 // StopSpeaking wraps the corresponding Objective-C method.
-func (x *WebView) StopSpeaking(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
+func (wv *WebView) StopSpeaking(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
 }
 
 // MoveToBeginningOfSentence wraps the corresponding Objective-C method.
-func (x *WebView) MoveToBeginningOfSentence(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveToBeginningOfSentence:"), objref.IDOf(sender))
+func (wv *WebView) MoveToBeginningOfSentence(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToBeginningOfSentence:"), objref.IDOf(sender))
 }
 
 // MoveToBeginningOfSentenceAndModifySelection wraps the corresponding Objective-C method.
-func (x *WebView) MoveToBeginningOfSentenceAndModifySelection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveToBeginningOfSentenceAndModifySelection:"), objref.IDOf(sender))
+func (wv *WebView) MoveToBeginningOfSentenceAndModifySelection(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToBeginningOfSentenceAndModifySelection:"), objref.IDOf(sender))
 }
 
 // MoveToEndOfSentence wraps the corresponding Objective-C method.
-func (x *WebView) MoveToEndOfSentence(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveToEndOfSentence:"), objref.IDOf(sender))
+func (wv *WebView) MoveToEndOfSentence(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToEndOfSentence:"), objref.IDOf(sender))
 }
 
 // MoveToEndOfSentenceAndModifySelection wraps the corresponding Objective-C method.
-func (x *WebView) MoveToEndOfSentenceAndModifySelection(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveToEndOfSentenceAndModifySelection:"), objref.IDOf(sender))
+func (wv *WebView) MoveToEndOfSentenceAndModifySelection(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToEndOfSentenceAndModifySelection:"), objref.IDOf(sender))
 }
 
 // SelectSentence wraps the corresponding Objective-C method.
-func (x *WebView) SelectSentence(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectSentence:"), objref.IDOf(sender))
+func (wv *WebView) SelectSentence(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("selectSentence:"), objref.IDOf(sender))
 }
 
 // OverWrite wraps the corresponding Objective-C method.
-func (x *WebView) OverWrite(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overWrite:"), objref.IDOf(sender))
+func (wv *WebView) OverWrite(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("overWrite:"), objref.IDOf(sender))
 }
-
-// WebViewable is the interface implemented by [WebView], for mocking and DI.
-type WebViewable interface {
-	obj.Object
-	WithShouldCloseWithWindow(shouldCloseWithWindow bool) *WebView
-	WithTextSizeMultiplier(textSizeMultiplier float32) *WebView
-	WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WebView
-	WithCustomUserAgent(customUserAgent string) *WebView
-	WithCustomTextEncodingName(customTextEncodingName string) *WebView
-	WithMediaStyle(mediaStyle string) *WebView
-	WithPreferences(preferences *WebPreferences) *WebView
-	WithPreferencesIdentifier(preferencesIdentifier string) *WebView
-	WithHostWindow(hostWindow obj.Object) *WebView
-	WithGroupName(groupName string) *WebView
-	WithDrawsBackground(drawsBackground bool) *WebView
-	WithShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool) *WebView
-	WithMainFrameURL(mainFrameURL string) *WebView
-	WithEditable(editable bool) *WebView
-	WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView
-	WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *WebView
-	WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *WebView
-	Close()
-	SetMaintainsBackForwardList(flag bool)
-	GoBack() bool
-	GoForward() bool
-	GoToBackForwardItem(item *WebHistoryItem) bool
-	UserAgentForURL(uRL string) string
-	StringByEvaluatingJavaScriptFromString(script string) string
-	SearchForDirectionCaseSensitiveWrap(string_ string, forward bool, caseFlag bool, wrapFlag bool) bool
-	ElementAtPoint(point corefoundation.CGPoint) obj.Object
-	WriteSelectionWithPasteboardTypesToPasteboard(types obj.Object, pasteboard obj.Object)
-	PasteboardTypesForElement(element obj.Object) obj.Object
-	WriteElementWithPasteboardTypesToPasteboard(element obj.Object, types obj.Object, pasteboard obj.Object)
-	MoveDragCaretToPoint(point corefoundation.CGPoint)
-	RemoveDragCaret()
-	ShouldCloseWithWindow() bool
-	SetShouldCloseWithWindow(shouldCloseWithWindow bool)
-	MainFrame() *WebFrame
-	SelectedFrame() *WebFrame
-	BackForwardList() *WebBackForwardList
-	TextSizeMultiplier() float32
-	SetTextSizeMultiplier(textSizeMultiplier float32)
-	ApplicationNameForUserAgent() string
-	SetApplicationNameForUserAgent(applicationNameForUserAgent string)
-	CustomUserAgent() string
-	SetCustomUserAgent(customUserAgent string)
-	SupportsTextEncoding() bool
-	CustomTextEncodingName() string
-	SetCustomTextEncodingName(customTextEncodingName string)
-	MediaStyle() string
-	SetMediaStyle(mediaStyle string)
-	WindowScriptObject() *WebScriptObject
-	Preferences() *WebPreferences
-	SetPreferences(preferences *WebPreferences)
-	PreferencesIdentifier() string
-	SetPreferencesIdentifier(preferencesIdentifier string)
-	HostWindow() obj.Object
-	SetHostWindow(hostWindow obj.Object)
-	GroupName() string
-	SetGroupName(groupName string)
-	EstimatedProgress() float64
-	IsLoading() bool
-	PasteboardTypesForSelection() obj.Object
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	ShouldUpdateWhileOffscreen() bool
-	SetShouldUpdateWhileOffscreen(shouldUpdateWhileOffscreen bool)
-	MainFrameURL() string
-	SetMainFrameURL(mainFrameURL string)
-	MainFrameDocument() *DOMDocument
-	MainFrameTitle() string
-	MainFrameIcon() obj.Object
-	TakeStringURLFrom(sender obj.Object)
-	StopLoading(sender obj.Object)
-	Reload(sender obj.Object)
-	ReloadFromOrigin(sender obj.Object)
-	GoBack2(sender obj.Object)
-	GoForward2(sender obj.Object)
-	MakeTextLarger(sender obj.Object)
-	MakeTextSmaller(sender obj.Object)
-	MakeTextStandardSize(sender obj.Object)
-	ToggleContinuousSpellChecking(sender obj.Object)
-	ToggleSmartInsertDelete(sender obj.Object)
-	CanGoBack() bool
-	CanGoForward() bool
-	CanMakeTextLarger() bool
-	CanMakeTextSmaller() bool
-	CanMakeTextStandardSize() bool
-	ComputedStyleForElementPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration
-	EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRange
-	StyleDeclarationWithText(text string) *DOMCSSStyleDeclaration
-	SelectedDOMRange() *DOMRange
-	MaintainsInactiveSelection() bool
-	IsEditable() bool
-	SetEditable(editable bool)
-	TypingStyle() *DOMCSSStyleDeclaration
-	SetTypingStyle(typingStyle *DOMCSSStyleDeclaration)
-	SmartInsertDeleteEnabled() bool
-	SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool)
-	IsContinuousSpellCheckingEnabled() bool
-	SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool)
-	SpellCheckerDocumentTag() int
-	ReplaceSelectionWithNode(node *DOMNode)
-	ReplaceSelectionWithText(text string)
-	ReplaceSelectionWithMarkupString(markupString string)
-	ReplaceSelectionWithArchive(archive *WebArchive)
-	DeleteSelection()
-	ApplyStyle(style *DOMCSSStyleDeclaration)
-	Copy(sender obj.Object)
-	Cut(sender obj.Object)
-	Paste(sender obj.Object)
-	CopyFont(sender obj.Object)
-	PasteFont(sender obj.Object)
-	Delete(sender obj.Object)
-	PasteAsPlainText(sender obj.Object)
-	PasteAsRichText(sender obj.Object)
-	ChangeFont(sender obj.Object)
-	ChangeAttributes(sender obj.Object)
-	ChangeDocumentBackgroundColor(sender obj.Object)
-	ChangeColor(sender obj.Object)
-	AlignCenter(sender obj.Object)
-	AlignJustified(sender obj.Object)
-	AlignLeft(sender obj.Object)
-	AlignRight(sender obj.Object)
-	CheckSpelling(sender obj.Object)
-	ShowGuessPanel(sender obj.Object)
-	PerformFindPanelAction(sender obj.Object)
-	StartSpeaking(sender obj.Object)
-	StopSpeaking(sender obj.Object)
-	MoveToBeginningOfSentence(sender obj.Object)
-	MoveToBeginningOfSentenceAndModifySelection(sender obj.Object)
-	MoveToEndOfSentence(sender obj.Object)
-	MoveToEndOfSentenceAndModifySelection(sender obj.Object)
-	SelectSentence(sender obj.Object)
-	OverWrite(sender obj.Object)
-}
-
-var _ WebViewable = (*WebView)(nil)

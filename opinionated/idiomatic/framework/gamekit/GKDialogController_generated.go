@@ -46,24 +46,24 @@ func dialogControllerAdopt(id objc.ID) *DialogController {
 }
 
 // Description returns the object's -description text.
-func (x *DialogController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dc *DialogController) Description() string {
+	return rt.Description(objref.IDOf(dc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DialogController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dc *DialogController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DialogController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dc *DialogController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DialogController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dc *DialogController) String() string {
+	return rt.Description(objref.IDOf(dc))
 }
 
 // NewDialogController creates a new DialogController.
@@ -72,42 +72,25 @@ func NewDialogController() *DialogController {
 	return dialogControllerAdopt(_id)
 }
 
-// WithParentWindow the window that displays the dashboard.
-func (x *DialogController) WithParentWindow(parentWindow obj.Object) *DialogController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
-	return x
+// WithParentWindow sets the window that displays the dashboard.
+func (dc *DialogController) WithParentWindow(parentWindow obj.Object) *DialogController {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	return dc
 }
 
 // PresentViewController presents the dashboard in the window.
-func (x *DialogController) PresentViewController(viewController obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentViewController:"), objref.IDOf(viewController))
+func (dc *DialogController) PresentViewController(viewController obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentViewController:"), objref.IDOf(viewController))
 	return _r
 }
 
 // Dismiss dismisses the dashboard.
-func (x *DialogController) Dismiss(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismiss:"), objref.IDOf(sender))
+func (dc *DialogController) Dismiss(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("dismiss:"), objref.IDOf(sender))
 }
 
 // ParentWindow wraps the corresponding Objective-C method.
-func (x *DialogController) ParentWindow() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentWindow"))
+func (dc *DialogController) ParentWindow() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("parentWindow"))
 	return obj.Wrap(_r)
 }
-
-// SetParentWindow wraps the corresponding Objective-C method.
-func (x *DialogController) SetParentWindow(parentWindow obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
-}
-
-// DialogControllerable is the interface implemented by [DialogController], for mocking and DI.
-type DialogControllerable interface {
-	obj.Object
-	WithParentWindow(parentWindow obj.Object) *DialogController
-	PresentViewController(viewController obj.Object) bool
-	Dismiss(sender obj.Object)
-	ParentWindow() obj.Object
-	SetParentWindow(parentWindow obj.Object)
-}
-
-var _ DialogControllerable = (*DialogController)(nil)

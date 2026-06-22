@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,45 +51,28 @@ func NewAudioUnitReverb() *AudioUnitReverb {
 	return audioUnitReverbAdopt(_id)
 }
 
-// WithWetDryMix the blend of the wet and dry signals.
-func (x *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
-	return x
+// WithWetDryMix sets the blend of the wet and dry signals.
+func (aur *AudioUnitReverb) WithWetDryMix(wetDryMix float32) *AudioUnitReverb {
+	objc.Send[objc.ID](objref.IDOf(aur), objc.RegisterName("setWetDryMix:"), wetDryMix)
+	return aur
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aur *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
+	objc.Send[objc.ID](objref.IDOf(aur), objc.RegisterName("setBypass:"), bypass)
+	return aur
 }
 
 // LoadFactoryPreset configures the audio unit as a reverb preset.
-func (x *AudioUnitReverb) LoadFactoryPreset(preset AudioUnitReverbPreset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryPreset:"), preset)
+func (aur *AudioUnitReverb) LoadFactoryPreset(preset AudioUnitReverbPreset) {
+	objc.Send[objc.ID](objref.IDOf(aur), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
 // WetDryMix wraps the corresponding Objective-C method.
-func (x *AudioUnitReverb) WetDryMix() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
+func (aur *AudioUnitReverb) WetDryMix() float32 {
+	_r := objc.Send[float32](objref.IDOf(aur), objc.RegisterName("wetDryMix"))
 	return _r
 }
-
-// SetWetDryMix wraps the corresponding Objective-C method.
-func (x *AudioUnitReverb) SetWetDryMix(wetDryMix float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
-}
-
-// AudioUnitReverbable is the interface implemented by [AudioUnitReverb], for mocking and DI.
-type AudioUnitReverbable interface {
-	obj.Object
-	WithWetDryMix(wetDryMix float32) *AudioUnitReverb
-	WithBypass(bypass bool) *AudioUnitReverb
-	LoadFactoryPreset(preset AudioUnitReverbPreset)
-	WetDryMix() float32
-	SetWetDryMix(wetDryMix float32)
-}
-
-var _ AudioUnitReverbable = (*AudioUnitReverb)(nil)
 
 var _ AudioUnitEffectProvider = (*AudioUnitReverb)(nil)
 

@@ -44,24 +44,24 @@ func mTRCertificatesAdopt(id objc.ID) *MTRCertificates {
 }
 
 // Description returns the object's -description text.
-func (x *MTRCertificates) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MTRCertificates) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCertificates) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MTRCertificates) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCertificates) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MTRCertificates) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCertificates) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MTRCertificates) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMTRCertificates creates a new MTRCertificates.
@@ -69,10 +69,3 @@ func NewMTRCertificates() *MTRCertificates {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRCertificates")), objc.RegisterName("new"))
 	return mTRCertificatesAdopt(_id)
 }
-
-// MTRCertificatesable is the interface implemented by [MTRCertificates], for mocking and DI.
-type MTRCertificatesable interface {
-	obj.Object
-}
-
-var _ MTRCertificatesable = (*MTRCertificates)(nil)

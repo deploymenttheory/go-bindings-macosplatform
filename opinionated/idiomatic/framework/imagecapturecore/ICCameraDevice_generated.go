@@ -5,7 +5,6 @@
 package imagecapturecore
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -53,193 +52,133 @@ func NewCameraDevice() *CameraDevice {
 	return cameraDeviceAdopt(_id)
 }
 
-// WithMediaPresentation the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
-func (x *CameraDevice) WithMediaPresentation(mediaPresentation MediaPresentation) *CameraDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaPresentation:"), mediaPresentation)
-	return x
+// WithMediaPresentation sets the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
+func (cd *CameraDevice) WithMediaPresentation(mediaPresentation MediaPresentation) *CameraDevice {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setMediaPresentation:"), mediaPresentation)
+	return cd
 }
 
-// WithPtpEventHandler a closure for handling PTP event packets.
-func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(obj.Object)) *CameraDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPtpEventHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { ptpEventHandler(obj.Wrap(_b0)) }))
-	return x
+// WithPtpEventHandler sets a closure for handling PTP event packets.
+func (cd *CameraDevice) WithPtpEventHandler(ptpEventHandler func(obj.Object)) *CameraDevice {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setPtpEventHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { ptpEventHandler(obj.Wrap(_b0)) }))
+	return cd
 }
 
 // FilesOfType returns an array of files of the selected type on the camera.
-func (x *CameraDevice) FilesOfType(fileUTType string) []string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filesOfType:"), purego.NSString(fileUTType))
+func (cd *CameraDevice) FilesOfType(fileUTType string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("filesOfType:"), purego.NSString(fileUTType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CancelDownload cancels a download from the camera.
-func (x *CameraDevice) CancelDownload() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDownload"))
+func (cd *CameraDevice) CancelDownload() {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("cancelDownload"))
 }
 
 // RequestDeleteFiles deletes files from the camera.
-func (x *CameraDevice) RequestDeleteFiles(files []*CameraItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDeleteFiles:"), purego.SliceToNSArray(files, func(_v *CameraItem) objc.ID { return objref.IDOf(_v) }))
+func (cd *CameraDevice) RequestDeleteFiles(files []*CameraItem) {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDeleteFiles:"), purego.SliceToNSArray(files, func(_v *CameraItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CancelDelete cancels the current delete operation.
-func (x *CameraDevice) CancelDelete() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDelete"))
+func (cd *CameraDevice) CancelDelete() {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("cancelDelete"))
 }
 
 // RequestSyncClock synchronizes the camera’s clock with the computer’s clock.
-func (x *CameraDevice) RequestSyncClock() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestSyncClock"))
+func (cd *CameraDevice) RequestSyncClock() {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestSyncClock"))
 }
 
 // RequestTakePicture captures a new image using the camera.
-func (x *CameraDevice) RequestTakePicture() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestTakePicture"))
+func (cd *CameraDevice) RequestTakePicture() {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestTakePicture"))
 }
 
 // RequestEnableTethering enables tethered capture if the camera has the capability to take pictures while connected.
-func (x *CameraDevice) RequestEnableTethering() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEnableTethering"))
+func (cd *CameraDevice) RequestEnableTethering() {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestEnableTethering"))
 }
 
 // RequestDisableTethering disables tethered capture on the camera.
-func (x *CameraDevice) RequestDisableTethering() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDisableTethering"))
+func (cd *CameraDevice) RequestDisableTethering() {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("requestDisableTethering"))
 }
 
-// ContentCatalogPercentCompleted ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
-func (x *CameraDevice) ContentCatalogPercentCompleted() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contentCatalogPercentCompleted"))
+// ContentCatalogPercentCompleted returns ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
+func (cd *CameraDevice) ContentCatalogPercentCompleted() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("contentCatalogPercentCompleted"))
 	return _r
 }
 
-// Contents ￼Contents of the camera. The structure of the elements in this array will reflect the folder structure of the storage reported by the camera. Each item in this array will correspond to a storage on the camera.
+// Contents returns ￼Contents of the camera. The structure of the elements in this array will reflect the folder structure of the storage reported by the camera. Each item in this array will correspond to a storage on the camera.
 //
 // Contents returns the collection as a Go slice.
-func (x *CameraDevice) Contents() []*CameraItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+func (cd *CameraDevice) Contents() []*CameraItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("contents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
 
-// MediaFiles ￼The property mediaFiles represents all image, movie and audio files on the camera. These files are returned as a single array without regard to the folder hierarchy used to store these files on the camera.
+// MediaFiles returns ￼The property mediaFiles represents all image, movie and audio files on the camera. These files are returned as a single array without regard to the folder hierarchy used to store these files on the camera.
 //
 // MediaFiles returns the collection as a Go slice.
-func (x *CameraDevice) MediaFiles() []*CameraItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaFiles"))
+func (cd *CameraDevice) MediaFiles() []*CameraItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("mediaFiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
 
-// IsEjectable ￼Indicates whether the device can be 'soft' removed or disconnected.
-func (x *CameraDevice) IsEjectable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEjectable"))
+// IsEjectable reports whether ￼Indicates whether the device can be 'soft' removed or disconnected.
+func (cd *CameraDevice) IsEjectable() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isEjectable"))
 	return _r
 }
 
-// IsLocked ￼Indicates whether the device is locked.  A locked device does not allow for deletion of any asset.
-func (x *CameraDevice) IsLocked() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocked"))
+// IsLocked reports whether ￼Indicates whether the device is locked. A locked device does not allow for deletion of any asset.
+func (cd *CameraDevice) IsLocked() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isLocked"))
 	return _r
 }
 
-// IsAccessRestrictedAppleDevice set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
-func (x *CameraDevice) IsAccessRestrictedAppleDevice() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAccessRestrictedAppleDevice"))
+// IsAccessRestrictedAppleDevice reports whether set to true if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
+func (cd *CameraDevice) IsAccessRestrictedAppleDevice() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isAccessRestrictedAppleDevice"))
 	return _r
 }
 
-// ICloudPhotosEnabled set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
-func (x *CameraDevice) ICloudPhotosEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("iCloudPhotosEnabled"))
+// ICloudPhotosEnabled reports whether set to true if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
+func (cd *CameraDevice) ICloudPhotosEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("iCloudPhotosEnabled"))
 	return _r
 }
 
-// MediaPresentation the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
-func (x *CameraDevice) MediaPresentation() MediaPresentation {
-	_r := objc.Send[MediaPresentation](objref.IDOf(x), objc.RegisterName("mediaPresentation"))
+// MediaPresentation returns the media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
+func (cd *CameraDevice) MediaPresentation() MediaPresentation {
+	_r := objc.Send[MediaPresentation](objref.IDOf(cd), objc.RegisterName("mediaPresentation"))
 	return _r
-}
-
-// SetMediaPresentation wraps the corresponding Objective-C method.
-func (x *CameraDevice) SetMediaPresentation(mediaPresentation MediaPresentation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaPresentation:"), mediaPresentation)
 }
 
 // TimeOffset indicates the time offset, in seconds, between the camera's clock and the computer's clock￼. This value is positive if the camera's clock is ahead of the computer's clock. This property should be ignored if the camera's capabilities property does not contain ICCameraDeviceCanSyncClock.
-func (x *CameraDevice) TimeOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeOffset"))
+func (cd *CameraDevice) TimeOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(cd), objc.RegisterName("timeOffset"))
 	return _r
 }
 
-// BatteryLevelAvailable indicates if the device has reported battery charge level￼.
-func (x *CameraDevice) BatteryLevelAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("batteryLevelAvailable"))
+// BatteryLevelAvailable reports whether indicates if the device has reported battery charge level￼.
+func (cd *CameraDevice) BatteryLevelAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("batteryLevelAvailable"))
 	return _r
 }
 
-// BatteryLevel ￼Indicates the battery charge level. Its value ranges from 0 to 100.
-func (x *CameraDevice) BatteryLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batteryLevel"))
+// BatteryLevel returns ￼Indicates the battery charge level. Its value ranges from 0 to 100.
+func (cd *CameraDevice) BatteryLevel() int {
+	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("batteryLevel"))
 	return _r
 }
 
-// TetheredCaptureEnabled this property is always set to YES when the device has the capability 'ICCameraDeviceCanTakePicture' requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard take picture functionality of supported cameras.
-func (x *CameraDevice) TetheredCaptureEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tetheredCaptureEnabled"))
+// TetheredCaptureEnabled reports whether this property is always set to true when the device has the capability 'ICCameraDeviceCanTakePicture' requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard take picture functionality of supported cameras.
+func (cd *CameraDevice) TetheredCaptureEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("tetheredCaptureEnabled"))
 	return _r
 }
-
-// SetPtpEventHandler wraps the corresponding Objective-C method.
-//
-// SetPtpEventHandler blocks until the operation completes or ctx is cancelled.
-func (x *CameraDevice) SetPtpEventHandler(ctx context.Context) (result obj.Object, err error) {
-	type _result struct {
-		val obj.Object
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = obj.Wrap(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPtpEventHandler:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero obj.Object
-		return _zero, ctx.Err()
-	}
-}
-
-// CameraDeviceable is the interface implemented by [CameraDevice], for mocking and DI.
-type CameraDeviceable interface {
-	obj.Object
-	WithMediaPresentation(mediaPresentation MediaPresentation) *CameraDevice
-	WithPtpEventHandler(ptpEventHandler func(obj.Object)) *CameraDevice
-	FilesOfType(fileUTType string) []string
-	CancelDownload()
-	RequestDeleteFiles(files []*CameraItem)
-	CancelDelete()
-	RequestSyncClock()
-	RequestTakePicture()
-	RequestEnableTethering()
-	RequestDisableTethering()
-	ContentCatalogPercentCompleted() int
-	Contents() []*CameraItem
-	MediaFiles() []*CameraItem
-	IsEjectable() bool
-	IsLocked() bool
-	IsAccessRestrictedAppleDevice() bool
-	ICloudPhotosEnabled() bool
-	MediaPresentation() MediaPresentation
-	SetMediaPresentation(mediaPresentation MediaPresentation)
-	TimeOffset() float64
-	BatteryLevelAvailable() bool
-	BatteryLevel() int
-	TetheredCaptureEnabled() bool
-	SetPtpEventHandler(ctx context.Context) (obj.Object, error)
-}
-
-var _ CameraDeviceable = (*CameraDevice)(nil)
 
 var _ DeviceProvider = (*CameraDevice)(nil)

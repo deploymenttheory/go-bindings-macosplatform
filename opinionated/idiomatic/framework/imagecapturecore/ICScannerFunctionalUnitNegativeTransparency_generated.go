@@ -53,115 +53,88 @@ func NewScannerFunctionalUnitNegativeTransparency() *ScannerFunctionalUnitNegati
 	return scannerFunctionalUnitNegativeTransparencyAdopt(_id)
 }
 
-// WithDocumentType ￼Current document type. This will always be one of the supported document types.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
-	return x
+// WithDocumentType sets ￼Current document type. This will always be one of the supported document types.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setDocumentType:"), documentType)
+	return sfunt
 }
 
-// WithPixelDataType ￼The pixel data type.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelDataType:"), pixelDataType)
-	return x
+// WithPixelDataType sets ￼The pixel data type.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setPixelDataType:"), pixelDataType)
+	return sfunt
 }
 
-// WithBitDepth ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitDepth:"), bitDepth)
-	return x
+// WithBitDepth sets ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setBitDepth:"), bitDepth)
+	return sfunt
 }
 
-// WithMeasurementUnit ￼Current measurement unit. This will always be one of the supported measurement units.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
-	return x
+// WithMeasurementUnit sets ￼Current measurement unit. This will always be one of the supported measurement units.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
+	return sfunt
 }
 
-// WithResolution ￼Current scan resolution. This will always be one of the supported resolution values.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithResolution(resolution int) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolution:"), resolution)
-	return x
+// WithResolution sets ￼Current scan resolution. This will always be one of the supported resolution values.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithResolution(resolution int) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setResolution:"), resolution)
+	return sfunt
 }
 
-// WithScaleFactor ￼Current scale factor. This will always be one of the supported scale factor values.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
-	return x
+// WithScaleFactor sets ￼Current scale factor. This will always be one of the supported scale factor values.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setScaleFactor:"), scaleFactor)
+	return sfunt
 }
 
-// WithScanArea ￼This property along with scanAreaOrientation describes the area to be scanned.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanArea:"), scanArea)
-	return x
+// WithScanArea sets ￼This property along with scanAreaOrientation describes the area to be scanned.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setScanArea:"), scanArea)
+	return sfunt
 }
 
-// WithScanAreaOrientation ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
-	return x
+// WithScanAreaOrientation sets ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
+	return sfunt
 }
 
-// WithUsesThresholdForBlackAndWhiteScanning ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
-	return x
+// WithUsesThresholdForBlackAndWhiteScanning sets ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
+	return sfunt
 }
 
-// WithThresholdForBlackAndWhiteScanning ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
-	return x
+// WithThresholdForBlackAndWhiteScanning sets ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
+	return sfunt
 }
 
-// WithOverviewResolution ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
-func (x *ScannerFunctionalUnitNegativeTransparency) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitNegativeTransparency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewResolution:"), overviewResolution)
-	return x
+// WithOverviewResolution sets ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitNegativeTransparency {
+	objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("setOverviewResolution:"), overviewResolution)
+	return sfunt
 }
 
-// SupportedDocumentTypes ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-func (x *ScannerFunctionalUnitNegativeTransparency) SupportedDocumentTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedDocumentTypes"))
+// SupportedDocumentTypes returns ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) SupportedDocumentTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sfunt), objc.RegisterName("supportedDocumentTypes"))
 	return obj.Wrap(_r)
 }
 
-// DocumentType ￼Current document type. This will always be one of the supported document types.
-func (x *ScannerFunctionalUnitNegativeTransparency) DocumentType() ScannerDocumentType {
-	_r := objc.Send[ScannerDocumentType](objref.IDOf(x), objc.RegisterName("documentType"))
+// DocumentType returns ￼Current document type. This will always be one of the supported document types.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) DocumentType() ScannerDocumentType {
+	_r := objc.Send[ScannerDocumentType](objref.IDOf(sfunt), objc.RegisterName("documentType"))
 	return _r
 }
 
-// SetDocumentType wraps the corresponding Objective-C method.
-func (x *ScannerFunctionalUnitNegativeTransparency) SetDocumentType(documentType ScannerDocumentType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
-}
-
-// DocumentSize ￼Document size of the current document type expressed in current measurement unit.
-func (x *ScannerFunctionalUnitNegativeTransparency) DocumentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("documentSize"))
+// DocumentSize returns ￼Document size of the current document type expressed in current measurement unit.
+func (sfunt *ScannerFunctionalUnitNegativeTransparency) DocumentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfunt), objc.RegisterName("documentSize"))
 	return _r
 }
-
-// ScannerFunctionalUnitNegativeTransparencyable is the interface implemented by [ScannerFunctionalUnitNegativeTransparency], for mocking and DI.
-type ScannerFunctionalUnitNegativeTransparencyable interface {
-	obj.Object
-	WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitNegativeTransparency
-	WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitNegativeTransparency
-	WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitNegativeTransparency
-	WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitNegativeTransparency
-	WithResolution(resolution int) *ScannerFunctionalUnitNegativeTransparency
-	WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitNegativeTransparency
-	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitNegativeTransparency
-	WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitNegativeTransparency
-	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitNegativeTransparency
-	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitNegativeTransparency
-	WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitNegativeTransparency
-	SupportedDocumentTypes() obj.Object
-	DocumentType() ScannerDocumentType
-	SetDocumentType(documentType ScannerDocumentType)
-	DocumentSize() corefoundation.CGSize
-}
-
-var _ ScannerFunctionalUnitNegativeTransparencyable = (*ScannerFunctionalUnitNegativeTransparency)(nil)
 
 var _ ScannerFunctionalUnitProvider = (*ScannerFunctionalUnitNegativeTransparency)(nil)

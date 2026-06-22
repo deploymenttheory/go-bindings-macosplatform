@@ -44,24 +44,24 @@ func mTRBridgedDeviceBasicInformationClusterProductAppearanceStructAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Description() string {
+	return rt.Description(objref.IDOf(mbdbicpas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbdbicpas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbdbicpas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) String() string {
+	return rt.Description(objref.IDOf(mbdbicpas))
 }
 
 // NewMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct creates a new MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct.
@@ -71,48 +71,25 @@ func NewMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct() *MTRBri
 }
 
 // WithFinish sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFinish:"), objref.IDOf(finish))
-	return x
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
+	objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("setFinish:"), objref.IDOf(finish))
+	return mbdbicpas
 }
 
 // WithPrimaryColor sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
-	return x
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
+	objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
+	return mbdbicpas
 }
 
 // Finish wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish"))
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("finish"))
 	return obj.Wrap(_r)
-}
-
-// SetFinish wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) SetFinish(finish obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 }
 
 // PrimaryColor wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryColor"))
+func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("primaryColor"))
 	return obj.Wrap(_r)
 }
-
-// SetPrimaryColor wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
-}
-
-// MTRBridgedDeviceBasicInformationClusterProductAppearanceStructable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct], for mocking and DI.
-type MTRBridgedDeviceBasicInformationClusterProductAppearanceStructable interface {
-	obj.Object
-	WithFinish(finish obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
-	WithPrimaryColor(primaryColor obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
-	Finish() obj.Object
-	SetFinish(finish obj.Object)
-	PrimaryColor() obj.Object
-	SetPrimaryColor(primaryColor obj.Object)
-}
-
-var _ MTRBridgedDeviceBasicInformationClusterProductAppearanceStructable = (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct)(nil)

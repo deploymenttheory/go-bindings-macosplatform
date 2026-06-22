@@ -7,7 +7,6 @@ package datadetection
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,61 +51,49 @@ func NewMatchPostalAddress() *MatchPostalAddress {
 	return matchPostalAddressAdopt(_id)
 }
 
-// Street the street name in a postal address.
-func (x *MatchPostalAddress) Street() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("street"))
+// Street returns the street name in a postal address.
+func (mpa *MatchPostalAddress) Street() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("street"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// City the city name in a postal address.
-func (x *MatchPostalAddress) City() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("city"))
+// City returns the city name in a postal address.
+func (mpa *MatchPostalAddress) City() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("city"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// State the state name in a postal address.
-func (x *MatchPostalAddress) State() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the state name in a postal address.
+func (mpa *MatchPostalAddress) State() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PostalCode the postal code in a postal address.
-func (x *MatchPostalAddress) PostalCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+// PostalCode returns the postal code in a postal address.
+func (mpa *MatchPostalAddress) PostalCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Country the country or region name in a postal address.
-func (x *MatchPostalAddress) Country() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
+// Country returns the country or region name in a postal address.
+func (mpa *MatchPostalAddress) Country() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MatchPostalAddressable is the interface implemented by [MatchPostalAddress], for mocking and DI.
-type MatchPostalAddressable interface {
-	obj.Object
-	Street() string
-	City() string
-	State() string
-	PostalCode() string
-	Country() string
-}
-
-var _ MatchPostalAddressable = (*MatchPostalAddress)(nil)
 
 var _ MatchProvider = (*MatchPostalAddress)(nil)

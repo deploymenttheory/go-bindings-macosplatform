@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterAlarmMutedEventAdopt(id objc.ID) *MTRSmokeCOAlarmClus
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterAlarmMutedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacame *MTRSmokeCOAlarmClusterAlarmMutedEvent) Description() string {
+	return rt.Description(objref.IDOf(mscacame))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterAlarmMutedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscacame *MTRSmokeCOAlarmClusterAlarmMutedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscacame), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterAlarmMutedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscacame *MTRSmokeCOAlarmClusterAlarmMutedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscacame), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterAlarmMutedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacame *MTRSmokeCOAlarmClusterAlarmMutedEvent) String() string {
+	return rt.Description(objref.IDOf(mscacame))
 }
 
 // NewMTRSmokeCOAlarmClusterAlarmMutedEvent creates a new MTRSmokeCOAlarmClusterAlarmMutedEvent.
@@ -69,10 +69,3 @@ func NewMTRSmokeCOAlarmClusterAlarmMutedEvent() *MTRSmokeCOAlarmClusterAlarmMute
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterAlarmMutedEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterAlarmMutedEventAdopt(_id)
 }
-
-// MTRSmokeCOAlarmClusterAlarmMutedEventable is the interface implemented by [MTRSmokeCOAlarmClusterAlarmMutedEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterAlarmMutedEventable interface {
-	obj.Object
-}
-
-var _ MTRSmokeCOAlarmClusterAlarmMutedEventable = (*MTRSmokeCOAlarmClusterAlarmMutedEvent)(nil)

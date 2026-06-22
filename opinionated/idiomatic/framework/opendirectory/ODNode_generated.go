@@ -5,13 +5,14 @@
 package opendirectory
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Node is an idiomatic wrapper over the Objective-C class ODNode.
@@ -48,24 +49,24 @@ func nodeAdopt(id objc.ID) *Node {
 }
 
 // Description returns the object's -description text.
-func (x *Node) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Node) Description() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Node) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (n *Node) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Node) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (n *Node) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Node) String() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Node) String() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // NewNodeWithSessionTypeError creates a node object with a specified session and type.
@@ -91,9 +92,9 @@ func NewNodeWithSessionNameError(inSession *Session, inName string) (result *Nod
 }
 
 // SubnodeNamesAndReturnError returns the names of subnodes for the node.
-func (x *Node) SubnodeNamesAndReturnError() (result obj.Object, err error) {
+func (n *Node) SubnodeNamesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subnodeNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("subnodeNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -101,9 +102,9 @@ func (x *Node) SubnodeNamesAndReturnError() (result obj.Object, err error) {
 }
 
 // UnreachableSubnodeNamesAndReturnError returns an array of the subnodes of a given node that are currently unreachable.
-func (x *Node) UnreachableSubnodeNamesAndReturnError() (result obj.Object, err error) {
+func (n *Node) UnreachableSubnodeNamesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unreachableSubnodeNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("unreachableSubnodeNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -111,9 +112,9 @@ func (x *Node) UnreachableSubnodeNamesAndReturnError() (result obj.Object, err e
 }
 
 // NodeDetailsForKeysError returns a dictionary containing details about a node.
-func (x *Node) NodeDetailsForKeysError(inKeys obj.Object) (result obj.Object, err error) {
+func (n *Node) NodeDetailsForKeysError(inKeys obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeDetailsForKeys:error:"), objref.IDOf(inKeys), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("nodeDetailsForKeys:error:"), objref.IDOf(inKeys), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -121,9 +122,9 @@ func (x *Node) NodeDetailsForKeysError(inKeys obj.Object) (result obj.Object, er
 }
 
 // SupportedRecordTypesAndReturnError returns an array of the record types supported by the node.
-func (x *Node) SupportedRecordTypesAndReturnError() (result obj.Object, err error) {
+func (n *Node) SupportedRecordTypesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedRecordTypesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("supportedRecordTypesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -131,9 +132,9 @@ func (x *Node) SupportedRecordTypesAndReturnError() (result obj.Object, err erro
 }
 
 // SupportedAttributesForRecordTypeError returns an array of attribute types supported by the node’s records.
-func (x *Node) SupportedAttributesForRecordTypeError(inRecordType obj.Object) (result obj.Object, err error) {
+func (n *Node) SupportedAttributesForRecordTypeError(inRecordType obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedAttributesForRecordType:error:"), objref.IDOf(inRecordType), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("supportedAttributesForRecordType:error:"), objref.IDOf(inRecordType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -141,9 +142,9 @@ func (x *Node) SupportedAttributesForRecordTypeError(inRecordType obj.Object) (r
 }
 
 // SetCredentialsWithRecordTypeRecordNamePassword sets credentials for interacting with the node.
-func (x *Node) SetCredentialsWithRecordTypeRecordNamePassword(inRecordType obj.Object, inRecordName string, inPassword string) error {
+func (n *Node) SetCredentialsWithRecordTypeRecordNamePassword(inRecordType obj.Object, inRecordName string, inPassword string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCredentialsWithRecordType:recordName:password:error:"), objref.IDOf(inRecordType), purego.NSString(inRecordName), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("setCredentialsWithRecordType:recordName:password:error:"), objref.IDOf(inRecordType), purego.NSString(inRecordName), purego.NSString(inPassword), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -151,9 +152,9 @@ func (x *Node) SetCredentialsWithRecordTypeRecordNamePassword(inRecordType obj.O
 }
 
 // SetCredentialsUsingKerberosCache unsupported method. Unsupported method.
-func (x *Node) SetCredentialsUsingKerberosCache(inCacheName string) error {
+func (n *Node) SetCredentialsUsingKerberosCache(inCacheName string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCredentialsUsingKerberosCache:error:"), purego.NSString(inCacheName), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("setCredentialsUsingKerberosCache:error:"), purego.NSString(inCacheName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -161,9 +162,9 @@ func (x *Node) SetCredentialsUsingKerberosCache(inCacheName string) error {
 }
 
 // CreateRecordWithRecordTypeNameAttributesError creates a record in a specified node with specified properties.
-func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType obj.Object, inRecordName string, inAttributes obj.Object) (result *Record, err error) {
+func (n *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType obj.Object, inRecordName string, inAttributes obj.Object) (result *Record, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRecordWithRecordType:name:attributes:error:"), objref.IDOf(inRecordType), purego.NSString(inRecordName), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("createRecordWithRecordType:name:attributes:error:"), objref.IDOf(inRecordType), purego.NSString(inRecordName), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -171,9 +172,9 @@ func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType obj.Ob
 }
 
 // RecordWithRecordTypeNameAttributesError returns a record from the node with a specified type and name.
-func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType obj.Object, inRecordName string, inAttributes obj.Object) (result *Record, err error) {
+func (n *Node) RecordWithRecordTypeNameAttributesError(inRecordType obj.Object, inRecordName string, inAttributes obj.Object) (result *Record, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordWithRecordType:name:attributes:error:"), objref.IDOf(inRecordType), purego.NSString(inRecordName), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("recordWithRecordType:name:attributes:error:"), objref.IDOf(inRecordType), purego.NSString(inRecordName), objref.IDOf(inAttributes), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -181,9 +182,9 @@ func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType obj.Object, 
 }
 
 // CustomCallSendDataError returns the result of a custom call to the node.
-func (x *Node) CustomCallSendDataError(inCustomCode int, inSendData obj.Object) (result obj.Object, err error) {
+func (n *Node) CustomCallSendDataError(inCustomCode int, inSendData obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customCall:sendData:error:"), inCustomCode, objref.IDOf(inSendData), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("customCall:sendData:error:"), inCustomCode, objref.IDOf(inSendData), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -191,9 +192,9 @@ func (x *Node) CustomCallSendDataError(inCustomCode int, inSendData obj.Object) 
 }
 
 // CustomFunctionPayloadError sends a custom function call to the node; data is a type specific to the call. Sends a custom function call to the node; data is a type specific to the call.  'error' is an optional parameter therefore nil can be passed if error details are not needed.  Return type is defined by the custom function requested.
-func (x *Node) CustomFunctionPayloadError(function string, payload obj.Object) (result obj.Object, err error) {
+func (n *Node) CustomFunctionPayloadError(function string, payload obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customFunction:payload:error:"), purego.NSString(function), objref.IDOf(payload), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("customFunction:payload:error:"), purego.NSString(function), objref.IDOf(payload), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -201,9 +202,9 @@ func (x *Node) CustomFunctionPayloadError(function string, payload obj.Object) (
 }
 
 // PoliciesAndReturnError this will copy any policies configured for the node. This will copy any policies configured for the node.
-func (x *Node) PoliciesAndReturnError() (result obj.Object, err error) {
+func (n *Node) PoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policiesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("policiesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -211,9 +212,9 @@ func (x *Node) PoliciesAndReturnError() (result obj.Object, err error) {
 }
 
 // SupportedPoliciesAndReturnError this will return a dictionary of supported policies. This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
-func (x *Node) SupportedPoliciesAndReturnError() (result obj.Object, err error) {
+func (n *Node) SupportedPoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("supportedPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -221,9 +222,9 @@ func (x *Node) SupportedPoliciesAndReturnError() (result obj.Object, err error) 
 }
 
 // SetPolicies this will set the policy for the node. This will set the policy for the node.  Policies are evaluated in combination with record-level policies.
-func (x *Node) SetPolicies(policies obj.Object) error {
+func (n *Node) SetPolicies(policies obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("setPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -231,9 +232,9 @@ func (x *Node) SetPolicies(policies obj.Object) error {
 }
 
 // SetPolicyValue this will set a specific policy setting for the node. This will set a specific policy setting for the node.
-func (x *Node) SetPolicyValue(policy obj.Object, value obj.Object) error {
+func (n *Node) SetPolicyValue(policy obj.Object, value obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPolicy:value:error:"), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("setPolicy:value:error:"), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -241,9 +242,9 @@ func (x *Node) SetPolicyValue(policy obj.Object, value obj.Object) error {
 }
 
 // RemovePolicy this will remove a specific policy setting from the node. This will remove a specific policy setting from the node.
-func (x *Node) RemovePolicy(policy obj.Object) error {
+func (n *Node) RemovePolicy(policy obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePolicy:error:"), objref.IDOf(policy), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("removePolicy:error:"), objref.IDOf(policy), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -251,9 +252,9 @@ func (x *Node) RemovePolicy(policy obj.Object) error {
 }
 
 // AddAccountPolicyToCategory this will add an account policy to the node for the specified category. This will add an account policy to the node for the specified category. The specified policy will be applied to all users in the specified node when policies are evaluated.
-func (x *Node) AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error {
+func (n *Node) AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addAccountPolicy:toCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("addAccountPolicy:toCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -261,9 +262,9 @@ func (x *Node) AddAccountPolicyToCategory(policy obj.Object, category obj.Object
 }
 
 // RemoveAccountPolicyFromCategory this will remove an account policy from the node for the specified category. This will remove an account policy from the node for the specified category.
-func (x *Node) RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error {
+func (n *Node) RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeAccountPolicy:fromCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("removeAccountPolicy:fromCategory:error:"), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -271,9 +272,9 @@ func (x *Node) RemoveAccountPolicyFromCategory(policy obj.Object, category obj.O
 }
 
 // SetAccountPolicies this will set the policies for the node. This will set the policies for the node, replacing any existing policies.  All of the policies in the set will be applied to all users in the specified node when policies are evaluated.
-func (x *Node) SetAccountPolicies(policies obj.Object) error {
+func (n *Node) SetAccountPolicies(policies obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setAccountPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("setAccountPolicies:error:"), objref.IDOf(policies), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -281,9 +282,9 @@ func (x *Node) SetAccountPolicies(policies obj.Object) error {
 }
 
 // AccountPoliciesAndReturnError returns a dictionary containing any policies configured for the node. Returns a dictionary containing any policies configured for the node.
-func (x *Node) AccountPoliciesAndReturnError() (result obj.Object, err error) {
+func (n *Node) AccountPoliciesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accountPoliciesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -291,18 +292,18 @@ func (x *Node) AccountPoliciesAndReturnError() (result obj.Object, err error) {
 }
 
 // PasswordContentCheckForRecordName validates a password against the node's password content policies. Validates a password against the node's password content policies. The node's password content policies will be evaluated to determine if the password is acceptable.  May be used prior to creating the record. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted.
-func (x *Node) PasswordContentCheckForRecordName(password string, recordName string) error {
+func (n *Node) PasswordContentCheckForRecordName(password string, recordName string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("passwordContentCheck:forRecordName:error:"), purego.NSString(password), purego.NSString(recordName), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(n), objc.RegisterName("passwordContentCheck:forRecordName:error:"), purego.NSString(password), purego.NSString(recordName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// NodeName the node name. The node name, corresponding to its path in OpenDirectory.
-func (x *Node) NodeName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeName"))
+// NodeName returns the node name. The node name, corresponding to its path in OpenDirectory.
+func (n *Node) NodeName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("nodeName"))
 	if _r == 0 {
 		return ""
 	}
@@ -310,37 +311,7 @@ func (x *Node) NodeName() string {
 }
 
 // Configuration returns an ODConfiguration object for the node. Returns an ODConfiguration object for the node.
-func (x *Node) Configuration() *Configuration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+func (n *Node) Configuration() *Configuration {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("configuration"))
 	return ConfigurationFromID(_r)
 }
-
-// Nodeable is the interface implemented by [Node], for mocking and DI.
-type Nodeable interface {
-	obj.Object
-	SubnodeNamesAndReturnError() (result obj.Object, err error)
-	UnreachableSubnodeNamesAndReturnError() (result obj.Object, err error)
-	NodeDetailsForKeysError(inKeys obj.Object) (result obj.Object, err error)
-	SupportedRecordTypesAndReturnError() (result obj.Object, err error)
-	SupportedAttributesForRecordTypeError(inRecordType obj.Object) (result obj.Object, err error)
-	SetCredentialsWithRecordTypeRecordNamePassword(inRecordType obj.Object, inRecordName string, inPassword string) error
-	SetCredentialsUsingKerberosCache(inCacheName string) error
-	CreateRecordWithRecordTypeNameAttributesError(inRecordType obj.Object, inRecordName string, inAttributes obj.Object) (result *Record, err error)
-	RecordWithRecordTypeNameAttributesError(inRecordType obj.Object, inRecordName string, inAttributes obj.Object) (result *Record, err error)
-	CustomCallSendDataError(inCustomCode int, inSendData obj.Object) (result obj.Object, err error)
-	CustomFunctionPayloadError(function string, payload obj.Object) (result obj.Object, err error)
-	PoliciesAndReturnError() (result obj.Object, err error)
-	SupportedPoliciesAndReturnError() (result obj.Object, err error)
-	SetPolicies(policies obj.Object) error
-	SetPolicyValue(policy obj.Object, value obj.Object) error
-	RemovePolicy(policy obj.Object) error
-	AddAccountPolicyToCategory(policy obj.Object, category obj.Object) error
-	RemoveAccountPolicyFromCategory(policy obj.Object, category obj.Object) error
-	SetAccountPolicies(policies obj.Object) error
-	AccountPoliciesAndReturnError() (result obj.Object, err error)
-	PasswordContentCheckForRecordName(password string, recordName string) error
-	NodeName() string
-	Configuration() *Configuration
-}
-
-var _ Nodeable = (*Node)(nil)

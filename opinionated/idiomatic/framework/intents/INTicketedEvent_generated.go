@@ -46,24 +46,24 @@ func ticketedEventAdopt(id objc.ID) *TicketedEvent {
 }
 
 // Description returns the object's -description text.
-func (x *TicketedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (te *TicketedEvent) Description() string {
+	return rt.Description(objref.IDOf(te))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TicketedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (te *TicketedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(te), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TicketedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (te *TicketedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(te), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TicketedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (te *TicketedEvent) String() string {
+	return rt.Description(objref.IDOf(te))
 }
 
 // NewTicketedEventWithCategoryNameEventDurationLocation creates a ticketed event object with the specified contents and attributes.
@@ -74,14 +74,14 @@ func NewTicketedEventWithCategoryNameEventDurationLocation(category TicketedEven
 }
 
 // Category wraps the corresponding Objective-C method.
-func (x *TicketedEvent) Category() TicketedEventCategory {
-	_r := objc.Send[TicketedEventCategory](objref.IDOf(x), objc.RegisterName("category"))
+func (te *TicketedEvent) Category() TicketedEventCategory {
+	_r := objc.Send[TicketedEventCategory](objref.IDOf(te), objc.RegisterName("category"))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TicketedEvent) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (te *TicketedEvent) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,24 +89,13 @@ func (x *TicketedEvent) Name() string {
 }
 
 // EventDuration wraps the corresponding Objective-C method.
-func (x *TicketedEvent) EventDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventDuration"))
+func (te *TicketedEvent) EventDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("eventDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // Location wraps the corresponding Objective-C method.
-func (x *TicketedEvent) Location() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("location"))
+func (te *TicketedEvent) Location() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("location"))
 	return obj.Wrap(_r)
 }
-
-// TicketedEventable is the interface implemented by [TicketedEvent], for mocking and DI.
-type TicketedEventable interface {
-	obj.Object
-	Category() TicketedEventCategory
-	Name() string
-	EventDuration() *DateComponentsRange
-	Location() obj.Object
-}
-
-var _ TicketedEventable = (*TicketedEvent)(nil)

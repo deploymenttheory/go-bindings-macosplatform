@@ -46,24 +46,24 @@ func objectTrackerAdopt(id objc.ID) *ObjectTracker {
 }
 
 // Description returns the object's -description text.
-func (x *ObjectTracker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ot *ObjectTracker) Description() string {
+	return rt.Description(objref.IDOf(ot))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectTracker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ot *ObjectTracker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ot), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectTracker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ot *ObjectTracker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ot), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ObjectTracker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ot *ObjectTracker) String() string {
+	return rt.Description(objref.IDOf(ot))
 }
 
 // NewObjectTracker creates a new ObjectTracker.
@@ -72,22 +72,13 @@ func NewObjectTracker() *ObjectTracker {
 	return objectTrackerAdopt(_id)
 }
 
-// FinishDetectionTrack finish constructing the detection track and return it. - Returns: a detection track which tracks the object
-func (x *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishDetectionTrack"))
+// FinishDetectionTrack returns finish constructing the detection track and return it. - Returns: a detection track which tracks the object
+func (ot *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("finishDetectionTrack"))
 	return DetectionTrackFromID(_r)
 }
 
 // ResetDetectionTrack reset the builder to construct a new detection track.
-func (x *ObjectTracker) ResetDetectionTrack() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetDetectionTrack"))
+func (ot *ObjectTracker) ResetDetectionTrack() {
+	objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("resetDetectionTrack"))
 }
-
-// ObjectTrackerable is the interface implemented by [ObjectTracker], for mocking and DI.
-type ObjectTrackerable interface {
-	obj.Object
-	FinishDetectionTrack() *DetectionTrack
-	ResetDetectionTrack()
-}
-
-var _ ObjectTrackerable = (*ObjectTracker)(nil)

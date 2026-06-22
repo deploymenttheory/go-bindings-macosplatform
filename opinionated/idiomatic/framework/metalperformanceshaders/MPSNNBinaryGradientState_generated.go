@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,30 +46,21 @@ func nNBinaryGradientStateAdopt(id objc.ID) *NNBinaryGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryGradientState) WithReadCount(readCount int) *NNBinaryGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (nbgs *NNBinaryGradientState) WithReadCount(readCount int) *NNBinaryGradientState {
+	objc.Send[objc.ID](objref.IDOf(nbgs), objc.RegisterName("setReadCount:"), readCount)
+	return nbgs
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNBinaryGradientState) WithLabel(label string) *NNBinaryGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nbgs *NNBinaryGradientState) WithLabel(label string) *NNBinaryGradientState {
+	objc.Send[objc.ID](objref.IDOf(nbgs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nbgs
 }
-
-// NNBinaryGradientStateable is the interface implemented by [NNBinaryGradientState], for mocking and DI.
-type NNBinaryGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *NNBinaryGradientState
-	WithLabel(label string) *NNBinaryGradientState
-}
-
-var _ NNBinaryGradientStateable = (*NNBinaryGradientState)(nil)
 
 // isNNBinaryGradientState marks NNBinaryGradientState — and, by embedding promotion, its
 // subclasses — as a member of the NNBinaryGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNBinaryGradientState) isNNBinaryGradientState() {}
+func (nbgs *NNBinaryGradientState) isNNBinaryGradientState() {}
 
 var _ NNBinaryGradientStateProvider = (*NNBinaryGradientState)(nil)
 

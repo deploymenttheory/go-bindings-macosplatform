@@ -46,24 +46,24 @@ func pDFPanelAdopt(id objc.ID) *PDFPanel {
 }
 
 // Description returns the object's -description text.
-func (x *PDFPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PDFPanel) Description() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PDFPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pp *PDFPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PDFPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pp *PDFPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PDFPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PDFPanel) String() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // NewPDFPanel creates a new PDFPanel.
@@ -72,78 +72,46 @@ func NewPDFPanel() *PDFPanel {
 	return pDFPanelAdopt(_id)
 }
 
-// WithAccessoryController a view controller for the accessory view that the panel can present.
-func (x *PDFPanel) WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
-	return x
+// WithAccessoryController sets a view controller for the accessory view that the panel can present.
+func (pp *PDFPanel) WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
+	return pp
 }
 
-// WithOptions a set of configuration options that determine the accessory views the PDF panel should display.
-func (x *PDFPanel) WithOptions(options PDFPanelOptions) *PDFPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-	return x
+// WithOptions sets a set of configuration options that determine the accessory views the PDF panel should display.
+func (pp *PDFPanel) WithOptions(options PDFPanelOptions) *PDFPanel {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setOptions:"), options)
+	return pp
 }
 
-// WithDefaultFileName the initial value for the user-editable filename shown in the name field of the PDF panel.
-func (x *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
-	return x
+// WithDefaultFileName sets the initial value for the user-editable filename shown in the name field of the PDF panel.
+func (pp *PDFPanel) WithDefaultFileName(defaultFileName string) *PDFPanel {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
+	return pp
 }
 
 // BeginSheetWithPDFInfoModalForWindowCompletionHandler presents a document-modal PDF panel.
-func (x *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *PDFInfo, docWindow *Window, completionHandler func(int)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
+func (pp *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *PDFInfo, docWindow *Window, completionHandler func(int)) {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 }
 
 // AccessoryController wraps the corresponding Objective-C method.
-func (x *PDFPanel) AccessoryController() *ViewController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryController"))
+func (pp *PDFPanel) AccessoryController() *ViewController {
+	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryController"))
 	return ViewControllerFromID(_r)
 }
 
-// SetAccessoryController wraps the corresponding Objective-C method.
-func (x *PDFPanel) SetAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryController:"), objref.IDOf(accessoryController))
-}
-
 // Options wraps the corresponding Objective-C method.
-func (x *PDFPanel) Options() PDFPanelOptions {
-	_r := objc.Send[PDFPanelOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (pp *PDFPanel) Options() PDFPanelOptions {
+	_r := objc.Send[PDFPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
 	return _r
 }
 
-// SetOptions wraps the corresponding Objective-C method.
-func (x *PDFPanel) SetOptions(options PDFPanelOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-}
-
 // DefaultFileName wraps the corresponding Objective-C method.
-func (x *PDFPanel) DefaultFileName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultFileName"))
+func (pp *PDFPanel) DefaultFileName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("defaultFileName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetDefaultFileName wraps the corresponding Objective-C method.
-func (x *PDFPanel) SetDefaultFileName(defaultFileName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultFileName:"), purego.NSString(defaultFileName))
-}
-
-// PDFPanelable is the interface implemented by [PDFPanel], for mocking and DI.
-type PDFPanelable interface {
-	obj.Object
-	WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel
-	WithOptions(options PDFPanelOptions) *PDFPanel
-	WithDefaultFileName(defaultFileName string) *PDFPanel
-	BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *PDFInfo, docWindow *Window, completionHandler func(int))
-	AccessoryController() *ViewController
-	SetAccessoryController(accessoryController *ViewController)
-	Options() PDFPanelOptions
-	SetOptions(options PDFPanelOptions)
-	DefaultFileName() string
-	SetDefaultFileName(defaultFileName string)
-}
-
-var _ PDFPanelable = (*PDFPanel)(nil)

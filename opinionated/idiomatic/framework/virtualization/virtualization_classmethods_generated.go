@@ -6,14 +6,15 @@ package virtualization
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// NetworkInterfaces return the list of network interfaces available for bridging.
+// NetworkInterfaces returns the list of network interfaces available for bridging.
 //
 // NetworkInterfaces returns the collection as a Go slice.
 func NetworkInterfaces() []*BridgedNetworkInterface {
@@ -21,13 +22,13 @@ func NetworkInterfaces() []*BridgedNetworkInterface {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BridgedNetworkInterface { return BridgedNetworkInterfaceFromID(_id) })
 }
 
-// IsNestedVirtualizationSupported indicate whether or not nested virtualization is available. Nested virtualization is only available on some hardware and software configurations. It may also be disabled by policy. Use this property to check if support is available for the platform. If nested virtualization is supported, use `nestedVirtualizationEnabled` to enable the feature.
+// IsNestedVirtualizationSupported reports whether nested virtualization is available. Nested virtualization is only available on some hardware and software configurations. It may also be disabled by policy. Use this property to check if support is available for the platform. If nested virtualization is supported, use `nestedVirtualizationEnabled` to enable the feature.
 func IsNestedVirtualizationSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VZGenericPlatformConfiguration")), objc.RegisterName("isNestedVirtualizationSupported"))
 	return _r
 }
 
-// MaximumNameLength the maximum allowed length of name, as defined by the sockaddr_un structure in Linux.
+// MaximumNameLength returns the maximum allowed length of name, as defined by the sockaddr_un structure in Linux.
 func MaximumNameLength() int {
 	_r := objc.Send[int](objc.ID(_class("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("maximumNameLength"))
 	return _r
@@ -52,13 +53,13 @@ func InstallRosetta(ctx context.Context) error {
 	}
 }
 
-// Availability check the availability of Rosetta support for the directory share.
+// Availability returns check the availability of Rosetta support for the directory share.
 func Availability() LinuxRosettaAvailability {
 	_r := objc.Send[LinuxRosettaAvailability](objc.ID(_class("VZLinuxRosettaDirectoryShare")), objc.RegisterName("availability"))
 	return _r
 }
 
-// MaximumPathLength the maximum allowed length of path, as defined by the sockaddr_un structure in Linux.
+// MaximumPathLength returns the maximum allowed length of path, as defined by the sockaddr_un structure in Linux.
 func MaximumPathLength() int {
 	_r := objc.Send[int](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("maximumPathLength"))
 	return _r
@@ -149,7 +150,7 @@ func ValidateURL(uRL string) error {
 	return nil
 }
 
-// SpiceAgentPortName the Spice agent port name. A console port configured with this name will spawn a Spice guest agent if supported by the guest. VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment. VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
+// SpiceAgentPortName returns the Spice agent port name. A console port configured with this name will spawn a Spice guest agent if supported by the guest. VZConsolePortConfiguration.attachment must be set to VZSpiceAgentPortAttachment. VZVirtioConsolePortConfiguration.isConsole must remain false on a Spice agent port.
 func SpiceAgentPortName() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("VZSpiceAgentPortAttachment")), objc.RegisterName("spiceAgentPortName"))
 	if _r == 0 {
@@ -178,7 +179,7 @@ func ValidateTag(tag string) error {
 	return nil
 }
 
-// MacOSGuestAutomountTag the macOS automount tag. A device configured with this tag will be automatically mounted in a macOS guest.
+// MacOSGuestAutomountTag returns the macOS automount tag. A device configured with this tag will be automatically mounted in a macOS guest.
 func MacOSGuestAutomountTag() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("macOSGuestAutomountTag"))
 	if _r == 0 {
@@ -187,31 +188,31 @@ func MacOSGuestAutomountTag() string {
 	return purego.GoString(_r)
 }
 
-// IsSupported indicate whether or not virtualization is available. If virtualization is unavailable, no VZVirtualMachineConfiguration will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why virtualization is unavailable.
+// IsSupported reports whether virtualization is available. If virtualization is unavailable, no VZVirtualMachineConfiguration will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why virtualization is unavailable.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// MinimumAllowedMemorySize minimum amount of memory required by virtual machines.
+// MinimumAllowedMemorySize returns minimum amount of memory required by virtual machines.
 func MinimumAllowedMemorySize() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("minimumAllowedMemorySize"))
 	return _r
 }
 
-// MaximumAllowedMemorySize maximum amount of memory allowed for a virtual machine.
+// MaximumAllowedMemorySize returns maximum amount of memory allowed for a virtual machine.
 func MaximumAllowedMemorySize() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("maximumAllowedMemorySize"))
 	return _r
 }
 
-// MinimumAllowedCPUCount minimum number of CPUs for a virtual machine.
+// MinimumAllowedCPUCount returns minimum number of CPUs for a virtual machine.
 func MinimumAllowedCPUCount() int {
 	_r := objc.Send[int](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("minimumAllowedCPUCount"))
 	return _r
 }
 
-// MaximumAllowedCPUCount maximum number of CPUs for a virtual machine.
+// MaximumAllowedCPUCount returns maximum number of CPUs for a virtual machine.
 func MaximumAllowedCPUCount() int {
 	_r := objc.Send[int](objc.ID(_class("VZVirtualMachineConfiguration")), objc.RegisterName("maximumAllowedCPUCount"))
 	return _r

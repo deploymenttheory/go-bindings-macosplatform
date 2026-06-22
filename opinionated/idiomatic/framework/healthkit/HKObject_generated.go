@@ -48,64 +48,53 @@ func objectAdopt(id objc.ID) *Object {
 }
 
 // Description returns the object's -description text.
-func (x *Object) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Object) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Object) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Object) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
-// UUID a unique identifier of the receiver in the HealthKit database.
-func (x *Object) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+// UUID returns a unique identifier of the receiver in the HealthKit database.
+func (o *Object) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
 // SourceRevision represents the revision of the source responsible for saving the receiver.
-func (x *Object) SourceRevision() *SourceRevision {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceRevision"))
+func (o *Object) SourceRevision() *SourceRevision {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("sourceRevision"))
 	return SourceRevisionFromID(_r)
 }
 
 // Device represents the device that generated the data of the receiver.
-func (x *Object) Device() *Device {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+func (o *Object) Device() *Device {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
-// Metadata extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-func (x *Object) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+func (o *Object) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
-
-// Objectable is the interface implemented by [Object], for mocking and DI.
-type Objectable interface {
-	obj.Object
-	UUID() obj.Object
-	SourceRevision() *SourceRevision
-	Device() *Device
-	Metadata() obj.Object
-}
-
-var _ Objectable = (*Object)(nil)
 
 // isObject marks Object — and, by embedding promotion, its
 // subclasses — as a member of the Object hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Object) isObject() {}
+func (o *Object) isObject() {}
 
 var _ ObjectProvider = (*Object)(nil)

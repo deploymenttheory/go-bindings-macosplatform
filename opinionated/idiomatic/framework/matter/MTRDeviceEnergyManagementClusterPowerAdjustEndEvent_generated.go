@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterPowerAdjustEndEventAdopt(id objc.ID) *MTRDe
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Description() string {
+	return rt.Description(objref.IDOf(mdemcpaee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcpaee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcpaee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) String() string {
+	return rt.Description(objref.IDOf(mdemcpaee))
 }
 
 // NewMTRDeviceEnergyManagementClusterPowerAdjustEndEvent creates a new MTRDeviceEnergyManagementClusterPowerAdjustEndEvent.
@@ -71,68 +71,37 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustEndEvent() *MTRDeviceEnergyMa
 }
 
 // WithCause sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-	return x
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
+	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setCause:"), objref.IDOf(cause))
+	return mdemcpaee
 }
 
 // WithDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-	return x
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
+	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+	return mdemcpaee
 }
 
 // WithEnergyUse sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithEnergyUse(energyUse obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
-	return x
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithEnergyUse(energyUse obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
+	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
+	return mdemcpaee
 }
 
 // Cause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
-}
-
-// SetCause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetCause(cause obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
-}
-
-// SetDuration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetDuration(duration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
 // EnergyUse wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energyUse"))
+func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("energyUse"))
 	return obj.Wrap(_r)
 }
-
-// SetEnergyUse wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) SetEnergyUse(energyUse obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
-}
-
-// MTRDeviceEnergyManagementClusterPowerAdjustEndEventable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustEndEvent], for mocking and DI.
-type MTRDeviceEnergyManagementClusterPowerAdjustEndEventable interface {
-	obj.Object
-	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
-	WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
-	WithEnergyUse(energyUse obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent
-	Cause() obj.Object
-	SetCause(cause obj.Object)
-	Duration() obj.Object
-	SetDuration(duration obj.Object)
-	EnergyUse() obj.Object
-	SetEnergyUse(energyUse obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterPowerAdjustEndEventable = (*MTRDeviceEnergyManagementClusterPowerAdjustEndEvent)(nil)

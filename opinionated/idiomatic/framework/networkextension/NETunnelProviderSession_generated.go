@@ -5,12 +5,13 @@
 package networkextension
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NETunnelProviderSession is an idiomatic wrapper over the Objective-C class NETunnelProviderSession.
@@ -55,9 +56,9 @@ func NewNETunnelProviderSession() *NETunnelProviderSession {
 }
 
 // StartTunnelWithOptionsAndReturnError start the process of connecting the tunnel.
-func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options obj.Object) error {
+func (ntps *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ntps), objc.RegisterName("startTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -65,17 +66,8 @@ func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options o
 }
 
 // StopTunnel start the process of disconnecting the tunnel.
-func (x *NETunnelProviderSession) StopTunnel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTunnel"))
+func (ntps *NETunnelProviderSession) StopTunnel() {
+	objc.Send[objc.ID](objref.IDOf(ntps), objc.RegisterName("stopTunnel"))
 }
-
-// NETunnelProviderSessionable is the interface implemented by [NETunnelProviderSession], for mocking and DI.
-type NETunnelProviderSessionable interface {
-	obj.Object
-	StartTunnelWithOptionsAndReturnError(options obj.Object) error
-	StopTunnel()
-}
-
-var _ NETunnelProviderSessionable = (*NETunnelProviderSession)(nil)
 
 var _ NEVPNConnectionProvider = (*NETunnelProviderSession)(nil)

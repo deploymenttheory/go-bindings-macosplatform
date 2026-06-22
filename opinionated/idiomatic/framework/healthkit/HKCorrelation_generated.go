@@ -53,32 +53,22 @@ func NewCorrelation() *Correlation {
 }
 
 // ObjectsForType returns a set containing all the objects of the specified type in the correlation.
-func (x *Correlation) ObjectsForType(objectType *ObjectType) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsForType:"), objref.IDOf(objectType))
+func (c *Correlation) ObjectsForType(objectType *ObjectType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectsForType:"), objref.IDOf(objectType))
 	return obj.Wrap(_r)
 }
 
 // CorrelationType wraps the corresponding Objective-C method.
-func (x *Correlation) CorrelationType() *CorrelationType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("correlationType"))
+func (c *Correlation) CorrelationType() *CorrelationType {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)
 }
 
-// Objects a set of HKSamples containing all of the objects that were saved with the receiver.
-func (x *Correlation) Objects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objects"))
+// Objects returns a set of HKSamples containing all of the objects that were saved with the receiver.
+func (c *Correlation) Objects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objects"))
 	return obj.Wrap(_r)
 }
-
-// Correlationable is the interface implemented by [Correlation], for mocking and DI.
-type Correlationable interface {
-	obj.Object
-	ObjectsForType(objectType *ObjectType) obj.Object
-	CorrelationType() *CorrelationType
-	Objects() obj.Object
-}
-
-var _ Correlationable = (*Correlation)(nil)
 
 var _ SampleProvider = (*Correlation)(nil)
 

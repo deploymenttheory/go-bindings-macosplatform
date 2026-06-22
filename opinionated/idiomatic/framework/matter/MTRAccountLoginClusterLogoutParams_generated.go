@@ -44,24 +44,24 @@ func mTRAccountLoginClusterLogoutParamsAdopt(id objc.ID) *MTRAccountLoginCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccountLoginClusterLogoutParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (malclp *MTRAccountLoginClusterLogoutParams) Description() string {
+	return rt.Description(objref.IDOf(malclp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccountLoginClusterLogoutParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (malclp *MTRAccountLoginClusterLogoutParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(malclp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccountLoginClusterLogoutParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (malclp *MTRAccountLoginClusterLogoutParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(malclp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccountLoginClusterLogoutParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (malclp *MTRAccountLoginClusterLogoutParams) String() string {
+	return rt.Description(objref.IDOf(malclp))
 }
 
 // NewMTRAccountLoginClusterLogoutParams creates a new MTRAccountLoginClusterLogoutParams.
@@ -71,68 +71,37 @@ func NewMTRAccountLoginClusterLogoutParams() *MTRAccountLoginClusterLogoutParams
 }
 
 // WithNode sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccountLoginClusterLogoutParams) WithNode(node obj.Object) *MTRAccountLoginClusterLogoutParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
-	return x
+func (malclp *MTRAccountLoginClusterLogoutParams) WithNode(node obj.Object) *MTRAccountLoginClusterLogoutParams {
+	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setNode:"), objref.IDOf(node))
+	return malclp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAccountLoginClusterLogoutParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterLogoutParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malclp *MTRAccountLoginClusterLogoutParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterLogoutParams {
+	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return malclp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAccountLoginClusterLogoutParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterLogoutParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (malclp *MTRAccountLoginClusterLogoutParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterLogoutParams {
+	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return malclp
 }
 
 // Node wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterLogoutParams) Node() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+func (malclp *MTRAccountLoginClusterLogoutParams) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
 
-// SetNode wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterLogoutParams) SetNode(node obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAccountLoginClusterLogoutParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malclp *MTRAccountLoginClusterLogoutParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterLogoutParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAccountLoginClusterLogoutParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (malclp *MTRAccountLoginClusterLogoutParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterLogoutParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRAccountLoginClusterLogoutParamsable is the interface implemented by [MTRAccountLoginClusterLogoutParams], for mocking and DI.
-type MTRAccountLoginClusterLogoutParamsable interface {
-	obj.Object
-	WithNode(node obj.Object) *MTRAccountLoginClusterLogoutParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterLogoutParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterLogoutParams
-	Node() obj.Object
-	SetNode(node obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRAccountLoginClusterLogoutParamsable = (*MTRAccountLoginClusterLogoutParams)(nil)

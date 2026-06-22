@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,115 +62,86 @@ func NewFetchShareParticipantsOperationWithUserIdentityLookupInfos(userIdentityL
 	return fetchShareParticipantsOperationAdopt(_id)
 }
 
-// WithUserIdentityLookupInfos the user data for the participants.
-func (x *FetchShareParticipantsOperation) WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *FetchShareParticipantsOperation {
+// WithUserIdentityLookupInfos sets the user data for the participants.
+func (fspo *FetchShareParticipantsOperation) WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *FetchShareParticipantsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityLookupInfos:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setUserIdentityLookupInfos:"), _arr)
+	return fspo
 }
 
-// WithShareParticipantFetchedBlock the closure to execute as the operation generates individual participants.
-func (x *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(obj.Object)) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareParticipantFetchedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { shareParticipantFetchedBlock(obj.Wrap(_b0)) }))
-	return x
+// WithShareParticipantFetchedBlock sets the closure to execute as the operation generates individual participants.
+func (fspo *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(obj.Object)) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setShareParticipantFetchedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { shareParticipantFetchedBlock(obj.Wrap(_b0)) }))
+	return fspo
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (fspo *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return fspo
 }
 
-// WithGroup the operation’s group.
-func (x *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (fspo *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return fspo
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (fspo *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return fspo
 }
 
-// WithContainer the operation's container.
-func (x *FetchShareParticipantsOperation) WithContainer(container *Container) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (fspo *FetchShareParticipantsOperation) WithContainer(container *Container) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return fspo
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchShareParticipantsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (fspo *FetchShareParticipantsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return fspo
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchShareParticipantsOperation) WithLongLived(longLived bool) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (fspo *FetchShareParticipantsOperation) WithLongLived(longLived bool) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setLongLived:"), longLived)
+	return fspo
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (fspo *FetchShareParticipantsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return fspo
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (fspo *FetchShareParticipantsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return fspo
 }
 
-// UserIdentityLookupInfos the user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
+// UserIdentityLookupInfos returns the user data for the participants. Use this property to view or change the participants user data. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue. - Note: If you don't set “CKFetchShareParticipantsOperation/userIdentityLookupInfos“ prior to executing the operation, it returns immediately with no results.
 //
 // UserIdentityLookupInfos returns the collection as a Go slice.
-func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentityLookupInfos"))
+func (fspo *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
+	_arr := objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("userIdentityLookupInfos"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
-}
-
-// SetUserIdentityLookupInfos wraps the corresponding Objective-C method.
-func (x *FetchShareParticipantsOperation) SetUserIdentityLookupInfos(userIdentityLookupInfos []*UserIdentityLookupInfo) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityLookupInfos:"), purego.SliceToNSArray(userIdentityLookupInfos, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetShareParticipantFetchedBlock wraps the corresponding Objective-C method.
-//
-// SetShareParticipantFetchedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchShareParticipantsOperation) SetShareParticipantFetchedBlock(ctx context.Context) (result *ShareParticipant, err error) {
-	type _result struct {
-		val *ShareParticipant
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = ShareParticipantFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareParticipantFetchedBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *ShareParticipant
-		return _zero, ctx.Err()
-	}
 }
 
 // SetFetchShareParticipantsCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetFetchShareParticipantsCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlock(ctx context.Context) error {
+func (fspo *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchShareParticipantsCompletionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setFetchShareParticipantsCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -177,26 +149,5 @@ func (x *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlo
 		return ctx.Err()
 	}
 }
-
-// FetchShareParticipantsOperationable is the interface implemented by [FetchShareParticipantsOperation], for mocking and DI.
-type FetchShareParticipantsOperationable interface {
-	obj.Object
-	WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *FetchShareParticipantsOperation
-	WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(obj.Object)) *FetchShareParticipantsOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation
-	WithGroup(group *OperationGroup) *FetchShareParticipantsOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation
-	WithContainer(container *Container) *FetchShareParticipantsOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation
-	WithLongLived(longLived bool) *FetchShareParticipantsOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation
-	UserIdentityLookupInfos() []*UserIdentityLookupInfo
-	SetUserIdentityLookupInfos(userIdentityLookupInfos []*UserIdentityLookupInfo)
-	SetShareParticipantFetchedBlock(ctx context.Context) (*ShareParticipant, error)
-	SetFetchShareParticipantsCompletionBlock(ctx context.Context) error
-}
-
-var _ FetchShareParticipantsOperationable = (*FetchShareParticipantsOperation)(nil)
 
 var _ OperationProvider = (*FetchShareParticipantsOperation)(nil)

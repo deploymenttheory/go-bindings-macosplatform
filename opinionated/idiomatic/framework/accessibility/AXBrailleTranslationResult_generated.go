@@ -46,24 +46,24 @@ func brailleTranslationResultAdopt(id objc.ID) *BrailleTranslationResult {
 }
 
 // Description returns the object's -description text.
-func (x *BrailleTranslationResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (btr *BrailleTranslationResult) Description() string {
+	return rt.Description(objref.IDOf(btr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BrailleTranslationResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (btr *BrailleTranslationResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(btr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BrailleTranslationResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (btr *BrailleTranslationResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(btr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BrailleTranslationResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (btr *BrailleTranslationResult) String() string {
+	return rt.Description(objref.IDOf(btr))
 }
 
 // NewBrailleTranslationResult creates a new BrailleTranslationResult.
@@ -72,28 +72,19 @@ func NewBrailleTranslationResult() *BrailleTranslationResult {
 	return brailleTranslationResultAdopt(_id)
 }
 
-// ResultString the resulting string after translation or back-translation.
-func (x *BrailleTranslationResult) ResultString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultString"))
+// ResultString returns the resulting string after translation or back-translation.
+func (btr *BrailleTranslationResult) ResultString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(btr), objc.RegisterName("resultString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocationMap an array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
+// LocationMap returns an array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
 //
 // LocationMap returns the collection as a Go slice.
-func (x *BrailleTranslationResult) LocationMap() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationMap"))
+func (btr *BrailleTranslationResult) LocationMap() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(btr), objc.RegisterName("locationMap"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// BrailleTranslationResultable is the interface implemented by [BrailleTranslationResult], for mocking and DI.
-type BrailleTranslationResultable interface {
-	obj.Object
-	ResultString() string
-	LocationMap() []obj.Object
-}
-
-var _ BrailleTranslationResultable = (*BrailleTranslationResult)(nil)

@@ -44,44 +44,33 @@ func nDArrayMultiaryBaseAdopt(id objc.ID) *NDArrayMultiaryBase {
 	return x
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayMultiaryBase) WithLabel(label string) *NDArrayMultiaryBase {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (namb *NDArrayMultiaryBase) WithLabel(label string) *NDArrayMultiaryBase {
+	objc.Send[objc.ID](objref.IDOf(namb), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return namb
 }
 
 // EncodeWithCoder initialize a MPSNDArrayMultiaryKernel from a NSCoder
-func (x *NDArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
+func (namb *NDArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(namb), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // ResultStateForSourceArraysSourceStatesDestinationArray wraps the corresponding Objective-C method.
-func (x *NDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:"), purego.SliceToNSArray(sourceArrays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationArray))
+func (namb *NDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(namb), objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:"), purego.SliceToNSArray(sourceArrays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationArray))
 	return obj.Wrap(_r)
 }
 
 // DestinationArrayDescriptorForSourceArraysSourceState return a descriptor suitable for allocating a NSArray to receive the result The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results.
-func (x *NDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:"), purego.SliceToNSArray(sources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(state))
+func (namb *NDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(namb), objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:"), purego.SliceToNSArray(sources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(state))
 	return obj.Wrap(_r)
 }
-
-// NDArrayMultiaryBaseable is the interface implemented by [NDArrayMultiaryBase], for mocking and DI.
-type NDArrayMultiaryBaseable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayMultiaryBase
-	EncodeWithCoder(coder obj.Object)
-	ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object
-	DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object
-}
-
-var _ NDArrayMultiaryBaseable = (*NDArrayMultiaryBase)(nil)
 
 // isNDArrayMultiaryBase marks NDArrayMultiaryBase — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayMultiaryBase hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayMultiaryBase) isNDArrayMultiaryBase() {}
+func (namb *NDArrayMultiaryBase) isNDArrayMultiaryBase() {}
 
 var _ NDArrayMultiaryBaseProvider = (*NDArrayMultiaryBase)(nil)
 

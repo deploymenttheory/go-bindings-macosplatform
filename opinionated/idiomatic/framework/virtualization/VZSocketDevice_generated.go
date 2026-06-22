@@ -48,36 +48,29 @@ func socketDeviceAdopt(id objc.ID) *SocketDevice {
 }
 
 // Description returns the object's -description text.
-func (x *SocketDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SocketDevice) Description() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SocketDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sd *SocketDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SocketDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sd *SocketDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SocketDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SocketDevice) String() string {
+	return rt.Description(objref.IDOf(sd))
 }
-
-// SocketDeviceable is the interface implemented by [SocketDevice], for mocking and DI.
-type SocketDeviceable interface {
-	obj.Object
-}
-
-var _ SocketDeviceable = (*SocketDevice)(nil)
 
 // isSocketDevice marks SocketDevice — and, by embedding promotion, its
 // subclasses — as a member of the SocketDevice hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SocketDevice) isSocketDevice() {}
+func (sd *SocketDevice) isSocketDevice() {}
 
 var _ SocketDeviceProvider = (*SocketDevice)(nil)

@@ -5,12 +5,13 @@
 package coredata
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PersistentCloudKitContainer is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainer.
@@ -59,68 +60,53 @@ func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options 
 	return persistentCloudKitContainerAdopt(_id), nil
 }
 
-// WithPersistentStoreDescriptions the descriptions of the container’s persistent stores.
-func (x *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items ...*PersistentStoreDescription) *PersistentCloudKitContainer {
+// WithPersistentStoreDescriptions sets the descriptions of the container’s persistent stores.
+func (pckc *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items ...*PersistentStoreDescription) *PersistentCloudKitContainer {
 	_arr := purego.SliceToNSArray(items, func(_v *PersistentStoreDescription) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentStoreDescriptions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("setPersistentStoreDescriptions:"), _arr)
+	return pckc
 }
 
 // RecordForManagedObjectID returns the CloudKit record for the specified managed object ID.
-func (x *PersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordForManagedObjectID:"), objref.IDOf(managedObjectID))
+func (pckc *PersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordForManagedObjectID:"), objref.IDOf(managedObjectID))
 	return obj.Wrap(_r)
 }
 
 // RecordsForManagedObjectIDs returns a dictionary that contains the CloudKit records for the specified managed object IDs.
-func (x *PersistentCloudKitContainer) RecordsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsForManagedObjectIDs:"), purego.SliceToNSArray(managedObjectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
+func (pckc *PersistentCloudKitContainer) RecordsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordsForManagedObjectIDs:"), purego.SliceToNSArray(managedObjectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // RecordIDForManagedObjectID returns the CloudKit record ID for the specified managed object ID.
-func (x *PersistentCloudKitContainer) RecordIDForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDForManagedObjectID:"), objref.IDOf(managedObjectID))
+func (pckc *PersistentCloudKitContainer) RecordIDForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordIDForManagedObjectID:"), objref.IDOf(managedObjectID))
 	return obj.Wrap(_r)
 }
 
 // RecordIDsForManagedObjectIDs returns a dictionary that contains the CloudKit record IDs for the specified managed object IDs.
-func (x *PersistentCloudKitContainer) RecordIDsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDsForManagedObjectIDs:"), purego.SliceToNSArray(managedObjectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
+func (pckc *PersistentCloudKitContainer) RecordIDsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckc), objc.RegisterName("recordIDsForManagedObjectIDs:"), purego.SliceToNSArray(managedObjectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // CanUpdateRecordForManagedObjectWithID returns a Boolean value that indicates whether the user can modify the managed object’s underlying CloudKit record.
-func (x *PersistentCloudKitContainer) CanUpdateRecordForManagedObjectWithID(objectID *ManagedObjectID) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canUpdateRecordForManagedObjectWithID:"), objref.IDOf(objectID))
+func (pckc *PersistentCloudKitContainer) CanUpdateRecordForManagedObjectWithID(objectID *ManagedObjectID) bool {
+	_r := objc.Send[bool](objref.IDOf(pckc), objc.RegisterName("canUpdateRecordForManagedObjectWithID:"), objref.IDOf(objectID))
 	return _r
 }
 
 // CanDeleteRecordForManagedObjectWithID returns a Boolean value that indicates whether the user can delete the managed object’s underlying CloudKit record.
-func (x *PersistentCloudKitContainer) CanDeleteRecordForManagedObjectWithID(objectID *ManagedObjectID) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDeleteRecordForManagedObjectWithID:"), objref.IDOf(objectID))
+func (pckc *PersistentCloudKitContainer) CanDeleteRecordForManagedObjectWithID(objectID *ManagedObjectID) bool {
+	_r := objc.Send[bool](objref.IDOf(pckc), objc.RegisterName("canDeleteRecordForManagedObjectWithID:"), objref.IDOf(objectID))
 	return _r
 }
 
 // CanModifyManagedObjectsInStore returns a Boolean value that indicates whether the user can modify the specified persistent store.
-func (x *PersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *PersistentStore) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canModifyManagedObjectsInStore:"), objref.IDOf(store))
+func (pckc *PersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *PersistentStore) bool {
+	_r := objc.Send[bool](objref.IDOf(pckc), objc.RegisterName("canModifyManagedObjectsInStore:"), objref.IDOf(store))
 	return _r
 }
-
-// PersistentCloudKitContainerable is the interface implemented by [PersistentCloudKitContainer], for mocking and DI.
-type PersistentCloudKitContainerable interface {
-	obj.Object
-	WithPersistentStoreDescriptions(items ...*PersistentStoreDescription) *PersistentCloudKitContainer
-	RecordForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object
-	RecordsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object
-	RecordIDForManagedObjectID(managedObjectID *ManagedObjectID) obj.Object
-	RecordIDsForManagedObjectIDs(managedObjectIDs []*ManagedObjectID) obj.Object
-	CanUpdateRecordForManagedObjectWithID(objectID *ManagedObjectID) bool
-	CanDeleteRecordForManagedObjectWithID(objectID *ManagedObjectID) bool
-	CanModifyManagedObjectsInStore(store *PersistentStore) bool
-}
-
-var _ PersistentCloudKitContainerable = (*PersistentCloudKitContainer)(nil)
 
 var _ PersistentContainerProvider = (*PersistentCloudKitContainer)(nil)

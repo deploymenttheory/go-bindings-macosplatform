@@ -49,53 +49,44 @@ func featureAdopt(id objc.ID) *Feature {
 }
 
 // Description returns the object's -description text.
-func (x *Feature) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Feature) Description() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Feature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (f *Feature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Feature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (f *Feature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Feature) String() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Feature) String() string {
+	return rt.Description(objref.IDOf(f))
 }
 
-// Type the type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
-func (x *Feature) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
+func (f *Feature) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Bounds the rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
-func (x *Feature) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+// Bounds returns the rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
+func (f *Feature) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(f), objc.RegisterName("bounds"))
 	return _r
 }
-
-// Featureable is the interface implemented by [Feature], for mocking and DI.
-type Featureable interface {
-	obj.Object
-	Type() string
-	Bounds() corefoundation.CGRect
-}
-
-var _ Featureable = (*Feature)(nil)
 
 // isFeature marks Feature — and, by embedding promotion, its
 // subclasses — as a member of the Feature hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Feature) isFeature() {}
+func (f *Feature) isFeature() {}
 
 var _ FeatureProvider = (*Feature)(nil)

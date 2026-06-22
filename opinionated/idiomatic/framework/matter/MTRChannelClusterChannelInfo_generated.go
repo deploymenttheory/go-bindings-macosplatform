@@ -51,59 +51,45 @@ func NewMTRChannelClusterChannelInfo() *MTRChannelClusterChannelInfo {
 }
 
 // WithMajorNumber sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
+	return mccci
 }
 
 // WithMinorNumber sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
+	return mccci
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithName(name string) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithName(name string) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setName:"), purego.NSString(name))
+	return mccci
 }
 
 // WithCallSign sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithCallSign(callSign string) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallSign:"), purego.NSString(callSign))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithCallSign(callSign string) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setCallSign:"), purego.NSString(callSign))
+	return mccci
 }
 
 // WithAffiliateCallSign sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffiliateCallSign:"), purego.NSString(affiliateCallSign))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setAffiliateCallSign:"), purego.NSString(affiliateCallSign))
+	return mccci
 }
 
 // WithIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithIdentifier(identifier string) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithIdentifier(identifier string) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return mccci
 }
 
 // WithType sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelInfo) WithType(type_ obj.Object) *MTRChannelClusterChannelInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-	return x
+func (mccci *MTRChannelClusterChannelInfo) WithType(type_ obj.Object) *MTRChannelClusterChannelInfo {
+	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setType:"), objref.IDOf(type_))
+	return mccci
 }
-
-// MTRChannelClusterChannelInfoable is the interface implemented by [MTRChannelClusterChannelInfo], for mocking and DI.
-type MTRChannelClusterChannelInfoable interface {
-	obj.Object
-	WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfo
-	WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfo
-	WithName(name string) *MTRChannelClusterChannelInfo
-	WithCallSign(callSign string) *MTRChannelClusterChannelInfo
-	WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo
-	WithIdentifier(identifier string) *MTRChannelClusterChannelInfo
-	WithType(type_ obj.Object) *MTRChannelClusterChannelInfo
-}
-
-var _ MTRChannelClusterChannelInfoable = (*MTRChannelClusterChannelInfo)(nil)
 
 var _ MTRChannelClusterChannelInfoStructProvider = (*MTRChannelClusterChannelInfo)(nil)

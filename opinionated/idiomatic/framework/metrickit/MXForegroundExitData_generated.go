@@ -46,24 +46,24 @@ func foregroundExitDataAdopt(id objc.ID) *ForegroundExitData {
 }
 
 // Description returns the object's -description text.
-func (x *ForegroundExitData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fed *ForegroundExitData) Description() string {
+	return rt.Description(objref.IDOf(fed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ForegroundExitData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fed *ForegroundExitData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ForegroundExitData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fed *ForegroundExitData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ForegroundExitData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fed *ForegroundExitData) String() string {
+	return rt.Description(objref.IDOf(fed))
 }
 
 // NewForegroundExitData creates a new ForegroundExitData.
@@ -72,51 +72,38 @@ func NewForegroundExitData() *ForegroundExitData {
 	return foregroundExitDataAdopt(_id)
 }
 
-// CumulativeNormalAppExitCount cumulative number of times the application exited normally, or was gracefully terminated by the system.
-func (x *ForegroundExitData) CumulativeNormalAppExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeNormalAppExitCount"))
+// CumulativeNormalAppExitCount returns cumulative number of times the application exited normally, or was gracefully terminated by the system.
+func (fed *ForegroundExitData) CumulativeNormalAppExitCount() int {
+	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeNormalAppExitCount"))
 	return _r
 }
 
-// CumulativeMemoryResourceLimitExitCount cumulative number of times the application was terminated for exceeding a memory consumption limit.
-func (x *ForegroundExitData) CumulativeMemoryResourceLimitExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeMemoryResourceLimitExitCount"))
+// CumulativeMemoryResourceLimitExitCount returns cumulative number of times the application was terminated for exceeding a memory consumption limit.
+func (fed *ForegroundExitData) CumulativeMemoryResourceLimitExitCount() int {
+	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeMemoryResourceLimitExitCount"))
 	return _r
 }
 
-// CumulativeBadAccessExitCount cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
-func (x *ForegroundExitData) CumulativeBadAccessExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeBadAccessExitCount"))
+// CumulativeBadAccessExitCount returns cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
+func (fed *ForegroundExitData) CumulativeBadAccessExitCount() int {
+	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeBadAccessExitCount"))
 	return _r
 }
 
-// CumulativeAbnormalExitCount cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
-func (x *ForegroundExitData) CumulativeAbnormalExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeAbnormalExitCount"))
+// CumulativeAbnormalExitCount returns cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
+func (fed *ForegroundExitData) CumulativeAbnormalExitCount() int {
+	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeAbnormalExitCount"))
 	return _r
 }
 
-// CumulativeIllegalInstructionExitCount cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
-func (x *ForegroundExitData) CumulativeIllegalInstructionExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeIllegalInstructionExitCount"))
+// CumulativeIllegalInstructionExitCount returns cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
+func (fed *ForegroundExitData) CumulativeIllegalInstructionExitCount() int {
+	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeIllegalInstructionExitCount"))
 	return _r
 }
 
-// CumulativeAppWatchdogExitCount cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
-func (x *ForegroundExitData) CumulativeAppWatchdogExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeAppWatchdogExitCount"))
+// CumulativeAppWatchdogExitCount returns cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
+func (fed *ForegroundExitData) CumulativeAppWatchdogExitCount() int {
+	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeAppWatchdogExitCount"))
 	return _r
 }
-
-// ForegroundExitDataable is the interface implemented by [ForegroundExitData], for mocking and DI.
-type ForegroundExitDataable interface {
-	obj.Object
-	CumulativeNormalAppExitCount() int
-	CumulativeMemoryResourceLimitExitCount() int
-	CumulativeBadAccessExitCount() int
-	CumulativeAbnormalExitCount() int
-	CumulativeIllegalInstructionExitCount() int
-	CumulativeAppWatchdogExitCount() int
-}
-
-var _ ForegroundExitDataable = (*ForegroundExitData)(nil)

@@ -46,24 +46,24 @@ func iOBluetoothUserNotificationAdopt(id objc.ID) *IOBluetoothUserNotification {
 }
 
 // Description returns the object's -description text.
-func (x *IOBluetoothUserNotification) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ibun *IOBluetoothUserNotification) Description() string {
+	return rt.Description(objref.IDOf(ibun))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothUserNotification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ibun *IOBluetoothUserNotification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ibun), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothUserNotification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ibun *IOBluetoothUserNotification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ibun), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOBluetoothUserNotification) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ibun *IOBluetoothUserNotification) String() string {
+	return rt.Description(objref.IDOf(ibun))
 }
 
 // NewIOBluetoothUserNotification creates a new IOBluetoothUserNotification.
@@ -73,14 +73,6 @@ func NewIOBluetoothUserNotification() *IOBluetoothUserNotification {
 }
 
 // Unregister called to unregister the target notification.
-func (x *IOBluetoothUserNotification) Unregister() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregister"))
+func (ibun *IOBluetoothUserNotification) Unregister() {
+	objc.Send[objc.ID](objref.IDOf(ibun), objc.RegisterName("unregister"))
 }
-
-// IOBluetoothUserNotificationable is the interface implemented by [IOBluetoothUserNotification], for mocking and DI.
-type IOBluetoothUserNotificationable interface {
-	obj.Object
-	Unregister()
-}
-
-var _ IOBluetoothUserNotificationable = (*IOBluetoothUserNotification)(nil)

@@ -48,71 +48,59 @@ func detectionTrackAdopt(id objc.ID) *DetectionTrack {
 }
 
 // Description returns the object's -description text.
-func (x *DetectionTrack) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DetectionTrack) Description() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DetectionTrack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dt *DetectionTrack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DetectionTrack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dt *DetectionTrack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DetectionTrack) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DetectionTrack) String() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
-// DetectionType the type of subject detected by this detection track.
-func (x *DetectionTrack) DetectionType() DetectionType {
-	_r := objc.Send[DetectionType](objref.IDOf(x), objc.RegisterName("detectionType"))
+// DetectionType returns the type of subject detected by this detection track.
+func (dt *DetectionTrack) DetectionType() DetectionType {
+	_r := objc.Send[DetectionType](objref.IDOf(dt), objc.RegisterName("detectionType"))
 	return _r
 }
 
-// DetectionID the detectionID of the subject detected during this track; unique within a cinematic script.
-func (x *DetectionTrack) DetectionID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
+// DetectionID returns the detectionID of the subject detected during this track; unique within a cinematic script.
+func (dt *DetectionTrack) DetectionID() int64 {
+	_r := objc.Send[int64](objref.IDOf(dt), objc.RegisterName("detectionID"))
 	return _r
 }
 
-// DetectionGroupID the detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
-func (x *DetectionTrack) DetectionGroupID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
+// DetectionGroupID returns the detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
+func (dt *DetectionTrack) DetectionGroupID() int64 {
+	_r := objc.Send[int64](objref.IDOf(dt), objc.RegisterName("detectionGroupID"))
 	return _r
 }
 
-// IsUserCreated whether this detection track was created by the client.
-func (x *DetectionTrack) IsUserCreated() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserCreated"))
+// IsUserCreated reports whether this detection track was created by the client.
+func (dt *DetectionTrack) IsUserCreated() bool {
+	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("isUserCreated"))
 	return _r
 }
 
-// IsDiscrete whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
-func (x *DetectionTrack) IsDiscrete() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDiscrete"))
+// IsDiscrete reports whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
+func (dt *DetectionTrack) IsDiscrete() bool {
+	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("isDiscrete"))
 	return _r
 }
-
-// DetectionTrackable is the interface implemented by [DetectionTrack], for mocking and DI.
-type DetectionTrackable interface {
-	obj.Object
-	DetectionType() DetectionType
-	DetectionID() int64
-	DetectionGroupID() int64
-	IsUserCreated() bool
-	IsDiscrete() bool
-}
-
-var _ DetectionTrackable = (*DetectionTrack)(nil)
 
 // isDetectionTrack marks DetectionTrack — and, by embedding promotion, its
 // subclasses — as a member of the DetectionTrack hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DetectionTrack) isDetectionTrack() {}
+func (dt *DetectionTrack) isDetectionTrack() {}
 
 var _ DetectionTrackProvider = (*DetectionTrack)(nil)

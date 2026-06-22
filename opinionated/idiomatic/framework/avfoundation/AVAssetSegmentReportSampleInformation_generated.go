@@ -46,24 +46,24 @@ func assetSegmentReportSampleInformationAdopt(id objc.ID) *AssetSegmentReportSam
 }
 
 // Description returns the object's -description text.
-func (x *AssetSegmentReportSampleInformation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asrsi *AssetSegmentReportSampleInformation) Description() string {
+	return rt.Description(objref.IDOf(asrsi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetSegmentReportSampleInformation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asrsi *AssetSegmentReportSampleInformation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asrsi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetSegmentReportSampleInformation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asrsi *AssetSegmentReportSampleInformation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asrsi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetSegmentReportSampleInformation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asrsi *AssetSegmentReportSampleInformation) String() string {
+	return rt.Description(objref.IDOf(asrsi))
 }
 
 // NewAssetSegmentReportSampleInformation creates a new AssetSegmentReportSampleInformation.
@@ -72,30 +72,20 @@ func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformati
 	return assetSegmentReportSampleInformationAdopt(_id)
 }
 
-// Offset the offset of the sample in the segment.
-func (x *AssetSegmentReportSampleInformation) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+// Offset returns the offset of the sample in the segment.
+func (asrsi *AssetSegmentReportSampleInformation) Offset() int {
+	_r := objc.Send[int](objref.IDOf(asrsi), objc.RegisterName("offset"))
 	return _r
 }
 
-// Length the length of the sample.
-func (x *AssetSegmentReportSampleInformation) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+// Length returns the length of the sample.
+func (asrsi *AssetSegmentReportSampleInformation) Length() int {
+	_r := objc.Send[int](objref.IDOf(asrsi), objc.RegisterName("length"))
 	return _r
 }
 
-// IsSyncSample indicates whether the sample is a sync sample.
-func (x *AssetSegmentReportSampleInformation) IsSyncSample() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSyncSample"))
+// IsSyncSample reports whether the sample is a sync sample.
+func (asrsi *AssetSegmentReportSampleInformation) IsSyncSample() bool {
+	_r := objc.Send[bool](objref.IDOf(asrsi), objc.RegisterName("isSyncSample"))
 	return _r
 }
-
-// AssetSegmentReportSampleInformationable is the interface implemented by [AssetSegmentReportSampleInformation], for mocking and DI.
-type AssetSegmentReportSampleInformationable interface {
-	obj.Object
-	Offset() int
-	Length() int
-	IsSyncSample() bool
-}
-
-var _ AssetSegmentReportSampleInformationable = (*AssetSegmentReportSampleInformation)(nil)

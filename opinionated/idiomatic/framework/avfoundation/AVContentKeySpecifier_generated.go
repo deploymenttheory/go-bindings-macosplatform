@@ -46,24 +46,24 @@ func contentKeySpecifierAdopt(id objc.ID) *ContentKeySpecifier {
 }
 
 // Description returns the object's -description text.
-func (x *ContentKeySpecifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cks *ContentKeySpecifier) Description() string {
+	return rt.Description(objref.IDOf(cks))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentKeySpecifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cks *ContentKeySpecifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cks), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentKeySpecifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cks *ContentKeySpecifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cks), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentKeySpecifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cks *ContentKeySpecifier) String() string {
+	return rt.Description(objref.IDOf(cks))
 }
 
 // NewContentKeySpecifierForKeySystemIdentifierOptions creates a content key specifier.
@@ -73,30 +73,20 @@ func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem obj.Object, c
 	return contentKeySpecifierAdopt(_id)
 }
 
-// KeySystem a valid key system for content keys.
-func (x *ContentKeySpecifier) KeySystem() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySystem"))
+// KeySystem returns a valid key system for content keys.
+func (cks *ContentKeySpecifier) KeySystem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("keySystem"))
 	return obj.Wrap(_r)
 }
 
-// Identifier container and protocol-specific key identifier.
-func (x *ContentKeySpecifier) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns container and protocol-specific key identifier.
+func (cks *ContentKeySpecifier) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Options additional information necessary to obtain the key, can be empty if none needed.
-func (x *ContentKeySpecifier) Options() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+// Options returns additional information necessary to obtain the key, can be empty if none needed.
+func (cks *ContentKeySpecifier) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
-
-// ContentKeySpecifierable is the interface implemented by [ContentKeySpecifier], for mocking and DI.
-type ContentKeySpecifierable interface {
-	obj.Object
-	KeySystem() obj.Object
-	Identifier() obj.Object
-	Options() obj.Object
-}
-
-var _ ContentKeySpecifierable = (*ContentKeySpecifier)(nil)

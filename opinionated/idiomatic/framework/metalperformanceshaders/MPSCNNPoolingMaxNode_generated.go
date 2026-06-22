@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNPoolingMaxNode() *CNNPoolingMaxNode {
 	return cNNPoolingMaxNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingMaxNode) WithLabel(label string) *CNNPoolingMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cpmn *CNNPoolingMaxNode) WithLabel(label string) *CNNPoolingMaxNode {
+	objc.Send[objc.ID](objref.IDOf(cpmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpmn
 }
-
-// CNNPoolingMaxNodeable is the interface implemented by [CNNPoolingMaxNode], for mocking and DI.
-type CNNPoolingMaxNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingMaxNode
-}
-
-var _ CNNPoolingMaxNodeable = (*CNNPoolingMaxNode)(nil)
 
 var _ CNNPoolingNodeProvider = (*CNNPoolingMaxNode)(nil)
 

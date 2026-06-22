@@ -44,24 +44,24 @@ func iSyncClientAdopt(id objc.ID) *ISyncClient {
 }
 
 // Description returns the object's -description text.
-func (x *ISyncClient) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ISyncClient) Description() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ISyncClient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (isc *ISyncClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ISyncClient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (isc *ISyncClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ISyncClient) String() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ISyncClient) String() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // NewISyncClient creates a new ISyncClient.
@@ -71,8 +71,8 @@ func NewISyncClient() *ISyncClient {
 }
 
 // ClientIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncClient) ClientIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientIdentifier"))
+func (isc *ISyncClient) ClientIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("clientIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,8 +80,8 @@ func (x *ISyncClient) ClientIdentifier() string {
 }
 
 // ClientType wraps the corresponding Objective-C method.
-func (x *ISyncClient) ClientType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientType"))
+func (isc *ISyncClient) ClientType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("clientType"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,8 +89,8 @@ func (x *ISyncClient) ClientType() string {
 }
 
 // DisplayName wraps the corresponding Objective-C method.
-func (x *ISyncClient) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+func (isc *ISyncClient) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -98,13 +98,13 @@ func (x *ISyncClient) DisplayName() string {
 }
 
 // SetDisplayName wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetDisplayName(displayName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
+func (isc *ISyncClient) SetDisplayName(displayName string) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setDisplayName:"), purego.NSString(displayName))
 }
 
 // ImagePath wraps the corresponding Objective-C method.
-func (x *ISyncClient) ImagePath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imagePath"))
+func (isc *ISyncClient) ImagePath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("imagePath"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,110 +112,110 @@ func (x *ISyncClient) ImagePath() string {
 }
 
 // SetImagePath wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetImagePath(path string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePath:"), purego.NSString(path))
+func (isc *ISyncClient) SetImagePath(path string) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setImagePath:"), purego.NSString(path))
 }
 
 // SupportedEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncClient) SupportedEntityNames() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedEntityNames"))
+func (isc *ISyncClient) SupportedEntityNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("supportedEntityNames"))
 	return obj.Wrap(_r)
 }
 
 // CanPushChangesForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncClient) CanPushChangesForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPushChangesForEntityName:"), purego.NSString(entityName))
+func (isc *ISyncClient) CanPushChangesForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("canPushChangesForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // CanPullChangesForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncClient) CanPullChangesForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPullChangesForEntityName:"), purego.NSString(entityName))
+func (isc *ISyncClient) CanPullChangesForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("canPullChangesForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // LastSyncDateForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncClient) LastSyncDateForEntityName(entityName string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastSyncDateForEntityName:"), purego.NSString(entityName))
+func (isc *ISyncClient) LastSyncDateForEntityName(entityName string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("lastSyncDateForEntityName:"), purego.NSString(entityName))
 	return obj.Wrap(_r)
 }
 
 // LastSyncStatusForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncClient) LastSyncStatusForEntityName(entityName string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lastSyncStatusForEntityName:"), purego.NSString(entityName))
+func (isc *ISyncClient) LastSyncStatusForEntityName(entityName string) int {
+	_r := objc.Send[int](objref.IDOf(isc), objc.RegisterName("lastSyncStatusForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // EnabledEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncClient) EnabledEntityNames() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enabledEntityNames"))
+func (isc *ISyncClient) EnabledEntityNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("enabledEntityNames"))
 	return obj.Wrap(_r)
 }
 
 // IsEnabledForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncClient) IsEnabledForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabledForEntityName:"), purego.NSString(entityName))
+func (isc *ISyncClient) IsEnabledForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("isEnabledForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // SetEnabledForEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetEnabledForEntityNames(flag bool, entityNames obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:forEntityNames:"), flag, objref.IDOf(entityNames))
+func (isc *ISyncClient) SetEnabledForEntityNames(flag bool, entityNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setEnabled:forEntityNames:"), flag, objref.IDOf(entityNames))
 }
 
 // FormatsRelationships wraps the corresponding Objective-C method.
-func (x *ISyncClient) FormatsRelationships() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("formatsRelationships"))
+func (isc *ISyncClient) FormatsRelationships() bool {
+	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("formatsRelationships"))
 	return _r
 }
 
 // SetFormatsRelationships wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetFormatsRelationships(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatsRelationships:"), flag)
+func (isc *ISyncClient) SetFormatsRelationships(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setFormatsRelationships:"), flag)
 }
 
 // ShouldReplaceClientRecordsForEntityName wraps the corresponding Objective-C method.
-func (x *ISyncClient) ShouldReplaceClientRecordsForEntityName(entityName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReplaceClientRecordsForEntityName:"), purego.NSString(entityName))
+func (isc *ISyncClient) ShouldReplaceClientRecordsForEntityName(entityName string) bool {
+	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("shouldReplaceClientRecordsForEntityName:"), purego.NSString(entityName))
 	return _r
 }
 
 // SetShouldReplaceClientRecordsForEntityNames wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReplaceClientRecords:forEntityNames:"), flag, objref.IDOf(entityNames))
+func (isc *ISyncClient) SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setShouldReplaceClientRecords:forEntityNames:"), flag, objref.IDOf(entityNames))
 }
 
 // ObjectForKey wraps the corresponding Objective-C method.
-func (x *ISyncClient) ObjectForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(key))
+func (isc *ISyncClient) ObjectForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("objectForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // Filters wraps the corresponding Objective-C method.
-func (x *ISyncClient) Filters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filters"))
+func (isc *ISyncClient) Filters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("filters"))
 	return obj.Wrap(_r)
 }
 
 // SetFilters wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetFilters(filters obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), objref.IDOf(filters))
+func (isc *ISyncClient) SetFilters(filters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setFilters:"), objref.IDOf(filters))
 }
 
 // ShouldSynchronizeWithClientsOfType wraps the corresponding Objective-C method.
-func (x *ISyncClient) ShouldSynchronizeWithClientsOfType(clientType string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSynchronizeWithClientsOfType:"), purego.NSString(clientType))
+func (isc *ISyncClient) ShouldSynchronizeWithClientsOfType(clientType string) bool {
+	_r := objc.Send[bool](objref.IDOf(isc), objc.RegisterName("shouldSynchronizeWithClientsOfType:"), purego.NSString(clientType))
 	return _r
 }
 
 // SetShouldSynchronizeWithClientsOfType wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetShouldSynchronizeWithClientsOfType(flag bool, clientType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldSynchronize:withClientsOfType:"), flag, purego.NSString(clientType))
+func (isc *ISyncClient) SetShouldSynchronizeWithClientsOfType(flag bool, clientType string) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setShouldSynchronize:withClientsOfType:"), flag, purego.NSString(clientType))
 }
 
 // SyncAlertToolPath wraps the corresponding Objective-C method.
-func (x *ISyncClient) SyncAlertToolPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("syncAlertToolPath"))
+func (isc *ISyncClient) SyncAlertToolPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("syncAlertToolPath"))
 	if _r == 0 {
 		return ""
 	}
@@ -223,38 +223,6 @@ func (x *ISyncClient) SyncAlertToolPath() string {
 }
 
 // SetSyncAlertToolPath wraps the corresponding Objective-C method.
-func (x *ISyncClient) SetSyncAlertToolPath(path string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSyncAlertToolPath:"), purego.NSString(path))
+func (isc *ISyncClient) SetSyncAlertToolPath(path string) {
+	objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("setSyncAlertToolPath:"), purego.NSString(path))
 }
-
-// ISyncClientable is the interface implemented by [ISyncClient], for mocking and DI.
-type ISyncClientable interface {
-	obj.Object
-	ClientIdentifier() string
-	ClientType() string
-	DisplayName() string
-	SetDisplayName(displayName string)
-	ImagePath() string
-	SetImagePath(path string)
-	SupportedEntityNames() obj.Object
-	CanPushChangesForEntityName(entityName string) bool
-	CanPullChangesForEntityName(entityName string) bool
-	LastSyncDateForEntityName(entityName string) obj.Object
-	LastSyncStatusForEntityName(entityName string) int
-	EnabledEntityNames() obj.Object
-	IsEnabledForEntityName(entityName string) bool
-	SetEnabledForEntityNames(flag bool, entityNames obj.Object)
-	FormatsRelationships() bool
-	SetFormatsRelationships(flag bool)
-	ShouldReplaceClientRecordsForEntityName(entityName string) bool
-	SetShouldReplaceClientRecordsForEntityNames(flag bool, entityNames obj.Object)
-	ObjectForKey(key string) obj.Object
-	Filters() obj.Object
-	SetFilters(filters obj.Object)
-	ShouldSynchronizeWithClientsOfType(clientType string) bool
-	SetShouldSynchronizeWithClientsOfType(flag bool, clientType string)
-	SyncAlertToolPath() string
-	SetSyncAlertToolPath(path string)
-}
-
-var _ ISyncClientable = (*ISyncClient)(nil)

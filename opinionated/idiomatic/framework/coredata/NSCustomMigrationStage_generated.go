@@ -7,7 +7,6 @@ package coredata
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,32 +52,22 @@ func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentM
 	return customMigrationStageAdopt(_id)
 }
 
-// WithLabel the textual description of the migration stage’s purpose.
-func (x *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the textual description of the migration stage’s purpose.
+func (cms *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
+	objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cms
 }
 
 // CurrentModel wraps the corresponding Objective-C method.
-func (x *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentModel"))
+func (cms *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
+	_r := objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("currentModel"))
 	return ManagedObjectModelReferenceFromID(_r)
 }
 
 // NextModel wraps the corresponding Objective-C method.
-func (x *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextModel"))
+func (cms *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
+	_r := objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("nextModel"))
 	return ManagedObjectModelReferenceFromID(_r)
 }
-
-// CustomMigrationStageable is the interface implemented by [CustomMigrationStage], for mocking and DI.
-type CustomMigrationStageable interface {
-	obj.Object
-	WithLabel(label string) *CustomMigrationStage
-	CurrentModel() *ManagedObjectModelReference
-	NextModel() *ManagedObjectModelReference
-}
-
-var _ CustomMigrationStageable = (*CustomMigrationStage)(nil)
 
 var _ MigrationStageProvider = (*CustomMigrationStage)(nil)

@@ -44,24 +44,24 @@ func mTRAccountLoginClusterGetSetupPINParamsAdopt(id objc.ID) *MTRAccountLoginCl
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccountLoginClusterGetSetupPINParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) Description() string {
+	return rt.Description(objref.IDOf(malcgspp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccountLoginClusterGetSetupPINParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(malcgspp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccountLoginClusterGetSetupPINParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(malcgspp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccountLoginClusterGetSetupPINParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) String() string {
+	return rt.Description(objref.IDOf(malcgspp))
 }
 
 // NewMTRAccountLoginClusterGetSetupPINParams creates a new MTRAccountLoginClusterGetSetupPINParams.
@@ -71,71 +71,40 @@ func NewMTRAccountLoginClusterGetSetupPINParams() *MTRAccountLoginClusterGetSetu
 }
 
 // WithTempAccountIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccountLoginClusterGetSetupPINParams) WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterGetSetupPINParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
-	return x
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterGetSetupPINParams {
+	objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
+	return malcgspp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAccountLoginClusterGetSetupPINParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINParams {
+	objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return malcgspp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAccountLoginClusterGetSetupPINParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterGetSetupPINParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterGetSetupPINParams {
+	objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return malcgspp
 }
 
 // TempAccountIdentifier wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINParams) TempAccountIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tempAccountIdentifier"))
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) TempAccountIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("tempAccountIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTempAccountIdentifier wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINParams) SetTempAccountIdentifier(tempAccountIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAccountLoginClusterGetSetupPINParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAccountLoginClusterGetSetupPINParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRAccountLoginClusterGetSetupPINParamsable is the interface implemented by [MTRAccountLoginClusterGetSetupPINParams], for mocking and DI.
-type MTRAccountLoginClusterGetSetupPINParamsable interface {
-	obj.Object
-	WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterGetSetupPINParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccountLoginClusterGetSetupPINParams
-	TempAccountIdentifier() string
-	SetTempAccountIdentifier(tempAccountIdentifier string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRAccountLoginClusterGetSetupPINParamsable = (*MTRAccountLoginClusterGetSetupPINParams)(nil)

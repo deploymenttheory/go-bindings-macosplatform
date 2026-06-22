@@ -47,24 +47,24 @@ func collectionLayoutGroupCustomItemAdopt(id objc.ID) *CollectionLayoutGroupCust
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutGroupCustomItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (clgci *CollectionLayoutGroupCustomItem) Description() string {
+	return rt.Description(objref.IDOf(clgci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutGroupCustomItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (clgci *CollectionLayoutGroupCustomItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(clgci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutGroupCustomItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (clgci *CollectionLayoutGroupCustomItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(clgci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutGroupCustomItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (clgci *CollectionLayoutGroupCustomItem) String() string {
+	return rt.Description(objref.IDOf(clgci))
 }
 
 // NewCollectionLayoutGroupCustomItem creates a new CollectionLayoutGroupCustomItem.
@@ -74,22 +74,13 @@ func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
 }
 
 // Frame wraps the corresponding Objective-C method.
-func (x *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+func (clgci *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(clgci), objc.RegisterName("frame"))
 	return _r
 }
 
 // ZIndex wraps the corresponding Objective-C method.
-func (x *CollectionLayoutGroupCustomItem) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+func (clgci *CollectionLayoutGroupCustomItem) ZIndex() int {
+	_r := objc.Send[int](objref.IDOf(clgci), objc.RegisterName("zIndex"))
 	return _r
 }
-
-// CollectionLayoutGroupCustomItemable is the interface implemented by [CollectionLayoutGroupCustomItem], for mocking and DI.
-type CollectionLayoutGroupCustomItemable interface {
-	obj.Object
-	Frame() corefoundation.CGRect
-	ZIndex() int
-}
-
-var _ CollectionLayoutGroupCustomItemable = (*CollectionLayoutGroupCustomItem)(nil)

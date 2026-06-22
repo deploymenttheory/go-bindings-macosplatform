@@ -44,24 +44,24 @@ func qCPatchControllerAdopt(id objc.ID) *QCPatchController {
 }
 
 // Description returns the object's -description text.
-func (x *QCPatchController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qpc *QCPatchController) Description() string {
+	return rt.Description(objref.IDOf(qpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCPatchController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qpc *QCPatchController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCPatchController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qpc *QCPatchController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCPatchController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qpc *QCPatchController) String() string {
+	return rt.Description(objref.IDOf(qpc))
 }
 
 // NewQCPatchController creates a new QCPatchController.
@@ -69,10 +69,3 @@ func NewQCPatchController() *QCPatchController {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCPatchController")), objc.RegisterName("new"))
 	return qCPatchControllerAdopt(_id)
 }
-
-// QCPatchControllerable is the interface implemented by [QCPatchController], for mocking and DI.
-type QCPatchControllerable interface {
-	obj.Object
-}
-
-var _ QCPatchControllerable = (*QCPatchController)(nil)

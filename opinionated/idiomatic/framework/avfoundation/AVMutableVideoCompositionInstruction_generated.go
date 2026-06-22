@@ -52,65 +52,30 @@ func NewMutableVideoCompositionInstruction() *MutableVideoCompositionInstruction
 	return mutableVideoCompositionInstructionAdopt(_id)
 }
 
-// WithBackgroundColor the background color of the composition.
-func (x *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the composition.
+func (mvci *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction {
+	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return mvci
 }
 
-// WithLayerInstructions instructions that specify how to layer and compose video frames from source tracks.
-func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
+// WithLayerInstructions sets instructions that specify how to layer and compose video frames from source tracks.
+func (mvci *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
 	_arr := purego.SliceToNSArray(items, func(_v VideoCompositionLayerInstructionProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerInstructions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setLayerInstructions:"), _arr)
+	return mvci
 }
 
-// WithEnablePostProcessing a Boolean value that indicates whether the instruction requires post processing.
-func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
-	return x
+// WithEnablePostProcessing sets a Boolean value that indicates whether the instruction requires post processing.
+func (mvci *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction {
+	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
+	return mvci
 }
 
-// WithRequiredSourceSampleDataTrackIDs the track identifiers of source sample data that the compositor requires to compose frames for the instruction.
-func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoCompositionInstruction {
+// WithRequiredSourceSampleDataTrackIDs sets the track identifiers of source sample data that the compositor requires to compose frames for the instruction.
+func (mvci *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoCompositionInstruction {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), _arr)
+	return mvci
 }
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *MutableVideoCompositionInstruction) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
-// SetLayerInstructions wraps the corresponding Objective-C method.
-func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions []*VideoCompositionLayerInstruction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerInstructions:"), purego.SliceToNSArray(layerInstructions, func(_v *VideoCompositionLayerInstruction) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetEnablePostProcessing wraps the corresponding Objective-C method.
-func (x *MutableVideoCompositionInstruction) SetEnablePostProcessing(enablePostProcessing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
-}
-
-// SetRequiredSourceSampleDataTrackIDs wraps the corresponding Objective-C method.
-func (x *MutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), purego.SliceToNSArray(requiredSourceSampleDataTrackIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableVideoCompositionInstructionable is the interface implemented by [MutableVideoCompositionInstruction], for mocking and DI.
-type MutableVideoCompositionInstructionable interface {
-	obj.Object
-	WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction
-	WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction
-	WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction
-	WithRequiredSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoCompositionInstruction
-	SetBackgroundColor(backgroundColor obj.Object)
-	SetLayerInstructions(layerInstructions []*VideoCompositionLayerInstruction)
-	SetEnablePostProcessing(enablePostProcessing bool)
-	SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs []obj.Object)
-}
-
-var _ MutableVideoCompositionInstructionable = (*MutableVideoCompositionInstruction)(nil)
 
 var _ VideoCompositionInstructionProvider = (*MutableVideoCompositionInstruction)(nil)

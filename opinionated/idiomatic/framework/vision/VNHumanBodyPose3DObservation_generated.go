@@ -5,12 +5,13 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HumanBodyPose3DObservation is an idiomatic wrapper over the Objective-C class VNHumanBodyPose3DObservation.
@@ -55,9 +56,9 @@ func NewHumanBodyPose3DObservation() *HumanBodyPose3DObservation {
 }
 
 // RecognizedPointsForJointsGroupNameError returns a collection of points for the group name you specify.
-func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+func (hbpdo *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hbpdo), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -65,9 +66,9 @@ func (x *HumanBodyPose3DObservation) RecognizedPointsForJointsGroupNameError(joi
 }
 
 // RecognizedPointForJointNameError returns the point for a joint name that the observation recognizes.
-func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *HumanBodyRecognizedPoint3D, err error) {
+func (hbpdo *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *HumanBodyRecognizedPoint3D, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hbpdo), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -75,9 +76,9 @@ func (x *HumanBodyPose3DObservation) RecognizedPointForJointNameError(jointName 
 }
 
 // PointInImageForJointNameError returns a 2D point for the joint name you specify, relative to the input image.
-func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName obj.Object) (result *Point, err error) {
+func (hbpdo *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName obj.Object) (result *Point, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointInImageForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hbpdo), objc.RegisterName("pointInImageForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,53 +86,38 @@ func (x *HumanBodyPose3DObservation) PointInImageForJointNameError(jointName obj
 }
 
 // ParentJointNameForJointName returns the parent joint of the joint name you specify.
-func (x *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentJointNameForJointName:"), objref.IDOf(jointName))
+func (hbpdo *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hbpdo), objc.RegisterName("parentJointNameForJointName:"), objref.IDOf(jointName))
 	return obj.Wrap(_r)
 }
 
-// HeightEstimation technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height. `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
-func (x *HumanBodyPose3DObservation) HeightEstimation() HumanBodyPose3DObservationHeightEstimation {
-	_r := objc.Send[HumanBodyPose3DObservationHeightEstimation](objref.IDOf(x), objc.RegisterName("heightEstimation"))
+// HeightEstimation returns technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height. `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
+func (hbpdo *HumanBodyPose3DObservation) HeightEstimation() HumanBodyPose3DObservationHeightEstimation {
+	_r := objc.Send[HumanBodyPose3DObservationHeightEstimation](objref.IDOf(hbpdo), objc.RegisterName("heightEstimation"))
 	return _r
 }
 
-// AvailableJointsGroupNames all of the joints group names available in the observation.
+// AvailableJointsGroupNames returns all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
-func (x *HumanBodyPose3DObservation) AvailableJointsGroupNames() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointsGroupNames"))
+func (hbpdo *HumanBodyPose3DObservation) AvailableJointsGroupNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(hbpdo), objc.RegisterName("availableJointsGroupNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AvailableJointNames all of the joint names available in the observation.
+// AvailableJointNames returns all of the joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
-func (x *HumanBodyPose3DObservation) AvailableJointNames() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointNames"))
+func (hbpdo *HumanBodyPose3DObservation) AvailableJointNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(hbpdo), objc.RegisterName("availableJointNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// BodyHeight estimated human height, in meters.
-func (x *HumanBodyPose3DObservation) BodyHeight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bodyHeight"))
+// BodyHeight returns estimated human height, in meters.
+func (hbpdo *HumanBodyPose3DObservation) BodyHeight() float32 {
+	_r := objc.Send[float32](objref.IDOf(hbpdo), objc.RegisterName("bodyHeight"))
 	return _r
 }
-
-// HumanBodyPose3DObservationable is the interface implemented by [HumanBodyPose3DObservation], for mocking and DI.
-type HumanBodyPose3DObservationable interface {
-	obj.Object
-	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
-	RecognizedPointForJointNameError(jointName obj.Object) (result *HumanBodyRecognizedPoint3D, err error)
-	PointInImageForJointNameError(jointName obj.Object) (result *Point, err error)
-	ParentJointNameForJointName(jointName obj.Object) obj.Object
-	HeightEstimation() HumanBodyPose3DObservationHeightEstimation
-	AvailableJointsGroupNames() []obj.Object
-	AvailableJointNames() []obj.Object
-	BodyHeight() float32
-}
-
-var _ HumanBodyPose3DObservationable = (*HumanBodyPose3DObservation)(nil)
 
 var _ RecognizedPoints3DObservationProvider = (*HumanBodyPose3DObservation)(nil)
 

@@ -46,24 +46,24 @@ func leaderboardEntryAdopt(id objc.ID) *LeaderboardEntry {
 }
 
 // Description returns the object's -description text.
-func (x *LeaderboardEntry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (le *LeaderboardEntry) Description() string {
+	return rt.Description(objref.IDOf(le))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LeaderboardEntry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (le *LeaderboardEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(le), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LeaderboardEntry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (le *LeaderboardEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(le), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LeaderboardEntry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (le *LeaderboardEntry) String() string {
+	return rt.Description(objref.IDOf(le))
 }
 
 // NewLeaderboardEntry creates a new LeaderboardEntry.
@@ -73,26 +73,26 @@ func NewLeaderboardEntry() *LeaderboardEntry {
 }
 
 // Player wraps the corresponding Objective-C method.
-func (x *LeaderboardEntry) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+func (le *LeaderboardEntry) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // Rank wraps the corresponding Objective-C method.
-func (x *LeaderboardEntry) Rank() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+func (le *LeaderboardEntry) Rank() int {
+	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("rank"))
 	return _r
 }
 
 // Score wraps the corresponding Objective-C method.
-func (x *LeaderboardEntry) Score() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("score"))
+func (le *LeaderboardEntry) Score() int {
+	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("score"))
 	return _r
 }
 
 // FormattedScore wraps the corresponding Objective-C method.
-func (x *LeaderboardEntry) FormattedScore() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedScore"))
+func (le *LeaderboardEntry) FormattedScore() string {
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("formattedScore"))
 	if _r == 0 {
 		return ""
 	}
@@ -100,26 +100,13 @@ func (x *LeaderboardEntry) FormattedScore() string {
 }
 
 // Context wraps the corresponding Objective-C method.
-func (x *LeaderboardEntry) Context() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("context"))
+func (le *LeaderboardEntry) Context() int {
+	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("context"))
 	return _r
 }
 
 // Date wraps the corresponding Objective-C method.
-func (x *LeaderboardEntry) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+func (le *LeaderboardEntry) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
-
-// LeaderboardEntryable is the interface implemented by [LeaderboardEntry], for mocking and DI.
-type LeaderboardEntryable interface {
-	obj.Object
-	Player() *Player
-	Rank() int
-	Score() int
-	FormattedScore() string
-	Context() int
-	Date() obj.Object
-}
-
-var _ LeaderboardEntryable = (*LeaderboardEntry)(nil)

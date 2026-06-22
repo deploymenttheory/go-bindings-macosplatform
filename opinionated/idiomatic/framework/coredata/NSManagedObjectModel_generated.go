@@ -46,24 +46,24 @@ func managedObjectModelAdopt(id objc.ID) *ManagedObjectModel {
 }
 
 // Description returns the object's -description text.
-func (x *ManagedObjectModel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mom *ManagedObjectModel) Description() string {
+	return rt.Description(objref.IDOf(mom))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ManagedObjectModel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mom *ManagedObjectModel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mom), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ManagedObjectModel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mom *ManagedObjectModel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mom), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ManagedObjectModel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mom *ManagedObjectModel) String() string {
+	return rt.Description(objref.IDOf(mom))
 }
 
 // NewManagedObjectModel creates a new ManagedObjectModel.
@@ -79,152 +79,110 @@ func NewManagedObjectModelWithContentsOfURL(url string) *ManagedObjectModel {
 	return managedObjectModelAdopt(_id)
 }
 
-// WithEntities the entities in the model.
-func (x *ManagedObjectModel) WithEntities(items ...*EntityDescription) *ManagedObjectModel {
+// WithEntities sets the entities in the model.
+func (mom *ManagedObjectModel) WithEntities(items ...*EntityDescription) *ManagedObjectModel {
 	_arr := purego.SliceToNSArray(items, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntities:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setEntities:"), _arr)
+	return mom
 }
 
-// WithLocalizationDictionary the localization dictionary of the model.
-func (x *ManagedObjectModel) WithLocalizationDictionary(localizationDictionary obj.Object) *ManagedObjectModel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizationDictionary:"), objref.IDOf(localizationDictionary))
-	return x
+// WithLocalizationDictionary sets the localization dictionary of the model.
+func (mom *ManagedObjectModel) WithLocalizationDictionary(localizationDictionary obj.Object) *ManagedObjectModel {
+	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setLocalizationDictionary:"), objref.IDOf(localizationDictionary))
+	return mom
 }
 
-// WithVersionIdentifiers the set of developer-defined version identifiers for the object model.
-func (x *ManagedObjectModel) WithVersionIdentifiers(versionIdentifiers obj.Object) *ManagedObjectModel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionIdentifiers:"), objref.IDOf(versionIdentifiers))
-	return x
+// WithVersionIdentifiers sets the set of developer-defined version identifiers for the object model.
+func (mom *ManagedObjectModel) WithVersionIdentifiers(versionIdentifiers obj.Object) *ManagedObjectModel {
+	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setVersionIdentifiers:"), objref.IDOf(versionIdentifiers))
+	return mom
 }
 
 // EntitiesForConfiguration returns the entities of the model for a specified configuration.
-func (x *ManagedObjectModel) EntitiesForConfiguration(configuration string) []*EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entitiesForConfiguration:"), purego.NSString(configuration))
+func (mom *ManagedObjectModel) EntitiesForConfiguration(configuration string) []*EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entitiesForConfiguration:"), purego.NSString(configuration))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
 // SetEntitiesForConfiguration associates the specified entities with the model using the given configuration name.
-func (x *ManagedObjectModel) SetEntitiesForConfiguration(entities []*EntityDescription, configuration string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntities:forConfiguration:"), purego.SliceToNSArray(entities, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) }), purego.NSString(configuration))
+func (mom *ManagedObjectModel) SetEntitiesForConfiguration(entities []*EntityDescription, configuration string) {
+	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setEntities:forConfiguration:"), purego.SliceToNSArray(entities, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) }), purego.NSString(configuration))
 }
 
 // SetFetchRequestTemplateForName associates the specified fetch request with the receiver using the given name.
-func (x *ManagedObjectModel) SetFetchRequestTemplateForName(fetchRequestTemplate obj.Object, name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequestTemplate:forName:"), objref.IDOf(fetchRequestTemplate), purego.NSString(name))
+func (mom *ManagedObjectModel) SetFetchRequestTemplateForName(fetchRequestTemplate obj.Object, name string) {
+	objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("setFetchRequestTemplate:forName:"), objref.IDOf(fetchRequestTemplate), purego.NSString(name))
 }
 
 // FetchRequestTemplateForName returns the fetch request with a specified name.
-func (x *ManagedObjectModel) FetchRequestTemplateForName(name string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequestTemplateForName:"), purego.NSString(name))
+func (mom *ManagedObjectModel) FetchRequestTemplateForName(name string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestTemplateForName:"), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
 // FetchRequestFromTemplateWithNameSubstitutionVariables returns a copy of the fetch request template with the variables substituted by values from the substitutions dictionary.
-func (x *ManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequestFromTemplateWithName:substitutionVariables:"), purego.NSString(name), objref.IDOf(variables))
+func (mom *ManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestFromTemplateWithName:substitutionVariables:"), purego.NSString(name), objref.IDOf(variables))
 	return obj.Wrap(_r)
 }
 
 // IsConfigurationCompatibleWithStoreMetadata returns a Boolean value that indicates whether a given configuration in the model is compatible with given metadata from a persistent store.
-func (x *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConfiguration:compatibleWithStoreMetadata:"), purego.NSString(configuration), objref.IDOf(metadata))
+func (mom *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(mom), objc.RegisterName("isConfiguration:compatibleWithStoreMetadata:"), purego.NSString(configuration), objref.IDOf(metadata))
 	return _r
 }
 
 // EntitiesByName wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) EntitiesByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entitiesByName"))
+func (mom *ManagedObjectModel) EntitiesByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entitiesByName"))
 	return obj.Wrap(_r)
 }
 
 // Entities wraps the corresponding Objective-C method.
 //
 // Entities returns the collection as a Go slice.
-func (x *ManagedObjectModel) Entities() []*EntityDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entities"))
+func (mom *ManagedObjectModel) Entities() []*EntityDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
-}
-
-// SetEntities wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) SetEntities(entities []*EntityDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntities:"), purego.SliceToNSArray(entities, func(_v *EntityDescription) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Configurations wraps the corresponding Objective-C method.
 //
 // Configurations returns the collection as a Go slice.
-func (x *ManagedObjectModel) Configurations() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurations"))
+func (mom *ManagedObjectModel) Configurations() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("configurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocalizationDictionary wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) LocalizationDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizationDictionary"))
+func (mom *ManagedObjectModel) LocalizationDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("localizationDictionary"))
 	return obj.Wrap(_r)
 }
 
-// SetLocalizationDictionary wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) SetLocalizationDictionary(localizationDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizationDictionary:"), objref.IDOf(localizationDictionary))
-}
-
 // FetchRequestTemplatesByName wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) FetchRequestTemplatesByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequestTemplatesByName"))
+func (mom *ManagedObjectModel) FetchRequestTemplatesByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestTemplatesByName"))
 	return obj.Wrap(_r)
 }
 
 // VersionIdentifiers wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) VersionIdentifiers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionIdentifiers"))
+func (mom *ManagedObjectModel) VersionIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("versionIdentifiers"))
 	return obj.Wrap(_r)
 }
 
-// SetVersionIdentifiers wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) SetVersionIdentifiers(versionIdentifiers obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionIdentifiers:"), objref.IDOf(versionIdentifiers))
-}
-
 // EntityVersionHashesByName wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) EntityVersionHashesByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityVersionHashesByName"))
+func (mom *ManagedObjectModel) EntityVersionHashesByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entityVersionHashesByName"))
 	return obj.Wrap(_r)
 }
 
 // VersionChecksum wraps the corresponding Objective-C method.
-func (x *ManagedObjectModel) VersionChecksum() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionChecksum"))
+func (mom *ManagedObjectModel) VersionChecksum() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("versionChecksum"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ManagedObjectModelable is the interface implemented by [ManagedObjectModel], for mocking and DI.
-type ManagedObjectModelable interface {
-	obj.Object
-	WithEntities(items ...*EntityDescription) *ManagedObjectModel
-	WithLocalizationDictionary(localizationDictionary obj.Object) *ManagedObjectModel
-	WithVersionIdentifiers(versionIdentifiers obj.Object) *ManagedObjectModel
-	EntitiesForConfiguration(configuration string) []*EntityDescription
-	SetEntitiesForConfiguration(entities []*EntityDescription, configuration string)
-	SetFetchRequestTemplateForName(fetchRequestTemplate obj.Object, name string)
-	FetchRequestTemplateForName(name string) obj.Object
-	FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables obj.Object) obj.Object
-	IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata obj.Object) bool
-	EntitiesByName() obj.Object
-	Entities() []*EntityDescription
-	SetEntities(entities []*EntityDescription)
-	Configurations() []string
-	LocalizationDictionary() obj.Object
-	SetLocalizationDictionary(localizationDictionary obj.Object)
-	FetchRequestTemplatesByName() obj.Object
-	VersionIdentifiers() obj.Object
-	SetVersionIdentifiers(versionIdentifiers obj.Object)
-	EntityVersionHashesByName() obj.Object
-	VersionChecksum() string
-}
-
-var _ ManagedObjectModelable = (*ManagedObjectModel)(nil)

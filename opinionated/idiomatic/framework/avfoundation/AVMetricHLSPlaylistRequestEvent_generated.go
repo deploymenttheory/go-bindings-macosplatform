@@ -52,39 +52,28 @@ func NewMetricHLSPlaylistRequestEvent() *MetricHLSPlaylistRequestEvent {
 	return metricHLSPlaylistRequestEventAdopt(_id)
 }
 
-// Url returns the URL of the playlist. If no value is available, returns nil.
-func (x *MetricHLSPlaylistRequestEvent) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL of the playlist. If no value is available, returns nil.
+func (mhpre *MetricHLSPlaylistRequestEvent) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mhpre), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// IsMultivariantPlaylist returns true if the playlist request is for a multivariant playlist.
-func (x *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultivariantPlaylist"))
+// IsMultivariantPlaylist reports whether the playlist request is for a multivariant playlist.
+func (mhpre *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
+	_r := objc.Send[bool](objref.IDOf(mhpre), objc.RegisterName("isMultivariantPlaylist"))
 	return _r
 }
 
 // MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-func (x *MetricHLSPlaylistRequestEvent) MediaType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+func (mhpre *MetricHLSPlaylistRequestEvent) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mhpre), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
 }
 
 // MediaResourceRequestEvent returns the media resource request event which was used to satisfy the playlist.
-func (x *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaResourceRequestEvent"))
+func (mhpre *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(mhpre), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
 }
-
-// MetricHLSPlaylistRequestEventable is the interface implemented by [MetricHLSPlaylistRequestEvent], for mocking and DI.
-type MetricHLSPlaylistRequestEventable interface {
-	obj.Object
-	Url() obj.Object
-	IsMultivariantPlaylist() bool
-	MediaType() obj.Object
-	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
-}
-
-var _ MetricHLSPlaylistRequestEventable = (*MetricHLSPlaylistRequestEvent)(nil)
 
 var _ MetricEventProvider = (*MetricHLSPlaylistRequestEvent)(nil)

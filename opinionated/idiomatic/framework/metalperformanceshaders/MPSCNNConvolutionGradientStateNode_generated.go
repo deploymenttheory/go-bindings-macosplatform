@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,31 +45,22 @@ func cNNConvolutionGradientStateNodeAdopt(id objc.ID) *CNNConvolutionGradientSta
 	return x
 }
 
-// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *CNNConvolutionGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-	return x
+// WithExportFromGraph sets tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+func (ccgsn *CNNConvolutionGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(ccgsn), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
+	return ccgsn
 }
 
-// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-func (x *CNNConvolutionGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionGradientStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-	return x
+// WithSynchronizeResource sets set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
+func (ccgsn *CNNConvolutionGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionGradientStateNode {
+	objc.Send[objc.ID](objref.IDOf(ccgsn), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
+	return ccgsn
 }
-
-// CNNConvolutionGradientStateNodeable is the interface implemented by [CNNConvolutionGradientStateNode], for mocking and DI.
-type CNNConvolutionGradientStateNodeable interface {
-	obj.Object
-	WithExportFromGraph(exportFromGraph bool) *CNNConvolutionGradientStateNode
-	WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionGradientStateNode
-}
-
-var _ CNNConvolutionGradientStateNodeable = (*CNNConvolutionGradientStateNode)(nil)
 
 // isCNNConvolutionGradientStateNode marks CNNConvolutionGradientStateNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionGradientStateNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNConvolutionGradientStateNode) isCNNConvolutionGradientStateNode() {}
+func (ccgsn *CNNConvolutionGradientStateNode) isCNNConvolutionGradientStateNode() {}
 
 var _ CNNConvolutionGradientStateNodeProvider = (*CNNConvolutionGradientStateNode)(nil)
 

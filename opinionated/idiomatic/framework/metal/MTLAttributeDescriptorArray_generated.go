@@ -46,24 +46,24 @@ func attributeDescriptorArrayAdopt(id objc.ID) *AttributeDescriptorArray {
 }
 
 // Description returns the object's -description text.
-func (x *AttributeDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ada *AttributeDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(ada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttributeDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ada *AttributeDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttributeDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ada *AttributeDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttributeDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ada *AttributeDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(ada))
 }
 
 // NewAttributeDescriptorArray creates a new AttributeDescriptorArray.
@@ -73,21 +73,12 @@ func NewAttributeDescriptorArray() *AttributeDescriptorArray {
 }
 
 // ObjectAtIndexedSubscript returns the state of the specified attribute.
-func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *AttributeDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+func (ada *AttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *AttributeDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(ada), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return AttributeDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets state for the specified attribute.
-func (x *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
+func (ada *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(ada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }
-
-// AttributeDescriptorArrayable is the interface implemented by [AttributeDescriptorArray], for mocking and DI.
-type AttributeDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(index int) *AttributeDescriptor
-	SetObjectAtIndexedSubscript(attributeDesc *AttributeDescriptor, index int)
-}
-
-var _ AttributeDescriptorArrayable = (*AttributeDescriptorArray)(nil)

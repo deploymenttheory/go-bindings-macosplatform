@@ -48,36 +48,29 @@ func barcodeDescriptorAdopt(id objc.ID) *BarcodeDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *BarcodeDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bd *BarcodeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(bd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BarcodeDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bd *BarcodeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BarcodeDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bd *BarcodeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BarcodeDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bd *BarcodeDescriptor) String() string {
+	return rt.Description(objref.IDOf(bd))
 }
-
-// BarcodeDescriptorable is the interface implemented by [BarcodeDescriptor], for mocking and DI.
-type BarcodeDescriptorable interface {
-	obj.Object
-}
-
-var _ BarcodeDescriptorable = (*BarcodeDescriptor)(nil)
 
 // isBarcodeDescriptor marks BarcodeDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the BarcodeDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BarcodeDescriptor) isBarcodeDescriptor() {}
+func (bd *BarcodeDescriptor) isBarcodeDescriptor() {}
 
 var _ BarcodeDescriptorProvider = (*BarcodeDescriptor)(nil)

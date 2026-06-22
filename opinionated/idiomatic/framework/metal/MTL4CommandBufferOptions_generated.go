@@ -46,24 +46,24 @@ func mTL4CommandBufferOptionsAdopt(id objc.ID) *MTL4CommandBufferOptions {
 }
 
 // Description returns the object's -description text.
-func (x *MTL4CommandBufferOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcbo *MTL4CommandBufferOptions) Description() string {
+	return rt.Description(objref.IDOf(mcbo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4CommandBufferOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcbo *MTL4CommandBufferOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcbo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4CommandBufferOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcbo *MTL4CommandBufferOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcbo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4CommandBufferOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcbo *MTL4CommandBufferOptions) String() string {
+	return rt.Description(objref.IDOf(mcbo))
 }
 
 // NewMTL4CommandBufferOptions creates a new MTL4CommandBufferOptions.
@@ -71,10 +71,3 @@ func NewMTL4CommandBufferOptions() *MTL4CommandBufferOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommandBufferOptions")), objc.RegisterName("new"))
 	return mTL4CommandBufferOptionsAdopt(_id)
 }
-
-// MTL4CommandBufferOptionsable is the interface implemented by [MTL4CommandBufferOptions], for mocking and DI.
-type MTL4CommandBufferOptionsable interface {
-	obj.Object
-}
-
-var _ MTL4CommandBufferOptionsable = (*MTL4CommandBufferOptions)(nil)

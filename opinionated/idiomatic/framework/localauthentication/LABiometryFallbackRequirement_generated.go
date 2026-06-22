@@ -46,24 +46,24 @@ func biometryFallbackRequirementAdopt(id objc.ID) *BiometryFallbackRequirement {
 }
 
 // Description returns the object's -description text.
-func (x *BiometryFallbackRequirement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bfr *BiometryFallbackRequirement) Description() string {
+	return rt.Description(objref.IDOf(bfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BiometryFallbackRequirement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bfr *BiometryFallbackRequirement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BiometryFallbackRequirement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bfr *BiometryFallbackRequirement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BiometryFallbackRequirement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bfr *BiometryFallbackRequirement) String() string {
+	return rt.Description(objref.IDOf(bfr))
 }
 
 // NewBiometryFallbackRequirement creates a new BiometryFallbackRequirement.
@@ -71,10 +71,3 @@ func NewBiometryFallbackRequirement() *BiometryFallbackRequirement {
 	_id := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("new"))
 	return biometryFallbackRequirementAdopt(_id)
 }
-
-// BiometryFallbackRequirementable is the interface implemented by [BiometryFallbackRequirement], for mocking and DI.
-type BiometryFallbackRequirementable interface {
-	obj.Object
-}
-
-var _ BiometryFallbackRequirementable = (*BiometryFallbackRequirement)(nil)

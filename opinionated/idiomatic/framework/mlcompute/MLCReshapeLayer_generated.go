@@ -52,34 +52,24 @@ func NewReshapeLayer() *ReshapeLayer {
 	return reshapeLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ReshapeLayer) WithLabel(label string) *ReshapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (rl *ReshapeLayer) WithLabel(label string) *ReshapeLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ReshapeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (rl *ReshapeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return rl
 }
 
-// Shape the target shape.
+// Shape returns the target shape.
 //
 // Shape returns the collection as a Go slice.
-func (x *ReshapeLayer) Shape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+func (rl *ReshapeLayer) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ReshapeLayerable is the interface implemented by [ReshapeLayer], for mocking and DI.
-type ReshapeLayerable interface {
-	obj.Object
-	WithLabel(label string) *ReshapeLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer
-	Shape() []obj.Object
-}
-
-var _ ReshapeLayerable = (*ReshapeLayer)(nil)
 
 var _ LayerProvider = (*ReshapeLayer)(nil)

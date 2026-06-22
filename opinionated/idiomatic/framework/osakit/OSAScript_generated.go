@@ -5,13 +5,14 @@
 package osakit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Script is an idiomatic wrapper over the Objective-C class OSAScript.
@@ -46,24 +47,24 @@ func scriptAdopt(id objc.ID) *Script {
 }
 
 // Description returns the object's -description text.
-func (x *Script) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Script) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Script) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Script) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Script) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Script) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Script) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Script) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewScriptWithSource creates a new Script.
@@ -142,122 +143,94 @@ func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions
 }
 
 // WithLanguage sets the property and returns the receiver so calls can be chained.
-func (x *Script) WithLanguage(language *Language) *Script {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
-	return x
+func (s *Script) WithLanguage(language *Language) *Script {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLanguage:"), objref.IDOf(language))
+	return s
 }
 
 // CompileAndReturnError wraps the corresponding Objective-C method.
-func (x *Script) CompileAndReturnError(errorInfo obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
+func (s *Script) CompileAndReturnError(errorInfo obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
 	return _r
 }
 
 // ExecuteAndReturnError wraps the corresponding Objective-C method.
-func (x *Script) ExecuteAndReturnError(errorInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
+func (s *Script) ExecuteAndReturnError(errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
 // ExecuteAppleEventError wraps the corresponding Objective-C method.
-func (x *Script) ExecuteAppleEventError(event obj.Object, errorInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
+func (s *Script) ExecuteAppleEventError(event obj.Object, errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
 // ExecuteAndReturnDisplayValueError wraps the corresponding Objective-C method.
-func (x *Script) ExecuteAndReturnDisplayValueError(displayValue obj.Object, errorInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAndReturnDisplayValue:error:"), objref.IDOf(displayValue), objref.IDOf(errorInfo))
+func (s *Script) ExecuteAndReturnDisplayValueError(displayValue obj.Object, errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeAndReturnDisplayValue:error:"), objref.IDOf(displayValue), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
 // ExecuteHandlerWithNameArgumentsError wraps the corresponding Objective-C method.
-func (x *Script) ExecuteHandlerWithNameArgumentsError(name string, arguments obj.Object, errorInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeHandlerWithName:arguments:error:"), purego.NSString(name), objref.IDOf(arguments), objref.IDOf(errorInfo))
+func (s *Script) ExecuteHandlerWithNameArgumentsError(name string, arguments obj.Object, errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("executeHandlerWithName:arguments:error:"), purego.NSString(name), objref.IDOf(arguments), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
 // RichTextFromDescriptor wraps the corresponding Objective-C method.
-func (x *Script) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
+func (s *Script) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
 	return obj.Wrap(_r)
 }
 
 // WriteToURLOfTypeError wraps the corresponding Objective-C method.
-func (x *Script) WriteToURLOfTypeError(url string, type_ string, errorInfo obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:ofType:error:"), rt.FileURL(url), purego.NSString(type_), objref.IDOf(errorInfo))
+func (s *Script) WriteToURLOfTypeError(url string, type_ string, errorInfo obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("writeToURL:ofType:error:"), rt.FileURL(url), purego.NSString(type_), objref.IDOf(errorInfo))
 	return _r
 }
 
 // WriteToURLOfTypeUsingStorageOptionsError wraps the corresponding Objective-C method.
-func (x *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions StorageOptions, errorInfo obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:ofType:usingStorageOptions:error:"), rt.FileURL(url), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
+func (s *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions StorageOptions, errorInfo obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("writeToURL:ofType:usingStorageOptions:error:"), rt.FileURL(url), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
 	return _r
 }
 
 // CompiledDataForTypeUsingStorageOptionsError wraps the corresponding Objective-C method.
-func (x *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions StorageOptions, errorInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compiledDataForType:usingStorageOptions:error:"), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
+func (s *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions StorageOptions, errorInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("compiledDataForType:usingStorageOptions:error:"), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *Script) Source() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (s *Script) Source() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Url wraps the corresponding Objective-C method.
-func (x *Script) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL wraps the corresponding Objective-C method.
+func (s *Script) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
 // Language wraps the corresponding Objective-C method.
-func (x *Script) Language() *Language {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (s *Script) Language() *Language {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
-// SetLanguage wraps the corresponding Objective-C method.
-func (x *Script) SetLanguage(language *Language) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
-}
-
 // IsCompiled wraps the corresponding Objective-C method.
-func (x *Script) IsCompiled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiled"))
+func (s *Script) IsCompiled() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isCompiled"))
 	return _r
 }
 
 // RichTextSource wraps the corresponding Objective-C method.
-func (x *Script) RichTextSource() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("richTextSource"))
+func (s *Script) RichTextSource() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("richTextSource"))
 	return obj.Wrap(_r)
 }
-
-// Scriptable is the interface implemented by [Script], for mocking and DI.
-type Scriptable interface {
-	obj.Object
-	WithLanguage(language *Language) *Script
-	CompileAndReturnError(errorInfo obj.Object) bool
-	ExecuteAndReturnError(errorInfo obj.Object) obj.Object
-	ExecuteAppleEventError(event obj.Object, errorInfo obj.Object) obj.Object
-	ExecuteAndReturnDisplayValueError(displayValue obj.Object, errorInfo obj.Object) obj.Object
-	ExecuteHandlerWithNameArgumentsError(name string, arguments obj.Object, errorInfo obj.Object) obj.Object
-	RichTextFromDescriptor(descriptor obj.Object) obj.Object
-	WriteToURLOfTypeError(url string, type_ string, errorInfo obj.Object) bool
-	WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions StorageOptions, errorInfo obj.Object) bool
-	CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions StorageOptions, errorInfo obj.Object) obj.Object
-	Source() string
-	Url() obj.Object
-	Language() *Language
-	SetLanguage(language *Language)
-	IsCompiled() bool
-	RichTextSource() obj.Object
-}
-
-var _ Scriptable = (*Script)(nil)

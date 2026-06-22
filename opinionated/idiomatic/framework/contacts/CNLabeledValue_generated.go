@@ -46,24 +46,24 @@ func labeledValueAdopt(id objc.ID) *LabeledValue {
 }
 
 // Description returns the object's -description text.
-func (x *LabeledValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lv *LabeledValue) Description() string {
+	return rt.Description(objref.IDOf(lv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LabeledValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lv *LabeledValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LabeledValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lv *LabeledValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LabeledValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lv *LabeledValue) String() string {
+	return rt.Description(objref.IDOf(lv))
 }
 
 // NewLabeledValueWithLabelValue returns a new labeled value identifier.
@@ -74,26 +74,26 @@ func NewLabeledValueWithLabelValue(label string, value obj.Object) *LabeledValue
 }
 
 // LabeledValueBySettingLabel returns a labeled value object with an existing value and identifier.
-func (x *LabeledValue) LabeledValueBySettingLabel(label string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labeledValueBySettingLabel:"), purego.NSString(label))
+func (lv *LabeledValue) LabeledValueBySettingLabel(label string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("labeledValueBySettingLabel:"), purego.NSString(label))
 	return obj.Wrap(_r)
 }
 
 // LabeledValueBySettingValue returns a new value for an existing label and identifier.
-func (x *LabeledValue) LabeledValueBySettingValue(value obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labeledValueBySettingValue:"), objref.IDOf(value))
+func (lv *LabeledValue) LabeledValueBySettingValue(value obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("labeledValueBySettingValue:"), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
 // LabeledValueBySettingLabelValue returns a labeled value object with the specified label and value with the existing identifier.
-func (x *LabeledValue) LabeledValueBySettingLabelValue(label string, value obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labeledValueBySettingLabel:value:"), purego.NSString(label), objref.IDOf(value))
+func (lv *LabeledValue) LabeledValueBySettingLabelValue(label string, value obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("labeledValueBySettingLabel:value:"), purego.NSString(label), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
-// Identifier the identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch.
-func (x *LabeledValue) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch.
+func (lv *LabeledValue) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,8 +101,8 @@ func (x *LabeledValue) Identifier() string {
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *LabeledValue) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (lv *LabeledValue) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
@@ -110,20 +110,7 @@ func (x *LabeledValue) Label() string {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *LabeledValue) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (lv *LabeledValue) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// LabeledValueable is the interface implemented by [LabeledValue], for mocking and DI.
-type LabeledValueable interface {
-	obj.Object
-	LabeledValueBySettingLabel(label string) obj.Object
-	LabeledValueBySettingValue(value obj.Object) obj.Object
-	LabeledValueBySettingLabelValue(label string, value obj.Object) obj.Object
-	Identifier() string
-	Label() string
-	Value() obj.Object
-}
-
-var _ LabeledValueable = (*LabeledValue)(nil)

@@ -47,24 +47,24 @@ func materialAdopt(id objc.ID) *Material {
 }
 
 // Description returns the object's -description text.
-func (x *Material) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Material) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Material) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Material) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Material) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Material) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Material) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Material) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMaterialWithNameScatteringFunction initializes a material
@@ -74,140 +74,99 @@ func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *Scat
 	return materialAdopt(_id)
 }
 
-// WithName a descriptive name for the material.
-func (x *Material) WithName(name string) *Material {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a descriptive name for the material.
+func (m *Material) WithName(name string) *Material {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setName:"), purego.NSString(name))
+	return m
 }
 
-// WithBaseMaterial another material object from which this material’s properties are derived.
-func (x *Material) WithBaseMaterial(baseMaterial *Material) *Material {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseMaterial:"), objref.IDOf(baseMaterial))
-	return x
+// WithBaseMaterial sets another material object from which this material’s properties are derived.
+func (m *Material) WithBaseMaterial(baseMaterial *Material) *Material {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBaseMaterial:"), objref.IDOf(baseMaterial))
+	return m
 }
 
-// WithMaterialFace the surface of an object.
-func (x *Material) WithMaterialFace(materialFace MaterialFace) *Material {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterialFace:"), materialFace)
-	return x
+// WithMaterialFace sets the surface of an object.
+func (m *Material) WithMaterialFace(materialFace MaterialFace) *Material {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setMaterialFace:"), materialFace)
+	return m
 }
 
 // SetProperty adds a new material property to or replaces an existing material property in the material.
-func (x *Material) SetProperty(property *MaterialProperty) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperty:"), objref.IDOf(property))
+func (m *Material) SetProperty(property *MaterialProperty) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setProperty:"), objref.IDOf(property))
 }
 
 // RemoveProperty removes the specified material property from the material.
-func (x *Material) RemoveProperty(property *MaterialProperty) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeProperty:"), objref.IDOf(property))
+func (m *Material) RemoveProperty(property *MaterialProperty) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeProperty:"), objref.IDOf(property))
 }
 
 // PropertyNamed returns the material property with the specified name.
-func (x *Material) PropertyNamed(name string) *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyNamed:"), purego.NSString(name))
+func (m *Material) PropertyNamed(name string) *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("propertyNamed:"), purego.NSString(name))
 	return MaterialPropertyFromID(_r)
 }
 
 // PropertyWithSemantic returns the material property for the specified material semantic.
-func (x *Material) PropertyWithSemantic(semantic MaterialSemantic) *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyWithSemantic:"), semantic)
+func (m *Material) PropertyWithSemantic(semantic MaterialSemantic) *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("propertyWithSemantic:"), semantic)
 	return MaterialPropertyFromID(_r)
 }
 
 // PropertiesWithSemantic returns the complete list of material properties that match the specified material semantic.
-func (x *Material) PropertiesWithSemantic(semantic MaterialSemantic) []*MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesWithSemantic:"), semantic)
+func (m *Material) PropertiesWithSemantic(semantic MaterialSemantic) []*MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("propertiesWithSemantic:"), semantic)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
 
 // RemoveAllProperties removes all material properties from the material.
-func (x *Material) RemoveAllProperties() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllProperties"))
+func (m *Material) RemoveAllProperties() {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeAllProperties"))
 }
 
 // ObjectAtIndexedSubscript returns the material property at the specified index in the material, for use with subscript syntax.
-func (x *Material) ObjectAtIndexedSubscript(idx int) *MaterialProperty {
-	errkit.CheckIndex(idx, x.Count())
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+func (m *Material) ObjectAtIndexedSubscript(idx int) *MaterialProperty {
+	errkit.CheckIndex(idx, m.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return MaterialPropertyFromID(_r)
 }
 
 // ObjectForKeyedSubscript returns the material property with the specified name, for use with subscript syntax.
-func (x *Material) ObjectForKeyedSubscript(name string) *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(name))
+func (m *Material) ObjectForKeyedSubscript(name string) *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(name))
 	return MaterialPropertyFromID(_r)
 }
 
 // ScatteringFunction wraps the corresponding Objective-C method.
-func (x *Material) ScatteringFunction() *ScatteringFunction {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatteringFunction"))
+func (m *Material) ScatteringFunction() *ScatteringFunction {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("scatteringFunction"))
 	return ScatteringFunctionFromID(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Material) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (m *Material) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *Material) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // BaseMaterial wraps the corresponding Objective-C method.
-func (x *Material) BaseMaterial() *Material {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseMaterial"))
+func (m *Material) BaseMaterial() *Material {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("baseMaterial"))
 	return MaterialFromID(_r)
 }
 
-// SetBaseMaterial wraps the corresponding Objective-C method.
-func (x *Material) SetBaseMaterial(baseMaterial *Material) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseMaterial:"), objref.IDOf(baseMaterial))
-}
-
 // Count wraps the corresponding Objective-C method.
-func (x *Material) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (m *Material) Count() int {
+	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("count"))
 	return _r
 }
 
 // MaterialFace wraps the corresponding Objective-C method.
-func (x *Material) MaterialFace() MaterialFace {
-	_r := objc.Send[MaterialFace](objref.IDOf(x), objc.RegisterName("materialFace"))
+func (m *Material) MaterialFace() MaterialFace {
+	_r := objc.Send[MaterialFace](objref.IDOf(m), objc.RegisterName("materialFace"))
 	return _r
 }
-
-// SetMaterialFace wraps the corresponding Objective-C method.
-func (x *Material) SetMaterialFace(materialFace MaterialFace) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterialFace:"), materialFace)
-}
-
-// Materialable is the interface implemented by [Material], for mocking and DI.
-type Materialable interface {
-	obj.Object
-	WithName(name string) *Material
-	WithBaseMaterial(baseMaterial *Material) *Material
-	WithMaterialFace(materialFace MaterialFace) *Material
-	SetProperty(property *MaterialProperty)
-	RemoveProperty(property *MaterialProperty)
-	PropertyNamed(name string) *MaterialProperty
-	PropertyWithSemantic(semantic MaterialSemantic) *MaterialProperty
-	PropertiesWithSemantic(semantic MaterialSemantic) []*MaterialProperty
-	RemoveAllProperties()
-	ObjectAtIndexedSubscript(idx int) *MaterialProperty
-	ObjectForKeyedSubscript(name string) *MaterialProperty
-	ScatteringFunction() *ScatteringFunction
-	Name() string
-	SetName(name string)
-	BaseMaterial() *Material
-	SetBaseMaterial(baseMaterial *Material)
-	Count() int
-	MaterialFace() MaterialFace
-	SetMaterialFace(materialFace MaterialFace)
-}
-
-var _ Materialable = (*Material)(nil)

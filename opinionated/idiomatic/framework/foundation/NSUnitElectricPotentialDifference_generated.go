@@ -53,18 +53,10 @@ func NewUnitElectricPotentialDifference() *UnitElectricPotentialDifference {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitElectricPotentialDifference) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricPotentialDifference {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uepd *UnitElectricPotentialDifference) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricPotentialDifference {
+	objc.Send[objc.ID](objref.IDOf(uepd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uepd
 }
-
-// UnitElectricPotentialDifferenceable is the interface implemented by [UnitElectricPotentialDifference], for mocking and DI.
-type UnitElectricPotentialDifferenceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricPotentialDifference
-}
-
-var _ UnitElectricPotentialDifferenceable = (*UnitElectricPotentialDifference)(nil)
 
 var _ DimensionProvider = (*UnitElectricPotentialDifference)(nil)
 

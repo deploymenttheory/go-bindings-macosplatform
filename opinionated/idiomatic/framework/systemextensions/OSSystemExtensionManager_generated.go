@@ -46,24 +46,24 @@ func systemExtensionManagerAdopt(id objc.ID) *SystemExtensionManager {
 }
 
 // Description returns the object's -description text.
-func (x *SystemExtensionManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sem *SystemExtensionManager) Description() string {
+	return rt.Description(objref.IDOf(sem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SystemExtensionManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sem *SystemExtensionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SystemExtensionManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sem *SystemExtensionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SystemExtensionManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sem *SystemExtensionManager) String() string {
+	return rt.Description(objref.IDOf(sem))
 }
 
 // NewSystemExtensionManager creates a new SystemExtensionManager.
@@ -73,14 +73,6 @@ func NewSystemExtensionManager() *SystemExtensionManager {
 }
 
 // SubmitRequest submits a system extension request to the manager.
-func (x *SystemExtensionManager) SubmitRequest(request *SystemExtensionRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submitRequest:"), objref.IDOf(request))
+func (sem *SystemExtensionManager) SubmitRequest(request *SystemExtensionRequest) {
+	objc.Send[objc.ID](objref.IDOf(sem), objc.RegisterName("submitRequest:"), objref.IDOf(request))
 }
-
-// SystemExtensionManagerable is the interface implemented by [SystemExtensionManager], for mocking and DI.
-type SystemExtensionManagerable interface {
-	obj.Object
-	SubmitRequest(request *SystemExtensionRequest)
-}
-
-var _ SystemExtensionManagerable = (*SystemExtensionManager)(nil)

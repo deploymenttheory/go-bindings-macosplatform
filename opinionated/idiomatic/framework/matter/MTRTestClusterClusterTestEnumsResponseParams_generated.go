@@ -51,31 +51,21 @@ func NewMTRTestClusterClusterTestEnumsResponseParams() *MTRTestClusterClusterTes
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mtccterp *MTRTestClusterClusterTestEnumsResponseParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccterp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mtccterp
 }
 
 // WithArg2 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
-	return x
+func (mtccterp *MTRTestClusterClusterTestEnumsResponseParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccterp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
+	return mtccterp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtccterp *MTRTestClusterClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccterp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtccterp
 }
-
-// MTRTestClusterClusterTestEnumsResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsResponseParams], for mocking and DI.
-type MTRTestClusterClusterTestEnumsResponseParamsable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams
-	WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEnumsResponseParams
-}
-
-var _ MTRTestClusterClusterTestEnumsResponseParamsable = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)
 
 var _ MTRUnitTestingClusterTestEnumsResponseParamsProvider = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)

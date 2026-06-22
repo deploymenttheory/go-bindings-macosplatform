@@ -44,24 +44,24 @@ func mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructAdopt(id ob
 }
 
 // Description returns the object's -description text.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) Description() string {
+	return rt.Description(objref.IDOf(meemccers))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemccers), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemccers), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) String() string {
+	return rt.Description(objref.IDOf(meemccers))
 }
 
 // NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct creates a new MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct.
@@ -71,88 +71,49 @@ func NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct() *MTRE
 }
 
 // WithImportedResetTimestamp sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetTimestamp(importedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportedResetTimestamp:"), objref.IDOf(importedResetTimestamp))
-	return x
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetTimestamp(importedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setImportedResetTimestamp:"), objref.IDOf(importedResetTimestamp))
+	return meemccers
 }
 
 // WithExportedResetTimestamp sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetTimestamp(exportedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedResetTimestamp:"), objref.IDOf(exportedResetTimestamp))
-	return x
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetTimestamp(exportedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setExportedResetTimestamp:"), objref.IDOf(exportedResetTimestamp))
+	return meemccers
 }
 
 // WithImportedResetSystime sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetSystime(importedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportedResetSystime:"), objref.IDOf(importedResetSystime))
-	return x
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetSystime(importedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setImportedResetSystime:"), objref.IDOf(importedResetSystime))
+	return meemccers
 }
 
 // WithExportedResetSystime sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetSystime(exportedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedResetSystime:"), objref.IDOf(exportedResetSystime))
-	return x
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetSystime(exportedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setExportedResetSystime:"), objref.IDOf(exportedResetSystime))
+	return meemccers
 }
 
 // ImportedResetTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importedResetTimestamp"))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("importedResetTimestamp"))
 	return obj.Wrap(_r)
-}
-
-// SetImportedResetTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetImportedResetTimestamp(importedResetTimestamp obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportedResetTimestamp:"), objref.IDOf(importedResetTimestamp))
 }
 
 // ExportedResetTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportedResetTimestamp"))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("exportedResetTimestamp"))
 	return obj.Wrap(_r)
-}
-
-// SetExportedResetTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetExportedResetTimestamp(exportedResetTimestamp obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedResetTimestamp:"), objref.IDOf(exportedResetTimestamp))
 }
 
 // ImportedResetSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importedResetSystime"))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("importedResetSystime"))
 	return obj.Wrap(_r)
-}
-
-// SetImportedResetSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetImportedResetSystime(importedResetSystime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportedResetSystime:"), objref.IDOf(importedResetSystime))
 }
 
 // ExportedResetSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportedResetSystime"))
+func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("exportedResetSystime"))
 	return obj.Wrap(_r)
 }
-
-// SetExportedResetSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetExportedResetSystime(exportedResetSystime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedResetSystime:"), objref.IDOf(exportedResetSystime))
-}
-
-// MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable is the interface implemented by [MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct], for mocking and DI.
-type MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable interface {
-	obj.Object
-	WithImportedResetTimestamp(importedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
-	WithExportedResetTimestamp(exportedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
-	WithImportedResetSystime(importedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
-	WithExportedResetSystime(exportedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
-	ImportedResetTimestamp() obj.Object
-	SetImportedResetTimestamp(importedResetTimestamp obj.Object)
-	ExportedResetTimestamp() obj.Object
-	SetExportedResetTimestamp(exportedResetTimestamp obj.Object)
-	ImportedResetSystime() obj.Object
-	SetImportedResetSystime(importedResetSystime obj.Object)
-	ExportedResetSystime() obj.Object
-	SetExportedResetSystime(exportedResetSystime obj.Object)
-}
-
-var _ MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable = (*MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct)(nil)

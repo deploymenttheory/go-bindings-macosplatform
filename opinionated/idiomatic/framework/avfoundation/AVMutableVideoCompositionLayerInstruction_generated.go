@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewMutableVideoCompositionLayerInstruction() *MutableVideoCompositionLayerI
 	return mutableVideoCompositionLayerInstructionAdopt(_id)
 }
 
-// WithTrackID the track identifier of the source track to which the compositor applies the instruction.
-func (x *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
-	return x
+// WithTrackID sets the track identifier of the source track to which the compositor applies the instruction.
+func (mvcli *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setTrackID:"), trackID)
+	return mvcli
 }
 
 // TrackID indicates the trackID of the source track to which the compositor will apply the instruction.
-func (x *MutableVideoCompositionLayerInstruction) TrackID() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
+func (mvcli *MutableVideoCompositionLayerInstruction) TrackID() int32 {
+	_r := objc.Send[int32](objref.IDOf(mvcli), objc.RegisterName("trackID"))
 	return _r
 }
-
-// SetTrackID wraps the corresponding Objective-C method.
-func (x *MutableVideoCompositionLayerInstruction) SetTrackID(trackID int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
-}
-
-// MutableVideoCompositionLayerInstructionable is the interface implemented by [MutableVideoCompositionLayerInstruction], for mocking and DI.
-type MutableVideoCompositionLayerInstructionable interface {
-	obj.Object
-	WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction
-	TrackID() int32
-	SetTrackID(trackID int32)
-}
-
-var _ MutableVideoCompositionLayerInstructionable = (*MutableVideoCompositionLayerInstruction)(nil)
 
 var _ VideoCompositionLayerInstructionProvider = (*MutableVideoCompositionLayerInstruction)(nil)

@@ -5,13 +5,14 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MutableCompositionTrack is an idiomatic wrapper over the Objective-C class AVMutableCompositionTrack.
@@ -55,53 +56,53 @@ func NewMutableCompositionTrack() *MutableCompositionTrack {
 	return mutableCompositionTrackAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether the tracks is in an enabled state.
-func (x *MutableCompositionTrack) WithEnabled(enabled bool) *MutableCompositionTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the tracks is in an enabled state.
+func (mct *MutableCompositionTrack) WithEnabled(enabled bool) *MutableCompositionTrack {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setEnabled:"), enabled)
+	return mct
 }
 
-// WithNaturalTimeScale the time scale in which you can perform time-based operations without extra numerical conversion.
-func (x *MutableCompositionTrack) WithNaturalTimeScale(naturalTimeScale int32) *MutableCompositionTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalTimeScale:"), naturalTimeScale)
-	return x
+// WithNaturalTimeScale sets the time scale in which you can perform time-based operations without extra numerical conversion.
+func (mct *MutableCompositionTrack) WithNaturalTimeScale(naturalTimeScale int32) *MutableCompositionTrack {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setNaturalTimeScale:"), naturalTimeScale)
+	return mct
 }
 
-// WithLanguageCode the language associated with the track, as an ISO 639-2/T language code.
-func (x *MutableCompositionTrack) WithLanguageCode(languageCode string) *MutableCompositionTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
-	return x
+// WithLanguageCode sets the language associated with the track, as an ISO 639-2/T language code.
+func (mct *MutableCompositionTrack) WithLanguageCode(languageCode string) *MutableCompositionTrack {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
+	return mct
 }
 
-// WithExtendedLanguageTag the language tag associated with the track, as an RFC 4646 language tag.
-func (x *MutableCompositionTrack) WithExtendedLanguageTag(extendedLanguageTag string) *MutableCompositionTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
-	return x
+// WithExtendedLanguageTag sets the language tag associated with the track, as an RFC 4646 language tag.
+func (mct *MutableCompositionTrack) WithExtendedLanguageTag(extendedLanguageTag string) *MutableCompositionTrack {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
+	return mct
 }
 
-// WithPreferredTransform the preferred transformation of the visual media data for display purposes.
-func (x *MutableCompositionTrack) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableCompositionTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
-	return x
+// WithPreferredTransform sets the preferred transformation of the visual media data for display purposes.
+func (mct *MutableCompositionTrack) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableCompositionTrack {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setPreferredTransform:"), preferredTransform)
+	return mct
 }
 
-// WithPreferredVolume the volume the track prefers for its audible media data.
-func (x *MutableCompositionTrack) WithPreferredVolume(preferredVolume float32) *MutableCompositionTrack {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
-	return x
+// WithPreferredVolume sets the volume the track prefers for its audible media data.
+func (mct *MutableCompositionTrack) WithPreferredVolume(preferredVolume float32) *MutableCompositionTrack {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setPreferredVolume:"), preferredVolume)
+	return mct
 }
 
-// WithSegments the track segments that a composition track contains.
-func (x *MutableCompositionTrack) WithSegments(items ...*CompositionTrackSegment) *MutableCompositionTrack {
+// WithSegments sets the track segments that a composition track contains.
+func (mct *MutableCompositionTrack) WithSegments(items ...*CompositionTrackSegment) *MutableCompositionTrack {
 	_arr := purego.SliceToNSArray(items, func(_v *CompositionTrackSegment) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegments:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setSegments:"), _arr)
+	return mct
 }
 
 // ValidateTrackSegments returns a Boolean value that indicates whether a given array of track segments conform to the timing rules for a composition track.
-func (x *MutableCompositionTrack) ValidateTrackSegments(trackSegments []*CompositionTrackSegment) error {
+func (mct *MutableCompositionTrack) ValidateTrackSegments(trackSegments []*CompositionTrackSegment) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateTrackSegments:error:"), purego.SliceToNSArray(trackSegments, func(_v *CompositionTrackSegment) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("validateTrackSegments:error:"), purego.SliceToNSArray(trackSegments, func(_v *CompositionTrackSegment) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -109,79 +110,19 @@ func (x *MutableCompositionTrack) ValidateTrackSegments(trackSegments []*Composi
 }
 
 // AddTrackAssociationToTrackType establishes a track association of a specific type between two tracks.
-func (x *MutableCompositionTrack) AddTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTrackAssociationToTrack:type:"), objref.IDOf(compositionTrack), objref.IDOf(trackAssociationType))
+func (mct *MutableCompositionTrack) AddTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("addTrackAssociationToTrack:type:"), objref.IDOf(compositionTrack), objref.IDOf(trackAssociationType))
 }
 
 // RemoveTrackAssociationToTrackType removes an association from a composition track.
-func (x *MutableCompositionTrack) RemoveTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrackAssociationToTrack:type:"), objref.IDOf(compositionTrack), objref.IDOf(trackAssociationType))
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// SetNaturalTimeScale wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetNaturalTimeScale(naturalTimeScale int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalTimeScale:"), naturalTimeScale)
-}
-
-// SetLanguageCode wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetLanguageCode(languageCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguageCode:"), purego.NSString(languageCode))
-}
-
-// SetExtendedLanguageTag wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetExtendedLanguageTag(extendedLanguageTag string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
-}
-
-// SetPreferredTransform wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
-}
-
-// SetPreferredVolume wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetPreferredVolume(preferredVolume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
-}
-
-// SetSegments wraps the corresponding Objective-C method.
-func (x *MutableCompositionTrack) SetSegments(segments []*CompositionTrackSegment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegments:"), purego.SliceToNSArray(segments, func(_v *CompositionTrackSegment) objc.ID { return objref.IDOf(_v) }))
+func (mct *MutableCompositionTrack) RemoveTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("removeTrackAssociationToTrack:type:"), objref.IDOf(compositionTrack), objref.IDOf(trackAssociationType))
 }
 
 // ReplaceFormatDescriptionWithFormatDescription replaces a format description with another or cancels a previous replacement.
-func (x *MutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription obj.Object, replacementFormatDescription obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(originalFormatDescription), objref.IDOf(replacementFormatDescription))
+func (mct *MutableCompositionTrack) ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription obj.Object, replacementFormatDescription obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(originalFormatDescription), objref.IDOf(replacementFormatDescription))
 }
-
-// MutableCompositionTrackable is the interface implemented by [MutableCompositionTrack], for mocking and DI.
-type MutableCompositionTrackable interface {
-	obj.Object
-	WithEnabled(enabled bool) *MutableCompositionTrack
-	WithNaturalTimeScale(naturalTimeScale int32) *MutableCompositionTrack
-	WithLanguageCode(languageCode string) *MutableCompositionTrack
-	WithExtendedLanguageTag(extendedLanguageTag string) *MutableCompositionTrack
-	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableCompositionTrack
-	WithPreferredVolume(preferredVolume float32) *MutableCompositionTrack
-	WithSegments(items ...*CompositionTrackSegment) *MutableCompositionTrack
-	ValidateTrackSegments(trackSegments []*CompositionTrackSegment) error
-	AddTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object)
-	RemoveTrackAssociationToTrackType(compositionTrack *CompositionTrack, trackAssociationType obj.Object)
-	SetEnabled(enabled bool)
-	SetNaturalTimeScale(naturalTimeScale int32)
-	SetLanguageCode(languageCode string)
-	SetExtendedLanguageTag(extendedLanguageTag string)
-	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
-	SetPreferredVolume(preferredVolume float32)
-	SetSegments(segments []*CompositionTrackSegment)
-	ReplaceFormatDescriptionWithFormatDescription(originalFormatDescription obj.Object, replacementFormatDescription obj.Object)
-}
-
-var _ MutableCompositionTrackable = (*MutableCompositionTrack)(nil)
 
 var _ CompositionTrackProvider = (*MutableCompositionTrack)(nil)
 

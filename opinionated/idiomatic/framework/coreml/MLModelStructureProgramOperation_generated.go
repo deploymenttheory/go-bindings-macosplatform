@@ -46,24 +46,24 @@ func modelStructureProgramOperationAdopt(id objc.ID) *ModelStructureProgramOpera
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgramOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mspo *ModelStructureProgramOperation) Description() string {
+	return rt.Description(objref.IDOf(mspo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgramOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mspo *ModelStructureProgramOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mspo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgramOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mspo *ModelStructureProgramOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mspo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgramOperation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mspo *ModelStructureProgramOperation) String() string {
+	return rt.Description(objref.IDOf(mspo))
 }
 
 // NewModelStructureProgramOperation creates a new ModelStructureProgramOperation.
@@ -72,46 +72,35 @@ func NewModelStructureProgramOperation() *ModelStructureProgramOperation {
 	return modelStructureProgramOperationAdopt(_id)
 }
 
-// OperatorName the name of the operator, e.g., "conv", "pool", "softmax", etc.
-func (x *ModelStructureProgramOperation) OperatorName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatorName"))
+// OperatorName returns the name of the operator, e.g., "conv", "pool", "softmax", etc.
+func (mspo *ModelStructureProgramOperation) OperatorName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("operatorName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Inputs the arguments to the Operation.
-func (x *ModelStructureProgramOperation) Inputs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+// Inputs returns the arguments to the Operation.
+func (mspo *ModelStructureProgramOperation) Inputs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("inputs"))
 	return obj.Wrap(_r)
 }
 
-// Outputs the outputs of the Operation.
+// Outputs returns the outputs of the Operation.
 //
 // Outputs returns the collection as a Go slice.
-func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+func (mspo *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("outputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
 		return ModelStructureProgramNamedValueTypeFromID(_id)
 	})
 }
 
-// Blocks nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.
+// Blocks returns nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.
 //
 // Blocks returns the collection as a Go slice.
-func (x *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blocks"))
+func (mspo *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {
+	_arr := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("blocks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramBlock { return ModelStructureProgramBlockFromID(_id) })
 }
-
-// ModelStructureProgramOperationable is the interface implemented by [ModelStructureProgramOperation], for mocking and DI.
-type ModelStructureProgramOperationable interface {
-	obj.Object
-	OperatorName() string
-	Inputs() obj.Object
-	Outputs() []*ModelStructureProgramNamedValueType
-	Blocks() []*ModelStructureProgramBlock
-}
-
-var _ ModelStructureProgramOperationable = (*ModelStructureProgramOperation)(nil)

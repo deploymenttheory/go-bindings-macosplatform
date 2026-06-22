@@ -46,24 +46,24 @@ func universalLinkAdopt(id objc.ID) *UniversalLink {
 }
 
 // Description returns the object's -description text.
-func (x *UniversalLink) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ul *UniversalLink) Description() string {
+	return rt.Description(objref.IDOf(ul))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UniversalLink) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ul *UniversalLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ul), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UniversalLink) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ul *UniversalLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ul), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UniversalLink) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ul *UniversalLink) String() string {
+	return rt.Description(objref.IDOf(ul))
 }
 
 // NewUniversalLinkWithWebpageURL creates a universal link object with the URL.
@@ -73,43 +73,26 @@ func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
 	return universalLinkAdopt(_id)
 }
 
-// WithEnabled a flag that indicates whether the universal link is enabled.
-func (x *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a flag that indicates whether the universal link is enabled.
+func (ul *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
+	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setEnabled:"), enabled)
+	return ul
 }
 
-// WebpageURL the URL passed when initializing the receiver.
-func (x *UniversalLink) WebpageURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webpageURL"))
+// WebpageURL returns the URL passed when initializing the receiver.
+func (ul *UniversalLink) WebpageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("webpageURL"))
 	return obj.Wrap(_r)
 }
 
-// ApplicationURL the file URL to the application that can handle this universal link.
-func (x *UniversalLink) ApplicationURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationURL"))
+// ApplicationURL returns the file URL to the application that can handle this universal link.
+func (ul *UniversalLink) ApplicationURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("applicationURL"))
 	return obj.Wrap(_r)
 }
 
-// IsEnabled whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
-func (x *UniversalLink) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
+func (ul *UniversalLink) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *UniversalLink) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// UniversalLinkable is the interface implemented by [UniversalLink], for mocking and DI.
-type UniversalLinkable interface {
-	obj.Object
-	WithEnabled(enabled bool) *UniversalLink
-	WebpageURL() obj.Object
-	ApplicationURL() obj.Object
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ UniversalLinkable = (*UniversalLink)(nil)

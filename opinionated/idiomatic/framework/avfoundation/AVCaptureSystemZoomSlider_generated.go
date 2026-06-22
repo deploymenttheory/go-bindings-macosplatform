@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,18 +59,10 @@ func NewCaptureSystemZoomSliderWithDeviceAction(device *CaptureDevice, action fu
 	return captureSystemZoomSliderAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether this control supports user interaction.
-func (x *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSlider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether this control supports user interaction.
+func (cszs *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSlider {
+	objc.Send[objc.ID](objref.IDOf(cszs), objc.RegisterName("setEnabled:"), enabled)
+	return cszs
 }
-
-// CaptureSystemZoomSliderable is the interface implemented by [CaptureSystemZoomSlider], for mocking and DI.
-type CaptureSystemZoomSliderable interface {
-	obj.Object
-	WithEnabled(enabled bool) *CaptureSystemZoomSlider
-}
-
-var _ CaptureSystemZoomSliderable = (*CaptureSystemZoomSlider)(nil)
 
 var _ CaptureControlProvider = (*CaptureSystemZoomSlider)(nil)

@@ -46,24 +46,24 @@ func searchableItemAdopt(id objc.ID) *SearchableItem {
 }
 
 // Description returns the object's -description text.
-func (x *SearchableItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (si *SearchableItem) Description() string {
+	return rt.Description(objref.IDOf(si))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SearchableItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (si *SearchableItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(si), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SearchableItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (si *SearchableItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(si), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SearchableItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (si *SearchableItem) String() string {
+	return rt.Description(objref.IDOf(si))
 }
 
 // NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
@@ -73,135 +73,80 @@ func NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIde
 	return searchableItemAdopt(_id)
 }
 
-// WithUniqueIdentifier the value that uniquely identifies the searchable item within your app.
-func (x *SearchableItem) WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueIdentifier:"), purego.NSString(uniqueIdentifier))
-	return x
+// WithUniqueIdentifier sets the value that uniquely identifies the searchable item within your app.
+func (si *SearchableItem) WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setUniqueIdentifier:"), purego.NSString(uniqueIdentifier))
+	return si
 }
 
-// WithDomainIdentifier an optional identifier that represents the domain or owner of the item.
-func (x *SearchableItem) WithDomainIdentifier(domainIdentifier string) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainIdentifier:"), purego.NSString(domainIdentifier))
-	return x
+// WithDomainIdentifier sets an optional identifier that represents the domain or owner of the item.
+func (si *SearchableItem) WithDomainIdentifier(domainIdentifier string) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setDomainIdentifier:"), purego.NSString(domainIdentifier))
+	return si
 }
 
-// WithExpirationDate the date after which the searchable item should no longer exist.
-func (x *SearchableItem) WithExpirationDate(expirationDate obj.Object) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-	return x
+// WithExpirationDate sets the date after which the searchable item should no longer exist.
+func (si *SearchableItem) WithExpirationDate(expirationDate obj.Object) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+	return si
 }
 
-// WithAttributeSet the set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.
-func (x *SearchableItem) WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeSet:"), objref.IDOf(attributeSet))
-	return x
+// WithAttributeSet sets the set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.
+func (si *SearchableItem) WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAttributeSet:"), objref.IDOf(attributeSet))
+	return si
 }
 
-// WithIsUpdate a Boolean value that indicates whether to treat the item as an update instead of a new item.
-func (x *SearchableItem) WithIsUpdate(isUpdate bool) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdate:"), isUpdate)
-	return x
+// WithIsUpdate sets a Boolean value that indicates whether to treat the item as an update instead of a new item.
+func (si *SearchableItem) WithIsUpdate(isUpdate bool) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setIsUpdate:"), isUpdate)
+	return si
 }
 
-// WithUpdateListenerOptions the types of notifications to request from Spotlight.
-func (x *SearchableItem) WithUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateListenerOptions:"), updateListenerOptions)
-	return x
+// WithUpdateListenerOptions sets the types of notifications to request from Spotlight.
+func (si *SearchableItem) WithUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setUpdateListenerOptions:"), updateListenerOptions)
+	return si
 }
 
 // UniqueIdentifier wraps the corresponding Objective-C method.
-func (x *SearchableItem) UniqueIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+func (si *SearchableItem) UniqueIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetUniqueIdentifier wraps the corresponding Objective-C method.
-func (x *SearchableItem) SetUniqueIdentifier(uniqueIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueIdentifier:"), purego.NSString(uniqueIdentifier))
 }
 
 // DomainIdentifier wraps the corresponding Objective-C method.
-func (x *SearchableItem) DomainIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
+func (si *SearchableItem) DomainIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDomainIdentifier wraps the corresponding Objective-C method.
-func (x *SearchableItem) SetDomainIdentifier(domainIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainIdentifier:"), purego.NSString(domainIdentifier))
-}
-
 // ExpirationDate wraps the corresponding Objective-C method.
-func (x *SearchableItem) ExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+func (si *SearchableItem) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
-// SetExpirationDate wraps the corresponding Objective-C method.
-func (x *SearchableItem) SetExpirationDate(expirationDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-}
-
 // AttributeSet wraps the corresponding Objective-C method.
-func (x *SearchableItem) AttributeSet() *SearchableItemAttributeSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeSet"))
+func (si *SearchableItem) AttributeSet() *SearchableItemAttributeSet {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("attributeSet"))
 	return SearchableItemAttributeSetFromID(_r)
 }
 
-// SetAttributeSet wraps the corresponding Objective-C method.
-func (x *SearchableItem) SetAttributeSet(attributeSet *SearchableItemAttributeSet) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeSet:"), objref.IDOf(attributeSet))
-}
-
 // IsUpdate wraps the corresponding Objective-C method.
-func (x *SearchableItem) IsUpdate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdate"))
+func (si *SearchableItem) IsUpdate() bool {
+	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isUpdate"))
 	return _r
-}
-
-// SetIsUpdate wraps the corresponding Objective-C method.
-func (x *SearchableItem) SetIsUpdate(isUpdate bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsUpdate:"), isUpdate)
 }
 
 // UpdateListenerOptions wraps the corresponding Objective-C method.
-func (x *SearchableItem) UpdateListenerOptions() SearchableItemUpdateListenerOptions {
-	_r := objc.Send[SearchableItemUpdateListenerOptions](objref.IDOf(x), objc.RegisterName("updateListenerOptions"))
+func (si *SearchableItem) UpdateListenerOptions() SearchableItemUpdateListenerOptions {
+	_r := objc.Send[SearchableItemUpdateListenerOptions](objref.IDOf(si), objc.RegisterName("updateListenerOptions"))
 	return _r
 }
-
-// SetUpdateListenerOptions wraps the corresponding Objective-C method.
-func (x *SearchableItem) SetUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateListenerOptions:"), updateListenerOptions)
-}
-
-// SearchableItemable is the interface implemented by [SearchableItem], for mocking and DI.
-type SearchableItemable interface {
-	obj.Object
-	WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem
-	WithDomainIdentifier(domainIdentifier string) *SearchableItem
-	WithExpirationDate(expirationDate obj.Object) *SearchableItem
-	WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem
-	WithIsUpdate(isUpdate bool) *SearchableItem
-	WithUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions) *SearchableItem
-	UniqueIdentifier() string
-	SetUniqueIdentifier(uniqueIdentifier string)
-	DomainIdentifier() string
-	SetDomainIdentifier(domainIdentifier string)
-	ExpirationDate() obj.Object
-	SetExpirationDate(expirationDate obj.Object)
-	AttributeSet() *SearchableItemAttributeSet
-	SetAttributeSet(attributeSet *SearchableItemAttributeSet)
-	IsUpdate() bool
-	SetIsUpdate(isUpdate bool)
-	UpdateListenerOptions() SearchableItemUpdateListenerOptions
-	SetUpdateListenerOptions(updateListenerOptions SearchableItemUpdateListenerOptions)
-}
-
-var _ SearchableItemable = (*SearchableItem)(nil)

@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewArrayGatherGradientState() *ArrayGatherGradientState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGatherGradientState")), objc.RegisterName("new"))
 	return arrayGatherGradientStateAdopt(_id)
 }
-
-// ArrayGatherGradientStateable is the interface implemented by [ArrayGatherGradientState], for mocking and DI.
-type ArrayGatherGradientStateable interface {
-	obj.Object
-}
-
-var _ ArrayGatherGradientStateable = (*ArrayGatherGradientState)(nil)
 
 var _ ArrayGradientStateProvider = (*ArrayGatherGradientState)(nil)

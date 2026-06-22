@@ -48,116 +48,77 @@ func rNNDescriptorAdopt(id objc.ID) *RNNDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *RNNDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rd *RNNDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rd *RNNDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rd *RNNDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RNNDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rd *RNNDescriptor) String() string {
+	return rt.Description(objref.IDOf(rd))
 }
 
-// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
-func (x *RNNDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
-	return x
+// WithInputFeatureChannels sets the number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (rd *RNNDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
+	return rd
 }
 
-// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-func (x *RNNDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
-	return x
+// WithOutputFeatureChannels sets the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (rd *RNNDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
+	return rd
 }
 
-// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-func (x *RNNDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
-	return x
+// WithUseLayerInputUnitTransformMode sets if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
+func (rd *RNNDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
+	return rd
 }
 
-// WithUseFloat32Weights if YES, then
-func (x *RNNDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
-	return x
+// WithUseFloat32Weights sets if YES, then
+func (rd *RNNDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
+	return rd
 }
 
-// InputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
-func (x *RNNDescriptor) InputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+// InputFeatureChannels returns the number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (rd *RNNDescriptor) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
-// SetInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *RNNDescriptor) SetInputFeatureChannels(inputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
-}
-
-// OutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-func (x *RNNDescriptor) OutputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+// OutputFeatureChannels returns the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (rd *RNNDescriptor) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
-// SetOutputFeatureChannels wraps the corresponding Objective-C method.
-func (x *RNNDescriptor) SetOutputFeatureChannels(outputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
-}
-
-// UseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-func (x *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useLayerInputUnitTransformMode"))
+// UseLayerInputUnitTransformMode reports whether if true then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
+func (rd *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("useLayerInputUnitTransformMode"))
 	return _r
 }
 
-// SetUseLayerInputUnitTransformMode wraps the corresponding Objective-C method.
-func (x *RNNDescriptor) SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
-}
-
-// UseFloat32Weights if YES, then
-func (x *RNNDescriptor) UseFloat32Weights() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useFloat32Weights"))
+// UseFloat32Weights reports whether if true, then
+func (rd *RNNDescriptor) UseFloat32Weights() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("useFloat32Weights"))
 	return _r
 }
-
-// SetUseFloat32Weights wraps the corresponding Objective-C method.
-func (x *RNNDescriptor) SetUseFloat32Weights(useFloat32Weights bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
-}
-
-// RNNDescriptorable is the interface implemented by [RNNDescriptor], for mocking and DI.
-type RNNDescriptorable interface {
-	obj.Object
-	WithInputFeatureChannels(inputFeatureChannels int) *RNNDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels int) *RNNDescriptor
-	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor
-	WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor
-	InputFeatureChannels() int
-	SetInputFeatureChannels(inputFeatureChannels int)
-	OutputFeatureChannels() int
-	SetOutputFeatureChannels(outputFeatureChannels int)
-	UseLayerInputUnitTransformMode() bool
-	SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool)
-	UseFloat32Weights() bool
-	SetUseFloat32Weights(useFloat32Weights bool)
-}
-
-var _ RNNDescriptorable = (*RNNDescriptor)(nil)
 
 // isRNNDescriptor marks RNNDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the RNNDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RNNDescriptor) isRNNDescriptor() {}
+func (rd *RNNDescriptor) isRNNDescriptor() {}
 
 var _ RNNDescriptorProvider = (*RNNDescriptor)(nil)

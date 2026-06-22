@@ -47,24 +47,24 @@ func layoutGuideAdopt(id objc.ID) *LayoutGuide {
 }
 
 // Description returns the object's -description text.
-func (x *LayoutGuide) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lg *LayoutGuide) Description() string {
+	return rt.Description(objref.IDOf(lg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LayoutGuide) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lg *LayoutGuide) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LayoutGuide) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lg *LayoutGuide) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LayoutGuide) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lg *LayoutGuide) String() string {
+	return rt.Description(objref.IDOf(lg))
 }
 
 // NewLayoutGuide creates a new LayoutGuide.
@@ -73,140 +73,104 @@ func NewLayoutGuide() *LayoutGuide {
 	return layoutGuideAdopt(_id)
 }
 
-// WithOwningView the view that owns this layout guide.
-func (x *LayoutGuide) WithOwningView(owningView ViewProvider) *LayoutGuide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwningView:"), objref.IDOf(owningView))
-	return x
+// WithOwningView sets the view that owns this layout guide.
+func (lg *LayoutGuide) WithOwningView(owningView ViewProvider) *LayoutGuide {
+	objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("setOwningView:"), objref.IDOf(owningView))
+	return lg
 }
 
-// WithIdentifier a string used to identify the layout guide.
-func (x *LayoutGuide) WithIdentifier(identifier obj.Object) *LayoutGuide {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-	return x
+// WithIdentifier sets a string used to identify the layout guide.
+func (lg *LayoutGuide) WithIdentifier(identifier obj.Object) *LayoutGuide {
+	objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
+	return lg
 }
 
 // ConstraintsAffectingLayoutForOrientation wraps the corresponding Objective-C method.
-func (x *LayoutGuide) ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintsAffectingLayoutForOrientation:"), orientation)
+func (lg *LayoutGuide) ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("constraintsAffectingLayoutForOrientation:"), orientation)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
 // Frame wraps the corresponding Objective-C method.
-func (x *LayoutGuide) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+func (lg *LayoutGuide) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lg), objc.RegisterName("frame"))
 	return _r
 }
 
 // OwningView wraps the corresponding Objective-C method.
-func (x *LayoutGuide) OwningView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owningView"))
+func (lg *LayoutGuide) OwningView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("owningView"))
 	return ViewFromID(_r)
 }
 
-// SetOwningView wraps the corresponding Objective-C method.
-func (x *LayoutGuide) SetOwningView(owningView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwningView:"), objref.IDOf(owningView))
-}
-
 // Identifier wraps the corresponding Objective-C method.
-func (x *LayoutGuide) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (lg *LayoutGuide) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *LayoutGuide) SetIdentifier(identifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-}
-
 // LeadingAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) LeadingAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leadingAnchor"))
+func (lg *LayoutGuide) LeadingAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("leadingAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // TrailingAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) TrailingAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trailingAnchor"))
+func (lg *LayoutGuide) TrailingAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("trailingAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // LeftAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) LeftAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftAnchor"))
+func (lg *LayoutGuide) LeftAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("leftAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // RightAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) RightAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightAnchor"))
+func (lg *LayoutGuide) RightAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("rightAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // TopAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) TopAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topAnchor"))
+func (lg *LayoutGuide) TopAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("topAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // BottomAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) BottomAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomAnchor"))
+func (lg *LayoutGuide) BottomAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("bottomAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // WidthAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) WidthAnchor() *LayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widthAnchor"))
+func (lg *LayoutGuide) WidthAnchor() *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("widthAnchor"))
 	return LayoutDimensionFromID(_r)
 }
 
 // HeightAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) HeightAnchor() *LayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heightAnchor"))
+func (lg *LayoutGuide) HeightAnchor() *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("heightAnchor"))
 	return LayoutDimensionFromID(_r)
 }
 
 // CenterXAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) CenterXAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centerXAnchor"))
+func (lg *LayoutGuide) CenterXAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("centerXAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // CenterYAnchor wraps the corresponding Objective-C method.
-func (x *LayoutGuide) CenterYAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centerYAnchor"))
+func (lg *LayoutGuide) CenterYAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("centerYAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // HasAmbiguousLayout wraps the corresponding Objective-C method.
-func (x *LayoutGuide) HasAmbiguousLayout() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAmbiguousLayout"))
+func (lg *LayoutGuide) HasAmbiguousLayout() bool {
+	_r := objc.Send[bool](objref.IDOf(lg), objc.RegisterName("hasAmbiguousLayout"))
 	return _r
 }
-
-// LayoutGuideable is the interface implemented by [LayoutGuide], for mocking and DI.
-type LayoutGuideable interface {
-	obj.Object
-	WithOwningView(owningView ViewProvider) *LayoutGuide
-	WithIdentifier(identifier obj.Object) *LayoutGuide
-	ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint
-	Frame() corefoundation.CGRect
-	OwningView() *View
-	SetOwningView(owningView *View)
-	Identifier() obj.Object
-	SetIdentifier(identifier obj.Object)
-	LeadingAnchor() *LayoutXAxisAnchor
-	TrailingAnchor() *LayoutXAxisAnchor
-	LeftAnchor() *LayoutXAxisAnchor
-	RightAnchor() *LayoutXAxisAnchor
-	TopAnchor() *LayoutYAxisAnchor
-	BottomAnchor() *LayoutYAxisAnchor
-	WidthAnchor() *LayoutDimension
-	HeightAnchor() *LayoutDimension
-	CenterXAnchor() *LayoutXAxisAnchor
-	CenterYAnchor() *LayoutYAxisAnchor
-	HasAmbiguousLayout() bool
-}
-
-var _ LayoutGuideable = (*LayoutGuide)(nil)

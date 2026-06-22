@@ -44,24 +44,24 @@ func mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(id objc.ID) 
 }
 
 // Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(mbdbicace))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbdbicace), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbdbicace), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) String() string {
+	return rt.Description(objref.IDOf(mbdbicace))
 }
 
 // NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent creates a new MTRBridgedDeviceBasicInformationClusterActiveChangedEvent.
@@ -71,28 +71,13 @@ func NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent() *MTRBridgedD
 }
 
 // WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
-	return x
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mbdbicace), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
+	return mbdbicace
 }
 
 // PromisedActiveDuration wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedActiveDuration"))
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbicace), objc.RegisterName("promisedActiveDuration"))
 	return obj.Wrap(_r)
 }
-
-// SetPromisedActiveDuration wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) SetPromisedActiveDuration(promisedActiveDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
-}
-
-// MTRBridgedDeviceBasicInformationClusterActiveChangedEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterActiveChangedEvent], for mocking and DI.
-type MTRBridgedDeviceBasicInformationClusterActiveChangedEventable interface {
-	obj.Object
-	WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
-	PromisedActiveDuration() obj.Object
-	SetPromisedActiveDuration(promisedActiveDuration obj.Object)
-}
-
-var _ MTRBridgedDeviceBasicInformationClusterActiveChangedEventable = (*MTRBridgedDeviceBasicInformationClusterActiveChangedEvent)(nil)

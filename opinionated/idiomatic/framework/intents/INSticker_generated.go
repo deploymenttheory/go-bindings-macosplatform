@@ -44,24 +44,24 @@ func stickerAdopt(id objc.ID) *Sticker {
 }
 
 // Description returns the object's -description text.
-func (x *Sticker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Sticker) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Sticker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Sticker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Sticker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Sticker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Sticker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Sticker) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewStickerWithTypeEmoji creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
@@ -72,25 +72,16 @@ func NewStickerWithTypeEmoji(type_ StickerType, emoji string) *Sticker {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Sticker) Type() StickerType {
-	_r := objc.Send[StickerType](objref.IDOf(x), objc.RegisterName("type"))
+func (s *Sticker) Type() StickerType {
+	_r := objc.Send[StickerType](objref.IDOf(s), objc.RegisterName("type"))
 	return _r
 }
 
 // Emoji wraps the corresponding Objective-C method.
-func (x *Sticker) Emoji() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emoji"))
+func (s *Sticker) Emoji() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("emoji"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Stickerable is the interface implemented by [Sticker], for mocking and DI.
-type Stickerable interface {
-	obj.Object
-	Type() StickerType
-	Emoji() string
-}
-
-var _ Stickerable = (*Sticker)(nil)

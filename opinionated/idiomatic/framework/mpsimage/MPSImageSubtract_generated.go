@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,81 +52,64 @@ func NewImageSubtract() *ImageSubtract {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageSubtract) WithPrimaryScale(primaryScale float32) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (is *ImageSubtract) WithPrimaryScale(primaryScale float32) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return is
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageSubtract) WithSecondaryScale(secondaryScale float32) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (is *ImageSubtract) WithSecondaryScale(secondaryScale float32) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return is
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *ImageSubtract) WithBias(bias float32) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (is *ImageSubtract) WithBias(bias float32) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setBias:"), bias)
+	return is
 }
 
-// WithPrimaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageSubtract) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
-	return x
+// WithPrimaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (is *ImageSubtract) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setPrimaryStrideInPixels:"), primaryStrideInPixels)
+	return is
 }
 
-// WithSecondaryStrideInPixels the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *ImageSubtract) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
-	return x
+// WithSecondaryStrideInPixels sets the secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (is *ImageSubtract) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setSecondaryStrideInPixels:"), secondaryStrideInPixels)
+	return is
 }
 
-// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *ImageSubtract) WithMinimumValue(minimumValue float32) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+// WithMinimumValue sets minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (is *ImageSubtract) WithMinimumValue(minimumValue float32) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return is
 }
 
-// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *ImageSubtract) WithMaximumValue(maximumValue float32) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+// WithMaximumValue sets maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (is *ImageSubtract) WithMaximumValue(maximumValue float32) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return is
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
-func (x *ImageSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
+func (is *ImageSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return is
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
-func (x *ImageSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
+func (is *ImageSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return is
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (is *ImageSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageSubtract {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setClipRect:"), clipRect)
+	return is
 }
-
-// ImageSubtractable is the interface implemented by [ImageSubtract], for mocking and DI.
-type ImageSubtractable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *ImageSubtract
-	WithSecondaryScale(secondaryScale float32) *ImageSubtract
-	WithBias(bias float32) *ImageSubtract
-	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageSubtract
-	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageSubtract
-	WithMinimumValue(minimumValue float32) *ImageSubtract
-	WithMaximumValue(maximumValue float32) *ImageSubtract
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageSubtract
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageSubtract
-	WithClipRect(clipRect metal.MTLRegion) *ImageSubtract
-}
-
-var _ ImageSubtractable = (*ImageSubtract)(nil)
 
 var _ ImageArithmeticProvider = (*ImageSubtract)(nil)
 

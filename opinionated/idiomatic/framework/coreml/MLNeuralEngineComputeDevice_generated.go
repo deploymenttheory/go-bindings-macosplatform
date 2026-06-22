@@ -46,24 +46,24 @@ func neuralEngineComputeDeviceAdopt(id objc.ID) *NeuralEngineComputeDevice {
 }
 
 // Description returns the object's -description text.
-func (x *NeuralEngineComputeDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (necd *NeuralEngineComputeDevice) Description() string {
+	return rt.Description(objref.IDOf(necd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NeuralEngineComputeDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (necd *NeuralEngineComputeDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(necd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NeuralEngineComputeDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (necd *NeuralEngineComputeDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(necd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NeuralEngineComputeDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (necd *NeuralEngineComputeDevice) String() string {
+	return rt.Description(objref.IDOf(necd))
 }
 
 // NewNeuralEngineComputeDevice creates a new NeuralEngineComputeDevice.
@@ -73,15 +73,7 @@ func NewNeuralEngineComputeDevice() *NeuralEngineComputeDevice {
 }
 
 // TotalCoreCount wraps the corresponding Objective-C method.
-func (x *NeuralEngineComputeDevice) TotalCoreCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalCoreCount"))
+func (necd *NeuralEngineComputeDevice) TotalCoreCount() int {
+	_r := objc.Send[int](objref.IDOf(necd), objc.RegisterName("totalCoreCount"))
 	return _r
 }
-
-// NeuralEngineComputeDeviceable is the interface implemented by [NeuralEngineComputeDevice], for mocking and DI.
-type NeuralEngineComputeDeviceable interface {
-	obj.Object
-	TotalCoreCount() int
-}
-
-var _ NeuralEngineComputeDeviceable = (*NeuralEngineComputeDevice)(nil)

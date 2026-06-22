@@ -46,24 +46,24 @@ func cDADocumentAdopt(id objc.ID) *CDADocument {
 }
 
 // Description returns the object's -description text.
-func (x *CDADocument) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *CDADocument) Description() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CDADocument) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cd *CDADocument) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CDADocument) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cd *CDADocument) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CDADocument) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *CDADocument) String() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // NewCDADocument creates a new CDADocument.
@@ -72,56 +72,44 @@ func NewCDADocument() *CDADocument {
 	return cDADocumentAdopt(_id)
 }
 
-// DocumentData the CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
-func (x *CDADocument) DocumentData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentData"))
+// DocumentData returns the CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
+func (cd *CDADocument) DocumentData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("documentData"))
 	return obj.Wrap(_r)
 }
 
-// Title the title of the document. This property is extracted automatically from the document.
-func (x *CDADocument) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns the title of the document. This property is extracted automatically from the document.
+func (cd *CDADocument) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PatientName the name of the patient receiving treatment. This property is extracted automatically from the document.
-func (x *CDADocument) PatientName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("patientName"))
+// PatientName returns the name of the patient receiving treatment. This property is extracted automatically from the document.
+func (cd *CDADocument) PatientName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("patientName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AuthorName the person responsible for authoring the document.  Usually, this is the treating physician. This property is extracted automatically from the document.
-func (x *CDADocument) AuthorName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorName"))
+// AuthorName returns the person responsible for authoring the document.  Usually, this is the treating physician. This property is extracted automatically from the document.
+func (cd *CDADocument) AuthorName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("authorName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CustodianName the organization responsible for the document.  This is usually the treating institution name. This property is extracted automatically from the document.
-func (x *CDADocument) CustodianName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("custodianName"))
+// CustodianName returns the organization responsible for the document.  This is usually the treating institution name. This property is extracted automatically from the document.
+func (cd *CDADocument) CustodianName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("custodianName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CDADocumentable is the interface implemented by [CDADocument], for mocking and DI.
-type CDADocumentable interface {
-	obj.Object
-	DocumentData() obj.Object
-	Title() string
-	PatientName() string
-	AuthorName() string
-	CustodianName() string
-}
-
-var _ CDADocumentable = (*CDADocument)(nil)

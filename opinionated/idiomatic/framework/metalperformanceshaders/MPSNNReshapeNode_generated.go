@@ -53,18 +53,10 @@ func NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels(sour
 	return nNReshapeNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReshapeNode) WithLabel(label string) *NNReshapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrn *NNReshapeNode) WithLabel(label string) *NNReshapeNode {
+	objc.Send[objc.ID](objref.IDOf(nrn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrn
 }
-
-// NNReshapeNodeable is the interface implemented by [NNReshapeNode], for mocking and DI.
-type NNReshapeNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNReshapeNode
-}
-
-var _ NNReshapeNodeable = (*NNReshapeNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNReshapeNode)(nil)

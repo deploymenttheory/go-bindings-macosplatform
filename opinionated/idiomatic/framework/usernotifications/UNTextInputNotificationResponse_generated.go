@@ -7,7 +7,6 @@ package usernotifications
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,20 +52,12 @@ func NewTextInputNotificationResponse() *TextInputNotificationResponse {
 }
 
 // UserText wraps the corresponding Objective-C method.
-func (x *TextInputNotificationResponse) UserText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userText"))
+func (tinr *TextInputNotificationResponse) UserText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tinr), objc.RegisterName("userText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TextInputNotificationResponseable is the interface implemented by [TextInputNotificationResponse], for mocking and DI.
-type TextInputNotificationResponseable interface {
-	obj.Object
-	UserText() string
-}
-
-var _ TextInputNotificationResponseable = (*TextInputNotificationResponse)(nil)
 
 var _ NotificationResponseProvider = (*TextInputNotificationResponse)(nil)

@@ -66,83 +66,55 @@ func NewUserDefaultsControllerWithCoder(coder obj.Object) *UserDefaultsControlle
 	return userDefaultsControllerAdopt(_id)
 }
 
-// WithInitialValues returns a dictionary containing the receiver’s initial default values.
-func (x *UserDefaultsController) WithInitialValues(initialValues obj.Object) *UserDefaultsController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialValues:"), objref.IDOf(initialValues))
-	return x
+// WithInitialValues sets returns a dictionary containing the receiver’s initial default values.
+func (udc *UserDefaultsController) WithInitialValues(initialValues obj.Object) *UserDefaultsController {
+	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("setInitialValues:"), objref.IDOf(initialValues))
+	return udc
 }
 
-// WithAppliesImmediately returns whether any changes made to bound user default properties are saved immediately.
-func (x *UserDefaultsController) WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesImmediately:"), appliesImmediately)
-	return x
+// WithAppliesImmediately sets returns whether any changes made to bound user default properties are saved immediately.
+func (udc *UserDefaultsController) WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController {
+	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("setAppliesImmediately:"), appliesImmediately)
+	return udc
 }
 
 // Revert causes the receiver to discard any unsaved changes to bound user default properties, restoring their previous values.
-func (x *UserDefaultsController) Revert(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revert:"), objref.IDOf(sender))
+func (udc *UserDefaultsController) Revert(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("revert:"), objref.IDOf(sender))
 }
 
 // Save saves the values of the receiver’s user default properties.
-func (x *UserDefaultsController) Save(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("save:"), objref.IDOf(sender))
+func (udc *UserDefaultsController) Save(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("save:"), objref.IDOf(sender))
 }
 
 // RevertToInitialValues causes the receiver to discard all edits and replace the values of all the user default properties with any corresponding values in the initialValues dictionary.
-func (x *UserDefaultsController) RevertToInitialValues(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revertToInitialValues:"), objref.IDOf(sender))
+func (udc *UserDefaultsController) RevertToInitialValues(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("revertToInitialValues:"), objref.IDOf(sender))
 }
 
 // Defaults wraps the corresponding Objective-C method.
-func (x *UserDefaultsController) Defaults() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaults"))
+func (udc *UserDefaultsController) Defaults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("defaults"))
 	return obj.Wrap(_r)
 }
 
-// SetInitialValues wraps the corresponding Objective-C method.
-func (x *UserDefaultsController) SetInitialValues(initialValues obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialValues:"), objref.IDOf(initialValues))
-}
-
 // AppliesImmediately wraps the corresponding Objective-C method.
-func (x *UserDefaultsController) AppliesImmediately() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesImmediately"))
+func (udc *UserDefaultsController) AppliesImmediately() bool {
+	_r := objc.Send[bool](objref.IDOf(udc), objc.RegisterName("appliesImmediately"))
 	return _r
 }
 
-// SetAppliesImmediately wraps the corresponding Objective-C method.
-func (x *UserDefaultsController) SetAppliesImmediately(appliesImmediately bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesImmediately:"), appliesImmediately)
-}
-
 // HasUnappliedChanges wraps the corresponding Objective-C method.
-func (x *UserDefaultsController) HasUnappliedChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUnappliedChanges"))
+func (udc *UserDefaultsController) HasUnappliedChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(udc), objc.RegisterName("hasUnappliedChanges"))
 	return _r
 }
 
 // Values wraps the corresponding Objective-C method.
-func (x *UserDefaultsController) Values() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("values"))
+func (udc *UserDefaultsController) Values() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("values"))
 	return obj.Wrap(_r)
 }
-
-// UserDefaultsControllerable is the interface implemented by [UserDefaultsController], for mocking and DI.
-type UserDefaultsControllerable interface {
-	obj.Object
-	WithInitialValues(initialValues obj.Object) *UserDefaultsController
-	WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController
-	Revert(sender obj.Object)
-	Save(sender obj.Object)
-	RevertToInitialValues(sender obj.Object)
-	Defaults() obj.Object
-	SetInitialValues(initialValues obj.Object)
-	AppliesImmediately() bool
-	SetAppliesImmediately(appliesImmediately bool)
-	HasUnappliedChanges() bool
-	Values() obj.Object
-}
-
-var _ UserDefaultsControllerable = (*UserDefaultsController)(nil)
 
 var _ ControllerProvider = (*UserDefaultsController)(nil)

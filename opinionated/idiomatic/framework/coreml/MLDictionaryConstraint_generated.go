@@ -46,24 +46,24 @@ func dictionaryConstraintAdopt(id objc.ID) *DictionaryConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *DictionaryConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dc *DictionaryConstraint) Description() string {
+	return rt.Description(objref.IDOf(dc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DictionaryConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dc *DictionaryConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DictionaryConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dc *DictionaryConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DictionaryConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dc *DictionaryConstraint) String() string {
+	return rt.Description(objref.IDOf(dc))
 }
 
 // NewDictionaryConstraint creates a new DictionaryConstraint.
@@ -73,15 +73,7 @@ func NewDictionaryConstraint() *DictionaryConstraint {
 }
 
 // KeyType wraps the corresponding Objective-C method.
-func (x *DictionaryConstraint) KeyType() FeatureType {
-	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("keyType"))
+func (dc *DictionaryConstraint) KeyType() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(dc), objc.RegisterName("keyType"))
 	return _r
 }
-
-// DictionaryConstraintable is the interface implemented by [DictionaryConstraint], for mocking and DI.
-type DictionaryConstraintable interface {
-	obj.Object
-	KeyType() FeatureType
-}
-
-var _ DictionaryConstraintable = (*DictionaryConstraint)(nil)

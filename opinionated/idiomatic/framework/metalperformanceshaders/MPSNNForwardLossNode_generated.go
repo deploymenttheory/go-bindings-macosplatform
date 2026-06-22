@@ -67,88 +67,70 @@ func NewNNForwardLossNodeWithSourcesLossDescriptor(sourceNodes []obj.Object, des
 	return nNForwardLossNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nfln *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
+	objc.Send[objc.ID](objref.IDOf(nfln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nfln
 }
 
 // GradientFilterWithSources wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) GradientFilterWithSources(sourceGradient []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(sourceGradient, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nfln *NNForwardLossNode) GradientFilterWithSources(sourceGradient []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfln), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(sourceGradient, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // GradientFiltersWithSources wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) GradientFiltersWithSources(sourceGradient []obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(sourceGradient, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nfln *NNForwardLossNode) GradientFiltersWithSources(sourceGradient []obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfln), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(sourceGradient, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // GradientFilterWithSource wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) GradientFilterWithSource(sourceGradient obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(sourceGradient))
+func (nfln *NNForwardLossNode) GradientFilterWithSource(sourceGradient obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfln), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(sourceGradient))
 	return obj.Wrap(_r)
 }
 
 // GradientFiltersWithSource wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) GradientFiltersWithSource(sourceGradient obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(sourceGradient))
+func (nfln *NNForwardLossNode) GradientFiltersWithSource(sourceGradient obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfln), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(sourceGradient))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NumberOfClasses wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) NumberOfClasses() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+func (nfln *NNForwardLossNode) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(nfln), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) ReduceAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+func (nfln *NNForwardLossNode) ReduceAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(nfln), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Weight wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+func (nfln *NNForwardLossNode) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) LabelSmoothing() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+func (nfln *NNForwardLossNode) LabelSmoothing() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+func (nfln *NNForwardLossNode) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta wraps the corresponding Objective-C method.
-func (x *NNForwardLossNode) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+func (nfln *NNForwardLossNode) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("delta"))
 	return _r
 }
-
-// NNForwardLossNodeable is the interface implemented by [NNForwardLossNode], for mocking and DI.
-type NNForwardLossNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNForwardLossNode
-	GradientFilterWithSources(sourceGradient []obj.Object) obj.Object
-	GradientFiltersWithSources(sourceGradient []obj.Object) []obj.Object
-	GradientFilterWithSource(sourceGradient obj.Object) obj.Object
-	GradientFiltersWithSource(sourceGradient obj.Object) []obj.Object
-	NumberOfClasses() int
-	ReduceAcrossBatch() bool
-	Weight() float32
-	LabelSmoothing() float32
-	Epsilon() float32
-	Delta() float32
-}
-
-var _ NNForwardLossNodeable = (*NNForwardLossNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNForwardLossNode)(nil)

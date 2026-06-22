@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,156 +51,108 @@ func NewCylinder() *Cylinder {
 	return cylinderAdopt(_id)
 }
 
-// WithRadius the radius of the cylinder’s circular cross section. Animatable.
-func (x *Cylinder) WithRadius(radius float64) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the radius of the cylinder’s circular cross section. Animatable.
+func (c *Cylinder) WithRadius(radius float64) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRadius:"), radius)
+	return c
 }
 
-// WithHeight the extent of the cylinder along its y-axis. Animatable.
-func (x *Cylinder) WithHeight(height float64) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
-	return x
+// WithHeight sets the extent of the cylinder along its y-axis. Animatable.
+func (c *Cylinder) WithHeight(height float64) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHeight:"), height)
+	return c
 }
 
-// WithRadialSegmentCount the number of subdivisions around the circumference of the cylinder. Animatable.
-func (x *Cylinder) WithRadialSegmentCount(radialSegmentCount int) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
-	return x
+// WithRadialSegmentCount sets the number of subdivisions around the circumference of the cylinder. Animatable.
+func (c *Cylinder) WithRadialSegmentCount(radialSegmentCount int) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
+	return c
 }
 
-// WithHeightSegmentCount the number of subdivisions in the sides of the cylinder along its y-axis. Animatable.
-func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
-	return x
+// WithHeightSegmentCount sets the number of subdivisions in the sides of the cylinder along its y-axis. Animatable.
+func (c *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
+	return c
 }
 
-// WithName a name associated with the geometry object.
-func (x *Cylinder) WithName(name string) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a name associated with the geometry object.
+func (c *Cylinder) WithName(name string) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), purego.NSString(name))
+	return c
 }
 
-// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-func (x *Cylinder) WithMaterials(items ...*Material) *Cylinder {
+// WithMaterials sets an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (c *Cylinder) WithMaterials(items ...*Material) *Cylinder {
 	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMaterials:"), _arr)
+	return c
 }
 
-// WithFirstMaterial the first material attached to the geometry.
-func (x *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
-	return x
+// WithFirstMaterial sets the first material attached to the geometry.
+func (c *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
+	return c
 }
 
-// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-func (x *Cylinder) WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder {
+// WithLevelsOfDetail sets an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (c *Cylinder) WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder {
 	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLevelsOfDetail:"), _arr)
+	return c
 }
 
 // WithTessellator sets the property and returns the receiver so calls can be chained.
-func (x *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
-	return x
+func (c *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
+	return c
 }
 
-// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-func (x *Cylinder) WithSubdivisionLevel(subdivisionLevel int) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
-	return x
+// WithSubdivisionLevel sets the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (c *Cylinder) WithSubdivisionLevel(subdivisionLevel int) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
+	return c
 }
 
-// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-func (x *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
-	return x
+// WithWantsAdaptiveSubdivision sets specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+func (c *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
+	return c
 }
 
-// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
-	return x
+// WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
+func (c *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
+	return c
 }
 
-// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
-	return x
+// WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
+func (c *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
+	return c
 }
 
-// Radius the radius of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
-func (x *Cylinder) Radius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+// Radius returns the radius of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+func (c *Cylinder) Radius() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("radius"))
 	return _r
 }
 
-// SetRadius wraps the corresponding Objective-C method.
-func (x *Cylinder) SetRadius(radius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-}
-
-// Height the height of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-func (x *Cylinder) Height() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+// Height returns the height of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+func (c *Cylinder) Height() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("height"))
 	return _r
 }
 
-// SetHeight wraps the corresponding Objective-C method.
-func (x *Cylinder) SetHeight(height float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
-}
-
-// RadialSegmentCount the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
-func (x *Cylinder) RadialSegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radialSegmentCount"))
+// RadialSegmentCount returns the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
+func (c *Cylinder) RadialSegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("radialSegmentCount"))
 	return _r
 }
 
-// SetRadialSegmentCount wraps the corresponding Objective-C method.
-func (x *Cylinder) SetRadialSegmentCount(radialSegmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
-}
-
-// HeightSegmentCount the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
-func (x *Cylinder) HeightSegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+// HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
+func (c *Cylinder) HeightSegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
-
-// SetHeightSegmentCount wraps the corresponding Objective-C method.
-func (x *Cylinder) SetHeightSegmentCount(heightSegmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
-}
-
-// Cylinderable is the interface implemented by [Cylinder], for mocking and DI.
-type Cylinderable interface {
-	obj.Object
-	WithRadius(radius float64) *Cylinder
-	WithHeight(height float64) *Cylinder
-	WithRadialSegmentCount(radialSegmentCount int) *Cylinder
-	WithHeightSegmentCount(heightSegmentCount int) *Cylinder
-	WithName(name string) *Cylinder
-	WithMaterials(items ...*Material) *Cylinder
-	WithFirstMaterial(firstMaterial *Material) *Cylinder
-	WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder
-	WithTessellator(tessellator *GeometryTessellator) *Cylinder
-	WithSubdivisionLevel(subdivisionLevel int) *Cylinder
-	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder
-	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder
-	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder
-	Radius() float64
-	SetRadius(radius float64)
-	Height() float64
-	SetHeight(height float64)
-	RadialSegmentCount() int
-	SetRadialSegmentCount(radialSegmentCount int)
-	HeightSegmentCount() int
-	SetHeightSegmentCount(heightSegmentCount int)
-}
-
-var _ Cylinderable = (*Cylinder)(nil)
 
 var _ GeometryProvider = (*Cylinder)(nil)

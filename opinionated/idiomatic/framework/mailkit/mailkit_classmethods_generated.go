@@ -6,6 +6,7 @@ package mailkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -80,31 +81,31 @@ func SetBackgroundColorActionWithColor(color MessageActionMessageColor) *Message
 	return MessageActionFromID(_r)
 }
 
-// MoveToTrashAction moves the mail message to the user's trash mailbox for the account.
+// MoveToTrashAction returns moves the mail message to the user's trash mailbox for the account.
 func MoveToTrashAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToTrashAction"))
 	return MessageActionFromID(_r)
 }
 
-// MoveToArchiveAction moves the mail message to the user's archive mailbox for the account.
+// MoveToArchiveAction returns moves the mail message to the user's archive mailbox for the account.
 func MoveToArchiveAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToArchiveAction"))
 	return MessageActionFromID(_r)
 }
 
-// MoveToJunkAction moves the mail message to the user's junk mailbox for the account.
+// MoveToJunkAction returns moves the mail message to the user's junk mailbox for the account.
 func MoveToJunkAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("moveToJunkAction"))
 	return MessageActionFromID(_r)
 }
 
-// MarkAsReadAction marks the mail message as read.
+// MarkAsReadAction returns marks the mail message as read.
 func MarkAsReadAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("markAsReadAction"))
 	return MessageActionFromID(_r)
 }
 
-// MarkAsUnreadAction marks the mail  message as unread.
+// MarkAsUnreadAction returns marks the mail  message as unread.
 func MarkAsUnreadAction() *MessageAction {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageAction")), objc.RegisterName("markAsUnreadAction"))
 	return MessageActionFromID(_r)

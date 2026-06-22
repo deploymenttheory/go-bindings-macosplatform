@@ -46,24 +46,24 @@ func widgetListViewControllerAdopt(id objc.ID) *WidgetListViewController {
 }
 
 // Description returns the object's -description text.
-func (x *WidgetListViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wlvc *WidgetListViewController) Description() string {
+	return rt.Description(objref.IDOf(wlvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WidgetListViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wlvc *WidgetListViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wlvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WidgetListViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wlvc *WidgetListViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wlvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WidgetListViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wlvc *WidgetListViewController) String() string {
+	return rt.Description(objref.IDOf(wlvc))
 }
 
 // NewWidgetListViewController creates a new WidgetListViewController.
@@ -72,116 +72,73 @@ func NewWidgetListViewController() *WidgetListViewController {
 	return widgetListViewControllerAdopt(_id)
 }
 
-// WithMinimumVisibleRowCount the minimum number of visible rows to display.
-func (x *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
-	return x
+// WithMinimumVisibleRowCount sets the minimum number of visible rows to display.
+func (wlvc *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController {
+	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
+	return wlvc
 }
 
-// WithHasDividerLines a Boolean value that indicates whether list displays divider lines between rows.
-func (x *WidgetListViewController) WithHasDividerLines(hasDividerLines bool) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
-	return x
+// WithHasDividerLines sets a Boolean value that indicates whether list displays divider lines between rows.
+func (wlvc *WidgetListViewController) WithHasDividerLines(hasDividerLines bool) *WidgetListViewController {
+	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
+	return wlvc
 }
 
-// WithEditing a Boolean value that indicates whether the list is in editing mode.
-func (x *WidgetListViewController) WithEditing(editing bool) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditing:"), editing)
-	return x
+// WithEditing sets a Boolean value that indicates whether the list is in editing mode.
+func (wlvc *WidgetListViewController) WithEditing(editing bool) *WidgetListViewController {
+	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setEditing:"), editing)
+	return wlvc
 }
 
-// WithShowsAddButtonWhenEditing a Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
-func (x *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
-	return x
+// WithShowsAddButtonWhenEditing sets a Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
+func (wlvc *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController {
+	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
+	return wlvc
 }
 
 // ViewControllerAtRowMakeIfNecessary returns the content view controller associated with the specified row, or a new content view controller if desired.
-func (x *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewControllerAtRow:makeIfNecessary:"), row, makeIfNecesary)
+func (wlvc *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("viewControllerAtRow:makeIfNecessary:"), row, makeIfNecesary)
 	return obj.Wrap(_r)
 }
 
 // RowForViewController returns the row represented by the specified content view controller.
-func (x *WidgetListViewController) RowForViewController(viewController obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForViewController:"), objref.IDOf(viewController))
+func (wlvc *WidgetListViewController) RowForViewController(viewController obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("rowForViewController:"), objref.IDOf(viewController))
 	return _r
 }
 
 // Contents wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) Contents() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+func (wlvc *WidgetListViewController) Contents() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("contents"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetContents wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) SetContents(contents []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (wlvc *WidgetListViewController) SetContents(contents []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MinimumVisibleRowCount wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) MinimumVisibleRowCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumVisibleRowCount"))
+func (wlvc *WidgetListViewController) MinimumVisibleRowCount() int {
+	_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("minimumVisibleRowCount"))
 	return _r
-}
-
-// SetMinimumVisibleRowCount wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) SetMinimumVisibleRowCount(minimumVisibleRowCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
 }
 
 // HasDividerLines wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) HasDividerLines() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDividerLines"))
+func (wlvc *WidgetListViewController) HasDividerLines() bool {
+	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("hasDividerLines"))
 	return _r
-}
-
-// SetHasDividerLines wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) SetHasDividerLines(hasDividerLines bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
 }
 
 // Editing wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) Editing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("editing"))
+func (wlvc *WidgetListViewController) Editing() bool {
+	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("editing"))
 	return _r
-}
-
-// SetEditing wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) SetEditing(editing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditing:"), editing)
 }
 
 // ShowsAddButtonWhenEditing wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsAddButtonWhenEditing"))
+func (wlvc *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
+	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("showsAddButtonWhenEditing"))
 	return _r
 }
-
-// SetShowsAddButtonWhenEditing wraps the corresponding Objective-C method.
-func (x *WidgetListViewController) SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
-}
-
-// WidgetListViewControllerable is the interface implemented by [WidgetListViewController], for mocking and DI.
-type WidgetListViewControllerable interface {
-	obj.Object
-	WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController
-	WithHasDividerLines(hasDividerLines bool) *WidgetListViewController
-	WithEditing(editing bool) *WidgetListViewController
-	WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController
-	ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object
-	RowForViewController(viewController obj.Object) int
-	Contents() []obj.Object
-	SetContents(contents []obj.Object)
-	MinimumVisibleRowCount() int
-	SetMinimumVisibleRowCount(minimumVisibleRowCount int)
-	HasDividerLines() bool
-	SetHasDividerLines(hasDividerLines bool)
-	Editing() bool
-	SetEditing(editing bool)
-	ShowsAddButtonWhenEditing() bool
-	SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool)
-}
-
-var _ WidgetListViewControllerable = (*WidgetListViewController)(nil)

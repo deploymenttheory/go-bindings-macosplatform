@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCDADocumentSample() *CDADocumentSample {
 	return cDADocumentSampleAdopt(_id)
 }
 
-// Document the contents of the document. Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
-func (x *CDADocumentSample) Document() *CDADocument {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+// Document returns the contents of the document. Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
+func (cds *CDADocumentSample) Document() *CDADocument {
+	_r := objc.Send[objc.ID](objref.IDOf(cds), objc.RegisterName("document"))
 	return CDADocumentFromID(_r)
 }
-
-// CDADocumentSampleable is the interface implemented by [CDADocumentSample], for mocking and DI.
-type CDADocumentSampleable interface {
-	obj.Object
-	Document() *CDADocument
-}
-
-var _ CDADocumentSampleable = (*CDADocumentSample)(nil)
 
 var _ DocumentSampleProvider = (*CDADocumentSample)(nil)
 

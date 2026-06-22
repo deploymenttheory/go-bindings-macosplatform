@@ -46,325 +46,274 @@ func actionCellAdopt(id objc.ID) *ActionCell {
 	return x
 }
 
-// WithControlView the view associated with the cell.
-func (x *ActionCell) WithControlView(controlView ViewProvider) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (ac *ActionCell) WithControlView(controlView ViewProvider) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return ac
 }
 
-// WithType the type of the cell.
-func (x *ActionCell) WithType(type_ CellType) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (ac *ActionCell) WithType(type_ CellType) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setType:"), type_)
+	return ac
 }
 
-// WithState the cell’s current state.
-func (x *ActionCell) WithState(state int) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (ac *ActionCell) WithState(state int) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setState:"), state)
+	return ac
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *ActionCell) WithTarget(target obj.Object) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (ac *ActionCell) WithTarget(target obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return ac
 }
 
-// WithTag a tag for identifying the cell.
-func (x *ActionCell) WithTag(tag int) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (ac *ActionCell) WithTag(tag int) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setTag:"), tag)
+	return ac
 }
 
-// WithTitle the cell’s title text.
-func (x *ActionCell) WithTitle(title string) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (ac *ActionCell) WithTitle(title string) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ac
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *ActionCell) WithEnabled(enabled bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (ac *ActionCell) WithEnabled(enabled bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setEnabled:"), enabled)
+	return ac
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *ActionCell) WithContinuous(continuous bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (ac *ActionCell) WithContinuous(continuous bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setContinuous:"), continuous)
+	return ac
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *ActionCell) WithEditable(editable bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (ac *ActionCell) WithEditable(editable bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setEditable:"), editable)
+	return ac
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *ActionCell) WithSelectable(selectable bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (ac *ActionCell) WithSelectable(selectable bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSelectable:"), selectable)
+	return ac
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *ActionCell) WithBordered(bordered bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (ac *ActionCell) WithBordered(bordered bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBordered:"), bordered)
+	return ac
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *ActionCell) WithBezeled(bezeled bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (ac *ActionCell) WithBezeled(bezeled bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBezeled:"), bezeled)
+	return ac
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *ActionCell) WithScrollable(scrollable bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (ac *ActionCell) WithScrollable(scrollable bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setScrollable:"), scrollable)
+	return ac
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *ActionCell) WithHighlighted(highlighted bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (ac *ActionCell) WithHighlighted(highlighted bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setHighlighted:"), highlighted)
+	return ac
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *ActionCell) WithAlignment(alignment TextAlignment) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (ac *ActionCell) WithAlignment(alignment TextAlignment) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAlignment:"), alignment)
+	return ac
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *ActionCell) WithWraps(wraps bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (ac *ActionCell) WithWraps(wraps bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setWraps:"), wraps)
+	return ac
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *ActionCell) WithFont(font *Font) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (ac *ActionCell) WithFont(font *Font) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return ac
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *ActionCell) WithFormatter(formatter obj.Object) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (ac *ActionCell) WithFormatter(formatter obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return ac
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *ActionCell) WithObjectValue(objectValue obj.Object) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (ac *ActionCell) WithObjectValue(objectValue obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return ac
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *ActionCell) WithStringValue(stringValue string) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (ac *ActionCell) WithStringValue(stringValue string) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return ac
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *ActionCell) WithIntValue(intValue int) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (ac *ActionCell) WithIntValue(intValue int) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setIntValue:"), intValue)
+	return ac
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *ActionCell) WithFloatValue(floatValue float32) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (ac *ActionCell) WithFloatValue(floatValue float32) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFloatValue:"), floatValue)
+	return ac
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *ActionCell) WithDoubleValue(doubleValue float64) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (ac *ActionCell) WithDoubleValue(doubleValue float64) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return ac
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *ActionCell) WithIntegerValue(integerValue int) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (ac *ActionCell) WithIntegerValue(integerValue int) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setIntegerValue:"), integerValue)
+	return ac
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *ActionCell) WithImage(image *Image) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (ac *ActionCell) WithImage(image *Image) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return ac
 }
 
-// WithControlSize the size of the cell.
-func (x *ActionCell) WithControlSize(controlSize ControlSize) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (ac *ActionCell) WithControlSize(controlSize ControlSize) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setControlSize:"), controlSize)
+	return ac
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *ActionCell) WithRepresentedObject(representedObject obj.Object) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (ac *ActionCell) WithRepresentedObject(representedObject obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return ac
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *ActionCell) WithMenu(menu *Menu) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (ac *ActionCell) WithMenu(menu *Menu) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return ac
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *ActionCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (ac *ActionCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return ac
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *ActionCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (ac *ActionCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return ac
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *ActionCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (ac *ActionCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return ac
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *ActionCell) WithAllowsUndo(allowsUndo bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (ac *ActionCell) WithAllowsUndo(allowsUndo bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return ac
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *ActionCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (ac *ActionCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return ac
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (ac *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return ac
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *ActionCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (ac *ActionCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return ac
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *ActionCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (ac *ActionCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return ac
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *ActionCell) WithShowsFirstResponder(showsFirstResponder bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (ac *ActionCell) WithShowsFirstResponder(showsFirstResponder bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return ac
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *ActionCell) WithFocusRingType(focusRingType FocusRingType) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (ac *ActionCell) WithFocusRingType(focusRingType FocusRingType) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return ac
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *ActionCell) WithAttributedStringValue(attributedStringValue obj.Object) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (ac *ActionCell) WithAttributedStringValue(attributedStringValue obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return ac
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *ActionCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (ac *ActionCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return ac
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *ActionCell) WithImportsGraphics(importsGraphics bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (ac *ActionCell) WithImportsGraphics(importsGraphics bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return ac
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *ActionCell) WithAllowsMixedState(allowsMixedState bool) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (ac *ActionCell) WithAllowsMixedState(allowsMixedState bool) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return ac
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *ActionCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (ac *ActionCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return ac
 }
 
-// WithControlTint the cell’s control tint.
-func (x *ActionCell) WithControlTint(controlTint ControlTint) *ActionCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (ac *ActionCell) WithControlTint(controlTint ControlTint) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setControlTint:"), controlTint)
+	return ac
 }
-
-// ActionCellable is the interface implemented by [ActionCell], for mocking and DI.
-type ActionCellable interface {
-	obj.Object
-	WithControlView(controlView ViewProvider) *ActionCell
-	WithType(type_ CellType) *ActionCell
-	WithState(state int) *ActionCell
-	WithTarget(target obj.Object) *ActionCell
-	WithTag(tag int) *ActionCell
-	WithTitle(title string) *ActionCell
-	WithEnabled(enabled bool) *ActionCell
-	WithContinuous(continuous bool) *ActionCell
-	WithEditable(editable bool) *ActionCell
-	WithSelectable(selectable bool) *ActionCell
-	WithBordered(bordered bool) *ActionCell
-	WithBezeled(bezeled bool) *ActionCell
-	WithScrollable(scrollable bool) *ActionCell
-	WithHighlighted(highlighted bool) *ActionCell
-	WithAlignment(alignment TextAlignment) *ActionCell
-	WithWraps(wraps bool) *ActionCell
-	WithFont(font *Font) *ActionCell
-	WithFormatter(formatter obj.Object) *ActionCell
-	WithObjectValue(objectValue obj.Object) *ActionCell
-	WithStringValue(stringValue string) *ActionCell
-	WithIntValue(intValue int) *ActionCell
-	WithFloatValue(floatValue float32) *ActionCell
-	WithDoubleValue(doubleValue float64) *ActionCell
-	WithIntegerValue(integerValue int) *ActionCell
-	WithImage(image *Image) *ActionCell
-	WithControlSize(controlSize ControlSize) *ActionCell
-	WithRepresentedObject(representedObject obj.Object) *ActionCell
-	WithMenu(menu *Menu) *ActionCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ActionCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *ActionCell
-	WithAllowsUndo(allowsUndo bool) *ActionCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ActionCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell
-	WithShowsFirstResponder(showsFirstResponder bool) *ActionCell
-	WithFocusRingType(focusRingType FocusRingType) *ActionCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *ActionCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell
-	WithImportsGraphics(importsGraphics bool) *ActionCell
-	WithAllowsMixedState(allowsMixedState bool) *ActionCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *ActionCell
-	WithControlTint(controlTint ControlTint) *ActionCell
-}
-
-var _ ActionCellable = (*ActionCell)(nil)
 
 // isActionCell marks ActionCell — and, by embedding promotion, its
 // subclasses — as a member of the ActionCell hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ActionCell) isActionCell() {}
+func (ac *ActionCell) isActionCell() {}
 
 var _ ActionCellProvider = (*ActionCell)(nil)
 

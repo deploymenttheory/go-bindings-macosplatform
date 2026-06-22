@@ -46,24 +46,24 @@ func libArtworkAdopt(id objc.ID) *LibArtwork {
 }
 
 // Description returns the object's -description text.
-func (x *LibArtwork) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (la *LibArtwork) Description() string {
+	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LibArtwork) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (la *LibArtwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LibArtwork) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (la *LibArtwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LibArtwork) String() string {
-	return rt.Description(objref.IDOf(x))
+func (la *LibArtwork) String() string {
+	return rt.Description(objref.IDOf(la))
 }
 
 // NewLibArtwork creates a new LibArtwork.
@@ -72,30 +72,20 @@ func NewLibArtwork() *LibArtwork {
 	return libArtworkAdopt(_id)
 }
 
-// Image the NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
-func (x *LibArtwork) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+// Image returns the NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
+func (la *LibArtwork) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
-// ImageData the data (bytes) of this artwork image.
-func (x *LibArtwork) ImageData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
+// ImageData returns the data (bytes) of this artwork image.
+func (la *LibArtwork) ImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("imageData"))
 	return obj.Wrap(_r)
 }
 
-// ImageDataFormat the fortmat of the data returned by the imageData method.
-func (x *LibArtwork) ImageDataFormat() LibArtworkFormat {
-	_r := objc.Send[LibArtworkFormat](objref.IDOf(x), objc.RegisterName("imageDataFormat"))
+// ImageDataFormat returns the fortmat of the data returned by the imageData method.
+func (la *LibArtwork) ImageDataFormat() LibArtworkFormat {
+	_r := objc.Send[LibArtworkFormat](objref.IDOf(la), objc.RegisterName("imageDataFormat"))
 	return _r
 }
-
-// LibArtworkable is the interface implemented by [LibArtwork], for mocking and DI.
-type LibArtworkable interface {
-	obj.Object
-	Image() obj.Object
-	ImageData() obj.Object
-	ImageDataFormat() LibArtworkFormat
-}
-
-var _ LibArtworkable = (*LibArtwork)(nil)

@@ -44,24 +44,24 @@ func mTRDishwasherModeClusterModeOptionStructAdopt(id objc.ID) *MTRDishwasherMod
 }
 
 // Description returns the object's -description text.
-func (x *MTRDishwasherModeClusterModeOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(mdmcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDishwasherModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdmcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDishwasherModeClusterModeOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdmcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDishwasherModeClusterModeOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(mdmcmos))
 }
 
 // NewMTRDishwasherModeClusterModeOptionStruct creates a new MTRDishwasherModeClusterModeOptionStruct.
@@ -71,64 +71,39 @@ func NewMTRDishwasherModeClusterModeOptionStruct() *MTRDishwasherModeClusterMode
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRDishwasherModeClusterModeOptionStruct) WithLabel(label string) *MTRDishwasherModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) WithLabel(label string) *MTRDishwasherModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mdmcmos
 }
 
 // WithMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDishwasherModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRDishwasherModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRDishwasherModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return mdmcmos
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Mode wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeOptionStruct) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeOptionStruct) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
 // ModeTags wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeOptionStruct) ModeTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
+func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
-
-// MTRDishwasherModeClusterModeOptionStructable is the interface implemented by [MTRDishwasherModeClusterModeOptionStruct], for mocking and DI.
-type MTRDishwasherModeClusterModeOptionStructable interface {
-	obj.Object
-	WithLabel(label string) *MTRDishwasherModeClusterModeOptionStruct
-	WithMode(mode obj.Object) *MTRDishwasherModeClusterModeOptionStruct
-	Label() string
-	SetLabel(label string)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	ModeTags() obj.Object
-	SetModeTags(modeTags obj.Object)
-}
-
-var _ MTRDishwasherModeClusterModeOptionStructable = (*MTRDishwasherModeClusterModeOptionStruct)(nil)

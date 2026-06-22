@@ -46,24 +46,24 @@ func colorAdopt(id objc.ID) *Color {
 }
 
 // Description returns the object's -description text.
-func (x *Color) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Color) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Color) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Color) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Color) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Color) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Color) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Color) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewColorWithCGColor create a Core Image color object with a Core Graphics color object.
@@ -102,60 +102,46 @@ func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64
 }
 
 // NumberOfComponents returns the color components of the color including alpha. This number includes the alpha component if the color contains one. Typically this number will be `4` for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then the number will be the same as calling `CGColorGetNumberOfComponents()`
-func (x *Color) NumberOfComponents() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfComponents"))
+func (c *Color) NumberOfComponents() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("numberOfComponents"))
 	return _r
 }
 
 // Alpha returns the alpha value of the color.
-func (x *Color) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+func (c *Color) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("alpha"))
 	return _r
 }
 
 // ColorSpace returns the `CGColorSpace` associated with the color
-func (x *Color) ColorSpace() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+func (c *Color) ColorSpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
 }
 
 // Red returns the unpremultiplied red component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red component.
-func (x *Color) Red() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("red"))
+func (c *Color) Red() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("red"))
 	return _r
 }
 
 // Green returns the unpremultiplied green component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
-func (x *Color) Green() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("green"))
+func (c *Color) Green() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("green"))
 	return _r
 }
 
 // Blue returns the unpremultiplied blue component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
-func (x *Color) Blue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blue"))
+func (c *Color) Blue() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blue"))
 	return _r
 }
 
 // StringRepresentation returns a formatted string with the unpremultiplied color and alpha components of the color. The string representation always has four components: red, green, blue, and alpha. Some example string representations of colors: `CIColor`                                       | `stringRepresentation` ----------------------------------------------- | -------------- `[CIColor colorWithRed:0.2 green:0.4 blue:0.6]` | `"0.2 0.4 0.6 1.0"` “/CIColor/yellowColor“                        | `"1.0 1.0 0.0 1.0"` To create a “CIColor“ instance from a string representation, use the “colorWithString:“ method. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red, green, and blue components. This property is not KVO-safe because it returns a new `NSString` instance each time. The value of the `NSString` will be the same each time it is called.
-func (x *Color) StringRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+func (c *Color) StringRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Colorable is the interface implemented by [Color], for mocking and DI.
-type Colorable interface {
-	obj.Object
-	NumberOfComponents() int
-	Alpha() float64
-	ColorSpace() obj.Object
-	Red() float64
-	Green() float64
-	Blue() float64
-	StringRepresentation() string
-}
-
-var _ Colorable = (*Color)(nil)

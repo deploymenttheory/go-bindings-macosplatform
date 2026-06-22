@@ -46,24 +46,24 @@ func composeSessionAdopt(id objc.ID) *ComposeSession {
 }
 
 // Description returns the object's -description text.
-func (x *ComposeSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ComposeSession) Description() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComposeSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cs *ComposeSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComposeSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cs *ComposeSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComposeSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ComposeSession) String() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // NewComposeSession creates a new ComposeSession.
@@ -73,35 +73,24 @@ func NewComposeSession() *ComposeSession {
 }
 
 // ReloadSession refreshes the compose session with the extension’s new information.
-func (x *ComposeSession) ReloadSession() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSession"))
+func (cs *ComposeSession) ReloadSession() {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("reloadSession"))
 }
 
-// SessionID a unique identifier for the session.
-func (x *ComposeSession) SessionID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+// SessionID returns a unique identifier for the session.
+func (cs *ComposeSession) SessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
-// MailMessage an instance of
-func (x *ComposeSession) MailMessage() *Message {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mailMessage"))
+// MailMessage returns an instance of
+func (cs *ComposeSession) MailMessage() *Message {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("mailMessage"))
 	return MessageFromID(_r)
 }
 
-// ComposeContext an instance of
-func (x *ComposeSession) ComposeContext() *ComposeContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composeContext"))
+// ComposeContext returns an instance of
+func (cs *ComposeSession) ComposeContext() *ComposeContext {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("composeContext"))
 	return ComposeContextFromID(_r)
 }
-
-// ComposeSessionable is the interface implemented by [ComposeSession], for mocking and DI.
-type ComposeSessionable interface {
-	obj.Object
-	ReloadSession()
-	SessionID() obj.Object
-	MailMessage() *Message
-	ComposeContext() *ComposeContext
-}
-
-var _ ComposeSessionable = (*ComposeSession)(nil)

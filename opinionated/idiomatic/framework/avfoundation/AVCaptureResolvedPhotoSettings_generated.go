@@ -47,24 +47,24 @@ func captureResolvedPhotoSettingsAdopt(id objc.ID) *CaptureResolvedPhotoSettings
 }
 
 // Description returns the object's -description text.
-func (x *CaptureResolvedPhotoSettings) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (crps *CaptureResolvedPhotoSettings) Description() string {
+	return rt.Description(objref.IDOf(crps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureResolvedPhotoSettings) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (crps *CaptureResolvedPhotoSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(crps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureResolvedPhotoSettings) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (crps *CaptureResolvedPhotoSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(crps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureResolvedPhotoSettings) String() string {
-	return rt.Description(objref.IDOf(x))
+func (crps *CaptureResolvedPhotoSettings) String() string {
+	return rt.Description(objref.IDOf(crps))
 }
 
 // NewCaptureResolvedPhotoSettings creates a new CaptureResolvedPhotoSettings.
@@ -73,37 +73,26 @@ func NewCaptureResolvedPhotoSettings() *CaptureResolvedPhotoSettings {
 	return captureResolvedPhotoSettingsAdopt(_id)
 }
 
-// UniqueID uniqueID matches that of the AVCapturePhotoSettings instance you passed to -capturePhotoWithSettings:delegate:.
-func (x *CaptureResolvedPhotoSettings) UniqueID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("uniqueID"))
+// UniqueID returns uniqueID matches that of the AVCapturePhotoSettings instance you passed to -capturePhotoWithSettings:delegate:.
+func (crps *CaptureResolvedPhotoSettings) UniqueID() int64 {
+	_r := objc.Send[int64](objref.IDOf(crps), objc.RegisterName("uniqueID"))
 	return _r
 }
 
-// PhotoDimensions the resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
-func (x *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(x), objc.RegisterName("photoDimensions"))
+// PhotoDimensions returns the resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
+func (crps *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(crps), objc.RegisterName("photoDimensions"))
 	return _r
 }
 
 // ExpectedPhotoCount indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
-func (x *CaptureResolvedPhotoSettings) ExpectedPhotoCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("expectedPhotoCount"))
+func (crps *CaptureResolvedPhotoSettings) ExpectedPhotoCount() int {
+	_r := objc.Send[int](objref.IDOf(crps), objc.RegisterName("expectedPhotoCount"))
 	return _r
 }
 
-// IsFastCapturePrioritizationEnabled indicates whether fast capture prioritization will be employed when capturing the photo.
-func (x *CaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFastCapturePrioritizationEnabled"))
+// IsFastCapturePrioritizationEnabled reports whether fast capture prioritization will be employed when capturing the photo.
+func (crps *CaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(crps), objc.RegisterName("isFastCapturePrioritizationEnabled"))
 	return _r
 }
-
-// CaptureResolvedPhotoSettingsable is the interface implemented by [CaptureResolvedPhotoSettings], for mocking and DI.
-type CaptureResolvedPhotoSettingsable interface {
-	obj.Object
-	UniqueID() int64
-	PhotoDimensions() coremedia.CMVideoDimensions
-	ExpectedPhotoCount() int
-	IsFastCapturePrioritizationEnabled() bool
-}
-
-var _ CaptureResolvedPhotoSettingsable = (*CaptureResolvedPhotoSettings)(nil)

@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewRatingCommandEvent() *RatingCommandEvent {
 }
 
 // Rating wraps the corresponding Objective-C method.
-func (x *RatingCommandEvent) Rating() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rating"))
+func (rce *RatingCommandEvent) Rating() float32 {
+	_r := objc.Send[float32](objref.IDOf(rce), objc.RegisterName("rating"))
 	return _r
 }
-
-// RatingCommandEventable is the interface implemented by [RatingCommandEvent], for mocking and DI.
-type RatingCommandEventable interface {
-	obj.Object
-	Rating() float32
-}
-
-var _ RatingCommandEventable = (*RatingCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*RatingCommandEvent)(nil)

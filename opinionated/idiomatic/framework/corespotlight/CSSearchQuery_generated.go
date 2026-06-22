@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,24 +51,24 @@ func searchQueryAdopt(id objc.ID) *SearchQuery {
 }
 
 // Description returns the object's -description text.
-func (x *SearchQuery) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sq *SearchQuery) Description() string {
+	return rt.Description(objref.IDOf(sq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SearchQuery) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sq *SearchQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SearchQuery) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sq *SearchQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SearchQuery) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sq *SearchQuery) String() string {
+	return rt.Description(objref.IDOf(sq))
 }
 
 // NewSearchQueryWithQueryStringQueryContext initializes and returns a query object with the specified query string and query context.
@@ -84,76 +85,52 @@ func NewSearchQueryWithQueryStringAttributes(queryString string, attributes []st
 	return searchQueryAdopt(_id)
 }
 
-// WithFoundItemsHandler the block to execute when the query delivers a new batch of matching items.
-func (x *SearchQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *SearchQuery {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
-	return x
+// WithFoundItemsHandler sets the block to execute when the query delivers a new batch of matching items.
+func (sq *SearchQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *SearchQuery {
+	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
+	return sq
 }
 
-// WithProtectionClasses the protection types of the indexes you want to search.
-func (x *SearchQuery) WithProtectionClasses(items ...obj.Object) *SearchQuery {
+// WithProtectionClasses sets the protection types of the indexes you want to search.
+func (sq *SearchQuery) WithProtectionClasses(items ...obj.Object) *SearchQuery {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtectionClasses:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("setProtectionClasses:"), _arr)
+	return sq
 }
 
 // Start starts searching the index for items that match the current query string and parameters.
-func (x *SearchQuery) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (sq *SearchQuery) Start() {
+	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("start"))
 }
 
 // Cancel cancels the current query operation.
-func (x *SearchQuery) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (sq *SearchQuery) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("cancel"))
 }
 
 // IsCancelled wraps the corresponding Objective-C method.
-func (x *SearchQuery) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+func (sq *SearchQuery) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(sq), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // FoundItemCount wraps the corresponding Objective-C method.
-func (x *SearchQuery) FoundItemCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("foundItemCount"))
+func (sq *SearchQuery) FoundItemCount() int {
+	_r := objc.Send[int](objref.IDOf(sq), objc.RegisterName("foundItemCount"))
 	return _r
-}
-
-// SetFoundItemsHandler wraps the corresponding Objective-C method.
-//
-// SetFoundItemsHandler blocks until the operation completes or ctx is cancelled.
-func (x *SearchQuery) SetFoundItemsHandler(ctx context.Context) (result obj.Object, err error) {
-	type _result struct {
-		val obj.Object
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = obj.Wrap(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundItemsHandler:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero obj.Object
-		return _zero, ctx.Err()
-	}
 }
 
 // Set wraps the corresponding Objective-C method.
 //
 // Set blocks until the operation completes or ctx is cancelled.
-func (x *SearchQuery) Set(ctx context.Context) error {
+func (sq *SearchQuery) Set(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("setCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -165,36 +142,14 @@ func (x *SearchQuery) Set(ctx context.Context) error {
 // ProtectionClasses wraps the corresponding Objective-C method.
 //
 // ProtectionClasses returns the collection as a Go slice.
-func (x *SearchQuery) ProtectionClasses() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protectionClasses"))
+func (sq *SearchQuery) ProtectionClasses() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("protectionClasses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetProtectionClasses wraps the corresponding Objective-C method.
-func (x *SearchQuery) SetProtectionClasses(protectionClasses []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtectionClasses:"), purego.SliceToNSArray(protectionClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SearchQueryable is the interface implemented by [SearchQuery], for mocking and DI.
-type SearchQueryable interface {
-	obj.Object
-	WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *SearchQuery
-	WithProtectionClasses(items ...obj.Object) *SearchQuery
-	Start()
-	Cancel()
-	IsCancelled() bool
-	FoundItemCount() int
-	SetFoundItemsHandler(ctx context.Context) (obj.Object, error)
-	Set(ctx context.Context) error
-	ProtectionClasses() []obj.Object
-	SetProtectionClasses(protectionClasses []obj.Object)
-}
-
-var _ SearchQueryable = (*SearchQuery)(nil)
 
 // isSearchQuery marks SearchQuery — and, by embedding promotion, its
 // subclasses — as a member of the SearchQuery hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SearchQuery) isSearchQuery() {}
+func (sq *SearchQuery) isSearchQuery() {}
 
 var _ SearchQueryProvider = (*SearchQuery)(nil)

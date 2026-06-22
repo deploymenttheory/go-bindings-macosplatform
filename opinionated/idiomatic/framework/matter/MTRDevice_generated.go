@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,24 +47,24 @@ func mTRDeviceAdopt(id objc.ID) *MTRDevice {
 }
 
 // Description returns the object's -description text.
-func (x *MTRDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (md *MTRDevice) Description() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (md *MTRDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (md *MTRDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (md *MTRDevice) String() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // NewMTRDevice creates a new MTRDevice.
@@ -73,32 +74,32 @@ func NewMTRDevice() *MTRDevice {
 }
 
 // ReadAttributeWithEndpointIDClusterIDAttributeIDParams read attribute in a designated attribute path.  If there is no value available for the attribute, whether because the device does not implement it or because the subscription priming read has not yet gotten to this attribute, nil will be returned. TODO: Need to fully document that this returns "the system's best guess" of attribute values.
-func (x *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWithEndpointID:clusterID:attributeID:params:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(params))
+func (md *MTRDevice) ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("readAttributeWithEndpointID:clusterID:attributeID:params:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout write to attribute in a designated attribute path
-func (x *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, value obj.Object, expectedValueInterval obj.Object, timeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:expectedValueInterval:timedWriteTimeout:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(value), objref.IDOf(expectedValueInterval), objref.IDOf(timeout))
+func (md *MTRDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, value obj.Object, expectedValueInterval obj.Object, timeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:expectedValueInterval:timedWriteTimeout:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(attributeID), objref.IDOf(value), objref.IDOf(expectedValueInterval), objref.IDOf(timeout))
 }
 
 // ReadAttributePaths read the attributes identified by the provided attribute paths. The paths can include wildcards.
-func (x *MTRDevice) ReadAttributePaths(attributePaths []*MTRAttributeRequestPath) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePaths:"), purego.SliceToNSArray(attributePaths, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) }))
+func (md *MTRDevice) ReadAttributePaths(attributePaths []*MTRAttributeRequestPath) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("readAttributePaths:"), purego.SliceToNSArray(attributePaths, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DescriptorClusters read all known attributes from descriptor clusters on all known endpoints.
-func (x *MTRDevice) DescriptorClusters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptorClusters"))
+// DescriptorClusters returns read all known attributes from descriptor clusters on all known endpoints.
+func (md *MTRDevice) DescriptorClusters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("descriptorClusters"))
 	return obj.Wrap(_r)
 }
 
 // DownloadLogOfTypeTimeoutQueueCompletion download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
 //
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
+func (md *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,7 +111,7 @@ func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context,
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadLogOfType:timeout:queue:completion:"), type_, timeout, objref.IDOf(queue), _block)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("downloadLogOfType:timeout:queue:completion:"), type_, timeout, objref.IDOf(queue), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -120,77 +121,56 @@ func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context,
 	}
 }
 
-// State the current state of the device. The three states: MTRDeviceStateUnknown Unable to determine the state of the device at the moment. MTRDeviceStateReachable Communication with the device is expected to succeed. MTRDeviceStateUnreachable The device is currently unreachable.
-func (x *MTRDevice) State() MTRDeviceState {
-	_r := objc.Send[MTRDeviceState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the current state of the device. The three states: MTRDeviceStateUnknown Unable to determine the state of the device at the moment. MTRDeviceStateReachable Communication with the device is expected to succeed. MTRDeviceStateUnreachable The device is currently unreachable.
+func (md *MTRDevice) State() MTRDeviceState {
+	_r := objc.Send[MTRDeviceState](objref.IDOf(md), objc.RegisterName("state"))
 	return _r
 }
 
-// DeviceCachePrimed is the device cache primed for this device? This will be true after the deviceCachePrimed: delegate callback has been called, false if not. Please note if you have a storage delegate implemented, the cache is then stored persistently, so the delegate would then only be called once, ever - and this property would basically always be true if a subscription has ever been established at any point in the past.
-func (x *MTRDevice) DeviceCachePrimed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deviceCachePrimed"))
+// DeviceCachePrimed reports whether is the device cache primed for this device? This will be true after the deviceCachePrimed: delegate callback has been called, false if not. Please note if you have a storage delegate implemented, the cache is then stored persistently, so the delegate would then only be called once, ever - and this property would basically always be true if a subscription has ever been established at any point in the past.
+func (md *MTRDevice) DeviceCachePrimed() bool {
+	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("deviceCachePrimed"))
 	return _r
 }
 
 // EstimatedStartTime wraps the corresponding Objective-C method.
-func (x *MTRDevice) EstimatedStartTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("estimatedStartTime"))
+func (md *MTRDevice) EstimatedStartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("estimatedStartTime"))
 	return obj.Wrap(_r)
 }
 
-// DeviceController the controller this device was created for.  May return nil if that controller has been shut down.
-func (x *MTRDevice) DeviceController() *MTRDeviceController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceController"))
+// DeviceController returns the controller this device was created for.  May return nil if that controller has been shut down.
+func (md *MTRDevice) DeviceController() *MTRDeviceController {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("deviceController"))
 	return MTRDeviceControllerFromID(_r)
 }
 
-// NodeID the node ID of the node this device corresponds to.
-func (x *MTRDevice) NodeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+// NodeID returns the node ID of the node this device corresponds to.
+func (md *MTRDevice) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("nodeID"))
 	return obj.Wrap(_r)
 }
 
-// EstimatedSubscriptionLatency an estimate of how much time is likely to elapse between setDelegate being called and the current device state (attributes, stored events) being known. nil if no such estimate is available.  Otherwise, the NSNumber stores an NSTimeInterval.
-func (x *MTRDevice) EstimatedSubscriptionLatency() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("estimatedSubscriptionLatency"))
+// EstimatedSubscriptionLatency returns an estimate of how much time is likely to elapse between setDelegate being called and the current device state (attributes, stored events) being known. nil if no such estimate is available.  Otherwise, the NSNumber stores an NSTimeInterval.
+func (md *MTRDevice) EstimatedSubscriptionLatency() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("estimatedSubscriptionLatency"))
 	return obj.Wrap(_r)
 }
 
-// VendorID the Vendor Identifier associated with the device. A non-nil value if the vendor identifier has been determined from the device, nil if unknown.
-func (x *MTRDevice) VendorID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+// VendorID returns the Vendor Identifier associated with the device. A non-nil value if the vendor identifier has been determined from the device, nil if unknown.
+func (md *MTRDevice) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// ProductID the Product Identifier associated with the device. A non-nil value if the product identifier has been determined from the device, nil if unknown.
-func (x *MTRDevice) ProductID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+// ProductID returns the Product Identifier associated with the device. A non-nil value if the product identifier has been determined from the device, nil if unknown.
+func (md *MTRDevice) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// NetworkCommissioningFeatures network commissioning features supported by the device.
-func (x *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeature {
-	_r := objc.Send[MTRNetworkCommissioningFeature](objref.IDOf(x), objc.RegisterName("networkCommissioningFeatures"))
+// NetworkCommissioningFeatures returns network commissioning features supported by the device.
+func (md *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeature {
+	_r := objc.Send[MTRNetworkCommissioningFeature](objref.IDOf(md), objc.RegisterName("networkCommissioningFeatures"))
 	return _r
 }
-
-// MTRDeviceable is the interface implemented by [MTRDevice], for mocking and DI.
-type MTRDeviceable interface {
-	obj.Object
-	ReadAttributeWithEndpointIDClusterIDAttributeIDParams(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams) obj.Object
-	WriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, value obj.Object, expectedValueInterval obj.Object, timeout obj.Object)
-	ReadAttributePaths(attributePaths []*MTRAttributeRequestPath) []obj.Object
-	DescriptorClusters() obj.Object
-	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue obj.Object) (obj.Object, error)
-	State() MTRDeviceState
-	DeviceCachePrimed() bool
-	EstimatedStartTime() obj.Object
-	DeviceController() *MTRDeviceController
-	NodeID() obj.Object
-	EstimatedSubscriptionLatency() obj.Object
-	VendorID() obj.Object
-	ProductID() obj.Object
-	NetworkCommissioningFeatures() MTRNetworkCommissioningFeature
-}
-
-var _ MTRDeviceable = (*MTRDevice)(nil)

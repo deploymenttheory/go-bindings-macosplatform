@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,56 +52,43 @@ func NewQRCodeFeature() *QRCodeFeature {
 	return qRCodeFeatureAdopt(_id)
 }
 
-// TopLeft the image coordinate of the upper-left corner of the detected QR code.
-func (x *QRCodeFeature) TopLeft() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+// TopLeft returns the image coordinate of the upper-left corner of the detected QR code.
+func (qcf *QRCodeFeature) TopLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("topLeft"))
 	return _r
 }
 
-// TopRight the image coordinate of the upper-right corner of the detected QR code.
-func (x *QRCodeFeature) TopRight() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+// TopRight returns the image coordinate of the upper-right corner of the detected QR code.
+func (qcf *QRCodeFeature) TopRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("topRight"))
 	return _r
 }
 
-// BottomLeft the image coordinate of the lower-left corner of the detected QR code.
-func (x *QRCodeFeature) BottomLeft() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+// BottomLeft returns the image coordinate of the lower-left corner of the detected QR code.
+func (qcf *QRCodeFeature) BottomLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
-// BottomRight the image coordinate of the lower-right corner of the detected QR code.
-func (x *QRCodeFeature) BottomRight() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+// BottomRight returns the image coordinate of the lower-right corner of the detected QR code.
+func (qcf *QRCodeFeature) BottomRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("bottomRight"))
 	return _r
 }
 
-// MessageString the string decoded from the detected barcode.
-func (x *QRCodeFeature) MessageString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageString"))
+// MessageString returns the string decoded from the detected barcode.
+func (qcf *QRCodeFeature) MessageString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(qcf), objc.RegisterName("messageString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SymbolDescriptor an abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
-func (x *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolDescriptor"))
+// SymbolDescriptor returns an abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
+func (qcf *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(qcf), objc.RegisterName("symbolDescriptor"))
 	return QRCodeDescriptorFromID(_r)
 }
-
-// QRCodeFeatureable is the interface implemented by [QRCodeFeature], for mocking and DI.
-type QRCodeFeatureable interface {
-	obj.Object
-	TopLeft() corefoundation.CGPoint
-	TopRight() corefoundation.CGPoint
-	BottomLeft() corefoundation.CGPoint
-	BottomRight() corefoundation.CGPoint
-	MessageString() string
-	SymbolDescriptor() *QRCodeDescriptor
-}
-
-var _ QRCodeFeatureable = (*QRCodeFeature)(nil)
 
 var _ FeatureProvider = (*QRCodeFeature)(nil)

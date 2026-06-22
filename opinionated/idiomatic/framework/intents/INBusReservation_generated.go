@@ -55,24 +55,15 @@ func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationSt
 }
 
 // ReservedSeat wraps the corresponding Objective-C method.
-func (x *BusReservation) ReservedSeat() *Seat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+func (br *BusReservation) ReservedSeat() *Seat {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // BusTrip wraps the corresponding Objective-C method.
-func (x *BusReservation) BusTrip() *BusTrip {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busTrip"))
+func (br *BusReservation) BusTrip() *BusTrip {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("busTrip"))
 	return BusTripFromID(_r)
 }
-
-// BusReservationable is the interface implemented by [BusReservation], for mocking and DI.
-type BusReservationable interface {
-	obj.Object
-	ReservedSeat() *Seat
-	BusTrip() *BusTrip
-}
-
-var _ BusReservationable = (*BusReservation)(nil)
 
 var _ ReservationProvider = (*BusReservation)(nil)

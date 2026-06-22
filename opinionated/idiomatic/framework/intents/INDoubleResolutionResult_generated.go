@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewDoubleResolutionResult() *DoubleResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INDoubleResolutionResult")), objc.RegisterName("new"))
 	return doubleResolutionResultAdopt(_id)
 }
-
-// DoubleResolutionResultable is the interface implemented by [DoubleResolutionResult], for mocking and DI.
-type DoubleResolutionResultable interface {
-	obj.Object
-}
-
-var _ DoubleResolutionResultable = (*DoubleResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*DoubleResolutionResult)(nil)

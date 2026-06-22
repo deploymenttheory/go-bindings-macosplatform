@@ -44,24 +44,24 @@ func transformMatrixOpAdopt(id objc.ID) *TransformMatrixOp {
 }
 
 // Description returns the object's -description text.
-func (x *TransformMatrixOp) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tmo *TransformMatrixOp) Description() string {
+	return rt.Description(objref.IDOf(tmo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformMatrixOp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tmo *TransformMatrixOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tmo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformMatrixOp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tmo *TransformMatrixOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tmo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformMatrixOp) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tmo *TransformMatrixOp) String() string {
+	return rt.Description(objref.IDOf(tmo))
 }
 
 // NewTransformMatrixOp creates a new TransformMatrixOp.
@@ -71,8 +71,8 @@ func NewTransformMatrixOp() *TransformMatrixOp {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TransformMatrixOp) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (tmo *TransformMatrixOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tmo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *TransformMatrixOp) Name() string {
 }
 
 // AnimatedValue wraps the corresponding Objective-C method.
-func (x *TransformMatrixOp) AnimatedValue() *AnimatedMatrix4x4 {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+func (tmo *TransformMatrixOp) AnimatedValue() *AnimatedMatrix4x4 {
+	_r := objc.Send[objc.ID](objref.IDOf(tmo), objc.RegisterName("animatedValue"))
 	return AnimatedMatrix4x4FromID(_r)
 }
-
-// TransformMatrixOpable is the interface implemented by [TransformMatrixOp], for mocking and DI.
-type TransformMatrixOpable interface {
-	obj.Object
-	Name() string
-	AnimatedValue() *AnimatedMatrix4x4
-}
-
-var _ TransformMatrixOpable = (*TransformMatrixOp)(nil)

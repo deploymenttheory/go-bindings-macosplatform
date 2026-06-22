@@ -46,24 +46,24 @@ func commandBufferDescriptorAdopt(id objc.ID) *CommandBufferDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *CommandBufferDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cbd *CommandBufferDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CommandBufferDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cbd *CommandBufferDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CommandBufferDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cbd *CommandBufferDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CommandBufferDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cbd *CommandBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(cbd))
 }
 
 // NewCommandBufferDescriptor creates a new CommandBufferDescriptor.
@@ -72,49 +72,26 @@ func NewCommandBufferDescriptor() *CommandBufferDescriptor {
 	return commandBufferDescriptorAdopt(_id)
 }
 
-// WithRetainedReferences a Boolean value that indicates whether the command buffer the descriptor creates maintains strong references to the resources it uses.
-func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainedReferences:"), retainedReferences)
-	return x
+// WithRetainedReferences sets a Boolean value that indicates whether the command buffer the descriptor creates maintains strong references to the resources it uses.
+func (cbd *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cbd), objc.RegisterName("setRetainedReferences:"), retainedReferences)
+	return cbd
 }
 
-// WithErrorOptions the reporting configuration that indicates which information the GPU driver stores in a command buffer’s error property.
-func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions CommandBufferErrorOption) *CommandBufferDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorOptions:"), errorOptions)
-	return x
+// WithErrorOptions sets the reporting configuration that indicates which information the GPU driver stores in a command buffer’s error property.
+func (cbd *CommandBufferDescriptor) WithErrorOptions(errorOptions CommandBufferErrorOption) *CommandBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cbd), objc.RegisterName("setErrorOptions:"), errorOptions)
+	return cbd
 }
 
-// RetainedReferences if YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
-func (x *CommandBufferDescriptor) RetainedReferences() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("retainedReferences"))
+// RetainedReferences reports whether if true, the created command buffer holds strong references to objects needed for it to execute. If false, the created command buffer does not hold strong references to objects needed for it to execute.
+func (cbd *CommandBufferDescriptor) RetainedReferences() bool {
+	_r := objc.Send[bool](objref.IDOf(cbd), objc.RegisterName("retainedReferences"))
 	return _r
 }
 
-// SetRetainedReferences wraps the corresponding Objective-C method.
-func (x *CommandBufferDescriptor) SetRetainedReferences(retainedReferences bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainedReferences:"), retainedReferences)
-}
-
-// ErrorOptions a set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
-func (x *CommandBufferDescriptor) ErrorOptions() CommandBufferErrorOption {
-	_r := objc.Send[CommandBufferErrorOption](objref.IDOf(x), objc.RegisterName("errorOptions"))
+// ErrorOptions returns a set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+func (cbd *CommandBufferDescriptor) ErrorOptions() CommandBufferErrorOption {
+	_r := objc.Send[CommandBufferErrorOption](objref.IDOf(cbd), objc.RegisterName("errorOptions"))
 	return _r
 }
-
-// SetErrorOptions wraps the corresponding Objective-C method.
-func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions CommandBufferErrorOption) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorOptions:"), errorOptions)
-}
-
-// CommandBufferDescriptorable is the interface implemented by [CommandBufferDescriptor], for mocking and DI.
-type CommandBufferDescriptorable interface {
-	obj.Object
-	WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor
-	WithErrorOptions(errorOptions CommandBufferErrorOption) *CommandBufferDescriptor
-	RetainedReferences() bool
-	SetRetainedReferences(retainedReferences bool)
-	ErrorOptions() CommandBufferErrorOption
-	SetErrorOptions(errorOptions CommandBufferErrorOption)
-}
-
-var _ CommandBufferDescriptorable = (*CommandBufferDescriptor)(nil)

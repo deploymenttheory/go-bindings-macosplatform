@@ -53,18 +53,10 @@ func NewUnitPressure() *UnitPressure {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitPressure) WithScriptingProperties(scriptingProperties obj.Object) *UnitPressure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (up *UnitPressure) WithScriptingProperties(scriptingProperties obj.Object) *UnitPressure {
+	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return up
 }
-
-// UnitPressureable is the interface implemented by [UnitPressure], for mocking and DI.
-type UnitPressureable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitPressure
-}
-
-var _ UnitPressureable = (*UnitPressure)(nil)
 
 var _ DimensionProvider = (*UnitPressure)(nil)
 

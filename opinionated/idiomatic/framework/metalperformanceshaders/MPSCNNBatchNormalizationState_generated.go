@@ -53,38 +53,27 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNBatchNormalizationState) WithReadCount(readCount int) *CNNBatchNormalizationState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cbns *CNNBatchNormalizationState) WithReadCount(readCount int) *CNNBatchNormalizationState {
+	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("setReadCount:"), readCount)
+	return cbns
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBatchNormalizationState) WithLabel(label string) *CNNBatchNormalizationState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbns *CNNBatchNormalizationState) WithLabel(label string) *CNNBatchNormalizationState {
+	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbns
 }
 
 // Reset reset any accumulated state data to its initial values.
-func (x *CNNBatchNormalizationState) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (cbns *CNNBatchNormalizationState) Reset() {
+	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("reset"))
 }
 
 // BatchNormalization wraps the corresponding Objective-C method.
-func (x *CNNBatchNormalizationState) BatchNormalization() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("batchNormalization"))
+func (cbns *CNNBatchNormalizationState) BatchNormalization() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("batchNormalization"))
 	return obj.Wrap(_r)
 }
-
-// CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
-type CNNBatchNormalizationStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNBatchNormalizationState
-	WithLabel(label string) *CNNBatchNormalizationState
-	Reset()
-	BatchNormalization() obj.Object
-}
-
-var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
 
 var _ NNGradientStateProvider = (*CNNBatchNormalizationState)(nil)
 

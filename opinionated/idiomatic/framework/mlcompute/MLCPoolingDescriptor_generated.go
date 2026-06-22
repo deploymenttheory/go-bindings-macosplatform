@@ -46,24 +46,24 @@ func poolingDescriptorAdopt(id objc.ID) *PoolingDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *PoolingDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PoolingDescriptor) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PoolingDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *PoolingDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PoolingDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *PoolingDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PoolingDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PoolingDescriptor) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // NewPoolingDescriptor creates a new PoolingDescriptor.
@@ -72,86 +72,68 @@ func NewPoolingDescriptor() *PoolingDescriptor {
 	return poolingDescriptorAdopt(_id)
 }
 
-// PoolingType the pooling operation
-func (x *PoolingDescriptor) PoolingType() PoolingType {
-	_r := objc.Send[PoolingType](objref.IDOf(x), objc.RegisterName("poolingType"))
+// PoolingType returns the pooling operation
+func (pd *PoolingDescriptor) PoolingType() PoolingType {
+	_r := objc.Send[PoolingType](objref.IDOf(pd), objc.RegisterName("poolingType"))
 	return _r
 }
 
-// KernelWidth the pooling kernel size in x.
-func (x *PoolingDescriptor) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the pooling kernel size in x.
+func (pd *PoolingDescriptor) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// KernelHeight the pooling kernel size in y.
-func (x *PoolingDescriptor) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the pooling kernel size in y.
+func (pd *PoolingDescriptor) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// StrideInX the stride of the kernel in x.
-func (x *PoolingDescriptor) StrideInX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInX"))
+// StrideInX returns the stride of the kernel in x.
+func (pd *PoolingDescriptor) StrideInX() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("strideInX"))
 	return _r
 }
 
-// StrideInY the stride of the kernel in y.
-func (x *PoolingDescriptor) StrideInY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("strideInY"))
+// StrideInY returns the stride of the kernel in y.
+func (pd *PoolingDescriptor) StrideInY() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("strideInY"))
 	return _r
 }
 
-// DilationRateInX the dilation rate i.e. stride of elements in the kernel in x.
-func (x *PoolingDescriptor) DilationRateInX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInX"))
+// DilationRateInX returns the dilation rate i.e. stride of elements in the kernel in x.
+func (pd *PoolingDescriptor) DilationRateInX() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
-// DilationRateInY the dilation rate i.e. stride of elements in the kernel in y.
-func (x *PoolingDescriptor) DilationRateInY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateInY"))
+// DilationRateInY returns the dilation rate i.e. stride of elements in the kernel in y.
+func (pd *PoolingDescriptor) DilationRateInY() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
-// PaddingPolicy the padding policy to use.
-func (x *PoolingDescriptor) PaddingPolicy() PaddingPolicy {
-	_r := objc.Send[PaddingPolicy](objref.IDOf(x), objc.RegisterName("paddingPolicy"))
+// PaddingPolicy returns the padding policy to use.
+func (pd *PoolingDescriptor) PaddingPolicy() PaddingPolicy {
+	_r := objc.Send[PaddingPolicy](objref.IDOf(pd), objc.RegisterName("paddingPolicy"))
 	return _r
 }
 
-// PaddingSizeInX the padding size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
-func (x *PoolingDescriptor) PaddingSizeInX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInX"))
+// PaddingSizeInX returns the padding size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+func (pd *PoolingDescriptor) PaddingSizeInX() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("paddingSizeInX"))
 	return _r
 }
 
-// PaddingSizeInY the padding size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
-func (x *PoolingDescriptor) PaddingSizeInY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingSizeInY"))
+// PaddingSizeInY returns the padding size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+func (pd *PoolingDescriptor) PaddingSizeInY() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("paddingSizeInY"))
 	return _r
 }
 
-// CountIncludesPadding include the zero-padding in the averaging calculation if true.  Used only with average pooling.
-func (x *PoolingDescriptor) CountIncludesPadding() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("countIncludesPadding"))
+// CountIncludesPadding reports whether include the zero-padding in the averaging calculation if true. Used only with average pooling.
+func (pd *PoolingDescriptor) CountIncludesPadding() bool {
+	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("countIncludesPadding"))
 	return _r
 }
-
-// PoolingDescriptorable is the interface implemented by [PoolingDescriptor], for mocking and DI.
-type PoolingDescriptorable interface {
-	obj.Object
-	PoolingType() PoolingType
-	KernelWidth() int
-	KernelHeight() int
-	StrideInX() int
-	StrideInY() int
-	DilationRateInX() int
-	DilationRateInY() int
-	PaddingPolicy() PaddingPolicy
-	PaddingSizeInX() int
-	PaddingSizeInY() int
-	CountIncludesPadding() bool
-}
-
-var _ PoolingDescriptorable = (*PoolingDescriptor)(nil)

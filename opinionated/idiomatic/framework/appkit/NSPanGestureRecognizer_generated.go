@@ -53,155 +53,117 @@ func NewPanGestureRecognizer() *PanGestureRecognizer {
 	return panGestureRecognizerAdopt(_id)
 }
 
-// WithButtonMask a bit mask of the button (or buttons) required to recognize this gesture.
-func (x *PanGestureRecognizer) WithButtonMask(buttonMask int) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonMask:"), buttonMask)
-	return x
+// WithButtonMask sets a bit mask of the button (or buttons) required to recognize this gesture.
+func (pgr *PanGestureRecognizer) WithButtonMask(buttonMask int) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	return pgr
 }
 
-// WithNumberOfTouchesRequired the number of necessary touches on a Touch Bar for the gesture recognizer to match.
-func (x *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
-	return x
+// WithNumberOfTouchesRequired sets the number of necessary touches on a Touch Bar for the gesture recognizer to match.
+func (pgr *PanGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	return pgr
 }
 
-// WithTarget the object that implements the action method.
-func (x *PanGestureRecognizer) WithTarget(target obj.Object) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that implements the action method.
+func (pgr *PanGestureRecognizer) WithTarget(target obj.Object) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return pgr
 }
 
-// WithState the current state of the gesture recognizer.
-func (x *PanGestureRecognizer) WithState(state GestureRecognizerState) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current state of the gesture recognizer.
+func (pgr *PanGestureRecognizer) WithState(state GestureRecognizerState) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setState:"), state)
+	return pgr
 }
 
-// WithEnabled a Boolean value indicating whether the gesture recognizer is able to handle events.
-func (x *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
+func (pgr *PanGestureRecognizer) WithEnabled(enabled bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setEnabled:"), enabled)
+	return pgr
 }
 
-// WithPressureConfiguration configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
-func (x *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+// WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+func (pgr *PanGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return pgr
 }
 
-// WithDelaysPrimaryMouseButtonEvents a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
-func (x *PanGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
-	return x
+// WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+func (pgr *PanGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	return pgr
 }
 
-// WithDelaysSecondaryMouseButtonEvents a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
-func (x *PanGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
-	return x
+// WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+func (pgr *PanGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	return pgr
 }
 
-// WithDelaysOtherMouseButtonEvents a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
-func (x *PanGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
-	return x
+// WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+func (pgr *PanGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	return pgr
 }
 
-// WithDelaysKeyEvents a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
-func (x *PanGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
-	return x
+// WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+func (pgr *PanGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	return pgr
 }
 
-// WithDelaysMagnificationEvents a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
-func (x *PanGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
-	return x
+// WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+func (pgr *PanGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	return pgr
 }
 
-// WithDelaysRotationEvents a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
-func (x *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-	return x
+// WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+func (pgr *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	return pgr
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (pgr *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
+	return pgr
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PanGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (pgr *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PanGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return pgr
 }
 
 // TranslationInView the distance traveled by the mouse during the gesture.
-func (x *PanGestureRecognizer) TranslationInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("translationInView:"), objref.IDOf(view))
+func (pgr *PanGestureRecognizer) TranslationInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pgr), objc.RegisterName("translationInView:"), objref.IDOf(view))
 	return _r
 }
 
 // SetTranslationInView changes the current translation value of the gesture recognizer.
-func (x *PanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslation:inView:"), translation, objref.IDOf(view))
+func (pgr *PanGestureRecognizer) SetTranslationInView(translation corefoundation.CGPoint, view *View) {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTranslation:inView:"), translation, objref.IDOf(view))
 }
 
 // VelocityInView the velocity of the pan, measured in points per second.
-func (x *PanGestureRecognizer) VelocityInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("velocityInView:"), objref.IDOf(view))
+func (pgr *PanGestureRecognizer) VelocityInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pgr), objc.RegisterName("velocityInView:"), objref.IDOf(view))
 	return _r
 }
 
 // ButtonMask wraps the corresponding Objective-C method.
-func (x *PanGestureRecognizer) ButtonMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonMask"))
+func (pgr *PanGestureRecognizer) ButtonMask() int {
+	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
 	return _r
-}
-
-// SetButtonMask wraps the corresponding Objective-C method.
-func (x *PanGestureRecognizer) SetButtonMask(buttonMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonMask:"), buttonMask)
 }
 
 // NumberOfTouchesRequired wraps the corresponding Objective-C method.
-func (x *PanGestureRecognizer) NumberOfTouchesRequired() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTouchesRequired"))
+func (pgr *PanGestureRecognizer) NumberOfTouchesRequired() int {
+	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
 	return _r
 }
-
-// SetNumberOfTouchesRequired wraps the corresponding Objective-C method.
-func (x *PanGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
-}
-
-// PanGestureRecognizerable is the interface implemented by [PanGestureRecognizer], for mocking and DI.
-type PanGestureRecognizerable interface {
-	obj.Object
-	WithButtonMask(buttonMask int) *PanGestureRecognizer
-	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer
-	WithTarget(target obj.Object) *PanGestureRecognizer
-	WithState(state GestureRecognizerState) *PanGestureRecognizer
-	WithEnabled(enabled bool) *PanGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer
-	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PanGestureRecognizer
-	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PanGestureRecognizer
-	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PanGestureRecognizer
-	WithDelaysKeyEvents(delaysKeyEvents bool) *PanGestureRecognizer
-	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer
-	WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer
-	WithName(name string) *PanGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PanGestureRecognizer
-	TranslationInView(view *View) corefoundation.CGPoint
-	SetTranslationInView(translation corefoundation.CGPoint, view *View)
-	VelocityInView(view *View) corefoundation.CGPoint
-	ButtonMask() int
-	SetButtonMask(buttonMask int)
-	NumberOfTouchesRequired() int
-	SetNumberOfTouchesRequired(numberOfTouchesRequired int)
-}
-
-var _ PanGestureRecognizerable = (*PanGestureRecognizer)(nil)
 
 var _ GestureRecognizerProvider = (*PanGestureRecognizer)(nil)

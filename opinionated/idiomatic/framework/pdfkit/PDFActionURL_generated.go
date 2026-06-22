@@ -54,31 +54,16 @@ func NewActionURLWithURL(url string) *ActionURL {
 	return actionURLAdopt(_id)
 }
 
-// WithURL returns the URL associated with the URL action.
-func (x *ActionURL) WithURL(uRL string) *ActionURL {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets returns the URL associated with the URL action.
+func (au *ActionURL) WithURL(uRL string) *ActionURL {
+	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return au
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *ActionURL) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (au *ActionURL) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// SetURL wraps the corresponding Objective-C method.
-func (x *ActionURL) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
-// ActionURLable is the interface implemented by [ActionURL], for mocking and DI.
-type ActionURLable interface {
-	obj.Object
-	WithURL(uRL string) *ActionURL
-	URL() obj.Object
-	SetURL(uRL string)
-}
-
-var _ ActionURLable = (*ActionURL)(nil)
 
 var _ ActionProvider = (*ActionURL)(nil)

@@ -9,7 +9,7 @@
 // {{.MarkerName}} marks {{.GoTypeName}} — and, by embedding promotion, its
 // subclasses — as a member of the {{.GoTypeName}} hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *{{.GoTypeName}}) {{.MarkerName}}() {}
+func ({{.RecvVar}} *{{.GoTypeName}}) {{.MarkerName}}() {}
 {{end}}{{range .ProviderIfaces}}
 var _ {{.}} = (*{{$.GoTypeName}})(nil)
 {{end}}{{end}}

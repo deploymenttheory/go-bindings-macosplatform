@@ -46,24 +46,24 @@ func bluetoothObjectPushUIControllerAdopt(id objc.ID) *BluetoothObjectPushUICont
 }
 
 // Description returns the object's -description text.
-func (x *BluetoothObjectPushUIController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bopuc *BluetoothObjectPushUIController) Description() string {
+	return rt.Description(objref.IDOf(bopuc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BluetoothObjectPushUIController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bopuc *BluetoothObjectPushUIController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bopuc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BluetoothObjectPushUIController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bopuc *BluetoothObjectPushUIController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bopuc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BluetoothObjectPushUIController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bopuc *BluetoothObjectPushUIController) String() string {
+	return rt.Description(objref.IDOf(bopuc))
 }
 
 // NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate creates and returns a new IOBluetoothObjectPush object
@@ -74,28 +74,28 @@ func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDel
 }
 
 // RunModal runs the transfer UI panel in a modal session
-func (x *BluetoothObjectPushUIController) RunModal() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runModal"))
+func (bopuc *BluetoothObjectPushUIController) RunModal() {
+	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runModal"))
 }
 
 // RunPanel runs the transfer UI as a panel with no modal session
-func (x *BluetoothObjectPushUIController) RunPanel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runPanel"))
+func (bopuc *BluetoothObjectPushUIController) RunPanel() {
+	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runPanel"))
 }
 
 // Stop stops the transfer UI
-func (x *BluetoothObjectPushUIController) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (bopuc *BluetoothObjectPushUIController) Stop() {
+	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("stop"))
 }
 
 // SetTitle sets the title of the panel when not run as a sheet.
-func (x *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
+func (bopuc *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
+	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
 // GetTitle returns the title of the transfer panel.
-func (x *BluetoothObjectPushUIController) GetTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getTitle"))
+func (bopuc *BluetoothObjectPushUIController) GetTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -103,33 +103,18 @@ func (x *BluetoothObjectPushUIController) GetTitle() string {
 }
 
 // SetIconImage manually sets the icon used in the panel.
-func (x *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconImage:"), objref.IDOf(image))
+func (bopuc *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setIconImage:"), objref.IDOf(image))
 }
 
 // GetDevice gets the object representing the remote target device in the transfer.
-func (x *BluetoothObjectPushUIController) GetDevice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
+func (bopuc *BluetoothObjectPushUIController) GetDevice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getDevice"))
 	return obj.Wrap(_r)
 }
 
-// IsTransferInProgress gets state of the transfer
-func (x *BluetoothObjectPushUIController) IsTransferInProgress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransferInProgress"))
+// IsTransferInProgress reports whether gets state of the transfer
+func (bopuc *BluetoothObjectPushUIController) IsTransferInProgress() bool {
+	_r := objc.Send[bool](objref.IDOf(bopuc), objc.RegisterName("isTransferInProgress"))
 	return _r
 }
-
-// BluetoothObjectPushUIControllerable is the interface implemented by [BluetoothObjectPushUIController], for mocking and DI.
-type BluetoothObjectPushUIControllerable interface {
-	obj.Object
-	RunModal()
-	RunPanel()
-	Stop()
-	SetTitle(windowTitle string)
-	GetTitle() string
-	SetIconImage(image obj.Object)
-	GetDevice() obj.Object
-	IsTransferInProgress() bool
-}
-
-var _ BluetoothObjectPushUIControllerable = (*BluetoothObjectPushUIController)(nil)

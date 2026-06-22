@@ -7,7 +7,6 @@ package classkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,59 +52,35 @@ func NewScoreItemWithIdentifierTitleScoreMaxScore(identifier string, title strin
 	return scoreItemAdopt(_id)
 }
 
-// WithScore the score earned by a user in completing the task.
-func (x *ScoreItem) WithScore(score float64) *ScoreItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScore:"), score)
-	return x
+// WithScore sets the score earned by a user in completing the task.
+func (si *ScoreItem) WithScore(score float64) *ScoreItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setScore:"), score)
+	return si
 }
 
-// WithMaxScore the maximum possible score that the user can earn on a given task.
-func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScore:"), maxScore)
-	return x
+// WithMaxScore sets the maximum possible score that the user can earn on a given task.
+func (si *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setMaxScore:"), maxScore)
+	return si
 }
 
-// WithTitle a human readable name for the activity item.
-func (x *ScoreItem) WithTitle(title string) *ScoreItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a human readable name for the activity item.
+func (si *ScoreItem) WithTitle(title string) *ScoreItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return si
 }
 
-// Score score out of Should be between zero and
-func (x *ScoreItem) Score() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("score"))
+// Score returns score out of Should be between zero and
+func (si *ScoreItem) Score() float64 {
+	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("score"))
 	return _r
 }
 
-// SetScore wraps the corresponding Objective-C method.
-func (x *ScoreItem) SetScore(score float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScore:"), score)
-}
-
-// MaxScore total score possible. Must be greater than zero.
-func (x *ScoreItem) MaxScore() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxScore"))
+// MaxScore returns total score possible. Must be greater than zero.
+func (si *ScoreItem) MaxScore() float64 {
+	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("maxScore"))
 	return _r
 }
-
-// SetMaxScore wraps the corresponding Objective-C method.
-func (x *ScoreItem) SetMaxScore(maxScore float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScore:"), maxScore)
-}
-
-// ScoreItemable is the interface implemented by [ScoreItem], for mocking and DI.
-type ScoreItemable interface {
-	obj.Object
-	WithScore(score float64) *ScoreItem
-	WithMaxScore(maxScore float64) *ScoreItem
-	WithTitle(title string) *ScoreItem
-	Score() float64
-	SetScore(score float64)
-	MaxScore() float64
-	SetMaxScore(maxScore float64)
-}
-
-var _ ScoreItemable = (*ScoreItem)(nil)
 
 var _ ActivityItemProvider = (*ScoreItem)(nil)
 

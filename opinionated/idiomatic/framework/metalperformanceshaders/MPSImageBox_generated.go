@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,52 +47,40 @@ func imageBoxAdopt(id objc.ID) *ImageBox {
 	return x
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageBox) WithOffset(offset mpscore.MPSOffset) *ImageBox {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ib *ImageBox) WithOffset(offset mpscore.MPSOffset) *ImageBox {
+	objc.Send[objc.ID](objref.IDOf(ib), objc.RegisterName("setOffset:"), offset)
+	return ib
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageBox) WithClipRect(clipRect metal.MTLRegion) *ImageBox {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ib *ImageBox) WithClipRect(clipRect metal.MTLRegion) *ImageBox {
+	objc.Send[objc.ID](objref.IDOf(ib), objc.RegisterName("setClipRect:"), clipRect)
+	return ib
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageBox) WithLabel(label string) *ImageBox {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ib *ImageBox) WithLabel(label string) *ImageBox {
+	objc.Send[objc.ID](objref.IDOf(ib), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ib
 }
 
-// KernelHeight the height of the filter window.
-func (x *ImageBox) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the height of the filter window.
+func (ib *ImageBox) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(ib), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// KernelWidth the width of the filter window.
-func (x *ImageBox) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the width of the filter window.
+func (ib *ImageBox) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(ib), objc.RegisterName("kernelWidth"))
 	return _r
 }
-
-// ImageBoxable is the interface implemented by [ImageBox], for mocking and DI.
-type ImageBoxable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageBox
-	WithClipRect(clipRect metal.MTLRegion) *ImageBox
-	WithLabel(label string) *ImageBox
-	KernelHeight() int
-	KernelWidth() int
-}
-
-var _ ImageBoxable = (*ImageBox)(nil)
 
 // isImageBox marks ImageBox — and, by embedding promotion, its
 // subclasses — as a member of the ImageBox hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageBox) isImageBox() {}
+func (ib *ImageBox) isImageBox() {}
 
 var _ ImageBoxProvider = (*ImageBox)(nil)
 

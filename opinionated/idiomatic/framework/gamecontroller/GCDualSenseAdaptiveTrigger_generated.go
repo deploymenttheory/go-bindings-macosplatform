@@ -7,7 +7,6 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,105 +51,84 @@ func NewDualSenseAdaptiveTrigger() *DualSenseAdaptiveTrigger {
 	return dualSenseAdaptiveTriggerAdopt(_id)
 }
 
-// WithValue the level of pressure the user is applying to the button.
-func (x *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the level of pressure the user is applying to the button.
+func (dsat *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setValue:"), value)
+	return dsat
 }
 
-// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
-func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return x
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (dsat *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return dsat
 }
 
-// WithSfSymbolsName a system symbol for the element or the remapped element.
-func (x *DualSenseAdaptiveTrigger) WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
-	return x
+// WithSfSymbolsName sets a system symbol for the element or the remapped element.
+func (dsat *DualSenseAdaptiveTrigger) WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
+	return dsat
 }
 
-// WithLocalizedName the localized name for the element or the remapped element.
-func (x *DualSenseAdaptiveTrigger) WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
-	return x
+// WithLocalizedName sets the localized name for the element or the remapped element.
+func (dsat *DualSenseAdaptiveTrigger) WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
+	return dsat
 }
 
-// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
-func (x *DualSenseAdaptiveTrigger) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
-	return x
+// WithUnmappedSfSymbolsName sets the element’s system symbol, not the remapped symbol.
+func (dsat *DualSenseAdaptiveTrigger) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
+	return dsat
 }
 
-// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
-func (x *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
-	return x
+// WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
+func (dsat *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return dsat
 }
 
 // SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength sets the mode to provide feedback when the user tilts the trigger between the start and the end positions.
-func (x *DualSenseAdaptiveTrigger) SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeSlopeFeedbackWithStartPosition:endPosition:startStrength:endStrength:"), startPosition, endPosition, startStrength, endStrength)
+func (dsat *DualSenseAdaptiveTrigger) SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32) {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeSlopeFeedbackWithStartPosition:endPosition:startStrength:endStrength:"), startPosition, endPosition, startStrength, endStrength)
 }
 
 // SetModeFeedbackWithStartPositionResistiveStrength sets the mode to provide feedback when the user depresses the trigger at the start position or at a greater value.
-func (x *DualSenseAdaptiveTrigger) SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:"), startPosition, resistiveStrength)
+func (dsat *DualSenseAdaptiveTrigger) SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32) {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:"), startPosition, resistiveStrength)
 }
 
 // SetModeWeaponWithStartPositionEndPositionResistiveStrength sets the mode to provide feedback when the user depresses the trigger between the start and the end positions.
-func (x *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeWeaponWithStartPosition:endPosition:resistiveStrength:"), startPosition, endPosition, resistiveStrength)
+func (dsat *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32) {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeWeaponWithStartPosition:endPosition:resistiveStrength:"), startPosition, endPosition, resistiveStrength)
 }
 
 // SetModeVibrationWithStartPositionAmplitudeFrequency sets the mode to vibrate when the user depresses the trigger at the start position or at a greater value.
-func (x *DualSenseAdaptiveTrigger) SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:"), startPosition, amplitude, frequency)
+func (dsat *DualSenseAdaptiveTrigger) SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32) {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:"), startPosition, amplitude, frequency)
 }
 
 // SetModeOff sets the mode to off and stops any trigger effect.
-func (x *DualSenseAdaptiveTrigger) SetModeOff() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeOff"))
+func (dsat *DualSenseAdaptiveTrigger) SetModeOff() {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeOff"))
 }
 
-// Mode the mode that the adaptive trigger is currently in. This property reflects the physical state of the triggers - and requires a response from the controller. It does not update immediately after calling -[GCDualSenseAdaptiveTrigger setMode...].
-func (x *DualSenseAdaptiveTrigger) Mode() DualSenseAdaptiveTriggerMode {
-	_r := objc.Send[DualSenseAdaptiveTriggerMode](objref.IDOf(x), objc.RegisterName("mode"))
+// Mode returns the mode that the adaptive trigger is currently in. This property reflects the physical state of the triggers - and requires a response from the controller. It does not update immediately after calling -[GCDualSenseAdaptiveTrigger setMode...].
+func (dsat *DualSenseAdaptiveTrigger) Mode() DualSenseAdaptiveTriggerMode {
+	_r := objc.Send[DualSenseAdaptiveTriggerMode](objref.IDOf(dsat), objc.RegisterName("mode"))
 	return _r
 }
 
-// Status the current status of the adaptive trigger - whether it is ready to apply a load, is currently applying a load, or has finished applying a load.
-func (x *DualSenseAdaptiveTrigger) Status() DualSenseAdaptiveTriggerStatus {
-	_r := objc.Send[DualSenseAdaptiveTriggerStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the current status of the adaptive trigger - whether it is ready to apply a load, is currently applying a load, or has finished applying a load.
+func (dsat *DualSenseAdaptiveTrigger) Status() DualSenseAdaptiveTriggerStatus {
+	_r := objc.Send[DualSenseAdaptiveTriggerStatus](objref.IDOf(dsat), objc.RegisterName("status"))
 	return _r
 }
 
-// ArmPosition a normalized float from [0-1], with 0 representing the lowest possible trigger arm position and 1 representing the maximum trigger arm position.
-func (x *DualSenseAdaptiveTrigger) ArmPosition() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("armPosition"))
+// ArmPosition returns a normalized float from [0-1], with 0 representing the lowest possible trigger arm position and 1 representing the maximum trigger arm position.
+func (dsat *DualSenseAdaptiveTrigger) ArmPosition() float32 {
+	_r := objc.Send[float32](objref.IDOf(dsat), objc.RegisterName("armPosition"))
 	return _r
 }
-
-// DualSenseAdaptiveTriggerable is the interface implemented by [DualSenseAdaptiveTrigger], for mocking and DI.
-type DualSenseAdaptiveTriggerable interface {
-	obj.Object
-	WithValue(value float32) *DualSenseAdaptiveTrigger
-	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger
-	WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger
-	WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger
-	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger
-	WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger
-	SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32)
-	SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32)
-	SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32)
-	SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32)
-	SetModeOff()
-	Mode() DualSenseAdaptiveTriggerMode
-	Status() DualSenseAdaptiveTriggerStatus
-	ArmPosition() float32
-}
-
-var _ DualSenseAdaptiveTriggerable = (*DualSenseAdaptiveTrigger)(nil)
 
 var _ ControllerButtonInputProvider = (*DualSenseAdaptiveTrigger)(nil)
 

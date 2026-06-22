@@ -46,24 +46,24 @@ func blitPassSampleBufferAttachmentDescriptorAdopt(id objc.ID) *BlitPassSampleBu
 }
 
 // Description returns the object's -description text.
-func (x *BlitPassSampleBufferAttachmentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(bpsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlitPassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bpsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlitPassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bpsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BlitPassSampleBufferAttachmentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(bpsbad))
 }
 
 // NewBlitPassSampleBufferAttachmentDescriptor creates a new BlitPassSampleBufferAttachmentDescriptor.
@@ -72,49 +72,26 @@ func NewBlitPassSampleBufferAttachmentDescriptor() *BlitPassSampleBufferAttachme
 	return blitPassSampleBufferAttachmentDescriptorAdopt(_id)
 }
 
-// WithStartOfEncoderSampleIndex an index within a counter sample buffer that tells the GPU where to store counter data from the start of a blit pass.
-func (x *BlitPassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *BlitPassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
-	return x
+// WithStartOfEncoderSampleIndex sets an index within a counter sample buffer that tells the GPU where to store counter data from the start of a blit pass.
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *BlitPassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(bpsbad), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
+	return bpsbad
 }
 
-// WithEndOfEncoderSampleIndex an index within a counter sample buffer that tells the GPU where to store counter data from the end of a blit pass.
-func (x *BlitPassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *BlitPassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
-	return x
+// WithEndOfEncoderSampleIndex sets an index within a counter sample buffer that tells the GPU where to store counter data from the end of a blit pass.
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *BlitPassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(bpsbad), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
+	return bpsbad
 }
 
-// StartOfEncoderSampleIndex the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
-func (x *BlitPassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOfEncoderSampleIndex"))
+// StartOfEncoderSampleIndex returns the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(bpsbad), objc.RegisterName("startOfEncoderSampleIndex"))
 	return _r
 }
 
-// SetStartOfEncoderSampleIndex wraps the corresponding Objective-C method.
-func (x *BlitPassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
-}
-
-// EndOfEncoderSampleIndex the sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
-func (x *BlitPassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOfEncoderSampleIndex"))
+// EndOfEncoderSampleIndex returns the sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a blit pass will fail.
+func (bpsbad *BlitPassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(bpsbad), objc.RegisterName("endOfEncoderSampleIndex"))
 	return _r
 }
-
-// SetEndOfEncoderSampleIndex wraps the corresponding Objective-C method.
-func (x *BlitPassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
-}
-
-// BlitPassSampleBufferAttachmentDescriptorable is the interface implemented by [BlitPassSampleBufferAttachmentDescriptor], for mocking and DI.
-type BlitPassSampleBufferAttachmentDescriptorable interface {
-	obj.Object
-	WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *BlitPassSampleBufferAttachmentDescriptor
-	WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *BlitPassSampleBufferAttachmentDescriptor
-	StartOfEncoderSampleIndex() int
-	SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int)
-	EndOfEncoderSampleIndex() int
-	SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int)
-}
-
-var _ BlitPassSampleBufferAttachmentDescriptorable = (*BlitPassSampleBufferAttachmentDescriptor)(nil)

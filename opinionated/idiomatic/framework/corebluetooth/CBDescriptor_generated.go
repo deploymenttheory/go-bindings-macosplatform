@@ -46,31 +46,22 @@ func descriptorAdopt(id objc.ID) *Descriptor {
 	return x
 }
 
-// Characteristic a back-pointer to the characteristic this descriptor belongs to.
-func (x *Descriptor) Characteristic() *Characteristic {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristic"))
+// Characteristic returns a back-pointer to the characteristic this descriptor belongs to.
+func (d *Descriptor) Characteristic() *Characteristic {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("characteristic"))
 	return CharacteristicFromID(_r)
 }
 
-// Value the value of the descriptor. The corresponding value types for the various descriptors are detailed in
-func (x *Descriptor) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the value of the descriptor. The corresponding value types for the various descriptors are detailed in
+func (d *Descriptor) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// Descriptorable is the interface implemented by [Descriptor], for mocking and DI.
-type Descriptorable interface {
-	obj.Object
-	Characteristic() *Characteristic
-	Value() obj.Object
-}
-
-var _ Descriptorable = (*Descriptor)(nil)
 
 // isDescriptor marks Descriptor — and, by embedding promotion, its
 // subclasses — as a member of the Descriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Descriptor) isDescriptor() {}
+func (d *Descriptor) isDescriptor() {}
 
 var _ DescriptorProvider = (*Descriptor)(nil)
 

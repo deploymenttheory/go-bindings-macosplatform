@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewArrayBinarySecondaryGradientKernel() *ArrayBinarySecondaryGradientKernel
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayBinarySecondaryGradientKernel")), objc.RegisterName("new"))
 	return arrayBinarySecondaryGradientKernelAdopt(_id)
 }
-
-// ArrayBinarySecondaryGradientKernelable is the interface implemented by [ArrayBinarySecondaryGradientKernel], for mocking and DI.
-type ArrayBinarySecondaryGradientKernelable interface {
-	obj.Object
-}
-
-var _ ArrayBinarySecondaryGradientKernelable = (*ArrayBinarySecondaryGradientKernel)(nil)
 
 var _ ArrayMultiaryGradientKernelProvider = (*ArrayBinarySecondaryGradientKernel)(nil)
 

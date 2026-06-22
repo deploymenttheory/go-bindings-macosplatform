@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,32 +49,17 @@ func NewArrayGather() *ArrayGather {
 	return arrayGatherAdopt(_id)
 }
 
-// WithAxis the axis along which to apply the gather operation. Defaults to zero.
-func (x *ArrayGather) WithAxis(axis int) *ArrayGather {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
-	return x
+// WithAxis sets the axis along which to apply the gather operation. Defaults to zero.
+func (ag *ArrayGather) WithAxis(axis int) *ArrayGather {
+	objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("setAxis:"), axis)
+	return ag
 }
 
-// Axis the axis along which to apply the gather operation. Defaults to zero.
-func (x *ArrayGather) Axis() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("axis"))
+// Axis returns the axis along which to apply the gather operation. Defaults to zero.
+func (ag *ArrayGather) Axis() int {
+	_r := objc.Send[int](objref.IDOf(ag), objc.RegisterName("axis"))
 	return _r
 }
-
-// SetAxis wraps the corresponding Objective-C method.
-func (x *ArrayGather) SetAxis(axis int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
-}
-
-// ArrayGatherable is the interface implemented by [ArrayGather], for mocking and DI.
-type ArrayGatherable interface {
-	obj.Object
-	WithAxis(axis int) *ArrayGather
-	Axis() int
-	SetAxis(axis int)
-}
-
-var _ ArrayGatherable = (*ArrayGather)(nil)
 
 var _ ArrayBinaryKernelProvider = (*ArrayGather)(nil)
 

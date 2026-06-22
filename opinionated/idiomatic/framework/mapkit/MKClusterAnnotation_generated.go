@@ -46,24 +46,24 @@ func clusterAnnotationAdopt(id objc.ID) *ClusterAnnotation {
 }
 
 // Description returns the object's -description text.
-func (x *ClusterAnnotation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *ClusterAnnotation) Description() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClusterAnnotation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ca *ClusterAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClusterAnnotation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ca *ClusterAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ClusterAnnotation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *ClusterAnnotation) String() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // NewClusterAnnotationWithMemberAnnotations creates a cluster annotation with the specified individual annotations.
@@ -73,62 +73,38 @@ func NewClusterAnnotationWithMemberAnnotations(memberAnnotations []obj.Object) *
 	return clusterAnnotationAdopt(_id)
 }
 
-// WithTitle the title string to display for the group of annotations.
-func (x *ClusterAnnotation) WithTitle(title string) *ClusterAnnotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title string to display for the group of annotations.
+func (ca *ClusterAnnotation) WithTitle(title string) *ClusterAnnotation {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ca
 }
 
-// WithSubtitle the subtitle string to display for the group of annotations.
-func (x *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle string to display for the group of annotations.
+func (ca *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return ca
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *ClusterAnnotation) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (ca *ClusterAnnotation) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *ClusterAnnotation) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // Subtitle wraps the corresponding Objective-C method.
-func (x *ClusterAnnotation) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+func (ca *ClusterAnnotation) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSubtitle wraps the corresponding Objective-C method.
-func (x *ClusterAnnotation) SetSubtitle(subtitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-}
-
 // MemberAnnotations wraps the corresponding Objective-C method.
-func (x *ClusterAnnotation) MemberAnnotations() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberAnnotations"))
+func (ca *ClusterAnnotation) MemberAnnotations() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("memberAnnotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ClusterAnnotationable is the interface implemented by [ClusterAnnotation], for mocking and DI.
-type ClusterAnnotationable interface {
-	obj.Object
-	WithTitle(title string) *ClusterAnnotation
-	WithSubtitle(subtitle string) *ClusterAnnotation
-	Title() string
-	SetTitle(title string)
-	Subtitle() string
-	SetSubtitle(subtitle string)
-	MemberAnnotations() []obj.Object
-}
-
-var _ ClusterAnnotationable = (*ClusterAnnotation)(nil)

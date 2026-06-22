@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,24 +45,16 @@ func cNNBinaryConvolutionNodeAdopt(id objc.ID) *CNNBinaryConvolutionNode {
 	return x
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbcn *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(cbcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbcn
 }
-
-// CNNBinaryConvolutionNodeable is the interface implemented by [CNNBinaryConvolutionNode], for mocking and DI.
-type CNNBinaryConvolutionNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNBinaryConvolutionNode
-}
-
-var _ CNNBinaryConvolutionNodeable = (*CNNBinaryConvolutionNode)(nil)
 
 // isCNNBinaryConvolutionNode marks CNNBinaryConvolutionNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNBinaryConvolutionNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNBinaryConvolutionNode) isCNNBinaryConvolutionNode() {}
+func (cbcn *CNNBinaryConvolutionNode) isCNNBinaryConvolutionNode() {}
 
 var _ CNNBinaryConvolutionNodeProvider = (*CNNBinaryConvolutionNode)(nil)
 

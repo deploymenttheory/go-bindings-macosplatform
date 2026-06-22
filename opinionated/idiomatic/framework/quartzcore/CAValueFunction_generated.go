@@ -46,24 +46,24 @@ func valueFunctionAdopt(id objc.ID) *ValueFunction {
 }
 
 // Description returns the object's -description text.
-func (x *ValueFunction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vf *ValueFunction) Description() string {
+	return rt.Description(objref.IDOf(vf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ValueFunction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vf *ValueFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ValueFunction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vf *ValueFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ValueFunction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vf *ValueFunction) String() string {
+	return rt.Description(objref.IDOf(vf))
 }
 
 // NewValueFunction creates a new ValueFunction.
@@ -73,15 +73,7 @@ func NewValueFunction() *ValueFunction {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *ValueFunction) Name() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (vf *ValueFunction) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vf), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
-
-// ValueFunctionable is the interface implemented by [ValueFunction], for mocking and DI.
-type ValueFunctionable interface {
-	obj.Object
-	Name() obj.Object
-}
-
-var _ ValueFunctionable = (*ValueFunction)(nil)

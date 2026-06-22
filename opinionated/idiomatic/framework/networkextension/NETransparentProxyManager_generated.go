@@ -7,7 +7,6 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,54 +51,41 @@ func NewNETransparentProxyManager() *NETransparentProxyManager {
 	return nETransparentProxyManagerAdopt(_id)
 }
 
-// WithOnDemandRules an ordered list of Connect On Demand rules.
-func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager {
+// WithOnDemandRules sets an ordered list of Connect On Demand rules.
+func (ntpm *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager {
 	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setOnDemandRules:"), _arr)
+	return ntpm
 }
 
-// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
-func (x *NETransparentProxyManager) WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
-	return x
+// WithOnDemandEnabled sets a Boolean used to toggle the Connect On Demand capability.
+func (ntpm *NETransparentProxyManager) WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager {
+	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
+	return ntpm
 }
 
-// WithLocalizedDescription a string containing the display name of the VPN configuration.
-func (x *NETransparentProxyManager) WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
-	return x
+// WithLocalizedDescription sets a string containing the display name of the VPN configuration.
+func (ntpm *NETransparentProxyManager) WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager {
+	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return ntpm
 }
 
-// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-func (x *NETransparentProxyManager) WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
-	return x
+// WithProtocol sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
+func (ntpm *NETransparentProxyManager) WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager {
+	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
+	return ntpm
 }
 
-// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-func (x *NETransparentProxyManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
-	return x
+// WithProtocolConfiguration sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
+func (ntpm *NETransparentProxyManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager {
+	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
+	return ntpm
 }
 
-// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
-func (x *NETransparentProxyManager) WithEnabled(enabled bool) *NETransparentProxyManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean used to toggle the enabled state of the VPN configuration.
+func (ntpm *NETransparentProxyManager) WithEnabled(enabled bool) *NETransparentProxyManager {
+	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setEnabled:"), enabled)
+	return ntpm
 }
-
-// NETransparentProxyManagerable is the interface implemented by [NETransparentProxyManager], for mocking and DI.
-type NETransparentProxyManagerable interface {
-	obj.Object
-	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager
-	WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager
-	WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager
-	WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager
-	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager
-	WithEnabled(enabled bool) *NETransparentProxyManager
-}
-
-var _ NETransparentProxyManagerable = (*NETransparentProxyManager)(nil)
 
 var _ NEVPNManagerProvider = (*NETransparentProxyManager)(nil)

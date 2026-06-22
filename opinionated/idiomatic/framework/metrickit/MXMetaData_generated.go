@@ -46,24 +46,24 @@ func metaDataAdopt(id objc.ID) *MetaData {
 }
 
 // Description returns the object's -description text.
-func (x *MetaData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (md *MetaData) Description() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetaData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (md *MetaData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetaData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (md *MetaData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetaData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (md *MetaData) String() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // NewMetaData creates a new MetaData.
@@ -73,56 +73,56 @@ func NewMetaData() *MetaData {
 }
 
 // JSONRepresentation returns the contents of the metadata in JSON format.
-func (x *MetaData) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+func (md *MetaData) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the contents of the metadata as a dictionary.
-func (x *MetaData) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+func (md *MetaData) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// RegionFormat an NSString designating the region format associated with the application.
-func (x *MetaData) RegionFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionFormat"))
+// RegionFormat returns an NSString designating the region format associated with the application.
+func (md *MetaData) RegionFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("regionFormat"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// OsVersion an NSString designating the OS version associated with the device.
-func (x *MetaData) OsVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("osVersion"))
+// OSVersion returns an NSString designating the OS version associated with the device.
+func (md *MetaData) OSVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("osVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DeviceType an NSString designating the device type associated with this device.
-func (x *MetaData) DeviceType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceType"))
+// DeviceType returns an NSString designating the device type associated with this device.
+func (md *MetaData) DeviceType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("deviceType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ApplicationBuildVersion an NSString designating the app build version.
-func (x *MetaData) ApplicationBuildVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationBuildVersion"))
+// ApplicationBuildVersion returns an NSString designating the app build version.
+func (md *MetaData) ApplicationBuildVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("applicationBuildVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PlatformArchitecture an NSString designating the current architecture.
-func (x *MetaData) PlatformArchitecture() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("platformArchitecture"))
+// PlatformArchitecture returns an NSString designating the current architecture.
+func (md *MetaData) PlatformArchitecture() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("platformArchitecture"))
 	if _r == 0 {
 		return ""
 	}
@@ -130,46 +130,28 @@ func (x *MetaData) PlatformArchitecture() string {
 }
 
 // LowPowerModeEnabled wraps the corresponding Objective-C method.
-func (x *MetaData) LowPowerModeEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lowPowerModeEnabled"))
+func (md *MetaData) LowPowerModeEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("lowPowerModeEnabled"))
 	return _r
 }
 
 // IsTestFlightApp wraps the corresponding Objective-C method.
-func (x *MetaData) IsTestFlightApp() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTestFlightApp"))
+func (md *MetaData) IsTestFlightApp() bool {
+	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("isTestFlightApp"))
 	return _r
 }
 
 // Pid wraps the corresponding Objective-C method.
-func (x *MetaData) Pid() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pid"))
+func (md *MetaData) Pid() int {
+	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("pid"))
 	return _r
 }
 
 // BundleIdentifier wraps the corresponding Objective-C method.
-func (x *MetaData) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+func (md *MetaData) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MetaDataable is the interface implemented by [MetaData], for mocking and DI.
-type MetaDataable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-	RegionFormat() string
-	OsVersion() string
-	DeviceType() string
-	ApplicationBuildVersion() string
-	PlatformArchitecture() string
-	LowPowerModeEnabled() bool
-	IsTestFlightApp() bool
-	Pid() int
-	BundleIdentifier() string
-}
-
-var _ MetaDataable = (*MetaData)(nil)

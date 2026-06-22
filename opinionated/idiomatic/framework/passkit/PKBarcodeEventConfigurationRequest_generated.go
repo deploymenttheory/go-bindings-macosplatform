@@ -44,24 +44,24 @@ func barcodeEventConfigurationRequestAdopt(id objc.ID) *BarcodeEventConfiguratio
 }
 
 // Description returns the object's -description text.
-func (x *BarcodeEventConfigurationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (becr *BarcodeEventConfigurationRequest) Description() string {
+	return rt.Description(objref.IDOf(becr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BarcodeEventConfigurationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (becr *BarcodeEventConfigurationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(becr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BarcodeEventConfigurationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (becr *BarcodeEventConfigurationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(becr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BarcodeEventConfigurationRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (becr *BarcodeEventConfigurationRequest) String() string {
+	return rt.Description(objref.IDOf(becr))
 }
 
 // NewBarcodeEventConfigurationRequest creates a new BarcodeEventConfigurationRequest.
@@ -71,8 +71,8 @@ func NewBarcodeEventConfigurationRequest() *BarcodeEventConfigurationRequest {
 }
 
 // DeviceAccountIdentifier wraps the corresponding Objective-C method.
-func (x *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+func (becr *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(becr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,23 +80,13 @@ func (x *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
 }
 
 // ConfigurationData wraps the corresponding Objective-C method.
-func (x *BarcodeEventConfigurationRequest) ConfigurationData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationData"))
+func (becr *BarcodeEventConfigurationRequest) ConfigurationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(becr), objc.RegisterName("configurationData"))
 	return obj.Wrap(_r)
 }
 
 // ConfigurationDataType wraps the corresponding Objective-C method.
-func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() BarcodeEventConfigurationDataType {
-	_r := objc.Send[BarcodeEventConfigurationDataType](objref.IDOf(x), objc.RegisterName("configurationDataType"))
+func (becr *BarcodeEventConfigurationRequest) ConfigurationDataType() BarcodeEventConfigurationDataType {
+	_r := objc.Send[BarcodeEventConfigurationDataType](objref.IDOf(becr), objc.RegisterName("configurationDataType"))
 	return _r
 }
-
-// BarcodeEventConfigurationRequestable is the interface implemented by [BarcodeEventConfigurationRequest], for mocking and DI.
-type BarcodeEventConfigurationRequestable interface {
-	obj.Object
-	DeviceAccountIdentifier() string
-	ConfigurationData() obj.Object
-	ConfigurationDataType() BarcodeEventConfigurationDataType
-}
-
-var _ BarcodeEventConfigurationRequestable = (*BarcodeEventConfigurationRequest)(nil)

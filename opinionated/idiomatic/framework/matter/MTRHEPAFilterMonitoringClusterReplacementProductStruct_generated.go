@@ -44,24 +44,24 @@ func mTRHEPAFilterMonitoringClusterReplacementProductStructAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) Description() string {
+	return rt.Description(objref.IDOf(mfmcrps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mfmcrps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mfmcrps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) String() string {
+	return rt.Description(objref.IDOf(mfmcrps))
 }
 
 // NewMTRHEPAFilterMonitoringClusterReplacementProductStruct creates a new MTRHEPAFilterMonitoringClusterReplacementProductStruct.
@@ -71,51 +71,28 @@ func NewMTRHEPAFilterMonitoringClusterReplacementProductStruct() *MTRHEPAFilterM
 }
 
 // WithProductIdentifierType sets the property and returns the receiver so calls can be chained.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
-	return x
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
+	objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
+	return mfmcrps
 }
 
 // WithProductIdentifierValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
-	return x
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
+	objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
+	return mfmcrps
 }
 
 // ProductIdentifierType wraps the corresponding Objective-C method.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierType"))
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("productIdentifierType"))
 	return obj.Wrap(_r)
 }
 
-// SetProductIdentifierType wraps the corresponding Objective-C method.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
-}
-
 // ProductIdentifierValue wraps the corresponding Objective-C method.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierValue"))
+func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("productIdentifierValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetProductIdentifierValue wraps the corresponding Objective-C method.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
-}
-
-// MTRHEPAFilterMonitoringClusterReplacementProductStructable is the interface implemented by [MTRHEPAFilterMonitoringClusterReplacementProductStruct], for mocking and DI.
-type MTRHEPAFilterMonitoringClusterReplacementProductStructable interface {
-	obj.Object
-	WithProductIdentifierType(productIdentifierType obj.Object) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
-	WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
-	ProductIdentifierType() obj.Object
-	SetProductIdentifierType(productIdentifierType obj.Object)
-	ProductIdentifierValue() string
-	SetProductIdentifierValue(productIdentifierValue string)
-}
-
-var _ MTRHEPAFilterMonitoringClusterReplacementProductStructable = (*MTRHEPAFilterMonitoringClusterReplacementProductStruct)(nil)

@@ -44,24 +44,24 @@ func mTRSwitchClusterLongReleaseEventAdopt(id objc.ID) *MTRSwitchClusterLongRele
 }
 
 // Description returns the object's -description text.
-func (x *MTRSwitchClusterLongReleaseEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msclre *MTRSwitchClusterLongReleaseEvent) Description() string {
+	return rt.Description(objref.IDOf(msclre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSwitchClusterLongReleaseEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msclre *MTRSwitchClusterLongReleaseEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msclre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSwitchClusterLongReleaseEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msclre *MTRSwitchClusterLongReleaseEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msclre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSwitchClusterLongReleaseEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msclre *MTRSwitchClusterLongReleaseEvent) String() string {
+	return rt.Description(objref.IDOf(msclre))
 }
 
 // NewMTRSwitchClusterLongReleaseEvent creates a new MTRSwitchClusterLongReleaseEvent.
@@ -71,28 +71,13 @@ func NewMTRSwitchClusterLongReleaseEvent() *MTRSwitchClusterLongReleaseEvent {
 }
 
 // WithPreviousPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRSwitchClusterLongReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterLongReleaseEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
-	return x
+func (msclre *MTRSwitchClusterLongReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterLongReleaseEvent {
+	objc.Send[objc.ID](objref.IDOf(msclre), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
+	return msclre
 }
 
 // PreviousPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterLongReleaseEvent) PreviousPosition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousPosition"))
+func (msclre *MTRSwitchClusterLongReleaseEvent) PreviousPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msclre), objc.RegisterName("previousPosition"))
 	return obj.Wrap(_r)
 }
-
-// SetPreviousPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterLongReleaseEvent) SetPreviousPosition(previousPosition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
-}
-
-// MTRSwitchClusterLongReleaseEventable is the interface implemented by [MTRSwitchClusterLongReleaseEvent], for mocking and DI.
-type MTRSwitchClusterLongReleaseEventable interface {
-	obj.Object
-	WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterLongReleaseEvent
-	PreviousPosition() obj.Object
-	SetPreviousPosition(previousPosition obj.Object)
-}
-
-var _ MTRSwitchClusterLongReleaseEventable = (*MTRSwitchClusterLongReleaseEvent)(nil)

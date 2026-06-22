@@ -46,24 +46,24 @@ func crashDetectionManagerAdopt(id objc.ID) *CrashDetectionManager {
 }
 
 // Description returns the object's -description text.
-func (x *CrashDetectionManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdm *CrashDetectionManager) Description() string {
+	return rt.Description(objref.IDOf(cdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CrashDetectionManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdm *CrashDetectionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CrashDetectionManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdm *CrashDetectionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CrashDetectionManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdm *CrashDetectionManager) String() string {
+	return rt.Description(objref.IDOf(cdm))
 }
 
 // NewCrashDetectionManager creates a new CrashDetectionManager.
@@ -72,16 +72,8 @@ func NewCrashDetectionManager() *CrashDetectionManager {
 	return crashDetectionManagerAdopt(_id)
 }
 
-// AuthorizationStatus authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
-func (x *CrashDetectionManager) AuthorizationStatus() AuthorizationStatus {
-	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+// AuthorizationStatus returns authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
+func (cdm *CrashDetectionManager) AuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objref.IDOf(cdm), objc.RegisterName("authorizationStatus"))
 	return _r
 }
-
-// CrashDetectionManagerable is the interface implemented by [CrashDetectionManager], for mocking and DI.
-type CrashDetectionManagerable interface {
-	obj.Object
-	AuthorizationStatus() AuthorizationStatus
-}
-
-var _ CrashDetectionManagerable = (*CrashDetectionManager)(nil)

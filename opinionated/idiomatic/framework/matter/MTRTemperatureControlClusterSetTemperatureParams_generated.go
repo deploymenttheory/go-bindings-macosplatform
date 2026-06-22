@@ -44,24 +44,24 @@ func mTRTemperatureControlClusterSetTemperatureParamsAdopt(id objc.ID) *MTRTempe
 }
 
 // Description returns the object's -description text.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) Description() string {
+	return rt.Description(objref.IDOf(mtccstp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtccstp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtccstp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) String() string {
+	return rt.Description(objref.IDOf(mtccstp))
 }
 
 // NewMTRTemperatureControlClusterSetTemperatureParams creates a new MTRTemperatureControlClusterSetTemperatureParams.
@@ -71,88 +71,49 @@ func NewMTRTemperatureControlClusterSetTemperatureParams() *MTRTemperatureContro
 }
 
 // WithTargetTemperature sets the property and returns the receiver so calls can be chained.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperature(targetTemperature obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetTemperature:"), objref.IDOf(targetTemperature))
-	return x
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperature(targetTemperature obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTargetTemperature:"), objref.IDOf(targetTemperature))
+	return mtccstp
 }
 
 // WithTargetTemperatureLevel sets the property and returns the receiver so calls can be chained.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperatureLevel(targetTemperatureLevel obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetTemperatureLevel:"), objref.IDOf(targetTemperatureLevel))
-	return x
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperatureLevel(targetTemperatureLevel obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTargetTemperatureLevel:"), objref.IDOf(targetTemperatureLevel))
+	return mtccstp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRTemperatureControlClusterSetTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtccstp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtccstp
 }
 
 // TargetTemperature wraps the corresponding Objective-C method.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetTemperature"))
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("targetTemperature"))
 	return obj.Wrap(_r)
-}
-
-// SetTargetTemperature wraps the corresponding Objective-C method.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) SetTargetTemperature(targetTemperature obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetTemperature:"), objref.IDOf(targetTemperature))
 }
 
 // TargetTemperatureLevel wraps the corresponding Objective-C method.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetTemperatureLevel"))
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("targetTemperatureLevel"))
 	return obj.Wrap(_r)
 }
 
-// SetTargetTemperatureLevel wraps the corresponding Objective-C method.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) SetTargetTemperatureLevel(targetTemperatureLevel obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetTemperatureLevel:"), objref.IDOf(targetTemperatureLevel))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRTemperatureControlClusterSetTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRTemperatureControlClusterSetTemperatureParamsable is the interface implemented by [MTRTemperatureControlClusterSetTemperatureParams], for mocking and DI.
-type MTRTemperatureControlClusterSetTemperatureParamsable interface {
-	obj.Object
-	WithTargetTemperature(targetTemperature obj.Object) *MTRTemperatureControlClusterSetTemperatureParams
-	WithTargetTemperatureLevel(targetTemperatureLevel obj.Object) *MTRTemperatureControlClusterSetTemperatureParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTemperatureControlClusterSetTemperatureParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTemperatureControlClusterSetTemperatureParams
-	TargetTemperature() obj.Object
-	SetTargetTemperature(targetTemperature obj.Object)
-	TargetTemperatureLevel() obj.Object
-	SetTargetTemperatureLevel(targetTemperatureLevel obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRTemperatureControlClusterSetTemperatureParamsable = (*MTRTemperatureControlClusterSetTemperatureParams)(nil)

@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterCostStructAdopt(id objc.ID) *MTRDeviceEnerg
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Description() string {
+	return rt.Description(objref.IDOf(mdemccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) String() string {
+	return rt.Description(objref.IDOf(mdemccs))
 }
 
 // NewMTRDeviceEnergyManagementClusterCostStruct creates a new MTRDeviceEnergyManagementClusterCostStruct.
@@ -71,88 +71,49 @@ func NewMTRDeviceEnergyManagementClusterCostStruct() *MTRDeviceEnergyManagementC
 }
 
 // WithCostType sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCostType:"), objref.IDOf(costType))
-	return x
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setCostType:"), objref.IDOf(costType))
+	return mdemccs
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mdemccs
 }
 
 // WithDecimalPoints sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
-	return x
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
+	return mdemccs
 }
 
 // WithCurrency sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
-	return x
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
+	return mdemccs
 }
 
 // CostType wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) CostType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("costType"))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) CostType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("costType"))
 	return obj.Wrap(_r)
-}
-
-// SetCostType wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCostType(costType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCostType:"), objref.IDOf(costType))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("value"))
 	return obj.Wrap(_r)
-}
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
 // DecimalPoints wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalPoints"))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("decimalPoints"))
 	return obj.Wrap(_r)
-}
-
-// SetDecimalPoints wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetDecimalPoints(decimalPoints obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
 }
 
 // Currency wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) Currency() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currency"))
+func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Currency() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("currency"))
 	return obj.Wrap(_r)
 }
-
-// SetCurrency wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCurrency(currency obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
-}
-
-// MTRDeviceEnergyManagementClusterCostStructable is the interface implemented by [MTRDeviceEnergyManagementClusterCostStruct], for mocking and DI.
-type MTRDeviceEnergyManagementClusterCostStructable interface {
-	obj.Object
-	WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
-	WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
-	WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
-	WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
-	CostType() obj.Object
-	SetCostType(costType obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-	DecimalPoints() obj.Object
-	SetDecimalPoints(decimalPoints obj.Object)
-	Currency() obj.Object
-	SetCurrency(currency obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterCostStructable = (*MTRDeviceEnergyManagementClusterCostStruct)(nil)

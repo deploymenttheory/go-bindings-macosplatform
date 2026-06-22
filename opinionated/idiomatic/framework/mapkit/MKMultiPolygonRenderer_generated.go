@@ -53,83 +53,66 @@ func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *MultiPolygon) *MultiP
 	return multiPolygonRendererAdopt(_id)
 }
 
-// WithFillColor the fill color to use for the path.
-func (x *MultiPolygonRenderer) WithFillColor(fillColor obj.Object) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the fill color to use for the path.
+func (mpr *MultiPolygonRenderer) WithFillColor(fillColor obj.Object) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return mpr
 }
 
-// WithStrokeColor the stroke color to use for the path.
-func (x *MultiPolygonRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the stroke color to use for the path.
+func (mpr *MultiPolygonRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return mpr
 }
 
-// WithLineWidth the stroke width to use for the path.
-func (x *MultiPolygonRenderer) WithLineWidth(lineWidth float64) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets the stroke width to use for the path.
+func (mpr *MultiPolygonRenderer) WithLineWidth(lineWidth float64) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setLineWidth:"), lineWidth)
+	return mpr
 }
 
-// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
-func (x *MultiPolygonRenderer) WithMiterLimit(miterLimit float64) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the limiting value that helps avoid spikes at junctions between connected line segments.
+func (mpr *MultiPolygonRenderer) WithMiterLimit(miterLimit float64) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return mpr
 }
 
-// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
-func (x *MultiPolygonRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
-	return x
+// WithLineDashPhase sets the offset (in points) at which to start drawing the dash pattern.
+func (mpr *MultiPolygonRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return mpr
 }
 
-// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
-func (x *MultiPolygonRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolygonRenderer {
+// WithLineDashPattern sets an array of numbers specifying the dash pattern to use for the path.
+func (mpr *MultiPolygonRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolygonRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setLineDashPattern:"), _arr)
+	return mpr
 }
 
-// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-func (x *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+func (mpr *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return mpr
 }
 
-// WithPath the path representing the overlay’s shape.
-func (x *MultiPolygonRenderer) WithPath(path obj.Object) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path representing the overlay’s shape.
+func (mpr *MultiPolygonRenderer) WithPath(path obj.Object) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return mpr
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (mpr *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setAlpha:"), alpha)
+	return mpr
 }
 
 // MultiPolygon wraps the corresponding Objective-C method.
-func (x *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiPolygon"))
+func (mpr *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
+	_r := objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("multiPolygon"))
 	return MultiPolygonFromID(_r)
 }
-
-// MultiPolygonRendererable is the interface implemented by [MultiPolygonRenderer], for mocking and DI.
-type MultiPolygonRendererable interface {
-	obj.Object
-	WithFillColor(fillColor obj.Object) *MultiPolygonRenderer
-	WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer
-	WithLineWidth(lineWidth float64) *MultiPolygonRenderer
-	WithMiterLimit(miterLimit float64) *MultiPolygonRenderer
-	WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer
-	WithLineDashPattern(items ...obj.Object) *MultiPolygonRenderer
-	WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer
-	WithPath(path obj.Object) *MultiPolygonRenderer
-	WithAlpha(alpha float64) *MultiPolygonRenderer
-	MultiPolygon() *MultiPolygon
-}
-
-var _ MultiPolygonRendererable = (*MultiPolygonRenderer)(nil)
 
 var _ OverlayPathRendererProvider = (*MultiPolygonRenderer)(nil)
 

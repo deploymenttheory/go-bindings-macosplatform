@@ -46,24 +46,24 @@ func extensionStreamPropertiesAdopt(id objc.ID) *ExtensionStreamProperties {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionStreamProperties) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esp *ExtensionStreamProperties) Description() string {
+	return rt.Description(objref.IDOf(esp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionStreamProperties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esp *ExtensionStreamProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionStreamProperties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esp *ExtensionStreamProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionStreamProperties) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esp *ExtensionStreamProperties) String() string {
+	return rt.Description(objref.IDOf(esp))
 }
 
 // NewExtensionStreamPropertiesWithDictionary creates a properties object that provides the specified properties and default states.
@@ -73,175 +73,103 @@ func NewExtensionStreamPropertiesWithDictionary(propertiesDictionary obj.Object)
 	return extensionStreamPropertiesAdopt(_id)
 }
 
-// WithActiveFormatIndex the index of the active format.
-func (x *ExtensionStreamProperties) WithActiveFormatIndex(activeFormatIndex obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveFormatIndex:"), objref.IDOf(activeFormatIndex))
-	return x
+// WithActiveFormatIndex sets the index of the active format.
+func (esp *ExtensionStreamProperties) WithActiveFormatIndex(activeFormatIndex obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setActiveFormatIndex:"), objref.IDOf(activeFormatIndex))
+	return esp
 }
 
-// WithFrameDuration the duration of the frame.
-func (x *ExtensionStreamProperties) WithFrameDuration(frameDuration obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameDuration:"), objref.IDOf(frameDuration))
-	return x
+// WithFrameDuration sets the duration of the frame.
+func (esp *ExtensionStreamProperties) WithFrameDuration(frameDuration obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setFrameDuration:"), objref.IDOf(frameDuration))
+	return esp
 }
 
-// WithMaxFrameDuration the maximum duration of a frame.
-func (x *ExtensionStreamProperties) WithMaxFrameDuration(maxFrameDuration obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFrameDuration:"), objref.IDOf(maxFrameDuration))
-	return x
+// WithMaxFrameDuration sets the maximum duration of a frame.
+func (esp *ExtensionStreamProperties) WithMaxFrameDuration(maxFrameDuration obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setMaxFrameDuration:"), objref.IDOf(maxFrameDuration))
+	return esp
 }
 
-// WithSinkBufferQueueSize the buffer queue size.
-func (x *ExtensionStreamProperties) WithSinkBufferQueueSize(sinkBufferQueueSize obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkBufferQueueSize:"), objref.IDOf(sinkBufferQueueSize))
-	return x
+// WithSinkBufferQueueSize sets the buffer queue size.
+func (esp *ExtensionStreamProperties) WithSinkBufferQueueSize(sinkBufferQueueSize obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setSinkBufferQueueSize:"), objref.IDOf(sinkBufferQueueSize))
+	return esp
 }
 
-// WithSinkBuffersRequiredForStartup the number of buffers the stream requires for startup.
-func (x *ExtensionStreamProperties) WithSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkBuffersRequiredForStartup:"), objref.IDOf(sinkBuffersRequiredForStartup))
-	return x
+// WithSinkBuffersRequiredForStartup sets the number of buffers the stream requires for startup.
+func (esp *ExtensionStreamProperties) WithSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setSinkBuffersRequiredForStartup:"), objref.IDOf(sinkBuffersRequiredForStartup))
+	return esp
 }
 
-// WithSinkBufferUnderrunCount the buffer underrun count.
-func (x *ExtensionStreamProperties) WithSinkBufferUnderrunCount(sinkBufferUnderrunCount obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkBufferUnderrunCount:"), objref.IDOf(sinkBufferUnderrunCount))
-	return x
+// WithSinkBufferUnderrunCount sets the buffer underrun count.
+func (esp *ExtensionStreamProperties) WithSinkBufferUnderrunCount(sinkBufferUnderrunCount obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setSinkBufferUnderrunCount:"), objref.IDOf(sinkBufferUnderrunCount))
+	return esp
 }
 
-// WithSinkEndOfData a value that indicates whether the stream has reached its end.
-func (x *ExtensionStreamProperties) WithSinkEndOfData(sinkEndOfData obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkEndOfData:"), objref.IDOf(sinkEndOfData))
-	return x
+// WithSinkEndOfData sets a value that indicates whether the stream has reached its end.
+func (esp *ExtensionStreamProperties) WithSinkEndOfData(sinkEndOfData obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setSinkEndOfData:"), objref.IDOf(sinkEndOfData))
+	return esp
 }
 
-// WithPropertiesDictionary a dictionary representation of the property state.
-func (x *ExtensionStreamProperties) WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionStreamProperties {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
-	return x
+// WithPropertiesDictionary sets a dictionary representation of the property state.
+func (esp *ExtensionStreamProperties) WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionStreamProperties {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
+	return esp
 }
 
 // SetPropertyStateForProperty sets the state of the specified property.
-func (x *ExtensionStreamProperties) SetPropertyStateForProperty(propertyState obj.Object, property obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyState:forProperty:"), objref.IDOf(propertyState), objref.IDOf(property))
+func (esp *ExtensionStreamProperties) SetPropertyStateForProperty(propertyState obj.Object, property obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("setPropertyState:forProperty:"), objref.IDOf(propertyState), objref.IDOf(property))
 }
 
-// ActiveFormatIndex the active format index. The property key is CMIOExtensionPropertyStreamActiveFormatIndex.
-func (x *ExtensionStreamProperties) ActiveFormatIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeFormatIndex"))
+// ActiveFormatIndex returns the active format index. The property key is CMIOExtensionPropertyStreamActiveFormatIndex.
+func (esp *ExtensionStreamProperties) ActiveFormatIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("activeFormatIndex"))
 	return obj.Wrap(_r)
 }
 
-// SetActiveFormatIndex wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetActiveFormatIndex(activeFormatIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveFormatIndex:"), objref.IDOf(activeFormatIndex))
-}
-
-// FrameDuration the frame duration. The property key is CMIOExtensionPropertyStreamFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
-func (x *ExtensionStreamProperties) FrameDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameDuration"))
+// FrameDuration returns the frame duration. The property key is CMIOExtensionPropertyStreamFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
+func (esp *ExtensionStreamProperties) FrameDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("frameDuration"))
 	return obj.Wrap(_r)
 }
 
-// SetFrameDuration wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetFrameDuration(frameDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameDuration:"), objref.IDOf(frameDuration))
-}
-
-// MaxFrameDuration the maximum frame duration. The property key is CMIOExtensionPropertyStreamMaxFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
-func (x *ExtensionStreamProperties) MaxFrameDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxFrameDuration"))
+// MaxFrameDuration returns the maximum frame duration. The property key is CMIOExtensionPropertyStreamMaxFrameDuration. The dictionary needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
+func (esp *ExtensionStreamProperties) MaxFrameDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("maxFrameDuration"))
 	return obj.Wrap(_r)
 }
 
-// SetMaxFrameDuration wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetMaxFrameDuration(maxFrameDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFrameDuration:"), objref.IDOf(maxFrameDuration))
-}
-
-// SinkBufferQueueSize the sink stream property buffer queue size. The property key is CMIOExtensionPropertyStreamSinkBufferQueueSize.
-func (x *ExtensionStreamProperties) SinkBufferQueueSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinkBufferQueueSize"))
+// SinkBufferQueueSize returns the sink stream property buffer queue size. The property key is CMIOExtensionPropertyStreamSinkBufferQueueSize.
+func (esp *ExtensionStreamProperties) SinkBufferQueueSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("sinkBufferQueueSize"))
 	return obj.Wrap(_r)
 }
 
-// SetSinkBufferQueueSize wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetSinkBufferQueueSize(sinkBufferQueueSize obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkBufferQueueSize:"), objref.IDOf(sinkBufferQueueSize))
-}
-
-// SinkBuffersRequiredForStartup the sink stream property for number of buffers required for startup. The property key is CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup.
-func (x *ExtensionStreamProperties) SinkBuffersRequiredForStartup() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinkBuffersRequiredForStartup"))
+// SinkBuffersRequiredForStartup returns the sink stream property for number of buffers required for startup. The property key is CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup.
+func (esp *ExtensionStreamProperties) SinkBuffersRequiredForStartup() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("sinkBuffersRequiredForStartup"))
 	return obj.Wrap(_r)
 }
 
-// SetSinkBuffersRequiredForStartup wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkBuffersRequiredForStartup:"), objref.IDOf(sinkBuffersRequiredForStartup))
-}
-
-// SinkBufferUnderrunCount the sink stream property buffer underrun count. The property key is CMIOExtensionPropertyStreamSinkBufferUnderrunCount.
-func (x *ExtensionStreamProperties) SinkBufferUnderrunCount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinkBufferUnderrunCount"))
+// SinkBufferUnderrunCount returns the sink stream property buffer underrun count. The property key is CMIOExtensionPropertyStreamSinkBufferUnderrunCount.
+func (esp *ExtensionStreamProperties) SinkBufferUnderrunCount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("sinkBufferUnderrunCount"))
 	return obj.Wrap(_r)
 }
 
-// SetSinkBufferUnderrunCount wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetSinkBufferUnderrunCount(sinkBufferUnderrunCount obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkBufferUnderrunCount:"), objref.IDOf(sinkBufferUnderrunCount))
-}
-
-// SinkEndOfData the sink stream property end of data. The property key is CMIOExtensionPropertyStreamSinkEndOfData.
-func (x *ExtensionStreamProperties) SinkEndOfData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sinkEndOfData"))
+// SinkEndOfData returns the sink stream property end of data. The property key is CMIOExtensionPropertyStreamSinkEndOfData.
+func (esp *ExtensionStreamProperties) SinkEndOfData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("sinkEndOfData"))
 	return obj.Wrap(_r)
 }
 
-// SetSinkEndOfData wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetSinkEndOfData(sinkEndOfData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSinkEndOfData:"), objref.IDOf(sinkEndOfData))
-}
-
-// PropertiesDictionary the dictionary of properties. The dictionary containing all keys and values.
-func (x *ExtensionStreamProperties) PropertiesDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesDictionary"))
+// PropertiesDictionary returns the dictionary of properties. The dictionary containing all keys and values.
+func (esp *ExtensionStreamProperties) PropertiesDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("propertiesDictionary"))
 	return obj.Wrap(_r)
 }
-
-// SetPropertiesDictionary wraps the corresponding Objective-C method.
-func (x *ExtensionStreamProperties) SetPropertiesDictionary(propertiesDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
-}
-
-// ExtensionStreamPropertiesable is the interface implemented by [ExtensionStreamProperties], for mocking and DI.
-type ExtensionStreamPropertiesable interface {
-	obj.Object
-	WithActiveFormatIndex(activeFormatIndex obj.Object) *ExtensionStreamProperties
-	WithFrameDuration(frameDuration obj.Object) *ExtensionStreamProperties
-	WithMaxFrameDuration(maxFrameDuration obj.Object) *ExtensionStreamProperties
-	WithSinkBufferQueueSize(sinkBufferQueueSize obj.Object) *ExtensionStreamProperties
-	WithSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup obj.Object) *ExtensionStreamProperties
-	WithSinkBufferUnderrunCount(sinkBufferUnderrunCount obj.Object) *ExtensionStreamProperties
-	WithSinkEndOfData(sinkEndOfData obj.Object) *ExtensionStreamProperties
-	WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionStreamProperties
-	SetPropertyStateForProperty(propertyState obj.Object, property obj.Object)
-	ActiveFormatIndex() obj.Object
-	SetActiveFormatIndex(activeFormatIndex obj.Object)
-	FrameDuration() obj.Object
-	SetFrameDuration(frameDuration obj.Object)
-	MaxFrameDuration() obj.Object
-	SetMaxFrameDuration(maxFrameDuration obj.Object)
-	SinkBufferQueueSize() obj.Object
-	SetSinkBufferQueueSize(sinkBufferQueueSize obj.Object)
-	SinkBuffersRequiredForStartup() obj.Object
-	SetSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup obj.Object)
-	SinkBufferUnderrunCount() obj.Object
-	SetSinkBufferUnderrunCount(sinkBufferUnderrunCount obj.Object)
-	SinkEndOfData() obj.Object
-	SetSinkEndOfData(sinkEndOfData obj.Object)
-	PropertiesDictionary() obj.Object
-	SetPropertiesDictionary(propertiesDictionary obj.Object)
-}
-
-var _ ExtensionStreamPropertiesable = (*ExtensionStreamProperties)(nil)

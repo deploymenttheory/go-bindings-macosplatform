@@ -44,24 +44,24 @@ func calNthWeekDayAdopt(id objc.ID) *CalNthWeekDay {
 }
 
 // Description returns the object's -description text.
-func (x *CalNthWeekDay) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cnwd *CalNthWeekDay) Description() string {
+	return rt.Description(objref.IDOf(cnwd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalNthWeekDay) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cnwd *CalNthWeekDay) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cnwd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalNthWeekDay) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cnwd *CalNthWeekDay) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cnwd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CalNthWeekDay) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cnwd *CalNthWeekDay) String() string {
+	return rt.Description(objref.IDOf(cnwd))
 }
 
 // NewCalNthWeekDay creates a new CalNthWeekDay.
@@ -71,22 +71,13 @@ func NewCalNthWeekDay() *CalNthWeekDay {
 }
 
 // DayOfTheWeek wraps the corresponding Objective-C method.
-func (x *CalNthWeekDay) DayOfTheWeek() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfTheWeek"))
+func (cnwd *CalNthWeekDay) DayOfTheWeek() int {
+	_r := objc.Send[int](objref.IDOf(cnwd), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
 // WeekNumber wraps the corresponding Objective-C method.
-func (x *CalNthWeekDay) WeekNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekNumber"))
+func (cnwd *CalNthWeekDay) WeekNumber() int {
+	_r := objc.Send[int](objref.IDOf(cnwd), objc.RegisterName("weekNumber"))
 	return _r
 }
-
-// CalNthWeekDayable is the interface implemented by [CalNthWeekDay], for mocking and DI.
-type CalNthWeekDayable interface {
-	obj.Object
-	DayOfTheWeek() int
-	WeekNumber() int
-}
-
-var _ CalNthWeekDayable = (*CalNthWeekDay)(nil)

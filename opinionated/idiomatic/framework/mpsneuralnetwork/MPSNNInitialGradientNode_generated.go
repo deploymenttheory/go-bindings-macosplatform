@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewNNInitialGradientNodeWithSource(source *NNImageNode) *NNInitialGradientN
 	return nNInitialGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNInitialGradientNode) WithLabel(label string) *NNInitialGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nign *NNInitialGradientNode) WithLabel(label string) *NNInitialGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nign), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nign
 }
-
-// NNInitialGradientNodeable is the interface implemented by [NNInitialGradientNode], for mocking and DI.
-type NNInitialGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNInitialGradientNode
-}
-
-var _ NNInitialGradientNodeable = (*NNInitialGradientNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNInitialGradientNode)(nil)

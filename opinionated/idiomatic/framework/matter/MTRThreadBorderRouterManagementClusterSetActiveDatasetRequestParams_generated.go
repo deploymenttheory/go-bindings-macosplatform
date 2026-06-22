@@ -44,24 +44,24 @@ func mTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsAdopt(id
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Description() string {
+	return rt.Description(objref.IDOf(mtbrmcsadrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtbrmcsadrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtbrmcsadrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) String() string {
+	return rt.Description(objref.IDOf(mtbrmcsadrp))
 }
 
 // NewMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams creates a new MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams.
@@ -71,88 +71,49 @@ func NewMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams() *M
 }
 
 // WithActiveDataset sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithActiveDataset(activeDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveDataset:"), objref.IDOf(activeDataset))
-	return x
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithActiveDataset(activeDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setActiveDataset:"), objref.IDOf(activeDataset))
+	return mtbrmcsadrp
 }
 
 // WithBreadcrumb sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithBreadcrumb(breadcrumb obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
-	return x
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithBreadcrumb(breadcrumb obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
+	return mtbrmcsadrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtbrmcsadrp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtbrmcsadrp
 }
 
 // ActiveDataset wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ActiveDataset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeDataset"))
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ActiveDataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("activeDataset"))
 	return obj.Wrap(_r)
-}
-
-// SetActiveDataset wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetActiveDataset(activeDataset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveDataset:"), objref.IDOf(activeDataset))
 }
 
 // Breadcrumb wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Breadcrumb() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Breadcrumb() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
-// SetBreadcrumb wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetBreadcrumb(breadcrumb obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams], for mocking and DI.
-type MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsable interface {
-	obj.Object
-	WithActiveDataset(activeDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
-	WithBreadcrumb(breadcrumb obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
-	ActiveDataset() obj.Object
-	SetActiveDataset(activeDataset obj.Object)
-	Breadcrumb() obj.Object
-	SetBreadcrumb(breadcrumb obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsable = (*MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams)(nil)

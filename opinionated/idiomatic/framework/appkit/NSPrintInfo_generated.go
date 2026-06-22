@@ -47,24 +47,24 @@ func printInfoAdopt(id objc.ID) *PrintInfo {
 }
 
 // Description returns the object's -description text.
-func (x *PrintInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PrintInfo) Description() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PrintInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pi *PrintInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PrintInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pi *PrintInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PrintInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PrintInfo) String() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // NewPrintInfo creates a new PrintInfo.
@@ -87,285 +87,215 @@ func NewPrintInfoWithCoder(coder obj.Object) *PrintInfo {
 	return printInfoAdopt(_id)
 }
 
-// WithPaperName the name of the currently selected paper size.
-func (x *PrintInfo) WithPaperName(paperName obj.Object) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaperName:"), objref.IDOf(paperName))
-	return x
+// WithPaperName sets the name of the currently selected paper size.
+func (pi *PrintInfo) WithPaperName(paperName obj.Object) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPaperName:"), objref.IDOf(paperName))
+	return pi
 }
 
-// WithPaperSize the size of the paper.
-func (x *PrintInfo) WithPaperSize(paperSize corefoundation.CGSize) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaperSize:"), paperSize)
-	return x
+// WithPaperSize sets the size of the paper.
+func (pi *PrintInfo) WithPaperSize(paperSize corefoundation.CGSize) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPaperSize:"), paperSize)
+	return pi
 }
 
-// WithOrientation the orientation attribute.
-func (x *PrintInfo) WithOrientation(orientation PaperOrientation) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
-	return x
+// WithOrientation sets the orientation attribute.
+func (pi *PrintInfo) WithOrientation(orientation PaperOrientation) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setOrientation:"), orientation)
+	return pi
 }
 
-// WithScalingFactor the current scaling factor.
-func (x *PrintInfo) WithScalingFactor(scalingFactor float64) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingFactor:"), scalingFactor)
-	return x
+// WithScalingFactor sets the current scaling factor.
+func (pi *PrintInfo) WithScalingFactor(scalingFactor float64) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScalingFactor:"), scalingFactor)
+	return pi
 }
 
-// WithLeftMargin the width of the left margin.
-func (x *PrintInfo) WithLeftMargin(leftMargin float64) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftMargin:"), leftMargin)
-	return x
+// WithLeftMargin sets the width of the left margin.
+func (pi *PrintInfo) WithLeftMargin(leftMargin float64) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLeftMargin:"), leftMargin)
+	return pi
 }
 
-// WithRightMargin the width of the right margin.
-func (x *PrintInfo) WithRightMargin(rightMargin float64) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightMargin:"), rightMargin)
-	return x
+// WithRightMargin sets the width of the right margin.
+func (pi *PrintInfo) WithRightMargin(rightMargin float64) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setRightMargin:"), rightMargin)
+	return pi
 }
 
-// WithTopMargin the top margin to the specified size.
-func (x *PrintInfo) WithTopMargin(topMargin float64) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopMargin:"), topMargin)
-	return x
+// WithTopMargin sets the top margin to the specified size.
+func (pi *PrintInfo) WithTopMargin(topMargin float64) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTopMargin:"), topMargin)
+	return pi
 }
 
-// WithBottomMargin the height of the bottom margin.
-func (x *PrintInfo) WithBottomMargin(bottomMargin float64) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomMargin:"), bottomMargin)
-	return x
+// WithBottomMargin sets the height of the bottom margin.
+func (pi *PrintInfo) WithBottomMargin(bottomMargin float64) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBottomMargin:"), bottomMargin)
+	return pi
 }
 
-// WithHorizontallyCentered a Boolean value that indicates whether the image is centered horizontally.
-func (x *PrintInfo) WithHorizontallyCentered(horizontallyCentered bool) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontallyCentered:"), horizontallyCentered)
-	return x
+// WithHorizontallyCentered sets a Boolean value that indicates whether the image is centered horizontally.
+func (pi *PrintInfo) WithHorizontallyCentered(horizontallyCentered bool) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHorizontallyCentered:"), horizontallyCentered)
+	return pi
 }
 
-// WithVerticallyCentered a Boolean value that indicates whether the image is centered vertically.
-func (x *PrintInfo) WithVerticallyCentered(verticallyCentered bool) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticallyCentered:"), verticallyCentered)
-	return x
+// WithVerticallyCentered sets a Boolean value that indicates whether the image is centered vertically.
+func (pi *PrintInfo) WithVerticallyCentered(verticallyCentered bool) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setVerticallyCentered:"), verticallyCentered)
+	return pi
 }
 
-// WithHorizontalPagination the horizontal pagination mode.
-func (x *PrintInfo) WithHorizontalPagination(horizontalPagination PrintingPaginationMode) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalPagination:"), horizontalPagination)
-	return x
+// WithHorizontalPagination sets the horizontal pagination mode.
+func (pi *PrintInfo) WithHorizontalPagination(horizontalPagination PrintingPaginationMode) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHorizontalPagination:"), horizontalPagination)
+	return pi
 }
 
-// WithVerticalPagination the vertical pagination to the specified mode.
-func (x *PrintInfo) WithVerticalPagination(verticalPagination PrintingPaginationMode) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalPagination:"), verticalPagination)
-	return x
+// WithVerticalPagination sets the vertical pagination to the specified mode.
+func (pi *PrintInfo) WithVerticalPagination(verticalPagination PrintingPaginationMode) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setVerticalPagination:"), verticalPagination)
+	return pi
 }
 
-// WithJobDisposition the action specified for the job.
-func (x *PrintInfo) WithJobDisposition(jobDisposition obj.Object) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobDisposition:"), objref.IDOf(jobDisposition))
-	return x
+// WithJobDisposition sets the action specified for the job.
+func (pi *PrintInfo) WithJobDisposition(jobDisposition obj.Object) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setJobDisposition:"), objref.IDOf(jobDisposition))
+	return pi
 }
 
-// WithPrinter the printer object to be used for printing.
-func (x *PrintInfo) WithPrinter(printer *Printer) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrinter:"), objref.IDOf(printer))
-	return x
+// WithPrinter sets the printer object to be used for printing.
+func (pi *PrintInfo) WithPrinter(printer *Printer) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPrinter:"), objref.IDOf(printer))
+	return pi
 }
 
-// WithSelectionOnly a Boolean value that indicates whether only the currently selected contents should be printed.
-func (x *PrintInfo) WithSelectionOnly(selectionOnly bool) *PrintInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionOnly:"), selectionOnly)
-	return x
+// WithSelectionOnly sets a Boolean value that indicates whether only the currently selected contents should be printed.
+func (pi *PrintInfo) WithSelectionOnly(selectionOnly bool) *PrintInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setSelectionOnly:"), selectionOnly)
+	return pi
 }
 
 // Dictionary returns the print info’s dictionary that contains the printing attributes.
-func (x *PrintInfo) Dictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionary"))
+func (pi *PrintInfo) Dictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("dictionary"))
 	return obj.Wrap(_r)
 }
 
 // SetUpPrintOperationDefaultValues validates the attributes encapsulated by the print info.
-func (x *PrintInfo) SetUpPrintOperationDefaultValues() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpPrintOperationDefaultValues"))
+func (pi *PrintInfo) SetUpPrintOperationDefaultValues() {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUpPrintOperationDefaultValues"))
 }
 
 // UpdateFromPMPageFormat synchronizes the print info’s page format information with information from its associated page format object.
-func (x *PrintInfo) UpdateFromPMPageFormat() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFromPMPageFormat"))
+func (pi *PrintInfo) UpdateFromPMPageFormat() {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("updateFromPMPageFormat"))
 }
 
 // UpdateFromPMPrintSettings synchronizes the print info’s print settings information with information from its associated print settings object.
-func (x *PrintInfo) UpdateFromPMPrintSettings() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFromPMPrintSettings"))
+func (pi *PrintInfo) UpdateFromPMPrintSettings() {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("updateFromPMPrintSettings"))
 }
 
 // TakeSettingsFromPDFInfo updates the print info with all the settings and attributes in the specified PDF info object.
-func (x *PrintInfo) TakeSettingsFromPDFInfo(inPDFInfo *PDFInfo) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeSettingsFromPDFInfo:"), objref.IDOf(inPDFInfo))
+func (pi *PrintInfo) TakeSettingsFromPDFInfo(inPDFInfo *PDFInfo) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("takeSettingsFromPDFInfo:"), objref.IDOf(inPDFInfo))
 }
 
 // PaperName wraps the corresponding Objective-C method.
-func (x *PrintInfo) PaperName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paperName"))
+func (pi *PrintInfo) PaperName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("paperName"))
 	return obj.Wrap(_r)
-}
-
-// SetPaperName wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetPaperName(paperName obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaperName:"), objref.IDOf(paperName))
 }
 
 // PaperSize wraps the corresponding Objective-C method.
-func (x *PrintInfo) PaperSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("paperSize"))
+func (pi *PrintInfo) PaperSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pi), objc.RegisterName("paperSize"))
 	return _r
-}
-
-// SetPaperSize wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetPaperSize(paperSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaperSize:"), paperSize)
 }
 
 // Orientation wraps the corresponding Objective-C method.
-func (x *PrintInfo) Orientation() PaperOrientation {
-	_r := objc.Send[PaperOrientation](objref.IDOf(x), objc.RegisterName("orientation"))
+func (pi *PrintInfo) Orientation() PaperOrientation {
+	_r := objc.Send[PaperOrientation](objref.IDOf(pi), objc.RegisterName("orientation"))
 	return _r
-}
-
-// SetOrientation wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetOrientation(orientation PaperOrientation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
 }
 
 // ScalingFactor wraps the corresponding Objective-C method.
-func (x *PrintInfo) ScalingFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scalingFactor"))
+func (pi *PrintInfo) ScalingFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("scalingFactor"))
 	return _r
-}
-
-// SetScalingFactor wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetScalingFactor(scalingFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingFactor:"), scalingFactor)
 }
 
 // LeftMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) LeftMargin() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leftMargin"))
+func (pi *PrintInfo) LeftMargin() float64 {
+	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("leftMargin"))
 	return _r
-}
-
-// SetLeftMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetLeftMargin(leftMargin float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftMargin:"), leftMargin)
 }
 
 // RightMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) RightMargin() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rightMargin"))
+func (pi *PrintInfo) RightMargin() float64 {
+	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("rightMargin"))
 	return _r
-}
-
-// SetRightMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetRightMargin(rightMargin float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightMargin:"), rightMargin)
 }
 
 // TopMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) TopMargin() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("topMargin"))
+func (pi *PrintInfo) TopMargin() float64 {
+	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("topMargin"))
 	return _r
-}
-
-// SetTopMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetTopMargin(topMargin float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopMargin:"), topMargin)
 }
 
 // BottomMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) BottomMargin() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bottomMargin"))
+func (pi *PrintInfo) BottomMargin() float64 {
+	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("bottomMargin"))
 	return _r
-}
-
-// SetBottomMargin wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetBottomMargin(bottomMargin float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomMargin:"), bottomMargin)
 }
 
 // IsHorizontallyCentered wraps the corresponding Objective-C method.
-func (x *PrintInfo) IsHorizontallyCentered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHorizontallyCentered"))
+func (pi *PrintInfo) IsHorizontallyCentered() bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isHorizontallyCentered"))
 	return _r
-}
-
-// SetHorizontallyCentered wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetHorizontallyCentered(horizontallyCentered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontallyCentered:"), horizontallyCentered)
 }
 
 // IsVerticallyCentered wraps the corresponding Objective-C method.
-func (x *PrintInfo) IsVerticallyCentered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVerticallyCentered"))
+func (pi *PrintInfo) IsVerticallyCentered() bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isVerticallyCentered"))
 	return _r
-}
-
-// SetVerticallyCentered wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetVerticallyCentered(verticallyCentered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticallyCentered:"), verticallyCentered)
 }
 
 // HorizontalPagination wraps the corresponding Objective-C method.
-func (x *PrintInfo) HorizontalPagination() PrintingPaginationMode {
-	_r := objc.Send[PrintingPaginationMode](objref.IDOf(x), objc.RegisterName("horizontalPagination"))
+func (pi *PrintInfo) HorizontalPagination() PrintingPaginationMode {
+	_r := objc.Send[PrintingPaginationMode](objref.IDOf(pi), objc.RegisterName("horizontalPagination"))
 	return _r
-}
-
-// SetHorizontalPagination wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetHorizontalPagination(horizontalPagination PrintingPaginationMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalPagination:"), horizontalPagination)
 }
 
 // VerticalPagination wraps the corresponding Objective-C method.
-func (x *PrintInfo) VerticalPagination() PrintingPaginationMode {
-	_r := objc.Send[PrintingPaginationMode](objref.IDOf(x), objc.RegisterName("verticalPagination"))
+func (pi *PrintInfo) VerticalPagination() PrintingPaginationMode {
+	_r := objc.Send[PrintingPaginationMode](objref.IDOf(pi), objc.RegisterName("verticalPagination"))
 	return _r
 }
 
-// SetVerticalPagination wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetVerticalPagination(verticalPagination PrintingPaginationMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalPagination:"), verticalPagination)
-}
-
 // JobDisposition wraps the corresponding Objective-C method.
-func (x *PrintInfo) JobDisposition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jobDisposition"))
+func (pi *PrintInfo) JobDisposition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("jobDisposition"))
 	return obj.Wrap(_r)
 }
 
-// SetJobDisposition wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetJobDisposition(jobDisposition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobDisposition:"), objref.IDOf(jobDisposition))
-}
-
 // Printer wraps the corresponding Objective-C method.
-func (x *PrintInfo) Printer() *Printer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printer"))
+func (pi *PrintInfo) Printer() *Printer {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("printer"))
 	return PrinterFromID(_r)
 }
 
-// SetPrinter wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetPrinter(printer *Printer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrinter:"), objref.IDOf(printer))
-}
-
 // ImageablePageBounds wraps the corresponding Objective-C method.
-func (x *PrintInfo) ImageablePageBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageablePageBounds"))
+func (pi *PrintInfo) ImageablePageBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pi), objc.RegisterName("imageablePageBounds"))
 	return _r
 }
 
 // LocalizedPaperName wraps the corresponding Objective-C method.
-func (x *PrintInfo) LocalizedPaperName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedPaperName"))
+func (pi *PrintInfo) LocalizedPaperName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("localizedPaperName"))
 	if _r == 0 {
 		return ""
 	}
@@ -373,78 +303,13 @@ func (x *PrintInfo) LocalizedPaperName() string {
 }
 
 // PrintSettings wraps the corresponding Objective-C method.
-func (x *PrintInfo) PrintSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printSettings"))
+func (pi *PrintInfo) PrintSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("printSettings"))
 	return obj.Wrap(_r)
 }
 
 // IsSelectionOnly wraps the corresponding Objective-C method.
-func (x *PrintInfo) IsSelectionOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectionOnly"))
+func (pi *PrintInfo) IsSelectionOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isSelectionOnly"))
 	return _r
 }
-
-// SetSelectionOnly wraps the corresponding Objective-C method.
-func (x *PrintInfo) SetSelectionOnly(selectionOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionOnly:"), selectionOnly)
-}
-
-// PrintInfoable is the interface implemented by [PrintInfo], for mocking and DI.
-type PrintInfoable interface {
-	obj.Object
-	WithPaperName(paperName obj.Object) *PrintInfo
-	WithPaperSize(paperSize corefoundation.CGSize) *PrintInfo
-	WithOrientation(orientation PaperOrientation) *PrintInfo
-	WithScalingFactor(scalingFactor float64) *PrintInfo
-	WithLeftMargin(leftMargin float64) *PrintInfo
-	WithRightMargin(rightMargin float64) *PrintInfo
-	WithTopMargin(topMargin float64) *PrintInfo
-	WithBottomMargin(bottomMargin float64) *PrintInfo
-	WithHorizontallyCentered(horizontallyCentered bool) *PrintInfo
-	WithVerticallyCentered(verticallyCentered bool) *PrintInfo
-	WithHorizontalPagination(horizontalPagination PrintingPaginationMode) *PrintInfo
-	WithVerticalPagination(verticalPagination PrintingPaginationMode) *PrintInfo
-	WithJobDisposition(jobDisposition obj.Object) *PrintInfo
-	WithPrinter(printer *Printer) *PrintInfo
-	WithSelectionOnly(selectionOnly bool) *PrintInfo
-	Dictionary() obj.Object
-	SetUpPrintOperationDefaultValues()
-	UpdateFromPMPageFormat()
-	UpdateFromPMPrintSettings()
-	TakeSettingsFromPDFInfo(inPDFInfo *PDFInfo)
-	PaperName() obj.Object
-	SetPaperName(paperName obj.Object)
-	PaperSize() corefoundation.CGSize
-	SetPaperSize(paperSize corefoundation.CGSize)
-	Orientation() PaperOrientation
-	SetOrientation(orientation PaperOrientation)
-	ScalingFactor() float64
-	SetScalingFactor(scalingFactor float64)
-	LeftMargin() float64
-	SetLeftMargin(leftMargin float64)
-	RightMargin() float64
-	SetRightMargin(rightMargin float64)
-	TopMargin() float64
-	SetTopMargin(topMargin float64)
-	BottomMargin() float64
-	SetBottomMargin(bottomMargin float64)
-	IsHorizontallyCentered() bool
-	SetHorizontallyCentered(horizontallyCentered bool)
-	IsVerticallyCentered() bool
-	SetVerticallyCentered(verticallyCentered bool)
-	HorizontalPagination() PrintingPaginationMode
-	SetHorizontalPagination(horizontalPagination PrintingPaginationMode)
-	VerticalPagination() PrintingPaginationMode
-	SetVerticalPagination(verticalPagination PrintingPaginationMode)
-	JobDisposition() obj.Object
-	SetJobDisposition(jobDisposition obj.Object)
-	Printer() *Printer
-	SetPrinter(printer *Printer)
-	ImageablePageBounds() corefoundation.CGRect
-	LocalizedPaperName() string
-	PrintSettings() obj.Object
-	IsSelectionOnly() bool
-	SetSelectionOnly(selectionOnly bool)
-}
-
-var _ PrintInfoable = (*PrintInfo)(nil)

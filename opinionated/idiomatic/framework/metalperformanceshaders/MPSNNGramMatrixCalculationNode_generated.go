@@ -60,25 +60,16 @@ func NewNNGramMatrixCalculationNodeWithSourceAlpha(sourceNode obj.Object, alpha 
 	return nNGramMatrixCalculationNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNGramMatrixCalculationNode) WithLabel(label string) *NNGramMatrixCalculationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ngmcn *NNGramMatrixCalculationNode) WithLabel(label string) *NNGramMatrixCalculationNode {
+	objc.Send[objc.ID](objref.IDOf(ngmcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ngmcn
 }
 
-// Alpha scaling factor for the output. Default: 1.0f.
-func (x *NNGramMatrixCalculationNode) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns scaling factor for the output. Default: 1.0f.
+func (ngmcn *NNGramMatrixCalculationNode) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(ngmcn), objc.RegisterName("alpha"))
 	return _r
 }
-
-// NNGramMatrixCalculationNodeable is the interface implemented by [NNGramMatrixCalculationNode], for mocking and DI.
-type NNGramMatrixCalculationNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNGramMatrixCalculationNode
-	Alpha() float32
-}
-
-var _ NNGramMatrixCalculationNodeable = (*NNGramMatrixCalculationNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNGramMatrixCalculationNode)(nil)

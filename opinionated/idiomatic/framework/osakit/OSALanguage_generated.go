@@ -44,24 +44,24 @@ func languageAdopt(id objc.ID) *Language {
 }
 
 // Description returns the object's -description text.
-func (x *Language) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Language) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Language) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Language) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Language) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Language) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Language) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Language) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // NewLanguage creates a new Language.
@@ -71,14 +71,14 @@ func NewLanguage() *Language {
 }
 
 // SharedLanguageInstance wraps the corresponding Objective-C method.
-func (x *Language) SharedLanguageInstance() *LanguageInstance {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedLanguageInstance"))
+func (l *Language) SharedLanguageInstance() *LanguageInstance {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("sharedLanguageInstance"))
 	return LanguageInstanceFromID(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Language) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (l *Language) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -86,8 +86,8 @@ func (x *Language) Name() string {
 }
 
 // Info wraps the corresponding Objective-C method.
-func (x *Language) Info() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("info"))
+func (l *Language) Info() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("info"))
 	if _r == 0 {
 		return ""
 	}
@@ -95,46 +95,31 @@ func (x *Language) Info() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Language) Type() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("type"))
+func (l *Language) Type() int {
+	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("type"))
 	return _r
 }
 
 // SubType wraps the corresponding Objective-C method.
-func (x *Language) SubType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("subType"))
+func (l *Language) SubType() int {
+	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("subType"))
 	return _r
 }
 
 // Manufacturer wraps the corresponding Objective-C method.
-func (x *Language) Manufacturer() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("manufacturer"))
+func (l *Language) Manufacturer() int {
+	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("manufacturer"))
 	return _r
 }
 
 // Features wraps the corresponding Objective-C method.
-func (x *Language) Features() LanguageFeatures {
-	_r := objc.Send[LanguageFeatures](objref.IDOf(x), objc.RegisterName("features"))
+func (l *Language) Features() LanguageFeatures {
+	_r := objc.Send[LanguageFeatures](objref.IDOf(l), objc.RegisterName("features"))
 	return _r
 }
 
 // IsThreadSafe wraps the corresponding Objective-C method.
-func (x *Language) IsThreadSafe() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isThreadSafe"))
+func (l *Language) IsThreadSafe() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isThreadSafe"))
 	return _r
 }
-
-// Languageable is the interface implemented by [Language], for mocking and DI.
-type Languageable interface {
-	obj.Object
-	SharedLanguageInstance() *LanguageInstance
-	Name() string
-	Info() string
-	Type() int
-	SubType() int
-	Manufacturer() int
-	Features() LanguageFeatures
-	IsThreadSafe() bool
-}
-
-var _ Languageable = (*Language)(nil)

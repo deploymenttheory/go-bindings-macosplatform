@@ -44,24 +44,24 @@ func fileProviderKnownFolderLocationAdopt(id objc.ID) *FileProviderKnownFolderLo
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderKnownFolderLocation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpkfl *FileProviderKnownFolderLocation) Description() string {
+	return rt.Description(objref.IDOf(fpkfl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderKnownFolderLocation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpkfl *FileProviderKnownFolderLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpkfl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderKnownFolderLocation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpkfl *FileProviderKnownFolderLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpkfl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderKnownFolderLocation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpkfl *FileProviderKnownFolderLocation) String() string {
+	return rt.Description(objref.IDOf(fpkfl))
 }
 
 // NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename initialize a location with the filename of the folder in a specified parent. When replicating a known folder the system will reuse a folder located at the specified filename within the parent if one exists, or create a new item at this location if none exists yet.
@@ -77,10 +77,3 @@ func NewFileProviderKnownFolderLocationWithExistingItemIdentifier(existingItemId
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExistingItemIdentifier:"), objref.IDOf(existingItemIdentifier))
 	return fileProviderKnownFolderLocationAdopt(_id)
 }
-
-// FileProviderKnownFolderLocationable is the interface implemented by [FileProviderKnownFolderLocation], for mocking and DI.
-type FileProviderKnownFolderLocationable interface {
-	obj.Object
-}
-
-var _ FileProviderKnownFolderLocationable = (*FileProviderKnownFolderLocation)(nil)

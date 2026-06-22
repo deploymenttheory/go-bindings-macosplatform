@@ -46,24 +46,24 @@ func collectionLayoutSizeAdopt(id objc.ID) *CollectionLayoutSize {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutSize) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cls *CollectionLayoutSize) Description() string {
+	return rt.Description(objref.IDOf(cls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutSize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cls *CollectionLayoutSize) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutSize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cls *CollectionLayoutSize) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutSize) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cls *CollectionLayoutSize) String() string {
+	return rt.Description(objref.IDOf(cls))
 }
 
 // NewCollectionLayoutSize creates a new CollectionLayoutSize.
@@ -73,22 +73,13 @@ func NewCollectionLayoutSize() *CollectionLayoutSize {
 }
 
 // WidthDimension wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widthDimension"))
+func (cls *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("widthDimension"))
 	return CollectionLayoutDimensionFromID(_r)
 }
 
 // HeightDimension wraps the corresponding Objective-C method.
-func (x *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heightDimension"))
+func (cls *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("heightDimension"))
 	return CollectionLayoutDimensionFromID(_r)
 }
-
-// CollectionLayoutSizeable is the interface implemented by [CollectionLayoutSize], for mocking and DI.
-type CollectionLayoutSizeable interface {
-	obj.Object
-	WidthDimension() *CollectionLayoutDimension
-	HeightDimension() *CollectionLayoutDimension
-}
-
-var _ CollectionLayoutSizeable = (*CollectionLayoutSize)(nil)

@@ -51,13 +51,6 @@ func NewMTRClusterBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint1
 	return mTRClusterBasicAdopt(_id)
 }
 
-// MTRClusterBasicable is the interface implemented by [MTRClusterBasic], for mocking and DI.
-type MTRClusterBasicable interface {
-	obj.Object
-}
-
-var _ MTRClusterBasicable = (*MTRClusterBasic)(nil)
-
 var _ MTRClusterBasicInformationProvider = (*MTRClusterBasic)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterBasic)(nil)

@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,26 +51,17 @@ func NewGlassesPrescription() *GlassesPrescription {
 	return glassesPrescriptionAdopt(_id)
 }
 
-// RightEye the right eye lens specification
-func (x *GlassesPrescription) RightEye() *GlassesLensSpecification {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEye"))
+// RightEye returns the right eye lens specification
+func (gp *GlassesPrescription) RightEye() *GlassesLensSpecification {
+	_r := objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("rightEye"))
 	return GlassesLensSpecificationFromID(_r)
 }
 
-// LeftEye the left eye lens specification
-func (x *GlassesPrescription) LeftEye() *GlassesLensSpecification {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEye"))
+// LeftEye returns the left eye lens specification
+func (gp *GlassesPrescription) LeftEye() *GlassesLensSpecification {
+	_r := objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("leftEye"))
 	return GlassesLensSpecificationFromID(_r)
 }
-
-// GlassesPrescriptionable is the interface implemented by [GlassesPrescription], for mocking and DI.
-type GlassesPrescriptionable interface {
-	obj.Object
-	RightEye() *GlassesLensSpecification
-	LeftEye() *GlassesLensSpecification
-}
-
-var _ GlassesPrescriptionable = (*GlassesPrescription)(nil)
 
 var _ VisionPrescriptionProvider = (*GlassesPrescription)(nil)
 

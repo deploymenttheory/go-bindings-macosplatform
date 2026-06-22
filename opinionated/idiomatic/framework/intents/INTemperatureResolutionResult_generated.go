@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewTemperatureResolutionResult() *TemperatureResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INTemperatureResolutionResult")), objc.RegisterName("new"))
 	return temperatureResolutionResultAdopt(_id)
 }
-
-// TemperatureResolutionResultable is the interface implemented by [TemperatureResolutionResult], for mocking and DI.
-type TemperatureResolutionResultable interface {
-	obj.Object
-}
-
-var _ TemperatureResolutionResultable = (*TemperatureResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*TemperatureResolutionResult)(nil)

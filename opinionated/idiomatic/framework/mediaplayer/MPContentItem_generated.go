@@ -46,24 +46,24 @@ func contentItemAdopt(id objc.ID) *ContentItem {
 }
 
 // Description returns the object's -description text.
-func (x *ContentItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *ContentItem) Description() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ci *ContentItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ci *ContentItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *ContentItem) String() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // NewContentItemWithIdentifier sets the identifier for a media item.
@@ -73,185 +73,113 @@ func NewContentItemWithIdentifier(identifier string) *ContentItem {
 	return contentItemAdopt(_id)
 }
 
-// WithTitle the public name of the media item.
-func (x *ContentItem) WithTitle(title string) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the public name of the media item.
+func (ci *ContentItem) WithTitle(title string) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ci
 }
 
-// WithSubtitle a secondary designator for the media item.
-func (x *ContentItem) WithSubtitle(subtitle string) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets a secondary designator for the media item.
+func (ci *ContentItem) WithSubtitle(subtitle string) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return ci
 }
 
-// WithArtwork a single image that’s associated with the media item.
-func (x *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtwork:"), objref.IDOf(artwork))
-	return x
+// WithArtwork sets a single image that’s associated with the media item.
+func (ci *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setArtwork:"), objref.IDOf(artwork))
+	return ci
 }
 
-// WithPlaybackProgress the amount of content played for the media item.
-func (x *ContentItem) WithPlaybackProgress(playbackProgress float32) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackProgress:"), playbackProgress)
-	return x
+// WithPlaybackProgress sets the amount of content played for the media item.
+func (ci *ContentItem) WithPlaybackProgress(playbackProgress float32) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setPlaybackProgress:"), playbackProgress)
+	return ci
 }
 
-// WithStreamingContent a Boolean value that indicates whether the content item is streaming content.
-func (x *ContentItem) WithStreamingContent(streamingContent bool) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamingContent:"), streamingContent)
-	return x
+// WithStreamingContent sets a Boolean value that indicates whether the content item is streaming content.
+func (ci *ContentItem) WithStreamingContent(streamingContent bool) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setStreamingContent:"), streamingContent)
+	return ci
 }
 
-// WithExplicitContent a Boolean value that indicates whether the media item contains explicit content.
-func (x *ContentItem) WithExplicitContent(explicitContent bool) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitContent:"), explicitContent)
-	return x
+// WithExplicitContent sets a Boolean value that indicates whether the media item contains explicit content.
+func (ci *ContentItem) WithExplicitContent(explicitContent bool) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setExplicitContent:"), explicitContent)
+	return ci
 }
 
-// WithContainer a Boolean value that indicates whether a media item is container of other items.
-func (x *ContentItem) WithContainer(container bool) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), container)
-	return x
+// WithContainer sets a Boolean value that indicates whether a media item is container of other items.
+func (ci *ContentItem) WithContainer(container bool) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setContainer:"), container)
+	return ci
 }
 
-// WithPlayable a Boolean value that indicates whether a media item is able to be played.
-func (x *ContentItem) WithPlayable(playable bool) *ContentItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayable:"), playable)
-	return x
+// WithPlayable sets a Boolean value that indicates whether a media item is able to be played.
+func (ci *ContentItem) WithPlayable(playable bool) *ContentItem {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setPlayable:"), playable)
+	return ci
 }
 
-// Identifier a unique identifier for this content item. (Required)
-func (x *ContentItem) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique identifier for this content item. (Required)
+func (ci *ContentItem) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Title a title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
-func (x *ContentItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns a title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
+func (ci *ContentItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *ContentItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// Subtitle a subtitle for this item. If this were representing a song, this would usually be the artist or composer.
-func (x *ContentItem) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+// Subtitle returns a subtitle for this item. If this were representing a song, this would usually be the artist or composer.
+func (ci *ContentItem) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSubtitle wraps the corresponding Objective-C method.
-func (x *ContentItem) SetSubtitle(subtitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-}
-
-// Artwork artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
-func (x *ContentItem) Artwork() *MediaItemArtwork {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("artwork"))
+// Artwork returns artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
+func (ci *ContentItem) Artwork() *MediaItemArtwork {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("artwork"))
 	return MediaItemArtworkFromID(_r)
 }
 
-// SetArtwork wraps the corresponding Objective-C method.
-func (x *ContentItem) SetArtwork(artwork *MediaItemArtwork) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArtwork:"), objref.IDOf(artwork))
-}
-
 // PlaybackProgress represents the current playback progress of the item. 0.0 = not watched/listened/viewed, 1.0 = fully watched/listened/viewed Default is -1.0 (no progress indicator shown)
-func (x *ContentItem) PlaybackProgress() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("playbackProgress"))
+func (ci *ContentItem) PlaybackProgress() float32 {
+	_r := objc.Send[float32](objref.IDOf(ci), objc.RegisterName("playbackProgress"))
 	return _r
 }
 
-// SetPlaybackProgress wraps the corresponding Objective-C method.
-func (x *ContentItem) SetPlaybackProgress(playbackProgress float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackProgress:"), playbackProgress)
-}
-
-// IsStreamingContent represents whether this content item is streaming content, i.e. from the cloud where the content is not stored locally.
-func (x *ContentItem) IsStreamingContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStreamingContent"))
+// IsStreamingContent reports whether this content item is streaming content, i.e. from the cloud where the content is not stored locally.
+func (ci *ContentItem) IsStreamingContent() bool {
+	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isStreamingContent"))
 	return _r
 }
 
-// SetStreamingContent wraps the corresponding Objective-C method.
-func (x *ContentItem) SetStreamingContent(streamingContent bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamingContent:"), streamingContent)
-}
-
-// IsExplicitContent represents whether this content item is explicit content
-func (x *ContentItem) IsExplicitContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExplicitContent"))
+// IsExplicitContent reports whether this content item is explicit content
+func (ci *ContentItem) IsExplicitContent() bool {
+	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isExplicitContent"))
 	return _r
 }
 
-// SetExplicitContent wraps the corresponding Objective-C method.
-func (x *ContentItem) SetExplicitContent(explicitContent bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitContent:"), explicitContent)
-}
-
-// IsContainer represents whether the content item is a container that may contain other content items, e.g. an album or a playlist.
-func (x *ContentItem) IsContainer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContainer"))
+// IsContainer reports whether the content item is a container that may contain other content items, e.g. an album or a playlist.
+func (ci *ContentItem) IsContainer() bool {
+	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isContainer"))
 	return _r
 }
 
-// SetContainer wraps the corresponding Objective-C method.
-func (x *ContentItem) SetContainer(container bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), container)
-}
-
-// IsPlayable represents whether the content item is actionable from a playback perspective. Albums are playable, for example, because selecting an album for playback means the app should play each song in the album in order. An example of a content item that may not be playable is a genre, since an app experience typically doesn't involve selecting an entire genre for playback.
-func (x *ContentItem) IsPlayable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayable"))
+// IsPlayable reports whether the content item is actionable from a playback perspective. Albums are playable, for example, because selecting an album for playback means the app should play each song in the album in order. An example of a content item that may not be playable is a genre, since an app experience typically doesn't involve selecting an entire genre for playback.
+func (ci *ContentItem) IsPlayable() bool {
+	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isPlayable"))
 	return _r
 }
-
-// SetPlayable wraps the corresponding Objective-C method.
-func (x *ContentItem) SetPlayable(playable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayable:"), playable)
-}
-
-// ContentItemable is the interface implemented by [ContentItem], for mocking and DI.
-type ContentItemable interface {
-	obj.Object
-	WithTitle(title string) *ContentItem
-	WithSubtitle(subtitle string) *ContentItem
-	WithArtwork(artwork *MediaItemArtwork) *ContentItem
-	WithPlaybackProgress(playbackProgress float32) *ContentItem
-	WithStreamingContent(streamingContent bool) *ContentItem
-	WithExplicitContent(explicitContent bool) *ContentItem
-	WithContainer(container bool) *ContentItem
-	WithPlayable(playable bool) *ContentItem
-	Identifier() string
-	Title() string
-	SetTitle(title string)
-	Subtitle() string
-	SetSubtitle(subtitle string)
-	Artwork() *MediaItemArtwork
-	SetArtwork(artwork *MediaItemArtwork)
-	PlaybackProgress() float32
-	SetPlaybackProgress(playbackProgress float32)
-	IsStreamingContent() bool
-	SetStreamingContent(streamingContent bool)
-	IsExplicitContent() bool
-	SetExplicitContent(explicitContent bool)
-	IsContainer() bool
-	SetContainer(container bool)
-	IsPlayable() bool
-	SetPlayable(playable bool)
-}
-
-var _ ContentItemable = (*ContentItem)(nil)

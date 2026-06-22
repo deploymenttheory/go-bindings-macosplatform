@@ -46,24 +46,24 @@ func vectorAdopt(id objc.ID) *Vector {
 }
 
 // Description returns the object's -description text.
-func (x *Vector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Vector) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Vector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *Vector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Vector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *Vector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Vector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Vector) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewVectorWithXComponentYComponent creates a new vector in Cartesian coordinate space, based on its x-axis and y-axis projections.
@@ -87,51 +87,38 @@ func NewVectorWithVectorHeadTail(head *Point, tail *Point) *Vector {
 	return vectorAdopt(_id)
 }
 
-// X signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
-func (x *Vector) X() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
+// X returns signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
+func (v_ *Vector) X() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("x"))
 	return _r
 }
 
-// Y signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
-func (x *Vector) Y() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
+// Y returns signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
+func (v_ *Vector) Y() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("y"))
 	return _r
 }
 
-// R radius, or absolute value, or length of the vector.
-func (x *Vector) R() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("r"))
+// R returns radius, or absolute value, or length of the vector.
+func (v_ *Vector) R() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("r"))
 	return _r
 }
 
-// Theta angle between the vector direction and positive direction of X axis.
-func (x *Vector) Theta() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("theta"))
+// Theta returns angle between the vector direction and positive direction of X axis.
+func (v_ *Vector) Theta() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("theta"))
 	return _r
 }
 
 // Length returns a length, or absolute value, of the vector.
-func (x *Vector) Length() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
+func (v_ *Vector) Length() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("length"))
 	return _r
 }
 
 // SquaredLength returns a length ^ 2 of a vector.
-func (x *Vector) SquaredLength() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("squaredLength"))
+func (v_ *Vector) SquaredLength() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("squaredLength"))
 	return _r
 }
-
-// Vectorable is the interface implemented by [Vector], for mocking and DI.
-type Vectorable interface {
-	obj.Object
-	X() float64
-	Y() float64
-	R() float64
-	Theta() float64
-	Length() float64
-	SquaredLength() float64
-}
-
-var _ Vectorable = (*Vector)(nil)

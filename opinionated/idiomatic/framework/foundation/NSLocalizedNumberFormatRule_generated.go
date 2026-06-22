@@ -44,24 +44,24 @@ func localizedNumberFormatRuleAdopt(id objc.ID) *LocalizedNumberFormatRule {
 }
 
 // Description returns the object's -description text.
-func (x *LocalizedNumberFormatRule) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lnfr *LocalizedNumberFormatRule) Description() string {
+	return rt.Description(objref.IDOf(lnfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalizedNumberFormatRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lnfr *LocalizedNumberFormatRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lnfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalizedNumberFormatRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lnfr *LocalizedNumberFormatRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lnfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalizedNumberFormatRule) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lnfr *LocalizedNumberFormatRule) String() string {
+	return rt.Description(objref.IDOf(lnfr))
 }
 
 // NewLocalizedNumberFormatRule creates a new LocalizedNumberFormatRule.
@@ -71,15 +71,7 @@ func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (lnfr *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule {
+	objc.Send[objc.ID](objref.IDOf(lnfr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return lnfr
 }
-
-// LocalizedNumberFormatRuleable is the interface implemented by [LocalizedNumberFormatRule], for mocking and DI.
-type LocalizedNumberFormatRuleable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule
-}
-
-var _ LocalizedNumberFormatRuleable = (*LocalizedNumberFormatRule)(nil)

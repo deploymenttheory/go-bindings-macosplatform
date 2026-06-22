@@ -46,24 +46,24 @@ func xPCListenerEndpointAdopt(id objc.ID) *XPCListenerEndpoint {
 }
 
 // Description returns the object's -description text.
-func (x *XPCListenerEndpoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (xle *XPCListenerEndpoint) Description() string {
+	return rt.Description(objref.IDOf(xle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XPCListenerEndpoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (xle *XPCListenerEndpoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(xle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XPCListenerEndpoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (xle *XPCListenerEndpoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(xle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *XPCListenerEndpoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (xle *XPCListenerEndpoint) String() string {
+	return rt.Description(objref.IDOf(xle))
 }
 
 // NewXPCListenerEndpoint creates a new XPCListenerEndpoint.
@@ -73,15 +73,7 @@ func NewXPCListenerEndpoint() *XPCListenerEndpoint {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties obj.Object) *XPCListenerEndpoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (xle *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties obj.Object) *XPCListenerEndpoint {
+	objc.Send[objc.ID](objref.IDOf(xle), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return xle
 }
-
-// XPCListenerEndpointable is the interface implemented by [XPCListenerEndpoint], for mocking and DI.
-type XPCListenerEndpointable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *XPCListenerEndpoint
-}
-
-var _ XPCListenerEndpointable = (*XPCListenerEndpoint)(nil)

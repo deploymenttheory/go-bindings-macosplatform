@@ -46,24 +46,24 @@ func mixerAdopt(id objc.ID) *Mixer {
 }
 
 // Description returns the object's -description text.
-func (x *Mixer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Mixer) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Mixer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Mixer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Mixer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Mixer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Mixer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Mixer) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMixer creates a new Mixer.
@@ -72,33 +72,23 @@ func NewMixer() *Mixer {
 	return mixerAdopt(_id)
 }
 
-// Identifier the identifier that uniquely represents this mixer.
-func (x *Mixer) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier that uniquely represents this mixer.
+func (m *Mixer) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Gain linear gain scalar.
-func (x *Mixer) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (m *Mixer) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("gain"))
 	return _r
 }
 
-// GainMetaParameter the metaparameter that can be used to adjust the gain during playback
-func (x *Mixer) GainMetaParameter() *MetaParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameter"))
+// GainMetaParameter returns the metaparameter that can be used to adjust the gain during playback
+func (m *Mixer) GainMetaParameter() *MetaParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("gainMetaParameter"))
 	return MetaParameterFromID(_r)
 }
-
-// Mixerable is the interface implemented by [Mixer], for mocking and DI.
-type Mixerable interface {
-	obj.Object
-	Identifier() string
-	Gain() float64
-	GainMetaParameter() *MetaParameter
-}
-
-var _ Mixerable = (*Mixer)(nil)

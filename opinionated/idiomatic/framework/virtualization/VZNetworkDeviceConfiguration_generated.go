@@ -48,76 +48,53 @@ func networkDeviceConfigurationAdopt(id objc.ID) *NetworkDeviceConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ndc *NetworkDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(ndc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ndc *NetworkDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ndc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ndc *NetworkDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ndc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ndc *NetworkDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(ndc))
 }
 
-// WithMACAddress the media access control (MAC) address to assign to the network device.
-func (x *NetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
-	return x
+// WithMACAddress sets the media access control (MAC) address to assign to the network device.
+func (ndc *NetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
+	return ndc
 }
 
-// WithAttachment the object that defines how the virtual network device communicates with the host system.
-func (x *NetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-	return x
+// WithAttachment sets the object that defines how the virtual network device communicates with the host system.
+func (ndc *NetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return ndc
 }
 
-// MACAddress the media access control address of the device. The default is a random, locally administered, unicast address.
-func (x *NetworkDeviceConfiguration) MACAddress() *MACAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MACAddress"))
+// MACAddress returns the media access control address of the device. The default is a random, locally administered, unicast address.
+func (ndc *NetworkDeviceConfiguration) MACAddress() *MACAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("MACAddress"))
 	return MACAddressFromID(_r)
 }
 
-// SetMACAddress wraps the corresponding Objective-C method.
-func (x *NetworkDeviceConfiguration) SetMACAddress(mACAddress *MACAddress) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
-}
-
-// Attachment network device attachment. Defines how the virtual device interfaces with the host system. The default is nil.
-func (x *NetworkDeviceConfiguration) Attachment() *NetworkDeviceAttachment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+// Attachment returns network device attachment. Defines how the virtual device interfaces with the host system. The default is nil.
+func (ndc *NetworkDeviceConfiguration) Attachment() *NetworkDeviceAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(ndc), objc.RegisterName("attachment"))
 	return NetworkDeviceAttachmentFromID(_r)
 }
-
-// SetAttachment wraps the corresponding Objective-C method.
-func (x *NetworkDeviceConfiguration) SetAttachment(attachment *NetworkDeviceAttachment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-}
-
-// NetworkDeviceConfigurationable is the interface implemented by [NetworkDeviceConfiguration], for mocking and DI.
-type NetworkDeviceConfigurationable interface {
-	obj.Object
-	WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration
-	WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration
-	MACAddress() *MACAddress
-	SetMACAddress(mACAddress *MACAddress)
-	Attachment() *NetworkDeviceAttachment
-	SetAttachment(attachment *NetworkDeviceAttachment)
-}
-
-var _ NetworkDeviceConfigurationable = (*NetworkDeviceConfiguration)(nil)
 
 // isNetworkDeviceConfiguration marks NetworkDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the NetworkDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NetworkDeviceConfiguration) isNetworkDeviceConfiguration() {}
+func (ndc *NetworkDeviceConfiguration) isNetworkDeviceConfiguration() {}
 
 var _ NetworkDeviceConfigurationProvider = (*NetworkDeviceConfiguration)(nil)

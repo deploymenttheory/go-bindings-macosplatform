@@ -46,24 +46,24 @@ func textureSamplerAdopt(id objc.ID) *TextureSampler {
 }
 
 // Description returns the object's -description text.
-func (x *TextureSampler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextureSampler) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextureSampler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TextureSampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextureSampler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TextureSampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextureSampler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextureSampler) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTextureSampler creates a new TextureSampler.
@@ -72,69 +72,38 @@ func NewTextureSampler() *TextureSampler {
 	return textureSamplerAdopt(_id)
 }
 
-// WithTexture the texture object that provides image data for sampling.
-func (x *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
-	return x
+// WithTexture sets the texture object that provides image data for sampling.
+func (ts *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTexture:"), objref.IDOf(texture))
+	return ts
 }
 
-// WithHardwareFilter an object that describes filtering modes for sampling from the texture.
-func (x *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
-	return x
+// WithHardwareFilter sets an object that describes filtering modes for sampling from the texture.
+func (ts *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
+	return ts
 }
 
-// WithTransform the transformation to be applied to texture coordinate data before sampling from the texture.
-func (x *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
-	return x
+// WithTransform sets the transformation to be applied to texture coordinate data before sampling from the texture.
+func (ts *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTransform:"), objref.IDOf(transform))
+	return ts
 }
 
 // Texture wraps the corresponding Objective-C method.
-func (x *TextureSampler) Texture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texture"))
+func (ts *TextureSampler) Texture() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("texture"))
 	return TextureFromID(_r)
 }
 
-// SetTexture wraps the corresponding Objective-C method.
-func (x *TextureSampler) SetTexture(texture *Texture) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
-}
-
 // HardwareFilter wraps the corresponding Objective-C method.
-func (x *TextureSampler) HardwareFilter() *TextureFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareFilter"))
+func (ts *TextureSampler) HardwareFilter() *TextureFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("hardwareFilter"))
 	return TextureFilterFromID(_r)
 }
 
-// SetHardwareFilter wraps the corresponding Objective-C method.
-func (x *TextureSampler) SetHardwareFilter(hardwareFilter *TextureFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
-}
-
 // Transform wraps the corresponding Objective-C method.
-func (x *TextureSampler) Transform() *Transform {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
+func (ts *TextureSampler) Transform() *Transform {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("transform"))
 	return TransformFromID(_r)
 }
-
-// SetTransform wraps the corresponding Objective-C method.
-func (x *TextureSampler) SetTransform(transform *Transform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
-}
-
-// TextureSamplerable is the interface implemented by [TextureSampler], for mocking and DI.
-type TextureSamplerable interface {
-	obj.Object
-	WithTexture(texture TextureProvider) *TextureSampler
-	WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler
-	WithTransform(transform *Transform) *TextureSampler
-	Texture() *Texture
-	SetTexture(texture *Texture)
-	HardwareFilter() *TextureFilter
-	SetHardwareFilter(hardwareFilter *TextureFilter)
-	Transform() *Transform
-	SetTransform(transform *Transform)
-}
-
-var _ TextureSamplerable = (*TextureSampler)(nil)

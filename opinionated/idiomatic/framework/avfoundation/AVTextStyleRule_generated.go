@@ -46,24 +46,24 @@ func textStyleRuleAdopt(id objc.ID) *TextStyleRule {
 }
 
 // Description returns the object's -description text.
-func (x *TextStyleRule) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tsr *TextStyleRule) Description() string {
+	return rt.Description(objref.IDOf(tsr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextStyleRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tsr *TextStyleRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tsr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextStyleRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tsr *TextStyleRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tsr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextStyleRule) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tsr *TextStyleRule) String() string {
+	return rt.Description(objref.IDOf(tsr))
 }
 
 // NewTextStyleRuleWithTextMarkupAttributes creates a text style rule object with the specified style attributes.
@@ -80,26 +80,17 @@ func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes o
 	return textStyleRuleAdopt(_id)
 }
 
-// TextMarkupAttributes an NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
-func (x *TextStyleRule) TextMarkupAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textMarkupAttributes"))
+// TextMarkupAttributes returns an NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
+func (tsr *TextStyleRule) TextMarkupAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tsr), objc.RegisterName("textMarkupAttributes"))
 	return obj.Wrap(_r)
 }
 
-// TextSelector a string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
-func (x *TextStyleRule) TextSelector() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelector"))
+// TextSelector returns a string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
+func (tsr *TextStyleRule) TextSelector() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tsr), objc.RegisterName("textSelector"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TextStyleRuleable is the interface implemented by [TextStyleRule], for mocking and DI.
-type TextStyleRuleable interface {
-	obj.Object
-	TextMarkupAttributes() obj.Object
-	TextSelector() string
-}
-
-var _ TextStyleRuleable = (*TextStyleRule)(nil)

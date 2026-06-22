@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter
 	return contactsLensSpecificationAdopt(_id)
 }
 
-// BaseCurve the curvature of the back surface of the lens (measured in mm)
-func (x *ContactsLensSpecification) BaseCurve() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseCurve"))
+// BaseCurve returns the curvature of the back surface of the lens (measured in mm)
+func (cls *ContactsLensSpecification) BaseCurve() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("baseCurve"))
 	return QuantityFromID(_r)
 }
 
-// Diameter the width of the lens from edge to edge (measured in mm)
-func (x *ContactsLensSpecification) Diameter() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diameter"))
+// Diameter returns the width of the lens from edge to edge (measured in mm)
+func (cls *ContactsLensSpecification) Diameter() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("diameter"))
 	return QuantityFromID(_r)
 }
-
-// ContactsLensSpecificationable is the interface implemented by [ContactsLensSpecification], for mocking and DI.
-type ContactsLensSpecificationable interface {
-	obj.Object
-	BaseCurve() *Quantity
-	Diameter() *Quantity
-}
-
-var _ ContactsLensSpecificationable = (*ContactsLensSpecification)(nil)
 
 var _ LensSpecificationProvider = (*ContactsLensSpecification)(nil)

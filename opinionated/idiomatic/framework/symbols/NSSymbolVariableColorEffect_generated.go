@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,53 +51,40 @@ func NewSymbolVariableColorEffect() *SymbolVariableColorEffect {
 	return symbolVariableColorEffectAdopt(_id)
 }
 
-// EffectWithIterative an effect that momentarily enables each layer of a symbol-based image in sequence.
-func (x *SymbolVariableColorEffect) EffectWithIterative() *SymbolVariableColorEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIterative"))
+// EffectWithIterative returns an effect that momentarily enables each layer of a symbol-based image in sequence.
+func (svce *SymbolVariableColorEffect) EffectWithIterative() *SymbolVariableColorEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithIterative"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// EffectWithCumulative an effect that enables each layer of a symbol-based image in sequence.
-func (x *SymbolVariableColorEffect) EffectWithCumulative() *SymbolVariableColorEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithCumulative"))
+// EffectWithCumulative returns an effect that enables each layer of a symbol-based image in sequence.
+func (svce *SymbolVariableColorEffect) EffectWithCumulative() *SymbolVariableColorEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithCumulative"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// EffectWithReversing an effect that reverses each time it repeats.
-func (x *SymbolVariableColorEffect) EffectWithReversing() *SymbolVariableColorEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithReversing"))
+// EffectWithReversing returns an effect that reverses each time it repeats.
+func (svce *SymbolVariableColorEffect) EffectWithReversing() *SymbolVariableColorEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithReversing"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// EffectWithNonReversing an effect that doesn’t reverse each time it repeats.
-func (x *SymbolVariableColorEffect) EffectWithNonReversing() *SymbolVariableColorEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithNonReversing"))
+// EffectWithNonReversing returns an effect that doesn’t reverse each time it repeats.
+func (svce *SymbolVariableColorEffect) EffectWithNonReversing() *SymbolVariableColorEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithNonReversing"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// EffectWithHideInactiveLayers an effect that hides inactive layers in a symbol-based image.
-func (x *SymbolVariableColorEffect) EffectWithHideInactiveLayers() *SymbolVariableColorEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithHideInactiveLayers"))
+// EffectWithHideInactiveLayers returns an effect that hides inactive layers in a symbol-based image.
+func (svce *SymbolVariableColorEffect) EffectWithHideInactiveLayers() *SymbolVariableColorEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithHideInactiveLayers"))
 	return SymbolVariableColorEffectFromID(_r)
 }
 
-// EffectWithDimInactiveLayers an effect that dims inactive layers in a symbol-based image.
-func (x *SymbolVariableColorEffect) EffectWithDimInactiveLayers() *SymbolVariableColorEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithDimInactiveLayers"))
+// EffectWithDimInactiveLayers returns an effect that dims inactive layers in a symbol-based image.
+func (svce *SymbolVariableColorEffect) EffectWithDimInactiveLayers() *SymbolVariableColorEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(svce), objc.RegisterName("effectWithDimInactiveLayers"))
 	return SymbolVariableColorEffectFromID(_r)
 }
-
-// SymbolVariableColorEffectable is the interface implemented by [SymbolVariableColorEffect], for mocking and DI.
-type SymbolVariableColorEffectable interface {
-	obj.Object
-	EffectWithIterative() *SymbolVariableColorEffect
-	EffectWithCumulative() *SymbolVariableColorEffect
-	EffectWithReversing() *SymbolVariableColorEffect
-	EffectWithNonReversing() *SymbolVariableColorEffect
-	EffectWithHideInactiveLayers() *SymbolVariableColorEffect
-	EffectWithDimInactiveLayers() *SymbolVariableColorEffect
-}
-
-var _ SymbolVariableColorEffectable = (*SymbolVariableColorEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolVariableColorEffect)(nil)

@@ -46,24 +46,24 @@ func previewViewControllerAdopt(id objc.ID) *PreviewViewController {
 }
 
 // Description returns the object's -description text.
-func (x *PreviewViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pvc *PreviewViewController) Description() string {
+	return rt.Description(objref.IDOf(pvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PreviewViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pvc *PreviewViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PreviewViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pvc *PreviewViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PreviewViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pvc *PreviewViewController) String() string {
+	return rt.Description(objref.IDOf(pvc))
 }
 
 // NewPreviewViewController creates a new PreviewViewController.
@@ -71,10 +71,3 @@ func NewPreviewViewController() *PreviewViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("RPPreviewViewController")), objc.RegisterName("new"))
 	return previewViewControllerAdopt(_id)
 }
-
-// PreviewViewControllerable is the interface implemented by [PreviewViewController], for mocking and DI.
-type PreviewViewControllerable interface {
-	obj.Object
-}
-
-var _ PreviewViewControllerable = (*PreviewViewController)(nil)

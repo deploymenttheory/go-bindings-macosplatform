@@ -44,24 +44,24 @@ func mTRAttributeValueWaiterAdopt(id objc.ID) *MTRAttributeValueWaiter {
 }
 
 // Description returns the object's -description text.
-func (x *MTRAttributeValueWaiter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mavw *MTRAttributeValueWaiter) Description() string {
+	return rt.Description(objref.IDOf(mavw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAttributeValueWaiter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mavw *MTRAttributeValueWaiter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mavw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAttributeValueWaiter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mavw *MTRAttributeValueWaiter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mavw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAttributeValueWaiter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mavw *MTRAttributeValueWaiter) String() string {
+	return rt.Description(objref.IDOf(mavw))
 }
 
 // NewMTRAttributeValueWaiter creates a new MTRAttributeValueWaiter.
@@ -71,21 +71,12 @@ func NewMTRAttributeValueWaiter() *MTRAttributeValueWaiter {
 }
 
 // Cancel cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
-func (x *MTRAttributeValueWaiter) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (mavw *MTRAttributeValueWaiter) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(mavw), objc.RegisterName("cancel"))
 }
 
 // UUID wraps the corresponding Objective-C method.
-func (x *MTRAttributeValueWaiter) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+func (mavw *MTRAttributeValueWaiter) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mavw), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
-
-// MTRAttributeValueWaiterable is the interface implemented by [MTRAttributeValueWaiter], for mocking and DI.
-type MTRAttributeValueWaiterable interface {
-	obj.Object
-	Cancel()
-	UUID() obj.Object
-}
-
-var _ MTRAttributeValueWaiterable = (*MTRAttributeValueWaiter)(nil)

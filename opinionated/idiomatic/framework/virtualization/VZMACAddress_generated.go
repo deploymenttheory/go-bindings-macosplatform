@@ -46,24 +46,24 @@ func mACAddressAdopt(id objc.ID) *MACAddress {
 }
 
 // Description returns the object's -description text.
-func (x *MACAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *MACAddress) Description() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MACAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ma *MACAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MACAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ma *MACAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MACAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *MACAddress) String() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // NewMACAddressWithString creates a MAC address object from a specially formatted string.
@@ -73,44 +73,32 @@ func NewMACAddressWithString(string_ string) *MACAddress {
 	return mACAddressAdopt(_id)
 }
 
-// IsBroadcastAddress true if the address is the broadcast address, false otherwise.
-func (x *MACAddress) IsBroadcastAddress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcastAddress"))
+// IsBroadcastAddress reports whether the address is the broadcast address.
+func (ma *MACAddress) IsBroadcastAddress() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isBroadcastAddress"))
 	return _r
 }
 
-// IsMulticastAddress true if the address is a multicast address, false otherwise.
-func (x *MACAddress) IsMulticastAddress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMulticastAddress"))
+// IsMulticastAddress reports whether the address is a multicast address.
+func (ma *MACAddress) IsMulticastAddress() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isMulticastAddress"))
 	return _r
 }
 
-// IsUnicastAddress true if the address is a unicast address, false otherwise.
-func (x *MACAddress) IsUnicastAddress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnicastAddress"))
+// IsUnicastAddress reports whether the address is a unicast address.
+func (ma *MACAddress) IsUnicastAddress() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isUnicastAddress"))
 	return _r
 }
 
-// IsLocallyAdministeredAddress true if the address is a locally administered addresses (LAA), false otherwise.
-func (x *MACAddress) IsLocallyAdministeredAddress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocallyAdministeredAddress"))
+// IsLocallyAdministeredAddress reports whether the address is a locally administered addresses (LAA).
+func (ma *MACAddress) IsLocallyAdministeredAddress() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isLocallyAdministeredAddress"))
 	return _r
 }
 
-// IsUniversallyAdministeredAddress true if the address is a universally administered addresses (UAA), false otherwise.
-func (x *MACAddress) IsUniversallyAdministeredAddress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUniversallyAdministeredAddress"))
+// IsUniversallyAdministeredAddress reports whether the address is a universally administered addresses (UAA).
+func (ma *MACAddress) IsUniversallyAdministeredAddress() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isUniversallyAdministeredAddress"))
 	return _r
 }
-
-// MACAddressable is the interface implemented by [MACAddress], for mocking and DI.
-type MACAddressable interface {
-	obj.Object
-	IsBroadcastAddress() bool
-	IsMulticastAddress() bool
-	IsUnicastAddress() bool
-	IsLocallyAdministeredAddress() bool
-	IsUniversallyAdministeredAddress() bool
-}
-
-var _ MACAddressable = (*MACAddress)(nil)

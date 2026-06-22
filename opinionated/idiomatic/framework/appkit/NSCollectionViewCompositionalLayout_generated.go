@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,31 +59,16 @@ func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *Colle
 	return collectionViewCompositionalLayoutAdopt(_id)
 }
 
-// WithConfiguration the layout’s configuration, such as its scroll direction and section spacing.
-func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the layout’s configuration, such as its scroll direction and section spacing.
+func (cvcl *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
+	objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return cvcl
 }
 
 // Configuration wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+func (cvcl *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("configuration"))
 	return CollectionViewCompositionalLayoutConfigurationFromID(_r)
 }
-
-// SetConfiguration wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayout) SetConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-}
-
-// CollectionViewCompositionalLayoutable is the interface implemented by [CollectionViewCompositionalLayout], for mocking and DI.
-type CollectionViewCompositionalLayoutable interface {
-	obj.Object
-	WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout
-	Configuration() *CollectionViewCompositionalLayoutConfiguration
-	SetConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration)
-}
-
-var _ CollectionViewCompositionalLayoutable = (*CollectionViewCompositionalLayout)(nil)
 
 var _ CollectionViewLayoutProvider = (*CollectionViewCompositionalLayout)(nil)

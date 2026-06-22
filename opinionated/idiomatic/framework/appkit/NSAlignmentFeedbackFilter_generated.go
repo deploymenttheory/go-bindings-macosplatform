@@ -46,24 +46,24 @@ func alignmentFeedbackFilterAdopt(id objc.ID) *AlignmentFeedbackFilter {
 }
 
 // Description returns the object's -description text.
-func (x *AlignmentFeedbackFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aff *AlignmentFeedbackFilter) Description() string {
+	return rt.Description(objref.IDOf(aff))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AlignmentFeedbackFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aff *AlignmentFeedbackFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aff), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AlignmentFeedbackFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aff *AlignmentFeedbackFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aff), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AlignmentFeedbackFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aff *AlignmentFeedbackFilter) String() string {
+	return rt.Description(objref.IDOf(aff))
 }
 
 // NewAlignmentFeedbackFilter creates a new AlignmentFeedbackFilter.
@@ -73,26 +73,16 @@ func NewAlignmentFeedbackFilter() *AlignmentFeedbackFilter {
 }
 
 // UpdateWithEvent informs the feedback filter about a new event.
-func (x *AlignmentFeedbackFilter) UpdateWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithEvent:"), objref.IDOf(event))
+func (aff *AlignmentFeedbackFilter) UpdateWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(aff), objc.RegisterName("updateWithEvent:"), objref.IDOf(event))
 }
 
 // UpdateWithPanRecognizer informs the feedback filter about a new pan (drag) gesture recognizer event.
-func (x *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithPanRecognizer:"), objref.IDOf(panRecognizer))
+func (aff *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer) {
+	objc.Send[objc.ID](objref.IDOf(aff), objc.RegisterName("updateWithPanRecognizer:"), objref.IDOf(panRecognizer))
 }
 
 // PerformFeedbackPerformanceTime performs the haptic feedback described by one or more alignment feedback tokens.
-func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performFeedback:performanceTime:"), purego.SliceToNSArray(alignmentFeedbackTokens, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), performanceTime)
+func (aff *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime) {
+	objc.Send[objc.ID](objref.IDOf(aff), objc.RegisterName("performFeedback:performanceTime:"), purego.SliceToNSArray(alignmentFeedbackTokens, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), performanceTime)
 }
-
-// AlignmentFeedbackFilterable is the interface implemented by [AlignmentFeedbackFilter], for mocking and DI.
-type AlignmentFeedbackFilterable interface {
-	obj.Object
-	UpdateWithEvent(event *Event)
-	UpdateWithPanRecognizer(panRecognizer *PanGestureRecognizer)
-	PerformFeedbackPerformanceTime(alignmentFeedbackTokens []obj.Object, performanceTime HapticFeedbackPerformanceTime)
-}
-
-var _ AlignmentFeedbackFilterable = (*AlignmentFeedbackFilter)(nil)

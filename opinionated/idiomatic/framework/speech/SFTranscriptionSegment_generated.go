@@ -47,24 +47,24 @@ func transcriptionSegmentAdopt(id objc.ID) *TranscriptionSegment {
 }
 
 // Description returns the object's -description text.
-func (x *TranscriptionSegment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TranscriptionSegment) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TranscriptionSegment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TranscriptionSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TranscriptionSegment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TranscriptionSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TranscriptionSegment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TranscriptionSegment) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTranscriptionSegment creates a new TranscriptionSegment.
@@ -73,63 +73,49 @@ func NewTranscriptionSegment() *TranscriptionSegment {
 	return transcriptionSegmentAdopt(_id)
 }
 
-// Substring the string representation of the utterance in the transcription segment.
-func (x *TranscriptionSegment) Substring() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substring"))
+// Substring returns the string representation of the utterance in the transcription segment.
+func (ts *TranscriptionSegment) Substring() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("substring"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SubstringRange the range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the “SFTranscription/formattedString“ property of the “SFTranscription“ object containing this segment.
-func (x *TranscriptionSegment) SubstringRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("substringRange"))
+// SubstringRange returns the range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the “SFTranscription/formattedString“ property of the “SFTranscription“ object containing this segment.
+func (ts *TranscriptionSegment) SubstringRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ts), objc.RegisterName("substringRange"))
 	return _r
 }
 
-// Timestamp the start time of the segment in the processed audio stream. The “timestamp“ is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
-func (x *TranscriptionSegment) Timestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+// Timestamp returns the start time of the segment in the processed audio stream. The “timestamp“ is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
+func (ts *TranscriptionSegment) Timestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("timestamp"))
 	return _r
 }
 
-// Duration the number of seconds it took for the user to speak the utterance represented by the segment. The “duration“ contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the “SFSpeechRecognizer“ sets “duration“ to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
-func (x *TranscriptionSegment) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the number of seconds it took for the user to speak the utterance represented by the segment. The “duration“ contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the “SFSpeechRecognizer“ sets “duration“ to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
+func (ts *TranscriptionSegment) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("duration"))
 	return _r
 }
 
-// Confidence the level of confidence the speech recognizer has in its recognition of the speech transcribed for the segment. This property reflects the overall confidence in the recognition of the entire phrase. The value is `0` if there was no recognition, and it is closer to `1` when there is a high certainty that a transcription matches the user's speech exactly. For example, a confidence value of `0.94` represents a very high confidence level, and is more likely to be correct than a transcription with a confidence value of `0.72`.
-func (x *TranscriptionSegment) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+// Confidence returns the level of confidence the speech recognizer has in its recognition of the speech transcribed for the segment. This property reflects the overall confidence in the recognition of the entire phrase. The value is `0` if there was no recognition, and it is closer to `1` when there is a high certainty that a transcription matches the user's speech exactly. For example, a confidence value of `0.94` represents a very high confidence level, and is more likely to be correct than a transcription with a confidence value of `0.72`.
+func (ts *TranscriptionSegment) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(ts), objc.RegisterName("confidence"))
 	return _r
 }
 
-// AlternativeSubstrings an array of alternate interpretations of the utterance in the transcription segment.
+// AlternativeSubstrings returns an array of alternate interpretations of the utterance in the transcription segment.
 //
 // AlternativeSubstrings returns the collection as a Go slice.
-func (x *TranscriptionSegment) AlternativeSubstrings() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeSubstrings"))
+func (ts *TranscriptionSegment) AlternativeSubstrings() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("alternativeSubstrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VoiceAnalytics an analysis of the transcription segment's vocal properties.
-func (x *TranscriptionSegment) VoiceAnalytics() *VoiceAnalytics {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceAnalytics"))
+// VoiceAnalytics returns an analysis of the transcription segment's vocal properties.
+func (ts *TranscriptionSegment) VoiceAnalytics() *VoiceAnalytics {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("voiceAnalytics"))
 	return VoiceAnalyticsFromID(_r)
 }
-
-// TranscriptionSegmentable is the interface implemented by [TranscriptionSegment], for mocking and DI.
-type TranscriptionSegmentable interface {
-	obj.Object
-	Substring() string
-	SubstringRange() foundation.NSRange
-	Timestamp() float64
-	Duration() float64
-	Confidence() float32
-	AlternativeSubstrings() []string
-	VoiceAnalytics() *VoiceAnalytics
-}
-
-var _ TranscriptionSegmentable = (*TranscriptionSegment)(nil)

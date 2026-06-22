@@ -62,38 +62,27 @@ func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReserva
 }
 
 // RentalCar wraps the corresponding Objective-C method.
-func (x *RentalCarReservation) RentalCar() *RentalCar {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCar"))
+func (rcr *RentalCarReservation) RentalCar() *RentalCar {
+	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("rentalCar"))
 	return RentalCarFromID(_r)
 }
 
 // RentalDuration wraps the corresponding Objective-C method.
-func (x *RentalCarReservation) RentalDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalDuration"))
+func (rcr *RentalCarReservation) RentalDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("rentalDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // PickupLocation wraps the corresponding Objective-C method.
-func (x *RentalCarReservation) PickupLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pickupLocation"))
+func (rcr *RentalCarReservation) PickupLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("pickupLocation"))
 	return obj.Wrap(_r)
 }
 
 // DropOffLocation wraps the corresponding Objective-C method.
-func (x *RentalCarReservation) DropOffLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropOffLocation"))
+func (rcr *RentalCarReservation) DropOffLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("dropOffLocation"))
 	return obj.Wrap(_r)
 }
-
-// RentalCarReservationable is the interface implemented by [RentalCarReservation], for mocking and DI.
-type RentalCarReservationable interface {
-	obj.Object
-	RentalCar() *RentalCar
-	RentalDuration() *DateComponentsRange
-	PickupLocation() obj.Object
-	DropOffLocation() obj.Object
-}
-
-var _ RentalCarReservationable = (*RentalCarReservation)(nil)
 
 var _ ReservationProvider = (*RentalCarReservation)(nil)

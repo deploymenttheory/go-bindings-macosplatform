@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func attachmentStoreAdopt(id objc.ID) *AttachmentStore {
 }
 
 // Description returns the object's -description text.
-func (x *AttachmentStore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AttachmentStore) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttachmentStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AttachmentStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttachmentStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AttachmentStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttachmentStore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AttachmentStore) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAttachmentStoreWithHealthStore creates an attachment store for the provided HealthKit store.
@@ -78,7 +79,7 @@ func NewAttachmentStoreWithHealthStore(healthStore *HealthStore) *AttachmentStor
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion adds an attachment to the specified object.
 //
 // AddAttachmentToObjectNameContentTypeURLMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (result *Attachment, err error) {
+func (as *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (result *Attachment, err error) {
 	type _result struct {
 		val *Attachment
 		err error
@@ -90,7 +91,7 @@ func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComplet
 		_o.val = AttachmentFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAttachmentToObject:name:contentType:URL:metadata:completion:"), objref.IDOf(object), purego.NSString(name), objref.IDOf(contentType), rt.FileURL(uRL), objref.IDOf(metadata), _block)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("addAttachmentToObject:name:contentType:URL:metadata:completion:"), objref.IDOf(object), purego.NSString(name), objref.IDOf(contentType), rt.FileURL(uRL), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -103,7 +104,7 @@ func (x *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComplet
 // GetAttachmentsForObjectCompletion returns all the attachments for the specified object.
 //
 // GetAttachmentsForObjectCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (result obj.Object, err error) {
+func (as *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,7 +116,7 @@ func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context,
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAttachmentsForObject:completion:"), objref.IDOf(object), _block)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("getAttachmentsForObject:completion:"), objref.IDOf(object), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -124,12 +125,3 @@ func (x *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context,
 		return _zero, ctx.Err()
 	}
 }
-
-// AttachmentStoreable is the interface implemented by [AttachmentStore], for mocking and DI.
-type AttachmentStoreable interface {
-	obj.Object
-	AddAttachmentToObjectNameContentTypeURLMetadataCompletion(ctx context.Context, object *Object, name string, contentType obj.Object, uRL string, metadata obj.Object) (*Attachment, error)
-	GetAttachmentsForObjectCompletion(ctx context.Context, object *Object) (obj.Object, error)
-}
-
-var _ AttachmentStoreable = (*AttachmentStore)(nil)

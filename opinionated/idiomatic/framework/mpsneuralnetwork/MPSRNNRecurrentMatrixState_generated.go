@@ -44,24 +44,24 @@ func rNNRecurrentMatrixStateAdopt(id objc.ID) *RNNRecurrentMatrixState {
 }
 
 // Description returns the object's -description text.
-func (x *RNNRecurrentMatrixState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rrms *RNNRecurrentMatrixState) Description() string {
+	return rt.Description(objref.IDOf(rrms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNRecurrentMatrixState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rrms *RNNRecurrentMatrixState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rrms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNRecurrentMatrixState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rrms *RNNRecurrentMatrixState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rrms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RNNRecurrentMatrixState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rrms *RNNRecurrentMatrixState) String() string {
+	return rt.Description(objref.IDOf(rrms))
 }
 
 // NewRNNRecurrentMatrixState creates a new RNNRecurrentMatrixState.
@@ -71,22 +71,13 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 }
 
 // GetRecurrentOutputMatrixForLayerIndex access the stored recurrent matrix data.
-func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
+func (rrms *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
 // GetMemoryCellMatrixForLayerIndex access the stored memory cell matrix data (if present).
-func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
+func (rrms *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
-
-// RNNRecurrentMatrixStateable is the interface implemented by [RNNRecurrentMatrixState], for mocking and DI.
-type RNNRecurrentMatrixStateable interface {
-	obj.Object
-	GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object
-	GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object
-}
-
-var _ RNNRecurrentMatrixStateable = (*RNNRecurrentMatrixState)(nil)

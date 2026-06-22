@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewCNNNormalizationMeanAndVarianceState() *CNNNormalizationMeanAndVarianceS
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNNormalizationMeanAndVarianceState) WithReadCount(readCount int) *CNNNormalizationMeanAndVarianceState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cnmavs *CNNNormalizationMeanAndVarianceState) WithReadCount(readCount int) *CNNNormalizationMeanAndVarianceState {
+	objc.Send[objc.ID](objref.IDOf(cnmavs), objc.RegisterName("setReadCount:"), readCount)
+	return cnmavs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNormalizationMeanAndVarianceState) WithLabel(label string) *CNNNormalizationMeanAndVarianceState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnmavs *CNNNormalizationMeanAndVarianceState) WithLabel(label string) *CNNNormalizationMeanAndVarianceState {
+	objc.Send[objc.ID](objref.IDOf(cnmavs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnmavs
 }
-
-// CNNNormalizationMeanAndVarianceStateable is the interface implemented by [CNNNormalizationMeanAndVarianceState], for mocking and DI.
-type CNNNormalizationMeanAndVarianceStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNNormalizationMeanAndVarianceState
-	WithLabel(label string) *CNNNormalizationMeanAndVarianceState
-}
-
-var _ CNNNormalizationMeanAndVarianceStateable = (*CNNNormalizationMeanAndVarianceState)(nil)
 
 var _ StateProvider = (*CNNNormalizationMeanAndVarianceState)(nil)

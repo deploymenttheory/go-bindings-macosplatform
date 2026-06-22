@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func safariWindowAdopt(id objc.ID) *SafariWindow {
 }
 
 // Description returns the object's -description text.
-func (x *SafariWindow) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sw *SafariWindow) Description() string {
+	return rt.Description(objref.IDOf(sw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariWindow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sw *SafariWindow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariWindow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sw *SafariWindow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariWindow) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sw *SafariWindow) String() string {
+	return rt.Description(objref.IDOf(sw))
 }
 
 // NewSafariWindow creates a new SafariWindow.
@@ -76,7 +77,7 @@ func NewSafariWindow() *SafariWindow {
 // GetActiveTab calls the completion handler with the active tab in the target window.
 //
 // GetActiveTab blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, err error) {
+func (sw *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, err error) {
 	type _result struct {
 		val *SafariTab
 		err error
@@ -87,7 +88,7 @@ func (x *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, err
 		_o.val = SafariTabFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getActiveTabWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sw), objc.RegisterName("getActiveTabWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -100,7 +101,7 @@ func (x *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, err
 // GetAllTabs calls the completion handler with all of the tabs in this window ordered left to right.
 //
 // GetAllTabs blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err error) {
+func (sw *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -111,7 +112,7 @@ func (x *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err e
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllTabsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sw), objc.RegisterName("getAllTabsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -124,7 +125,7 @@ func (x *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err e
 // OpenTabWithURLMakeActiveIfPossible opens a tab at the end of the tab bar.
 //
 // OpenTabWithURLMakeActiveIfPossible blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (result *SafariTab, err error) {
+func (sw *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (result *SafariTab, err error) {
 	type _result struct {
 		val *SafariTab
 		err error
@@ -135,7 +136,7 @@ func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, u
 		_o.val = SafariTabFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openTabWithURL:makeActiveIfPossible:completionHandler:"), rt.FileURL(url), activateTab, _block)
+	objc.Send[objc.ID](objref.IDOf(sw), objc.RegisterName("openTabWithURL:makeActiveIfPossible:completionHandler:"), rt.FileURL(url), activateTab, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -148,7 +149,7 @@ func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, u
 // GetToolbarItem gets the extension’s toolbar item from the target window.
 //
 // GetToolbarItem blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolbarItem, err error) {
+func (sw *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolbarItem, err error) {
 	type _result struct {
 		val *SafariToolbarItem
 		err error
@@ -159,7 +160,7 @@ func (x *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolba
 		_o.val = SafariToolbarItemFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getToolbarItemWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sw), objc.RegisterName("getToolbarItemWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -170,18 +171,6 @@ func (x *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolba
 }
 
 // Close closes this window.
-func (x *SafariWindow) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (sw *SafariWindow) Close() {
+	objc.Send[objc.ID](objref.IDOf(sw), objc.RegisterName("close"))
 }
-
-// SafariWindowable is the interface implemented by [SafariWindow], for mocking and DI.
-type SafariWindowable interface {
-	obj.Object
-	GetActiveTab(ctx context.Context) (*SafariTab, error)
-	GetAllTabs(ctx context.Context) (obj.Object, error)
-	OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error)
-	GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error)
-	Close()
-}
-
-var _ SafariWindowable = (*SafariWindow)(nil)

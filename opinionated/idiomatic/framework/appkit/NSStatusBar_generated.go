@@ -46,24 +46,24 @@ func statusBarAdopt(id objc.ID) *StatusBar {
 }
 
 // Description returns the object's -description text.
-func (x *StatusBar) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sb *StatusBar) Description() string {
+	return rt.Description(objref.IDOf(sb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StatusBar) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sb *StatusBar) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StatusBar) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sb *StatusBar) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StatusBar) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sb *StatusBar) String() string {
+	return rt.Description(objref.IDOf(sb))
 }
 
 // NewStatusBar creates a new StatusBar.
@@ -73,35 +73,24 @@ func NewStatusBar() *StatusBar {
 }
 
 // StatusItemWithLength returns a newly created status item that has been allotted a specified space within the status bar.
-func (x *StatusBar) StatusItemWithLength(length float64) *StatusItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusItemWithLength:"), length)
+func (sb *StatusBar) StatusItemWithLength(length float64) *StatusItem {
+	_r := objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("statusItemWithLength:"), length)
 	return StatusItemFromID(_r)
 }
 
 // RemoveStatusItem removes the specified status item from the receiver.
-func (x *StatusBar) RemoveStatusItem(item *StatusItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeStatusItem:"), objref.IDOf(item))
+func (sb *StatusBar) RemoveStatusItem(item *StatusItem) {
+	objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("removeStatusItem:"), objref.IDOf(item))
 }
 
 // IsVertical wraps the corresponding Objective-C method.
-func (x *StatusBar) IsVertical() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+func (sb *StatusBar) IsVertical() bool {
+	_r := objc.Send[bool](objref.IDOf(sb), objc.RegisterName("isVertical"))
 	return _r
 }
 
 // Thickness wraps the corresponding Objective-C method.
-func (x *StatusBar) Thickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("thickness"))
+func (sb *StatusBar) Thickness() float64 {
+	_r := objc.Send[float64](objref.IDOf(sb), objc.RegisterName("thickness"))
 	return _r
 }
-
-// StatusBarable is the interface implemented by [StatusBar], for mocking and DI.
-type StatusBarable interface {
-	obj.Object
-	StatusItemWithLength(length float64) *StatusItem
-	RemoveStatusItem(item *StatusItem)
-	IsVertical() bool
-	Thickness() float64
-}
-
-var _ StatusBarable = (*StatusBar)(nil)

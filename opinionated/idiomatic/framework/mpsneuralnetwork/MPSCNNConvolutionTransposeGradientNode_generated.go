@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewCNNConvolutionTransposeGradientNode() *CNNConvolutionTransposeGradientNo
 	return cNNConvolutionTransposeGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionTransposeGradientNode) WithLabel(label string) *CNNConvolutionTransposeGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cctgn *CNNConvolutionTransposeGradientNode) WithLabel(label string) *CNNConvolutionTransposeGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cctgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cctgn
 }
-
-// CNNConvolutionTransposeGradientNodeable is the interface implemented by [CNNConvolutionTransposeGradientNode], for mocking and DI.
-type CNNConvolutionTransposeGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNConvolutionTransposeGradientNode
-}
-
-var _ CNNConvolutionTransposeGradientNodeable = (*CNNConvolutionTransposeGradientNode)(nil)
 
 var _ CNNConvolutionGradientNodeProvider = (*CNNConvolutionTransposeGradientNode)(nil)
 

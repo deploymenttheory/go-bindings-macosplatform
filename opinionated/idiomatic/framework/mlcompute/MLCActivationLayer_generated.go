@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewActivationLayer() *ActivationLayer {
 	return activationLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (al *ActivationLayer) WithLabel(label string) *ActivationLayer {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return al
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (al *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return al
 }
 
-// Descriptor the activation descriptor
-func (x *ActivationLayer) Descriptor() *ActivationDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the activation descriptor
+func (al *ActivationLayer) Descriptor() *ActivationDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("descriptor"))
 	return ActivationDescriptorFromID(_r)
 }
-
-// ActivationLayerable is the interface implemented by [ActivationLayer], for mocking and DI.
-type ActivationLayerable interface {
-	obj.Object
-	WithLabel(label string) *ActivationLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer
-	Descriptor() *ActivationDescriptor
-}
-
-var _ ActivationLayerable = (*ActivationLayer)(nil)
 
 var _ LayerProvider = (*ActivationLayer)(nil)

@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,199 +50,151 @@ func NewDOMHTMLBaseFontElement() *DOMHTMLBaseFontElement {
 }
 
 // WithColor sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithColor(color string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithColor(color string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setColor:"), purego.NSString(color))
+	return dbfe
 }
 
 // WithFace sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithFace(face string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFace:"), purego.NSString(face))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithFace(face string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setFace:"), purego.NSString(face))
+	return dbfe
 }
 
 // WithSize sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithSize(size string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithSize(size string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setSize:"), purego.NSString(size))
+	return dbfe
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithTitle(title string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithTitle(title string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dbfe
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithLang(lang string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithLang(lang string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dbfe
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithDir(dir string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithDir(dir string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dbfe
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithTabIndex(tabIndex int) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithTabIndex(tabIndex int) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dbfe
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithAccessKey(accessKey string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithAccessKey(accessKey string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dbfe
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithInnerText(innerText string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithInnerText(innerText string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dbfe
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithOuterText(outerText string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithOuterText(outerText string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dbfe
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithContentEditable(contentEditable string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithContentEditable(contentEditable string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dbfe
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithIdName(idName string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dbfe *DOMHTMLBaseFontElement) WithIDName(idName string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dbfe
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithScrollLeft(scrollLeft int) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithScrollLeft(scrollLeft int) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dbfe
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithScrollTop(scrollTop int) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithScrollTop(scrollTop int) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dbfe
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithInnerHTML(innerHTML string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithInnerHTML(innerHTML string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dbfe
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithOuterHTML(outerHTML string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithOuterHTML(outerHTML string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dbfe
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithClassName(className string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithClassName(className string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dbfe
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithNodeValue(nodeValue string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithNodeValue(nodeValue string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dbfe
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithPrefix(prefix string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithPrefix(prefix string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dbfe
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLBaseFontElement) WithTextContent(textContent string) *DOMHTMLBaseFontElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dbfe *DOMHTMLBaseFontElement) WithTextContent(textContent string) *DOMHTMLBaseFontElement {
+	objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dbfe
 }
 
 // Color wraps the corresponding Objective-C method.
-func (x *DOMHTMLBaseFontElement) Color() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (dbfe *DOMHTMLBaseFontElement) Color() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("color"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetColor wraps the corresponding Objective-C method.
-func (x *DOMHTMLBaseFontElement) SetColor(color string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
 }
 
 // Face wraps the corresponding Objective-C method.
-func (x *DOMHTMLBaseFontElement) Face() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("face"))
+func (dbfe *DOMHTMLBaseFontElement) Face() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("face"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetFace wraps the corresponding Objective-C method.
-func (x *DOMHTMLBaseFontElement) SetFace(face string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFace:"), purego.NSString(face))
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *DOMHTMLBaseFontElement) Size() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("size"))
+func (dbfe *DOMHTMLBaseFontElement) Size() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dbfe), objc.RegisterName("size"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetSize wraps the corresponding Objective-C method.
-func (x *DOMHTMLBaseFontElement) SetSize(size string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
-}
-
-// DOMHTMLBaseFontElementable is the interface implemented by [DOMHTMLBaseFontElement], for mocking and DI.
-type DOMHTMLBaseFontElementable interface {
-	obj.Object
-	WithColor(color string) *DOMHTMLBaseFontElement
-	WithFace(face string) *DOMHTMLBaseFontElement
-	WithSize(size string) *DOMHTMLBaseFontElement
-	WithTitle(title string) *DOMHTMLBaseFontElement
-	WithLang(lang string) *DOMHTMLBaseFontElement
-	WithDir(dir string) *DOMHTMLBaseFontElement
-	WithTabIndex(tabIndex int) *DOMHTMLBaseFontElement
-	WithAccessKey(accessKey string) *DOMHTMLBaseFontElement
-	WithInnerText(innerText string) *DOMHTMLBaseFontElement
-	WithOuterText(outerText string) *DOMHTMLBaseFontElement
-	WithContentEditable(contentEditable string) *DOMHTMLBaseFontElement
-	WithIdName(idName string) *DOMHTMLBaseFontElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLBaseFontElement
-	WithScrollTop(scrollTop int) *DOMHTMLBaseFontElement
-	WithInnerHTML(innerHTML string) *DOMHTMLBaseFontElement
-	WithOuterHTML(outerHTML string) *DOMHTMLBaseFontElement
-	WithClassName(className string) *DOMHTMLBaseFontElement
-	WithNodeValue(nodeValue string) *DOMHTMLBaseFontElement
-	WithPrefix(prefix string) *DOMHTMLBaseFontElement
-	WithTextContent(textContent string) *DOMHTMLBaseFontElement
-	Color() string
-	SetColor(color string)
-	Face() string
-	SetFace(face string)
-	Size() string
-	SetSize(size string)
-}
-
-var _ DOMHTMLBaseFontElementable = (*DOMHTMLBaseFontElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLBaseFontElement)(nil)
 

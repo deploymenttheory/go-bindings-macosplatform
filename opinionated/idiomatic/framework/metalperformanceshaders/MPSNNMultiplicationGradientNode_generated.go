@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,74 +52,58 @@ func NewNNMultiplicationGradientNode() *NNMultiplicationGradientNode {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return nmgn
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return nmgn
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithBias(bias float32) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithBias(bias float32) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setBias:"), bias)
+	return nmgn
 }
 
 // WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nmgn
 }
 
 // WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nmgn
 }
 
 // WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return nmgn
 }
 
 // WithMinimumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithMinimumValue(minimumValue float32) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithMinimumValue(minimumValue float32) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return nmgn
 }
 
 // WithMaximumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationGradientNode) WithMaximumValue(maximumValue float32) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+func (nmgn *NNMultiplicationGradientNode) WithMaximumValue(maximumValue float32) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return nmgn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNMultiplicationGradientNode) WithLabel(label string) *NNMultiplicationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nmgn *NNMultiplicationGradientNode) WithLabel(label string) *NNMultiplicationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nmgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nmgn
 }
-
-// NNMultiplicationGradientNodeable is the interface implemented by [NNMultiplicationGradientNode], for mocking and DI.
-type NNMultiplicationGradientNodeable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *NNMultiplicationGradientNode
-	WithSecondaryScale(secondaryScale float32) *NNMultiplicationGradientNode
-	WithBias(bias float32) *NNMultiplicationGradientNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationGradientNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationGradientNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationGradientNode
-	WithMinimumValue(minimumValue float32) *NNMultiplicationGradientNode
-	WithMaximumValue(maximumValue float32) *NNMultiplicationGradientNode
-	WithLabel(label string) *NNMultiplicationGradientNode
-}
-
-var _ NNMultiplicationGradientNodeable = (*NNMultiplicationGradientNode)(nil)
 
 var _ NNArithmeticGradientNodeProvider = (*NNMultiplicationGradientNode)(nil)
 

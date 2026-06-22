@@ -44,24 +44,24 @@ func mTRChannelClusterSeriesInfoStructAdopt(id objc.ID) *MTRChannelClusterSeries
 }
 
 // Description returns the object's -description text.
-func (x *MTRChannelClusterSeriesInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mccsis *MTRChannelClusterSeriesInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(mccsis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterSeriesInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mccsis *MTRChannelClusterSeriesInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mccsis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterSeriesInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mccsis *MTRChannelClusterSeriesInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mccsis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRChannelClusterSeriesInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mccsis *MTRChannelClusterSeriesInfoStruct) String() string {
+	return rt.Description(objref.IDOf(mccsis))
 }
 
 // NewMTRChannelClusterSeriesInfoStruct creates a new MTRChannelClusterSeriesInfoStruct.
@@ -71,54 +71,31 @@ func NewMTRChannelClusterSeriesInfoStruct() *MTRChannelClusterSeriesInfoStruct {
 }
 
 // WithSeason sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterSeriesInfoStruct) WithSeason(season string) *MTRChannelClusterSeriesInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeason:"), purego.NSString(season))
-	return x
+func (mccsis *MTRChannelClusterSeriesInfoStruct) WithSeason(season string) *MTRChannelClusterSeriesInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("setSeason:"), purego.NSString(season))
+	return mccsis
 }
 
 // WithEpisode sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpisode:"), purego.NSString(episode))
-	return x
+func (mccsis *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("setEpisode:"), purego.NSString(episode))
+	return mccsis
 }
 
 // Season wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterSeriesInfoStruct) Season() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("season"))
+func (mccsis *MTRChannelClusterSeriesInfoStruct) Season() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("season"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSeason wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterSeriesInfoStruct) SetSeason(season string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeason:"), purego.NSString(season))
 }
 
 // Episode wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterSeriesInfoStruct) Episode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("episode"))
+func (mccsis *MTRChannelClusterSeriesInfoStruct) Episode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("episode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetEpisode wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterSeriesInfoStruct) SetEpisode(episode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpisode:"), purego.NSString(episode))
-}
-
-// MTRChannelClusterSeriesInfoStructable is the interface implemented by [MTRChannelClusterSeriesInfoStruct], for mocking and DI.
-type MTRChannelClusterSeriesInfoStructable interface {
-	obj.Object
-	WithSeason(season string) *MTRChannelClusterSeriesInfoStruct
-	WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct
-	Season() string
-	SetSeason(season string)
-	Episode() string
-	SetEpisode(episode string)
-}
-
-var _ MTRChannelClusterSeriesInfoStructable = (*MTRChannelClusterSeriesInfoStruct)(nil)

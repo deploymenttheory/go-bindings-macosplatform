@@ -46,24 +46,24 @@ func featureValueAdopt(id objc.ID) *FeatureValue {
 }
 
 // Description returns the object's -description text.
-func (x *FeatureValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fv *FeatureValue) Description() string {
+	return rt.Description(objref.IDOf(fv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FeatureValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fv *FeatureValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FeatureValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fv *FeatureValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FeatureValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fv *FeatureValue) String() string {
+	return rt.Description(objref.IDOf(fv))
 }
 
 // NewFeatureValue creates a new FeatureValue.
@@ -73,74 +73,58 @@ func NewFeatureValue() *FeatureValue {
 }
 
 // IsEqualToFeatureValue returns a Boolean value that indicates whether a feature value is equal to another.
-func (x *FeatureValue) IsEqualToFeatureValue(value *FeatureValue) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToFeatureValue:"), objref.IDOf(value))
+func (fv *FeatureValue) IsEqualToFeatureValue(value *FeatureValue) bool {
+	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isEqualToFeatureValue:"), objref.IDOf(value))
 	return _r
 }
 
-// Type type of the value for which the corresponding property below is held
-func (x *FeatureValue) Type() FeatureType {
-	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of the value for which the corresponding property below is held
+func (fv *FeatureValue) Type() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(fv), objc.RegisterName("type"))
 	return _r
 }
 
-// IsUndefined true if the value represents a missing or undefined value
-func (x *FeatureValue) IsUndefined() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUndefined"))
+// IsUndefined reports whether the value represents a missing or undefined value
+func (fv *FeatureValue) IsUndefined() bool {
+	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isUndefined"))
 	return _r
 }
 
-// Int64Value populated value if the type is MLFeatureTypeInt64
-func (x *FeatureValue) Int64Value() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("int64Value"))
+// Int64Value returns populated value if the type is MLFeatureTypeInt64
+func (fv *FeatureValue) Int64Value() int64 {
+	_r := objc.Send[int64](objref.IDOf(fv), objc.RegisterName("int64Value"))
 	return _r
 }
 
-// DoubleValue populated value if the type is MLFeatureTypeDouble
-func (x *FeatureValue) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+// DoubleValue returns populated value if the type is MLFeatureTypeDouble
+func (fv *FeatureValue) DoubleValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(fv), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// StringValue populated value if the type is MLFeatureTypeString
-func (x *FeatureValue) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+// StringValue returns populated value if the type is MLFeatureTypeString
+func (fv *FeatureValue) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MultiArrayValue populated value if the type is MLFeatureTypeMultiArray
-func (x *FeatureValue) MultiArrayValue() *MultiArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiArrayValue"))
+// MultiArrayValue returns populated value if the type is MLFeatureTypeMultiArray
+func (fv *FeatureValue) MultiArrayValue() *MultiArray {
+	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("multiArrayValue"))
 	return MultiArrayFromID(_r)
 }
 
-// DictionaryValue populated value if the type is MLFeatureTypeDictionary
-func (x *FeatureValue) DictionaryValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryValue"))
+// DictionaryValue returns populated value if the type is MLFeatureTypeDictionary
+func (fv *FeatureValue) DictionaryValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("dictionaryValue"))
 	return obj.Wrap(_r)
 }
 
-// SequenceValue populated value if the type is MLFeatureTypeSequence
-func (x *FeatureValue) SequenceValue() *Sequence {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sequenceValue"))
+// SequenceValue returns populated value if the type is MLFeatureTypeSequence
+func (fv *FeatureValue) SequenceValue() *Sequence {
+	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("sequenceValue"))
 	return SequenceFromID(_r)
 }
-
-// FeatureValueable is the interface implemented by [FeatureValue], for mocking and DI.
-type FeatureValueable interface {
-	obj.Object
-	IsEqualToFeatureValue(value *FeatureValue) bool
-	Type() FeatureType
-	IsUndefined() bool
-	Int64Value() int64
-	DoubleValue() float64
-	StringValue() string
-	MultiArrayValue() *MultiArray
-	DictionaryValue() obj.Object
-	SequenceValue() *Sequence
-}
-
-var _ FeatureValueable = (*FeatureValue)(nil)

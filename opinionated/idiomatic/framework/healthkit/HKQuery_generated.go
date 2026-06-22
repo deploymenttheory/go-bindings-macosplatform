@@ -48,57 +48,47 @@ func queryAdopt(id objc.ID) *Query {
 }
 
 // Description returns the object's -description text.
-func (x *Query) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Query) Description() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Query) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (q *Query) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Query) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (q *Query) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Query) String() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Query) String() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // ObjectType wraps the corresponding Objective-C method.
-func (x *Query) ObjectType() *ObjectType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectType"))
+func (q *Query) ObjectType() *ObjectType {
+	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("objectType"))
 	return ObjectTypeFromID(_r)
 }
 
 // SampleType wraps the corresponding Objective-C method.
-func (x *Query) SampleType() *SampleType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
+func (q *Query) SampleType() *SampleType {
+	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
 // Predicate wraps the corresponding Objective-C method.
-func (x *Query) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+func (q *Query) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
-
-// Queryable is the interface implemented by [Query], for mocking and DI.
-type Queryable interface {
-	obj.Object
-	ObjectType() *ObjectType
-	SampleType() *SampleType
-	Predicate() obj.Object
-}
-
-var _ Queryable = (*Query)(nil)
 
 // isQuery marks Query — and, by embedding promotion, its
 // subclasses — as a member of the Query hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Query) isQuery() {}
+func (q *Query) isQuery() {}
 
 var _ QueryProvider = (*Query)(nil)

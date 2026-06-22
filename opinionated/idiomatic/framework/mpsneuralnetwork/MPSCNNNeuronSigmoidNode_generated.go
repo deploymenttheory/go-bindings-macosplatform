@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,19 +52,11 @@ func NewCNNNeuronSigmoidNodeWithSource(sourceNode *NNImageNode) *CNNNeuronSigmoi
 	return cNNNeuronSigmoidNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnsn *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
+	objc.Send[objc.ID](objref.IDOf(cnsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnsn
 }
-
-// CNNNeuronSigmoidNodeable is the interface implemented by [CNNNeuronSigmoidNode], for mocking and DI.
-type CNNNeuronSigmoidNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronSigmoidNode
-}
-
-var _ CNNNeuronSigmoidNodeable = (*CNNNeuronSigmoidNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronSigmoidNode)(nil)
 

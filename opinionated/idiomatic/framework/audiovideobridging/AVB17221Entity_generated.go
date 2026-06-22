@@ -44,24 +44,24 @@ func aVB17221EntityAdopt(id objc.ID) *AVB17221Entity {
 }
 
 // Description returns the object's -description text.
-func (x *AVB17221Entity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ae *AVB17221Entity) Description() string {
+	return rt.Description(objref.IDOf(ae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AVB17221Entity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ae *AVB17221Entity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AVB17221Entity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ae *AVB17221Entity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AVB17221Entity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ae *AVB17221Entity) String() string {
+	return rt.Description(objref.IDOf(ae))
 }
 
 // NewAVB17221Entity creates a new AVB17221Entity.
@@ -70,392 +70,233 @@ func NewAVB17221Entity() *AVB17221Entity {
 	return aVB17221EntityAdopt(_id)
 }
 
-// WithLocalEntity YES if the entity is published locally on the machine and NO if the entity has been discovered on the network.
-func (x *AVB17221Entity) WithLocalEntity(localEntity bool) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalEntity:"), localEntity)
-	return x
+// WithLocalEntity sets YES if the entity is published locally on the machine and NO if the entity has been discovered on the network.
+func (ae *AVB17221Entity) WithLocalEntity(localEntity bool) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setLocalEntity:"), localEntity)
+	return ae
 }
 
-// WithTimeToLive the number of seconds left until the entity registration times out.
-func (x *AVB17221Entity) WithTimeToLive(timeToLive uint8) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeToLive:"), timeToLive)
-	return x
+// WithTimeToLive sets the number of seconds left until the entity registration times out.
+func (ae *AVB17221Entity) WithTimeToLive(timeToLive uint8) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setTimeToLive:"), timeToLive)
+	return ae
 }
 
-// WithEntityID the Unique Identifier (entity_id) of the entity.
-func (x *AVB17221Entity) WithEntityID(entityID uint64) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityID:"), entityID)
-	return x
+// WithEntityID sets the Unique Identifier (entity_id) of the entity.
+func (ae *AVB17221Entity) WithEntityID(entityID uint64) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setEntityID:"), entityID)
+	return ae
 }
 
-// WithEntityModelID the Entity Model Unique Identifier (entity_model_id) of the entity.
-func (x *AVB17221Entity) WithEntityModelID(entityModelID uint64) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityModelID:"), entityModelID)
-	return x
+// WithEntityModelID sets the Entity Model Unique Identifier (entity_model_id) of the entity.
+func (ae *AVB17221Entity) WithEntityModelID(entityModelID uint64) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setEntityModelID:"), entityModelID)
+	return ae
 }
 
-// WithEntityCapabilities the entity_capabilities of the entity.
-func (x *AVB17221Entity) WithEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityCapabilities:"), entityCapabilities)
-	return x
+// WithEntityCapabilities sets the entity_capabilities of the entity.
+func (ae *AVB17221Entity) WithEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setEntityCapabilities:"), entityCapabilities)
+	return ae
 }
 
-// WithTalkerStreamSources the number of stream sources the entity has.
-func (x *AVB17221Entity) WithTalkerStreamSources(talkerStreamSources uint16) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerStreamSources:"), talkerStreamSources)
-	return x
+// WithTalkerStreamSources sets the number of stream sources the entity has.
+func (ae *AVB17221Entity) WithTalkerStreamSources(talkerStreamSources uint16) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setTalkerStreamSources:"), talkerStreamSources)
+	return ae
 }
 
-// WithTalkerCapabilities the talker_capabilities of the entity.
-func (x *AVB17221Entity) WithTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerCapabilities:"), talkerCapabilities)
-	return x
+// WithTalkerCapabilities sets the talker_capabilities of the entity.
+func (ae *AVB17221Entity) WithTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setTalkerCapabilities:"), talkerCapabilities)
+	return ae
 }
 
-// WithListenerStreamSinks the number of stream sinks the entity has.
-func (x *AVB17221Entity) WithListenerStreamSinks(listenerStreamSinks uint16) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerStreamSinks:"), listenerStreamSinks)
-	return x
+// WithListenerStreamSinks sets the number of stream sinks the entity has.
+func (ae *AVB17221Entity) WithListenerStreamSinks(listenerStreamSinks uint16) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setListenerStreamSinks:"), listenerStreamSinks)
+	return ae
 }
 
-// WithListenerCapabilities the listener_capabilities of the entity.
-func (x *AVB17221Entity) WithListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerCapabilities:"), listenerCapabilities)
-	return x
+// WithListenerCapabilities sets the listener_capabilities of the entity.
+func (ae *AVB17221Entity) WithListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setListenerCapabilities:"), listenerCapabilities)
+	return ae
 }
 
-// WithControllerCapabilities the controller_capabilities of the entity.
-func (x *AVB17221Entity) WithControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerCapabilities:"), controllerCapabilities)
-	return x
+// WithControllerCapabilities sets the controller_capabilities of the entity.
+func (ae *AVB17221Entity) WithControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setControllerCapabilities:"), controllerCapabilities)
+	return ae
 }
 
-// WithAvailableIndex the available_index of the entity.
-func (x *AVB17221Entity) WithAvailableIndex(availableIndex uint32) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailableIndex:"), availableIndex)
-	return x
+// WithAvailableIndex sets the available_index of the entity.
+func (ae *AVB17221Entity) WithAvailableIndex(availableIndex uint32) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setAvailableIndex:"), availableIndex)
+	return ae
 }
 
-// WithGPTPGrandmasterID the clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
-func (x *AVB17221Entity) WithGPTPGrandmasterID(gPTPGrandmasterID uint64) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPTPGrandmasterID:"), gPTPGrandmasterID)
-	return x
+// WithGPTPGrandmasterID sets the clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+func (ae *AVB17221Entity) WithGPTPGrandmasterID(gPTPGrandmasterID uint64) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setGPTPGrandmasterID:"), gPTPGrandmasterID)
+	return ae
 }
 
-// WithGPTPDomainNumber the domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
-func (x *AVB17221Entity) WithGPTPDomainNumber(gPTPDomainNumber uint8) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPTPDomainNumber:"), gPTPDomainNumber)
-	return x
+// WithGPTPDomainNumber sets the domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+func (ae *AVB17221Entity) WithGPTPDomainNumber(gPTPDomainNumber uint8) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setGPTPDomainNumber:"), gPTPDomainNumber)
+	return ae
 }
 
-// WithIdentifyControlIndex the descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
-func (x *AVB17221Entity) WithIdentifyControlIndex(identifyControlIndex uint16) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifyControlIndex:"), identifyControlIndex)
-	return x
+// WithIdentifyControlIndex sets the descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
+func (ae *AVB17221Entity) WithIdentifyControlIndex(identifyControlIndex uint16) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setIdentifyControlIndex:"), identifyControlIndex)
+	return ae
 }
 
-// WithInterfaceIndex the descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
-func (x *AVB17221Entity) WithInterfaceIndex(interfaceIndex uint16) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceIndex:"), interfaceIndex)
-	return x
+// WithInterfaceIndex sets the descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
+func (ae *AVB17221Entity) WithInterfaceIndex(interfaceIndex uint16) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setInterfaceIndex:"), interfaceIndex)
+	return ae
 }
 
-// WithAssociationID the association_id of the entity.
-func (x *AVB17221Entity) WithAssociationID(associationID uint64) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationID:"), associationID)
-	return x
+// WithAssociationID sets the association_id of the entity.
+func (ae *AVB17221Entity) WithAssociationID(associationID uint64) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setAssociationID:"), associationID)
+	return ae
 }
 
-// WithCurrentConfigurationIndex the descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
-func (x *AVB17221Entity) WithCurrentConfigurationIndex(currentConfigurationIndex uint16) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentConfigurationIndex:"), currentConfigurationIndex)
-	return x
+// WithCurrentConfigurationIndex sets the descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
+func (ae *AVB17221Entity) WithCurrentConfigurationIndex(currentConfigurationIndex uint16) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setCurrentConfigurationIndex:"), currentConfigurationIndex)
+	return ae
 }
 
-// WithMacAddresses an array of AVBMACAddress objects containing the current MAC addresses of the entity.
-func (x *AVB17221Entity) WithMacAddresses(items ...*MACAddress) *AVB17221Entity {
+// WithMACAddresses sets an array of AVBMACAddress objects containing the current MAC addresses of the entity.
+func (ae *AVB17221Entity) WithMACAddresses(items ...*MACAddress) *AVB17221Entity {
 	_arr := purego.SliceToNSArray(items, func(_v *MACAddress) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMacAddresses:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setMacAddresses:"), _arr)
+	return ae
 }
 
-// WithEntityDiscovery the AVB17221EntityDiscovery object which discovered the entity.
-func (x *AVB17221Entity) WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityDiscovery:"), objref.IDOf(entityDiscovery))
-	return x
+// WithEntityDiscovery sets the AVB17221EntityDiscovery object which discovered the entity.
+func (ae *AVB17221Entity) WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setEntityDiscovery:"), objref.IDOf(entityDiscovery))
+	return ae
 }
 
-// IsLocalEntity YES if the entity is published locally on the machine and NO if the entity has been discovered on the network.
-func (x *AVB17221Entity) IsLocalEntity() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocalEntity"))
+// IsLocalEntity reports whether the entity is published locally on the machine and false if the entity has been discovered on the network.
+func (ae *AVB17221Entity) IsLocalEntity() bool {
+	_r := objc.Send[bool](objref.IDOf(ae), objc.RegisterName("isLocalEntity"))
 	return _r
 }
 
-// SetLocalEntity wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetLocalEntity(localEntity bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalEntity:"), localEntity)
-}
-
-// TimeToLive the number of seconds left until the entity registration times out.
-func (x *AVB17221Entity) TimeToLive() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("timeToLive"))
+// TimeToLive returns the number of seconds left until the entity registration times out.
+func (ae *AVB17221Entity) TimeToLive() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ae), objc.RegisterName("timeToLive"))
 	return _r
 }
 
-// SetTimeToLive wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetTimeToLive(timeToLive uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeToLive:"), timeToLive)
-}
-
-// EntityID the Unique Identifier (entity_id) of the entity.
-func (x *AVB17221Entity) EntityID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("entityID"))
+// EntityID returns the Unique Identifier (entity_id) of the entity.
+func (ae *AVB17221Entity) EntityID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("entityID"))
 	return _r
 }
 
-// SetEntityID wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetEntityID(entityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityID:"), entityID)
-}
-
-// EntityModelID the Entity Model Unique Identifier (entity_model_id) of the entity.
-func (x *AVB17221Entity) EntityModelID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("entityModelID"))
+// EntityModelID returns the Entity Model Unique Identifier (entity_model_id) of the entity.
+func (ae *AVB17221Entity) EntityModelID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("entityModelID"))
 	return _r
 }
 
-// SetEntityModelID wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetEntityModelID(entityModelID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityModelID:"), entityModelID)
-}
-
-// EntityCapabilities the entity_capabilities of the entity.
-func (x *AVB17221Entity) EntityCapabilities() AVB17221ADPEntityCapabilities {
-	_r := objc.Send[AVB17221ADPEntityCapabilities](objref.IDOf(x), objc.RegisterName("entityCapabilities"))
+// EntityCapabilities returns the entity_capabilities of the entity.
+func (ae *AVB17221Entity) EntityCapabilities() AVB17221ADPEntityCapabilities {
+	_r := objc.Send[AVB17221ADPEntityCapabilities](objref.IDOf(ae), objc.RegisterName("entityCapabilities"))
 	return _r
 }
 
-// SetEntityCapabilities wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityCapabilities:"), entityCapabilities)
-}
-
-// TalkerStreamSources the number of stream sources the entity has.
-func (x *AVB17221Entity) TalkerStreamSources() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("talkerStreamSources"))
+// TalkerStreamSources returns the number of stream sources the entity has.
+func (ae *AVB17221Entity) TalkerStreamSources() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("talkerStreamSources"))
 	return _r
 }
 
-// SetTalkerStreamSources wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetTalkerStreamSources(talkerStreamSources uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerStreamSources:"), talkerStreamSources)
-}
-
-// TalkerCapabilities the talker_capabilities of the entity.
-func (x *AVB17221Entity) TalkerCapabilities() AVB17221ADPTalkerCapabilities {
-	_r := objc.Send[AVB17221ADPTalkerCapabilities](objref.IDOf(x), objc.RegisterName("talkerCapabilities"))
+// TalkerCapabilities returns the talker_capabilities of the entity.
+func (ae *AVB17221Entity) TalkerCapabilities() AVB17221ADPTalkerCapabilities {
+	_r := objc.Send[AVB17221ADPTalkerCapabilities](objref.IDOf(ae), objc.RegisterName("talkerCapabilities"))
 	return _r
 }
 
-// SetTalkerCapabilities wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerCapabilities:"), talkerCapabilities)
-}
-
-// ListenerStreamSinks the number of stream sinks the entity has.
-func (x *AVB17221Entity) ListenerStreamSinks() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("listenerStreamSinks"))
+// ListenerStreamSinks returns the number of stream sinks the entity has.
+func (ae *AVB17221Entity) ListenerStreamSinks() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("listenerStreamSinks"))
 	return _r
 }
 
-// SetListenerStreamSinks wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetListenerStreamSinks(listenerStreamSinks uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerStreamSinks:"), listenerStreamSinks)
-}
-
-// ListenerCapabilities the listener_capabilities of the entity.
-func (x *AVB17221Entity) ListenerCapabilities() AVB17221ADPListenerCapabilities {
-	_r := objc.Send[AVB17221ADPListenerCapabilities](objref.IDOf(x), objc.RegisterName("listenerCapabilities"))
+// ListenerCapabilities returns the listener_capabilities of the entity.
+func (ae *AVB17221Entity) ListenerCapabilities() AVB17221ADPListenerCapabilities {
+	_r := objc.Send[AVB17221ADPListenerCapabilities](objref.IDOf(ae), objc.RegisterName("listenerCapabilities"))
 	return _r
 }
 
-// SetListenerCapabilities wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerCapabilities:"), listenerCapabilities)
-}
-
-// ControllerCapabilities the controller_capabilities of the entity.
-func (x *AVB17221Entity) ControllerCapabilities() AVB17221ADPControllerCapabilities {
-	_r := objc.Send[AVB17221ADPControllerCapabilities](objref.IDOf(x), objc.RegisterName("controllerCapabilities"))
+// ControllerCapabilities returns the controller_capabilities of the entity.
+func (ae *AVB17221Entity) ControllerCapabilities() AVB17221ADPControllerCapabilities {
+	_r := objc.Send[AVB17221ADPControllerCapabilities](objref.IDOf(ae), objc.RegisterName("controllerCapabilities"))
 	return _r
 }
 
-// SetControllerCapabilities wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerCapabilities:"), controllerCapabilities)
-}
-
-// AvailableIndex the available_index of the entity.
-func (x *AVB17221Entity) AvailableIndex() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("availableIndex"))
+// AvailableIndex returns the available_index of the entity.
+func (ae *AVB17221Entity) AvailableIndex() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ae), objc.RegisterName("availableIndex"))
 	return _r
 }
 
-// SetAvailableIndex wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetAvailableIndex(availableIndex uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailableIndex:"), availableIndex)
-}
-
-// GPTPGrandmasterID the clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
-func (x *AVB17221Entity) GPTPGrandmasterID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("gPTPGrandmasterID"))
+// GPTPGrandmasterID returns the clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+func (ae *AVB17221Entity) GPTPGrandmasterID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("gPTPGrandmasterID"))
 	return _r
 }
 
-// SetGPTPGrandmasterID wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetGPTPGrandmasterID(gPTPGrandmasterID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPTPGrandmasterID:"), gPTPGrandmasterID)
-}
-
-// GPTPDomainNumber the domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
-func (x *AVB17221Entity) GPTPDomainNumber() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("gPTPDomainNumber"))
+// GPTPDomainNumber returns the domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
+func (ae *AVB17221Entity) GPTPDomainNumber() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ae), objc.RegisterName("gPTPDomainNumber"))
 	return _r
 }
 
-// SetGPTPDomainNumber wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetGPTPDomainNumber(gPTPDomainNumber uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGPTPDomainNumber:"), gPTPDomainNumber)
-}
-
-// IdentifyControlIndex the descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
-func (x *AVB17221Entity) IdentifyControlIndex() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("identifyControlIndex"))
+// IdentifyControlIndex returns the descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
+func (ae *AVB17221Entity) IdentifyControlIndex() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("identifyControlIndex"))
 	return _r
 }
 
-// SetIdentifyControlIndex wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetIdentifyControlIndex(identifyControlIndex uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifyControlIndex:"), identifyControlIndex)
-}
-
-// InterfaceIndex the descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
-func (x *AVB17221Entity) InterfaceIndex() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("interfaceIndex"))
+// InterfaceIndex returns the descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
+func (ae *AVB17221Entity) InterfaceIndex() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("interfaceIndex"))
 	return _r
 }
 
-// SetInterfaceIndex wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetInterfaceIndex(interfaceIndex uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceIndex:"), interfaceIndex)
-}
-
-// AssociationID the association_id of the entity.
-func (x *AVB17221Entity) AssociationID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("associationID"))
+// AssociationID returns the association_id of the entity.
+func (ae *AVB17221Entity) AssociationID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("associationID"))
 	return _r
 }
 
-// SetAssociationID wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetAssociationID(associationID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationID:"), associationID)
-}
-
-// CurrentConfigurationIndex the descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
-func (x *AVB17221Entity) CurrentConfigurationIndex() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("currentConfigurationIndex"))
+// CurrentConfigurationIndex returns the descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
+func (ae *AVB17221Entity) CurrentConfigurationIndex() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("currentConfigurationIndex"))
 	return _r
 }
 
-// SetCurrentConfigurationIndex wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetCurrentConfigurationIndex(currentConfigurationIndex uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentConfigurationIndex:"), currentConfigurationIndex)
-}
-
-// MacAddresses an array of AVBMACAddress objects containing the current MAC addresses of the entity.
+// MACAddresses returns an array of AVBMACAddress objects containing the current MAC addresses of the entity.
 //
-// MacAddresses returns the collection as a Go slice.
-func (x *AVB17221Entity) MacAddresses() []*MACAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("macAddresses"))
+// MACAddresses returns the collection as a Go slice.
+func (ae *AVB17221Entity) MACAddresses() []*MACAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("macAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MACAddress { return MACAddressFromID(_id) })
 }
 
-// SetMacAddresses wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetMacAddresses(macAddresses []*MACAddress) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMacAddresses:"), purego.SliceToNSArray(macAddresses, func(_v *MACAddress) objc.ID { return objref.IDOf(_v) }))
-}
-
-// EntityDiscovery the AVB17221EntityDiscovery object which discovered the entity.
-func (x *AVB17221Entity) EntityDiscovery() *AVB17221EntityDiscovery {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityDiscovery"))
+// EntityDiscovery returns the AVB17221EntityDiscovery object which discovered the entity.
+func (ae *AVB17221Entity) EntityDiscovery() *AVB17221EntityDiscovery {
+	_r := objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("entityDiscovery"))
 	return AVB17221EntityDiscoveryFromID(_r)
 }
-
-// SetEntityDiscovery wraps the corresponding Objective-C method.
-func (x *AVB17221Entity) SetEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityDiscovery:"), objref.IDOf(entityDiscovery))
-}
-
-// AVB17221Entityable is the interface implemented by [AVB17221Entity], for mocking and DI.
-type AVB17221Entityable interface {
-	obj.Object
-	WithLocalEntity(localEntity bool) *AVB17221Entity
-	WithTimeToLive(timeToLive uint8) *AVB17221Entity
-	WithEntityID(entityID uint64) *AVB17221Entity
-	WithEntityModelID(entityModelID uint64) *AVB17221Entity
-	WithEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) *AVB17221Entity
-	WithTalkerStreamSources(talkerStreamSources uint16) *AVB17221Entity
-	WithTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) *AVB17221Entity
-	WithListenerStreamSinks(listenerStreamSinks uint16) *AVB17221Entity
-	WithListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) *AVB17221Entity
-	WithControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) *AVB17221Entity
-	WithAvailableIndex(availableIndex uint32) *AVB17221Entity
-	WithGPTPGrandmasterID(gPTPGrandmasterID uint64) *AVB17221Entity
-	WithGPTPDomainNumber(gPTPDomainNumber uint8) *AVB17221Entity
-	WithIdentifyControlIndex(identifyControlIndex uint16) *AVB17221Entity
-	WithInterfaceIndex(interfaceIndex uint16) *AVB17221Entity
-	WithAssociationID(associationID uint64) *AVB17221Entity
-	WithCurrentConfigurationIndex(currentConfigurationIndex uint16) *AVB17221Entity
-	WithMacAddresses(items ...*MACAddress) *AVB17221Entity
-	WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity
-	IsLocalEntity() bool
-	SetLocalEntity(localEntity bool)
-	TimeToLive() uint8
-	SetTimeToLive(timeToLive uint8)
-	EntityID() uint64
-	SetEntityID(entityID uint64)
-	EntityModelID() uint64
-	SetEntityModelID(entityModelID uint64)
-	EntityCapabilities() AVB17221ADPEntityCapabilities
-	SetEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities)
-	TalkerStreamSources() uint16
-	SetTalkerStreamSources(talkerStreamSources uint16)
-	TalkerCapabilities() AVB17221ADPTalkerCapabilities
-	SetTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities)
-	ListenerStreamSinks() uint16
-	SetListenerStreamSinks(listenerStreamSinks uint16)
-	ListenerCapabilities() AVB17221ADPListenerCapabilities
-	SetListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities)
-	ControllerCapabilities() AVB17221ADPControllerCapabilities
-	SetControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities)
-	AvailableIndex() uint32
-	SetAvailableIndex(availableIndex uint32)
-	GPTPGrandmasterID() uint64
-	SetGPTPGrandmasterID(gPTPGrandmasterID uint64)
-	GPTPDomainNumber() uint8
-	SetGPTPDomainNumber(gPTPDomainNumber uint8)
-	IdentifyControlIndex() uint16
-	SetIdentifyControlIndex(identifyControlIndex uint16)
-	InterfaceIndex() uint16
-	SetInterfaceIndex(interfaceIndex uint16)
-	AssociationID() uint64
-	SetAssociationID(associationID uint64)
-	CurrentConfigurationIndex() uint16
-	SetCurrentConfigurationIndex(currentConfigurationIndex uint16)
-	MacAddresses() []*MACAddress
-	SetMacAddresses(macAddresses []*MACAddress)
-	EntityDiscovery() *AVB17221EntityDiscovery
-	SetEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery)
-}
-
-var _ AVB17221Entityable = (*AVB17221Entity)(nil)

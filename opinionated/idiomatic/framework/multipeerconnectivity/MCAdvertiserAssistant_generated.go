@@ -46,24 +46,24 @@ func advertiserAssistantAdopt(id objc.ID) *AdvertiserAssistant {
 }
 
 // Description returns the object's -description text.
-func (x *AdvertiserAssistant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aa *AdvertiserAssistant) Description() string {
+	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AdvertiserAssistant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aa *AdvertiserAssistant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AdvertiserAssistant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aa *AdvertiserAssistant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AdvertiserAssistant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aa *AdvertiserAssistant) String() string {
+	return rt.Description(objref.IDOf(aa))
 }
 
 // NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession initializes an advertiser assistant object.
@@ -74,44 +74,32 @@ func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType strin
 }
 
 // Start begins advertising the service provided by a local peer and starts the assistant.
-func (x *AdvertiserAssistant) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (aa *AdvertiserAssistant) Start() {
+	objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("start"))
 }
 
 // Stop stops advertising the service provided by a local peer and stops the assistant.
-func (x *AdvertiserAssistant) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (aa *AdvertiserAssistant) Stop() {
+	objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("stop"))
 }
 
 // Session wraps the corresponding Objective-C method.
-func (x *AdvertiserAssistant) Session() *Session {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+func (aa *AdvertiserAssistant) Session() *Session {
+	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
 // DiscoveryInfo wraps the corresponding Objective-C method.
-func (x *AdvertiserAssistant) DiscoveryInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryInfo"))
+func (aa *AdvertiserAssistant) DiscoveryInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("discoveryInfo"))
 	return obj.Wrap(_r)
 }
 
 // ServiceType wraps the corresponding Objective-C method.
-func (x *AdvertiserAssistant) ServiceType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
+func (aa *AdvertiserAssistant) ServiceType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("serviceType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AdvertiserAssistantable is the interface implemented by [AdvertiserAssistant], for mocking and DI.
-type AdvertiserAssistantable interface {
-	obj.Object
-	Start()
-	Stop()
-	Session() *Session
-	DiscoveryInfo() obj.Object
-	ServiceType() string
-}
-
-var _ AdvertiserAssistantable = (*AdvertiserAssistant)(nil)

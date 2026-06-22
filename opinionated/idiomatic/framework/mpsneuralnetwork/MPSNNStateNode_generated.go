@@ -46,76 +46,53 @@ func nNStateNodeAdopt(id objc.ID) *NNStateNode {
 }
 
 // Description returns the object's -description text.
-func (x *NNStateNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nsn *NNStateNode) Description() string {
+	return rt.Description(objref.IDOf(nsn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNStateNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nsn *NNStateNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nsn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNStateNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nsn *NNStateNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nsn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNStateNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nsn *NNStateNode) String() string {
+	return rt.Description(objref.IDOf(nsn))
 }
 
-// WithExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *NNStateNode) WithExportFromGraph(exportFromGraph bool) *NNStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-	return x
+// WithExportFromGraph sets tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+func (nsn *NNStateNode) WithExportFromGraph(exportFromGraph bool) *NNStateNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
+	return nsn
 }
 
-// WithSynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-func (x *NNStateNode) WithSynchronizeResource(synchronizeResource bool) *NNStateNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-	return x
+// WithSynchronizeResource sets set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
+func (nsn *NNStateNode) WithSynchronizeResource(synchronizeResource bool) *NNStateNode {
+	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
+	return nsn
 }
 
-// ExportFromGraph tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-func (x *NNStateNode) ExportFromGraph() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("exportFromGraph"))
+// ExportFromGraph reports whether tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits. When exportFromGraph = true, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly. This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: false
+func (nsn *NNStateNode) ExportFromGraph() bool {
+	_r := objc.Send[bool](objref.IDOf(nsn), objc.RegisterName("exportFromGraph"))
 	return _r
 }
 
-// SetExportFromGraph wraps the corresponding Objective-C method.
-func (x *NNStateNode) SetExportFromGraph(exportFromGraph bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
-}
-
-// SynchronizeResource set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
-func (x *NNStateNode) SynchronizeResource() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeResource"))
+// SynchronizeResource reports whether set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
+func (nsn *NNStateNode) SynchronizeResource() bool {
+	_r := objc.Send[bool](objref.IDOf(nsn), objc.RegisterName("synchronizeResource"))
 	return _r
 }
-
-// SetSynchronizeResource wraps the corresponding Objective-C method.
-func (x *NNStateNode) SetSynchronizeResource(synchronizeResource bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
-}
-
-// NNStateNodeable is the interface implemented by [NNStateNode], for mocking and DI.
-type NNStateNodeable interface {
-	obj.Object
-	WithExportFromGraph(exportFromGraph bool) *NNStateNode
-	WithSynchronizeResource(synchronizeResource bool) *NNStateNode
-	ExportFromGraph() bool
-	SetExportFromGraph(exportFromGraph bool)
-	SynchronizeResource() bool
-	SetSynchronizeResource(synchronizeResource bool)
-}
-
-var _ NNStateNodeable = (*NNStateNode)(nil)
 
 // isNNStateNode marks NNStateNode — and, by embedding promotion, its
 // subclasses — as a member of the NNStateNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNStateNode) isNNStateNode() {}
+func (nsn *NNStateNode) isNNStateNode() {}
 
 var _ NNStateNodeProvider = (*NNStateNode)(nil)

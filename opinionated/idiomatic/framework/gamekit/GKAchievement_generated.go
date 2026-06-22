@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func achievementAdopt(id objc.ID) *Achievement {
 }
 
 // Description returns the object's -description text.
-func (x *Achievement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Achievement) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Achievement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Achievement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Achievement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Achievement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Achievement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Achievement) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAchievementWithIdentifier initializes an achievement for the local player.
@@ -89,89 +90,74 @@ func NewAchievementWithIdentifierForPlayer(identifier string, playerID string) *
 	return achievementAdopt(_id)
 }
 
-// WithIdentifier the identifier for the achievement that you enter in App Store Connect.
-func (x *Achievement) WithIdentifier(identifier string) *Achievement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-	return x
+// WithIdentifier sets the identifier for the achievement that you enter in App Store Connect.
+func (a *Achievement) WithIdentifier(identifier string) *Achievement {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return a
 }
 
-// WithPercentComplete a percentage value that states how far the player has progressed on the achievement.
-func (x *Achievement) WithPercentComplete(percentComplete float64) *Achievement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentComplete:"), percentComplete)
-	return x
+// WithPercentComplete sets a percentage value that states how far the player has progressed on the achievement.
+func (a *Achievement) WithPercentComplete(percentComplete float64) *Achievement {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPercentComplete:"), percentComplete)
+	return a
 }
 
-// WithShowsCompletionBanner a Boolean value that indicates whether GameKit displays a banner when the player completes the achievement.
-func (x *Achievement) WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompletionBanner:"), showsCompletionBanner)
-	return x
+// WithShowsCompletionBanner sets a Boolean value that indicates whether GameKit displays a banner when the player completes the achievement.
+func (a *Achievement) WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setShowsCompletionBanner:"), showsCompletionBanner)
+	return a
 }
 
-// Identifier achievement identifier
-func (x *Achievement) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns achievement identifier
+func (a *Achievement) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *Achievement) SetIdentifier(identifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-}
-
-// PercentComplete required, Percentage of achievement complete.
-func (x *Achievement) PercentComplete() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("percentComplete"))
+// PercentComplete returns required, Percentage of achievement complete.
+func (a *Achievement) PercentComplete() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("percentComplete"))
 	return _r
 }
 
-// SetPercentComplete wraps the corresponding Objective-C method.
-func (x *Achievement) SetPercentComplete(percentComplete float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentComplete:"), percentComplete)
-}
-
-// IsCompleted set to NO until percentComplete = 100.
-func (x *Achievement) IsCompleted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompleted"))
+// IsCompleted reports whether set to false until percentComplete = 100.
+func (a *Achievement) IsCompleted() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isCompleted"))
 	return _r
 }
 
-// LastReportedDate date the achievement was last reported. Read-only. Created at initialization
-func (x *Achievement) LastReportedDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastReportedDate"))
+// LastReportedDate returns date the achievement was last reported. Read-only. Created at initialization
+func (a *Achievement) LastReportedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("lastReportedDate"))
 	return obj.Wrap(_r)
 }
 
-// ShowsCompletionBanner a banner will be momentarily displayed after reporting a completed achievement
-func (x *Achievement) ShowsCompletionBanner() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCompletionBanner"))
+// ShowsCompletionBanner reports whether a banner will be momentarily displayed after reporting a completed achievement
+func (a *Achievement) ShowsCompletionBanner() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("showsCompletionBanner"))
 	return _r
 }
 
-// SetShowsCompletionBanner wraps the corresponding Objective-C method.
-func (x *Achievement) SetShowsCompletionBanner(showsCompletionBanner bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompletionBanner:"), showsCompletionBanner)
-}
-
-// Player the identifier of the player that earned the achievement.
-func (x *Achievement) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+// Player returns the identifier of the player that earned the achievement.
+func (a *Achievement) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // ReportAchievement wraps the corresponding Objective-C method.
 //
 // ReportAchievement blocks until the operation completes or ctx is cancelled.
-func (x *Achievement) ReportAchievement(ctx context.Context) error {
+func (a *Achievement) ReportAchievement(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportAchievementWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reportAchievementWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -181,14 +167,14 @@ func (x *Achievement) ReportAchievement(ctx context.Context) error {
 }
 
 // IsHidden wraps the corresponding Objective-C method.
-func (x *Achievement) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+func (a *Achievement) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // PlayerID wraps the corresponding Objective-C method.
-func (x *Achievement) PlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+func (a *Achievement) PlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
 	}
@@ -198,7 +184,7 @@ func (x *Achievement) PlayerID() string {
 // SelectChallengeablePlayers finds the subset of players who can earn an achievement.
 //
 // SelectChallengeablePlayers blocks until the operation completes or ctx is cancelled.
-func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players []*Player) (result obj.Object, err error) {
+func (a *Achievement) SelectChallengeablePlayers(ctx context.Context, players []*Player) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,7 +196,7 @@ func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players []
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectChallengeablePlayers:withCompletionHandler:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("selectChallengeablePlayers:withCompletionHandler:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -221,14 +207,14 @@ func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players []
 }
 
 // IssueChallengeToPlayersMessage * This method is obsolete. It will never be invoked and its implementation does nothing**
-func (x *Achievement) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
+func (a *Achievement) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }
 
 // SelectChallengeablePlayerIDs * This method is obsolete. It will never be invoked and its implementation does nothing**
 //
 // SelectChallengeablePlayerIDs blocks until the operation completes or ctx is cancelled.
-func (x *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerIDs []string) (result obj.Object, err error) {
+func (a *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerIDs []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,7 +226,7 @@ func (x *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerID
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectChallengeablePlayerIDs:withCompletionHandler:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("selectChallengeablePlayerIDs:withCompletionHandler:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -249,28 +235,3 @@ func (x *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerID
 		return _zero, ctx.Err()
 	}
 }
-
-// Achievementable is the interface implemented by [Achievement], for mocking and DI.
-type Achievementable interface {
-	obj.Object
-	WithIdentifier(identifier string) *Achievement
-	WithPercentComplete(percentComplete float64) *Achievement
-	WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement
-	Identifier() string
-	SetIdentifier(identifier string)
-	PercentComplete() float64
-	SetPercentComplete(percentComplete float64)
-	IsCompleted() bool
-	LastReportedDate() obj.Object
-	ShowsCompletionBanner() bool
-	SetShowsCompletionBanner(showsCompletionBanner bool)
-	Player() *Player
-	ReportAchievement(ctx context.Context) error
-	IsHidden() bool
-	PlayerID() string
-	SelectChallengeablePlayers(ctx context.Context, players []*Player) (obj.Object, error)
-	IssueChallengeToPlayersMessage(playerIDs []string, message string)
-	SelectChallengeablePlayerIDs(ctx context.Context, playerIDs []string) (obj.Object, error)
-}
-
-var _ Achievementable = (*Achievement)(nil)

@@ -46,24 +46,24 @@ func mergeConflictAdopt(id objc.ID) *MergeConflict {
 }
 
 // Description returns the object's -description text.
-func (x *MergeConflict) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MergeConflict) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MergeConflict) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MergeConflict) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MergeConflict) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MergeConflict) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MergeConflict) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MergeConflict) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapshot initializes a merge conflict.
@@ -74,50 +74,37 @@ func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapsh
 }
 
 // SourceObject wraps the corresponding Objective-C method.
-func (x *MergeConflict) SourceObject() *ManagedObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceObject"))
+func (mc *MergeConflict) SourceObject() *ManagedObject {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("sourceObject"))
 	return ManagedObjectFromID(_r)
 }
 
 // ObjectSnapshot wraps the corresponding Objective-C method.
-func (x *MergeConflict) ObjectSnapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectSnapshot"))
+func (mc *MergeConflict) ObjectSnapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("objectSnapshot"))
 	return obj.Wrap(_r)
 }
 
 // CachedSnapshot wraps the corresponding Objective-C method.
-func (x *MergeConflict) CachedSnapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cachedSnapshot"))
+func (mc *MergeConflict) CachedSnapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("cachedSnapshot"))
 	return obj.Wrap(_r)
 }
 
 // PersistedSnapshot wraps the corresponding Objective-C method.
-func (x *MergeConflict) PersistedSnapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistedSnapshot"))
+func (mc *MergeConflict) PersistedSnapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("persistedSnapshot"))
 	return obj.Wrap(_r)
 }
 
 // NewVersionNumber wraps the corresponding Objective-C method.
-func (x *MergeConflict) NewVersionNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("newVersionNumber"))
+func (mc *MergeConflict) NewVersionNumber() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("newVersionNumber"))
 	return _r
 }
 
 // OldVersionNumber wraps the corresponding Objective-C method.
-func (x *MergeConflict) OldVersionNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("oldVersionNumber"))
+func (mc *MergeConflict) OldVersionNumber() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("oldVersionNumber"))
 	return _r
 }
-
-// MergeConflictable is the interface implemented by [MergeConflict], for mocking and DI.
-type MergeConflictable interface {
-	obj.Object
-	SourceObject() *ManagedObject
-	ObjectSnapshot() obj.Object
-	CachedSnapshot() obj.Object
-	PersistedSnapshot() obj.Object
-	NewVersionNumber() int
-	OldVersionNumber() int
-}
-
-var _ MergeConflictable = (*MergeConflict)(nil)

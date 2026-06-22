@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,90 +50,51 @@ func NewSendMessageIntentDonationMetadata() *SendMessageIntentDonationMetadata {
 }
 
 // WithMentionsCurrentUser sets the property and returns the receiver so calls can be chained.
-func (x *SendMessageIntentDonationMetadata) WithMentionsCurrentUser(mentionsCurrentUser bool) *SendMessageIntentDonationMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMentionsCurrentUser:"), mentionsCurrentUser)
-	return x
+func (smidm *SendMessageIntentDonationMetadata) WithMentionsCurrentUser(mentionsCurrentUser bool) *SendMessageIntentDonationMetadata {
+	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setMentionsCurrentUser:"), mentionsCurrentUser)
+	return smidm
 }
 
 // WithReplyToCurrentUser sets the property and returns the receiver so calls can be chained.
-func (x *SendMessageIntentDonationMetadata) WithReplyToCurrentUser(replyToCurrentUser bool) *SendMessageIntentDonationMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplyToCurrentUser:"), replyToCurrentUser)
-	return x
+func (smidm *SendMessageIntentDonationMetadata) WithReplyToCurrentUser(replyToCurrentUser bool) *SendMessageIntentDonationMetadata {
+	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setReplyToCurrentUser:"), replyToCurrentUser)
+	return smidm
 }
 
 // WithNotifyRecipientAnyway sets the property and returns the receiver so calls can be chained.
-func (x *SendMessageIntentDonationMetadata) WithNotifyRecipientAnyway(notifyRecipientAnyway bool) *SendMessageIntentDonationMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyRecipientAnyway:"), notifyRecipientAnyway)
-	return x
+func (smidm *SendMessageIntentDonationMetadata) WithNotifyRecipientAnyway(notifyRecipientAnyway bool) *SendMessageIntentDonationMetadata {
+	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setNotifyRecipientAnyway:"), notifyRecipientAnyway)
+	return smidm
 }
 
 // WithRecipientCount sets the property and returns the receiver so calls can be chained.
-func (x *SendMessageIntentDonationMetadata) WithRecipientCount(recipientCount int) *SendMessageIntentDonationMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientCount:"), recipientCount)
-	return x
+func (smidm *SendMessageIntentDonationMetadata) WithRecipientCount(recipientCount int) *SendMessageIntentDonationMetadata {
+	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setRecipientCount:"), recipientCount)
+	return smidm
 }
 
 // MentionsCurrentUser wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) MentionsCurrentUser() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mentionsCurrentUser"))
+func (smidm *SendMessageIntentDonationMetadata) MentionsCurrentUser() bool {
+	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("mentionsCurrentUser"))
 	return _r
-}
-
-// SetMentionsCurrentUser wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) SetMentionsCurrentUser(mentionsCurrentUser bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMentionsCurrentUser:"), mentionsCurrentUser)
 }
 
 // IsReplyToCurrentUser wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) IsReplyToCurrentUser() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReplyToCurrentUser"))
+func (smidm *SendMessageIntentDonationMetadata) IsReplyToCurrentUser() bool {
+	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("isReplyToCurrentUser"))
 	return _r
-}
-
-// SetReplyToCurrentUser wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) SetReplyToCurrentUser(replyToCurrentUser bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplyToCurrentUser:"), replyToCurrentUser)
 }
 
 // NotifyRecipientAnyway wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) NotifyRecipientAnyway() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyRecipientAnyway"))
+func (smidm *SendMessageIntentDonationMetadata) NotifyRecipientAnyway() bool {
+	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("notifyRecipientAnyway"))
 	return _r
-}
-
-// SetNotifyRecipientAnyway wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) SetNotifyRecipientAnyway(notifyRecipientAnyway bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyRecipientAnyway:"), notifyRecipientAnyway)
 }
 
 // RecipientCount wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) RecipientCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recipientCount"))
+func (smidm *SendMessageIntentDonationMetadata) RecipientCount() int {
+	_r := objc.Send[int](objref.IDOf(smidm), objc.RegisterName("recipientCount"))
 	return _r
 }
-
-// SetRecipientCount wraps the corresponding Objective-C method.
-func (x *SendMessageIntentDonationMetadata) SetRecipientCount(recipientCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientCount:"), recipientCount)
-}
-
-// SendMessageIntentDonationMetadataable is the interface implemented by [SendMessageIntentDonationMetadata], for mocking and DI.
-type SendMessageIntentDonationMetadataable interface {
-	obj.Object
-	WithMentionsCurrentUser(mentionsCurrentUser bool) *SendMessageIntentDonationMetadata
-	WithReplyToCurrentUser(replyToCurrentUser bool) *SendMessageIntentDonationMetadata
-	WithNotifyRecipientAnyway(notifyRecipientAnyway bool) *SendMessageIntentDonationMetadata
-	WithRecipientCount(recipientCount int) *SendMessageIntentDonationMetadata
-	MentionsCurrentUser() bool
-	SetMentionsCurrentUser(mentionsCurrentUser bool)
-	IsReplyToCurrentUser() bool
-	SetReplyToCurrentUser(replyToCurrentUser bool)
-	NotifyRecipientAnyway() bool
-	SetNotifyRecipientAnyway(notifyRecipientAnyway bool)
-	RecipientCount() int
-	SetRecipientCount(recipientCount int)
-}
-
-var _ SendMessageIntentDonationMetadataable = (*SendMessageIntentDonationMetadata)(nil)
 
 var _ IntentDonationMetadataProvider = (*SendMessageIntentDonationMetadata)(nil)

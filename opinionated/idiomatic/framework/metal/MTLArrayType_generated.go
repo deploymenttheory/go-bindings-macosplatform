@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,73 +52,57 @@ func NewArrayType() *ArrayType {
 }
 
 // ElementStructType provides a description of the underlying struct type when an array holds structs as its elements.
-func (x *ArrayType) ElementStructType() *StructType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementStructType"))
+func (at *ArrayType) ElementStructType() *StructType {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementStructType"))
 	return StructTypeFromID(_r)
 }
 
 // ElementArrayType provides a description of the underlying type when an array holds other arrays as its elements.
-func (x *ArrayType) ElementArrayType() *ArrayType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayType"))
+func (at *ArrayType) ElementArrayType() *ArrayType {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementArrayType"))
 	return ArrayTypeFromID(_r)
 }
 
 // ElementTextureReferenceType provides a description of the underlying texture type when an array holds textures as its elements.
-func (x *ArrayType) ElementTextureReferenceType() *TextureReferenceType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementTextureReferenceType"))
+func (at *ArrayType) ElementTextureReferenceType() *TextureReferenceType {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementTextureReferenceType"))
 	return TextureReferenceTypeFromID(_r)
 }
 
 // ElementPointerType provides a description of the underlying pointer type when an array holds pointers as its elements.
-func (x *ArrayType) ElementPointerType() *PointerType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementPointerType"))
+func (at *ArrayType) ElementPointerType() *PointerType {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementPointerType"))
 	return PointerTypeFromID(_r)
 }
 
 // ElementTensorReferenceType provides a description of the underlying tensor type when this array holds tensors as its elements.
-func (x *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementTensorReferenceType"))
+func (at *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("elementTensorReferenceType"))
 	return TensorReferenceTypeFromID(_r)
 }
 
 // ElementType wraps the corresponding Objective-C method.
-func (x *ArrayType) ElementType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("elementType"))
+func (at *ArrayType) ElementType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(at), objc.RegisterName("elementType"))
 	return _r
 }
 
 // ArrayLength wraps the corresponding Objective-C method.
-func (x *ArrayType) ArrayLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
+func (at *ArrayType) ArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("arrayLength"))
 	return _r
 }
 
 // Stride wraps the corresponding Objective-C method.
-func (x *ArrayType) Stride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+func (at *ArrayType) Stride() int {
+	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("stride"))
 	return _r
 }
 
 // ArgumentIndexStride wraps the corresponding Objective-C method.
-func (x *ArrayType) ArgumentIndexStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndexStride"))
+func (at *ArrayType) ArgumentIndexStride() int {
+	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("argumentIndexStride"))
 	return _r
 }
-
-// ArrayTypeable is the interface implemented by [ArrayType], for mocking and DI.
-type ArrayTypeable interface {
-	obj.Object
-	ElementStructType() *StructType
-	ElementArrayType() *ArrayType
-	ElementTextureReferenceType() *TextureReferenceType
-	ElementPointerType() *PointerType
-	ElementTensorReferenceType() *TensorReferenceType
-	ElementType() DataType
-	ArrayLength() int
-	Stride() int
-	ArgumentIndexStride() int
-}
-
-var _ ArrayTypeable = (*ArrayType)(nil)
 
 var _ TypeProvider = (*ArrayType)(nil)

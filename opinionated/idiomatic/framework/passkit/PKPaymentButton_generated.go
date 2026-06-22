@@ -46,24 +46,24 @@ func paymentButtonAdopt(id objc.ID) *PaymentButton {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentButton) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pb *PaymentButton) Description() string {
+	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentButton) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pb *PaymentButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentButton) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pb *PaymentButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentButton) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pb *PaymentButton) String() string {
+	return rt.Description(objref.IDOf(pb))
 }
 
 // NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new payment button with the specified type and style.
@@ -73,29 +73,14 @@ func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PaymentButton
 	return paymentButtonAdopt(_id)
 }
 
-// WithCornerRadius the radius, in points, for the rounded corners on the button.
-func (x *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius, in points, for the rounded corners on the button.
+func (pb *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return pb
 }
 
 // CornerRadius wraps the corresponding Objective-C method.
-func (x *PaymentButton) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+func (pb *PaymentButton) CornerRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("cornerRadius"))
 	return _r
 }
-
-// SetCornerRadius wraps the corresponding Objective-C method.
-func (x *PaymentButton) SetCornerRadius(cornerRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-}
-
-// PaymentButtonable is the interface implemented by [PaymentButton], for mocking and DI.
-type PaymentButtonable interface {
-	obj.Object
-	WithCornerRadius(cornerRadius float64) *PaymentButton
-	CornerRadius() float64
-	SetCornerRadius(cornerRadius float64)
-}
-
-var _ PaymentButtonable = (*PaymentButton)(nil)

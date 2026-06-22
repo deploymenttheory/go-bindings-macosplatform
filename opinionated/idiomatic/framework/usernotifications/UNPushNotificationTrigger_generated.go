@@ -7,7 +7,6 @@ package usernotifications
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewPushNotificationTrigger() *PushNotificationTrigger {
 	_id := objc.Send[objc.ID](objc.ID(_class("UNPushNotificationTrigger")), objc.RegisterName("new"))
 	return pushNotificationTriggerAdopt(_id)
 }
-
-// PushNotificationTriggerable is the interface implemented by [PushNotificationTrigger], for mocking and DI.
-type PushNotificationTriggerable interface {
-	obj.Object
-}
-
-var _ PushNotificationTriggerable = (*PushNotificationTrigger)(nil)
 
 var _ NotificationTriggerProvider = (*PushNotificationTrigger)(nil)

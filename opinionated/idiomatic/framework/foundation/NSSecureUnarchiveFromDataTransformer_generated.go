@@ -53,17 +53,9 @@ func NewSecureUnarchiveFromDataTransformer() *SecureUnarchiveFromDataTransformer
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (sufdt *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer {
+	objc.Send[objc.ID](objref.IDOf(sufdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return sufdt
 }
-
-// SecureUnarchiveFromDataTransformerable is the interface implemented by [SecureUnarchiveFromDataTransformer], for mocking and DI.
-type SecureUnarchiveFromDataTransformerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer
-}
-
-var _ SecureUnarchiveFromDataTransformerable = (*SecureUnarchiveFromDataTransformer)(nil)
 
 var _ ValueTransformerProvider = (*SecureUnarchiveFromDataTransformer)(nil)

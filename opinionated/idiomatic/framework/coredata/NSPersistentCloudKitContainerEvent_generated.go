@@ -46,24 +46,24 @@ func persistentCloudKitContainerEventAdopt(id objc.ID) *PersistentCloudKitContai
 }
 
 // Description returns the object's -description text.
-func (x *PersistentCloudKitContainerEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pckce *PersistentCloudKitContainerEvent) Description() string {
+	return rt.Description(objref.IDOf(pckce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentCloudKitContainerEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pckce *PersistentCloudKitContainerEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pckce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentCloudKitContainerEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pckce *PersistentCloudKitContainerEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pckce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentCloudKitContainerEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pckce *PersistentCloudKitContainerEvent) String() string {
+	return rt.Description(objref.IDOf(pckce))
 }
 
 // NewPersistentCloudKitContainerEvent creates a new PersistentCloudKitContainerEvent.
@@ -73,14 +73,14 @@ func NewPersistentCloudKitContainerEvent() *PersistentCloudKitContainerEvent {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEvent) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (pckce *PersistentCloudKitContainerEvent) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // StoreIdentifier wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEvent) StoreIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storeIdentifier"))
+func (pckce *PersistentCloudKitContainerEvent) StoreIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("storeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,38 +88,25 @@ func (x *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEvent) Type() PersistentCloudKitContainerEventType {
-	_r := objc.Send[PersistentCloudKitContainerEventType](objref.IDOf(x), objc.RegisterName("type"))
+func (pckce *PersistentCloudKitContainerEvent) Type() PersistentCloudKitContainerEventType {
+	_r := objc.Send[PersistentCloudKitContainerEventType](objref.IDOf(pckce), objc.RegisterName("type"))
 	return _r
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEvent) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (pckce *PersistentCloudKitContainerEvent) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEvent) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (pckce *PersistentCloudKitContainerEvent) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // Succeeded wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEvent) Succeeded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("succeeded"))
+func (pckce *PersistentCloudKitContainerEvent) Succeeded() bool {
+	_r := objc.Send[bool](objref.IDOf(pckce), objc.RegisterName("succeeded"))
 	return _r
 }
-
-// PersistentCloudKitContainerEventable is the interface implemented by [PersistentCloudKitContainerEvent], for mocking and DI.
-type PersistentCloudKitContainerEventable interface {
-	obj.Object
-	Identifier() obj.Object
-	StoreIdentifier() string
-	Type() PersistentCloudKitContainerEventType
-	StartDate() obj.Object
-	EndDate() obj.Object
-	Succeeded() bool
-}
-
-var _ PersistentCloudKitContainerEventable = (*PersistentCloudKitContainerEvent)(nil)

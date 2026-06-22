@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTREnergyEVSEModeClusterChangeToModeResponseParams is an idiomatic wrapper over the Objective-C class MTREnergyEVSEModeClusterChangeToModeResponseParams.
@@ -46,24 +47,24 @@ func mTREnergyEVSEModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTREne
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) Description() string {
+	return rt.Description(objref.IDOf(meemcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(meemcctmrp))
 }
 
 // NewMTREnergyEVSEModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTREnergyEVSEModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,51 +79,28 @@ func NewMTREnergyEVSEModeClusterChangeToModeResponseParamsWithResponseValueError
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return meemcctmrp
 }
 
 // WithStatusText sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-	return x
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
+	return meemcctmrp
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
 // StatusText wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) StatusText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
+func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStatusText wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-}
-
-// MTREnergyEVSEModeClusterChangeToModeResponseParamsable is the interface implemented by [MTREnergyEVSEModeClusterChangeToModeResponseParams], for mocking and DI.
-type MTREnergyEVSEModeClusterChangeToModeResponseParamsable interface {
-	obj.Object
-	WithStatus(status obj.Object) *MTREnergyEVSEModeClusterChangeToModeResponseParams
-	WithStatusText(statusText string) *MTREnergyEVSEModeClusterChangeToModeResponseParams
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	StatusText() string
-	SetStatusText(statusText string)
-}
-
-var _ MTREnergyEVSEModeClusterChangeToModeResponseParamsable = (*MTREnergyEVSEModeClusterChangeToModeResponseParams)(nil)

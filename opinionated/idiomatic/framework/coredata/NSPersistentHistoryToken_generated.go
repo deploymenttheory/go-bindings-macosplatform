@@ -46,24 +46,24 @@ func persistentHistoryTokenAdopt(id objc.ID) *PersistentHistoryToken {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentHistoryToken) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pht *PersistentHistoryToken) Description() string {
+	return rt.Description(objref.IDOf(pht))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentHistoryToken) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pht *PersistentHistoryToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pht), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentHistoryToken) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pht *PersistentHistoryToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pht), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentHistoryToken) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pht *PersistentHistoryToken) String() string {
+	return rt.Description(objref.IDOf(pht))
 }
 
 // NewPersistentHistoryToken creates a new PersistentHistoryToken.
@@ -71,10 +71,3 @@ func NewPersistentHistoryToken() *PersistentHistoryToken {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryToken")), objc.RegisterName("new"))
 	return persistentHistoryTokenAdopt(_id)
 }
-
-// PersistentHistoryTokenable is the interface implemented by [PersistentHistoryToken], for mocking and DI.
-type PersistentHistoryTokenable interface {
-	obj.Object
-}
-
-var _ PersistentHistoryTokenable = (*PersistentHistoryToken)(nil)

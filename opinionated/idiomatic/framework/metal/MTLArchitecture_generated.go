@@ -46,24 +46,24 @@ func architectureAdopt(id objc.ID) *Architecture {
 }
 
 // Description returns the object's -description text.
-func (x *Architecture) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Architecture) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Architecture) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Architecture) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Architecture) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Architecture) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Architecture) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Architecture) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewArchitecture creates a new Architecture.
@@ -73,18 +73,10 @@ func NewArchitecture() *Architecture {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Architecture) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (a *Architecture) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Architectureable is the interface implemented by [Architecture], for mocking and DI.
-type Architectureable interface {
-	obj.Object
-	Name() string
-}
-
-var _ Architectureable = (*Architecture)(nil)

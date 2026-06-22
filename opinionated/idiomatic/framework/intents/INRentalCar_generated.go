@@ -46,24 +46,24 @@ func rentalCarAdopt(id objc.ID) *RentalCar {
 }
 
 // Description returns the object's -description text.
-func (x *RentalCar) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rc *RentalCar) Description() string {
+	return rt.Description(objref.IDOf(rc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RentalCar) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rc *RentalCar) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RentalCar) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rc *RentalCar) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RentalCar) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rc *RentalCar) String() string {
+	return rt.Description(objref.IDOf(rc))
 }
 
 // NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription creates a new rental car object with the specified contents and attributes.
@@ -74,8 +74,8 @@ func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCo
 }
 
 // RentalCompanyName wraps the corresponding Objective-C method.
-func (x *RentalCar) RentalCompanyName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCompanyName"))
+func (rc *RentalCar) RentalCompanyName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("rentalCompanyName"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *RentalCar) RentalCompanyName() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *RentalCar) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (rc *RentalCar) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +92,8 @@ func (x *RentalCar) Type() string {
 }
 
 // Make wraps the corresponding Objective-C method.
-func (x *RentalCar) Make() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("make"))
+func (rc *RentalCar) Make() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("make"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,8 +101,8 @@ func (x *RentalCar) Make() string {
 }
 
 // Model wraps the corresponding Objective-C method.
-func (x *RentalCar) Model() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+func (rc *RentalCar) Model() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("model"))
 	if _r == 0 {
 		return ""
 	}
@@ -110,22 +110,10 @@ func (x *RentalCar) Model() string {
 }
 
 // RentalCarDescription wraps the corresponding Objective-C method.
-func (x *RentalCar) RentalCarDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rentalCarDescription"))
+func (rc *RentalCar) RentalCarDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("rentalCarDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// RentalCarable is the interface implemented by [RentalCar], for mocking and DI.
-type RentalCarable interface {
-	obj.Object
-	RentalCompanyName() string
-	Type() string
-	Make() string
-	Model() string
-	RentalCarDescription() string
-}
-
-var _ RentalCarable = (*RentalCar)(nil)

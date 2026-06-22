@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,46 +50,34 @@ func NewDOMProgressEvent() *DOMProgressEvent {
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMProgressEvent) WithReturnValue(returnValue bool) *DOMProgressEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
-	return x
+func (dpe *DOMProgressEvent) WithReturnValue(returnValue bool) *DOMProgressEvent {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setReturnValue:"), returnValue)
+	return dpe
 }
 
 // WithCancelBubble sets the property and returns the receiver so calls can be chained.
-func (x *DOMProgressEvent) WithCancelBubble(cancelBubble bool) *DOMProgressEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-	return x
+func (dpe *DOMProgressEvent) WithCancelBubble(cancelBubble bool) *DOMProgressEvent {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return dpe
 }
 
 // LengthComputable wraps the corresponding Objective-C method.
-func (x *DOMProgressEvent) LengthComputable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lengthComputable"))
+func (dpe *DOMProgressEvent) LengthComputable() bool {
+	_r := objc.Send[bool](objref.IDOf(dpe), objc.RegisterName("lengthComputable"))
 	return _r
 }
 
 // Loaded wraps the corresponding Objective-C method.
-func (x *DOMProgressEvent) Loaded() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("loaded"))
+func (dpe *DOMProgressEvent) Loaded() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(dpe), objc.RegisterName("loaded"))
 	return _r
 }
 
 // Total wraps the corresponding Objective-C method.
-func (x *DOMProgressEvent) Total() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("total"))
+func (dpe *DOMProgressEvent) Total() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(dpe), objc.RegisterName("total"))
 	return _r
 }
-
-// DOMProgressEventable is the interface implemented by [DOMProgressEvent], for mocking and DI.
-type DOMProgressEventable interface {
-	obj.Object
-	WithReturnValue(returnValue bool) *DOMProgressEvent
-	WithCancelBubble(cancelBubble bool) *DOMProgressEvent
-	LengthComputable() bool
-	Loaded() uint64
-	Total() uint64
-}
-
-var _ DOMProgressEventable = (*DOMProgressEvent)(nil)
 
 var _ DOMEventProvider = (*DOMProgressEvent)(nil)
 

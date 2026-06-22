@@ -46,24 +46,24 @@ func imageProcessorKernelAdopt(id objc.ID) *ImageProcessorKernel {
 }
 
 // Description returns the object's -description text.
-func (x *ImageProcessorKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ipk *ImageProcessorKernel) Description() string {
+	return rt.Description(objref.IDOf(ipk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageProcessorKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ipk *ImageProcessorKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ipk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageProcessorKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ipk *ImageProcessorKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ipk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageProcessorKernel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ipk *ImageProcessorKernel) String() string {
+	return rt.Description(objref.IDOf(ipk))
 }
 
 // NewImageProcessorKernel creates a new ImageProcessorKernel.
@@ -71,10 +71,3 @@ func NewImageProcessorKernel() *ImageProcessorKernel {
 	_id := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("new"))
 	return imageProcessorKernelAdopt(_id)
 }
-
-// ImageProcessorKernelable is the interface implemented by [ImageProcessorKernel], for mocking and DI.
-type ImageProcessorKernelable interface {
-	obj.Object
-}
-
-var _ ImageProcessorKernelable = (*ImageProcessorKernel)(nil)

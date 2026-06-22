@@ -48,76 +48,53 @@ func smartCardUserInteractionAdopt(id objc.ID) *SmartCardUserInteraction {
 }
 
 // Description returns the object's -description text.
-func (x *SmartCardUserInteraction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scui *SmartCardUserInteraction) Description() string {
+	return rt.Description(objref.IDOf(scui))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SmartCardUserInteraction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scui *SmartCardUserInteraction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scui), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SmartCardUserInteraction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scui *SmartCardUserInteraction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scui), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SmartCardUserInteraction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scui *SmartCardUserInteraction) String() string {
+	return rt.Description(objref.IDOf(scui))
 }
 
-// WithInitialTimeout the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
-	return x
+// WithInitialTimeout sets the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scui *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction {
+	objc.Send[objc.ID](objref.IDOf(scui), objc.RegisterName("setInitialTimeout:"), initialTimeout)
+	return scui
 }
 
-// WithInteractionTimeout the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
-	return x
+// WithInteractionTimeout sets the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scui *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction {
+	objc.Send[objc.ID](objref.IDOf(scui), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
+	return scui
 }
 
-// Cancel attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
-func (x *SmartCardUserInteraction) Cancel() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("cancel"))
+// Cancel reports whether attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.
+func (scui *SmartCardUserInteraction) Cancel() bool {
+	_r := objc.Send[bool](objref.IDOf(scui), objc.RegisterName("cancel"))
 	return _r
 }
 
-// SetInitialTimeout wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteraction) SetInitialTimeout(initialTimeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
-}
-
-// InteractionTimeout timeout after the first key stroke. If set to 0, the reader-defined default timeout is used.
-func (x *SmartCardUserInteraction) InteractionTimeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interactionTimeout"))
+// InteractionTimeout returns timeout after the first key stroke. If set to 0, the reader-defined default timeout is used.
+func (scui *SmartCardUserInteraction) InteractionTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(scui), objc.RegisterName("interactionTimeout"))
 	return _r
 }
-
-// SetInteractionTimeout wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteraction) SetInteractionTimeout(interactionTimeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
-}
-
-// SmartCardUserInteractionable is the interface implemented by [SmartCardUserInteraction], for mocking and DI.
-type SmartCardUserInteractionable interface {
-	obj.Object
-	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction
-	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction
-	Cancel() bool
-	SetInitialTimeout(initialTimeout float64)
-	InteractionTimeout() float64
-	SetInteractionTimeout(interactionTimeout float64)
-}
-
-var _ SmartCardUserInteractionable = (*SmartCardUserInteraction)(nil)
 
 // isSmartCardUserInteraction marks SmartCardUserInteraction — and, by embedding promotion, its
 // subclasses — as a member of the SmartCardUserInteraction hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SmartCardUserInteraction) isSmartCardUserInteraction() {}
+func (scui *SmartCardUserInteraction) isSmartCardUserInteraction() {}
 
 var _ SmartCardUserInteractionProvider = (*SmartCardUserInteraction)(nil)

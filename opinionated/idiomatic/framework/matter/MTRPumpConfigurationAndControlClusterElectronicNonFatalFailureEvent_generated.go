@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventAdopt(id
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccenffe *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccenffe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccenffe *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccenffe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccenffe *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccenffe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccenffe *MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccenffe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent creates a new MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent() *M
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEventable = (*MTRPumpConfigurationAndControlClusterElectronicNonFatalFailureEvent)(nil)

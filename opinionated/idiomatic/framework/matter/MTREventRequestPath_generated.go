@@ -44,24 +44,24 @@ func mTREventRequestPathAdopt(id objc.ID) *MTREventRequestPath {
 }
 
 // Description returns the object's -description text.
-func (x *MTREventRequestPath) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (merp *MTREventRequestPath) Description() string {
+	return rt.Description(objref.IDOf(merp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREventRequestPath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (merp *MTREventRequestPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(merp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREventRequestPath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (merp *MTREventRequestPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(merp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREventRequestPath) String() string {
-	return rt.Description(objref.IDOf(x))
+func (merp *MTREventRequestPath) String() string {
+	return rt.Description(objref.IDOf(merp))
 }
 
 // NewMTREventRequestPath creates a new MTREventRequestPath.
@@ -71,29 +71,19 @@ func NewMTREventRequestPath() *MTREventRequestPath {
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTREventRequestPath) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (merp *MTREventRequestPath) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
 // Cluster wraps the corresponding Objective-C method.
-func (x *MTREventRequestPath) Cluster() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+func (merp *MTREventRequestPath) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
 // Event wraps the corresponding Objective-C method.
-func (x *MTREventRequestPath) Event() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
+func (merp *MTREventRequestPath) Event() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("event"))
 	return obj.Wrap(_r)
 }
-
-// MTREventRequestPathable is the interface implemented by [MTREventRequestPath], for mocking and DI.
-type MTREventRequestPathable interface {
-	obj.Object
-	Endpoint() obj.Object
-	Cluster() obj.Object
-	Event() obj.Object
-}
-
-var _ MTREventRequestPathable = (*MTREventRequestPath)(nil)

@@ -44,24 +44,24 @@ func mTRChannelClusterChangeChannelParamsAdopt(id objc.ID) *MTRChannelClusterCha
 }
 
 // Description returns the object's -description text.
-func (x *MTRChannelClusterChangeChannelParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mccccp *MTRChannelClusterChangeChannelParams) Description() string {
+	return rt.Description(objref.IDOf(mccccp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterChangeChannelParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mccccp *MTRChannelClusterChangeChannelParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mccccp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterChangeChannelParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mccccp *MTRChannelClusterChangeChannelParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mccccp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRChannelClusterChangeChannelParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mccccp *MTRChannelClusterChangeChannelParams) String() string {
+	return rt.Description(objref.IDOf(mccccp))
 }
 
 // NewMTRChannelClusterChangeChannelParams creates a new MTRChannelClusterChangeChannelParams.
@@ -71,71 +71,40 @@ func NewMTRChannelClusterChangeChannelParams() *MTRChannelClusterChangeChannelPa
 }
 
 // WithMatch sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChangeChannelParams) WithMatch(match string) *MTRChannelClusterChangeChannelParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatch:"), purego.NSString(match))
-	return x
+func (mccccp *MTRChannelClusterChangeChannelParams) WithMatch(match string) *MTRChannelClusterChangeChannelParams {
+	objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("setMatch:"), purego.NSString(match))
+	return mccccp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRChannelClusterChangeChannelParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mccccp *MTRChannelClusterChangeChannelParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelParams {
+	objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mccccp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRChannelClusterChangeChannelParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterChangeChannelParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mccccp *MTRChannelClusterChangeChannelParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterChangeChannelParams {
+	objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mccccp
 }
 
 // Match wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChangeChannelParams) Match() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("match"))
+func (mccccp *MTRChannelClusterChangeChannelParams) Match() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("match"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMatch wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChangeChannelParams) SetMatch(match string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatch:"), purego.NSString(match))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRChannelClusterChangeChannelParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mccccp *MTRChannelClusterChangeChannelParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChangeChannelParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRChannelClusterChangeChannelParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mccccp *MTRChannelClusterChangeChannelParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChangeChannelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRChannelClusterChangeChannelParamsable is the interface implemented by [MTRChannelClusterChangeChannelParams], for mocking and DI.
-type MTRChannelClusterChangeChannelParamsable interface {
-	obj.Object
-	WithMatch(match string) *MTRChannelClusterChangeChannelParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterChangeChannelParams
-	Match() string
-	SetMatch(match string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRChannelClusterChangeChannelParamsable = (*MTRChannelClusterChangeChannelParams)(nil)

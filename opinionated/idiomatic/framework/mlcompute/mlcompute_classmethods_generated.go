@@ -1042,7 +1042,7 @@ func ConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCo
 	return TensorDescriptorFromID(_r)
 }
 
-// MaxTensorDimensions the maximum number of tensor dimensions supported
+// MaxTensorDimensions returns the maximum number of tensor dimensions supported
 func MaxTensorDimensions() int {
 	_r := objc.Send[int](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("maxTensorDimensions"))
 	return _r

@@ -46,24 +46,24 @@ func accelerationStructureAdopt(id objc.ID) *AccelerationStructure {
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructure) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AccelerationStructure) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructure) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AccelerationStructure) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructure) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AccelerationStructure) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructure) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AccelerationStructure) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAccelerationStructureWithGroup initialize the acceleration structure with an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. The Metal device is determined from the acceleration structure group. All acceleration structures in the instance hierarchy must share the same group.
@@ -80,62 +80,43 @@ func NewAccelerationStructureWithCoderGroup(aDecoder obj.Object, group *Accelera
 	return accelerationStructureAdopt(_id)
 }
 
-// WithUsage acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-func (x *AccelerationStructure) WithUsage(usage AccelerationStructureUsage) *AccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
-	return x
+// WithUsage sets acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
+func (as *AccelerationStructure) WithUsage(usage AccelerationStructureUsage) *AccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setUsage:"), usage)
+	return as
 }
 
 // Rebuild rebuild the acceleration structure This method must be called before any intersection tests can be scheduled with this acceleration structure. Before calling this method, fill out the properties of the acceleration structure such as vertex buffer, instance buffer, etc. The acceleration structure should be rebuilt when its contents (e.g. vertices in a triangle acceleration structure) have been modified significantly and must be rebuilt when properties such as triangle count, vertex stride, etc. have changed. When the contents of the acceleration structure have only been modified slightly, it may be cheaper to refit the acceleration structure instead. This method blocks until the acceleration structure has been rebuilt. Until the rebuild has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, rebuilt, or refit. Before this method can be called, any pending GPU writes to the vertex buffer, index buffer, etc. must be completed (and, for managed buffers, synchronized). Any prior intersection tests must also be completed before the acceleration structure can be rebuilt.
-func (x *AccelerationStructure) Rebuild() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rebuild"))
+func (as *AccelerationStructure) Rebuild() {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("rebuild"))
 }
 
 // EncodeWithCoder encode the acceleration structure with an NSCoder Buffer properties such as the vertex buffer, index buffer, etc. are not be encoded. Encode and decode these buffers along with the acceleration structure instead. Do not encode the acceleration structure until any prior refit or rebuild operations have completed.
-func (x *AccelerationStructure) EncodeWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
+func (as *AccelerationStructure) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// Group the group this acceleration structure was created with
-func (x *AccelerationStructure) Group() *AccelerationStructureGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+// Group returns the group this acceleration structure was created with
+func (as *AccelerationStructure) Group() *AccelerationStructureGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("group"))
 	return AccelerationStructureGroupFromID(_r)
 }
 
-// Status status indicating whether the acceleration structure has finished building
-func (x *AccelerationStructure) Status() AccelerationStructureStatus {
-	_r := objc.Send[AccelerationStructureStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns status indicating whether the acceleration structure has finished building
+func (as *AccelerationStructure) Status() AccelerationStructureStatus {
+	_r := objc.Send[AccelerationStructureStatus](objref.IDOf(as), objc.RegisterName("status"))
 	return _r
 }
 
-// Usage acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-func (x *AccelerationStructure) Usage() AccelerationStructureUsage {
-	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(x), objc.RegisterName("usage"))
+// Usage returns acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
+func (as *AccelerationStructure) Usage() AccelerationStructureUsage {
+	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(as), objc.RegisterName("usage"))
 	return _r
 }
-
-// SetUsage wraps the corresponding Objective-C method.
-func (x *AccelerationStructure) SetUsage(usage AccelerationStructureUsage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
-}
-
-// AccelerationStructureable is the interface implemented by [AccelerationStructure], for mocking and DI.
-type AccelerationStructureable interface {
-	obj.Object
-	WithUsage(usage AccelerationStructureUsage) *AccelerationStructure
-	Rebuild()
-	EncodeWithCoder(coder obj.Object)
-	Group() *AccelerationStructureGroup
-	Status() AccelerationStructureStatus
-	Usage() AccelerationStructureUsage
-	SetUsage(usage AccelerationStructureUsage)
-}
-
-var _ AccelerationStructureable = (*AccelerationStructure)(nil)
 
 // isAccelerationStructure marks AccelerationStructure — and, by embedding promotion, its
 // subclasses — as a member of the AccelerationStructure hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AccelerationStructure) isAccelerationStructure() {}
+func (as *AccelerationStructure) isAccelerationStructure() {}
 
 var _ AccelerationStructureProvider = (*AccelerationStructure)(nil)

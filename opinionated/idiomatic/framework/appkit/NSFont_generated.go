@@ -47,24 +47,24 @@ func fontAdopt(id objc.ID) *Font {
 }
 
 // Description returns the object's -description text.
-func (x *Font) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Font) Description() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Font) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (f *Font) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Font) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (f *Font) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Font) String() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Font) String() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // NewFont creates a new Font.
@@ -74,36 +74,36 @@ func NewFont() *Font {
 }
 
 // FontWithSize wraps the corresponding Objective-C method.
-func (x *Font) FontWithSize(fontSize float64) *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontWithSize:"), fontSize)
+func (f *Font) FontWithSize(fontSize float64) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("fontWithSize:"), fontSize)
 	return FontFromID(_r)
 }
 
 // BoundingRectForCGGlyph ******* Glyph metrics ******** ******* Glyph metrics ********
-func (x *Font) BoundingRectForCGGlyph(glyph uint16) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingRectForCGGlyph:"), glyph)
+func (f *Font) BoundingRectForCGGlyph(glyph uint16) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(f), objc.RegisterName("boundingRectForCGGlyph:"), glyph)
 	return _r
 }
 
 // AdvancementForCGGlyph wraps the corresponding Objective-C method.
-func (x *Font) AdvancementForCGGlyph(glyph uint16) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("advancementForCGGlyph:"), glyph)
+func (f *Font) AdvancementForCGGlyph(glyph uint16) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(f), objc.RegisterName("advancementForCGGlyph:"), glyph)
 	return _r
 }
 
 // Set sets this font as the font for the current graphics context.
-func (x *Font) Set() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+func (f *Font) Set() {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("set"))
 }
 
 // SetInContext sets this font as the font for the specified graphics context.
-func (x *Font) SetInContext(graphicsContext *GraphicsContext) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInContext:"), objref.IDOf(graphicsContext))
+func (f *Font) SetInContext(graphicsContext *GraphicsContext) {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setInContext:"), objref.IDOf(graphicsContext))
 }
 
-// FontName ******* Core font attribute ********
-func (x *Font) FontName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontName"))
+// FontName returns ******* Core font attribute ********
+func (f *Font) FontName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("fontName"))
 	if _r == 0 {
 		return ""
 	}
@@ -111,14 +111,14 @@ func (x *Font) FontName() string {
 }
 
 // PointSize wraps the corresponding Objective-C method.
-func (x *Font) PointSize() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pointSize"))
+func (f *Font) PointSize() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("pointSize"))
 	return _r
 }
 
 // FamilyName wraps the corresponding Objective-C method.
-func (x *Font) FamilyName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("familyName"))
+func (f *Font) FamilyName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("familyName"))
 	if _r == 0 {
 		return ""
 	}
@@ -126,8 +126,8 @@ func (x *Font) FamilyName() string {
 }
 
 // DisplayName wraps the corresponding Objective-C method.
-func (x *Font) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+func (f *Font) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -135,192 +135,151 @@ func (x *Font) DisplayName() string {
 }
 
 // FontDescriptor wraps the corresponding Objective-C method.
-func (x *Font) FontDescriptor() *FontDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptor"))
+func (f *Font) FontDescriptor() *FontDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("fontDescriptor"))
 	return FontDescriptorFromID(_r)
 }
 
 // TextTransform wraps the corresponding Objective-C method.
-func (x *Font) TextTransform() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textTransform"))
+func (f *Font) TextTransform() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("textTransform"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfGlyphs ******* Glyph coverage ********
-func (x *Font) NumberOfGlyphs() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfGlyphs"))
+// NumberOfGlyphs returns ******* Glyph coverage ********
+func (f *Font) NumberOfGlyphs() int {
+	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("numberOfGlyphs"))
 	return _r
 }
 
 // MostCompatibleStringEncoding wraps the corresponding Objective-C method.
-func (x *Font) MostCompatibleStringEncoding() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mostCompatibleStringEncoding"))
+func (f *Font) MostCompatibleStringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("mostCompatibleStringEncoding"))
 	return _r
 }
 
 // CoveredCharacterSet wraps the corresponding Objective-C method.
-func (x *Font) CoveredCharacterSet() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coveredCharacterSet"))
+func (f *Font) CoveredCharacterSet() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("coveredCharacterSet"))
 	return obj.Wrap(_r)
 }
 
 // BoundingRectForFont wraps the corresponding Objective-C method.
-func (x *Font) BoundingRectForFont() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingRectForFont"))
+func (f *Font) BoundingRectForFont() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(f), objc.RegisterName("boundingRectForFont"))
 	return _r
 }
 
 // MaximumAdvancement wraps the corresponding Objective-C method.
-func (x *Font) MaximumAdvancement() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumAdvancement"))
+func (f *Font) MaximumAdvancement() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(f), objc.RegisterName("maximumAdvancement"))
 	return _r
 }
 
 // Ascender wraps the corresponding Objective-C method.
-func (x *Font) Ascender() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("ascender"))
+func (f *Font) Ascender() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("ascender"))
 	return _r
 }
 
 // Descender wraps the corresponding Objective-C method.
-func (x *Font) Descender() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("descender"))
+func (f *Font) Descender() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("descender"))
 	return _r
 }
 
 // Leading wraps the corresponding Objective-C method.
-func (x *Font) Leading() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leading"))
+func (f *Font) Leading() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("leading"))
 	return _r
 }
 
 // UnderlinePosition wraps the corresponding Objective-C method.
-func (x *Font) UnderlinePosition() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("underlinePosition"))
+func (f *Font) UnderlinePosition() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("underlinePosition"))
 	return _r
 }
 
 // UnderlineThickness wraps the corresponding Objective-C method.
-func (x *Font) UnderlineThickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("underlineThickness"))
+func (f *Font) UnderlineThickness() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("underlineThickness"))
 	return _r
 }
 
 // ItalicAngle wraps the corresponding Objective-C method.
-func (x *Font) ItalicAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("italicAngle"))
+func (f *Font) ItalicAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("italicAngle"))
 	return _r
 }
 
 // CapHeight wraps the corresponding Objective-C method.
-func (x *Font) CapHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("capHeight"))
+func (f *Font) CapHeight() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("capHeight"))
 	return _r
 }
 
 // XHeight wraps the corresponding Objective-C method.
-func (x *Font) XHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xHeight"))
+func (f *Font) XHeight() float64 {
+	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("xHeight"))
 	return _r
 }
 
 // IsFixedPitch wraps the corresponding Objective-C method.
-func (x *Font) IsFixedPitch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFixedPitch"))
+func (f *Font) IsFixedPitch() bool {
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isFixedPitch"))
 	return _r
 }
 
 // VerticalFont wraps the corresponding Objective-C method.
-func (x *Font) VerticalFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verticalFont"))
+func (f *Font) VerticalFont() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("verticalFont"))
 	return FontFromID(_r)
 }
 
 // IsVertical wraps the corresponding Objective-C method.
-func (x *Font) IsVertical() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+func (f *Font) IsVertical() bool {
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isVertical"))
 	return _r
 }
 
 // GlyphWithName returns the named encoded glyph, or –1 if the receiver contains no such glyph.
-func (x *Font) GlyphWithName(name string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphWithName:"), purego.NSString(name))
+func (f *Font) GlyphWithName(name string) int {
+	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("glyphWithName:"), purego.NSString(name))
 	return _r
 }
 
 // BoundingRectForGlyph returns the bounding rectangle for the specified glyph, scaled to the receiver’s size.
-func (x *Font) BoundingRectForGlyph(glyph int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingRectForGlyph:"), glyph)
+func (f *Font) BoundingRectForGlyph(glyph int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(f), objc.RegisterName("boundingRectForGlyph:"), glyph)
 	return _r
 }
 
 // AdvancementForGlyph returns the nominal spacing for the given glyph—the distance the current point moves after showing the glyph—accounting for the receiver’s size.
-func (x *Font) AdvancementForGlyph(glyph int) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("advancementForGlyph:"), glyph)
+func (f *Font) AdvancementForGlyph(glyph int) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(f), objc.RegisterName("advancementForGlyph:"), glyph)
 	return _r
 }
 
 // ScreenFontWithRenderingMode returns a bitmapped screen font, when sent to a font object representing a scalable PostScript font, with the specified rendering mode, matching the receiver in typeface and matrix (or size), or nil if such a font can’t be found.
-func (x *Font) ScreenFontWithRenderingMode(renderingMode FontRenderingMode) *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("screenFontWithRenderingMode:"), renderingMode)
+func (f *Font) ScreenFontWithRenderingMode(renderingMode FontRenderingMode) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("screenFontWithRenderingMode:"), renderingMode)
 	return FontFromID(_r)
 }
 
-// PrinterFont ******* Rendering mode ********
-func (x *Font) PrinterFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printerFont"))
+// PrinterFont returns ******* Rendering mode ********
+func (f *Font) PrinterFont() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("printerFont"))
 	return FontFromID(_r)
 }
 
 // ScreenFont wraps the corresponding Objective-C method.
-func (x *Font) ScreenFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("screenFont"))
+func (f *Font) ScreenFont() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("screenFont"))
 	return FontFromID(_r)
 }
 
 // RenderingMode wraps the corresponding Objective-C method.
-func (x *Font) RenderingMode() FontRenderingMode {
-	_r := objc.Send[FontRenderingMode](objref.IDOf(x), objc.RegisterName("renderingMode"))
+func (f *Font) RenderingMode() FontRenderingMode {
+	_r := objc.Send[FontRenderingMode](objref.IDOf(f), objc.RegisterName("renderingMode"))
 	return _r
 }
-
-// Fontable is the interface implemented by [Font], for mocking and DI.
-type Fontable interface {
-	obj.Object
-	FontWithSize(fontSize float64) *Font
-	BoundingRectForCGGlyph(glyph uint16) corefoundation.CGRect
-	AdvancementForCGGlyph(glyph uint16) corefoundation.CGSize
-	Set()
-	SetInContext(graphicsContext *GraphicsContext)
-	FontName() string
-	PointSize() float64
-	FamilyName() string
-	DisplayName() string
-	FontDescriptor() *FontDescriptor
-	TextTransform() obj.Object
-	NumberOfGlyphs() int
-	MostCompatibleStringEncoding() int
-	CoveredCharacterSet() obj.Object
-	BoundingRectForFont() corefoundation.CGRect
-	MaximumAdvancement() corefoundation.CGSize
-	Ascender() float64
-	Descender() float64
-	Leading() float64
-	UnderlinePosition() float64
-	UnderlineThickness() float64
-	ItalicAngle() float64
-	CapHeight() float64
-	XHeight() float64
-	IsFixedPitch() bool
-	VerticalFont() *Font
-	IsVertical() bool
-	GlyphWithName(name string) int
-	BoundingRectForGlyph(glyph int) corefoundation.CGRect
-	AdvancementForGlyph(glyph int) corefoundation.CGSize
-	ScreenFontWithRenderingMode(renderingMode FontRenderingMode) *Font
-	PrinterFont() *Font
-	ScreenFont() *Font
-	RenderingMode() FontRenderingMode
-}
-
-var _ Fontable = (*Font)(nil)

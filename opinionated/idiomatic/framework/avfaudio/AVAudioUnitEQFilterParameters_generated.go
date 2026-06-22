@@ -46,24 +46,24 @@ func audioUnitEQFilterParametersAdopt(id objc.ID) *AudioUnitEQFilterParameters {
 }
 
 // Description returns the object's -description text.
-func (x *AudioUnitEQFilterParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (auefp *AudioUnitEQFilterParameters) Description() string {
+	return rt.Description(objref.IDOf(auefp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioUnitEQFilterParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (auefp *AudioUnitEQFilterParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(auefp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioUnitEQFilterParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (auefp *AudioUnitEQFilterParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(auefp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioUnitEQFilterParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (auefp *AudioUnitEQFilterParameters) String() string {
+	return rt.Description(objref.IDOf(auefp))
 }
 
 // NewAudioUnitEQFilterParameters creates a new AudioUnitEQFilterParameters.
@@ -72,109 +72,62 @@ func NewAudioUnitEQFilterParameters() *AudioUnitEQFilterParameters {
 	return audioUnitEQFilterParametersAdopt(_id)
 }
 
-// WithFilterType the equalizer filter type.
-func (x *AudioUnitEQFilterParameters) WithFilterType(filterType AudioUnitEQFilterType) *AudioUnitEQFilterParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterType:"), filterType)
-	return x
+// WithFilterType sets the equalizer filter type.
+func (auefp *AudioUnitEQFilterParameters) WithFilterType(filterType AudioUnitEQFilterType) *AudioUnitEQFilterParameters {
+	objc.Send[objc.ID](objref.IDOf(auefp), objc.RegisterName("setFilterType:"), filterType)
+	return auefp
 }
 
-// WithFrequency the frequency of the equalizer filter, in hertz.
-func (x *AudioUnitEQFilterParameters) WithFrequency(frequency float32) *AudioUnitEQFilterParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets the frequency of the equalizer filter, in hertz.
+func (auefp *AudioUnitEQFilterParameters) WithFrequency(frequency float32) *AudioUnitEQFilterParameters {
+	objc.Send[objc.ID](objref.IDOf(auefp), objc.RegisterName("setFrequency:"), frequency)
+	return auefp
 }
 
-// WithBandwidth the bandwidth of the equalizer filter, in octaves.
-func (x *AudioUnitEQFilterParameters) WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBandwidth:"), bandwidth)
-	return x
+// WithBandwidth sets the bandwidth of the equalizer filter, in octaves.
+func (auefp *AudioUnitEQFilterParameters) WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters {
+	objc.Send[objc.ID](objref.IDOf(auefp), objc.RegisterName("setBandwidth:"), bandwidth)
+	return auefp
 }
 
-// WithGain the gain of the equalizer filter, in decibels.
-func (x *AudioUnitEQFilterParameters) WithGain(gain float32) *AudioUnitEQFilterParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets the gain of the equalizer filter, in decibels.
+func (auefp *AudioUnitEQFilterParameters) WithGain(gain float32) *AudioUnitEQFilterParameters {
+	objc.Send[objc.ID](objref.IDOf(auefp), objc.RegisterName("setGain:"), gain)
+	return auefp
 }
 
-// WithBypass the bypass state of the equalizer filter band.
-func (x *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilterParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the equalizer filter band.
+func (auefp *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilterParameters {
+	objc.Send[objc.ID](objref.IDOf(auefp), objc.RegisterName("setBypass:"), bypass)
+	return auefp
 }
 
-// FilterType AVAudioUnitEQFilterType Default:    AVAudioUnitEQFilterTypeParametric
-func (x *AudioUnitEQFilterParameters) FilterType() AudioUnitEQFilterType {
-	_r := objc.Send[AudioUnitEQFilterType](objref.IDOf(x), objc.RegisterName("filterType"))
+// FilterType returns AVAudioUnitEQFilterType Default:    AVAudioUnitEQFilterTypeParametric
+func (auefp *AudioUnitEQFilterParameters) FilterType() AudioUnitEQFilterType {
+	_r := objc.Send[AudioUnitEQFilterType](objref.IDOf(auefp), objc.RegisterName("filterType"))
 	return _r
 }
 
-// SetFilterType wraps the corresponding Objective-C method.
-func (x *AudioUnitEQFilterParameters) SetFilterType(filterType AudioUnitEQFilterType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterType:"), filterType)
-}
-
-// Frequency frequency in Hertz. Range:      20 -> (SampleRate/2) Unit:       Hertz
-func (x *AudioUnitEQFilterParameters) Frequency() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("frequency"))
+// Frequency returns frequency in Hertz. Range:      20 -> (SampleRate/2) Unit:       Hertz
+func (auefp *AudioUnitEQFilterParameters) Frequency() float32 {
+	_r := objc.Send[float32](objref.IDOf(auefp), objc.RegisterName("frequency"))
 	return _r
 }
 
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *AudioUnitEQFilterParameters) SetFrequency(frequency float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-}
-
-// Bandwidth bandwidth in octaves. Range:      0.05 -> 5.0 Unit:       Octaves
-func (x *AudioUnitEQFilterParameters) Bandwidth() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bandwidth"))
+// Bandwidth returns bandwidth in octaves. Range:      0.05 -> 5.0 Unit:       Octaves
+func (auefp *AudioUnitEQFilterParameters) Bandwidth() float32 {
+	_r := objc.Send[float32](objref.IDOf(auefp), objc.RegisterName("bandwidth"))
 	return _r
 }
 
-// SetBandwidth wraps the corresponding Objective-C method.
-func (x *AudioUnitEQFilterParameters) SetBandwidth(bandwidth float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBandwidth:"), bandwidth)
-}
-
-// Gain gain in dB. Range:      -96 -> 24 Default:    0 Unit:       dB
-func (x *AudioUnitEQFilterParameters) Gain() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns gain in dB. Range:      -96 -> 24 Default:    0 Unit:       dB
+func (auefp *AudioUnitEQFilterParameters) Gain() float32 {
+	_r := objc.Send[float32](objref.IDOf(auefp), objc.RegisterName("gain"))
 	return _r
 }
 
-// SetGain wraps the corresponding Objective-C method.
-func (x *AudioUnitEQFilterParameters) SetGain(gain float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-}
-
-// Bypass bypass state of band. Default:    YES
-func (x *AudioUnitEQFilterParameters) Bypass() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
+// Bypass reports whether bypass state of band. Default: true
+func (auefp *AudioUnitEQFilterParameters) Bypass() bool {
+	_r := objc.Send[bool](objref.IDOf(auefp), objc.RegisterName("bypass"))
 	return _r
 }
-
-// SetBypass wraps the corresponding Objective-C method.
-func (x *AudioUnitEQFilterParameters) SetBypass(bypass bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-}
-
-// AudioUnitEQFilterParametersable is the interface implemented by [AudioUnitEQFilterParameters], for mocking and DI.
-type AudioUnitEQFilterParametersable interface {
-	obj.Object
-	WithFilterType(filterType AudioUnitEQFilterType) *AudioUnitEQFilterParameters
-	WithFrequency(frequency float32) *AudioUnitEQFilterParameters
-	WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters
-	WithGain(gain float32) *AudioUnitEQFilterParameters
-	WithBypass(bypass bool) *AudioUnitEQFilterParameters
-	FilterType() AudioUnitEQFilterType
-	SetFilterType(filterType AudioUnitEQFilterType)
-	Frequency() float32
-	SetFrequency(frequency float32)
-	Bandwidth() float32
-	SetBandwidth(bandwidth float32)
-	Gain() float32
-	SetGain(gain float32)
-	Bypass() bool
-	SetBypass(bypass bool)
-}
-
-var _ AudioUnitEQFilterParametersable = (*AudioUnitEQFilterParameters)(nil)

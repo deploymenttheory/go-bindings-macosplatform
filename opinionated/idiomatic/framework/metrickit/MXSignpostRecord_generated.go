@@ -46,24 +46,24 @@ func signpostRecordAdopt(id objc.ID) *SignpostRecord {
 }
 
 // Description returns the object's -description text.
-func (x *SignpostRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sr *SignpostRecord) Description() string {
+	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SignpostRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sr *SignpostRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SignpostRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sr *SignpostRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SignpostRecord) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sr *SignpostRecord) String() string {
+	return rt.Description(objref.IDOf(sr))
 }
 
 // NewSignpostRecord creates a new SignpostRecord.
@@ -72,21 +72,21 @@ func NewSignpostRecord() *SignpostRecord {
 	return signpostRecordAdopt(_id)
 }
 
-// JSONRepresentation convenience method to return a JSON representation of this SignpostRecord.
-func (x *SignpostRecord) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+// JSONRepresentation returns convenience method to return a JSON representation of this SignpostRecord.
+func (sr *SignpostRecord) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// DictionaryRepresentation convenience method to return a NSDictionary representation of this SignpostRecord.
-func (x *SignpostRecord) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+// DictionaryRepresentation returns convenience method to return a NSDictionary representation of this SignpostRecord.
+func (sr *SignpostRecord) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Subsystem an NSString representation of the subsystem of the signpost instance.
-func (x *SignpostRecord) Subsystem() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subsystem"))
+// Subsystem returns an NSString representation of the subsystem of the signpost instance.
+func (sr *SignpostRecord) Subsystem() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("subsystem"))
 	if _r == 0 {
 		return ""
 	}
@@ -94,8 +94,8 @@ func (x *SignpostRecord) Subsystem() string {
 }
 
 // Category wraps the corresponding Objective-C method.
-func (x *SignpostRecord) Category() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+func (sr *SignpostRecord) Category() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
 	}
@@ -103,8 +103,8 @@ func (x *SignpostRecord) Category() string {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *SignpostRecord) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (sr *SignpostRecord) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,41 +112,25 @@ func (x *SignpostRecord) Name() string {
 }
 
 // BeginTimeStamp wraps the corresponding Objective-C method.
-func (x *SignpostRecord) BeginTimeStamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginTimeStamp"))
+func (sr *SignpostRecord) BeginTimeStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("beginTimeStamp"))
 	return obj.Wrap(_r)
 }
 
 // EndTimeStamp wraps the corresponding Objective-C method.
-func (x *SignpostRecord) EndTimeStamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimeStamp"))
+func (sr *SignpostRecord) EndTimeStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("endTimeStamp"))
 	return obj.Wrap(_r)
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *SignpostRecord) Duration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (sr *SignpostRecord) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
 // IsInterval wraps the corresponding Objective-C method.
-func (x *SignpostRecord) IsInterval() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInterval"))
+func (sr *SignpostRecord) IsInterval() bool {
+	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isInterval"))
 	return _r
 }
-
-// SignpostRecordable is the interface implemented by [SignpostRecord], for mocking and DI.
-type SignpostRecordable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-	Subsystem() string
-	Category() string
-	Name() string
-	BeginTimeStamp() obj.Object
-	EndTimeStamp() obj.Object
-	Duration() obj.Object
-	IsInterval() bool
-}
-
-var _ SignpostRecordable = (*SignpostRecord)(nil)

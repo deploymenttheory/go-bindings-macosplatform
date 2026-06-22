@@ -52,81 +52,65 @@ func NewBarcodeObservation() *BarcodeObservation {
 	return barcodeObservationAdopt(_id)
 }
 
-// Symbology the symbology of the detected barcode.
-func (x *BarcodeObservation) Symbology() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbology"))
+// Symbology returns the symbology of the detected barcode.
+func (bo *BarcodeObservation) Symbology() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("symbology"))
 	return obj.Wrap(_r)
 }
 
-// BarcodeDescriptor an object that provides symbology-specific data for the barcode.
-func (x *BarcodeObservation) BarcodeDescriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("barcodeDescriptor"))
+// BarcodeDescriptor returns an object that provides symbology-specific data for the barcode.
+func (bo *BarcodeObservation) BarcodeDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("barcodeDescriptor"))
 	return obj.Wrap(_r)
 }
 
-// PayloadStringValue the string representation of the barcode's payload.  Depending on the symbology of the barcode and/or the payload data itself, a string representation of the payload may not be available.
-func (x *BarcodeObservation) PayloadStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payloadStringValue"))
+// PayloadStringValue returns the string representation of the barcode's payload.  Depending on the symbology of the barcode and/or the payload data itself, a string representation of the payload may not be available.
+func (bo *BarcodeObservation) PayloadStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("payloadStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PayloadData the raw data representation of the barcode's payload if available.
-func (x *BarcodeObservation) PayloadData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payloadData"))
+// PayloadData returns the raw data representation of the barcode's payload if available.
+func (bo *BarcodeObservation) PayloadData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("payloadData"))
 	return obj.Wrap(_r)
 }
 
-// IsGS1DataCarrier boolean indicating if the barcode carries any GS1 application specific data
-func (x *BarcodeObservation) IsGS1DataCarrier() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGS1DataCarrier"))
+// IsGS1DataCarrier reports whether boolean indicating if the barcode carries any GS1 application specific data
+func (bo *BarcodeObservation) IsGS1DataCarrier() bool {
+	_r := objc.Send[bool](objref.IDOf(bo), objc.RegisterName("isGS1DataCarrier"))
 	return _r
 }
 
-// IsColorInverted a boolean indicating if the barcode is color inverted
-func (x *BarcodeObservation) IsColorInverted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isColorInverted"))
+// IsColorInverted reports whether a boolean indicating if the barcode is color inverted
+func (bo *BarcodeObservation) IsColorInverted() bool {
+	_r := objc.Send[bool](objref.IDOf(bo), objc.RegisterName("isColorInverted"))
 	return _r
 }
 
 // SupplementalCompositeType represents the supplemental composite type. Currently, this can only refer to the composite flag of the 2D symbology as part of a GS1 composite symbology. This attribute only exists when the primary descriptor is the 1D symbology of a GS1 composite symbology, and of which a valid 2D counterpart has been coalesced into.
-func (x *BarcodeObservation) SupplementalCompositeType() BarcodeCompositeType {
-	_r := objc.Send[BarcodeCompositeType](objref.IDOf(x), objc.RegisterName("supplementalCompositeType"))
+func (bo *BarcodeObservation) SupplementalCompositeType() BarcodeCompositeType {
+	_r := objc.Send[BarcodeCompositeType](objref.IDOf(bo), objc.RegisterName("supplementalCompositeType"))
 	return _r
 }
 
-// SupplementalPayloadString decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload string value.
-func (x *BarcodeObservation) SupplementalPayloadString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementalPayloadString"))
+// SupplementalPayloadString returns decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload string value.
+func (bo *BarcodeObservation) SupplementalPayloadString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("supplementalPayloadString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SupplementalPayloadData decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload raw data value.
-func (x *BarcodeObservation) SupplementalPayloadData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementalPayloadData"))
+// SupplementalPayloadData returns decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload raw data value.
+func (bo *BarcodeObservation) SupplementalPayloadData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("supplementalPayloadData"))
 	return obj.Wrap(_r)
 }
-
-// BarcodeObservationable is the interface implemented by [BarcodeObservation], for mocking and DI.
-type BarcodeObservationable interface {
-	obj.Object
-	Symbology() obj.Object
-	BarcodeDescriptor() obj.Object
-	PayloadStringValue() string
-	PayloadData() obj.Object
-	IsGS1DataCarrier() bool
-	IsColorInverted() bool
-	SupplementalCompositeType() BarcodeCompositeType
-	SupplementalPayloadString() string
-	SupplementalPayloadData() obj.Object
-}
-
-var _ BarcodeObservationable = (*BarcodeObservation)(nil)
 
 var _ RectangleObservationProvider = (*BarcodeObservation)(nil)
 

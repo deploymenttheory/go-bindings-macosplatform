@@ -52,65 +52,51 @@ func NewMTRClusterWakeOnLANWithDeviceEndpointIDQueue(device *MTRDevice, endpoint
 }
 
 // ReadAttributeMACAddressWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeMACAddressWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMACAddressWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeMACAddressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeMACAddressWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLinkLocalAddressWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeLinkLocalAddressWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLinkLocalAddressWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeLinkLocalAddressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeLinkLocalAddressWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWakeOnLAN) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcwol *MTRClusterWakeOnLAN) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwol), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterWakeOnLANable is the interface implemented by [MTRClusterWakeOnLAN], for mocking and DI.
-type MTRClusterWakeOnLANable interface {
-	obj.Object
-	ReadAttributeMACAddressWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLinkLocalAddressWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterWakeOnLANable = (*MTRClusterWakeOnLAN)(nil)
 
 // isMTRClusterWakeOnLAN marks MTRClusterWakeOnLAN — and, by embedding promotion, its
 // subclasses — as a member of the MTRClusterWakeOnLAN hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRClusterWakeOnLAN) isMTRClusterWakeOnLAN() {}
+func (mcwol *MTRClusterWakeOnLAN) isMTRClusterWakeOnLAN() {}
 
 var _ MTRClusterWakeOnLANProvider = (*MTRClusterWakeOnLAN)(nil)
 

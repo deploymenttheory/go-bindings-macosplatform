@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,28 +45,20 @@ func compositionTrackAdopt(id objc.ID) *CompositionTrack {
 	return x
 }
 
-// FormatDescriptionReplacements an array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements. The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
+// FormatDescriptionReplacements returns an array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements. The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
 //
 // FormatDescriptionReplacements returns the collection as a Go slice.
-func (x *CompositionTrack) FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescriptionReplacements"))
+func (ct *CompositionTrack) FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement {
+	_arr := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("formatDescriptionReplacements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CompositionTrackFormatDescriptionReplacement {
 		return CompositionTrackFormatDescriptionReplacementFromID(_id)
 	})
 }
 
-// CompositionTrackable is the interface implemented by [CompositionTrack], for mocking and DI.
-type CompositionTrackable interface {
-	obj.Object
-	FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement
-}
-
-var _ CompositionTrackable = (*CompositionTrack)(nil)
-
 // isCompositionTrack marks CompositionTrack — and, by embedding promotion, its
 // subclasses — as a member of the CompositionTrack hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CompositionTrack) isCompositionTrack() {}
+func (ct *CompositionTrack) isCompositionTrack() {}
 
 var _ CompositionTrackProvider = (*CompositionTrack)(nil)
 

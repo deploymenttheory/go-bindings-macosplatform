@@ -48,24 +48,24 @@ func paymentRequestUpdateAdopt(id objc.ID) *PaymentRequestUpdate {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentRequestUpdate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pru *PaymentRequestUpdate) Description() string {
+	return rt.Description(objref.IDOf(pru))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentRequestUpdate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pru *PaymentRequestUpdate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pru), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentRequestUpdate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pru *PaymentRequestUpdate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pru), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentRequestUpdate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pru *PaymentRequestUpdate) String() string {
+	return rt.Description(objref.IDOf(pru))
 }
 
 // NewPaymentRequestUpdateWithPaymentSummaryItems creates a payment request update with the specified payment summary items.
@@ -75,165 +75,102 @@ func NewPaymentRequestUpdateWithPaymentSummaryItems(paymentSummaryItems []*Payme
 	return paymentRequestUpdateAdopt(_id)
 }
 
-// WithStatus the status of the payment request that indicates whether authorization succeeds or fails.
-func (x *PaymentRequestUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status of the payment request that indicates whether authorization succeeds or fails.
+func (pru *PaymentRequestUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestUpdate {
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setStatus:"), status)
+	return pru
 }
 
-// WithPaymentSummaryItems the list of payment summary items for the instance.
-func (x *PaymentRequestUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestUpdate {
+// WithPaymentSummaryItems sets the list of payment summary items for the instance.
+func (pru *PaymentRequestUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setPaymentSummaryItems:"), _arr)
+	return pru
 }
 
-// WithShippingMethods the list of shipping methods available for a payment request.
-func (x *PaymentRequestUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestUpdate {
+// WithShippingMethods sets the list of shipping methods available for a payment request.
+func (pru *PaymentRequestUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setShippingMethods:"), _arr)
+	return pru
 }
 
-// WithMultiTokenContexts an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
-func (x *PaymentRequestUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestUpdate {
+// WithMultiTokenContexts sets an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
+func (pru *PaymentRequestUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setMultiTokenContexts:"), _arr)
+	return pru
 }
 
-// WithRecurringPaymentRequest the recurring payment request to update the payment request with.
-func (x *PaymentRequestUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
-	return x
+// WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
+func (pru *PaymentRequestUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestUpdate {
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
+	return pru
 }
 
-// WithAutomaticReloadPaymentRequest the automatic reload payment request to update the payment request with.
-func (x *PaymentRequestUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
-	return x
+// WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
+func (pru *PaymentRequestUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestUpdate {
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
+	return pru
 }
 
-// WithDeferredPaymentRequest the deferred payment request to update the payment request with.
-func (x *PaymentRequestUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
-	return x
+// WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
+func (pru *PaymentRequestUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestUpdate {
+	objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
+	return pru
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) Status() PaymentAuthorizationStatus {
-	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("status"))
+func (pru *PaymentRequestUpdate) Status() PaymentAuthorizationStatus {
+	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(pru), objc.RegisterName("status"))
 	return _r
-}
-
-// SetStatus wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetStatus(status PaymentAuthorizationStatus) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 }
 
 // PaymentSummaryItems wraps the corresponding Objective-C method.
 //
 // PaymentSummaryItems returns the collection as a Go slice.
-func (x *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentSummaryItems"))
+func (pru *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("paymentSummaryItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
-}
-
-// SetPaymentSummaryItems wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetPaymentSummaryItems(paymentSummaryItems []*PaymentSummaryItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), purego.SliceToNSArray(paymentSummaryItems, func(_v *PaymentSummaryItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ShippingMethods wraps the corresponding Objective-C method.
 //
 // ShippingMethods returns the collection as a Go slice.
-func (x *PaymentRequestUpdate) ShippingMethods() []*ShippingMethod {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingMethods"))
+func (pru *PaymentRequestUpdate) ShippingMethods() []*ShippingMethod {
+	_arr := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("shippingMethods"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShippingMethod { return ShippingMethodFromID(_id) })
-}
-
-// SetShippingMethods wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetShippingMethods(shippingMethods []*ShippingMethod) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), purego.SliceToNSArray(shippingMethods, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MultiTokenContexts wraps the corresponding Objective-C method.
 //
 // MultiTokenContexts returns the collection as a Go slice.
-func (x *PaymentRequestUpdate) MultiTokenContexts() []*PaymentTokenContext {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiTokenContexts"))
+func (pru *PaymentRequestUpdate) MultiTokenContexts() []*PaymentTokenContext {
+	_arr := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("multiTokenContexts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentTokenContext { return PaymentTokenContextFromID(_id) })
 }
 
-// SetMultiTokenContexts wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetMultiTokenContexts(multiTokenContexts []*PaymentTokenContext) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), purego.SliceToNSArray(multiTokenContexts, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) }))
-}
-
 // RecurringPaymentRequest wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) RecurringPaymentRequest() *RecurringPaymentRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurringPaymentRequest"))
+func (pru *PaymentRequestUpdate) RecurringPaymentRequest() *RecurringPaymentRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("recurringPaymentRequest"))
 	return RecurringPaymentRequestFromID(_r)
 }
 
-// SetRecurringPaymentRequest wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
-}
-
 // AutomaticReloadPaymentRequest wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("automaticReloadPaymentRequest"))
+func (pru *PaymentRequestUpdate) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("automaticReloadPaymentRequest"))
 	return AutomaticReloadPaymentRequestFromID(_r)
 }
 
-// SetAutomaticReloadPaymentRequest wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
-}
-
 // DeferredPaymentRequest wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) DeferredPaymentRequest() *DeferredPaymentRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredPaymentRequest"))
+func (pru *PaymentRequestUpdate) DeferredPaymentRequest() *DeferredPaymentRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("deferredPaymentRequest"))
 	return DeferredPaymentRequestFromID(_r)
 }
-
-// SetDeferredPaymentRequest wraps the corresponding Objective-C method.
-func (x *PaymentRequestUpdate) SetDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
-}
-
-// PaymentRequestUpdateable is the interface implemented by [PaymentRequestUpdate], for mocking and DI.
-type PaymentRequestUpdateable interface {
-	obj.Object
-	WithStatus(status PaymentAuthorizationStatus) *PaymentRequestUpdate
-	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestUpdate
-	WithShippingMethods(items ...*ShippingMethod) *PaymentRequestUpdate
-	WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestUpdate
-	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestUpdate
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestUpdate
-	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestUpdate
-	Status() PaymentAuthorizationStatus
-	SetStatus(status PaymentAuthorizationStatus)
-	PaymentSummaryItems() []*PaymentSummaryItem
-	SetPaymentSummaryItems(paymentSummaryItems []*PaymentSummaryItem)
-	ShippingMethods() []*ShippingMethod
-	SetShippingMethods(shippingMethods []*ShippingMethod)
-	MultiTokenContexts() []*PaymentTokenContext
-	SetMultiTokenContexts(multiTokenContexts []*PaymentTokenContext)
-	RecurringPaymentRequest() *RecurringPaymentRequest
-	SetRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest)
-	AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest
-	SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest)
-	DeferredPaymentRequest() *DeferredPaymentRequest
-	SetDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest)
-}
-
-var _ PaymentRequestUpdateable = (*PaymentRequestUpdate)(nil)
 
 // isPaymentRequestUpdate marks PaymentRequestUpdate — and, by embedding promotion, its
 // subclasses — as a member of the PaymentRequestUpdate hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PaymentRequestUpdate) isPaymentRequestUpdate() {}
+func (pru *PaymentRequestUpdate) isPaymentRequestUpdate() {}
 
 var _ PaymentRequestUpdateProvider = (*PaymentRequestUpdate)(nil)

@@ -46,24 +46,24 @@ func sensitivityAnalysisAdopt(id objc.ID) *SensitivityAnalysis {
 }
 
 // Description returns the object's -description text.
-func (x *SensitivityAnalysis) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SensitivityAnalysis) Description() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SensitivityAnalysis) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sa *SensitivityAnalysis) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SensitivityAnalysis) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sa *SensitivityAnalysis) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SensitivityAnalysis) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SensitivityAnalysis) String() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // NewSensitivityAnalysis creates a new SensitivityAnalysis.
@@ -73,29 +73,19 @@ func NewSensitivityAnalysis() *SensitivityAnalysis {
 }
 
 // IsSensitive wraps the corresponding Objective-C method.
-func (x *SensitivityAnalysis) IsSensitive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSensitive"))
+func (sa *SensitivityAnalysis) IsSensitive() bool {
+	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isSensitive"))
 	return _r
 }
 
-// ShouldIndicateSensitivity intervention guidance that suggests the app indicate the presence of sensitive content.
-func (x *SensitivityAnalysis) ShouldIndicateSensitivity() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldIndicateSensitivity"))
+// ShouldIndicateSensitivity reports whether intervention guidance that suggests the app indicate the presence of sensitive content.
+func (sa *SensitivityAnalysis) ShouldIndicateSensitivity() bool {
+	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("shouldIndicateSensitivity"))
 	return _r
 }
 
-// ShouldMuteAudio intervention guidance that suggests the app mute the audio of the current video stream.
-func (x *SensitivityAnalysis) ShouldMuteAudio() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMuteAudio"))
+// ShouldMuteAudio reports whether intervention guidance that suggests the app mute the audio of the current video stream.
+func (sa *SensitivityAnalysis) ShouldMuteAudio() bool {
+	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("shouldMuteAudio"))
 	return _r
 }
-
-// SensitivityAnalysisable is the interface implemented by [SensitivityAnalysis], for mocking and DI.
-type SensitivityAnalysisable interface {
-	obj.Object
-	IsSensitive() bool
-	ShouldIndicateSensitivity() bool
-	ShouldMuteAudio() bool
-}
-
-var _ SensitivityAnalysisable = (*SensitivityAnalysis)(nil)

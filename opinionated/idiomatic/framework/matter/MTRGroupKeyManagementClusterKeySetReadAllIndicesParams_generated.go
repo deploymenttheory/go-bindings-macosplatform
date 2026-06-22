@@ -44,24 +44,24 @@ func mTRGroupKeyManagementClusterKeySetReadAllIndicesParamsAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) Description() string {
+	return rt.Description(objref.IDOf(mgkmcksraip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgkmcksraip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgkmcksraip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) String() string {
+	return rt.Description(objref.IDOf(mgkmcksraip))
 }
 
 // NewMTRGroupKeyManagementClusterKeySetReadAllIndicesParams creates a new MTRGroupKeyManagementClusterKeySetReadAllIndicesParams.
@@ -70,62 +70,37 @@ func NewMTRGroupKeyManagementClusterKeySetReadAllIndicesParams() *MTRGroupKeyMan
 	return mTRGroupKeyManagementClusterKeySetReadAllIndicesParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams {
+	objc.Send[objc.ID](objref.IDOf(mgkmcksraip), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mgkmcksraip
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams {
+	objc.Send[objc.ID](objref.IDOf(mgkmcksraip), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mgkmcksraip
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgkmcksraip), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgkmcksraip), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
-}
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // GroupKeySetIDs wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) GroupKeySetIDs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySetIDs"))
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) GroupKeySetIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgkmcksraip), objc.RegisterName("groupKeySetIDs"))
 	return obj.Wrap(_r)
 }
 
 // SetGroupKeySetIDs wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetGroupKeySetIDs(groupKeySetIDs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetIDs:"), objref.IDOf(groupKeySetIDs))
+func (mgkmcksraip *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams) SetGroupKeySetIDs(groupKeySetIDs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgkmcksraip), objc.RegisterName("setGroupKeySetIDs:"), objref.IDOf(groupKeySetIDs))
 }
-
-// MTRGroupKeyManagementClusterKeySetReadAllIndicesParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetReadAllIndicesParams], for mocking and DI.
-type MTRGroupKeyManagementClusterKeySetReadAllIndicesParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-	GroupKeySetIDs() obj.Object
-	SetGroupKeySetIDs(groupKeySetIDs obj.Object)
-}
-
-var _ MTRGroupKeyManagementClusterKeySetReadAllIndicesParamsable = (*MTRGroupKeyManagementClusterKeySetReadAllIndicesParams)(nil)

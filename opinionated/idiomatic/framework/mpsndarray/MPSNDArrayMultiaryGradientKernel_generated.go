@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,17 +43,10 @@ func arrayMultiaryGradientKernelAdopt(id objc.ID) *ArrayMultiaryGradientKernel {
 	return x
 }
 
-// ArrayMultiaryGradientKernelable is the interface implemented by [ArrayMultiaryGradientKernel], for mocking and DI.
-type ArrayMultiaryGradientKernelable interface {
-	obj.Object
-}
-
-var _ ArrayMultiaryGradientKernelable = (*ArrayMultiaryGradientKernel)(nil)
-
 // isArrayMultiaryGradientKernel marks ArrayMultiaryGradientKernel — and, by embedding promotion, its
 // subclasses — as a member of the ArrayMultiaryGradientKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayMultiaryGradientKernel) isArrayMultiaryGradientKernel() {}
+func (amgk *ArrayMultiaryGradientKernel) isArrayMultiaryGradientKernel() {}
 
 var _ ArrayMultiaryGradientKernelProvider = (*ArrayMultiaryGradientKernel)(nil)
 

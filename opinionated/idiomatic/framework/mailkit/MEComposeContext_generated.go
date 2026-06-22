@@ -44,24 +44,24 @@ func composeContextAdopt(id objc.ID) *ComposeContext {
 }
 
 // Description returns the object's -description text.
-func (x *ComposeContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *ComposeContext) Description() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComposeContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cc *ComposeContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComposeContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cc *ComposeContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComposeContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *ComposeContext) String() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // NewComposeContext creates a new ComposeContext.
@@ -70,51 +70,38 @@ func NewComposeContext() *ComposeContext {
 	return composeContextAdopt(_id)
 }
 
-// OriginalMessage the original email message on which user performed an action It is
-func (x *ComposeContext) OriginalMessage() *Message {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalMessage"))
+// OriginalMessage returns the original email message on which user performed an action It is
+func (cc *ComposeContext) OriginalMessage() *Message {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("originalMessage"))
 	return MessageFromID(_r)
 }
 
 // Action indicates the action performed by the user that created this compose context.
-func (x *ComposeContext) Action() ComposeUserAction {
-	_r := objc.Send[ComposeUserAction](objref.IDOf(x), objc.RegisterName("action"))
+func (cc *ComposeContext) Action() ComposeUserAction {
+	_r := objc.Send[ComposeUserAction](objref.IDOf(cc), objc.RegisterName("action"))
 	return _r
 }
 
-// IsEncrypted boolean that indicates the message is encrypted by a Message Security extension.
-func (x *ComposeContext) IsEncrypted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+// IsEncrypted reports whether boolean that indicates the message is encrypted by a Message Security extension.
+func (cc *ComposeContext) IsEncrypted() bool {
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
-// ShouldEncrypt boolean that indicates if the user wants to encrypt the message.
-func (x *ComposeContext) ShouldEncrypt() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEncrypt"))
+// ShouldEncrypt reports whether boolean that indicates if the user wants to encrypt the message.
+func (cc *ComposeContext) ShouldEncrypt() bool {
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("shouldEncrypt"))
 	return _r
 }
 
-// IsSigned boolean that indicates the message is signed by a Message Security extension.
-func (x *ComposeContext) IsSigned() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSigned"))
+// IsSigned reports whether boolean that indicates the message is signed by a Message Security extension.
+func (cc *ComposeContext) IsSigned() bool {
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isSigned"))
 	return _r
 }
 
-// ShouldSign a Boolean that indicates if the user wants to sign the message.
-func (x *ComposeContext) ShouldSign() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSign"))
+// ShouldSign reports whether a Boolean that indicates if the user wants to sign the message.
+func (cc *ComposeContext) ShouldSign() bool {
+	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("shouldSign"))
 	return _r
 }
-
-// ComposeContextable is the interface implemented by [ComposeContext], for mocking and DI.
-type ComposeContextable interface {
-	obj.Object
-	OriginalMessage() *Message
-	Action() ComposeUserAction
-	IsEncrypted() bool
-	ShouldEncrypt() bool
-	IsSigned() bool
-	ShouldSign() bool
-}
-
-var _ ComposeContextable = (*ComposeContext)(nil)

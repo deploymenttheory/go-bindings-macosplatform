@@ -46,24 +46,24 @@ func addressRepresentationsAdopt(id objc.ID) *AddressRepresentations {
 }
 
 // Description returns the object's -description text.
-func (x *AddressRepresentations) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AddressRepresentations) Description() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddressRepresentations) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ar *AddressRepresentations) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddressRepresentations) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ar *AddressRepresentations) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddressRepresentations) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AddressRepresentations) String() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // NewAddressRepresentations creates a new AddressRepresentations.
@@ -73,8 +73,8 @@ func NewAddressRepresentations() *AddressRepresentations {
 }
 
 // FullAddressIncludingRegionSingleLine returns the the location’s full address, optionally including the country or on a single link without line breaks.
-func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullAddressIncludingRegion:singleLine:"), includingRegion, singleLine)
+func (ar *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("fullAddressIncludingRegion:singleLine:"), includingRegion, singleLine)
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingR
 }
 
 // CityWithContextUsingStyle the city name and, optionally and if applicable, state and region to provide additional disambiguating context.
-func (x *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityWithContextUsingStyle:"), style)
+func (ar *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityWithContextUsingStyle:"), style)
 	if _r == 0 {
 		return ""
 	}
@@ -91,8 +91,8 @@ func (x *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresen
 }
 
 // CityName wraps the corresponding Objective-C method.
-func (x *AddressRepresentations) CityName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityName"))
+func (ar *AddressRepresentations) CityName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityName"))
 	if _r == 0 {
 		return ""
 	}
@@ -100,8 +100,8 @@ func (x *AddressRepresentations) CityName() string {
 }
 
 // CityWithContext wraps the corresponding Objective-C method.
-func (x *AddressRepresentations) CityWithContext() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityWithContext"))
+func (ar *AddressRepresentations) CityWithContext() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityWithContext"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,8 +109,8 @@ func (x *AddressRepresentations) CityWithContext() string {
 }
 
 // RegionName wraps the corresponding Objective-C method.
-func (x *AddressRepresentations) RegionName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionName"))
+func (ar *AddressRepresentations) RegionName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("regionName"))
 	if _r == 0 {
 		return ""
 	}
@@ -118,23 +118,10 @@ func (x *AddressRepresentations) RegionName() string {
 }
 
 // RegionCode wraps the corresponding Objective-C method.
-func (x *AddressRepresentations) RegionCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionCode"))
+func (ar *AddressRepresentations) RegionCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("regionCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AddressRepresentationsable is the interface implemented by [AddressRepresentations], for mocking and DI.
-type AddressRepresentationsable interface {
-	obj.Object
-	FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string
-	CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string
-	CityName() string
-	CityWithContext() string
-	RegionName() string
-	RegionCode() string
-}
-
-var _ AddressRepresentationsable = (*AddressRepresentations)(nil)

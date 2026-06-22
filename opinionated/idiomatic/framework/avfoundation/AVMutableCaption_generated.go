@@ -53,147 +53,98 @@ func NewMutableCaption() *MutableCaption {
 	return mutableCaptionAdopt(_id)
 }
 
-// WithText the caption text.
-func (x *MutableCaption) WithText(text string) *MutableCaption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
-	return x
+// WithText sets the caption text.
+func (mc *MutableCaption) WithText(text string) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setText:"), purego.NSString(text))
+	return mc
 }
 
-// WithRegion the region in which the caption exists.
-func (x *MutableCaption) WithRegion(region CaptionRegionProvider) *MutableCaption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegion:"), objref.IDOf(region))
-	return x
+// WithRegion sets the region in which the caption exists.
+func (mc *MutableCaption) WithRegion(region CaptionRegionProvider) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRegion:"), objref.IDOf(region))
+	return mc
 }
 
-// WithTextAlignment the alignment of the caption text.
-func (x *MutableCaption) WithTextAlignment(textAlignment CaptionTextAlignment) *MutableCaption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAlignment:"), textAlignment)
-	return x
+// WithTextAlignment sets the alignment of the caption text.
+func (mc *MutableCaption) WithTextAlignment(textAlignment CaptionTextAlignment) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextAlignment:"), textAlignment)
+	return mc
 }
 
-// WithAnimation animations to apply to the caption text.
-func (x *MutableCaption) WithAnimation(animation CaptionAnimation) *MutableCaption {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), animation)
-	return x
-}
-
-// SetText wraps the corresponding Objective-C method.
-func (x *MutableCaption) SetText(text string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
+// WithAnimation sets animations to apply to the caption text.
+func (mc *MutableCaption) WithAnimation(animation CaptionAnimation) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setAnimation:"), animation)
+	return mc
 }
 
 // SetTextColorInRange sets the text color for a range of text.
-func (x *MutableCaption) SetTextColorInRange(color obj.Object, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:inRange:"), objref.IDOf(color), range_)
+func (mc *MutableCaption) SetTextColorInRange(color obj.Object, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextColor:inRange:"), objref.IDOf(color), range_)
 }
 
 // SetBackgroundColorInRange sets the background color for a range of text.
-func (x *MutableCaption) SetBackgroundColorInRange(color obj.Object, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:inRange:"), objref.IDOf(color), range_)
+func (mc *MutableCaption) SetBackgroundColorInRange(color obj.Object, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setBackgroundColor:inRange:"), objref.IDOf(color), range_)
 }
 
 // SetFontWeightInRange sets the font weight for a range of text.
-func (x *MutableCaption) SetFontWeightInRange(fontWeight CaptionFontWeight, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontWeight:inRange:"), fontWeight, range_)
+func (mc *MutableCaption) SetFontWeightInRange(fontWeight CaptionFontWeight, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setFontWeight:inRange:"), fontWeight, range_)
 }
 
 // SetFontStyleInRange sets the font style for a range of text.
-func (x *MutableCaption) SetFontStyleInRange(fontStyle CaptionFontStyle, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontStyle:inRange:"), fontStyle, range_)
+func (mc *MutableCaption) SetFontStyleInRange(fontStyle CaptionFontStyle, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setFontStyle:inRange:"), fontStyle, range_)
 }
 
 // SetDecorationInRange sets a decoration for a range of text.
-func (x *MutableCaption) SetDecorationInRange(decoration CaptionDecoration, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecoration:inRange:"), decoration, range_)
+func (mc *MutableCaption) SetDecorationInRange(decoration CaptionDecoration, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setDecoration:inRange:"), decoration, range_)
 }
 
 // SetTextCombineInRange sets text combine for a range.
-func (x *MutableCaption) SetTextCombineInRange(textCombine CaptionTextCombine, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextCombine:inRange:"), textCombine, range_)
+func (mc *MutableCaption) SetTextCombineInRange(textCombine CaptionTextCombine, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextCombine:inRange:"), textCombine, range_)
 }
 
 // SetRubyInRange sets ruby text for a range.
-func (x *MutableCaption) SetRubyInRange(ruby *CaptionRuby, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRuby:inRange:"), objref.IDOf(ruby), range_)
+func (mc *MutableCaption) SetRubyInRange(ruby *CaptionRuby, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRuby:inRange:"), objref.IDOf(ruby), range_)
 }
 
 // RemoveTextColorInRange removes the text color for a range of text.
-func (x *MutableCaption) RemoveTextColorInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTextColorInRange:"), range_)
+func (mc *MutableCaption) RemoveTextColorInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTextColorInRange:"), range_)
 }
 
 // RemoveBackgroundColorInRange removes a background color from a range of text.
-func (x *MutableCaption) RemoveBackgroundColorInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBackgroundColorInRange:"), range_)
+func (mc *MutableCaption) RemoveBackgroundColorInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeBackgroundColorInRange:"), range_)
 }
 
 // RemoveFontWeightInRange removes a font weight from a range of text.
-func (x *MutableCaption) RemoveFontWeightInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFontWeightInRange:"), range_)
+func (mc *MutableCaption) RemoveFontWeightInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeFontWeightInRange:"), range_)
 }
 
 // RemoveFontStyleInRange removes a font style from a range of text.
-func (x *MutableCaption) RemoveFontStyleInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFontStyleInRange:"), range_)
+func (mc *MutableCaption) RemoveFontStyleInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeFontStyleInRange:"), range_)
 }
 
 // RemoveDecorationInRange removes a decoration from a range of text.
-func (x *MutableCaption) RemoveDecorationInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDecorationInRange:"), range_)
+func (mc *MutableCaption) RemoveDecorationInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeDecorationInRange:"), range_)
 }
 
 // RemoveTextCombineInRange removes text combine from a range of text.
-func (x *MutableCaption) RemoveTextCombineInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTextCombineInRange:"), range_)
+func (mc *MutableCaption) RemoveTextCombineInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTextCombineInRange:"), range_)
 }
 
 // RemoveRubyInRange removes ruby text from a range.
-func (x *MutableCaption) RemoveRubyInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRubyInRange:"), range_)
+func (mc *MutableCaption) RemoveRubyInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeRubyInRange:"), range_)
 }
-
-// SetRegion wraps the corresponding Objective-C method.
-func (x *MutableCaption) SetRegion(region *CaptionRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegion:"), objref.IDOf(region))
-}
-
-// SetTextAlignment wraps the corresponding Objective-C method.
-func (x *MutableCaption) SetTextAlignment(textAlignment CaptionTextAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAlignment:"), textAlignment)
-}
-
-// SetAnimation wraps the corresponding Objective-C method.
-func (x *MutableCaption) SetAnimation(animation CaptionAnimation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), animation)
-}
-
-// MutableCaptionable is the interface implemented by [MutableCaption], for mocking and DI.
-type MutableCaptionable interface {
-	obj.Object
-	WithText(text string) *MutableCaption
-	WithRegion(region CaptionRegionProvider) *MutableCaption
-	WithTextAlignment(textAlignment CaptionTextAlignment) *MutableCaption
-	WithAnimation(animation CaptionAnimation) *MutableCaption
-	SetText(text string)
-	SetTextColorInRange(color obj.Object, range_ foundation.NSRange)
-	SetBackgroundColorInRange(color obj.Object, range_ foundation.NSRange)
-	SetFontWeightInRange(fontWeight CaptionFontWeight, range_ foundation.NSRange)
-	SetFontStyleInRange(fontStyle CaptionFontStyle, range_ foundation.NSRange)
-	SetDecorationInRange(decoration CaptionDecoration, range_ foundation.NSRange)
-	SetTextCombineInRange(textCombine CaptionTextCombine, range_ foundation.NSRange)
-	SetRubyInRange(ruby *CaptionRuby, range_ foundation.NSRange)
-	RemoveTextColorInRange(range_ foundation.NSRange)
-	RemoveBackgroundColorInRange(range_ foundation.NSRange)
-	RemoveFontWeightInRange(range_ foundation.NSRange)
-	RemoveFontStyleInRange(range_ foundation.NSRange)
-	RemoveDecorationInRange(range_ foundation.NSRange)
-	RemoveTextCombineInRange(range_ foundation.NSRange)
-	RemoveRubyInRange(range_ foundation.NSRange)
-	SetRegion(region *CaptionRegion)
-	SetTextAlignment(textAlignment CaptionTextAlignment)
-	SetAnimation(animation CaptionAnimation)
-}
-
-var _ MutableCaptionable = (*MutableCaption)(nil)
 
 var _ CaptionProvider = (*MutableCaption)(nil)

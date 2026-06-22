@@ -188,53 +188,6 @@ func TestNamedReturnsTestbed(t *testing.T) {
 	}
 }
 
-// TestInterfaceAssertionsTestbed enforces E11: every concrete wrapper type emits
-// a var _ <Type>able = (*Type)(nil) assertion proving it satisfies its mock
-// interface.
-func TestInterfaceAssertionsTestbed(t *testing.T) {
-	_, files := parseTestbed(t)
-	for _, f := range files {
-		// Collect the wrapper struct types and the mock assertions in this file.
-		wrappers := map[string]bool{}
-		asserts := map[string]bool{}
-		for _, decl := range f.Decls {
-			switch d := decl.(type) {
-			case *ast.GenDecl:
-				for _, spec := range d.Specs {
-					ts, ok := spec.(*ast.TypeSpec)
-					if !ok {
-						continue
-					}
-					if ts.Name.IsExported() && isWrapperStruct(ts) {
-						wrappers[ts.Name.Name] = true
-					}
-				}
-			}
-		}
-		// Scan var declarations of the form var _ X = (*Y)(nil).
-		for _, decl := range f.Decls {
-			gd, ok := decl.(*ast.GenDecl)
-			if !ok || gd.Tok != token.VAR {
-				continue
-			}
-			for _, spec := range gd.Specs {
-				vs, ok := spec.(*ast.ValueSpec)
-				if !ok || len(vs.Names) != 1 || vs.Names[0].Name != "_" || len(vs.Values) != 1 {
-					continue
-				}
-				if y := assertedConcreteType(vs.Values[0]); y != "" {
-					asserts[y] = true
-				}
-			}
-		}
-		for w := range wrappers {
-			if !asserts[w] {
-				t.Errorf("wrapper type %s lacks a var _ %sable = (*%s)(nil) assertion (E11)", w, w, w)
-			}
-		}
-	}
-}
-
 // isWrapperStruct reports whether a struct type is an Objective-C wrapper — it
 // embeds a field (objref.Handle or a same-framework base) — as opposed to a plain
 // value struct, which has only named fields.
@@ -249,26 +202,6 @@ func isWrapperStruct(ts *ast.TypeSpec) bool {
 		}
 	}
 	return false
-}
-
-// assertedConcreteType extracts Y from an expression of the form (*Y)(nil).
-func assertedConcreteType(e ast.Expr) string {
-	call, ok := e.(*ast.CallExpr)
-	if !ok || len(call.Args) != 1 {
-		return ""
-	}
-	paren, ok := call.Fun.(*ast.ParenExpr)
-	if !ok {
-		return ""
-	}
-	star, ok := paren.X.(*ast.StarExpr)
-	if !ok {
-		return ""
-	}
-	if id, ok := star.X.(*ast.Ident); ok {
-		return id.Name
-	}
-	return ""
 }
 
 // TestDocCommentsStartName enforces E2 on the func and wrapper-type API surface:

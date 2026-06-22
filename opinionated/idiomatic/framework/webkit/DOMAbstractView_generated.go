@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,18 +50,10 @@ func NewDOMAbstractView() *DOMAbstractView {
 }
 
 // Document wraps the corresponding Objective-C method.
-func (x *DOMAbstractView) Document() *DOMDocument {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+func (dav *DOMAbstractView) Document() *DOMDocument {
+	_r := objc.Send[objc.ID](objref.IDOf(dav), objc.RegisterName("document"))
 	return DOMDocumentFromID(_r)
 }
-
-// DOMAbstractViewable is the interface implemented by [DOMAbstractView], for mocking and DI.
-type DOMAbstractViewable interface {
-	obj.Object
-	Document() *DOMDocument
-}
-
-var _ DOMAbstractViewable = (*DOMAbstractView)(nil)
 
 var _ DOMObjectProvider = (*DOMAbstractView)(nil)
 

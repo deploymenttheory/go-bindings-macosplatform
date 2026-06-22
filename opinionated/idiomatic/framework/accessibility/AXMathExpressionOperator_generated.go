@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,20 +51,12 @@ func NewMathExpressionOperatorWithContent(content string) *MathExpressionOperato
 }
 
 // Content wraps the corresponding Objective-C method.
-func (x *MathExpressionOperator) Content() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+func (meo *MathExpressionOperator) Content() string {
+	_r := objc.Send[objc.ID](objref.IDOf(meo), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MathExpressionOperatorable is the interface implemented by [MathExpressionOperator], for mocking and DI.
-type MathExpressionOperatorable interface {
-	obj.Object
-	Content() string
-}
-
-var _ MathExpressionOperatorable = (*MathExpressionOperator)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionOperator)(nil)

@@ -46,24 +46,24 @@ func mTREndpointInfoAdopt(id objc.ID) *MTREndpointInfo {
 }
 
 // Description returns the object's -description text.
-func (x *MTREndpointInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mei *MTREndpointInfo) Description() string {
+	return rt.Description(objref.IDOf(mei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREndpointInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mei *MTREndpointInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREndpointInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mei *MTREndpointInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREndpointInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mei *MTREndpointInfo) String() string {
+	return rt.Description(objref.IDOf(mei))
 }
 
 // NewMTREndpointInfo creates a new MTREndpointInfo.
@@ -73,42 +73,31 @@ func NewMTREndpointInfo() *MTREndpointInfo {
 }
 
 // EndpointID wraps the corresponding Objective-C method.
-func (x *MTREndpointInfo) EndpointID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
+func (mei *MTREndpointInfo) EndpointID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
 }
 
 // DeviceTypes wraps the corresponding Objective-C method.
 //
 // DeviceTypes returns the collection as a Go slice.
-func (x *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypes"))
+func (mei *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
+	_arr := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("deviceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
 
 // PartsList wraps the corresponding Objective-C method.
 //
 // PartsList returns the collection as a Go slice.
-func (x *MTREndpointInfo) PartsList() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partsList"))
+func (mei *MTREndpointInfo) PartsList() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("partsList"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Children the direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
+// Children returns the direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
 //
 // Children returns the collection as a Go slice.
-func (x *MTREndpointInfo) Children() []*MTREndpointInfo {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+func (mei *MTREndpointInfo) Children() []*MTREndpointInfo {
+	_arr := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTREndpointInfo { return MTREndpointInfoFromID(_id) })
 }
-
-// MTREndpointInfoable is the interface implemented by [MTREndpointInfo], for mocking and DI.
-type MTREndpointInfoable interface {
-	obj.Object
-	EndpointID() obj.Object
-	DeviceTypes() []*MTRDeviceTypeRevision
-	PartsList() []obj.Object
-	Children() []*MTREndpointInfo
-}
-
-var _ MTREndpointInfoable = (*MTREndpointInfo)(nil)

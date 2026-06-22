@@ -53,383 +53,323 @@ func NewTableHeaderCell() *TableHeaderCell {
 	return tableHeaderCellAdopt(_id)
 }
 
-// WithBackgroundColor the color of the cell’s background.
-func (x *TableHeaderCell) WithBackgroundColor(backgroundColor *Color) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the cell’s background.
+func (thc *TableHeaderCell) WithBackgroundColor(backgroundColor *Color) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return thc
 }
 
-// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
-func (x *TableHeaderCell) WithDrawsBackground(drawsBackground bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that indicates whether the cell draws its background color.
+func (thc *TableHeaderCell) WithDrawsBackground(drawsBackground bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return thc
 }
 
-// WithTextColor the color to use to draw the cell’s text.
-func (x *TableHeaderCell) WithTextColor(textColor *Color) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the color to use to draw the cell’s text.
+func (thc *TableHeaderCell) WithTextColor(textColor *Color) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return thc
 }
 
-// WithBezelStyle the bezel style to use when drawing the text field.
-func (x *TableHeaderCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-	return x
+// WithBezelStyle sets the bezel style to use when drawing the text field.
+func (thc *TableHeaderCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	return thc
 }
 
-// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
-func (x *TableHeaderCell) WithPlaceholderString(placeholderString string) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+// WithPlaceholderString sets the placeholder text for the cell, specified as a plain text string.
+func (thc *TableHeaderCell) WithPlaceholderString(placeholderString string) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return thc
 }
 
-// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
-func (x *TableHeaderCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+// WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
+func (thc *TableHeaderCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return thc
 }
 
-// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-func (x *TableHeaderCell) WithAllowedInputSourceLocales(items ...obj.Object) *TableHeaderCell {
+// WithAllowedInputSourceLocales sets an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+func (thc *TableHeaderCell) WithAllowedInputSourceLocales(items ...obj.Object) *TableHeaderCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	return thc
 }
 
-// WithControlView the view associated with the cell.
-func (x *TableHeaderCell) WithControlView(controlView ViewProvider) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (thc *TableHeaderCell) WithControlView(controlView ViewProvider) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return thc
 }
 
-// WithType the type of the cell.
-func (x *TableHeaderCell) WithType(type_ CellType) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (thc *TableHeaderCell) WithType(type_ CellType) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setType:"), type_)
+	return thc
 }
 
-// WithState the cell’s current state.
-func (x *TableHeaderCell) WithState(state int) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (thc *TableHeaderCell) WithState(state int) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setState:"), state)
+	return thc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *TableHeaderCell) WithTarget(target obj.Object) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (thc *TableHeaderCell) WithTarget(target obj.Object) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return thc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *TableHeaderCell) WithTag(tag int) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (thc *TableHeaderCell) WithTag(tag int) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTag:"), tag)
+	return thc
 }
 
-// WithTitle the cell’s title text.
-func (x *TableHeaderCell) WithTitle(title string) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (thc *TableHeaderCell) WithTitle(title string) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return thc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *TableHeaderCell) WithEnabled(enabled bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (thc *TableHeaderCell) WithEnabled(enabled bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setEnabled:"), enabled)
+	return thc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *TableHeaderCell) WithContinuous(continuous bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (thc *TableHeaderCell) WithContinuous(continuous bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setContinuous:"), continuous)
+	return thc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *TableHeaderCell) WithEditable(editable bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (thc *TableHeaderCell) WithEditable(editable bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setEditable:"), editable)
+	return thc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *TableHeaderCell) WithSelectable(selectable bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (thc *TableHeaderCell) WithSelectable(selectable bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setSelectable:"), selectable)
+	return thc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *TableHeaderCell) WithBordered(bordered bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (thc *TableHeaderCell) WithBordered(bordered bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBordered:"), bordered)
+	return thc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *TableHeaderCell) WithBezeled(bezeled bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (thc *TableHeaderCell) WithBezeled(bezeled bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBezeled:"), bezeled)
+	return thc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *TableHeaderCell) WithScrollable(scrollable bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (thc *TableHeaderCell) WithScrollable(scrollable bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setScrollable:"), scrollable)
+	return thc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *TableHeaderCell) WithHighlighted(highlighted bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (thc *TableHeaderCell) WithHighlighted(highlighted bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setHighlighted:"), highlighted)
+	return thc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *TableHeaderCell) WithAlignment(alignment TextAlignment) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (thc *TableHeaderCell) WithAlignment(alignment TextAlignment) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAlignment:"), alignment)
+	return thc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *TableHeaderCell) WithWraps(wraps bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (thc *TableHeaderCell) WithWraps(wraps bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setWraps:"), wraps)
+	return thc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *TableHeaderCell) WithFont(font *Font) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (thc *TableHeaderCell) WithFont(font *Font) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return thc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *TableHeaderCell) WithFormatter(formatter obj.Object) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (thc *TableHeaderCell) WithFormatter(formatter obj.Object) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return thc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *TableHeaderCell) WithObjectValue(objectValue obj.Object) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (thc *TableHeaderCell) WithObjectValue(objectValue obj.Object) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return thc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *TableHeaderCell) WithStringValue(stringValue string) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (thc *TableHeaderCell) WithStringValue(stringValue string) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return thc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *TableHeaderCell) WithIntValue(intValue int) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (thc *TableHeaderCell) WithIntValue(intValue int) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setIntValue:"), intValue)
+	return thc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *TableHeaderCell) WithFloatValue(floatValue float32) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (thc *TableHeaderCell) WithFloatValue(floatValue float32) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setFloatValue:"), floatValue)
+	return thc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *TableHeaderCell) WithDoubleValue(doubleValue float64) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (thc *TableHeaderCell) WithDoubleValue(doubleValue float64) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return thc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *TableHeaderCell) WithIntegerValue(integerValue int) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (thc *TableHeaderCell) WithIntegerValue(integerValue int) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return thc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *TableHeaderCell) WithImage(image *Image) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (thc *TableHeaderCell) WithImage(image *Image) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return thc
 }
 
-// WithControlSize the size of the cell.
-func (x *TableHeaderCell) WithControlSize(controlSize ControlSize) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (thc *TableHeaderCell) WithControlSize(controlSize ControlSize) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setControlSize:"), controlSize)
+	return thc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *TableHeaderCell) WithRepresentedObject(representedObject obj.Object) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (thc *TableHeaderCell) WithRepresentedObject(representedObject obj.Object) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return thc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *TableHeaderCell) WithMenu(menu *Menu) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (thc *TableHeaderCell) WithMenu(menu *Menu) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return thc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *TableHeaderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (thc *TableHeaderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return thc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *TableHeaderCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (thc *TableHeaderCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return thc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *TableHeaderCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (thc *TableHeaderCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return thc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *TableHeaderCell) WithAllowsUndo(allowsUndo bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (thc *TableHeaderCell) WithAllowsUndo(allowsUndo bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return thc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *TableHeaderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (thc *TableHeaderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return thc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *TableHeaderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (thc *TableHeaderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return thc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *TableHeaderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (thc *TableHeaderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return thc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *TableHeaderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (thc *TableHeaderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return thc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *TableHeaderCell) WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (thc *TableHeaderCell) WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return thc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *TableHeaderCell) WithFocusRingType(focusRingType FocusRingType) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (thc *TableHeaderCell) WithFocusRingType(focusRingType FocusRingType) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return thc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *TableHeaderCell) WithAttributedStringValue(attributedStringValue obj.Object) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (thc *TableHeaderCell) WithAttributedStringValue(attributedStringValue obj.Object) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return thc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *TableHeaderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (thc *TableHeaderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return thc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *TableHeaderCell) WithImportsGraphics(importsGraphics bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (thc *TableHeaderCell) WithImportsGraphics(importsGraphics bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return thc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *TableHeaderCell) WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (thc *TableHeaderCell) WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return thc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *TableHeaderCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (thc *TableHeaderCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return thc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *TableHeaderCell) WithControlTint(controlTint ControlTint) *TableHeaderCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (thc *TableHeaderCell) WithControlTint(controlTint ControlTint) *TableHeaderCell {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setControlTint:"), controlTint)
+	return thc
 }
 
 // DrawSortIndicatorWithFrameInViewAscendingPriority draws a sorting indicator given a cell frame contained inside a view.
-func (x *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *View, ascending bool, priority int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawSortIndicatorWithFrame:inView:ascending:priority:"), cellFrame, objref.IDOf(controlView), ascending, priority)
+func (thc *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *View, ascending bool, priority int) {
+	objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("drawSortIndicatorWithFrame:inView:ascending:priority:"), cellFrame, objref.IDOf(controlView), ascending, priority)
 }
 
 // SortIndicatorRectForBounds returns the location to display the sorting indicator given theRect.
-func (x *TableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("sortIndicatorRectForBounds:"), rect)
+func (thc *TableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(thc), objc.RegisterName("sortIndicatorRectForBounds:"), rect)
 	return _r
 }
-
-// TableHeaderCellable is the interface implemented by [TableHeaderCell], for mocking and DI.
-type TableHeaderCellable interface {
-	obj.Object
-	WithBackgroundColor(backgroundColor *Color) *TableHeaderCell
-	WithDrawsBackground(drawsBackground bool) *TableHeaderCell
-	WithTextColor(textColor *Color) *TableHeaderCell
-	WithBezelStyle(bezelStyle TextFieldBezelStyle) *TableHeaderCell
-	WithPlaceholderString(placeholderString string) *TableHeaderCell
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TableHeaderCell
-	WithAllowedInputSourceLocales(items ...obj.Object) *TableHeaderCell
-	WithControlView(controlView ViewProvider) *TableHeaderCell
-	WithType(type_ CellType) *TableHeaderCell
-	WithState(state int) *TableHeaderCell
-	WithTarget(target obj.Object) *TableHeaderCell
-	WithTag(tag int) *TableHeaderCell
-	WithTitle(title string) *TableHeaderCell
-	WithEnabled(enabled bool) *TableHeaderCell
-	WithContinuous(continuous bool) *TableHeaderCell
-	WithEditable(editable bool) *TableHeaderCell
-	WithSelectable(selectable bool) *TableHeaderCell
-	WithBordered(bordered bool) *TableHeaderCell
-	WithBezeled(bezeled bool) *TableHeaderCell
-	WithScrollable(scrollable bool) *TableHeaderCell
-	WithHighlighted(highlighted bool) *TableHeaderCell
-	WithAlignment(alignment TextAlignment) *TableHeaderCell
-	WithWraps(wraps bool) *TableHeaderCell
-	WithFont(font *Font) *TableHeaderCell
-	WithFormatter(formatter obj.Object) *TableHeaderCell
-	WithObjectValue(objectValue obj.Object) *TableHeaderCell
-	WithStringValue(stringValue string) *TableHeaderCell
-	WithIntValue(intValue int) *TableHeaderCell
-	WithFloatValue(floatValue float32) *TableHeaderCell
-	WithDoubleValue(doubleValue float64) *TableHeaderCell
-	WithIntegerValue(integerValue int) *TableHeaderCell
-	WithImage(image *Image) *TableHeaderCell
-	WithControlSize(controlSize ControlSize) *TableHeaderCell
-	WithRepresentedObject(representedObject obj.Object) *TableHeaderCell
-	WithMenu(menu *Menu) *TableHeaderCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TableHeaderCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *TableHeaderCell
-	WithAllowsUndo(allowsUndo bool) *TableHeaderCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableHeaderCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell
-	WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell
-	WithFocusRingType(focusRingType FocusRingType) *TableHeaderCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *TableHeaderCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell
-	WithImportsGraphics(importsGraphics bool) *TableHeaderCell
-	WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TableHeaderCell
-	WithControlTint(controlTint ControlTint) *TableHeaderCell
-	DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *View, ascending bool, priority int)
-	SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
-}
-
-var _ TableHeaderCellable = (*TableHeaderCell)(nil)
 
 var _ TextFieldCellProvider = (*TableHeaderCell)(nil)
 

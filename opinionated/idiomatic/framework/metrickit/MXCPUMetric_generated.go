@@ -52,25 +52,16 @@ func NewCPUMetric() *CPUMetric {
 	return cPUMetricAdopt(_id)
 }
 
-// CumulativeCPUTime CPU time aggregated cumulatively. The data here represents the total CPU time an application consumed over the date range of the containing payload. Dimensioned as NSUnitDuration.
-func (x *CPUMetric) CumulativeCPUTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUTime"))
+// CumulativeCPUTime returns CPU time aggregated cumulatively. The data here represents the total CPU time an application consumed over the date range of the containing payload. Dimensioned as NSUnitDuration.
+func (cm *CPUMetric) CumulativeCPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("cumulativeCPUTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeCPUInstructions CPU instructions retired aggregated cumulatively. The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. Dimensionless.
-func (x *CPUMetric) CumulativeCPUInstructions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUInstructions"))
+// CumulativeCPUInstructions returns CPU instructions retired aggregated cumulatively. The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. Dimensionless.
+func (cm *CPUMetric) CumulativeCPUInstructions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("cumulativeCPUInstructions"))
 	return obj.Wrap(_r)
 }
-
-// CPUMetricable is the interface implemented by [CPUMetric], for mocking and DI.
-type CPUMetricable interface {
-	obj.Object
-	CumulativeCPUTime() obj.Object
-	CumulativeCPUInstructions() obj.Object
-}
-
-var _ CPUMetricable = (*CPUMetric)(nil)
 
 var _ MetricProvider = (*CPUMetric)(nil)

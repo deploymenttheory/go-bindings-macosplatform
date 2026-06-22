@@ -46,24 +46,24 @@ func assessmentSessionAdopt(id objc.ID) *AssessmentSession {
 }
 
 // Description returns the object's -description text.
-func (x *AssessmentSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AssessmentSession) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssessmentSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AssessmentSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssessmentSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AssessmentSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssessmentSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AssessmentSession) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAssessmentSessionWithConfiguration creates a new assessment session.
@@ -74,40 +74,28 @@ func NewAssessmentSessionWithConfiguration(configuration *AssessmentConfiguratio
 }
 
 // Begin starts an assessment session.
-func (x *AssessmentSession) Begin() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("begin"))
+func (as *AssessmentSession) Begin() {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("begin"))
 }
 
 // End ends an assessment session.
-func (x *AssessmentSession) End() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+func (as *AssessmentSession) End() {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("end"))
 }
 
 // UpdateToConfiguration changes the session to use the specified configuration.
-func (x *AssessmentSession) UpdateToConfiguration(configuration *AssessmentConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateToConfiguration:"), objref.IDOf(configuration))
+func (as *AssessmentSession) UpdateToConfiguration(configuration *AssessmentConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("updateToConfiguration:"), objref.IDOf(configuration))
 }
 
 // Configuration wraps the corresponding Objective-C method.
-func (x *AssessmentSession) Configuration() *AssessmentConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+func (as *AssessmentSession) Configuration() *AssessmentConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("configuration"))
 	return AssessmentConfigurationFromID(_r)
 }
 
 // IsActive wraps the corresponding Objective-C method.
-func (x *AssessmentSession) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+func (as *AssessmentSession) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isActive"))
 	return _r
 }
-
-// AssessmentSessionable is the interface implemented by [AssessmentSession], for mocking and DI.
-type AssessmentSessionable interface {
-	obj.Object
-	Begin()
-	End()
-	UpdateToConfiguration(configuration *AssessmentConfiguration)
-	Configuration() *AssessmentConfiguration
-	IsActive() bool
-}
-
-var _ AssessmentSessionable = (*AssessmentSession)(nil)

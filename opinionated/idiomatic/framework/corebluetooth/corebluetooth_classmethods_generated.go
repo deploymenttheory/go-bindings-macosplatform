@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// AuthorizationClass the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. You can check this in your implementation of required delegate method {
+// AuthorizationClass returns the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. You can check this in your implementation of required delegate method {
 func AuthorizationClass() ManagerAuthorization {
 	_r := objc.Send[ManagerAuthorization](objc.ID(_class("CBManager")), objc.RegisterName("authorization"))
 	return _r

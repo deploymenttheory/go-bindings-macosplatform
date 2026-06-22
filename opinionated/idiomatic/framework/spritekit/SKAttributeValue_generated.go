@@ -46,24 +46,24 @@ func attributeValueAdopt(id objc.ID) *AttributeValue {
 }
 
 // Description returns the object's -description text.
-func (x *AttributeValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (av *AttributeValue) Description() string {
+	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttributeValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (av *AttributeValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttributeValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (av *AttributeValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttributeValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (av *AttributeValue) String() string {
+	return rt.Description(objref.IDOf(av))
 }
 
 // NewAttributeValue creates a new AttributeValue.
@@ -72,29 +72,14 @@ func NewAttributeValue() *AttributeValue {
 	return attributeValueAdopt(_id)
 }
 
-// WithFloatValue the receiver’s floating point value.
-func (x *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the receiver’s floating point value.
+func (av *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setFloatValue:"), floatValue)
+	return av
 }
 
 // FloatValue wraps the corresponding Objective-C method.
-func (x *AttributeValue) FloatValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+func (av *AttributeValue) FloatValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("floatValue"))
 	return _r
 }
-
-// SetFloatValue wraps the corresponding Objective-C method.
-func (x *AttributeValue) SetFloatValue(floatValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-}
-
-// AttributeValueable is the interface implemented by [AttributeValue], for mocking and DI.
-type AttributeValueable interface {
-	obj.Object
-	WithFloatValue(floatValue float32) *AttributeValue
-	FloatValue() float32
-	SetFloatValue(floatValue float32)
-}
-
-var _ AttributeValueable = (*AttributeValue)(nil)

@@ -44,24 +44,24 @@ func mTRColorControlClusterEnhancedMoveToHueAndSaturationParamsAdopt(id objc.ID)
 }
 
 // Description returns the object's -description text.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Description() string {
+	return rt.Description(objref.IDOf(mcccemthasp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcccemthasp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcccemthasp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) String() string {
+	return rt.Description(objref.IDOf(mcccemthasp))
 }
 
 // NewMTRColorControlClusterEnhancedMoveToHueAndSaturationParams creates a new MTRColorControlClusterEnhancedMoveToHueAndSaturationParams.
@@ -71,148 +71,85 @@ func NewMTRColorControlClusterEnhancedMoveToHueAndSaturationParams() *MTRColorCo
 }
 
 // WithEnhancedHue sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithEnhancedHue(enhancedHue obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnhancedHue:"), objref.IDOf(enhancedHue))
-	return x
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithEnhancedHue(enhancedHue obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setEnhancedHue:"), objref.IDOf(enhancedHue))
+	return mcccemthasp
 }
 
 // WithSaturation sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithSaturation(saturation obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
-	return x
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithSaturation(saturation obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
+	return mcccemthasp
 }
 
 // WithTransitionTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-	return x
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
+	return mcccemthasp
 }
 
 // WithOptionsMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
-	return x
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
+	return mcccemthasp
 }
 
 // WithOptionsOverride sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-	return x
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
+	return mcccemthasp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mcccemthasp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mcccemthasp
 }
 
 // EnhancedHue wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) EnhancedHue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enhancedHue"))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) EnhancedHue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("enhancedHue"))
 	return obj.Wrap(_r)
-}
-
-// SetEnhancedHue wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetEnhancedHue(enhancedHue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnhancedHue:"), objref.IDOf(enhancedHue))
 }
 
 // Saturation wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Saturation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saturation"))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Saturation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("saturation"))
 	return obj.Wrap(_r)
-}
-
-// SetSaturation wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetSaturation(saturation obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
 }
 
 // TransitionTime wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TransitionTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
-}
-
-// SetTransitionTime wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetTransitionTime(transitionTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
 // OptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsMask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetOptionsMask(optionsMask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
 // OptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsOverride() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetOptionsOverride(optionsOverride obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRColorControlClusterEnhancedMoveToHueAndSaturationParamsable is the interface implemented by [MTRColorControlClusterEnhancedMoveToHueAndSaturationParams], for mocking and DI.
-type MTRColorControlClusterEnhancedMoveToHueAndSaturationParamsable interface {
-	obj.Object
-	WithEnhancedHue(enhancedHue obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	WithSaturation(saturation obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
-	EnhancedHue() obj.Object
-	SetEnhancedHue(enhancedHue obj.Object)
-	Saturation() obj.Object
-	SetSaturation(saturation obj.Object)
-	TransitionTime() obj.Object
-	SetTransitionTime(transitionTime obj.Object)
-	OptionsMask() obj.Object
-	SetOptionsMask(optionsMask obj.Object)
-	OptionsOverride() obj.Object
-	SetOptionsOverride(optionsOverride obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRColorControlClusterEnhancedMoveToHueAndSaturationParamsable = (*MTRColorControlClusterEnhancedMoveToHueAndSaturationParams)(nil)

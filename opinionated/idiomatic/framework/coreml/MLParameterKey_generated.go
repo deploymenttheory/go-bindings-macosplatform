@@ -7,7 +7,6 @@ package coreml
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewParameterKey() *ParameterKey {
 }
 
 // ScopedTo creates a copy of a parameter key and adds the scope to it.
-func (x *ParameterKey) ScopedTo(scope string) *ParameterKey {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scopedTo:"), purego.NSString(scope))
+func (pk *ParameterKey) ScopedTo(scope string) *ParameterKey {
+	_r := objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("scopedTo:"), purego.NSString(scope))
 	return ParameterKeyFromID(_r)
 }
-
-// ParameterKeyable is the interface implemented by [ParameterKey], for mocking and DI.
-type ParameterKeyable interface {
-	obj.Object
-	ScopedTo(scope string) *ParameterKey
-}
-
-var _ ParameterKeyable = (*ParameterKey)(nil)
 
 var _ KeyProvider = (*ParameterKey)(nil)

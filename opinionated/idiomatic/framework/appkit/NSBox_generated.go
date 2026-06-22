@@ -54,641 +54,483 @@ func NewBox() *Box {
 	return boxAdopt(_id)
 }
 
-// WithBoxType the receiver’s box type.
-func (x *Box) WithBoxType(boxType BoxType) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoxType:"), boxType)
-	return x
+// WithBoxType sets the receiver’s box type.
+func (b *Box) WithBoxType(boxType BoxType) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoxType:"), boxType)
+	return b
 }
 
-// WithTitlePosition a constant representing the title position.
-func (x *Box) WithTitlePosition(titlePosition TitlePosition) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlePosition:"), titlePosition)
-	return x
+// WithTitlePosition sets a constant representing the title position.
+func (b *Box) WithTitlePosition(titlePosition TitlePosition) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitlePosition:"), titlePosition)
+	return b
 }
 
-// WithTitle the receiver’s title.
-func (x *Box) WithTitle(title string) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the receiver’s title.
+func (b *Box) WithTitle(title string) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return b
 }
 
-// WithTitleFont the font object used to draw the receiver’s title.
-func (x *Box) WithTitleFont(titleFont *Font) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
-	return x
+// WithTitleFont sets the font object used to draw the receiver’s title.
+func (b *Box) WithTitleFont(titleFont *Font) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
+	return b
 }
 
-// WithContentViewMargins the distances between the border and the content view.
-func (x *Box) WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewMargins:"), contentViewMargins)
-	return x
+// WithContentViewMargins sets the distances between the border and the content view.
+func (b *Box) WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentViewMargins:"), contentViewMargins)
+	return b
 }
 
-// WithContentView the receiver’s content view.
-func (x *Box) WithContentView(contentView ViewProvider) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-	return x
+// WithContentView sets the receiver’s content view.
+func (b *Box) WithContentView(contentView ViewProvider) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	return b
 }
 
-// WithTransparent a Boolean value that indicates whether the receiver is transparent.
-func (x *Box) WithTransparent(transparent bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
-	return x
+// WithTransparent sets a Boolean value that indicates whether the receiver is transparent.
+func (b *Box) WithTransparent(transparent bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTransparent:"), transparent)
+	return b
 }
 
-// WithBorderWidth the width of the receiver’s border when the receiver is a custom box with a simple line border.
-func (x *Box) WithBorderWidth(borderWidth float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the receiver’s border when the receiver is a custom box with a simple line border.
+func (b *Box) WithBorderWidth(borderWidth float64) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return b
 }
 
-// WithCornerRadius the radius of the receiver’s corners when the receiver is a custom box with a simple line border.
-func (x *Box) WithCornerRadius(cornerRadius float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius of the receiver’s corners when the receiver is a custom box with a simple line border.
+func (b *Box) WithCornerRadius(cornerRadius float64) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return b
 }
 
-// WithBorderColor the color of the receiver’s border when the receiver is a custom box with a simple line border.
-func (x *Box) WithBorderColor(borderColor *Color) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the receiver’s border when the receiver is a custom box with a simple line border.
+func (b *Box) WithBorderColor(borderColor *Color) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return b
 }
 
-// WithFillColor the color of the receiver’s background when the receiver is a custom box with a simple line border.
-func (x *Box) WithFillColor(fillColor *Color) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the color of the receiver’s background when the receiver is a custom box with a simple line border.
+func (b *Box) WithFillColor(fillColor *Color) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return b
 }
 
-// WithBorderType the receiver’s border type.
-func (x *Box) WithBorderType(borderType BorderType) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderType:"), borderType)
-	return x
+// WithBorderType sets the receiver’s border type.
+func (b *Box) WithBorderType(borderType BorderType) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderType:"), borderType)
+	return b
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithSubviews(items ...ViewProvider) *Box {
+func (b *Box) WithSubviews(items ...ViewProvider) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSubviews:"), _arr)
+	return b
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithHidden(hidden bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (b *Box) WithHidden(hidden bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHidden:"), hidden)
+	return b
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (b *Box) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return b
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithAutoresizesSubviews(autoresizesSubviews bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (b *Box) WithAutoresizesSubviews(autoresizesSubviews bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return b
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (b *Box) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return b
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Box) WithFrame(frame corefoundation.CGRect) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (b *Box) WithFrame(frame corefoundation.CGRect) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrame:"), frame)
+	return b
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithFrameRotation(frameRotation float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (b *Box) WithFrameRotation(frameRotation float64) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return b
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithFrameCenterRotation(frameCenterRotation float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (b *Box) WithFrameCenterRotation(frameCenterRotation float64) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return b
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithBoundsRotation(boundsRotation float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (b *Box) WithBoundsRotation(boundsRotation float64) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return b
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Box) WithBounds(bounds corefoundation.CGRect) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (b *Box) WithBounds(bounds corefoundation.CGRect) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBounds:"), bounds)
+	return b
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithCanDrawConcurrently(canDrawConcurrently bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (b *Box) WithCanDrawConcurrently(canDrawConcurrently bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return b
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Box) WithNeedsDisplay(needsDisplay bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (b *Box) WithNeedsDisplay(needsDisplay bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return b
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (b *Box) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return b
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithWantsRestingTouches(wantsRestingTouches bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (b *Box) WithWantsRestingTouches(wantsRestingTouches bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return b
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (b *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return b
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (b *Box) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return b
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithWantsLayer(wantsLayer bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (b *Box) WithWantsLayer(wantsLayer bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return b
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithLayer(layer obj.Object) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (b *Box) WithLayer(layer obj.Object) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return b
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (b *Box) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return b
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithNeedsLayout(needsLayout bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (b *Box) WithNeedsLayout(needsLayout bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return b
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithAlphaValue(alphaValue float64) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (b *Box) WithAlphaValue(alphaValue float64) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return b
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (b *Box) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return b
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithBackgroundFilters(items ...obj.Object) *Box {
+func (b *Box) WithBackgroundFilters(items ...obj.Object) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return b
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithCompositingFilter(compositingFilter obj.Object) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (b *Box) WithCompositingFilter(compositingFilter obj.Object) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return b
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithContentFilters(items ...obj.Object) *Box {
+func (b *Box) WithContentFilters(items ...obj.Object) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentFilters:"), _arr)
+	return b
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithShadow(shadow *Shadow) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (b *Box) WithShadow(shadow *Shadow) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return b
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithClipsToBounds(clipsToBounds bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (b *Box) WithClipsToBounds(clipsToBounds bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return b
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (b *Box) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return b
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithToolTip(toolTip string) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (b *Box) WithToolTip(toolTip string) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return b
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (b *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return b
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (b *Box) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return b
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (b *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return b
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithFocusRingType(focusRingType FocusRingType) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (b *Box) WithFocusRingType(focusRingType FocusRingType) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return b
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
+func (b *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return b
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (b *Box) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return b
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (b *Box) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return b
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (b *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return b
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (b *Box) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return b
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (b *Box) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return b
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (b *Box) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return b
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (b *Box) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return b
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (b *Box) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return b
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (b *Box) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return b
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (b *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return b
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Box) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (b *Box) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return b
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (b *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return b
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Box) WithMenu(menu *Menu) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (b *Box) WithMenu(menu *Menu) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return b
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Box) WithUserActivity(userActivity obj.Object) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (b *Box) WithUserActivity(userActivity obj.Object) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return b
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Box) WithTouchBar(touchBar *TouchBar) *Box {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (b *Box) WithTouchBar(touchBar *TouchBar) *Box {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return b
 }
 
 // SizeToFit resizes and moves the receiver’s content view so it just encloses its subviews.
-func (x *Box) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
+func (b *Box) SizeToFit() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sizeToFit"))
 }
 
 // SetFrameFromContentFrame places the receiver so its content view lies on the specified frame.
-func (x *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameFromContentFrame:"), contentFrame)
+func (b *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameFromContentFrame:"), contentFrame)
 }
 
 // BoxType wraps the corresponding Objective-C method.
-func (x *Box) BoxType() BoxType {
-	_r := objc.Send[BoxType](objref.IDOf(x), objc.RegisterName("boxType"))
+func (b *Box) BoxType() BoxType {
+	_r := objc.Send[BoxType](objref.IDOf(b), objc.RegisterName("boxType"))
 	return _r
-}
-
-// SetBoxType wraps the corresponding Objective-C method.
-func (x *Box) SetBoxType(boxType BoxType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoxType:"), boxType)
 }
 
 // TitlePosition wraps the corresponding Objective-C method.
-func (x *Box) TitlePosition() TitlePosition {
-	_r := objc.Send[TitlePosition](objref.IDOf(x), objc.RegisterName("titlePosition"))
+func (b *Box) TitlePosition() TitlePosition {
+	_r := objc.Send[TitlePosition](objref.IDOf(b), objc.RegisterName("titlePosition"))
 	return _r
 }
 
-// SetTitlePosition wraps the corresponding Objective-C method.
-func (x *Box) SetTitlePosition(titlePosition TitlePosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlePosition:"), titlePosition)
-}
-
 // Title wraps the corresponding Objective-C method.
-func (x *Box) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (b *Box) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *Box) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
 // TitleFont wraps the corresponding Objective-C method.
-func (x *Box) TitleFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleFont"))
+func (b *Box) TitleFont() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleFont"))
 	return FontFromID(_r)
 }
 
-// SetTitleFont wraps the corresponding Objective-C method.
-func (x *Box) SetTitleFont(titleFont *Font) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
-}
-
 // BorderRect wraps the corresponding Objective-C method.
-func (x *Box) BorderRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("borderRect"))
+func (b *Box) BorderRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("borderRect"))
 	return _r
 }
 
 // TitleRect wraps the corresponding Objective-C method.
-func (x *Box) TitleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("titleRect"))
+func (b *Box) TitleRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("titleRect"))
 	return _r
 }
 
 // TitleCell wraps the corresponding Objective-C method.
-func (x *Box) TitleCell() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleCell"))
+func (b *Box) TitleCell() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleCell"))
 	return obj.Wrap(_r)
 }
 
 // ContentViewMargins wraps the corresponding Objective-C method.
-func (x *Box) ContentViewMargins() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentViewMargins"))
+func (b *Box) ContentViewMargins() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(b), objc.RegisterName("contentViewMargins"))
 	return _r
-}
-
-// SetContentViewMargins wraps the corresponding Objective-C method.
-func (x *Box) SetContentViewMargins(contentViewMargins corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewMargins:"), contentViewMargins)
 }
 
 // ContentView wraps the corresponding Objective-C method.
-func (x *Box) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+func (b *Box) ContentView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
-// SetContentView wraps the corresponding Objective-C method.
-func (x *Box) SetContentView(contentView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-}
-
 // IsTransparent wraps the corresponding Objective-C method.
-func (x *Box) IsTransparent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransparent"))
+func (b *Box) IsTransparent() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isTransparent"))
 	return _r
-}
-
-// SetTransparent wraps the corresponding Objective-C method.
-func (x *Box) SetTransparent(transparent bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 }
 
 // BorderWidth wraps the corresponding Objective-C method.
-func (x *Box) BorderWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("borderWidth"))
+func (b *Box) BorderWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("borderWidth"))
 	return _r
-}
-
-// SetBorderWidth wraps the corresponding Objective-C method.
-func (x *Box) SetBorderWidth(borderWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
 }
 
 // CornerRadius wraps the corresponding Objective-C method.
-func (x *Box) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+func (b *Box) CornerRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("cornerRadius"))
 	return _r
-}
-
-// SetCornerRadius wraps the corresponding Objective-C method.
-func (x *Box) SetCornerRadius(cornerRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
 // BorderColor wraps the corresponding Objective-C method.
-func (x *Box) BorderColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+func (b *Box) BorderColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("borderColor"))
 	return ColorFromID(_r)
-}
-
-// SetBorderColor wraps the corresponding Objective-C method.
-func (x *Box) SetBorderColor(borderColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
 // FillColor wraps the corresponding Objective-C method.
-func (x *Box) FillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+func (b *Box) FillColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("fillColor"))
 	return ColorFromID(_r)
 }
 
-// SetFillColor wraps the corresponding Objective-C method.
-func (x *Box) SetFillColor(fillColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-}
-
 // SetTitleWithMnemonic sets the title of the receiver with a character denoted as an access key.
-func (x *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+func (b *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
 
 // BorderType wraps the corresponding Objective-C method.
-func (x *Box) BorderType() BorderType {
-	_r := objc.Send[BorderType](objref.IDOf(x), objc.RegisterName("borderType"))
+func (b *Box) BorderType() BorderType {
+	_r := objc.Send[BorderType](objref.IDOf(b), objc.RegisterName("borderType"))
 	return _r
 }
-
-// SetBorderType wraps the corresponding Objective-C method.
-func (x *Box) SetBorderType(borderType BorderType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderType:"), borderType)
-}
-
-// Boxable is the interface implemented by [Box], for mocking and DI.
-type Boxable interface {
-	obj.Object
-	WithBoxType(boxType BoxType) *Box
-	WithTitlePosition(titlePosition TitlePosition) *Box
-	WithTitle(title string) *Box
-	WithTitleFont(titleFont *Font) *Box
-	WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box
-	WithContentView(contentView ViewProvider) *Box
-	WithTransparent(transparent bool) *Box
-	WithBorderWidth(borderWidth float64) *Box
-	WithCornerRadius(cornerRadius float64) *Box
-	WithBorderColor(borderColor *Color) *Box
-	WithFillColor(fillColor *Color) *Box
-	WithBorderType(borderType BorderType) *Box
-	WithSubviews(items ...ViewProvider) *Box
-	WithHidden(hidden bool) *Box
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Box
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Box
-	WithFrame(frame corefoundation.CGRect) *Box
-	WithFrameRotation(frameRotation float64) *Box
-	WithFrameCenterRotation(frameCenterRotation float64) *Box
-	WithBoundsRotation(boundsRotation float64) *Box
-	WithBounds(bounds corefoundation.CGRect) *Box
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Box
-	WithNeedsDisplay(needsDisplay bool) *Box
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box
-	WithWantsRestingTouches(wantsRestingTouches bool) *Box
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Box
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Box
-	WithWantsLayer(wantsLayer bool) *Box
-	WithLayer(layer obj.Object) *Box
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box
-	WithNeedsLayout(needsLayout bool) *Box
-	WithAlphaValue(alphaValue float64) *Box
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box
-	WithBackgroundFilters(items ...obj.Object) *Box
-	WithCompositingFilter(compositingFilter obj.Object) *Box
-	WithContentFilters(items ...obj.Object) *Box
-	WithShadow(shadow *Shadow) *Box
-	WithClipsToBounds(clipsToBounds bool) *Box
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box
-	WithToolTip(toolTip string) *Box
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Box
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box
-	WithNextKeyView(nextKeyView ViewProvider) *Box
-	WithFocusRingType(focusRingType FocusRingType) *Box
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Box
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box
-	WithNextResponder(nextResponder ResponderProvider) *Box
-	WithMenu(menu *Menu) *Box
-	WithUserActivity(userActivity obj.Object) *Box
-	WithTouchBar(touchBar *TouchBar) *Box
-	SizeToFit()
-	SetFrameFromContentFrame(contentFrame corefoundation.CGRect)
-	BoxType() BoxType
-	SetBoxType(boxType BoxType)
-	TitlePosition() TitlePosition
-	SetTitlePosition(titlePosition TitlePosition)
-	Title() string
-	SetTitle(title string)
-	TitleFont() *Font
-	SetTitleFont(titleFont *Font)
-	BorderRect() corefoundation.CGRect
-	TitleRect() corefoundation.CGRect
-	TitleCell() obj.Object
-	ContentViewMargins() corefoundation.CGSize
-	SetContentViewMargins(contentViewMargins corefoundation.CGSize)
-	ContentView() *View
-	SetContentView(contentView *View)
-	IsTransparent() bool
-	SetTransparent(transparent bool)
-	BorderWidth() float64
-	SetBorderWidth(borderWidth float64)
-	CornerRadius() float64
-	SetCornerRadius(cornerRadius float64)
-	BorderColor() *Color
-	SetBorderColor(borderColor *Color)
-	FillColor() *Color
-	SetFillColor(fillColor *Color)
-	SetTitleWithMnemonic(stringWithAmpersand string)
-	BorderType() BorderType
-	SetBorderType(borderType BorderType)
-}
-
-var _ Boxable = (*Box)(nil)
 
 var _ ViewProvider = (*Box)(nil)
 

@@ -44,24 +44,24 @@ func mTRRVCOperationalStateClusterOperationalStateStructAdopt(id objc.ID) *MTRRV
 }
 
 // Description returns the object's -description text.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) Description() string {
+	return rt.Description(objref.IDOf(moscoss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moscoss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moscoss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) String() string {
+	return rt.Description(objref.IDOf(moscoss))
 }
 
 // NewMTRRVCOperationalStateClusterOperationalStateStruct creates a new MTRRVCOperationalStateClusterOperationalStateStruct.
@@ -71,51 +71,28 @@ func NewMTRRVCOperationalStateClusterOperationalStateStruct() *MTRRVCOperational
 }
 
 // WithOperationalStateID sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID obj.Object) *MTRRVCOperationalStateClusterOperationalStateStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
-	return x
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID obj.Object) *MTRRVCOperationalStateClusterOperationalStateStruct {
+	objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
+	return moscoss
 }
 
 // WithOperationalStateLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateLabel(operationalStateLabel string) *MTRRVCOperationalStateClusterOperationalStateStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
-	return x
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateLabel(operationalStateLabel string) *MTRRVCOperationalStateClusterOperationalStateStruct {
+	objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
+	return moscoss
 }
 
 // OperationalStateID wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalStateID"))
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("operationalStateID"))
 	return obj.Wrap(_r)
 }
 
-// SetOperationalStateID wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) SetOperationalStateID(operationalStateID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
-}
-
 // OperationalStateLabel wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalStateLabel"))
+func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("operationalStateLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetOperationalStateLabel wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) SetOperationalStateLabel(operationalStateLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
-}
-
-// MTRRVCOperationalStateClusterOperationalStateStructable is the interface implemented by [MTRRVCOperationalStateClusterOperationalStateStruct], for mocking and DI.
-type MTRRVCOperationalStateClusterOperationalStateStructable interface {
-	obj.Object
-	WithOperationalStateID(operationalStateID obj.Object) *MTRRVCOperationalStateClusterOperationalStateStruct
-	WithOperationalStateLabel(operationalStateLabel string) *MTRRVCOperationalStateClusterOperationalStateStruct
-	OperationalStateID() obj.Object
-	SetOperationalStateID(operationalStateID obj.Object)
-	OperationalStateLabel() string
-	SetOperationalStateLabel(operationalStateLabel string)
-}
-
-var _ MTRRVCOperationalStateClusterOperationalStateStructable = (*MTRRVCOperationalStateClusterOperationalStateStruct)(nil)

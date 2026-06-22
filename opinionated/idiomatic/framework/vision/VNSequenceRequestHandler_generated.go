@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // SequenceRequestHandler is an idiomatic wrapper over the Objective-C class VNSequenceRequestHandler.
@@ -48,24 +49,24 @@ func sequenceRequestHandlerAdopt(id objc.ID) *SequenceRequestHandler {
 }
 
 // Description returns the object's -description text.
-func (x *SequenceRequestHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (srh *SequenceRequestHandler) Description() string {
+	return rt.Description(objref.IDOf(srh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SequenceRequestHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (srh *SequenceRequestHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(srh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SequenceRequestHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (srh *SequenceRequestHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(srh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SequenceRequestHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (srh *SequenceRequestHandler) String() string {
+	return rt.Description(objref.IDOf(srh))
 }
 
 // NewSequenceRequestHandler creates a new SequenceRequestHandler.
@@ -75,9 +76,9 @@ func NewSequenceRequestHandler() *SequenceRequestHandler {
 }
 
 // PerformRequestsOnCGImage schedules Vision requests to be performed on a Core Graphics image.
-func (x *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,9 +86,9 @@ func (x *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, i
 }
 
 // PerformRequestsOnCIImage schedules one or more Vision requests to be performed on Core Image image data.
-func (x *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, image obj.Object) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, image obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCIImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCIImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -95,9 +96,9 @@ func (x *SequenceRequestHandler) PerformRequestsOnCIImage(requests []*Request, i
 }
 
 // PerformRequestsOnImageURL schedules one or more Vision requests to be performed on an image.
-func (x *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, imageURL string) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, imageURL string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onImageURL:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), rt.FileURL(imageURL), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onImageURL:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), rt.FileURL(imageURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -105,9 +106,9 @@ func (x *SequenceRequestHandler) PerformRequestsOnImageURL(requests []*Request, 
 }
 
 // PerformRequestsOnImageData schedules one or more Vision requests to be performed on raw image data.
-func (x *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onImageData:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(imageData), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onImageData:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(imageData), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -115,23 +116,11 @@ func (x *SequenceRequestHandler) PerformRequestsOnImageData(requests []*Request,
 }
 
 // PerformRequestsOnCMSampleBuffer performs one or more requests on an image contained within a sample buffer.
-func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:onCMSampleBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sampleBuffer), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCMSampleBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(sampleBuffer), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// SequenceRequestHandlerable is the interface implemented by [SequenceRequestHandler], for mocking and DI.
-type SequenceRequestHandlerable interface {
-	obj.Object
-	PerformRequestsOnCGImage(requests []*Request, image obj.Object) error
-	PerformRequestsOnCIImage(requests []*Request, image obj.Object) error
-	PerformRequestsOnImageURL(requests []*Request, imageURL string) error
-	PerformRequestsOnImageData(requests []*Request, imageData obj.Object) error
-	PerformRequestsOnCMSampleBuffer(requests []*Request, sampleBuffer obj.Object) error
-}
-
-var _ SequenceRequestHandlerable = (*SequenceRequestHandler)(nil)

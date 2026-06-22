@@ -46,24 +46,24 @@ func adjustmentDataAdopt(id objc.ID) *AdjustmentData {
 }
 
 // Description returns the object's -description text.
-func (x *AdjustmentData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *AdjustmentData) Description() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AdjustmentData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ad *AdjustmentData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AdjustmentData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ad *AdjustmentData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AdjustmentData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *AdjustmentData) String() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // NewAdjustmentDataWithFormatIdentifierFormatVersionData initializes an adjustment object with the specified format and data.
@@ -74,8 +74,8 @@ func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier str
 }
 
 // FormatIdentifier wraps the corresponding Objective-C method.
-func (x *AdjustmentData) FormatIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatIdentifier"))
+func (ad *AdjustmentData) FormatIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("formatIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *AdjustmentData) FormatIdentifier() string {
 }
 
 // FormatVersion wraps the corresponding Objective-C method.
-func (x *AdjustmentData) FormatVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatVersion"))
+func (ad *AdjustmentData) FormatVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("formatVersion"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,17 +92,7 @@ func (x *AdjustmentData) FormatVersion() string {
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *AdjustmentData) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (ad *AdjustmentData) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// AdjustmentDataable is the interface implemented by [AdjustmentData], for mocking and DI.
-type AdjustmentDataable interface {
-	obj.Object
-	FormatIdentifier() string
-	FormatVersion() string
-	Data() obj.Object
-}
-
-var _ AdjustmentDataable = (*AdjustmentData)(nil)

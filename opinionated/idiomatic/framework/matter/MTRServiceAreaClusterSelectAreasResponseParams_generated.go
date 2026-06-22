@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRServiceAreaClusterSelectAreasResponseParams is an idiomatic wrapper over the Objective-C class MTRServiceAreaClusterSelectAreasResponseParams.
@@ -46,24 +47,24 @@ func mTRServiceAreaClusterSelectAreasResponseParamsAdopt(id objc.ID) *MTRService
 }
 
 // Description returns the object's -description text.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) Description() string {
+	return rt.Description(objref.IDOf(msacsarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msacsarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msacsarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) String() string {
+	return rt.Description(objref.IDOf(msacsarp))
 }
 
 // NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError initialize an MTRServiceAreaClusterSelectAreasResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,51 +79,28 @@ func NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError(res
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) WithStatus(status obj.Object) *MTRServiceAreaClusterSelectAreasResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) WithStatus(status obj.Object) *MTRServiceAreaClusterSelectAreasResponseParams {
+	objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return msacsarp
 }
 
 // WithStatusText sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) WithStatusText(statusText string) *MTRServiceAreaClusterSelectAreasResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-	return x
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) WithStatusText(statusText string) *MTRServiceAreaClusterSelectAreasResponseParams {
+	objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
+	return msacsarp
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
 // StatusText wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) StatusText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) StatusText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStatusText wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) SetStatusText(statusText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-}
-
-// MTRServiceAreaClusterSelectAreasResponseParamsable is the interface implemented by [MTRServiceAreaClusterSelectAreasResponseParams], for mocking and DI.
-type MTRServiceAreaClusterSelectAreasResponseParamsable interface {
-	obj.Object
-	WithStatus(status obj.Object) *MTRServiceAreaClusterSelectAreasResponseParams
-	WithStatusText(statusText string) *MTRServiceAreaClusterSelectAreasResponseParams
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	StatusText() string
-	SetStatusText(statusText string)
-}
-
-var _ MTRServiceAreaClusterSelectAreasResponseParamsable = (*MTRServiceAreaClusterSelectAreasResponseParams)(nil)

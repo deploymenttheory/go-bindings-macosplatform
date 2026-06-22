@@ -46,24 +46,24 @@ func syncEngineFetchChangesContextAdopt(id objc.ID) *SyncEngineFetchChangesConte
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineFetchChangesContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sefcc *SyncEngineFetchChangesContext) Description() string {
+	return rt.Description(objref.IDOf(sefcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFetchChangesContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sefcc *SyncEngineFetchChangesContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sefcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFetchChangesContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sefcc *SyncEngineFetchChangesContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sefcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineFetchChangesContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sefcc *SyncEngineFetchChangesContext) String() string {
+	return rt.Description(objref.IDOf(sefcc))
 }
 
 // NewSyncEngineFetchChangesContext creates a new SyncEngineFetchChangesContext.
@@ -72,23 +72,14 @@ func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
 	return syncEngineFetchChangesContextAdopt(_id)
 }
 
-// Reason the reason why the sync engine is attempting to fetch changes.
-func (x *SyncEngineFetchChangesContext) Reason() SyncEngineSyncReason {
-	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(x), objc.RegisterName("reason"))
+// Reason returns the reason why the sync engine is attempting to fetch changes.
+func (sefcc *SyncEngineFetchChangesContext) Reason() SyncEngineSyncReason {
+	_r := objc.Send[SyncEngineSyncReason](objref.IDOf(sefcc), objc.RegisterName("reason"))
 	return _r
 }
 
-// Options the options being used for this attempt to fetch changes.
-func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+// Options returns the options being used for this attempt to fetch changes.
+func (sefcc *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(sefcc), objc.RegisterName("options"))
 	return SyncEngineFetchChangesOptionsFromID(_r)
 }
-
-// SyncEngineFetchChangesContextable is the interface implemented by [SyncEngineFetchChangesContext], for mocking and DI.
-type SyncEngineFetchChangesContextable interface {
-	obj.Object
-	Reason() SyncEngineSyncReason
-	Options() *SyncEngineFetchChangesOptions
-}
-
-var _ SyncEngineFetchChangesContextable = (*SyncEngineFetchChangesContext)(nil)

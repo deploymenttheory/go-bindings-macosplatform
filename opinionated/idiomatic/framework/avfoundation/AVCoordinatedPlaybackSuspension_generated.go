@@ -46,24 +46,24 @@ func coordinatedPlaybackSuspensionAdopt(id objc.ID) *CoordinatedPlaybackSuspensi
 }
 
 // Description returns the object's -description text.
-func (x *CoordinatedPlaybackSuspension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cps *CoordinatedPlaybackSuspension) Description() string {
+	return rt.Description(objref.IDOf(cps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CoordinatedPlaybackSuspension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cps *CoordinatedPlaybackSuspension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CoordinatedPlaybackSuspension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cps *CoordinatedPlaybackSuspension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CoordinatedPlaybackSuspension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cps *CoordinatedPlaybackSuspension) String() string {
+	return rt.Description(objref.IDOf(cps))
 }
 
 // NewCoordinatedPlaybackSuspension creates a new CoordinatedPlaybackSuspension.
@@ -73,28 +73,18 @@ func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 }
 
 // End ends a suspension.
-func (x *CoordinatedPlaybackSuspension) End() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+func (cps *CoordinatedPlaybackSuspension) End() {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("end"))
 }
 
-// Reason the reason for the suspension. This will be communicated to other participants while coordination is suspended.
-func (x *CoordinatedPlaybackSuspension) Reason() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
+// Reason returns the reason for the suspension. This will be communicated to other participants while coordination is suspended.
+func (cps *CoordinatedPlaybackSuspension) Reason() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("reason"))
 	return obj.Wrap(_r)
 }
 
-// BeginDate the begin time of the suspension.
-func (x *CoordinatedPlaybackSuspension) BeginDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginDate"))
+// BeginDate returns the begin time of the suspension.
+func (cps *CoordinatedPlaybackSuspension) BeginDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("beginDate"))
 	return obj.Wrap(_r)
 }
-
-// CoordinatedPlaybackSuspensionable is the interface implemented by [CoordinatedPlaybackSuspension], for mocking and DI.
-type CoordinatedPlaybackSuspensionable interface {
-	obj.Object
-	End()
-	Reason() obj.Object
-	BeginDate() obj.Object
-}
-
-var _ CoordinatedPlaybackSuspensionable = (*CoordinatedPlaybackSuspension)(nil)

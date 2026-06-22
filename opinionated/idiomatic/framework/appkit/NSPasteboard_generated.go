@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func pasteboardAdopt(id objc.ID) *Pasteboard {
 }
 
 // Description returns the object's -description text.
-func (x *Pasteboard) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Pasteboard) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Pasteboard) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Pasteboard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Pasteboard) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Pasteboard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Pasteboard) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Pasteboard) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPasteboard creates a new Pasteboard.
@@ -75,103 +76,103 @@ func NewPasteboard() *Pasteboard {
 }
 
 // ReleaseGlobally releases the receiver’s resources in the pasteboard server.
-func (x *Pasteboard) ReleaseGlobally() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseGlobally"))
+func (p *Pasteboard) ReleaseGlobally() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("releaseGlobally"))
 }
 
 // PrepareForNewContentsWithOptions prepares the pasteboard to receive new contents, removing the existing pasteboard contents.
-func (x *Pasteboard) PrepareForNewContentsWithOptions(options PasteboardContentsOptions) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("prepareForNewContentsWithOptions:"), options)
+func (p *Pasteboard) PrepareForNewContentsWithOptions(options PasteboardContentsOptions) int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("prepareForNewContentsWithOptions:"), options)
 	return _r
 }
 
-// ClearContents clears the existing contents of the pasteboard.
-func (x *Pasteboard) ClearContents() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clearContents"))
+// ClearContents returns clears the existing contents of the pasteboard.
+func (p *Pasteboard) ClearContents() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("clearContents"))
 	return _r
 }
 
 // WriteObjects writes an array of objects to the receiver.
-func (x *Pasteboard) WriteObjects(objects []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeObjects:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (p *Pasteboard) WriteObjects(objects []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("writeObjects:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // ReadObjectsForClassesOptions reads from the receiver objects that best match the specified array of classes.
-func (x *Pasteboard) ReadObjectsForClassesOptions(classArray []obj.Object, options obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readObjectsForClasses:options:"), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+func (p *Pasteboard) ReadObjectsForClassesOptions(classArray []obj.Object, options obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("readObjectsForClasses:options:"), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 
 // IndexOfPasteboardItem returns the index of the specified pasteboard item.
-func (x *Pasteboard) IndexOfPasteboardItem(pasteboardItem *PasteboardItem) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfPasteboardItem:"), objref.IDOf(pasteboardItem))
+func (p *Pasteboard) IndexOfPasteboardItem(pasteboardItem *PasteboardItem) int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("indexOfPasteboardItem:"), objref.IDOf(pasteboardItem))
 	return _r
 }
 
 // CanReadItemWithDataConformingToTypes returns a Boolean value that indicates whether the receiver contains any items that conform to the specified UTIs.
-func (x *Pasteboard) CanReadItemWithDataConformingToTypes(types []string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canReadItemWithDataConformingToTypes:"), purego.SliceToNSArray(types, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (p *Pasteboard) CanReadItemWithDataConformingToTypes(types []string) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("canReadItemWithDataConformingToTypes:"), purego.SliceToNSArray(types, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return _r
 }
 
 // CanReadObjectForClassesOptions returns a Boolean value that indicates whether the receiver contains any items that can be represented as an instance of any class in a given array.
-func (x *Pasteboard) CanReadObjectForClassesOptions(classArray []obj.Object, options obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canReadObjectForClasses:options:"), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+func (p *Pasteboard) CanReadObjectForClassesOptions(classArray []obj.Object, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("canReadObjectForClasses:options:"), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 	return _r
 }
 
 // DeclareTypesOwner prepares the receiver for a change in its contents by declaring the new types of data it will contain and a new owner.
-func (x *Pasteboard) DeclareTypesOwner(newTypes []obj.Object, newOwner obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("declareTypes:owner:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(newOwner))
+func (p *Pasteboard) DeclareTypesOwner(newTypes []obj.Object, newOwner obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("declareTypes:owner:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(newOwner))
 	return _r
 }
 
 // AddTypesOwner adds promises for the specified types to the first pasteboard item.
-func (x *Pasteboard) AddTypesOwner(newTypes []obj.Object, newOwner obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("addTypes:owner:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(newOwner))
+func (p *Pasteboard) AddTypesOwner(newTypes []obj.Object, newOwner obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("addTypes:owner:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(newOwner))
 	return _r
 }
 
 // AvailableTypeFromArray scans the specified types for a type that the receiver supports.
-func (x *Pasteboard) AvailableTypeFromArray(types []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableTypeFromArray:"), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (p *Pasteboard) AvailableTypeFromArray(types []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("availableTypeFromArray:"), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // SetDataForType sets the data as the representation for the specified type for the first item on the receiver.
-func (x *Pasteboard) SetDataForType(data obj.Object, dataType obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setData:forType:"), objref.IDOf(data), objref.IDOf(dataType))
+func (p *Pasteboard) SetDataForType(data obj.Object, dataType obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("setData:forType:"), objref.IDOf(data), objref.IDOf(dataType))
 	return _r
 }
 
 // SetPropertyListForType sets the given property list as the representation for the specified type for the first item on the receiver.
-func (x *Pasteboard) SetPropertyListForType(plist obj.Object, dataType obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPropertyList:forType:"), objref.IDOf(plist), objref.IDOf(dataType))
+func (p *Pasteboard) SetPropertyListForType(plist obj.Object, dataType obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("setPropertyList:forType:"), objref.IDOf(plist), objref.IDOf(dataType))
 	return _r
 }
 
 // SetStringForType sets the given string as the representation for the specified type for the first item on the receiver.
-func (x *Pasteboard) SetStringForType(string_ string, dataType obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setString:forType:"), purego.NSString(string_), objref.IDOf(dataType))
+func (p *Pasteboard) SetStringForType(string_ string, dataType obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("setString:forType:"), purego.NSString(string_), objref.IDOf(dataType))
 	return _r
 }
 
 // DataForType returns the data for the specified type from the first item in the receiver that contains the type.
-func (x *Pasteboard) DataForType(dataType obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataForType:"), objref.IDOf(dataType))
+func (p *Pasteboard) DataForType(dataType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("dataForType:"), objref.IDOf(dataType))
 	return obj.Wrap(_r)
 }
 
 // PropertyListForType returns the property list for the specified type from the first item in the receiver that contains the type.
-func (x *Pasteboard) PropertyListForType(dataType obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListForType:"), objref.IDOf(dataType))
+func (p *Pasteboard) PropertyListForType(dataType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("propertyListForType:"), objref.IDOf(dataType))
 	return obj.Wrap(_r)
 }
 
 // StringForType returns a concatenation of the strings for the specified type from all the items in the receiver that contain the type.
-func (x *Pasteboard) StringForType(dataType obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForType:"), objref.IDOf(dataType))
+func (p *Pasteboard) StringForType(dataType obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stringForType:"), objref.IDOf(dataType))
 	if _r == 0 {
 		return ""
 	}
@@ -181,7 +182,7 @@ func (x *Pasteboard) StringForType(dataType obj.Object) string {
 // DetectPatternsForPatterns determines whether the first pasteboard item matches the specified patterns, without notifying the person using the app.
 //
 // DetectPatternsForPatterns blocks until the operation completes or ctx is cancelled.
-func (x *Pasteboard) DetectPatternsForPatterns(ctx context.Context, patterns obj.Object) (result obj.Object, err error) {
+func (p *Pasteboard) DetectPatternsForPatterns(ctx context.Context, patterns obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -193,7 +194,7 @@ func (x *Pasteboard) DetectPatternsForPatterns(ctx context.Context, patterns obj
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectPatternsForPatterns:completionHandler:"), objref.IDOf(patterns), _block)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("detectPatternsForPatterns:completionHandler:"), objref.IDOf(patterns), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -204,48 +205,48 @@ func (x *Pasteboard) DetectPatternsForPatterns(ctx context.Context, patterns obj
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Pasteboard) Name() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (p *Pasteboard) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
 // ChangeCount wraps the corresponding Objective-C method.
-func (x *Pasteboard) ChangeCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("changeCount"))
+func (p *Pasteboard) ChangeCount() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("changeCount"))
 	return _r
 }
 
-// AccessBehavior the current pasteboard access behavior. The user can customize this behavior per-app in System Settings for any app that has triggered a pasteboard access alert in the past.
-func (x *Pasteboard) AccessBehavior() PasteboardAccessBehavior {
-	_r := objc.Send[PasteboardAccessBehavior](objref.IDOf(x), objc.RegisterName("accessBehavior"))
+// AccessBehavior returns the current pasteboard access behavior. The user can customize this behavior per-app in System Settings for any app that has triggered a pasteboard access alert in the past.
+func (p *Pasteboard) AccessBehavior() PasteboardAccessBehavior {
+	_r := objc.Send[PasteboardAccessBehavior](objref.IDOf(p), objc.RegisterName("accessBehavior"))
 	return _r
 }
 
 // PasteboardItems wraps the corresponding Objective-C method.
 //
 // PasteboardItems returns the collection as a Go slice.
-func (x *Pasteboard) PasteboardItems() []*PasteboardItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteboardItems"))
+func (p *Pasteboard) PasteboardItems() []*PasteboardItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pasteboardItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PasteboardItem { return PasteboardItemFromID(_id) })
 }
 
 // Types wraps the corresponding Objective-C method.
 //
 // Types returns the collection as a Go slice.
-func (x *Pasteboard) Types() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("types"))
+func (p *Pasteboard) Types() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("types"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteFileContents writes the contents of the specified file to the pasteboard.
-func (x *Pasteboard) WriteFileContents(filename string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeFileContents:"), purego.NSString(filename))
+func (p *Pasteboard) WriteFileContents(filename string) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("writeFileContents:"), purego.NSString(filename))
 	return _r
 }
 
 // ReadFileContentsTypeToFile reads data representing a file’s contents from the receiver and writes it to the specified file.
-func (x *Pasteboard) ReadFileContentsTypeToFile(type_ obj.Object, filename string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readFileContentsType:toFile:"), objref.IDOf(type_), purego.NSString(filename))
+func (p *Pasteboard) ReadFileContentsTypeToFile(type_ obj.Object, filename string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("readFileContentsType:toFile:"), objref.IDOf(type_), purego.NSString(filename))
 	if _r == 0 {
 		return ""
 	}
@@ -253,47 +254,13 @@ func (x *Pasteboard) ReadFileContentsTypeToFile(type_ obj.Object, filename strin
 }
 
 // WriteFileWrapper writes the serialized contents of the specified file wrapper to the pasteboard.
-func (x *Pasteboard) WriteFileWrapper(wrapper obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeFileWrapper:"), objref.IDOf(wrapper))
+func (p *Pasteboard) WriteFileWrapper(wrapper obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("writeFileWrapper:"), objref.IDOf(wrapper))
 	return _r
 }
 
-// ReadFileWrapper reads data representing a file’s contents from the receiver and returns it as a file wrapper.
-func (x *Pasteboard) ReadFileWrapper() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readFileWrapper"))
+// ReadFileWrapper returns reads data representing a file’s contents from the receiver and returns it as a file wrapper.
+func (p *Pasteboard) ReadFileWrapper() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("readFileWrapper"))
 	return obj.Wrap(_r)
 }
-
-// Pasteboardable is the interface implemented by [Pasteboard], for mocking and DI.
-type Pasteboardable interface {
-	obj.Object
-	ReleaseGlobally()
-	PrepareForNewContentsWithOptions(options PasteboardContentsOptions) int
-	ClearContents() int
-	WriteObjects(objects []obj.Object) bool
-	ReadObjectsForClassesOptions(classArray []obj.Object, options obj.Object) obj.Object
-	IndexOfPasteboardItem(pasteboardItem *PasteboardItem) int
-	CanReadItemWithDataConformingToTypes(types []string) bool
-	CanReadObjectForClassesOptions(classArray []obj.Object, options obj.Object) bool
-	DeclareTypesOwner(newTypes []obj.Object, newOwner obj.Object) int
-	AddTypesOwner(newTypes []obj.Object, newOwner obj.Object) int
-	AvailableTypeFromArray(types []obj.Object) obj.Object
-	SetDataForType(data obj.Object, dataType obj.Object) bool
-	SetPropertyListForType(plist obj.Object, dataType obj.Object) bool
-	SetStringForType(string_ string, dataType obj.Object) bool
-	DataForType(dataType obj.Object) obj.Object
-	PropertyListForType(dataType obj.Object) obj.Object
-	StringForType(dataType obj.Object) string
-	DetectPatternsForPatterns(ctx context.Context, patterns obj.Object) (obj.Object, error)
-	Name() obj.Object
-	ChangeCount() int
-	AccessBehavior() PasteboardAccessBehavior
-	PasteboardItems() []*PasteboardItem
-	Types() []obj.Object
-	WriteFileContents(filename string) bool
-	ReadFileContentsTypeToFile(type_ obj.Object, filename string) string
-	WriteFileWrapper(wrapper obj.Object) bool
-	ReadFileWrapper() obj.Object
-}
-
-var _ Pasteboardable = (*Pasteboard)(nil)

@@ -46,24 +46,24 @@ func pathAdopt(id objc.ID) *Path {
 }
 
 // Description returns the object's -description text.
-func (x *Path) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Path) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Path) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Path) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Path) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Path) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Path) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Path) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPathWithGraphNodesRadius initializes a path using the positions of the specified graph nodes.
@@ -73,56 +73,32 @@ func NewPathWithGraphNodesRadius(graphNodes []*GraphNode, radius float32) *Path 
 	return pathAdopt(_id)
 }
 
-// WithRadius the radius of the path.
-func (x *Path) WithRadius(radius float32) *Path {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the radius of the path.
+func (p *Path) WithRadius(radius float32) *Path {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setRadius:"), radius)
+	return p
 }
 
-// WithCyclical a Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
-func (x *Path) WithCyclical(cyclical bool) *Path {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCyclical:"), cyclical)
-	return x
+// WithCyclical sets a Boolean value that determines whether the path loops around on itself (that is, the path’s end point connects to its start point).
+func (p *Path) WithCyclical(cyclical bool) *Path {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCyclical:"), cyclical)
+	return p
 }
 
-// Radius radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
-func (x *Path) Radius() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
+// Radius returns radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
+func (p *Path) Radius() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("radius"))
 	return _r
 }
 
-// SetRadius wraps the corresponding Objective-C method.
-func (x *Path) SetRadius(radius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-}
-
-// NumPoints number of points in this path
-func (x *Path) NumPoints() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numPoints"))
+// NumPoints returns number of points in this path
+func (p *Path) NumPoints() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("numPoints"))
 	return _r
 }
 
-// IsCyclical does this path loop back on itself, creating a cycle?
-func (x *Path) IsCyclical() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCyclical"))
+// IsCyclical reports whether does this path loop back on itself, creating a cycle?
+func (p *Path) IsCyclical() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCyclical"))
 	return _r
 }
-
-// SetCyclical wraps the corresponding Objective-C method.
-func (x *Path) SetCyclical(cyclical bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCyclical:"), cyclical)
-}
-
-// Pathable is the interface implemented by [Path], for mocking and DI.
-type Pathable interface {
-	obj.Object
-	WithRadius(radius float32) *Path
-	WithCyclical(cyclical bool) *Path
-	Radius() float32
-	SetRadius(radius float32)
-	NumPoints() int
-	IsCyclical() bool
-	SetCyclical(cyclical bool)
-}
-
-var _ Pathable = (*Path)(nil)

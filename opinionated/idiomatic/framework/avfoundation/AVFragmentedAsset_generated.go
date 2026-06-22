@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewFragmentedAsset() *FragmentedAsset {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAsset")), objc.RegisterName("new"))
 	return fragmentedAssetAdopt(_id)
 }
-
-// FragmentedAssetable is the interface implemented by [FragmentedAsset], for mocking and DI.
-type FragmentedAssetable interface {
-	obj.Object
-}
-
-var _ FragmentedAssetable = (*FragmentedAsset)(nil)
 
 var _ URLAssetProvider = (*FragmentedAsset)(nil)
 

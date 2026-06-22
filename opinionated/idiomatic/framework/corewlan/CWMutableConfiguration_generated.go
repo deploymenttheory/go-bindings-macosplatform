@@ -52,76 +52,34 @@ func NewMutableConfiguration() *MutableConfiguration {
 	return mutableConfigurationAdopt(_id)
 }
 
-// WithNetworkProfiles the preferred networks list.
-func (x *MutableConfiguration) WithNetworkProfiles(networkProfiles obj.Object) *MutableConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkProfiles:"), objref.IDOf(networkProfiles))
-	return x
+// WithNetworkProfiles sets the preferred networks list.
+func (mc *MutableConfiguration) WithNetworkProfiles(networkProfiles obj.Object) *MutableConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setNetworkProfiles:"), objref.IDOf(networkProfiles))
+	return mc
 }
 
-// WithRequireAdministratorForAssociation a Boolean value that determines whether to require an administrator password to change networks.
-func (x *MutableConfiguration) WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForAssociation:"), requireAdministratorForAssociation)
-	return x
+// WithRequireAdministratorForAssociation sets a Boolean value that determines whether to require an administrator password to change networks.
+func (mc *MutableConfiguration) WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRequireAdministratorForAssociation:"), requireAdministratorForAssociation)
+	return mc
 }
 
-// WithRequireAdministratorForPower a Boolean value that determines whether to require an administrator password to change the interface power state.
-func (x *MutableConfiguration) WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForPower:"), requireAdministratorForPower)
-	return x
+// WithRequireAdministratorForPower sets a Boolean value that determines whether to require an administrator password to change the interface power state.
+func (mc *MutableConfiguration) WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRequireAdministratorForPower:"), requireAdministratorForPower)
+	return mc
 }
 
-// WithRequireAdministratorForIBSSMode a Boolean value that determines whether to require an administrator password to create a computer-to-computer network.
-func (x *MutableConfiguration) WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForIBSSMode:"), requireAdministratorForIBSSMode)
-	return x
+// WithRequireAdministratorForIBSSMode sets a Boolean value that determines whether to require an administrator password to create a computer-to-computer network.
+func (mc *MutableConfiguration) WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRequireAdministratorForIBSSMode:"), requireAdministratorForIBSSMode)
+	return mc
 }
 
-// WithRememberJoinedNetworks a Boolean value that determines whether to remember all joined Wi-Fi networks unless the user specifies otherwise when joining a particular Wi-Fi network.
-func (x *MutableConfiguration) WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberJoinedNetworks:"), rememberJoinedNetworks)
-	return x
+// WithRememberJoinedNetworks sets a Boolean value that determines whether to remember all joined Wi-Fi networks unless the user specifies otherwise when joining a particular Wi-Fi network.
+func (mc *MutableConfiguration) WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRememberJoinedNetworks:"), rememberJoinedNetworks)
+	return mc
 }
-
-// SetNetworkProfiles wraps the corresponding Objective-C method.
-func (x *MutableConfiguration) SetNetworkProfiles(networkProfiles obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkProfiles:"), objref.IDOf(networkProfiles))
-}
-
-// SetRequireAdministratorForAssociation wraps the corresponding Objective-C method.
-func (x *MutableConfiguration) SetRequireAdministratorForAssociation(requireAdministratorForAssociation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForAssociation:"), requireAdministratorForAssociation)
-}
-
-// SetRequireAdministratorForPower wraps the corresponding Objective-C method.
-func (x *MutableConfiguration) SetRequireAdministratorForPower(requireAdministratorForPower bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForPower:"), requireAdministratorForPower)
-}
-
-// SetRequireAdministratorForIBSSMode wraps the corresponding Objective-C method.
-func (x *MutableConfiguration) SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequireAdministratorForIBSSMode:"), requireAdministratorForIBSSMode)
-}
-
-// SetRememberJoinedNetworks wraps the corresponding Objective-C method.
-func (x *MutableConfiguration) SetRememberJoinedNetworks(rememberJoinedNetworks bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberJoinedNetworks:"), rememberJoinedNetworks)
-}
-
-// MutableConfigurationable is the interface implemented by [MutableConfiguration], for mocking and DI.
-type MutableConfigurationable interface {
-	obj.Object
-	WithNetworkProfiles(networkProfiles obj.Object) *MutableConfiguration
-	WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration
-	WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration
-	WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration
-	WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration
-	SetNetworkProfiles(networkProfiles obj.Object)
-	SetRequireAdministratorForAssociation(requireAdministratorForAssociation bool)
-	SetRequireAdministratorForPower(requireAdministratorForPower bool)
-	SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool)
-	SetRememberJoinedNetworks(rememberJoinedNetworks bool)
-}
-
-var _ MutableConfigurationable = (*MutableConfiguration)(nil)
 
 var _ ConfigurationProvider = (*MutableConfiguration)(nil)

@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,19 +50,11 @@ func NewCNNBatchNormalizationGradientNodeWithSourceGradientSourceImageGradientSt
 	return cNNBatchNormalizationGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBatchNormalizationGradientNode) WithLabel(label string) *CNNBatchNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbngn *CNNBatchNormalizationGradientNode) WithLabel(label string) *CNNBatchNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cbngn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbngn
 }
-
-// CNNBatchNormalizationGradientNodeable is the interface implemented by [CNNBatchNormalizationGradientNode], for mocking and DI.
-type CNNBatchNormalizationGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNBatchNormalizationGradientNode
-}
-
-var _ CNNBatchNormalizationGradientNodeable = (*CNNBatchNormalizationGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNBatchNormalizationGradientNode)(nil)
 

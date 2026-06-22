@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTREventReport is an idiomatic wrapper over the Objective-C class MTREventReport.
@@ -46,24 +47,24 @@ func mTREventReportAdopt(id objc.ID) *MTREventReport {
 }
 
 // Description returns the object's -description text.
-func (x *MTREventReport) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mer *MTREventReport) Description() string {
+	return rt.Description(objref.IDOf(mer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREventReport) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mer *MTREventReport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREventReport) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mer *MTREventReport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREventReport) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mer *MTREventReport) String() string {
+	return rt.Description(objref.IDOf(mer))
 }
 
 // NewMTREventReportWithResponseValueError initialize an MTREventReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an event response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/event combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
@@ -78,64 +79,49 @@ func NewMTREventReportWithResponseValueError(responseValue obj.Object) (result *
 }
 
 // Path wraps the corresponding Objective-C method.
-func (x *MTREventReport) Path() *MTREventPath {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (mer *MTREventReport) Path() *MTREventPath {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("path"))
 	return MTREventPathFromID(_r)
 }
 
-// EventNumber eventNumber will only have a useful value if "error" is nil.
-func (x *MTREventReport) EventNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventNumber"))
+// EventNumber returns eventNumber will only have a useful value if "error" is nil.
+func (mer *MTREventReport) EventNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("eventNumber"))
 	return obj.Wrap(_r)
 }
 
-// Priority priority will only have a useful value if "error" is nil.
-func (x *MTREventReport) Priority() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priority"))
+// Priority returns priority will only have a useful value if "error" is nil.
+func (mer *MTREventReport) Priority() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("priority"))
 	return obj.Wrap(_r)
 }
 
-// EventTimeType either systemUpTime or timestampDate will be valid depending on eventTimeType, if "error" is nil.  If "error" is not nil, none of eventTimeType, systemUpTime, timestampDate should be expected to have useful values.
-func (x *MTREventReport) EventTimeType() MTREventTimeType {
-	_r := objc.Send[MTREventTimeType](objref.IDOf(x), objc.RegisterName("eventTimeType"))
+// EventTimeType returns either systemUpTime or timestampDate will be valid depending on eventTimeType, if "error" is nil.  If "error" is not nil, none of eventTimeType, systemUpTime, timestampDate should be expected to have useful values.
+func (mer *MTREventReport) EventTimeType() MTREventTimeType {
+	_r := objc.Send[MTREventTimeType](objref.IDOf(mer), objc.RegisterName("eventTimeType"))
 	return _r
 }
 
 // SystemUpTime wraps the corresponding Objective-C method.
-func (x *MTREventReport) SystemUpTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("systemUpTime"))
+func (mer *MTREventReport) SystemUpTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(mer), objc.RegisterName("systemUpTime"))
 	return _r
 }
 
 // TimestampDate wraps the corresponding Objective-C method.
-func (x *MTREventReport) TimestampDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestampDate"))
+func (mer *MTREventReport) TimestampDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("timestampDate"))
 	return obj.Wrap(_r)
 }
 
-// Value an instance of the event payload interface that corresponds to the report's path (e.g. MTRBasicInformationClusterStartUpEvent if the path's cluster 0x0028 "Basic Information" and the path's event is 0x00 "StartUp"), or nil if error is not nil (in which case there is no payload available).
-func (x *MTREventReport) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns an instance of the event payload interface that corresponds to the report's path (e.g. MTRBasicInformationClusterStartUpEvent if the path's cluster 0x0028 "Basic Information" and the path's event is 0x00 "StartUp"), or nil if error is not nil (in which case there is no payload available).
+func (mer *MTREventReport) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *MTREventReport) Timestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (mer *MTREventReport) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
-
-// MTREventReportable is the interface implemented by [MTREventReport], for mocking and DI.
-type MTREventReportable interface {
-	obj.Object
-	Path() *MTREventPath
-	EventNumber() obj.Object
-	Priority() obj.Object
-	EventTimeType() MTREventTimeType
-	SystemUpTime() float64
-	TimestampDate() obj.Object
-	Value() obj.Object
-	Timestamp() obj.Object
-}
-
-var _ MTREventReportable = (*MTREventReport)(nil)

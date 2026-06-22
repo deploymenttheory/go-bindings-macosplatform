@@ -47,24 +47,24 @@ func streamConfigurationAdopt(id objc.ID) *StreamConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *StreamConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *StreamConfiguration) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StreamConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *StreamConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StreamConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *StreamConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StreamConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *StreamConfiguration) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewStreamConfiguration creates a new StreamConfiguration.
@@ -73,615 +73,368 @@ func NewStreamConfiguration() *StreamConfiguration {
 	return streamConfigurationAdopt(_id)
 }
 
-// WithWidth the width of the output.
-func (x *StreamConfiguration) WithWidth(width int) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
-	return x
+// WithWidth sets the width of the output.
+func (sc *StreamConfiguration) WithWidth(width int) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWidth:"), width)
+	return sc
 }
 
-// WithHeight the height of the output.
-func (x *StreamConfiguration) WithHeight(height int) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
-	return x
+// WithHeight sets the height of the output.
+func (sc *StreamConfiguration) WithHeight(height int) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHeight:"), height)
+	return sc
 }
 
-// WithPixelFormat a pixel format for sample buffers that a stream outputs.
-func (x *StreamConfiguration) WithPixelFormat(pixelFormat int) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
-	return x
+// WithPixelFormat sets a pixel format for sample buffers that a stream outputs.
+func (sc *StreamConfiguration) WithPixelFormat(pixelFormat int) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPixelFormat:"), pixelFormat)
+	return sc
 }
 
-// WithScalesToFit a Boolean value that indicates whether to scale the output to fit the configured width and height.
-func (x *StreamConfiguration) WithScalesToFit(scalesToFit bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalesToFit:"), scalesToFit)
-	return x
+// WithScalesToFit sets a Boolean value that indicates whether to scale the output to fit the configured width and height.
+func (sc *StreamConfiguration) WithScalesToFit(scalesToFit bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScalesToFit:"), scalesToFit)
+	return sc
 }
 
-// WithPreservesAspectRatio a Boolean value that determines if the stream preserves aspect ratio.
-func (x *StreamConfiguration) WithPreservesAspectRatio(preservesAspectRatio bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesAspectRatio:"), preservesAspectRatio)
-	return x
+// WithPreservesAspectRatio sets a Boolean value that determines if the stream preserves aspect ratio.
+func (sc *StreamConfiguration) WithPreservesAspectRatio(preservesAspectRatio bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPreservesAspectRatio:"), preservesAspectRatio)
+	return sc
 }
 
-// WithStreamName a name that you provide for identifying the stream.
-func (x *StreamConfiguration) WithStreamName(streamName string) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamName:"), purego.NSString(streamName))
-	return x
+// WithStreamName sets a name that you provide for identifying the stream.
+func (sc *StreamConfiguration) WithStreamName(streamName string) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStreamName:"), purego.NSString(streamName))
+	return sc
 }
 
-// WithShowsCursor a Boolean value that determines whether the cursor is visible in the stream.
-func (x *StreamConfiguration) WithShowsCursor(showsCursor bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCursor:"), showsCursor)
-	return x
+// WithShowsCursor sets a Boolean value that determines whether the cursor is visible in the stream.
+func (sc *StreamConfiguration) WithShowsCursor(showsCursor bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsCursor:"), showsCursor)
+	return sc
 }
 
-// WithShowMouseClicks SCStreamProperty that specifies whether to draw a circle around the cursor click, default is NO. This property will not be affected by showsCursor. This property currently applies when pixelFormat is set to BGRA.
-func (x *StreamConfiguration) WithShowMouseClicks(showMouseClicks bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowMouseClicks:"), showMouseClicks)
-	return x
+// WithShowMouseClicks sets SCStreamProperty that specifies whether to draw a circle around the cursor click, default is NO. This property will not be affected by showsCursor. This property currently applies when pixelFormat is set to BGRA.
+func (sc *StreamConfiguration) WithShowMouseClicks(showMouseClicks bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowMouseClicks:"), showMouseClicks)
+	return sc
 }
 
-// WithBackgroundColor a background color for the output.
-func (x *StreamConfiguration) WithBackgroundColor(backgroundColor obj.Object) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets a background color for the output.
+func (sc *StreamConfiguration) WithBackgroundColor(backgroundColor obj.Object) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return sc
 }
 
-// WithSourceRect a rectangle that specifies the source area to capture.
-func (x *StreamConfiguration) WithSourceRect(sourceRect corefoundation.CGRect) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRect:"), sourceRect)
-	return x
+// WithSourceRect sets a rectangle that specifies the source area to capture.
+func (sc *StreamConfiguration) WithSourceRect(sourceRect corefoundation.CGRect) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSourceRect:"), sourceRect)
+	return sc
 }
 
-// WithDestinationRect a rectangle that specifies a destination into which to write the output.
-func (x *StreamConfiguration) WithDestinationRect(destinationRect corefoundation.CGRect) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationRect:"), destinationRect)
-	return x
+// WithDestinationRect sets a rectangle that specifies a destination into which to write the output.
+func (sc *StreamConfiguration) WithDestinationRect(destinationRect corefoundation.CGRect) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDestinationRect:"), destinationRect)
+	return sc
 }
 
-// WithQueueDepth the maximum number of frames for the queue to store.
-func (x *StreamConfiguration) WithQueueDepth(queueDepth int) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueueDepth:"), queueDepth)
-	return x
+// WithQueueDepth sets the maximum number of frames for the queue to store.
+func (sc *StreamConfiguration) WithQueueDepth(queueDepth int) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setQueueDepth:"), queueDepth)
+	return sc
 }
 
-// WithColorMatrix a color matrix to apply to the output surface.
-func (x *StreamConfiguration) WithColorMatrix(colorMatrix obj.Object) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorMatrix:"), objref.IDOf(colorMatrix))
-	return x
+// WithColorMatrix sets a color matrix to apply to the output surface.
+func (sc *StreamConfiguration) WithColorMatrix(colorMatrix obj.Object) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setColorMatrix:"), objref.IDOf(colorMatrix))
+	return sc
 }
 
-// WithColorSpaceName a color space to use for the output buffer.
-func (x *StreamConfiguration) WithColorSpaceName(colorSpaceName obj.Object) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets a color space to use for the output buffer.
+func (sc *StreamConfiguration) WithColorSpaceName(colorSpaceName obj.Object) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return sc
 }
 
-// WithCapturesAudio a Boolean value that indicates whether to capture audio.
-func (x *StreamConfiguration) WithCapturesAudio(capturesAudio bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesAudio:"), capturesAudio)
-	return x
+// WithCapturesAudio sets a Boolean value that indicates whether to capture audio.
+func (sc *StreamConfiguration) WithCapturesAudio(capturesAudio bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCapturesAudio:"), capturesAudio)
+	return sc
 }
 
-// WithSampleRate the sample rate for audio capture.
-func (x *StreamConfiguration) WithSampleRate(sampleRate int) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleRate:"), sampleRate)
-	return x
+// WithSampleRate sets the sample rate for audio capture.
+func (sc *StreamConfiguration) WithSampleRate(sampleRate int) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSampleRate:"), sampleRate)
+	return sc
 }
 
-// WithChannelCount the number of audio channels to capture.
-func (x *StreamConfiguration) WithChannelCount(channelCount int) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelCount:"), channelCount)
-	return x
+// WithChannelCount sets the number of audio channels to capture.
+func (sc *StreamConfiguration) WithChannelCount(channelCount int) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setChannelCount:"), channelCount)
+	return sc
 }
 
-// WithExcludesCurrentProcessAudio a Boolean value that indicates whether to exclude audio from your app during capture.
-func (x *StreamConfiguration) WithExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludesCurrentProcessAudio:"), excludesCurrentProcessAudio)
-	return x
+// WithExcludesCurrentProcessAudio sets a Boolean value that indicates whether to exclude audio from your app during capture.
+func (sc *StreamConfiguration) WithExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setExcludesCurrentProcessAudio:"), excludesCurrentProcessAudio)
+	return sc
 }
 
-// WithIgnoreShadowsDisplay a Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in display style.
-func (x *StreamConfiguration) WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreShadowsDisplay:"), ignoreShadowsDisplay)
-	return x
+// WithIgnoreShadowsDisplay sets a Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in display style.
+func (sc *StreamConfiguration) WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoreShadowsDisplay:"), ignoreShadowsDisplay)
+	return sc
 }
 
-// WithIgnoreShadowsSingleWindow a Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in window style.
-func (x *StreamConfiguration) WithIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreShadowsSingleWindow:"), ignoreShadowsSingleWindow)
-	return x
+// WithIgnoreShadowsSingleWindow sets a Boolean value that indicates if the stream ignores the capturing of window shadows when streaming in window style.
+func (sc *StreamConfiguration) WithIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoreShadowsSingleWindow:"), ignoreShadowsSingleWindow)
+	return sc
 }
 
-// WithCaptureResolution the resolution at which to capture source content.
-func (x *StreamConfiguration) WithCaptureResolution(captureResolution CaptureResolutionType) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureResolution:"), captureResolution)
-	return x
+// WithCaptureResolution sets the resolution at which to capture source content.
+func (sc *StreamConfiguration) WithCaptureResolution(captureResolution CaptureResolutionType) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCaptureResolution:"), captureResolution)
+	return sc
 }
 
-// WithCapturesShadowsOnly a Boolean value that indicates if the stream only captures shadows.
-func (x *StreamConfiguration) WithCapturesShadowsOnly(capturesShadowsOnly bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesShadowsOnly:"), capturesShadowsOnly)
-	return x
+// WithCapturesShadowsOnly sets a Boolean value that indicates if the stream only captures shadows.
+func (sc *StreamConfiguration) WithCapturesShadowsOnly(capturesShadowsOnly bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCapturesShadowsOnly:"), capturesShadowsOnly)
+	return sc
 }
 
-// WithShouldBeOpaque a Boolean value that indicates if semitransparent content presents as opaque.
-func (x *StreamConfiguration) WithShouldBeOpaque(shouldBeOpaque bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBeOpaque:"), shouldBeOpaque)
-	return x
+// WithShouldBeOpaque sets a Boolean value that indicates if semitransparent content presents as opaque.
+func (sc *StreamConfiguration) WithShouldBeOpaque(shouldBeOpaque bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShouldBeOpaque:"), shouldBeOpaque)
+	return sc
 }
 
-// WithIgnoreGlobalClipDisplay a Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in display style.
-func (x *StreamConfiguration) WithIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreGlobalClipDisplay:"), ignoreGlobalClipDisplay)
-	return x
+// WithIgnoreGlobalClipDisplay sets a Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in display style.
+func (sc *StreamConfiguration) WithIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoreGlobalClipDisplay:"), ignoreGlobalClipDisplay)
+	return sc
 }
 
-// WithIgnoreGlobalClipSingleWindow a Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in window style.
-func (x *StreamConfiguration) WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreGlobalClipSingleWindow:"), ignoreGlobalClipSingleWindow)
-	return x
+// WithIgnoreGlobalClipSingleWindow sets a Boolean value that indicates if the stream ignores content clipped past the edge of a display, when streaming in window style.
+func (sc *StreamConfiguration) WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIgnoreGlobalClipSingleWindow:"), ignoreGlobalClipSingleWindow)
+	return sc
 }
 
-// WithPresenterOverlayPrivacyAlertSetting a value indicating if alerts appear to presenters while using Presenter Overlay.
-func (x *StreamConfiguration) WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting PresenterOverlayAlertSetting) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresenterOverlayPrivacyAlertSetting:"), presenterOverlayPrivacyAlertSetting)
-	return x
+// WithPresenterOverlayPrivacyAlertSetting sets a value indicating if alerts appear to presenters while using Presenter Overlay.
+func (sc *StreamConfiguration) WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting PresenterOverlayAlertSetting) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPresenterOverlayPrivacyAlertSetting:"), presenterOverlayPrivacyAlertSetting)
+	return sc
 }
 
-// WithIncludeChildWindows SCStreamProperty to show the child windows in display bound windows and applications sharing.  Child windows are included by default.
-func (x *StreamConfiguration) WithIncludeChildWindows(includeChildWindows bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeChildWindows:"), includeChildWindows)
-	return x
+// WithIncludeChildWindows sets SCStreamProperty to show the child windows in display bound windows and applications sharing.  Child windows are included by default.
+func (sc *StreamConfiguration) WithIncludeChildWindows(includeChildWindows bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIncludeChildWindows:"), includeChildWindows)
+	return sc
 }
 
-// WithCaptureMicrophone SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured.
-func (x *StreamConfiguration) WithCaptureMicrophone(captureMicrophone bool) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureMicrophone:"), captureMicrophone)
-	return x
+// WithCaptureMicrophone sets SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured.
+func (sc *StreamConfiguration) WithCaptureMicrophone(captureMicrophone bool) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCaptureMicrophone:"), captureMicrophone)
+	return sc
 }
 
-// WithMicrophoneCaptureDeviceID SCStreamProperty that specifies which microphone device to capture. This deviceID is the uniqueID from AVCaptureDevice for the microphone. System Default Microphone will be used if not specified by client. For Mac Catalyst apps, the System Default Microphone will be captured.
-func (x *StreamConfiguration) WithMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMicrophoneCaptureDeviceID:"), purego.NSString(microphoneCaptureDeviceID))
-	return x
+// WithMicrophoneCaptureDeviceID sets SCStreamProperty that specifies which microphone device to capture. This deviceID is the uniqueID from AVCaptureDevice for the microphone. System Default Microphone will be used if not specified by client. For Mac Catalyst apps, the System Default Microphone will be captured.
+func (sc *StreamConfiguration) WithMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMicrophoneCaptureDeviceID:"), purego.NSString(microphoneCaptureDeviceID))
+	return sc
 }
 
-// WithCaptureDynamicRange SCStreamProperty client will choose captureDynamicRange between SCCaptureDynamicRangeSDR, SCCaptureDynamicRangeHDRLocalDisplay,  SCCaptureDynamicRangeHDRCanonicalDisplay. By default, the stream is capturing with SCCaptureDynamicRangeSDR. HDR capture is only supported with Apple Silicon Mac, setting this property on Intel Mac will have no effect. HDR recording is not support yet, adding a recording output to a stream with SCCaptureDynamicRangeHDR set will fail.
-func (x *StreamConfiguration) WithCaptureDynamicRange(captureDynamicRange CaptureDynamicRange) *StreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureDynamicRange:"), captureDynamicRange)
-	return x
+// WithCaptureDynamicRange sets SCStreamProperty client will choose captureDynamicRange between SCCaptureDynamicRangeSDR, SCCaptureDynamicRangeHDRLocalDisplay,  SCCaptureDynamicRangeHDRCanonicalDisplay. By default, the stream is capturing with SCCaptureDynamicRangeSDR. HDR capture is only supported with Apple Silicon Mac, setting this property on Intel Mac will have no effect. HDR recording is not support yet, adding a recording output to a stream with SCCaptureDynamicRangeHDR set will fail.
+func (sc *StreamConfiguration) WithCaptureDynamicRange(captureDynamicRange CaptureDynamicRange) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCaptureDynamicRange:"), captureDynamicRange)
+	return sc
 }
 
-// Width SCStreamProperty for output width as measured in pixels. Default is set to 1920.
-func (x *StreamConfiguration) Width() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+// Width returns SCStreamProperty for output width as measured in pixels. Default is set to 1920.
+func (sc *StreamConfiguration) Width() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("width"))
 	return _r
 }
 
-// SetWidth wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetWidth(width int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
-}
-
-// Height SCStreamProperty for output height as measured in pixels. Default is set to 1080.
-func (x *StreamConfiguration) Height() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+// Height returns SCStreamProperty for output height as measured in pixels. Default is set to 1080.
+func (sc *StreamConfiguration) Height() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("height"))
 	return _r
 }
 
-// SetHeight wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetHeight(height int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
-}
-
-// PixelFormat SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 'l10r': Packed Little Endian ARGB2101010 '420v': 2-plane "video" range YCbCr 4:2:0 '420f': 2-plane "full" range YCbCr 4:2:0 'xf44': 2 plane "full" range YCbCr10 4:4:4 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
-func (x *StreamConfiguration) PixelFormat() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+// PixelFormat returns SCStreamProperty for output pixel format. Supported pixel formats are: 'BGRA': Packed Little Endian ARGB8888 'l10r': Packed Little Endian ARGB2101010 '420v': 2-plane "video" range YCbCr 4:2:0 '420f': 2-plane "full" range YCbCr 4:2:0 'xf44': 2 plane "full" range YCbCr10 4:4:4 'RGhA': 64 bit RGBA IEEE half-precision float, 16-bit little-endian See https://developer.apple.com/documentation/coregraphics/1455170-cgdisplaystreamcreate
+func (sc *StreamConfiguration) PixelFormat() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("pixelFormat"))
 	return _r
 }
 
-// SetPixelFormat wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetPixelFormat(pixelFormat int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
-}
-
-// ScalesToFit SCStreamProperty for output to be always scaled to fit into the provided width and height. For use for independent window capture. When true, the output scales up and down. When false, the output only scales down.
-func (x *StreamConfiguration) ScalesToFit() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scalesToFit"))
+// ScalesToFit reports whether SCStreamProperty for output to be always scaled to fit into the provided width and height. For use for independent window capture. When true, the output scales up and down. When false, the output only scales down.
+func (sc *StreamConfiguration) ScalesToFit() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("scalesToFit"))
 	return _r
 }
 
-// SetScalesToFit wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetScalesToFit(scalesToFit bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalesToFit:"), scalesToFit)
-}
-
-// PreservesAspectRatio SCStreamProperty that specifies whether the  stream preserves the aspect ratio of the source pixel data. By default the aspect ratio is preserved.
-func (x *StreamConfiguration) PreservesAspectRatio() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesAspectRatio"))
+// PreservesAspectRatio reports whether SCStreamProperty that specifies whether the stream preserves the aspect ratio of the source pixel data. By default the aspect ratio is preserved.
+func (sc *StreamConfiguration) PreservesAspectRatio() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("preservesAspectRatio"))
 	return _r
 }
 
-// SetPreservesAspectRatio wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetPreservesAspectRatio(preservesAspectRatio bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesAspectRatio:"), preservesAspectRatio)
-}
-
-// StreamName SCStreamProperty the name of the stream
-func (x *StreamConfiguration) StreamName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamName"))
+// StreamName returns SCStreamProperty the name of the stream
+func (sc *StreamConfiguration) StreamName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("streamName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetStreamName wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetStreamName(streamName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamName:"), purego.NSString(streamName))
-}
-
-// ShowsCursor SCStreamProperty that specifies whether the cursor should appear in the stream.  By default the cursor is visible.
-func (x *StreamConfiguration) ShowsCursor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCursor"))
+// ShowsCursor reports whether SCStreamProperty that specifies whether the cursor should appear in the stream. By default the cursor is visible.
+func (sc *StreamConfiguration) ShowsCursor() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("showsCursor"))
 	return _r
 }
 
-// SetShowsCursor wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetShowsCursor(showsCursor bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCursor:"), showsCursor)
-}
-
-// ShowMouseClicks SCStreamProperty that specifies whether to draw a circle around the cursor click, default is NO. This property will not be affected by showsCursor. This property currently applies when pixelFormat is set to BGRA.
-func (x *StreamConfiguration) ShowMouseClicks() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showMouseClicks"))
+// ShowMouseClicks reports whether SCStreamProperty that specifies whether to draw a circle around the cursor click, default is false. This property will not be affected by showsCursor. This property currently applies when pixelFormat is set to BGRA.
+func (sc *StreamConfiguration) ShowMouseClicks() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("showMouseClicks"))
 	return _r
 }
 
-// SetShowMouseClicks wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetShowMouseClicks(showMouseClicks bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowMouseClicks:"), showMouseClicks)
-}
-
-// BackgroundColor SCStreamProperty for background color. By default the background color is clear.
-func (x *StreamConfiguration) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+// BackgroundColor returns SCStreamProperty for background color. By default the background color is clear.
+func (sc *StreamConfiguration) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
-// SourceRect SCStreamProperty that specifies that the stream only samples a subset of the frame input. For display streams, if not set, then the entire display is streamed. For independent window streams, if not set, then the entire window is streamed. The rectangle is specified in points in the display’s logical coordinate system.
-func (x *StreamConfiguration) SourceRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("sourceRect"))
+// SourceRect returns SCStreamProperty that specifies that the stream only samples a subset of the frame input. For display streams, if not set, then the entire display is streamed. For independent window streams, if not set, then the entire window is streamed. The rectangle is specified in points in the display’s logical coordinate system.
+func (sc *StreamConfiguration) SourceRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("sourceRect"))
 	return _r
 }
 
-// SetSourceRect wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetSourceRect(sourceRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRect:"), sourceRect)
-}
-
-// DestinationRect SCStreamProperty that specifies that the stream outputs the frame data into a subset of the output IOSurface object. For both display streams and independent window streams, if not set, then the entire output surface is used. The rectangle is specified in pixels in the display's coordinate system.
-func (x *StreamConfiguration) DestinationRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("destinationRect"))
+// DestinationRect returns SCStreamProperty that specifies that the stream outputs the frame data into a subset of the output IOSurface object. For both display streams and independent window streams, if not set, then the entire output surface is used. The rectangle is specified in pixels in the display's coordinate system.
+func (sc *StreamConfiguration) DestinationRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("destinationRect"))
 	return _r
 }
 
-// SetDestinationRect wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetDestinationRect(destinationRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationRect:"), destinationRect)
-}
-
-// QueueDepth SCStreamProperty that specifies the number of frames to keep in the queue.  If not set the default value is 8 frames.  Specifying more frames uses more memory, but may allow you to process frame data without stalling the display stream and should not exceed 8 frames.
-func (x *StreamConfiguration) QueueDepth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("queueDepth"))
+// QueueDepth returns SCStreamProperty that specifies the number of frames to keep in the queue.  If not set the default value is 8 frames.  Specifying more frames uses more memory, but may allow you to process frame data without stalling the display stream and should not exceed 8 frames.
+func (sc *StreamConfiguration) QueueDepth() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("queueDepth"))
 	return _r
 }
 
-// SetQueueDepth wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetQueueDepth(queueDepth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueueDepth:"), queueDepth)
-}
-
-// ColorMatrix SCStreamProperty that specifies the YCbCr matrix applied to the output surface.  The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/quartz_display_services/display_stream_ycbcr_to_rgb_conversion_matrix_options. Should only be used if your pixel format is 420v or 420f.
-func (x *StreamConfiguration) ColorMatrix() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorMatrix"))
+// ColorMatrix returns SCStreamProperty that specifies the YCbCr matrix applied to the output surface.  The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/quartz_display_services/display_stream_ycbcr_to_rgb_conversion_matrix_options. Should only be used if your pixel format is 420v or 420f.
+func (sc *StreamConfiguration) ColorMatrix() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("colorMatrix"))
 	return obj.Wrap(_r)
 }
 
-// SetColorMatrix wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetColorMatrix(colorMatrix obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorMatrix:"), objref.IDOf(colorMatrix))
-}
-
-// ColorSpaceName SCStreamProperty that specifies the color space of the output buffer.  If not set the output buffer uses the same color space as the display. The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/cgcolorspace/color_space_names.
-func (x *StreamConfiguration) ColorSpaceName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpaceName"))
+// ColorSpaceName returns SCStreamProperty that specifies the color space of the output buffer.  If not set the output buffer uses the same color space as the display. The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/cgcolorspace/color_space_names.
+func (sc *StreamConfiguration) ColorSpaceName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("colorSpaceName"))
 	return obj.Wrap(_r)
 }
 
-// SetColorSpaceName wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetColorSpaceName(colorSpaceName obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-}
-
-// CapturesAudio SCStreamProperty that specifies whether the audio will be captured.  By default audio is not captured.
-func (x *StreamConfiguration) CapturesAudio() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("capturesAudio"))
+// CapturesAudio reports whether SCStreamProperty that specifies whether the audio will be captured. By default audio is not captured.
+func (sc *StreamConfiguration) CapturesAudio() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("capturesAudio"))
 	return _r
 }
 
-// SetCapturesAudio wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetCapturesAudio(capturesAudio bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesAudio:"), capturesAudio)
-}
-
-// SampleRate SCStreamProperty to specify the sample rate for audio. Default is set to 48000.
-func (x *StreamConfiguration) SampleRate() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleRate"))
+// SampleRate returns SCStreamProperty to specify the sample rate for audio. Default is set to 48000.
+func (sc *StreamConfiguration) SampleRate() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("sampleRate"))
 	return _r
 }
 
-// SetSampleRate wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetSampleRate(sampleRate int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleRate:"), sampleRate)
-}
-
-// ChannelCount SCStreamProperty to specify channel count. Default is set to two.
-func (x *StreamConfiguration) ChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount"))
+// ChannelCount returns SCStreamProperty to specify channel count. Default is set to two.
+func (sc *StreamConfiguration) ChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("channelCount"))
 	return _r
 }
 
-// SetChannelCount wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetChannelCount(channelCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelCount:"), channelCount)
-}
-
-// ExcludesCurrentProcessAudio SCAudioProperty whether to exclude audio from current process. Default is set to NO.
-func (x *StreamConfiguration) ExcludesCurrentProcessAudio() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesCurrentProcessAudio"))
+// ExcludesCurrentProcessAudio reports whether SCAudioProperty whether to exclude audio from current process. Default is set to false.
+func (sc *StreamConfiguration) ExcludesCurrentProcessAudio() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("excludesCurrentProcessAudio"))
 	return _r
 }
 
-// SetExcludesCurrentProcessAudio wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludesCurrentProcessAudio:"), excludesCurrentProcessAudio)
-}
-
-// IgnoreShadowsDisplay SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
-func (x *StreamConfiguration) IgnoreShadowsDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoreShadowsDisplay"))
+// IgnoreShadowsDisplay reports whether SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
+func (sc *StreamConfiguration) IgnoreShadowsDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("ignoreShadowsDisplay"))
 	return _r
 }
 
-// SetIgnoreShadowsDisplay wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetIgnoreShadowsDisplay(ignoreShadowsDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreShadowsDisplay:"), ignoreShadowsDisplay)
-}
-
-// IgnoreShadowsSingleWindow SCStreamProperty to ignore framing on windows in the single window sharing case (will ignore shadows).
-func (x *StreamConfiguration) IgnoreShadowsSingleWindow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoreShadowsSingleWindow"))
+// IgnoreShadowsSingleWindow reports whether SCStreamProperty to ignore framing on windows in the single window sharing case (will ignore shadows).
+func (sc *StreamConfiguration) IgnoreShadowsSingleWindow() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("ignoreShadowsSingleWindow"))
 	return _r
 }
 
-// SetIgnoreShadowsSingleWindow wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreShadowsSingleWindow:"), ignoreShadowsSingleWindow)
-}
-
-// CaptureResolution captureResolution Choose between automatic, best, and nominal.
-func (x *StreamConfiguration) CaptureResolution() CaptureResolutionType {
-	_r := objc.Send[CaptureResolutionType](objref.IDOf(x), objc.RegisterName("captureResolution"))
+// CaptureResolution returns captureResolution Choose between automatic, best, and nominal.
+func (sc *StreamConfiguration) CaptureResolution() CaptureResolutionType {
+	_r := objc.Send[CaptureResolutionType](objref.IDOf(sc), objc.RegisterName("captureResolution"))
 	return _r
 }
 
-// SetCaptureResolution wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetCaptureResolution(captureResolution CaptureResolutionType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureResolution:"), captureResolution)
-}
-
-// CapturesShadowsOnly SCStreamProperty to capture only the shadows of windows.
-func (x *StreamConfiguration) CapturesShadowsOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("capturesShadowsOnly"))
+// CapturesShadowsOnly reports whether SCStreamProperty to capture only the shadows of windows.
+func (sc *StreamConfiguration) CapturesShadowsOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("capturesShadowsOnly"))
 	return _r
 }
 
-// SetCapturesShadowsOnly wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetCapturesShadowsOnly(capturesShadowsOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapturesShadowsOnly:"), capturesShadowsOnly)
-}
-
-// ShouldBeOpaque SCStreamProperty to ensure partially transparent areas on windows are backed by a solid white color so that the resulting image is fully opaque.
-func (x *StreamConfiguration) ShouldBeOpaque() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeOpaque"))
+// ShouldBeOpaque reports whether SCStreamProperty to ensure partially transparent areas on windows are backed by a solid white color so that the resulting image is fully opaque.
+func (sc *StreamConfiguration) ShouldBeOpaque() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("shouldBeOpaque"))
 	return _r
 }
 
-// SetShouldBeOpaque wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetShouldBeOpaque(shouldBeOpaque bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldBeOpaque:"), shouldBeOpaque)
-}
-
-// IgnoreGlobalClipDisplay SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
-func (x *StreamConfiguration) IgnoreGlobalClipDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoreGlobalClipDisplay"))
+// IgnoreGlobalClipDisplay reports whether SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
+func (sc *StreamConfiguration) IgnoreGlobalClipDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("ignoreGlobalClipDisplay"))
 	return _r
 }
 
-// SetIgnoreGlobalClipDisplay wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreGlobalClipDisplay:"), ignoreGlobalClipDisplay)
-}
-
-// IgnoreGlobalClipSingleWindow SCStreamProperty to ignore global clipping when on single window share. When set to true, single window captures that are partially off the screen will not be clipped. (will ignore window placement in display context).
-func (x *StreamConfiguration) IgnoreGlobalClipSingleWindow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoreGlobalClipSingleWindow"))
+// IgnoreGlobalClipSingleWindow reports whether SCStreamProperty to ignore global clipping when on single window share. When set to true, single window captures that are partially off the screen will not be clipped. (will ignore window placement in display context).
+func (sc *StreamConfiguration) IgnoreGlobalClipSingleWindow() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("ignoreGlobalClipSingleWindow"))
 	return _r
 }
 
-// SetIgnoreGlobalClipSingleWindow wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreGlobalClipSingleWindow:"), ignoreGlobalClipSingleWindow)
-}
-
-// PresenterOverlayPrivacyAlertSetting SCStreamProperty that informs the system if a privacy alert should be shown when using presenter overlay for a stream. Defaults to SCPresenterOverlayAlertSettingSystem;
-func (x *StreamConfiguration) PresenterOverlayPrivacyAlertSetting() PresenterOverlayAlertSetting {
-	_r := objc.Send[PresenterOverlayAlertSetting](objref.IDOf(x), objc.RegisterName("presenterOverlayPrivacyAlertSetting"))
+// PresenterOverlayPrivacyAlertSetting returns SCStreamProperty that informs the system if a privacy alert should be shown when using presenter overlay for a stream. Defaults to SCPresenterOverlayAlertSettingSystem;
+func (sc *StreamConfiguration) PresenterOverlayPrivacyAlertSetting() PresenterOverlayAlertSetting {
+	_r := objc.Send[PresenterOverlayAlertSetting](objref.IDOf(sc), objc.RegisterName("presenterOverlayPrivacyAlertSetting"))
 	return _r
 }
 
-// SetPresenterOverlayPrivacyAlertSetting wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting PresenterOverlayAlertSetting) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresenterOverlayPrivacyAlertSetting:"), presenterOverlayPrivacyAlertSetting)
-}
-
-// IncludeChildWindows SCStreamProperty to show the child windows in display bound windows and applications sharing.  Child windows are included by default.
-func (x *StreamConfiguration) IncludeChildWindows() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeChildWindows"))
+// IncludeChildWindows reports whether SCStreamProperty to show the child windows in display bound windows and applications sharing. Child windows are included by default.
+func (sc *StreamConfiguration) IncludeChildWindows() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("includeChildWindows"))
 	return _r
 }
 
-// SetIncludeChildWindows wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetIncludeChildWindows(includeChildWindows bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeChildWindows:"), includeChildWindows)
-}
-
-// CaptureMicrophone SCStreamProperty that specifies whether the microphone audio will be captured.  By default microphone is not captured.
-func (x *StreamConfiguration) CaptureMicrophone() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("captureMicrophone"))
+// CaptureMicrophone reports whether SCStreamProperty that specifies whether the microphone audio will be captured. By default microphone is not captured.
+func (sc *StreamConfiguration) CaptureMicrophone() bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("captureMicrophone"))
 	return _r
 }
 
-// SetCaptureMicrophone wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetCaptureMicrophone(captureMicrophone bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureMicrophone:"), captureMicrophone)
-}
-
-// MicrophoneCaptureDeviceID SCStreamProperty that specifies which microphone device to capture. This deviceID is the uniqueID from AVCaptureDevice for the microphone. System Default Microphone will be used if not specified by client. For Mac Catalyst apps, the System Default Microphone will be captured.
-func (x *StreamConfiguration) MicrophoneCaptureDeviceID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("microphoneCaptureDeviceID"))
+// MicrophoneCaptureDeviceID returns SCStreamProperty that specifies which microphone device to capture. This deviceID is the uniqueID from AVCaptureDevice for the microphone. System Default Microphone will be used if not specified by client. For Mac Catalyst apps, the System Default Microphone will be captured.
+func (sc *StreamConfiguration) MicrophoneCaptureDeviceID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("microphoneCaptureDeviceID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMicrophoneCaptureDeviceID wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMicrophoneCaptureDeviceID:"), purego.NSString(microphoneCaptureDeviceID))
-}
-
-// CaptureDynamicRange SCStreamProperty client will choose captureDynamicRange between SCCaptureDynamicRangeSDR, SCCaptureDynamicRangeHDRLocalDisplay,  SCCaptureDynamicRangeHDRCanonicalDisplay. By default, the stream is capturing with SCCaptureDynamicRangeSDR. HDR capture is only supported with Apple Silicon Mac, setting this property on Intel Mac will have no effect. HDR recording is not support yet, adding a recording output to a stream with SCCaptureDynamicRangeHDR set will fail.
-func (x *StreamConfiguration) CaptureDynamicRange() CaptureDynamicRange {
-	_r := objc.Send[CaptureDynamicRange](objref.IDOf(x), objc.RegisterName("captureDynamicRange"))
+// CaptureDynamicRange returns SCStreamProperty client will choose captureDynamicRange between SCCaptureDynamicRangeSDR, SCCaptureDynamicRangeHDRLocalDisplay,  SCCaptureDynamicRangeHDRCanonicalDisplay. By default, the stream is capturing with SCCaptureDynamicRangeSDR. HDR capture is only supported with Apple Silicon Mac, setting this property on Intel Mac will have no effect. HDR recording is not support yet, adding a recording output to a stream with SCCaptureDynamicRangeHDR set will fail.
+func (sc *StreamConfiguration) CaptureDynamicRange() CaptureDynamicRange {
+	_r := objc.Send[CaptureDynamicRange](objref.IDOf(sc), objc.RegisterName("captureDynamicRange"))
 	return _r
 }
-
-// SetCaptureDynamicRange wraps the corresponding Objective-C method.
-func (x *StreamConfiguration) SetCaptureDynamicRange(captureDynamicRange CaptureDynamicRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureDynamicRange:"), captureDynamicRange)
-}
-
-// StreamConfigurationable is the interface implemented by [StreamConfiguration], for mocking and DI.
-type StreamConfigurationable interface {
-	obj.Object
-	WithWidth(width int) *StreamConfiguration
-	WithHeight(height int) *StreamConfiguration
-	WithPixelFormat(pixelFormat int) *StreamConfiguration
-	WithScalesToFit(scalesToFit bool) *StreamConfiguration
-	WithPreservesAspectRatio(preservesAspectRatio bool) *StreamConfiguration
-	WithStreamName(streamName string) *StreamConfiguration
-	WithShowsCursor(showsCursor bool) *StreamConfiguration
-	WithShowMouseClicks(showMouseClicks bool) *StreamConfiguration
-	WithBackgroundColor(backgroundColor obj.Object) *StreamConfiguration
-	WithSourceRect(sourceRect corefoundation.CGRect) *StreamConfiguration
-	WithDestinationRect(destinationRect corefoundation.CGRect) *StreamConfiguration
-	WithQueueDepth(queueDepth int) *StreamConfiguration
-	WithColorMatrix(colorMatrix obj.Object) *StreamConfiguration
-	WithColorSpaceName(colorSpaceName obj.Object) *StreamConfiguration
-	WithCapturesAudio(capturesAudio bool) *StreamConfiguration
-	WithSampleRate(sampleRate int) *StreamConfiguration
-	WithChannelCount(channelCount int) *StreamConfiguration
-	WithExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) *StreamConfiguration
-	WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool) *StreamConfiguration
-	WithIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) *StreamConfiguration
-	WithCaptureResolution(captureResolution CaptureResolutionType) *StreamConfiguration
-	WithCapturesShadowsOnly(capturesShadowsOnly bool) *StreamConfiguration
-	WithShouldBeOpaque(shouldBeOpaque bool) *StreamConfiguration
-	WithIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) *StreamConfiguration
-	WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) *StreamConfiguration
-	WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting PresenterOverlayAlertSetting) *StreamConfiguration
-	WithIncludeChildWindows(includeChildWindows bool) *StreamConfiguration
-	WithCaptureMicrophone(captureMicrophone bool) *StreamConfiguration
-	WithMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) *StreamConfiguration
-	WithCaptureDynamicRange(captureDynamicRange CaptureDynamicRange) *StreamConfiguration
-	Width() int
-	SetWidth(width int)
-	Height() int
-	SetHeight(height int)
-	PixelFormat() int
-	SetPixelFormat(pixelFormat int)
-	ScalesToFit() bool
-	SetScalesToFit(scalesToFit bool)
-	PreservesAspectRatio() bool
-	SetPreservesAspectRatio(preservesAspectRatio bool)
-	StreamName() string
-	SetStreamName(streamName string)
-	ShowsCursor() bool
-	SetShowsCursor(showsCursor bool)
-	ShowMouseClicks() bool
-	SetShowMouseClicks(showMouseClicks bool)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	SourceRect() corefoundation.CGRect
-	SetSourceRect(sourceRect corefoundation.CGRect)
-	DestinationRect() corefoundation.CGRect
-	SetDestinationRect(destinationRect corefoundation.CGRect)
-	QueueDepth() int
-	SetQueueDepth(queueDepth int)
-	ColorMatrix() obj.Object
-	SetColorMatrix(colorMatrix obj.Object)
-	ColorSpaceName() obj.Object
-	SetColorSpaceName(colorSpaceName obj.Object)
-	CapturesAudio() bool
-	SetCapturesAudio(capturesAudio bool)
-	SampleRate() int
-	SetSampleRate(sampleRate int)
-	ChannelCount() int
-	SetChannelCount(channelCount int)
-	ExcludesCurrentProcessAudio() bool
-	SetExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool)
-	IgnoreShadowsDisplay() bool
-	SetIgnoreShadowsDisplay(ignoreShadowsDisplay bool)
-	IgnoreShadowsSingleWindow() bool
-	SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool)
-	CaptureResolution() CaptureResolutionType
-	SetCaptureResolution(captureResolution CaptureResolutionType)
-	CapturesShadowsOnly() bool
-	SetCapturesShadowsOnly(capturesShadowsOnly bool)
-	ShouldBeOpaque() bool
-	SetShouldBeOpaque(shouldBeOpaque bool)
-	IgnoreGlobalClipDisplay() bool
-	SetIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool)
-	IgnoreGlobalClipSingleWindow() bool
-	SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool)
-	PresenterOverlayPrivacyAlertSetting() PresenterOverlayAlertSetting
-	SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting PresenterOverlayAlertSetting)
-	IncludeChildWindows() bool
-	SetIncludeChildWindows(includeChildWindows bool)
-	CaptureMicrophone() bool
-	SetCaptureMicrophone(captureMicrophone bool)
-	MicrophoneCaptureDeviceID() string
-	SetMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string)
-	CaptureDynamicRange() CaptureDynamicRange
-	SetCaptureDynamicRange(captureDynamicRange CaptureDynamicRange)
-}
-
-var _ StreamConfigurationable = (*StreamConfiguration)(nil)

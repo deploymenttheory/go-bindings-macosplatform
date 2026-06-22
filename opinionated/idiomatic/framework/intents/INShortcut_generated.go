@@ -44,24 +44,24 @@ func shortcutAdopt(id objc.ID) *Shortcut {
 }
 
 // Description returns the object's -description text.
-func (x *Shortcut) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shortcut) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Shortcut) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Shortcut) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Shortcut) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Shortcut) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Shortcut) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shortcut) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewShortcutWithIntent creates a shortcut with the given intent.
@@ -78,23 +78,14 @@ func NewShortcutWithUserActivity(userActivity obj.Object) *Shortcut {
 	return shortcutAdopt(_id)
 }
 
-// Intent the intent that will be performed when this shortcut is invoked. Is
-func (x *Shortcut) Intent() *Intent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intent"))
+// Intent returns the intent that will be performed when this shortcut is invoked. Is
+func (s *Shortcut) Intent() *Intent {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("intent"))
 	return IntentFromID(_r)
 }
 
-// UserActivity the user activity that will be performed when this shortcut is invoked. Is
-func (x *Shortcut) UserActivity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+// UserActivity returns the user activity that will be performed when this shortcut is invoked. Is
+func (s *Shortcut) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
 }
-
-// Shortcutable is the interface implemented by [Shortcut], for mocking and DI.
-type Shortcutable interface {
-	obj.Object
-	Intent() *Intent
-	UserActivity() obj.Object
-}
-
-var _ Shortcutable = (*Shortcut)(nil)

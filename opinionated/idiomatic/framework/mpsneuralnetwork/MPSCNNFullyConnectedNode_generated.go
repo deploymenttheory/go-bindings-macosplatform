@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,33 +51,23 @@ func NewCNNFullyConnectedNode() *CNNFullyConnectedNode {
 	return cNNFullyConnectedNodeAdopt(_id)
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNFullyConnectedNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (cfcn *CNNFullyConnectedNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cfcn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return cfcn
 }
 
-// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
-	return x
+// WithAccumulatorPrecision sets set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (cfcn *CNNFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cfcn), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return cfcn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNFullyConnectedNode) WithLabel(label string) *CNNFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cfcn *CNNFullyConnectedNode) WithLabel(label string) *CNNFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cfcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cfcn
 }
-
-// CNNFullyConnectedNodeable is the interface implemented by [CNNFullyConnectedNode], for mocking and DI.
-type CNNFullyConnectedNodeable interface {
-	obj.Object
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNFullyConnectedNode
-	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode
-	WithLabel(label string) *CNNFullyConnectedNode
-}
-
-var _ CNNFullyConnectedNodeable = (*CNNFullyConnectedNode)(nil)
 
 var _ CNNConvolutionNodeProvider = (*CNNFullyConnectedNode)(nil)
 

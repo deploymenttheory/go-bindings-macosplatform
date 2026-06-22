@@ -5,12 +5,13 @@
 package healthkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // StatisticsCollection is an idiomatic wrapper over the Objective-C class HKStatisticsCollection.
@@ -47,24 +48,24 @@ func statisticsCollectionAdopt(id objc.ID) *StatisticsCollection {
 }
 
 // Description returns the object's -description text.
-func (x *StatisticsCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *StatisticsCollection) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StatisticsCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *StatisticsCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StatisticsCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *StatisticsCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StatisticsCollection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *StatisticsCollection) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewStatisticsCollection creates a new StatisticsCollection.
@@ -74,37 +75,26 @@ func NewStatisticsCollection() *StatisticsCollection {
 }
 
 // StatisticsForDate returns the statistics object for the time interval that contains the provided date.
-func (x *StatisticsCollection) StatisticsForDate(date obj.Object) *Statistics {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForDate:"), objref.IDOf(date))
+func (sc *StatisticsCollection) StatisticsForDate(date obj.Object) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("statisticsForDate:"), objref.IDOf(date))
 	return StatisticsFromID(_r)
 }
 
 // EnumerateStatisticsFromDateToDateWith enumerates the statistics objects for all the time intervals from the start date until the end date.
-func (x *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate obj.Object, endDate obj.Object, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateStatisticsFromDate:toDate:withBlock:"), objref.IDOf(startDate), objref.IDOf(endDate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (sc *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate obj.Object, endDate obj.Object, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("enumerateStatisticsFromDate:toDate:withBlock:"), objref.IDOf(startDate), objref.IDOf(endDate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // Statistics returns an array of statistics objects representing the populated time intervals covered by the statistics collection query.
 //
 // Statistics returns the collection as a Go slice.
-func (x *StatisticsCollection) Statistics() []*Statistics {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statistics"))
+func (sc *StatisticsCollection) Statistics() []*Statistics {
+	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("statistics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Statistics { return StatisticsFromID(_id) })
 }
 
 // Sources returns a set containing all the sources that had samples matched by the statistics collection query.
-func (x *StatisticsCollection) Sources() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sources"))
+func (sc *StatisticsCollection) Sources() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("sources"))
 	return obj.Wrap(_r)
 }
-
-// StatisticsCollectionable is the interface implemented by [StatisticsCollection], for mocking and DI.
-type StatisticsCollectionable interface {
-	obj.Object
-	StatisticsForDate(date obj.Object) *Statistics
-	EnumerateStatisticsFromDateToDateWith(startDate obj.Object, endDate obj.Object, block func(obj.Object, *bool))
-	Statistics() []*Statistics
-	Sources() obj.Object
-}
-
-var _ StatisticsCollectionable = (*StatisticsCollection)(nil)

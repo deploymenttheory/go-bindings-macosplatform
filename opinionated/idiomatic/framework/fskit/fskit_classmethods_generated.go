@@ -11,19 +11,19 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedInstance the shared instance of the FSKit client class.
+// SharedInstance returns the shared instance of the FSKit client class.
 func SharedInstance() *Client {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSClient")), objc.RegisterName("sharedInstance"))
 	return ClientFromID(_r)
 }
 
-// Active a status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.
+// Active returns a status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.
 func Active() *ContainerStatus {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("active"))
 	return ContainerStatusFromID(_r)
 }
 
-// Ready a status that represents a ready container with no error. This value is a “FSContainerStatus“ with a “state“ that is “ready“, and a “status“ that is `nil`.
+// Ready returns a status that represents a ready container with no error. This value is a “FSContainerStatus“ with a “state“ that is “ready“, and a “status“ that is `nil`.
 func Ready() *ContainerStatus {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("ready"))
 	return ContainerStatusFromID(_r)
@@ -77,13 +77,13 @@ func UsableProbeResultWithNameContainerID(name string, containerID *ContainerIde
 	return ProbeResultFromID(_r)
 }
 
-// NotRecognizedProbeResult a probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its “FSProbeResult/name“ and “FSProbeResult/containerID“ properties.
+// NotRecognizedProbeResult returns a probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its “FSProbeResult/name“ and “FSProbeResult/containerID“ properties.
 func NotRecognizedProbeResult() *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("notRecognizedProbeResult"))
 	return ProbeResultFromID(_r)
 }
 
-// UsableButLimitedProbeResult a probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the “FSProbeResult/name“, “FSProbeResult/containerID“, or both. Don't return this result from probing a resource that isn't limited.
+// UsableButLimitedProbeResult returns a probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the “FSProbeResult/name“, “FSProbeResult/containerID“, or both. Don't return this result from probing a resource that isn't limited.
 func UsableButLimitedProbeResult() *ProbeResult {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("usableButLimitedProbeResult"))
 	return ProbeResultFromID(_r)

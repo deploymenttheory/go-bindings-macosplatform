@@ -46,24 +46,24 @@ func voiceChatAdopt(id objc.ID) *VoiceChat {
 }
 
 // Description returns the object's -description text.
-func (x *VoiceChat) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vc *VoiceChat) Description() string {
+	return rt.Description(objref.IDOf(vc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VoiceChat) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vc *VoiceChat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VoiceChat) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vc *VoiceChat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VoiceChat) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vc *VoiceChat) String() string {
+	return rt.Description(objref.IDOf(vc))
 }
 
 // NewVoiceChat creates a new VoiceChat.
@@ -72,36 +72,36 @@ func NewVoiceChat() *VoiceChat {
 	return voiceChatAdopt(_id)
 }
 
-// WithActive a Boolean value that indicates whether the channel is sampling the microphone.
-func (x *VoiceChat) WithActive(active bool) *VoiceChat {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-	return x
+// WithActive sets a Boolean value that indicates whether the channel is sampling the microphone.
+func (vc *VoiceChat) WithActive(active bool) *VoiceChat {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setActive:"), active)
+	return vc
 }
 
-// WithVolume the volume level for the channel.
-func (x *VoiceChat) WithVolume(volume float32) *VoiceChat {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the volume level for the channel.
+func (vc *VoiceChat) WithVolume(volume float32) *VoiceChat {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setVolume:"), volume)
+	return vc
 }
 
 // Start starts communication with other players in a channel.
-func (x *VoiceChat) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (vc *VoiceChat) Start() {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("start"))
 }
 
 // Stop ends communication with other players in a channel.
-func (x *VoiceChat) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (vc *VoiceChat) Stop() {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("stop"))
 }
 
 // SetPlayerMuted mutes a player in the chat, including the local player.
-func (x *VoiceChat) SetPlayerMuted(player *Player, isMuted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:muted:"), objref.IDOf(player), isMuted)
+func (vc *VoiceChat) SetPlayerMuted(player *Player, isMuted bool) {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPlayer:muted:"), objref.IDOf(player), isMuted)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *VoiceChat) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (vc *VoiceChat) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,64 +109,34 @@ func (x *VoiceChat) Name() string {
 }
 
 // IsActive wraps the corresponding Objective-C method.
-func (x *VoiceChat) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+func (vc *VoiceChat) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("isActive"))
 	return _r
-}
-
-// SetActive wraps the corresponding Objective-C method.
-func (x *VoiceChat) SetActive(active bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 }
 
 // Volume wraps the corresponding Objective-C method.
-func (x *VoiceChat) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+func (vc *VoiceChat) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(vc), objc.RegisterName("volume"))
 	return _r
-}
-
-// SetVolume wraps the corresponding Objective-C method.
-func (x *VoiceChat) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
 // Players wraps the corresponding Objective-C method.
 //
 // Players returns the collection as a Go slice.
-func (x *VoiceChat) Players() []*Player {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
+func (vc *VoiceChat) Players() []*Player {
+	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // SetMuteForPlayer mutes a player in a voice chat.
-func (x *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMute:forPlayer:"), isMuted, purego.NSString(playerID))
+func (vc *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setMute:forPlayer:"), isMuted, purego.NSString(playerID))
 }
 
-// PlayerIDs * This property is obsolete. **
+// PlayerIDs returns * This property is obsolete. **
 //
 // PlayerIDs returns the collection as a Go slice.
-func (x *VoiceChat) PlayerIDs() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerIDs"))
+func (vc *VoiceChat) PlayerIDs() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("playerIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// VoiceChatable is the interface implemented by [VoiceChat], for mocking and DI.
-type VoiceChatable interface {
-	obj.Object
-	WithActive(active bool) *VoiceChat
-	WithVolume(volume float32) *VoiceChat
-	Start()
-	Stop()
-	SetPlayerMuted(player *Player, isMuted bool)
-	Name() string
-	IsActive() bool
-	SetActive(active bool)
-	Volume() float32
-	SetVolume(volume float32)
-	Players() []*Player
-	SetMuteForPlayer(isMuted bool, playerID string)
-	PlayerIDs() []string
-}
-
-var _ VoiceChatable = (*VoiceChat)(nil)

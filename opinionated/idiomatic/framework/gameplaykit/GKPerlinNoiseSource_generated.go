@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,60 +52,41 @@ func NewPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequ
 	return perlinNoiseSourceAdopt(_id)
 }
 
-// WithPersistence the rate at which successive octaves of the noise function decrease in amplitude.
-func (x *PerlinNoiseSource) WithPersistence(persistence float64) *PerlinNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
-	return x
+// WithPersistence sets the rate at which successive octaves of the noise function decrease in amplitude.
+func (pns *PerlinNoiseSource) WithPersistence(persistence float64) *PerlinNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setPersistence:"), persistence)
+	return pns
 }
 
-// WithFrequency a value that determines the size and spacing of features in generated noise.
-func (x *PerlinNoiseSource) WithFrequency(frequency float64) *PerlinNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the size and spacing of features in generated noise.
+func (pns *PerlinNoiseSource) WithFrequency(frequency float64) *PerlinNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setFrequency:"), frequency)
+	return pns
 }
 
-// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
-func (x *PerlinNoiseSource) WithOctaveCount(octaveCount int) *PerlinNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
-	return x
+// WithOctaveCount sets the number of octaves of the underlying noise function to use for generating noise.
+func (pns *PerlinNoiseSource) WithOctaveCount(octaveCount int) *PerlinNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setOctaveCount:"), octaveCount)
+	return pns
 }
 
-// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
-func (x *PerlinNoiseSource) WithLacunarity(lacunarity float64) *PerlinNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
-	return x
+// WithLacunarity sets the rate at which successive octaves of the noise function increase in frequency.
+func (pns *PerlinNoiseSource) WithLacunarity(lacunarity float64) *PerlinNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setLacunarity:"), lacunarity)
+	return pns
 }
 
-// WithSeed the value that determines the specific configuration of noise produced by the noise source.
-func (x *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the value that determines the specific configuration of noise produced by the noise source.
+func (pns *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setSeed:"), seed)
+	return pns
 }
 
 // Persistence wraps the corresponding Objective-C method.
-func (x *PerlinNoiseSource) Persistence() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("persistence"))
+func (pns *PerlinNoiseSource) Persistence() float64 {
+	_r := objc.Send[float64](objref.IDOf(pns), objc.RegisterName("persistence"))
 	return _r
 }
-
-// SetPersistence wraps the corresponding Objective-C method.
-func (x *PerlinNoiseSource) SetPersistence(persistence float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
-}
-
-// PerlinNoiseSourceable is the interface implemented by [PerlinNoiseSource], for mocking and DI.
-type PerlinNoiseSourceable interface {
-	obj.Object
-	WithPersistence(persistence float64) *PerlinNoiseSource
-	WithFrequency(frequency float64) *PerlinNoiseSource
-	WithOctaveCount(octaveCount int) *PerlinNoiseSource
-	WithLacunarity(lacunarity float64) *PerlinNoiseSource
-	WithSeed(seed int32) *PerlinNoiseSource
-	Persistence() float64
-	SetPersistence(persistence float64)
-}
-
-var _ PerlinNoiseSourceable = (*PerlinNoiseSource)(nil)
 
 var _ CoherentNoiseSourceProvider = (*PerlinNoiseSource)(nil)
 

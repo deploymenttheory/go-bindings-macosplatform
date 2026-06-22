@@ -46,24 +46,24 @@ func tileGroupRuleAdopt(id objc.ID) *TileGroupRule {
 }
 
 // Description returns the object's -description text.
-func (x *TileGroupRule) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tgr *TileGroupRule) Description() string {
+	return rt.Description(objref.IDOf(tgr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TileGroupRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tgr *TileGroupRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tgr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TileGroupRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tgr *TileGroupRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tgr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TileGroupRule) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tgr *TileGroupRule) String() string {
+	return rt.Description(objref.IDOf(tgr))
 }
 
 // NewTileGroupRuleWithAdjacencyTileDefinitions initializes a new tile group rule with adjacency rules and tile definitions.
@@ -73,75 +73,44 @@ func NewTileGroupRuleWithAdjacencyTileDefinitions(adjacency TileAdjacencyMask, t
 	return tileGroupRuleAdopt(_id)
 }
 
-// WithAdjacency the adjacency requirement for this rule.
-func (x *TileGroupRule) WithAdjacency(adjacency TileAdjacencyMask) *TileGroupRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdjacency:"), adjacency)
-	return x
+// WithAdjacency sets the adjacency requirement for this rule.
+func (tgr *TileGroupRule) WithAdjacency(adjacency TileAdjacencyMask) *TileGroupRule {
+	objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("setAdjacency:"), adjacency)
+	return tgr
 }
 
-// WithTileDefinitions the tile definitions used for this rule.
-func (x *TileGroupRule) WithTileDefinitions(items ...*TileDefinition) *TileGroupRule {
+// WithTileDefinitions sets the tile definitions used for this rule.
+func (tgr *TileGroupRule) WithTileDefinitions(items ...*TileDefinition) *TileGroupRule {
 	_arr := purego.SliceToNSArray(items, func(_v *TileDefinition) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileDefinitions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("setTileDefinitions:"), _arr)
+	return tgr
 }
 
-// WithName a name associated with the tile group rule.
-func (x *TileGroupRule) WithName(name string) *TileGroupRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a name associated with the tile group rule.
+func (tgr *TileGroupRule) WithName(name string) *TileGroupRule {
+	objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("setName:"), purego.NSString(name))
+	return tgr
 }
 
-// Adjacency the adjacency mask used by this rule. Set this to the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group for this rule met.
-func (x *TileGroupRule) Adjacency() TileAdjacencyMask {
-	_r := objc.Send[TileAdjacencyMask](objref.IDOf(x), objc.RegisterName("adjacency"))
+// Adjacency returns the adjacency mask used by this rule. Set this to the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group for this rule met.
+func (tgr *TileGroupRule) Adjacency() TileAdjacencyMask {
+	_r := objc.Send[TileAdjacencyMask](objref.IDOf(tgr), objc.RegisterName("adjacency"))
 	return _r
 }
 
-// SetAdjacency wraps the corresponding Objective-C method.
-func (x *TileGroupRule) SetAdjacency(adjacency TileAdjacencyMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdjacency:"), adjacency)
-}
-
-// TileDefinitions the tile definitions used by this rule. If the rule is evaluated and its conditions are met, one of the tile definitions within this array will be randomly selected for placement within the tile map. Each tile definitions' placement weight is taken into consideration to determine how likely each is to be selected; tile definitions with higher placement weights will be selected more frequently than those with lower placement weights.
+// TileDefinitions returns the tile definitions used by this rule. If the rule is evaluated and its conditions are met, one of the tile definitions within this array will be randomly selected for placement within the tile map. Each tile definitions' placement weight is taken into consideration to determine how likely each is to be selected; tile definitions with higher placement weights will be selected more frequently than those with lower placement weights.
 //
 // TileDefinitions returns the collection as a Go slice.
-func (x *TileGroupRule) TileDefinitions() []*TileDefinition {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileDefinitions"))
+func (tgr *TileGroupRule) TileDefinitions() []*TileDefinition {
+	_arr := objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("tileDefinitions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileDefinition { return TileDefinitionFromID(_id) })
 }
 
-// SetTileDefinitions wraps the corresponding Objective-C method.
-func (x *TileGroupRule) SetTileDefinitions(tileDefinitions []*TileDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileDefinitions:"), purego.SliceToNSArray(tileDefinitions, func(_v *TileDefinition) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Name client-assignable name for the tile group rule. Defaults to nil.
-func (x *TileGroupRule) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns client-assignable name for the tile group rule. Defaults to nil.
+func (tgr *TileGroupRule) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *TileGroupRule) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// TileGroupRuleable is the interface implemented by [TileGroupRule], for mocking and DI.
-type TileGroupRuleable interface {
-	obj.Object
-	WithAdjacency(adjacency TileAdjacencyMask) *TileGroupRule
-	WithTileDefinitions(items ...*TileDefinition) *TileGroupRule
-	WithName(name string) *TileGroupRule
-	Adjacency() TileAdjacencyMask
-	SetAdjacency(adjacency TileAdjacencyMask)
-	TileDefinitions() []*TileDefinition
-	SetTileDefinitions(tileDefinitions []*TileDefinition)
-	Name() string
-	SetName(name string)
-}
-
-var _ TileGroupRuleable = (*TileGroupRule)(nil)

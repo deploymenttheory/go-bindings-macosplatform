@@ -46,24 +46,24 @@ func assetResourceLoadingRequestorAdopt(id objc.ID) *AssetResourceLoadingRequest
 }
 
 // Description returns the object's -description text.
-func (x *AssetResourceLoadingRequestor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (arlr *AssetResourceLoadingRequestor) Description() string {
+	return rt.Description(objref.IDOf(arlr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetResourceLoadingRequestor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (arlr *AssetResourceLoadingRequestor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(arlr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetResourceLoadingRequestor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (arlr *AssetResourceLoadingRequestor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(arlr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetResourceLoadingRequestor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (arlr *AssetResourceLoadingRequestor) String() string {
+	return rt.Description(objref.IDOf(arlr))
 }
 
 // NewAssetResourceLoadingRequestor creates a new AssetResourceLoadingRequestor.
@@ -73,15 +73,7 @@ func NewAssetResourceLoadingRequestor() *AssetResourceLoadingRequestor {
 }
 
 // ProvidesExpiredSessionReports wraps the corresponding Objective-C method.
-func (x *AssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesExpiredSessionReports"))
+func (arlr *AssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
+	_r := objc.Send[bool](objref.IDOf(arlr), objc.RegisterName("providesExpiredSessionReports"))
 	return _r
 }
-
-// AssetResourceLoadingRequestorable is the interface implemented by [AssetResourceLoadingRequestor], for mocking and DI.
-type AssetResourceLoadingRequestorable interface {
-	obj.Object
-	ProvidesExpiredSessionReports() bool
-}
-
-var _ AssetResourceLoadingRequestorable = (*AssetResourceLoadingRequestor)(nil)

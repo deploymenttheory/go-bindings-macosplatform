@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,21 +50,13 @@ func NewDOMFile() *DOMFile {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *DOMFile) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (df *DOMFile) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DOMFileable is the interface implemented by [DOMFile], for mocking and DI.
-type DOMFileable interface {
-	obj.Object
-	Name() string
-}
-
-var _ DOMFileable = (*DOMFile)(nil)
 
 var _ DOMBlobProvider = (*DOMFile)(nil)
 

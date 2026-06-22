@@ -48,50 +48,41 @@ func managerAdopt(id objc.ID) *Manager {
 }
 
 // Description returns the object's -description text.
-func (x *Manager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Manager) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Manager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Manager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Manager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Manager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Manager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Manager) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
-// State the current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {
-func (x *Manager) State() ManagerState {
-	_r := objc.Send[ManagerState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {
+func (m *Manager) State() ManagerState {
+	_r := objc.Send[ManagerState](objref.IDOf(m), objc.RegisterName("state"))
 	return _r
 }
 
-// Authorization the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {
-func (x *Manager) Authorization() ManagerAuthorization {
-	_r := objc.Send[ManagerAuthorization](objref.IDOf(x), objc.RegisterName("authorization"))
+// Authorization returns the current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {
+func (m *Manager) Authorization() ManagerAuthorization {
+	_r := objc.Send[ManagerAuthorization](objref.IDOf(m), objc.RegisterName("authorization"))
 	return _r
 }
-
-// Managerable is the interface implemented by [Manager], for mocking and DI.
-type Managerable interface {
-	obj.Object
-	State() ManagerState
-	Authorization() ManagerAuthorization
-}
-
-var _ Managerable = (*Manager)(nil)
 
 // isManager marks Manager — and, by embedding promotion, its
 // subclasses — as a member of the Manager hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Manager) isManager() {}
+func (m *Manager) isManager() {}
 
 var _ ManagerProvider = (*Manager)(nil)

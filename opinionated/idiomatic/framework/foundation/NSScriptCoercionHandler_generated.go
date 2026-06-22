@@ -46,24 +46,24 @@ func scriptCoercionHandlerAdopt(id objc.ID) *ScriptCoercionHandler {
 }
 
 // Description returns the object's -description text.
-func (x *ScriptCoercionHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sch *ScriptCoercionHandler) Description() string {
+	return rt.Description(objref.IDOf(sch))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScriptCoercionHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sch *ScriptCoercionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sch), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScriptCoercionHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sch *ScriptCoercionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sch), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScriptCoercionHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sch *ScriptCoercionHandler) String() string {
+	return rt.Description(objref.IDOf(sch))
 }
 
 // NewScriptCoercionHandler creates a new ScriptCoercionHandler.
@@ -73,15 +73,7 @@ func NewScriptCoercionHandler() *ScriptCoercionHandler {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (sch *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler {
+	objc.Send[objc.ID](objref.IDOf(sch), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return sch
 }
-
-// ScriptCoercionHandlerable is the interface implemented by [ScriptCoercionHandler], for mocking and DI.
-type ScriptCoercionHandlerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler
-}
-
-var _ ScriptCoercionHandlerable = (*ScriptCoercionHandler)(nil)

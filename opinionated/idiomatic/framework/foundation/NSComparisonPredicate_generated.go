@@ -61,52 +61,39 @@ func NewComparisonPredicateWithCoder(coder *Coder) *ComparisonPredicate {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ComparisonPredicate) WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cp *ComparisonPredicate) WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cp
 }
 
 // PredicateOperatorType wraps the corresponding Objective-C method.
-func (x *ComparisonPredicate) PredicateOperatorType() PredicateOperatorType {
-	_r := objc.Send[PredicateOperatorType](objref.IDOf(x), objc.RegisterName("predicateOperatorType"))
+func (cp *ComparisonPredicate) PredicateOperatorType() PredicateOperatorType {
+	_r := objc.Send[PredicateOperatorType](objref.IDOf(cp), objc.RegisterName("predicateOperatorType"))
 	return _r
 }
 
 // ComparisonPredicateModifier wraps the corresponding Objective-C method.
-func (x *ComparisonPredicate) ComparisonPredicateModifier() ComparisonPredicateModifier {
-	_r := objc.Send[ComparisonPredicateModifier](objref.IDOf(x), objc.RegisterName("comparisonPredicateModifier"))
+func (cp *ComparisonPredicate) ComparisonPredicateModifier() ComparisonPredicateModifier {
+	_r := objc.Send[ComparisonPredicateModifier](objref.IDOf(cp), objc.RegisterName("comparisonPredicateModifier"))
 	return _r
 }
 
 // LeftExpression wraps the corresponding Objective-C method.
-func (x *ComparisonPredicate) LeftExpression() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpression"))
+func (cp *ComparisonPredicate) LeftExpression() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
 // RightExpression wraps the corresponding Objective-C method.
-func (x *ComparisonPredicate) RightExpression() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpression"))
+func (cp *ComparisonPredicate) RightExpression() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *ComparisonPredicate) Options() ComparisonPredicateOptions {
-	_r := objc.Send[ComparisonPredicateOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (cp *ComparisonPredicate) Options() ComparisonPredicateOptions {
+	_r := objc.Send[ComparisonPredicateOptions](objref.IDOf(cp), objc.RegisterName("options"))
 	return _r
 }
-
-// ComparisonPredicateable is the interface implemented by [ComparisonPredicate], for mocking and DI.
-type ComparisonPredicateable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate
-	PredicateOperatorType() PredicateOperatorType
-	ComparisonPredicateModifier() ComparisonPredicateModifier
-	LeftExpression() *Expression
-	RightExpression() *Expression
-	Options() ComparisonPredicateOptions
-}
-
-var _ ComparisonPredicateable = (*ComparisonPredicate)(nil)
 
 var _ PredicateProvider = (*ComparisonPredicate)(nil)

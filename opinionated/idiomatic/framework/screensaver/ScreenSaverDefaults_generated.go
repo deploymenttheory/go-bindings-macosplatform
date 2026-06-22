@@ -46,24 +46,24 @@ func screenSaverDefaultsAdopt(id objc.ID) *ScreenSaverDefaults {
 }
 
 // Description returns the object's -description text.
-func (x *ScreenSaverDefaults) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ssd *ScreenSaverDefaults) Description() string {
+	return rt.Description(objref.IDOf(ssd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScreenSaverDefaults) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ssd *ScreenSaverDefaults) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ssd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScreenSaverDefaults) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ssd *ScreenSaverDefaults) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ssd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScreenSaverDefaults) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ssd *ScreenSaverDefaults) String() string {
+	return rt.Description(objref.IDOf(ssd))
 }
 
 // NewScreenSaverDefaults creates a new ScreenSaverDefaults.
@@ -71,10 +71,3 @@ func NewScreenSaverDefaults() *ScreenSaverDefaults {
 	_id := objc.Send[objc.ID](objc.ID(_class("ScreenSaverDefaults")), objc.RegisterName("new"))
 	return screenSaverDefaultsAdopt(_id)
 }
-
-// ScreenSaverDefaultsable is the interface implemented by [ScreenSaverDefaults], for mocking and DI.
-type ScreenSaverDefaultsable interface {
-	obj.Object
-}
-
-var _ ScreenSaverDefaultsable = (*ScreenSaverDefaults)(nil)

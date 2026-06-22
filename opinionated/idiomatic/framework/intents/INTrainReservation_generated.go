@@ -62,24 +62,15 @@ func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservation
 }
 
 // ReservedSeat wraps the corresponding Objective-C method.
-func (x *TrainReservation) ReservedSeat() *Seat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+func (tr *TrainReservation) ReservedSeat() *Seat {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // TrainTrip wraps the corresponding Objective-C method.
-func (x *TrainReservation) TrainTrip() *TrainTrip {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainTrip"))
+func (tr *TrainReservation) TrainTrip() *TrainTrip {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("trainTrip"))
 	return TrainTripFromID(_r)
 }
-
-// TrainReservationable is the interface implemented by [TrainReservation], for mocking and DI.
-type TrainReservationable interface {
-	obj.Object
-	ReservedSeat() *Seat
-	TrainTrip() *TrainTrip
-}
-
-var _ TrainReservationable = (*TrainReservation)(nil)
 
 var _ ReservationProvider = (*TrainReservation)(nil)

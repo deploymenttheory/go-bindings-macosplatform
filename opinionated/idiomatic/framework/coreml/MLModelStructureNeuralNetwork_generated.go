@@ -46,24 +46,24 @@ func modelStructureNeuralNetworkAdopt(id objc.ID) *ModelStructureNeuralNetwork {
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureNeuralNetwork) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msnn *ModelStructureNeuralNetwork) Description() string {
+	return rt.Description(objref.IDOf(msnn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureNeuralNetwork) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msnn *ModelStructureNeuralNetwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msnn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureNeuralNetwork) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msnn *ModelStructureNeuralNetwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msnn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureNeuralNetwork) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msnn *ModelStructureNeuralNetwork) String() string {
+	return rt.Description(objref.IDOf(msnn))
 }
 
 // NewModelStructureNeuralNetwork creates a new ModelStructureNeuralNetwork.
@@ -75,17 +75,9 @@ func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
 // Layers wraps the corresponding Objective-C method.
 //
 // Layers returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layers"))
+func (msnn *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {
+	_arr := objc.Send[objc.ID](objref.IDOf(msnn), objc.RegisterName("layers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureNeuralNetworkLayer {
 		return ModelStructureNeuralNetworkLayerFromID(_id)
 	})
 }
-
-// ModelStructureNeuralNetworkable is the interface implemented by [ModelStructureNeuralNetwork], for mocking and DI.
-type ModelStructureNeuralNetworkable interface {
-	obj.Object
-	Layers() []*ModelStructureNeuralNetworkLayer
-}
-
-var _ ModelStructureNeuralNetworkable = (*ModelStructureNeuralNetwork)(nil)

@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewUSBKeyboardConfiguration() *USBKeyboardConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBKeyboardConfiguration")), objc.RegisterName("new"))
 	return uSBKeyboardConfigurationAdopt(_id)
 }
-
-// USBKeyboardConfigurationable is the interface implemented by [USBKeyboardConfiguration], for mocking and DI.
-type USBKeyboardConfigurationable interface {
-	obj.Object
-}
-
-var _ USBKeyboardConfigurationable = (*USBKeyboardConfiguration)(nil)
 
 var _ KeyboardConfigurationProvider = (*USBKeyboardConfiguration)(nil)

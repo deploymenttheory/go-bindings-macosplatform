@@ -5,13 +5,14 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Color is an idiomatic wrapper over the Objective-C class NSColor.
@@ -48,24 +49,24 @@ func colorAdopt(id objc.ID) *Color {
 }
 
 // Description returns the object's -description text.
-func (x *Color) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Color) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Color) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Color) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Color) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Color) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Color) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Color) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewColor creates a new Color.
@@ -82,151 +83,151 @@ func NewColorWithCoder(coder obj.Object) *Color {
 }
 
 // ColorUsingType returns a version of the color object that is compatible with the specified color type.
-func (x *Color) ColorUsingType(type_ ColorType) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorUsingType:"), type_)
+func (c *Color) ColorUsingType(type_ ColorType) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingType:"), type_)
 	return ColorFromID(_r)
 }
 
 // ColorUsingColorSpace creates a new color object representing the color of the current color object in the specified color space.
-func (x *Color) ColorUsingColorSpace(space *ColorSpace) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorUsingColorSpace:"), objref.IDOf(space))
+func (c *Color) ColorUsingColorSpace(space *ColorSpace) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingColorSpace:"), objref.IDOf(space))
 	return ColorFromID(_r)
 }
 
 // ColorByApplyingContentHeadroom reinterpret the color by applying a new contentHeadroom without changing the color components. Changing the contentHeadroom redefines the color relative to a different peak white, changing its behavior under tone mapping and the result of calling standardDynamicRangeColor. The new color will have a contentHeadroom >= 1.0. If called on a color with a color space that does not support extended range, or does not have an equivalent extended range counterpart, this will return self.
-func (x *Color) ColorByApplyingContentHeadroom(contentHeadroom float64) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorByApplyingContentHeadroom:"), contentHeadroom)
+func (c *Color) ColorByApplyingContentHeadroom(contentHeadroom float64) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorByApplyingContentHeadroom:"), contentHeadroom)
 	return ColorFromID(_r)
 }
 
 // HighlightWithLevel creates a new color object that represents a blend between the current color and the highlight color.
-func (x *Color) HighlightWithLevel(val float64) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightWithLevel:"), val)
+func (c *Color) HighlightWithLevel(val float64) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("highlightWithLevel:"), val)
 	return ColorFromID(_r)
 }
 
 // ShadowWithLevel creates a new color object that represents a blend between the current color and the shadow color.
-func (x *Color) ShadowWithLevel(val float64) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadowWithLevel:"), val)
+func (c *Color) ShadowWithLevel(val float64) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("shadowWithLevel:"), val)
 	return ColorFromID(_r)
 }
 
 // ColorWithSystemEffect returns a new color object that represents the current color modified to include the specified visual effect.
-func (x *Color) ColorWithSystemEffect(systemEffect ColorSystemEffect) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorWithSystemEffect:"), systemEffect)
+func (c *Color) ColorWithSystemEffect(systemEffect ColorSystemEffect) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorWithSystemEffect:"), systemEffect)
 	return ColorFromID(_r)
 }
 
 // Set sets the color of subsequent drawing to the color that the color object represents.
-func (x *Color) Set() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+func (c *Color) Set() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("set"))
 }
 
 // SetFill sets the fill color of subsequent drawing to the color object’s color.
-func (x *Color) SetFill() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFill"))
+func (c *Color) SetFill() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFill"))
 }
 
 // SetStroke sets the stroke color of subsequent drawing to the color object’s color.
-func (x *Color) SetStroke() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStroke"))
+func (c *Color) SetStroke() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setStroke"))
 }
 
 // BlendedColorWithFractionOfColor creates a new color object whose component values are a weighted sum of the current color object and the specified color object’s.
-func (x *Color) BlendedColorWithFractionOfColor(fraction float64, color *Color) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blendedColorWithFraction:ofColor:"), fraction, objref.IDOf(color))
+func (c *Color) BlendedColorWithFractionOfColor(fraction float64, color *Color) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("blendedColorWithFraction:ofColor:"), fraction, objref.IDOf(color))
 	return ColorFromID(_r)
 }
 
 // ColorWithAlphaComponent creates a new color object that has the same color space and component values as the current color object, but the specified alpha component.
-func (x *Color) ColorWithAlphaComponent(alpha float64) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorWithAlphaComponent:"), alpha)
+func (c *Color) ColorWithAlphaComponent(alpha float64) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorWithAlphaComponent:"), alpha)
 	return ColorFromID(_r)
 }
 
 // GetRedGreenBlueAlpha returns the color object’s RGB component and opacity values in the respective arguments.
-func (x *Color) GetRedGreenBlueAlpha() (red float64, green float64, blue float64, alpha float64) {
+func (c *Color) GetRedGreenBlueAlpha() (red float64, green float64, blue float64, alpha float64) {
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
 	var _out3 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRed:green:blue:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getRed:green:blue:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
 	return _out0, _out1, _out2, _out3
 }
 
 // GetHueSaturationBrightnessAlpha returns the color object’s HSB component and opacity values in the respective arguments.
-func (x *Color) GetHueSaturationBrightnessAlpha() (hue float64, saturation float64, brightness float64, alpha float64) {
+func (c *Color) GetHueSaturationBrightnessAlpha() (hue float64, saturation float64, brightness float64, alpha float64) {
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
 	var _out3 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getHue:saturation:brightness:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getHue:saturation:brightness:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
 	return _out0, _out1, _out2, _out3
 }
 
 // GetWhiteAlpha returns the grayscale and alpha values of the color.
-func (x *Color) GetWhiteAlpha() (white float64, alpha float64) {
+func (c *Color) GetWhiteAlpha() (white float64, alpha float64) {
 	var _out0 float64
 	var _out1 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getWhite:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getWhite:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _out0, _out1
 }
 
 // GetCyanMagentaYellowBlackAlpha returns the color object’s CMYK and opacity values.
-func (x *Color) GetCyanMagentaYellowBlackAlpha() (cyan float64, magenta float64, yellow float64, black float64, alpha float64) {
+func (c *Color) GetCyanMagentaYellowBlackAlpha() (cyan float64, magenta float64, yellow float64, black float64, alpha float64) {
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
 	var _out3 float64
 	var _out4 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCyan:magenta:yellow:black:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getCyan:magenta:yellow:black:alpha:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
 	return _out0, _out1, _out2, _out3, _out4
 }
 
 // GetComponents returns the components of the color as an array.
-func (x *Color) GetComponents() (components float64) {
+func (c *Color) GetComponents() (components float64) {
 	var _out0 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getComponents:"), unsafe.Pointer(&_out0))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("getComponents:"), unsafe.Pointer(&_out0))
 	return _out0
 }
 
 // WriteToPasteboard writes the color object’s data to the specified pasteboard.
-func (x *Color) WriteToPasteboard(pasteBoard *Pasteboard) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeToPasteboard:"), objref.IDOf(pasteBoard))
+func (c *Color) WriteToPasteboard(pasteBoard *Pasteboard) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("writeToPasteboard:"), objref.IDOf(pasteBoard))
 }
 
 // DrawSwatchInRect draws the current color in the specified rectangle.
-func (x *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawSwatchInRect:"), rect)
+func (c *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawSwatchInRect:"), rect)
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Color) Type() ColorType {
-	_r := objc.Send[ColorType](objref.IDOf(x), objc.RegisterName("type"))
+func (c *Color) Type() ColorType {
+	_r := objc.Send[ColorType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }
 
-// StandardDynamicRangeColor in some cases it is useful to recover the color that was base the SDR color that was exposed to generate an HDR color. If a color's `linearExposure` is > 1, then this will return the base SDR color. If the color is not an HDR color, this will return `self`.
-func (x *Color) StandardDynamicRangeColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardDynamicRangeColor"))
+// StandardDynamicRangeColor returns in some cases it is useful to recover the color that was base the SDR color that was exposed to generate an HDR color. If a color's `linearExposure` is > 1, then this will return the base SDR color. If the color is not an HDR color, this will return `self`.
+func (c *Color) StandardDynamicRangeColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("standardDynamicRangeColor"))
 	return ColorFromID(_r)
 }
 
 // CatalogNameComponent wraps the corresponding Objective-C method.
-func (x *Color) CatalogNameComponent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("catalogNameComponent"))
+func (c *Color) CatalogNameComponent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("catalogNameComponent"))
 	return obj.Wrap(_r)
 }
 
 // ColorNameComponent wraps the corresponding Objective-C method.
-func (x *Color) ColorNameComponent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorNameComponent"))
+func (c *Color) ColorNameComponent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorNameComponent"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedCatalogNameComponent wraps the corresponding Objective-C method.
-func (x *Color) LocalizedCatalogNameComponent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedCatalogNameComponent"))
+func (c *Color) LocalizedCatalogNameComponent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedCatalogNameComponent"))
 	if _r == 0 {
 		return ""
 	}
@@ -234,8 +235,8 @@ func (x *Color) LocalizedCatalogNameComponent() string {
 }
 
 // LocalizedColorNameComponent wraps the corresponding Objective-C method.
-func (x *Color) LocalizedColorNameComponent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedColorNameComponent"))
+func (c *Color) LocalizedColorNameComponent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedColorNameComponent"))
 	if _r == 0 {
 		return ""
 	}
@@ -243,172 +244,121 @@ func (x *Color) LocalizedColorNameComponent() string {
 }
 
 // RedComponent wraps the corresponding Objective-C method.
-func (x *Color) RedComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("redComponent"))
+func (c *Color) RedComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("redComponent"))
 	return _r
 }
 
 // GreenComponent wraps the corresponding Objective-C method.
-func (x *Color) GreenComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("greenComponent"))
+func (c *Color) GreenComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("greenComponent"))
 	return _r
 }
 
 // BlueComponent wraps the corresponding Objective-C method.
-func (x *Color) BlueComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blueComponent"))
+func (c *Color) BlueComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blueComponent"))
 	return _r
 }
 
 // HueComponent wraps the corresponding Objective-C method.
-func (x *Color) HueComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("hueComponent"))
+func (c *Color) HueComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("hueComponent"))
 	return _r
 }
 
 // SaturationComponent wraps the corresponding Objective-C method.
-func (x *Color) SaturationComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("saturationComponent"))
+func (c *Color) SaturationComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("saturationComponent"))
 	return _r
 }
 
 // BrightnessComponent wraps the corresponding Objective-C method.
-func (x *Color) BrightnessComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("brightnessComponent"))
+func (c *Color) BrightnessComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("brightnessComponent"))
 	return _r
 }
 
 // WhiteComponent wraps the corresponding Objective-C method.
-func (x *Color) WhiteComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("whiteComponent"))
+func (c *Color) WhiteComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("whiteComponent"))
 	return _r
 }
 
 // CyanComponent wraps the corresponding Objective-C method.
-func (x *Color) CyanComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cyanComponent"))
+func (c *Color) CyanComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("cyanComponent"))
 	return _r
 }
 
 // MagentaComponent wraps the corresponding Objective-C method.
-func (x *Color) MagentaComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("magentaComponent"))
+func (c *Color) MagentaComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("magentaComponent"))
 	return _r
 }
 
 // YellowComponent wraps the corresponding Objective-C method.
-func (x *Color) YellowComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yellowComponent"))
+func (c *Color) YellowComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("yellowComponent"))
 	return _r
 }
 
 // BlackComponent wraps the corresponding Objective-C method.
-func (x *Color) BlackComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blackComponent"))
+func (c *Color) BlackComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blackComponent"))
 	return _r
 }
 
 // ColorSpace wraps the corresponding Objective-C method.
-func (x *Color) ColorSpace() *ColorSpace {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+func (c *Color) ColorSpace() *ColorSpace {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
 // NumberOfComponents wraps the corresponding Objective-C method.
-func (x *Color) NumberOfComponents() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfComponents"))
+func (c *Color) NumberOfComponents() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("numberOfComponents"))
 	return _r
 }
 
 // PatternImage wraps the corresponding Objective-C method.
-func (x *Color) PatternImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("patternImage"))
+func (c *Color) PatternImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("patternImage"))
 	return ImageFromID(_r)
 }
 
 // AlphaComponent wraps the corresponding Objective-C method.
-func (x *Color) AlphaComponent() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alphaComponent"))
+func (c *Color) AlphaComponent() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("alphaComponent"))
 	return _r
 }
 
-// LinearExposure for HDR colors, the linear brightness multiplier that was applied when generating the color. Colors created with an exposure by NSColor create CGColors that are tagged with a contentHeadroom value. While CGColors created without a contentHeadroom tag will return 0 from CGColorGetHeadroom, NSColors generated in a similar fashion return a linearExposure of 1.0.
-func (x *Color) LinearExposure() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("linearExposure"))
+// LinearExposure returns for HDR colors, the linear brightness multiplier that was applied when generating the color. Colors created with an exposure by NSColor create CGColors that are tagged with a contentHeadroom value. While CGColors created without a contentHeadroom tag will return 0 from CGColorGetHeadroom, NSColors generated in a similar fashion return a linearExposure of 1.0.
+func (c *Color) LinearExposure() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("linearExposure"))
 	return _r
 }
 
 // CGColor wraps the corresponding Objective-C method.
-func (x *Color) CGColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGColor"))
+func (c *Color) CGColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
 	return obj.Wrap(_r)
 }
 
 // ColorUsingColorSpaceNameDevice creates a new color object for the same color, but in the specified color space and specific to the provided device.
-func (x *Color) ColorUsingColorSpaceNameDevice(name obj.Object, deviceDescription obj.Object) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorUsingColorSpaceName:device:"), objref.IDOf(name), objref.IDOf(deviceDescription))
+func (c *Color) ColorUsingColorSpaceNameDevice(name obj.Object, deviceDescription obj.Object) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingColorSpaceName:device:"), objref.IDOf(name), objref.IDOf(deviceDescription))
 	return ColorFromID(_r)
 }
 
 // ColorUsingColorSpaceName creates a new color object whose color is the same as the receiver’s, except that the new color object is in the specified color space.
-func (x *Color) ColorUsingColorSpaceName(name obj.Object) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorUsingColorSpaceName:"), objref.IDOf(name))
+func (c *Color) ColorUsingColorSpaceName(name obj.Object) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorUsingColorSpaceName:"), objref.IDOf(name))
 	return ColorFromID(_r)
 }
 
 // ColorSpaceName wraps the corresponding Objective-C method.
-func (x *Color) ColorSpaceName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpaceName"))
+func (c *Color) ColorSpaceName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpaceName"))
 	return obj.Wrap(_r)
 }
-
-// Colorable is the interface implemented by [Color], for mocking and DI.
-type Colorable interface {
-	obj.Object
-	ColorUsingType(type_ ColorType) *Color
-	ColorUsingColorSpace(space *ColorSpace) *Color
-	ColorByApplyingContentHeadroom(contentHeadroom float64) *Color
-	HighlightWithLevel(val float64) *Color
-	ShadowWithLevel(val float64) *Color
-	ColorWithSystemEffect(systemEffect ColorSystemEffect) *Color
-	Set()
-	SetFill()
-	SetStroke()
-	BlendedColorWithFractionOfColor(fraction float64, color *Color) *Color
-	ColorWithAlphaComponent(alpha float64) *Color
-	GetRedGreenBlueAlpha() (red float64, green float64, blue float64, alpha float64)
-	GetHueSaturationBrightnessAlpha() (hue float64, saturation float64, brightness float64, alpha float64)
-	GetWhiteAlpha() (white float64, alpha float64)
-	GetCyanMagentaYellowBlackAlpha() (cyan float64, magenta float64, yellow float64, black float64, alpha float64)
-	GetComponents() (components float64)
-	WriteToPasteboard(pasteBoard *Pasteboard)
-	DrawSwatchInRect(rect corefoundation.CGRect)
-	Type() ColorType
-	StandardDynamicRangeColor() *Color
-	CatalogNameComponent() obj.Object
-	ColorNameComponent() obj.Object
-	LocalizedCatalogNameComponent() string
-	LocalizedColorNameComponent() string
-	RedComponent() float64
-	GreenComponent() float64
-	BlueComponent() float64
-	HueComponent() float64
-	SaturationComponent() float64
-	BrightnessComponent() float64
-	WhiteComponent() float64
-	CyanComponent() float64
-	MagentaComponent() float64
-	YellowComponent() float64
-	BlackComponent() float64
-	ColorSpace() *ColorSpace
-	NumberOfComponents() int
-	PatternImage() *Image
-	AlphaComponent() float64
-	LinearExposure() float64
-	CGColor() obj.Object
-	ColorUsingColorSpaceNameDevice(name obj.Object, deviceDescription obj.Object) *Color
-	ColorUsingColorSpaceName(name obj.Object) *Color
-	ColorSpaceName() obj.Object
-}
-
-var _ Colorable = (*Color)(nil)

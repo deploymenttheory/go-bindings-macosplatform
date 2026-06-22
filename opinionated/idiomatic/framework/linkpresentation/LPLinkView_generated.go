@@ -46,24 +46,24 @@ func linkViewAdopt(id objc.ID) *LinkView {
 }
 
 // Description returns the object's -description text.
-func (x *LinkView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lv *LinkView) Description() string {
+	return rt.Description(objref.IDOf(lv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LinkView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lv *LinkView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LinkView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lv *LinkView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LinkView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lv *LinkView) String() string {
+	return rt.Description(objref.IDOf(lv))
 }
 
 // NewLinkViewWithURL initializes a placeholder link view without metadata for a given URL.
@@ -80,29 +80,14 @@ func NewLinkViewWithMetadata(metadata *LinkMetadata) *LinkView {
 	return linkViewAdopt(_id)
 }
 
-// WithMetadata the metadata from which to generate a rich presentation.
-func (x *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
-	return x
+// WithMetadata sets the metadata from which to generate a rich presentation.
+func (lv *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
+	objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
+	return lv
 }
 
 // Metadata wraps the corresponding Objective-C method.
-func (x *LinkView) Metadata() *LinkMetadata {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+func (lv *LinkView) Metadata() *LinkMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("metadata"))
 	return LinkMetadataFromID(_r)
 }
-
-// SetMetadata wraps the corresponding Objective-C method.
-func (x *LinkView) SetMetadata(metadata *LinkMetadata) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
-}
-
-// LinkViewable is the interface implemented by [LinkView], for mocking and DI.
-type LinkViewable interface {
-	obj.Object
-	WithMetadata(metadata *LinkMetadata) *LinkView
-	Metadata() *LinkMetadata
-	SetMetadata(metadata *LinkMetadata)
-}
-
-var _ LinkViewable = (*LinkView)(nil)

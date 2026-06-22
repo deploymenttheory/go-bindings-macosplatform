@@ -46,24 +46,24 @@ func airportGateAdopt(id objc.ID) *AirportGate {
 }
 
 // Description returns the object's -description text.
-func (x *AirportGate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ag *AirportGate) Description() string {
+	return rt.Description(objref.IDOf(ag))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AirportGate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ag *AirportGate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ag), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AirportGate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ag *AirportGate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ag), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AirportGate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ag *AirportGate) String() string {
+	return rt.Description(objref.IDOf(ag))
 }
 
 // NewAirportGateWithAirportTerminalGate creates a new gate object for a flight.
@@ -74,14 +74,14 @@ func NewAirportGateWithAirportTerminalGate(airport *Airport, terminal string, ga
 }
 
 // Airport wraps the corresponding Objective-C method.
-func (x *AirportGate) Airport() *Airport {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airport"))
+func (ag *AirportGate) Airport() *Airport {
+	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("airport"))
 	return AirportFromID(_r)
 }
 
 // Terminal wraps the corresponding Objective-C method.
-func (x *AirportGate) Terminal() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminal"))
+func (ag *AirportGate) Terminal() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("terminal"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,20 +89,10 @@ func (x *AirportGate) Terminal() string {
 }
 
 // Gate wraps the corresponding Objective-C method.
-func (x *AirportGate) Gate() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gate"))
+func (ag *AirportGate) Gate() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("gate"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AirportGateable is the interface implemented by [AirportGate], for mocking and DI.
-type AirportGateable interface {
-	obj.Object
-	Airport() *Airport
-	Terminal() string
-	Gate() string
-}
-
-var _ AirportGateable = (*AirportGate)(nil)

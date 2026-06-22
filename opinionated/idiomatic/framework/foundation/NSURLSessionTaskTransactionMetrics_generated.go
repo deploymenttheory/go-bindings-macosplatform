@@ -46,24 +46,24 @@ func uRLSessionTaskTransactionMetricsAdopt(id objc.ID) *URLSessionTaskTransactio
 }
 
 // Description returns the object's -description text.
-func (x *URLSessionTaskTransactionMetrics) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (usttm *URLSessionTaskTransactionMetrics) Description() string {
+	return rt.Description(objref.IDOf(usttm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLSessionTaskTransactionMetrics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (usttm *URLSessionTaskTransactionMetrics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(usttm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLSessionTaskTransactionMetrics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (usttm *URLSessionTaskTransactionMetrics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(usttm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLSessionTaskTransactionMetrics) String() string {
-	return rt.Description(objref.IDOf(x))
+func (usttm *URLSessionTaskTransactionMetrics) String() string {
+	return rt.Description(objref.IDOf(usttm))
 }
 
 // NewURLSessionTaskTransactionMetrics creates a new URLSessionTaskTransactionMetrics.
@@ -73,92 +73,92 @@ func NewURLSessionTaskTransactionMetrics() *URLSessionTaskTransactionMetrics {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionTaskTransactionMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskTransactionMetrics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (usttm *URLSessionTaskTransactionMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskTransactionMetrics {
+	objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return usttm
 }
 
 // Request wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) Request() *URLRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+func (usttm *URLSessionTaskTransactionMetrics) Request() *URLRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
 // Response wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) Response() *URLResponse {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
+func (usttm *URLSessionTaskTransactionMetrics) Response() *URLResponse {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
 // FetchStartDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) FetchStartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchStartDate"))
+func (usttm *URLSessionTaskTransactionMetrics) FetchStartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("fetchStartDate"))
 	return DateFromID(_r)
 }
 
 // DomainLookupStartDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) DomainLookupStartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainLookupStartDate"))
+func (usttm *URLSessionTaskTransactionMetrics) DomainLookupStartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("domainLookupStartDate"))
 	return DateFromID(_r)
 }
 
 // DomainLookupEndDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) DomainLookupEndDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainLookupEndDate"))
+func (usttm *URLSessionTaskTransactionMetrics) DomainLookupEndDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("domainLookupEndDate"))
 	return DateFromID(_r)
 }
 
 // ConnectStartDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) ConnectStartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectStartDate"))
+func (usttm *URLSessionTaskTransactionMetrics) ConnectStartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("connectStartDate"))
 	return DateFromID(_r)
 }
 
 // SecureConnectionStartDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) SecureConnectionStartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secureConnectionStartDate"))
+func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionStartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("secureConnectionStartDate"))
 	return DateFromID(_r)
 }
 
 // SecureConnectionEndDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) SecureConnectionEndDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secureConnectionEndDate"))
+func (usttm *URLSessionTaskTransactionMetrics) SecureConnectionEndDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("secureConnectionEndDate"))
 	return DateFromID(_r)
 }
 
 // ConnectEndDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) ConnectEndDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectEndDate"))
+func (usttm *URLSessionTaskTransactionMetrics) ConnectEndDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("connectEndDate"))
 	return DateFromID(_r)
 }
 
 // RequestStartDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) RequestStartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStartDate"))
+func (usttm *URLSessionTaskTransactionMetrics) RequestStartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("requestStartDate"))
 	return DateFromID(_r)
 }
 
 // RequestEndDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) RequestEndDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEndDate"))
+func (usttm *URLSessionTaskTransactionMetrics) RequestEndDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("requestEndDate"))
 	return DateFromID(_r)
 }
 
 // ResponseStartDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) ResponseStartDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseStartDate"))
+func (usttm *URLSessionTaskTransactionMetrics) ResponseStartDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("responseStartDate"))
 	return DateFromID(_r)
 }
 
 // ResponseEndDate wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) ResponseEndDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseEndDate"))
+func (usttm *URLSessionTaskTransactionMetrics) ResponseEndDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("responseEndDate"))
 	return DateFromID(_r)
 }
 
 // NetworkProtocolName wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkProtocolName"))
+func (usttm *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("networkProtocolName"))
 	if _r == 0 {
 		return ""
 	}
@@ -166,62 +166,62 @@ func (x *URLSessionTaskTransactionMetrics) NetworkProtocolName() string {
 }
 
 // IsProxyConnection wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) IsProxyConnection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isProxyConnection"))
+func (usttm *URLSessionTaskTransactionMetrics) IsProxyConnection() bool {
+	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isProxyConnection"))
 	return _r
 }
 
 // IsReusedConnection wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) IsReusedConnection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReusedConnection"))
+func (usttm *URLSessionTaskTransactionMetrics) IsReusedConnection() bool {
+	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isReusedConnection"))
 	return _r
 }
 
 // ResourceFetchType wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) ResourceFetchType() URLSessionTaskMetricsResourceFetchType {
-	_r := objc.Send[URLSessionTaskMetricsResourceFetchType](objref.IDOf(x), objc.RegisterName("resourceFetchType"))
+func (usttm *URLSessionTaskTransactionMetrics) ResourceFetchType() URLSessionTaskMetricsResourceFetchType {
+	_r := objc.Send[URLSessionTaskMetricsResourceFetchType](objref.IDOf(usttm), objc.RegisterName("resourceFetchType"))
 	return _r
 }
 
 // CountOfRequestHeaderBytesSent wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) CountOfRequestHeaderBytesSent() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfRequestHeaderBytesSent"))
+func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestHeaderBytesSent() int64 {
+	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestHeaderBytesSent"))
 	return _r
 }
 
 // CountOfRequestBodyBytesSent wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesSent() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfRequestBodyBytesSent"))
+func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesSent() int64 {
+	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestBodyBytesSent"))
 	return _r
 }
 
 // CountOfRequestBodyBytesBeforeEncoding wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesBeforeEncoding() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfRequestBodyBytesBeforeEncoding"))
+func (usttm *URLSessionTaskTransactionMetrics) CountOfRequestBodyBytesBeforeEncoding() int64 {
+	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfRequestBodyBytesBeforeEncoding"))
 	return _r
 }
 
 // CountOfResponseHeaderBytesReceived wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) CountOfResponseHeaderBytesReceived() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfResponseHeaderBytesReceived"))
+func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseHeaderBytesReceived() int64 {
+	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseHeaderBytesReceived"))
 	return _r
 }
 
 // CountOfResponseBodyBytesReceived wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesReceived() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfResponseBodyBytesReceived"))
+func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesReceived() int64 {
+	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseBodyBytesReceived"))
 	return _r
 }
 
 // CountOfResponseBodyBytesAfterDecoding wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesAfterDecoding() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("countOfResponseBodyBytesAfterDecoding"))
+func (usttm *URLSessionTaskTransactionMetrics) CountOfResponseBodyBytesAfterDecoding() int64 {
+	_r := objc.Send[int64](objref.IDOf(usttm), objc.RegisterName("countOfResponseBodyBytesAfterDecoding"))
 	return _r
 }
 
 // LocalAddress wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) LocalAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localAddress"))
+func (usttm *URLSessionTaskTransactionMetrics) LocalAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("localAddress"))
 	if _r == 0 {
 		return ""
 	}
@@ -229,14 +229,14 @@ func (x *URLSessionTaskTransactionMetrics) LocalAddress() string {
 }
 
 // LocalPort wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) LocalPort() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localPort"))
+func (usttm *URLSessionTaskTransactionMetrics) LocalPort() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("localPort"))
 	return NumberFromID(_r)
 }
 
 // RemoteAddress wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) RemoteAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteAddress"))
+func (usttm *URLSessionTaskTransactionMetrics) RemoteAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("remoteAddress"))
 	if _r == 0 {
 		return ""
 	}
@@ -244,91 +244,49 @@ func (x *URLSessionTaskTransactionMetrics) RemoteAddress() string {
 }
 
 // RemotePort wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) RemotePort() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remotePort"))
+func (usttm *URLSessionTaskTransactionMetrics) RemotePort() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("remotePort"))
 	return NumberFromID(_r)
 }
 
 // NegotiatedTLSProtocolVersion wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negotiatedTLSProtocolVersion"))
+func (usttm *URLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("negotiatedTLSProtocolVersion"))
 	return NumberFromID(_r)
 }
 
 // NegotiatedTLSCipherSuite wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("negotiatedTLSCipherSuite"))
+func (usttm *URLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("negotiatedTLSCipherSuite"))
 	return NumberFromID(_r)
 }
 
 // IsCellular wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) IsCellular() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCellular"))
+func (usttm *URLSessionTaskTransactionMetrics) IsCellular() bool {
+	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isCellular"))
 	return _r
 }
 
 // IsExpensive wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) IsExpensive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExpensive"))
+func (usttm *URLSessionTaskTransactionMetrics) IsExpensive() bool {
+	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isExpensive"))
 	return _r
 }
 
 // IsConstrained wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) IsConstrained() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstrained"))
+func (usttm *URLSessionTaskTransactionMetrics) IsConstrained() bool {
+	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isConstrained"))
 	return _r
 }
 
 // IsMultipath wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) IsMultipath() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultipath"))
+func (usttm *URLSessionTaskTransactionMetrics) IsMultipath() bool {
+	_r := objc.Send[bool](objref.IDOf(usttm), objc.RegisterName("isMultipath"))
 	return _r
 }
 
 // DomainResolutionProtocol wraps the corresponding Objective-C method.
-func (x *URLSessionTaskTransactionMetrics) DomainResolutionProtocol() URLSessionTaskMetricsDomainResolutionProtocol {
-	_r := objc.Send[URLSessionTaskMetricsDomainResolutionProtocol](objref.IDOf(x), objc.RegisterName("domainResolutionProtocol"))
+func (usttm *URLSessionTaskTransactionMetrics) DomainResolutionProtocol() URLSessionTaskMetricsDomainResolutionProtocol {
+	_r := objc.Send[URLSessionTaskMetricsDomainResolutionProtocol](objref.IDOf(usttm), objc.RegisterName("domainResolutionProtocol"))
 	return _r
 }
-
-// URLSessionTaskTransactionMetricsable is the interface implemented by [URLSessionTaskTransactionMetrics], for mocking and DI.
-type URLSessionTaskTransactionMetricsable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskTransactionMetrics
-	Request() *URLRequest
-	Response() *URLResponse
-	FetchStartDate() *Date
-	DomainLookupStartDate() *Date
-	DomainLookupEndDate() *Date
-	ConnectStartDate() *Date
-	SecureConnectionStartDate() *Date
-	SecureConnectionEndDate() *Date
-	ConnectEndDate() *Date
-	RequestStartDate() *Date
-	RequestEndDate() *Date
-	ResponseStartDate() *Date
-	ResponseEndDate() *Date
-	NetworkProtocolName() string
-	IsProxyConnection() bool
-	IsReusedConnection() bool
-	ResourceFetchType() URLSessionTaskMetricsResourceFetchType
-	CountOfRequestHeaderBytesSent() int64
-	CountOfRequestBodyBytesSent() int64
-	CountOfRequestBodyBytesBeforeEncoding() int64
-	CountOfResponseHeaderBytesReceived() int64
-	CountOfResponseBodyBytesReceived() int64
-	CountOfResponseBodyBytesAfterDecoding() int64
-	LocalAddress() string
-	LocalPort() *Number
-	RemoteAddress() string
-	RemotePort() *Number
-	NegotiatedTLSProtocolVersion() *Number
-	NegotiatedTLSCipherSuite() *Number
-	IsCellular() bool
-	IsExpensive() bool
-	IsConstrained() bool
-	IsMultipath() bool
-	DomainResolutionProtocol() URLSessionTaskMetricsDomainResolutionProtocol
-}
-
-var _ URLSessionTaskTransactionMetricsable = (*URLSessionTaskTransactionMetrics)(nil)

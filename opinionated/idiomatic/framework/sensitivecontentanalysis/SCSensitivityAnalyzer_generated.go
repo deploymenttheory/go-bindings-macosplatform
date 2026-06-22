@@ -6,6 +6,7 @@ package sensitivecontentanalysis
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func sensitivityAnalyzerAdopt(id objc.ID) *SensitivityAnalyzer {
 }
 
 // Description returns the object's -description text.
-func (x *SensitivityAnalyzer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SensitivityAnalyzer) Description() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SensitivityAnalyzer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sa *SensitivityAnalyzer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SensitivityAnalyzer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sa *SensitivityAnalyzer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SensitivityAnalyzer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SensitivityAnalyzer) String() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // NewSensitivityAnalyzer creates a new SensitivityAnalyzer.
@@ -77,7 +78,7 @@ func NewSensitivityAnalyzer() *SensitivityAnalyzer {
 // AnalyzeImageFile analyzes an image file on disk at a URL and runs code on completion.
 //
 // AnalyzeImageFile blocks until the operation completes or ctx is cancelled.
-func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (result *SensitivityAnalysis, err error) {
+func (sa *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (result *SensitivityAnalysis, err error) {
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
@@ -89,7 +90,7 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 		_o.val = SensitivityAnalysisFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeImageFile:completionHandler:"), rt.FileURL(fileURL), _block)
+	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("analyzeImageFile:completionHandler:"), rt.FileURL(fileURL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,7 +103,7 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 // AnalyzeCGImage analyzes an image for sensitive content and runs code on completion.
 //
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
-func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (result *SensitivityAnalysis, err error) {
+func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (result *SensitivityAnalysis, err error) {
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
@@ -114,7 +115,7 @@ func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Obje
 		_o.val = SensitivityAnalysisFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeCGImage:completionHandler:"), objref.IDOf(image), _block)
+	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("analyzeCGImage:completionHandler:"), objref.IDOf(image), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -124,18 +125,8 @@ func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Obje
 	}
 }
 
-// AnalysisPolicy current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
-func (x *SensitivityAnalyzer) AnalysisPolicy() SensitivityAnalysisPolicy {
-	_r := objc.Send[SensitivityAnalysisPolicy](objref.IDOf(x), objc.RegisterName("analysisPolicy"))
+// AnalysisPolicy returns current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
+func (sa *SensitivityAnalyzer) AnalysisPolicy() SensitivityAnalysisPolicy {
+	_r := objc.Send[SensitivityAnalysisPolicy](objref.IDOf(sa), objc.RegisterName("analysisPolicy"))
 	return _r
 }
-
-// SensitivityAnalyzerable is the interface implemented by [SensitivityAnalyzer], for mocking and DI.
-type SensitivityAnalyzerable interface {
-	obj.Object
-	AnalyzeImageFile(ctx context.Context, fileURL string) (*SensitivityAnalysis, error)
-	AnalyzeCGImage(ctx context.Context, image obj.Object) (*SensitivityAnalysis, error)
-	AnalysisPolicy() SensitivityAnalysisPolicy
-}
-
-var _ SensitivityAnalyzerable = (*SensitivityAnalyzer)(nil)

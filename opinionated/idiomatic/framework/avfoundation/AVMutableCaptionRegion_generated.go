@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,50 +58,22 @@ func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionReg
 	return mutableCaptionRegionAdopt(_id)
 }
 
-// WithScroll the scroll mode of the region.
-func (x *MutableCaptionRegion) WithScroll(scroll CaptionRegionScroll) *MutableCaptionRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScroll:"), scroll)
-	return x
+// WithScroll sets the scroll mode of the region.
+func (mcr *MutableCaptionRegion) WithScroll(scroll CaptionRegionScroll) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(mcr), objc.RegisterName("setScroll:"), scroll)
+	return mcr
 }
 
-// WithDisplayAlignment the alignment of lines for the region.
-func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) *MutableCaptionRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayAlignment:"), displayAlignment)
-	return x
+// WithDisplayAlignment sets the alignment of lines for the region.
+func (mcr *MutableCaptionRegion) WithDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(mcr), objc.RegisterName("setDisplayAlignment:"), displayAlignment)
+	return mcr
 }
 
-// WithWritingMode the block and inline progression direction of the region.
-func (x *MutableCaptionRegion) WithWritingMode(writingMode CaptionRegionWritingMode) *MutableCaptionRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingMode:"), writingMode)
-	return x
+// WithWritingMode sets the block and inline progression direction of the region.
+func (mcr *MutableCaptionRegion) WithWritingMode(writingMode CaptionRegionWritingMode) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(mcr), objc.RegisterName("setWritingMode:"), writingMode)
+	return mcr
 }
-
-// SetScroll wraps the corresponding Objective-C method.
-func (x *MutableCaptionRegion) SetScroll(scroll CaptionRegionScroll) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScroll:"), scroll)
-}
-
-// SetDisplayAlignment wraps the corresponding Objective-C method.
-func (x *MutableCaptionRegion) SetDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayAlignment:"), displayAlignment)
-}
-
-// SetWritingMode wraps the corresponding Objective-C method.
-func (x *MutableCaptionRegion) SetWritingMode(writingMode CaptionRegionWritingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingMode:"), writingMode)
-}
-
-// MutableCaptionRegionable is the interface implemented by [MutableCaptionRegion], for mocking and DI.
-type MutableCaptionRegionable interface {
-	obj.Object
-	WithScroll(scroll CaptionRegionScroll) *MutableCaptionRegion
-	WithDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) *MutableCaptionRegion
-	WithWritingMode(writingMode CaptionRegionWritingMode) *MutableCaptionRegion
-	SetScroll(scroll CaptionRegionScroll)
-	SetDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment)
-	SetWritingMode(writingMode CaptionRegionWritingMode)
-}
-
-var _ MutableCaptionRegionable = (*MutableCaptionRegion)(nil)
 
 var _ CaptionRegionProvider = (*MutableCaptionRegion)(nil)

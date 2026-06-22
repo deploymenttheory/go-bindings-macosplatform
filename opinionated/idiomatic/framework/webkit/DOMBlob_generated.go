@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,23 +44,15 @@ func dOMBlobAdopt(id objc.ID) *DOMBlob {
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *DOMBlob) Size() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("size"))
+func (db *DOMBlob) Size() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(db), objc.RegisterName("size"))
 	return _r
 }
-
-// DOMBlobable is the interface implemented by [DOMBlob], for mocking and DI.
-type DOMBlobable interface {
-	obj.Object
-	Size() uint64
-}
-
-var _ DOMBlobable = (*DOMBlob)(nil)
 
 // isDOMBlob marks DOMBlob — and, by embedding promotion, its
 // subclasses — as a member of the DOMBlob hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMBlob) isDOMBlob() {}
+func (db *DOMBlob) isDOMBlob() {}
 
 var _ DOMBlobProvider = (*DOMBlob)(nil)
 

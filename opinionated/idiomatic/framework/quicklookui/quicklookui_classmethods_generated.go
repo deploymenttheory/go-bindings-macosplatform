@@ -14,7 +14,7 @@ func SharedPreviewPanel() *PreviewPanel {
 	return PreviewPanelFromID(_r)
 }
 
-// SharedPreviewPanelExists returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.
+// SharedPreviewPanelExists reports whether returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.
 func SharedPreviewPanelExists() bool {
 	_r := objc.Send[bool](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("sharedPreviewPanelExists"))
 	return _r

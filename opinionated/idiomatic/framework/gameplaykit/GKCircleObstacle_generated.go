@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
 	return circleObstacleAdopt(_id)
 }
 
-// WithRadius the radius of the obstacle.
-func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the radius of the obstacle.
+func (co *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
+	objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("setRadius:"), radius)
+	return co
 }
 
-// Radius radius of the impassible circle
-func (x *CircleObstacle) Radius() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
+// Radius returns radius of the impassible circle
+func (co *CircleObstacle) Radius() float32 {
+	_r := objc.Send[float32](objref.IDOf(co), objc.RegisterName("radius"))
 	return _r
 }
-
-// SetRadius wraps the corresponding Objective-C method.
-func (x *CircleObstacle) SetRadius(radius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-}
-
-// CircleObstacleable is the interface implemented by [CircleObstacle], for mocking and DI.
-type CircleObstacleable interface {
-	obj.Object
-	WithRadius(radius float32) *CircleObstacle
-	Radius() float32
-	SetRadius(radius float32)
-}
-
-var _ CircleObstacleable = (*CircleObstacle)(nil)
 
 var _ ObstacleProvider = (*CircleObstacle)(nil)

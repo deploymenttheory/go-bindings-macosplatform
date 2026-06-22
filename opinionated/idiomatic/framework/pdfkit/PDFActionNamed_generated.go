@@ -7,7 +7,6 @@ package pdfkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewActionNamedWithName(name ActionNamedName) *ActionNamed {
 	return actionNamedAdopt(_id)
 }
 
-// WithName returns the name of the named action.
-func (x *ActionNamed) WithName(name ActionNamedName) *ActionNamed {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), name)
-	return x
+// WithName sets returns the name of the named action.
+func (an *ActionNamed) WithName(name ActionNamedName) *ActionNamed {
+	objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setName:"), name)
+	return an
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *ActionNamed) Name() ActionNamedName {
-	_r := objc.Send[ActionNamedName](objref.IDOf(x), objc.RegisterName("name"))
+func (an *ActionNamed) Name() ActionNamedName {
+	_r := objc.Send[ActionNamedName](objref.IDOf(an), objc.RegisterName("name"))
 	return _r
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *ActionNamed) SetName(name ActionNamedName) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), name)
-}
-
-// ActionNamedable is the interface implemented by [ActionNamed], for mocking and DI.
-type ActionNamedable interface {
-	obj.Object
-	WithName(name ActionNamedName) *ActionNamed
-	Name() ActionNamedName
-	SetName(name ActionNamedName)
-}
-
-var _ ActionNamedable = (*ActionNamed)(nil)
 
 var _ ActionProvider = (*ActionNamed)(nil)

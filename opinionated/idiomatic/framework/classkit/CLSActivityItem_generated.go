@@ -7,7 +7,6 @@ package classkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,50 +45,34 @@ func activityItemAdopt(id objc.ID) *ActivityItem {
 	return x
 }
 
-// WithTitle a human readable name for the activity item.
-func (x *ActivityItem) WithTitle(title string) *ActivityItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a human readable name for the activity item.
+func (ai *ActivityItem) WithTitle(title string) *ActivityItem {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ai
 }
 
-// Title title of what this ActivityItem represents. This will be the title associated with the activity item in the generated progress report.
-func (x *ActivityItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns title of what this ActivityItem represents. This will be the title associated with the activity item in the generated progress report.
+func (ai *ActivityItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *ActivityItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// Identifier an identifier that is unique within its owning activity The identifier can be used to look up existing activityItems in a given activity.
-func (x *ActivityItem) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns an identifier that is unique within its owning activity The identifier can be used to look up existing activityItems in a given activity.
+func (ai *ActivityItem) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ActivityItemable is the interface implemented by [ActivityItem], for mocking and DI.
-type ActivityItemable interface {
-	obj.Object
-	WithTitle(title string) *ActivityItem
-	Title() string
-	SetTitle(title string)
-	Identifier() string
-}
-
-var _ ActivityItemable = (*ActivityItem)(nil)
 
 // isActivityItem marks ActivityItem — and, by embedding promotion, its
 // subclasses — as a member of the ActivityItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ActivityItem) isActivityItem() {}
+func (ai *ActivityItem) isActivityItem() {}
 
 var _ ActivityItemProvider = (*ActivityItem)(nil)
 

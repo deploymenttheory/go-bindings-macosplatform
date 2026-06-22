@@ -44,24 +44,24 @@ func submeshAdopt(id objc.ID) *Submesh {
 }
 
 // Description returns the object's -description text.
-func (x *Submesh) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Submesh) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Submesh) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Submesh) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Submesh) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Submesh) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Submesh) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Submesh) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSubmesh creates a new Submesh.
@@ -70,54 +70,41 @@ func NewSubmesh() *Submesh {
 	return submeshAdopt(_id)
 }
 
-// Type type of data in the elementBuffer (aka indexBuffer) This value should be used for the type parameter of glDrawElements
-func (x *Submesh) Type() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of data in the elementBuffer (aka indexBuffer) This value should be used for the type parameter of glDrawElements
+func (s *Submesh) Type() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(s), objc.RegisterName("type"))
 	return _r
 }
 
-// Mode primitive type mode value of data in the elementBuffer (aka indexBuffer) This value should be used for the mode parameter in glDrawElements
-func (x *Submesh) Mode() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mode"))
+// Mode returns primitive type mode value of data in the elementBuffer (aka indexBuffer) This value should be used for the mode parameter in glDrawElements
+func (s *Submesh) Mode() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(s), objc.RegisterName("mode"))
 	return _r
 }
 
-// ElementCount number of elements (aka indicies) in the elementBuffer (aka indexBuffer) This value should be used for the count parameter in glDrawElements
-func (x *Submesh) ElementCount() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("elementCount"))
+// ElementCount returns number of elements (aka indicies) in the elementBuffer (aka indexBuffer) This value should be used for the count parameter in glDrawElements
+func (s *Submesh) ElementCount() int32 {
+	_r := objc.Send[int32](objref.IDOf(s), objc.RegisterName("elementCount"))
 	return _r
 }
 
-// ElementBuffer name of buffer object with index data The buffer name to be used with DrawElements
-func (x *Submesh) ElementBuffer() *MeshBuffer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementBuffer"))
+// ElementBuffer returns name of buffer object with index data The buffer name to be used with DrawElements
+func (s *Submesh) ElementBuffer() *MeshBuffer {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("elementBuffer"))
 	return MeshBufferFromID(_r)
 }
 
-// Mesh parent GLKit mesh containing vertex data of this object Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
-func (x *Submesh) Mesh() *Mesh {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mesh"))
+// Mesh returns parent GLKit mesh containing vertex data of this object Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
+func (s *Submesh) Mesh() *Mesh {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mesh"))
 	return MeshFromID(_r)
 }
 
-// Name name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
-func (x *Submesh) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
+func (s *Submesh) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Submeshable is the interface implemented by [Submesh], for mocking and DI.
-type Submeshable interface {
-	obj.Object
-	Type() uint32
-	Mode() uint32
-	ElementCount() int32
-	ElementBuffer() *MeshBuffer
-	Mesh() *Mesh
-	Name() string
-}
-
-var _ Submeshable = (*Submesh)(nil)

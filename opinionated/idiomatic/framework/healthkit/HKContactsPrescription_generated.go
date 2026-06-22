@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,36 +51,26 @@ func NewContactsPrescription() *ContactsPrescription {
 	return contactsPrescriptionAdopt(_id)
 }
 
-// RightEye the right eye lens specification
-func (x *ContactsPrescription) RightEye() *ContactsLensSpecification {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEye"))
+// RightEye returns the right eye lens specification
+func (cp *ContactsPrescription) RightEye() *ContactsLensSpecification {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("rightEye"))
 	return ContactsLensSpecificationFromID(_r)
 }
 
-// LeftEye the left eye lens specification
-func (x *ContactsPrescription) LeftEye() *ContactsLensSpecification {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEye"))
+// LeftEye returns the left eye lens specification
+func (cp *ContactsPrescription) LeftEye() *ContactsLensSpecification {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("leftEye"))
 	return ContactsLensSpecificationFromID(_r)
 }
 
-// Brand the prescribed brand after contact lens fitting
-func (x *ContactsPrescription) Brand() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("brand"))
+// Brand returns the prescribed brand after contact lens fitting
+func (cp *ContactsPrescription) Brand() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("brand"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ContactsPrescriptionable is the interface implemented by [ContactsPrescription], for mocking and DI.
-type ContactsPrescriptionable interface {
-	obj.Object
-	RightEye() *ContactsLensSpecification
-	LeftEye() *ContactsLensSpecification
-	Brand() string
-}
-
-var _ ContactsPrescriptionable = (*ContactsPrescription)(nil)
 
 var _ VisionPrescriptionProvider = (*ContactsPrescription)(nil)
 

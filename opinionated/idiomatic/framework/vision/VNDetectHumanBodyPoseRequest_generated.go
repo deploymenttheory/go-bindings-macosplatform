@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DetectHumanBodyPoseRequest is an idiomatic wrapper over the Objective-C class VNDetectHumanBodyPoseRequest.
@@ -55,66 +56,53 @@ func NewDetectHumanBodyPoseRequest() *DetectHumanBodyPoseRequest {
 	return detectHumanBodyPoseRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectHumanBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dhbpr *DetectHumanBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dhbpr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dhbpr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectHumanBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dhbpr *DetectHumanBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dhbpr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dhbpr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectHumanBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dhbpr *DetectHumanBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dhbpr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dhbpr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectHumanBodyPoseRequest) WithRevision(revision int) *DetectHumanBodyPoseRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dhbpr *DetectHumanBodyPoseRequest) WithRevision(revision int) *DetectHumanBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(dhbpr), objc.RegisterName("setRevision:"), revision)
+	return dhbpr
 }
 
-// SupportedJointNames retrieves the supported joint names.
+// SupportedJointNames returns retrieves the supported joint names.
 //
 // SupportedJointNames returns the collection as a Go slice.
-func (x *DetectHumanBodyPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
+func (dhbpr *DetectHumanBodyPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(dhbpr), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// SupportedJointsGroupNames retrieves the supported joint group names.
+// SupportedJointsGroupNames returns retrieves the supported joint group names.
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
-func (x *DetectHumanBodyPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
+func (dhbpr *DetectHumanBodyPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(dhbpr), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
-
-// DetectHumanBodyPoseRequestable is the interface implemented by [DetectHumanBodyPoseRequest], for mocking and DI.
-type DetectHumanBodyPoseRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanBodyPoseRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanBodyPoseRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanBodyPoseRequest
-	WithRevision(revision int) *DetectHumanBodyPoseRequest
-	SupportedJointNames() ([]obj.Object, error)
-	SupportedJointsGroupNames() ([]obj.Object, error)
-}
-
-var _ DetectHumanBodyPoseRequestable = (*DetectHumanBodyPoseRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectHumanBodyPoseRequest)(nil)
 

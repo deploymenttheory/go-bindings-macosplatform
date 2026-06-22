@@ -46,24 +46,24 @@ func assetVariantAudioRenditionSpecificAttributesAdopt(id objc.ID) *AssetVariant
 }
 
 // Description returns the object's -description text.
-func (x *AssetVariantAudioRenditionSpecificAttributes) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) Description() string {
+	return rt.Description(objref.IDOf(avarsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetVariantAudioRenditionSpecificAttributes) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(avarsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetVariantAudioRenditionSpecificAttributes) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(avarsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetVariantAudioRenditionSpecificAttributes) String() string {
-	return rt.Description(objref.IDOf(x))
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) String() string {
+	return rt.Description(objref.IDOf(avarsa))
 }
 
 // NewAssetVariantAudioRenditionSpecificAttributes creates a new AssetVariantAudioRenditionSpecificAttributes.
@@ -72,37 +72,26 @@ func NewAssetVariantAudioRenditionSpecificAttributes() *AssetVariantAudioRenditi
 	return assetVariantAudioRenditionSpecificAttributesAdopt(_id)
 }
 
-// ChannelCount if it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
-func (x *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount"))
+// ChannelCount returns if it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(avarsa), objc.RegisterName("channelCount"))
 	return _r
 }
 
-// IsBinaural indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
-func (x *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBinaural"))
+// IsBinaural reports whether indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
+	_r := objc.Send[bool](objref.IDOf(avarsa), objc.RegisterName("isBinaural"))
 	return _r
 }
 
-// IsImmersive indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
-func (x *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isImmersive"))
+// IsImmersive reports whether indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
+	_r := objc.Send[bool](objref.IDOf(avarsa), objc.RegisterName("isImmersive"))
 	return _r
 }
 
-// IsDownmix indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
-func (x *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDownmix"))
+// IsDownmix reports whether indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
+func (avarsa *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
+	_r := objc.Send[bool](objref.IDOf(avarsa), objc.RegisterName("isDownmix"))
 	return _r
 }
-
-// AssetVariantAudioRenditionSpecificAttributesable is the interface implemented by [AssetVariantAudioRenditionSpecificAttributes], for mocking and DI.
-type AssetVariantAudioRenditionSpecificAttributesable interface {
-	obj.Object
-	ChannelCount() int
-	IsBinaural() bool
-	IsImmersive() bool
-	IsDownmix() bool
-}
-
-var _ AssetVariantAudioRenditionSpecificAttributesable = (*AssetVariantAudioRenditionSpecificAttributes)(nil)

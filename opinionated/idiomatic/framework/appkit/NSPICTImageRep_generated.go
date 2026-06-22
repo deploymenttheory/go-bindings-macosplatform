@@ -54,81 +54,64 @@ func NewPICTImageRepWithData(pictData obj.Object) *PICTImageRep {
 	return pICTImageRepAdopt(_id)
 }
 
-// WithSize the size of the image representation, measured in points in the user coordinate space.
-func (x *PICTImageRep) WithSize(size corefoundation.CGSize) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the image representation, measured in points in the user coordinate space.
+func (pir *PICTImageRep) WithSize(size corefoundation.CGSize) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setSize:"), size)
+	return pir
 }
 
-// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
-func (x *PICTImageRep) WithAlpha(alpha bool) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets a Boolean value that indicates whether the image data has an alpha channel.
+func (pir *PICTImageRep) WithAlpha(alpha bool) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setAlpha:"), alpha)
+	return pir
 }
 
-// WithOpaque a Boolean value that indicates whether the image is opaque.
-func (x *PICTImageRep) WithOpaque(opaque bool) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the image is opaque.
+func (pir *PICTImageRep) WithOpaque(opaque bool) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setOpaque:"), opaque)
+	return pir
 }
 
-// WithColorSpaceName the name of the color space used by the image data.
-func (x *PICTImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets the name of the color space used by the image data.
+func (pir *PICTImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return pir
 }
 
-// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-func (x *PICTImageRep) WithBitsPerSample(bitsPerSample int) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
-	return x
+// WithBitsPerSample sets the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (pir *PICTImageRep) WithBitsPerSample(bitsPerSample int) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return pir
 }
 
-// WithPixelsWide the width of the image, measured in pixels.
-func (x *PICTImageRep) WithPixelsWide(pixelsWide int) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
-	return x
+// WithPixelsWide sets the width of the image, measured in pixels.
+func (pir *PICTImageRep) WithPixelsWide(pixelsWide int) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return pir
 }
 
-// WithPixelsHigh the height of the image, measured in pixels.
-func (x *PICTImageRep) WithPixelsHigh(pixelsHigh int) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
-	return x
+// WithPixelsHigh sets the height of the image, measured in pixels.
+func (pir *PICTImageRep) WithPixelsHigh(pixelsHigh int) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return pir
 }
 
-// WithLayoutDirection the layout direction for the image.
-func (x *PICTImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *PICTImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-	return x
+// WithLayoutDirection sets the layout direction for the image.
+func (pir *PICTImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return pir
 }
 
 // PICTRepresentation wraps the corresponding Objective-C method.
-func (x *PICTImageRep) PICTRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PICTRepresentation"))
+func (pir *PICTImageRep) PICTRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("PICTRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // BoundingBox wraps the corresponding Objective-C method.
-func (x *PICTImageRep) BoundingBox() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingBox"))
+func (pir *PICTImageRep) BoundingBox() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pir), objc.RegisterName("boundingBox"))
 	return _r
 }
-
-// PICTImageRepable is the interface implemented by [PICTImageRep], for mocking and DI.
-type PICTImageRepable interface {
-	obj.Object
-	WithSize(size corefoundation.CGSize) *PICTImageRep
-	WithAlpha(alpha bool) *PICTImageRep
-	WithOpaque(opaque bool) *PICTImageRep
-	WithColorSpaceName(colorSpaceName obj.Object) *PICTImageRep
-	WithBitsPerSample(bitsPerSample int) *PICTImageRep
-	WithPixelsWide(pixelsWide int) *PICTImageRep
-	WithPixelsHigh(pixelsHigh int) *PICTImageRep
-	WithLayoutDirection(layoutDirection ImageLayoutDirection) *PICTImageRep
-	PICTRepresentation() obj.Object
-	BoundingBox() corefoundation.CGRect
-}
-
-var _ PICTImageRepable = (*PICTImageRep)(nil)
 
 var _ ImageRepProvider = (*PICTImageRep)(nil)

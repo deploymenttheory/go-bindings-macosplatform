@@ -48,35 +48,35 @@ func formatterAdopt(id objc.ID) *Formatter {
 }
 
 // Description returns the object's -description text.
-func (x *Formatter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Formatter) Description() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Formatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (f *Formatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Formatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (f *Formatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Formatter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Formatter) String() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Formatter) WithScriptingProperties(scriptingProperties obj.Object) *Formatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (f *Formatter) WithScriptingProperties(scriptingProperties obj.Object) *Formatter {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return f
 }
 
 // StringForObjectValue wraps the corresponding Objective-C method.
-func (x *Formatter) StringForObjectValue(obj_ obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForObjectValue:"), objref.IDOf(obj_))
+func (f *Formatter) StringForObjectValue(obj_ obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("stringForObjectValue:"), objref.IDOf(obj_))
 	if _r == 0 {
 		return ""
 	}
@@ -84,14 +84,14 @@ func (x *Formatter) StringForObjectValue(obj_ obj.Object) string {
 }
 
 // AttributedStringForObjectValueWithDefaultAttributes wraps the corresponding Objective-C method.
-func (x *Formatter) AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:"), objref.IDOf(obj_), objref.IDOf(attrs))
+func (f *Formatter) AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:"), objref.IDOf(obj_), objref.IDOf(attrs))
 	return AttributedStringFromID(_r)
 }
 
 // EditingStringForObjectValue wraps the corresponding Objective-C method.
-func (x *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editingStringForObjectValue:"), objref.IDOf(obj_))
+func (f *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("editingStringForObjectValue:"), objref.IDOf(obj_))
 	if _r == 0 {
 		return ""
 	}
@@ -99,26 +99,14 @@ func (x *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
 }
 
 // IsPartialStringValidNewEditingStringErrorDescription wraps the corresponding Objective-C method.
-func (x *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:"), purego.NSString(partialString), purego.NSString(newString), purego.NSString(error_))
+func (f *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool {
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:"), purego.NSString(partialString), purego.NSString(newString), purego.NSString(error_))
 	return _r
 }
-
-// Formatterable is the interface implemented by [Formatter], for mocking and DI.
-type Formatterable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Formatter
-	StringForObjectValue(obj_ obj.Object) string
-	AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString
-	EditingStringForObjectValue(obj_ obj.Object) string
-	IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool
-}
-
-var _ Formatterable = (*Formatter)(nil)
 
 // isFormatter marks Formatter — and, by embedding promotion, its
 // subclasses — as a member of the Formatter hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Formatter) isFormatter() {}
+func (f *Formatter) isFormatter() {}
 
 var _ FormatterProvider = (*Formatter)(nil)

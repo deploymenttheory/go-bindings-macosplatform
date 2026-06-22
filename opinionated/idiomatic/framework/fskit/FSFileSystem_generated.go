@@ -46,24 +46,24 @@ func fileSystemAdopt(id objc.ID) *FileSystem {
 }
 
 // Description returns the object's -description text.
-func (x *FileSystem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FileSystem) Description() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileSystem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fs *FileSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileSystem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fs *FileSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileSystem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FileSystem) String() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // NewFileSystem creates a new FileSystem.
@@ -71,10 +71,3 @@ func NewFileSystem() *FileSystem {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSFileSystem")), objc.RegisterName("new"))
 	return fileSystemAdopt(_id)
 }
-
-// FileSystemable is the interface implemented by [FileSystem], for mocking and DI.
-type FileSystemable interface {
-	obj.Object
-}
-
-var _ FileSystemable = (*FileSystem)(nil)

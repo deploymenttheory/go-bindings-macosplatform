@@ -46,24 +46,24 @@ func orderedCollectionChangeAdopt(id objc.ID) *OrderedCollectionChange {
 }
 
 // Description returns the object's -description text.
-func (x *OrderedCollectionChange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (occ *OrderedCollectionChange) Description() string {
+	return rt.Description(objref.IDOf(occ))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OrderedCollectionChange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (occ *OrderedCollectionChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(occ), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OrderedCollectionChange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (occ *OrderedCollectionChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(occ), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OrderedCollectionChange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (occ *OrderedCollectionChange) String() string {
+	return rt.Description(objref.IDOf(occ))
 }
 
 // NewOrderedCollectionChangeWithObjectTypeIndex creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
@@ -81,43 +81,31 @@ func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject obj.O
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *OrderedCollectionChange) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (occ *OrderedCollectionChange) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange {
+	objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return occ
 }
 
 // Object wraps the corresponding Objective-C method.
-func (x *OrderedCollectionChange) Object() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
+func (occ *OrderedCollectionChange) Object() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
 // ChangeType wraps the corresponding Objective-C method.
-func (x *OrderedCollectionChange) ChangeType() CollectionChangeType {
-	_r := objc.Send[CollectionChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
+func (occ *OrderedCollectionChange) ChangeType() CollectionChangeType {
+	_r := objc.Send[CollectionChangeType](objref.IDOf(occ), objc.RegisterName("changeType"))
 	return _r
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *OrderedCollectionChange) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+func (occ *OrderedCollectionChange) Index() int {
+	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("index"))
 	return _r
 }
 
 // AssociatedIndex wraps the corresponding Objective-C method.
-func (x *OrderedCollectionChange) AssociatedIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("associatedIndex"))
+func (occ *OrderedCollectionChange) AssociatedIndex() int {
+	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("associatedIndex"))
 	return _r
 }
-
-// OrderedCollectionChangeable is the interface implemented by [OrderedCollectionChange], for mocking and DI.
-type OrderedCollectionChangeable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange
-	Object() obj.Object
-	ChangeType() CollectionChangeType
-	Index() int
-	AssociatedIndex() int
-}
-
-var _ OrderedCollectionChangeable = (*OrderedCollectionChange)(nil)

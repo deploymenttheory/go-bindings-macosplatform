@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewCylindersNoiseSourceWithFrequency(frequency float64) *CylindersNoiseSour
 	return cylindersNoiseSourceAdopt(_id)
 }
 
-// WithFrequency a value that determines the size and spacing of concentric cylinders.
-func (x *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the size and spacing of concentric cylinders.
+func (cns *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setFrequency:"), frequency)
+	return cns
 }
 
 // Frequency wraps the corresponding Objective-C method.
-func (x *CylindersNoiseSource) Frequency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+func (cns *CylindersNoiseSource) Frequency() float64 {
+	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("frequency"))
 	return _r
 }
-
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *CylindersNoiseSource) SetFrequency(frequency float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-}
-
-// CylindersNoiseSourceable is the interface implemented by [CylindersNoiseSource], for mocking and DI.
-type CylindersNoiseSourceable interface {
-	obj.Object
-	WithFrequency(frequency float64) *CylindersNoiseSource
-	Frequency() float64
-	SetFrequency(frequency float64)
-}
-
-var _ CylindersNoiseSourceable = (*CylindersNoiseSource)(nil)
 
 var _ NoiseSourceProvider = (*CylindersNoiseSource)(nil)

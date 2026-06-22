@@ -7,7 +7,6 @@ package audiotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewParameterTree() *ParameterTree {
 }
 
 // ParameterWithAddress searches the tree for a parameter with a specific address.
-func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterWithAddress:"), address)
+func (pt *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("parameterWithAddress:"), address)
 	return ParameterFromID(_r)
 }
 
 // ParameterWithIDScopeElement searches the tree for a specific version 2 audio unit parameter.
-func (x *ParameterTree) ParameterWithIDScopeElement(paramID int, scope int, element int) *Parameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterWithID:scope:element:"), paramID, scope, element)
+func (pt *ParameterTree) ParameterWithIDScopeElement(paramID int, scope int, element int) *Parameter {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("parameterWithID:scope:element:"), paramID, scope, element)
 	return ParameterFromID(_r)
 }
-
-// ParameterTreeable is the interface implemented by [ParameterTree], for mocking and DI.
-type ParameterTreeable interface {
-	obj.Object
-	ParameterWithAddress(address uint64) *Parameter
-	ParameterWithIDScopeElement(paramID int, scope int, element int) *Parameter
-}
-
-var _ ParameterTreeable = (*ParameterTree)(nil)
 
 var _ ParameterGroupProvider = (*ParameterTree)(nil)
 

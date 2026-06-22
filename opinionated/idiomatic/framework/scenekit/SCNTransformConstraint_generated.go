@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewTransformConstraint() *TransformConstraint {
 	return transformConstraintAdopt(_id)
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (tc *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setEnabled:"), enabled)
+	return tc
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (tc *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return tc
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *TransformConstraint) WithIncremental(incremental bool) *TransformConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (tc *TransformConstraint) WithIncremental(incremental bool) *TransformConstraint {
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setIncremental:"), incremental)
+	return tc
 }
-
-// TransformConstraintable is the interface implemented by [TransformConstraint], for mocking and DI.
-type TransformConstraintable interface {
-	obj.Object
-	WithEnabled(enabled bool) *TransformConstraint
-	WithInfluenceFactor(influenceFactor float64) *TransformConstraint
-	WithIncremental(incremental bool) *TransformConstraint
-}
-
-var _ TransformConstraintable = (*TransformConstraint)(nil)
 
 var _ ConstraintProvider = (*TransformConstraint)(nil)

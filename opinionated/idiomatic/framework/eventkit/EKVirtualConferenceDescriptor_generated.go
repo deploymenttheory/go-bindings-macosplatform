@@ -46,24 +46,24 @@ func virtualConferenceDescriptorAdopt(id objc.ID) *VirtualConferenceDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *VirtualConferenceDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcd *VirtualConferenceDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualConferenceDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcd *VirtualConferenceDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualConferenceDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcd *VirtualConferenceDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualConferenceDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcd *VirtualConferenceDescriptor) String() string {
+	return rt.Description(objref.IDOf(vcd))
 }
 
 // NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails creates an object that describes a virtual conference, including a name and URL to join the conference.
@@ -74,8 +74,8 @@ func NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails(titl
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *VirtualConferenceDescriptor) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (vcd *VirtualConferenceDescriptor) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -85,26 +85,16 @@ func (x *VirtualConferenceDescriptor) Title() string {
 // URLDescriptors wraps the corresponding Objective-C method.
 //
 // URLDescriptors returns the collection as a Go slice.
-func (x *VirtualConferenceDescriptor) URLDescriptors() []*VirtualConferenceURLDescriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLDescriptors"))
+func (vcd *VirtualConferenceDescriptor) URLDescriptors() []*VirtualConferenceURLDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("URLDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtualConferenceURLDescriptor { return VirtualConferenceURLDescriptorFromID(_id) })
 }
 
 // ConferenceDetails wraps the corresponding Objective-C method.
-func (x *VirtualConferenceDescriptor) ConferenceDetails() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conferenceDetails"))
+func (vcd *VirtualConferenceDescriptor) ConferenceDetails() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("conferenceDetails"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// VirtualConferenceDescriptorable is the interface implemented by [VirtualConferenceDescriptor], for mocking and DI.
-type VirtualConferenceDescriptorable interface {
-	obj.Object
-	Title() string
-	URLDescriptors() []*VirtualConferenceURLDescriptor
-	ConferenceDetails() string
-}
-
-var _ VirtualConferenceDescriptorable = (*VirtualConferenceDescriptor)(nil)

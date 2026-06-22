@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,40 +51,29 @@ func NewSuicaPassProperties() *SuicaPassProperties {
 	return suicaPassPropertiesAdopt(_id)
 }
 
-// IsInShinkansenStation note: isInShinkansenStation is not a subset of isInStation.
-func (x *SuicaPassProperties) IsInShinkansenStation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInShinkansenStation"))
+// IsInShinkansenStation reports whether note: isInShinkansenStation is not a subset of isInStation.
+func (spp *SuicaPassProperties) IsInShinkansenStation() bool {
+	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isInShinkansenStation"))
 	return _r
 }
 
 // IsBalanceAllowedForCommute wraps the corresponding Objective-C method.
-func (x *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBalanceAllowedForCommute"))
+func (spp *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
+	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isBalanceAllowedForCommute"))
 	return _r
 }
 
 // IsLowBalanceGateNotificationEnabled wraps the corresponding Objective-C method.
-func (x *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLowBalanceGateNotificationEnabled"))
+func (spp *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isLowBalanceGateNotificationEnabled"))
 	return _r
 }
 
 // IsGreenCarTicketUsed wraps the corresponding Objective-C method.
-func (x *SuicaPassProperties) IsGreenCarTicketUsed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGreenCarTicketUsed"))
+func (spp *SuicaPassProperties) IsGreenCarTicketUsed() bool {
+	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isGreenCarTicketUsed"))
 	return _r
 }
-
-// SuicaPassPropertiesable is the interface implemented by [SuicaPassProperties], for mocking and DI.
-type SuicaPassPropertiesable interface {
-	obj.Object
-	IsInShinkansenStation() bool
-	IsBalanceAllowedForCommute() bool
-	IsLowBalanceGateNotificationEnabled() bool
-	IsGreenCarTicketUsed() bool
-}
-
-var _ SuicaPassPropertiesable = (*SuicaPassProperties)(nil)
 
 var _ TransitPassPropertiesProvider = (*SuicaPassProperties)(nil)
 

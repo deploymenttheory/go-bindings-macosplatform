@@ -48,60 +48,50 @@ func logEntryAdopt(id objc.ID) *LogEntry {
 }
 
 // Description returns the object's -description text.
-func (x *LogEntry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (le *LogEntry) Description() string {
+	return rt.Description(objref.IDOf(le))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogEntry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (le *LogEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(le), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogEntry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (le *LogEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(le), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LogEntry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (le *LogEntry) String() string {
+	return rt.Description(objref.IDOf(le))
 }
 
-// ComposedMessage the fully formatted message for the entry.
-func (x *LogEntry) ComposedMessage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composedMessage"))
+// ComposedMessage returns the fully formatted message for the entry.
+func (le *LogEntry) ComposedMessage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("composedMessage"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Date the timestamp of the entry.
-func (x *LogEntry) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+// Date returns the timestamp of the entry.
+func (le *LogEntry) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// StoreCategory this entry's storage tag. See OSLogEntryStoreCategory.
-func (x *LogEntry) StoreCategory() LogEntryStoreCategory {
-	_r := objc.Send[LogEntryStoreCategory](objref.IDOf(x), objc.RegisterName("storeCategory"))
+// StoreCategory returns this entry's storage tag. See OSLogEntryStoreCategory.
+func (le *LogEntry) StoreCategory() LogEntryStoreCategory {
+	_r := objc.Send[LogEntryStoreCategory](objref.IDOf(le), objc.RegisterName("storeCategory"))
 	return _r
 }
-
-// LogEntryable is the interface implemented by [LogEntry], for mocking and DI.
-type LogEntryable interface {
-	obj.Object
-	ComposedMessage() string
-	Date() obj.Object
-	StoreCategory() LogEntryStoreCategory
-}
-
-var _ LogEntryable = (*LogEntry)(nil)
 
 // isLogEntry marks LogEntry — and, by embedding promotion, its
 // subclasses — as a member of the LogEntry hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *LogEntry) isLogEntry() {}
+func (le *LogEntry) isLogEntry() {}
 
 var _ LogEntryProvider = (*LogEntry)(nil)

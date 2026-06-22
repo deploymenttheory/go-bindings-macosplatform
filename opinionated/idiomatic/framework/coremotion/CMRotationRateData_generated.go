@@ -7,7 +7,6 @@ package coremotion
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,17 +45,10 @@ func rotationRateDataAdopt(id objc.ID) *RotationRateData {
 	return x
 }
 
-// RotationRateDataable is the interface implemented by [RotationRateData], for mocking and DI.
-type RotationRateDataable interface {
-	obj.Object
-}
-
-var _ RotationRateDataable = (*RotationRateData)(nil)
-
 // isRotationRateData marks RotationRateData — and, by embedding promotion, its
 // subclasses — as a member of the RotationRateData hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RotationRateData) isRotationRateData() {}
+func (rrd *RotationRateData) isRotationRateData() {}
 
 var _ RotationRateDataProvider = (*RotationRateData)(nil)
 

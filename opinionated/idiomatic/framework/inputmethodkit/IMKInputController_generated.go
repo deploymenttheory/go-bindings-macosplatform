@@ -47,24 +47,24 @@ func inputControllerAdopt(id objc.ID) *InputController {
 }
 
 // Description returns the object's -description text.
-func (x *InputController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ic *InputController) Description() string {
+	return rt.Description(objref.IDOf(ic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InputController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ic *InputController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InputController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ic *InputController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InputController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ic *InputController) String() string {
+	return rt.Description(objref.IDOf(ic))
 }
 
 // NewInputControllerWithServerDelegateClient initializes the input control by setting the delegate.
@@ -75,112 +75,89 @@ func NewInputControllerWithServerDelegateClient(server *Server, delegate obj.Obj
 }
 
 // UpdateComposition informs the input controller that the composition has changed.
-func (x *InputController) UpdateComposition() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateComposition"))
+func (ic *InputController) UpdateComposition() {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("updateComposition"))
 }
 
 // CancelComposition stops the current composition and replaces marked text with the original text.
-func (x *InputController) CancelComposition() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelComposition"))
+func (ic *InputController) CancelComposition() {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("cancelComposition"))
 }
 
 // CompositionAttributesAtRange returns a dictionary of text attributes.
-func (x *InputController) CompositionAttributesAtRange(range_ foundation.NSRange) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionAttributesAtRange:"), range_)
+func (ic *InputController) CompositionAttributesAtRange(range_ foundation.NSRange) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("compositionAttributesAtRange:"), range_)
 	return obj.Wrap(_r)
 }
 
 // SelectionRange returns where the range of the selection that should be placed inside marked text.
-func (x *InputController) SelectionRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("selectionRange"))
+func (ic *InputController) SelectionRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ic), objc.RegisterName("selectionRange"))
 	return _r
 }
 
 // ReplacementRange returns the range in the client document that the text should replace.
-func (x *InputController) ReplacementRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("replacementRange"))
+func (ic *InputController) ReplacementRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ic), objc.RegisterName("replacementRange"))
 	return _r
 }
 
 // MarkForStyleAtRange returns a dictionary of text attributes that can mark a range of an attributed string to send to a client.
-func (x *InputController) MarkForStyleAtRange(style int, range_ foundation.NSRange) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markForStyle:atRange:"), style, range_)
+func (ic *InputController) MarkForStyleAtRange(style int, range_ foundation.NSRange) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("markForStyle:atRange:"), style, range_)
 	return obj.Wrap(_r)
 }
 
 // HidePalettes informs an input method that it should close any visible user interface.
-func (x *InputController) HidePalettes() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hidePalettes"))
+func (ic *InputController) HidePalettes() {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("hidePalettes"))
 }
 
 // Menu returns a menu of commands that are specific to an input method.
-func (x *InputController) Menu() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
+func (ic *InputController) Menu() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("menu"))
 	return obj.Wrap(_r)
 }
 
 // Delegate returns the delegate for input controller object.
-func (x *InputController) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (ic *InputController) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // SetDelegate sets the delegate for input controller object.
-func (x *InputController) SetDelegate(newDelegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(newDelegate))
+func (ic *InputController) SetDelegate(newDelegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setDelegate:"), objref.IDOf(newDelegate))
 }
 
 // Server returns the server object that manages the input controller.
-func (x *InputController) Server() *Server {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("server"))
+func (ic *InputController) Server() *Server {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("server"))
 	return ServerFromID(_r)
 }
 
 // Client returns the client object associated with the input controller.
-func (x *InputController) Client() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
+func (ic *InputController) Client() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("client"))
 	return obj.Wrap(_r)
 }
 
 // InputControllerWillClose called to notify an input controller that it is about to be closed.
-func (x *InputController) InputControllerWillClose() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputControllerWillClose"))
+func (ic *InputController) InputControllerWillClose() {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("inputControllerWillClose"))
 }
 
 // AnnotationSelectedForCandidate sends the selected candidate string and annotation string to the input controller.
-func (x *InputController) AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotationSelected:forCandidate:"), objref.IDOf(annotationString), objref.IDOf(candidateString))
+func (ic *InputController) AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("annotationSelected:forCandidate:"), objref.IDOf(annotationString), objref.IDOf(candidateString))
 }
 
 // CandidateSelectionChanged informs an input controller that the current candidate selection in the candidate window has changed.
-func (x *InputController) CandidateSelectionChanged(candidateString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateSelectionChanged:"), objref.IDOf(candidateString))
+func (ic *InputController) CandidateSelectionChanged(candidateString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("candidateSelectionChanged:"), objref.IDOf(candidateString))
 }
 
 // CandidateSelected informs an input controller that a new candidate is selected.
-func (x *InputController) CandidateSelected(candidateString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateSelected:"), objref.IDOf(candidateString))
+func (ic *InputController) CandidateSelected(candidateString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("candidateSelected:"), objref.IDOf(candidateString))
 }
-
-// InputControllerable is the interface implemented by [InputController], for mocking and DI.
-type InputControllerable interface {
-	obj.Object
-	UpdateComposition()
-	CancelComposition()
-	CompositionAttributesAtRange(range_ foundation.NSRange) obj.Object
-	SelectionRange() foundation.NSRange
-	ReplacementRange() foundation.NSRange
-	MarkForStyleAtRange(style int, range_ foundation.NSRange) obj.Object
-	HidePalettes()
-	Menu() obj.Object
-	Delegate() obj.Object
-	SetDelegate(newDelegate obj.Object)
-	Server() *Server
-	Client() obj.Object
-	InputControllerWillClose()
-	AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object)
-	CandidateSelectionChanged(candidateString obj.Object)
-	CandidateSelected(candidateString obj.Object)
-}
-
-var _ InputControllerable = (*InputController)(nil)

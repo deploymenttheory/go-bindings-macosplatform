@@ -46,24 +46,24 @@ func assessmentParticipantConfigurationAdopt(id objc.ID) *AssessmentParticipantC
 }
 
 // Description returns the object's -description text.
-func (x *AssessmentParticipantConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apc *AssessmentParticipantConfiguration) Description() string {
+	return rt.Description(objref.IDOf(apc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssessmentParticipantConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apc *AssessmentParticipantConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssessmentParticipantConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apc *AssessmentParticipantConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssessmentParticipantConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apc *AssessmentParticipantConfiguration) String() string {
+	return rt.Description(objref.IDOf(apc))
 }
 
 // NewAssessmentParticipantConfiguration creates a new AssessmentParticipantConfiguration.
@@ -72,69 +72,38 @@ func NewAssessmentParticipantConfiguration() *AssessmentParticipantConfiguration
 	return assessmentParticipantConfigurationAdopt(_id)
 }
 
-// WithAllowsNetworkAccess a Boolean that indicates whether an app can access network resources during an assessment.
-func (x *AssessmentParticipantConfiguration) WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
-	return x
+// WithAllowsNetworkAccess sets a Boolean that indicates whether an app can access network resources during an assessment.
+func (apc *AssessmentParticipantConfiguration) WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
+	return apc
 }
 
 // WithRequired sets the property and returns the receiver so calls can be chained.
-func (x *AssessmentParticipantConfiguration) WithRequired(required bool) *AssessmentParticipantConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequired:"), required)
-	return x
+func (apc *AssessmentParticipantConfiguration) WithRequired(required bool) *AssessmentParticipantConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setRequired:"), required)
+	return apc
 }
 
 // WithConfigurationInfo sets the property and returns the receiver so calls can be chained.
-func (x *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
-	return x
+func (apc *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
+	return apc
 }
 
 // AllowsNetworkAccess wraps the corresponding Objective-C method.
-func (x *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNetworkAccess"))
+func (apc *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(apc), objc.RegisterName("allowsNetworkAccess"))
 	return _r
-}
-
-// SetAllowsNetworkAccess wraps the corresponding Objective-C method.
-func (x *AssessmentParticipantConfiguration) SetAllowsNetworkAccess(allowsNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
 }
 
 // IsRequired wraps the corresponding Objective-C method.
-func (x *AssessmentParticipantConfiguration) IsRequired() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRequired"))
+func (apc *AssessmentParticipantConfiguration) IsRequired() bool {
+	_r := objc.Send[bool](objref.IDOf(apc), objc.RegisterName("isRequired"))
 	return _r
 }
 
-// SetRequired wraps the corresponding Objective-C method.
-func (x *AssessmentParticipantConfiguration) SetRequired(required bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequired:"), required)
-}
-
 // ConfigurationInfo wraps the corresponding Objective-C method.
-func (x *AssessmentParticipantConfiguration) ConfigurationInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationInfo"))
+func (apc *AssessmentParticipantConfiguration) ConfigurationInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("configurationInfo"))
 	return obj.Wrap(_r)
 }
-
-// SetConfigurationInfo wraps the corresponding Objective-C method.
-func (x *AssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
-}
-
-// AssessmentParticipantConfigurationable is the interface implemented by [AssessmentParticipantConfiguration], for mocking and DI.
-type AssessmentParticipantConfigurationable interface {
-	obj.Object
-	WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration
-	WithRequired(required bool) *AssessmentParticipantConfiguration
-	WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration
-	AllowsNetworkAccess() bool
-	SetAllowsNetworkAccess(allowsNetworkAccess bool)
-	IsRequired() bool
-	SetRequired(required bool)
-	ConfigurationInfo() obj.Object
-	SetConfigurationInfo(configurationInfo obj.Object)
-}
-
-var _ AssessmentParticipantConfigurationable = (*AssessmentParticipantConfiguration)(nil)

@@ -46,24 +46,24 @@ func addVoiceShortcutButtonAdopt(id objc.ID) *AddVoiceShortcutButton {
 }
 
 // Description returns the object's -description text.
-func (x *AddVoiceShortcutButton) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (avsb *AddVoiceShortcutButton) Description() string {
+	return rt.Description(objref.IDOf(avsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddVoiceShortcutButton) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (avsb *AddVoiceShortcutButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(avsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddVoiceShortcutButton) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (avsb *AddVoiceShortcutButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(avsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddVoiceShortcutButton) String() string {
-	return rt.Description(objref.IDOf(x))
+func (avsb *AddVoiceShortcutButton) String() string {
+	return rt.Description(objref.IDOf(avsb))
 }
 
 // NewAddVoiceShortcutButtonWithStyle creates an Add to Siri button with the specified style.
@@ -73,69 +73,38 @@ func NewAddVoiceShortcutButtonWithStyle(style AddVoiceShortcutButtonStyle) *AddV
 	return addVoiceShortcutButtonAdopt(_id)
 }
 
-// WithStyle the button style.
-func (x *AddVoiceShortcutButton) WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-	return x
+// WithStyle sets the button style.
+func (avsb *AddVoiceShortcutButton) WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
+	objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setStyle:"), style)
+	return avsb
 }
 
-// WithShortcut the shortcut Siri invokes when the user speaks the invocation phrase.
-func (x *AddVoiceShortcutButton) WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
-	return x
+// WithShortcut sets the shortcut Siri invokes when the user speaks the invocation phrase.
+func (avsb *AddVoiceShortcutButton) WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton {
+	objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
+	return avsb
 }
 
-// WithCornerRadius a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
-func (x *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
+func (avsb *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton {
+	objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return avsb
 }
 
 // Style wraps the corresponding Objective-C method.
-func (x *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
-	_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(x), objc.RegisterName("style"))
+func (avsb *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
+	_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(avsb), objc.RegisterName("style"))
 	return _r
-}
-
-// SetStyle wraps the corresponding Objective-C method.
-func (x *AddVoiceShortcutButton) SetStyle(style AddVoiceShortcutButtonStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
 // Shortcut wraps the corresponding Objective-C method.
-func (x *AddVoiceShortcutButton) Shortcut() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortcut"))
+func (avsb *AddVoiceShortcutButton) Shortcut() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("shortcut"))
 	return obj.Wrap(_r)
 }
 
-// SetShortcut wraps the corresponding Objective-C method.
-func (x *AddVoiceShortcutButton) SetShortcut(shortcut obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcut:"), objref.IDOf(shortcut))
-}
-
-// CornerRadius a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
-func (x *AddVoiceShortcutButton) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+// CornerRadius returns a custom corner radius for the If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
+func (avsb *AddVoiceShortcutButton) CornerRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(avsb), objc.RegisterName("cornerRadius"))
 	return _r
 }
-
-// SetCornerRadius wraps the corresponding Objective-C method.
-func (x *AddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-}
-
-// AddVoiceShortcutButtonable is the interface implemented by [AddVoiceShortcutButton], for mocking and DI.
-type AddVoiceShortcutButtonable interface {
-	obj.Object
-	WithStyle(style AddVoiceShortcutButtonStyle) *AddVoiceShortcutButton
-	WithShortcut(shortcut obj.Object) *AddVoiceShortcutButton
-	WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton
-	Style() AddVoiceShortcutButtonStyle
-	SetStyle(style AddVoiceShortcutButtonStyle)
-	Shortcut() obj.Object
-	SetShortcut(shortcut obj.Object)
-	CornerRadius() float64
-	SetCornerRadius(cornerRadius float64)
-}
-
-var _ AddVoiceShortcutButtonable = (*AddVoiceShortcutButton)(nil)

@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,18 +49,10 @@ func NewCNNGroupNormalizationNode() *CNNGroupNormalizationNode {
 	return cNNGroupNormalizationNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNGroupNormalizationNode) WithLabel(label string) *CNNGroupNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cgnn *CNNGroupNormalizationNode) WithLabel(label string) *CNNGroupNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cgnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cgnn
 }
-
-// CNNGroupNormalizationNodeable is the interface implemented by [CNNGroupNormalizationNode], for mocking and DI.
-type CNNGroupNormalizationNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNGroupNormalizationNode
-}
-
-var _ CNNGroupNormalizationNodeable = (*CNNGroupNormalizationNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNGroupNormalizationNode)(nil)

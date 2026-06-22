@@ -46,24 +46,24 @@ func rangeAdopt(id objc.ID) *Range {
 }
 
 // Description returns the object's -description text.
-func (x *Range) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Range) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Range) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Range) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Range) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Range) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Range) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Range) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRangeWithLowerBoundUpperBound creates a range with the bounds you specify.
@@ -73,23 +73,14 @@ func NewRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *R
 	return rangeAdopt(_id)
 }
 
-// LowerBound the lowerBound of this time range
-func (x *Range) LowerBound() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerBound"))
+// LowerBound returns the lowerBound of this time range
+func (r *Range) LowerBound() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("lowerBound"))
 	return _r
 }
 
-// UpperBound the range's upper bound.
-func (x *Range) UpperBound() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperBound"))
+// UpperBound returns the range's upper bound.
+func (r *Range) UpperBound() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("upperBound"))
 	return _r
 }
-
-// Rangeable is the interface implemented by [Range], for mocking and DI.
-type Rangeable interface {
-	obj.Object
-	LowerBound() float64
-	UpperBound() float64
-}
-
-var _ Rangeable = (*Range)(nil)

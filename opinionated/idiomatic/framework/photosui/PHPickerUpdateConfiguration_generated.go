@@ -46,24 +46,24 @@ func pickerUpdateConfigurationAdopt(id objc.ID) *PickerUpdateConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *PickerUpdateConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (puc *PickerUpdateConfiguration) Description() string {
+	return rt.Description(objref.IDOf(puc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PickerUpdateConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (puc *PickerUpdateConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(puc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PickerUpdateConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (puc *PickerUpdateConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(puc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PickerUpdateConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (puc *PickerUpdateConfiguration) String() string {
+	return rt.Description(objref.IDOf(puc))
 }
 
 // NewPickerUpdateConfiguration creates a new PickerUpdateConfiguration.
@@ -72,29 +72,14 @@ func NewPickerUpdateConfiguration() *PickerUpdateConfiguration {
 	return pickerUpdateConfigurationAdopt(_id)
 }
 
-// WithSelectionLimit the maximum number of selections the user can make.
-func (x *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
-	return x
+// WithSelectionLimit sets the maximum number of selections the user can make.
+func (puc *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration {
+	objc.Send[objc.ID](objref.IDOf(puc), objc.RegisterName("setSelectionLimit:"), selectionLimit)
+	return puc
 }
 
-// SelectionLimit the maximum number of assets that can be selected.
-func (x *PickerUpdateConfiguration) SelectionLimit() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionLimit"))
+// SelectionLimit returns the maximum number of assets that can be selected.
+func (puc *PickerUpdateConfiguration) SelectionLimit() int {
+	_r := objc.Send[int](objref.IDOf(puc), objc.RegisterName("selectionLimit"))
 	return _r
 }
-
-// SetSelectionLimit the maximum number of assets that can be selected.
-func (x *PickerUpdateConfiguration) SetSelectionLimit(selectionLimit int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionLimit:"), selectionLimit)
-}
-
-// PickerUpdateConfigurationable is the interface implemented by [PickerUpdateConfiguration], for mocking and DI.
-type PickerUpdateConfigurationable interface {
-	obj.Object
-	WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration
-	SelectionLimit() int
-	SetSelectionLimit(selectionLimit int)
-}
-
-var _ PickerUpdateConfigurationable = (*PickerUpdateConfiguration)(nil)

@@ -7,7 +7,6 @@ package pencilkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,25 +59,16 @@ func NewEraserToolWithEraserTypeWidth(eraserType EraserType, width float64) *Era
 	return eraserToolAdopt(_id)
 }
 
-// EraserType the eraser type.
-func (x *EraserTool) EraserType() EraserType {
-	_r := objc.Send[EraserType](objref.IDOf(x), objc.RegisterName("eraserType"))
+// EraserType returns the eraser type.
+func (et *EraserTool) EraserType() EraserType {
+	_r := objc.Send[EraserType](objref.IDOf(et), objc.RegisterName("eraserType"))
 	return _r
 }
 
-// Width the width of the eraser.
-func (x *EraserTool) Width() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+// Width returns the width of the eraser.
+func (et *EraserTool) Width() float64 {
+	_r := objc.Send[float64](objref.IDOf(et), objc.RegisterName("width"))
 	return _r
 }
-
-// EraserToolable is the interface implemented by [EraserTool], for mocking and DI.
-type EraserToolable interface {
-	obj.Object
-	EraserType() EraserType
-	Width() float64
-}
-
-var _ EraserToolable = (*EraserTool)(nil)
 
 var _ ToolProvider = (*EraserTool)(nil)

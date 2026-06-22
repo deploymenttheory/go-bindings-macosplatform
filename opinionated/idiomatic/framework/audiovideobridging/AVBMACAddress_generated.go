@@ -44,24 +44,24 @@ func mACAddressAdopt(id objc.ID) *MACAddress {
 }
 
 // Description returns the object's -description text.
-func (x *MACAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *MACAddress) Description() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MACAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ma *MACAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MACAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ma *MACAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MACAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *MACAddress) String() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // NewMACAddress creates a new MACAddress.
@@ -70,72 +70,41 @@ func NewMACAddress() *MACAddress {
 	return mACAddressAdopt(_id)
 }
 
-// WithDataRepresentation an NSData object containing the bytes of the MAC address.
-func (x *MACAddress) WithDataRepresentation(dataRepresentation obj.Object) *MACAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
-	return x
+// WithDataRepresentation sets an NSData object containing the bytes of the MAC address.
+func (ma *MACAddress) WithDataRepresentation(dataRepresentation obj.Object) *MACAddress {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
+	return ma
 }
 
-// WithStringRepresentation the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
-func (x *MACAddress) WithStringRepresentation(stringRepresentation string) *MACAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
-	return x
+// WithStringRepresentation sets the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
+func (ma *MACAddress) WithStringRepresentation(stringRepresentation string) *MACAddress {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
+	return ma
 }
 
-// WithMulticast returns if the multicast bit is set in the MAC address.
-func (x *MACAddress) WithMulticast(multicast bool) *MACAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMulticast:"), multicast)
-	return x
+// WithMulticast sets returns if the multicast bit is set in the MAC address.
+func (ma *MACAddress) WithMulticast(multicast bool) *MACAddress {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setMulticast:"), multicast)
+	return ma
 }
 
-// DataRepresentation an NSData object containing the bytes of the MAC address.
-func (x *MACAddress) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+// DataRepresentation returns an NSData object containing the bytes of the MAC address.
+func (ma *MACAddress) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// SetDataRepresentation wraps the corresponding Objective-C method.
-func (x *MACAddress) SetDataRepresentation(dataRepresentation obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
-}
-
-// StringRepresentation the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
-func (x *MACAddress) StringRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+// StringRepresentation returns the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
+func (ma *MACAddress) StringRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetStringRepresentation wraps the corresponding Objective-C method.
-func (x *MACAddress) SetStringRepresentation(stringRepresentation string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
-}
-
-// IsMulticast returns if the multicast bit is set in the MAC address.
-func (x *MACAddress) IsMulticast() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMulticast"))
+// IsMulticast reports whether returns if the multicast bit is set in the MAC address.
+func (ma *MACAddress) IsMulticast() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isMulticast"))
 	return _r
 }
-
-// SetMulticast wraps the corresponding Objective-C method.
-func (x *MACAddress) SetMulticast(multicast bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMulticast:"), multicast)
-}
-
-// MACAddressable is the interface implemented by [MACAddress], for mocking and DI.
-type MACAddressable interface {
-	obj.Object
-	WithDataRepresentation(dataRepresentation obj.Object) *MACAddress
-	WithStringRepresentation(stringRepresentation string) *MACAddress
-	WithMulticast(multicast bool) *MACAddress
-	DataRepresentation() obj.Object
-	SetDataRepresentation(dataRepresentation obj.Object)
-	StringRepresentation() string
-	SetStringRepresentation(stringRepresentation string)
-	IsMulticast() bool
-	SetMulticast(multicast bool)
-}
-
-var _ MACAddressable = (*MACAddress)(nil)

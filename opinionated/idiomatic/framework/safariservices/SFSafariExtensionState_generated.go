@@ -46,24 +46,24 @@ func safariExtensionStateAdopt(id objc.ID) *SafariExtensionState {
 }
 
 // Description returns the object's -description text.
-func (x *SafariExtensionState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ses *SafariExtensionState) Description() string {
+	return rt.Description(objref.IDOf(ses))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariExtensionState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ses *SafariExtensionState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ses), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariExtensionState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ses *SafariExtensionState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ses), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariExtensionState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ses *SafariExtensionState) String() string {
+	return rt.Description(objref.IDOf(ses))
 }
 
 // NewSafariExtensionState creates a new SafariExtensionState.
@@ -73,15 +73,7 @@ func NewSafariExtensionState() *SafariExtensionState {
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *SafariExtensionState) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (ses *SafariExtensionState) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ses), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SafariExtensionStateable is the interface implemented by [SafariExtensionState], for mocking and DI.
-type SafariExtensionStateable interface {
-	obj.Object
-	IsEnabled() bool
-}
-
-var _ SafariExtensionStateable = (*SafariExtensionState)(nil)

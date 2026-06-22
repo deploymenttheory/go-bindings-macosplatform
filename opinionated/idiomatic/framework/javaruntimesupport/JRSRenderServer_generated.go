@@ -44,24 +44,24 @@ func renderServerAdopt(id objc.ID) *RenderServer {
 }
 
 // Description returns the object's -description text.
-func (x *RenderServer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RenderServer) Description() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rs *RenderServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rs *RenderServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderServer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RenderServer) String() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // NewRenderServer creates a new RenderServer.
@@ -69,10 +69,3 @@ func NewRenderServer() *RenderServer {
 	_id := objc.Send[objc.ID](objc.ID(_class("JRSRenderServer")), objc.RegisterName("new"))
 	return renderServerAdopt(_id)
 }
-
-// RenderServerable is the interface implemented by [RenderServer], for mocking and DI.
-type RenderServerable interface {
-	obj.Object
-}
-
-var _ RenderServerable = (*RenderServer)(nil)

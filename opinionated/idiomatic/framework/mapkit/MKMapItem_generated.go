@@ -46,24 +46,24 @@ func mapItemAdopt(id objc.ID) *MapItem {
 }
 
 // Description returns the object's -description text.
-func (x *MapItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MapItem) Description() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mi *MapItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mi *MapItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MapItem) String() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // NewMapItemWithPlacemark creates and returns a map item object using the specified placemark object.
@@ -73,170 +73,115 @@ func NewMapItemWithPlacemark(placemark *Placemark) *MapItem {
 	return mapItemAdopt(_id)
 }
 
-// WithName the descriptive name associated with the map item.
-func (x *MapItem) WithName(name string) *MapItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the descriptive name associated with the map item.
+func (mi *MapItem) WithName(name string) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setName:"), purego.NSString(name))
+	return mi
 }
 
-// WithPhoneNumber the phone number associated with a business at the specified location.
-func (x *MapItem) WithPhoneNumber(phoneNumber string) *MapItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
-	return x
+// WithPhoneNumber sets the phone number associated with a business at the specified location.
+func (mi *MapItem) WithPhoneNumber(phoneNumber string) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
+	return mi
 }
 
-// WithUrl the URL associated with the specified location.
-func (x *MapItem) WithUrl(url string) *MapItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
-	return x
+// WithURL sets the URL associated with the specified location.
+func (mi *MapItem) WithURL(url string) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setUrl:"), rt.FileURL(url))
+	return mi
 }
 
-// WithTimeZone the time zone of the specified location.
-func (x *MapItem) WithTimeZone(timeZone obj.Object) *MapItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
-	return x
+// WithTimeZone sets the time zone of the specified location.
+func (mi *MapItem) WithTimeZone(timeZone obj.Object) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	return mi
 }
 
-// WithPointOfInterestCategory the point-of-interest category for the map item.
-func (x *MapItem) WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
-	return x
+// WithPointOfInterestCategory sets the point-of-interest category for the map item.
+func (mi *MapItem) WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
+	return mi
 }
 
 // OpenInMapsWithLaunchOptions opens the Maps app and displays the map item.
-func (x *MapItem) OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openInMapsWithLaunchOptions:"), objref.IDOf(launchOptions))
+func (mi *MapItem) OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:"), objref.IDOf(launchOptions))
 	return _r
 }
 
 // OpenInMapsWithLaunchOptionsCompletionHandler opens the Maps app and displays the map item.
-func (x *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+func (mi *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *MapItem) Identifier() *MapItemIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (mi *MapItem) Identifier() *MapItemIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("identifier"))
 	return MapItemIdentifierFromID(_r)
 }
 
 // AlternateIdentifiers wraps the corresponding Objective-C method.
-func (x *MapItem) AlternateIdentifiers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateIdentifiers"))
+func (mi *MapItem) AlternateIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("alternateIdentifiers"))
 	return obj.Wrap(_r)
 }
 
 // Placemark wraps the corresponding Objective-C method.
-func (x *MapItem) Placemark() *Placemark {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placemark"))
+func (mi *MapItem) Placemark() *Placemark {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("placemark"))
 	return PlacemarkFromID(_r)
 }
 
 // IsCurrentLocation wraps the corresponding Objective-C method.
-func (x *MapItem) IsCurrentLocation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCurrentLocation"))
+func (mi *MapItem) IsCurrentLocation() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isCurrentLocation"))
 	return _r
 }
 
 // Address wraps the corresponding Objective-C method.
-func (x *MapItem) Address() *Address {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+func (mi *MapItem) Address() *Address {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("address"))
 	return AddressFromID(_r)
 }
 
 // AddressRepresentations wraps the corresponding Objective-C method.
-func (x *MapItem) AddressRepresentations() *AddressRepresentations {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressRepresentations"))
+func (mi *MapItem) AddressRepresentations() *AddressRepresentations {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("addressRepresentations"))
 	return AddressRepresentationsFromID(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MapItem) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mi *MapItem) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MapItem) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // PhoneNumber wraps the corresponding Objective-C method.
-func (x *MapItem) PhoneNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+func (mi *MapItem) PhoneNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPhoneNumber wraps the corresponding Objective-C method.
-func (x *MapItem) SetPhoneNumber(phoneNumber string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
-}
-
-// Url wraps the corresponding Objective-C method.
-func (x *MapItem) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL wraps the corresponding Objective-C method.
+func (mi *MapItem) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("url"))
 	return obj.Wrap(_r)
-}
-
-// SetUrl wraps the corresponding Objective-C method.
-func (x *MapItem) SetUrl(url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
 // TimeZone wraps the corresponding Objective-C method.
-func (x *MapItem) TimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+func (mi *MapItem) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
-}
-
-// SetTimeZone wraps the corresponding Objective-C method.
-func (x *MapItem) SetTimeZone(timeZone obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
 // PointOfInterestCategory wraps the corresponding Objective-C method.
-func (x *MapItem) PointOfInterestCategory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestCategory"))
+func (mi *MapItem) PointOfInterestCategory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("pointOfInterestCategory"))
 	return obj.Wrap(_r)
 }
-
-// SetPointOfInterestCategory wraps the corresponding Objective-C method.
-func (x *MapItem) SetPointOfInterestCategory(pointOfInterestCategory obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
-}
-
-// MapItemable is the interface implemented by [MapItem], for mocking and DI.
-type MapItemable interface {
-	obj.Object
-	WithName(name string) *MapItem
-	WithPhoneNumber(phoneNumber string) *MapItem
-	WithUrl(url string) *MapItem
-	WithTimeZone(timeZone obj.Object) *MapItem
-	WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem
-	OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool
-	OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool))
-	Identifier() *MapItemIdentifier
-	AlternateIdentifiers() obj.Object
-	Placemark() *Placemark
-	IsCurrentLocation() bool
-	Address() *Address
-	AddressRepresentations() *AddressRepresentations
-	Name() string
-	SetName(name string)
-	PhoneNumber() string
-	SetPhoneNumber(phoneNumber string)
-	Url() obj.Object
-	SetUrl(url string)
-	TimeZone() obj.Object
-	SetTimeZone(timeZone obj.Object)
-	PointOfInterestCategory() obj.Object
-	SetPointOfInterestCategory(pointOfInterestCategory obj.Object)
-}
-
-var _ MapItemable = (*MapItem)(nil)

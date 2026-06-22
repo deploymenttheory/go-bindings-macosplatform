@@ -46,24 +46,24 @@ func workoutConfigurationAdopt(id objc.ID) *WorkoutConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *WorkoutConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wc *WorkoutConfiguration) Description() string {
+	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wc *WorkoutConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wc *WorkoutConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkoutConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wc *WorkoutConfiguration) String() string {
+	return rt.Description(objref.IDOf(wc))
 }
 
 // NewWorkoutConfiguration creates a new WorkoutConfiguration.
@@ -72,89 +72,50 @@ func NewWorkoutConfiguration() *WorkoutConfiguration {
 	return workoutConfigurationAdopt(_id)
 }
 
-// WithActivityType the workout session’s activity type.
-func (x *WorkoutConfiguration) WithActivityType(activityType WorkoutActivityType) *WorkoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
-	return x
+// WithActivityType sets the workout session’s activity type.
+func (wc *WorkoutConfiguration) WithActivityType(activityType WorkoutActivityType) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setActivityType:"), activityType)
+	return wc
 }
 
-// WithLocationType the workout session’s location.
-func (x *WorkoutConfiguration) WithLocationType(locationType WorkoutSessionLocationType) *WorkoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationType:"), locationType)
-	return x
+// WithLocationType sets the workout session’s location.
+func (wc *WorkoutConfiguration) WithLocationType(locationType WorkoutSessionLocationType) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setLocationType:"), locationType)
+	return wc
 }
 
-// WithSwimmingLocationType the workout session’s swimming location.
-func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) *WorkoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
-	return x
+// WithSwimmingLocationType sets the workout session’s swimming location.
+func (wc *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
+	return wc
 }
 
-// WithLapLength the length of the lap for a workout session.
-func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
-	return x
+// WithLapLength sets the length of the lap for a workout session.
+func (wc *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
+	return wc
 }
 
 // ActivityType indicates the type of workout for the configuration.
-func (x *WorkoutConfiguration) ActivityType() WorkoutActivityType {
-	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("activityType"))
+func (wc *WorkoutConfiguration) ActivityType() WorkoutActivityType {
+	_r := objc.Send[WorkoutActivityType](objref.IDOf(wc), objc.RegisterName("activityType"))
 	return _r
-}
-
-// SetActivityType wraps the corresponding Objective-C method.
-func (x *WorkoutConfiguration) SetActivityType(activityType WorkoutActivityType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
 }
 
 // LocationType indicates the type of location (indoors vs. outdoors) for the configuration.
-func (x *WorkoutConfiguration) LocationType() WorkoutSessionLocationType {
-	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(x), objc.RegisterName("locationType"))
+func (wc *WorkoutConfiguration) LocationType() WorkoutSessionLocationType {
+	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(wc), objc.RegisterName("locationType"))
 	return _r
-}
-
-// SetLocationType wraps the corresponding Objective-C method.
-func (x *WorkoutConfiguration) SetLocationType(locationType WorkoutSessionLocationType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationType:"), locationType)
 }
 
 // SwimmingLocationType indicates the type of swimming location (pool vs. open water) where the workout will take place.
-func (x *WorkoutConfiguration) SwimmingLocationType() WorkoutSwimmingLocationType {
-	_r := objc.Send[WorkoutSwimmingLocationType](objref.IDOf(x), objc.RegisterName("swimmingLocationType"))
+func (wc *WorkoutConfiguration) SwimmingLocationType() WorkoutSwimmingLocationType {
+	_r := objc.Send[WorkoutSwimmingLocationType](objref.IDOf(wc), objc.RegisterName("swimmingLocationType"))
 	return _r
 }
 
-// SetSwimmingLocationType wraps the corresponding Objective-C method.
-func (x *WorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
-}
-
 // LapLength indicates the length of the pool, when the workout location type is pool. This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
-func (x *WorkoutConfiguration) LapLength() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lapLength"))
+func (wc *WorkoutConfiguration) LapLength() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("lapLength"))
 	return QuantityFromID(_r)
 }
-
-// SetLapLength wraps the corresponding Objective-C method.
-func (x *WorkoutConfiguration) SetLapLength(lapLength *Quantity) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
-}
-
-// WorkoutConfigurationable is the interface implemented by [WorkoutConfiguration], for mocking and DI.
-type WorkoutConfigurationable interface {
-	obj.Object
-	WithActivityType(activityType WorkoutActivityType) *WorkoutConfiguration
-	WithLocationType(locationType WorkoutSessionLocationType) *WorkoutConfiguration
-	WithSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) *WorkoutConfiguration
-	WithLapLength(lapLength *Quantity) *WorkoutConfiguration
-	ActivityType() WorkoutActivityType
-	SetActivityType(activityType WorkoutActivityType)
-	LocationType() WorkoutSessionLocationType
-	SetLocationType(locationType WorkoutSessionLocationType)
-	SwimmingLocationType() WorkoutSwimmingLocationType
-	SetSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType)
-	LapLength() *Quantity
-	SetLapLength(lapLength *Quantity)
-}
-
-var _ WorkoutConfigurationable = (*WorkoutConfiguration)(nil)

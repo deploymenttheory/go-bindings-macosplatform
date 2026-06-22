@@ -46,24 +46,24 @@ func moduleIdentityAdopt(id objc.ID) *ModuleIdentity {
 }
 
 // Description returns the object's -description text.
-func (x *ModuleIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *ModuleIdentity) Description() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModuleIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mi *ModuleIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModuleIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mi *ModuleIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModuleIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *ModuleIdentity) String() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // NewModuleIdentity creates a new ModuleIdentity.
@@ -72,33 +72,23 @@ func NewModuleIdentity() *ModuleIdentity {
 	return moduleIdentityAdopt(_id)
 }
 
-// BundleIdentifier the module's bundle identifier.
-func (x *ModuleIdentity) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+// BundleIdentifier returns the module's bundle identifier.
+func (mi *ModuleIdentity) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Url the module's URL.
-func (x *ModuleIdentity) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the module's URL.
+func (mi *ModuleIdentity) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *ModuleIdentity) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (mi *ModuleIdentity) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// ModuleIdentityable is the interface implemented by [ModuleIdentity], for mocking and DI.
-type ModuleIdentityable interface {
-	obj.Object
-	BundleIdentifier() string
-	Url() obj.Object
-	IsEnabled() bool
-}
-
-var _ ModuleIdentityable = (*ModuleIdentity)(nil)

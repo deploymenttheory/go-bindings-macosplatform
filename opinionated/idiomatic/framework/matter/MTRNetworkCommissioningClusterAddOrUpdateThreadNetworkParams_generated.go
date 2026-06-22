@@ -44,24 +44,24 @@ func mTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsAdopt(id objc.I
 }
 
 // Description returns the object's -description text.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Description() string {
+	return rt.Description(objref.IDOf(mnccaoutnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mnccaoutnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mnccaoutnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) String() string {
+	return rt.Description(objref.IDOf(mnccaoutnp))
 }
 
 // NewMTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams creates a new MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams.
@@ -71,88 +71,49 @@ func NewMTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams() *MTRNetwo
 }
 
 // WithOperationalDataset sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithOperationalDataset(operationalDataset obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
-	return x
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithOperationalDataset(operationalDataset obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
+	return mnccaoutnp
 }
 
 // WithBreadcrumb sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
-	return x
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
+	return mnccaoutnp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mnccaoutnp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mnccaoutnp
 }
 
 // OperationalDataset wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) OperationalDataset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalDataset"))
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) OperationalDataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("operationalDataset"))
 	return obj.Wrap(_r)
-}
-
-// SetOperationalDataset wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetOperationalDataset(operationalDataset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 }
 
 // Breadcrumb wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Breadcrumb() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Breadcrumb() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
-// SetBreadcrumb wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetBreadcrumb(breadcrumb obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams], for mocking and DI.
-type MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable interface {
-	obj.Object
-	WithOperationalDataset(operationalDataset obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
-	WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
-	OperationalDataset() obj.Object
-	SetOperationalDataset(operationalDataset obj.Object)
-	Breadcrumb() obj.Object
-	SetBreadcrumb(breadcrumb obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsable = (*MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams)(nil)

@@ -81,25 +81,16 @@ func NewGraphTensorDataWithMPSNDArray(ndarray obj.Object) *GraphTensorData {
 	return graphTensorDataAdopt(_id)
 }
 
-// Mpsndarray return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
-func (x *GraphTensorData) Mpsndarray() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mpsndarray"))
+// Mpsndarray returns an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
+func (gtd *GraphTensorData) Mpsndarray() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gtd), objc.RegisterName("mpsndarray"))
 	return obj.Wrap(_r)
 }
 
-// Device the device of the tensor data.
-func (x *GraphTensorData) Device() *GraphDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+// Device returns the device of the tensor data.
+func (gtd *GraphTensorData) Device() *GraphDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(gtd), objc.RegisterName("device"))
 	return GraphDeviceFromID(_r)
 }
-
-// GraphTensorDataable is the interface implemented by [GraphTensorData], for mocking and DI.
-type GraphTensorDataable interface {
-	obj.Object
-	Mpsndarray() obj.Object
-	Device() *GraphDevice
-}
-
-var _ GraphTensorDataable = (*GraphTensorData)(nil)
 
 var _ GraphObjectProvider = (*GraphTensorData)(nil)

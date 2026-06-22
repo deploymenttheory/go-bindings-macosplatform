@@ -46,24 +46,24 @@ func mappingModelAdopt(id objc.ID) *MappingModel {
 }
 
 // Description returns the object's -description text.
-func (x *MappingModel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mm *MappingModel) Description() string {
+	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MappingModel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mm *MappingModel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MappingModel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mm *MappingModel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MappingModel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mm *MappingModel) String() string {
+	return rt.Description(objref.IDOf(mm))
 }
 
 // NewMappingModelWithContentsOfURL returns a mapping model initialized from a given URL.
@@ -73,39 +73,23 @@ func NewMappingModelWithContentsOfURL(url string) *MappingModel {
 	return mappingModelAdopt(_id)
 }
 
-// WithEntityMappings the entity mappings for the mapping model.
-func (x *MappingModel) WithEntityMappings(items ...*EntityMapping) *MappingModel {
+// WithEntityMappings sets the entity mappings for the mapping model.
+func (mm *MappingModel) WithEntityMappings(items ...*EntityMapping) *MappingModel {
 	_arr := purego.SliceToNSArray(items, func(_v *EntityMapping) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityMappings:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setEntityMappings:"), _arr)
+	return mm
 }
 
 // EntityMappings wraps the corresponding Objective-C method.
 //
 // EntityMappings returns the collection as a Go slice.
-func (x *MappingModel) EntityMappings() []*EntityMapping {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityMappings"))
+func (mm *MappingModel) EntityMappings() []*EntityMapping {
+	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("entityMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityMapping { return EntityMappingFromID(_id) })
 }
 
-// SetEntityMappings wraps the corresponding Objective-C method.
-func (x *MappingModel) SetEntityMappings(entityMappings []*EntityMapping) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntityMappings:"), purego.SliceToNSArray(entityMappings, func(_v *EntityMapping) objc.ID { return objref.IDOf(_v) }))
-}
-
 // EntityMappingsByName wraps the corresponding Objective-C method.
-func (x *MappingModel) EntityMappingsByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityMappingsByName"))
+func (mm *MappingModel) EntityMappingsByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("entityMappingsByName"))
 	return obj.Wrap(_r)
 }
-
-// MappingModelable is the interface implemented by [MappingModel], for mocking and DI.
-type MappingModelable interface {
-	obj.Object
-	WithEntityMappings(items ...*EntityMapping) *MappingModel
-	EntityMappings() []*EntityMapping
-	SetEntityMappings(entityMappings []*EntityMapping)
-	EntityMappingsByName() obj.Object
-}
-
-var _ MappingModelable = (*MappingModel)(nil)

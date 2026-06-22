@@ -5,13 +5,14 @@
 package coremidi
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // CISession is an idiomatic wrapper over the Objective-C class MIDICISession.
@@ -48,24 +49,24 @@ func cISessionAdopt(id objc.ID) *CISession {
 }
 
 // Description returns the object's -description text.
-func (x *CISession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *CISession) Description() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CISession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cs *CISession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CISession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cs *CISession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CISession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *CISession) String() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // NewCISession creates a new CISession.
@@ -75,15 +76,15 @@ func NewCISession() *CISession {
 }
 
 // ProfileStateForChannel returns the profile state for the specified MIDI channel number.
-func (x *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileStateForChannel:"), channel)
+func (cs *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("profileStateForChannel:"), channel)
 	return CIProfileStateFromID(_r)
 }
 
 // EnableProfileOnChannel performs an asynchronous request to enable a profile for a specific MIDI channel number.
-func (x *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) error {
+func (cs *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(cs), objc.RegisterName("enableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -91,9 +92,9 @@ func (x *CISession) EnableProfileOnChannel(profile *CIProfile, channel uint8) er
 }
 
 // DisableProfileOnChannel performs an asynchronous request to disable a profile for a specific MIDI channel number.
-func (x *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) error {
+func (cs *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(cs), objc.RegisterName("disableProfile:onChannel:error:"), objref.IDOf(profile), channel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -101,60 +102,43 @@ func (x *CISession) DisableProfileOnChannel(profile *CIProfile, channel uint8) e
 }
 
 // SendProfileOnChannelProfileData sends profile-specific data to the MIDI-CI session.
-func (x *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(profile), channel, objref.IDOf(profileSpecificData))
+func (cs *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(profile), channel, objref.IDOf(profileSpecificData))
 	return _r
 }
 
 // MidiDestination wraps the corresponding Objective-C method.
-func (x *CISession) MidiDestination() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("midiDestination"))
+func (cs *CISession) MidiDestination() int {
+	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("midiDestination"))
 	return _r
 }
 
 // SupportsProfileCapability wraps the corresponding Objective-C method.
-func (x *CISession) SupportsProfileCapability() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfileCapability"))
+func (cs *CISession) SupportsProfileCapability() bool {
+	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("supportsProfileCapability"))
 	return _r
 }
 
 // SupportsPropertyCapability wraps the corresponding Objective-C method.
-func (x *CISession) SupportsPropertyCapability() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPropertyCapability"))
+func (cs *CISession) SupportsPropertyCapability() bool {
+	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("supportsPropertyCapability"))
 	return _r
 }
 
 // DeviceInfo wraps the corresponding Objective-C method.
-func (x *CISession) DeviceInfo() *CIDeviceInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+func (cs *CISession) DeviceInfo() *CIDeviceInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
 
 // MaxSysExSize wraps the corresponding Objective-C method.
-func (x *CISession) MaxSysExSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxSysExSize"))
+func (cs *CISession) MaxSysExSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("maxSysExSize"))
 	return obj.Wrap(_r)
 }
 
 // MaxPropertyRequests wraps the corresponding Objective-C method.
-func (x *CISession) MaxPropertyRequests() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPropertyRequests"))
+func (cs *CISession) MaxPropertyRequests() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("maxPropertyRequests"))
 	return obj.Wrap(_r)
 }
-
-// CISessionable is the interface implemented by [CISession], for mocking and DI.
-type CISessionable interface {
-	obj.Object
-	ProfileStateForChannel(channel uint8) *CIProfileState
-	EnableProfileOnChannel(profile *CIProfile, channel uint8) error
-	DisableProfileOnChannel(profile *CIProfile, channel uint8) error
-	SendProfileOnChannelProfileData(profile *CIProfile, channel uint8, profileSpecificData obj.Object) bool
-	MidiDestination() int
-	SupportsProfileCapability() bool
-	SupportsPropertyCapability() bool
-	DeviceInfo() *CIDeviceInfo
-	MaxSysExSize() obj.Object
-	MaxPropertyRequests() obj.Object
-}
-
-var _ CISessionable = (*CISession)(nil)

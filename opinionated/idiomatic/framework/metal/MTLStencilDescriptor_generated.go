@@ -46,24 +46,24 @@ func stencilDescriptorAdopt(id objc.ID) *StencilDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *StencilDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *StencilDescriptor) Description() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StencilDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sd *StencilDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StencilDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sd *StencilDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StencilDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *StencilDescriptor) String() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // NewStencilDescriptor creates a new StencilDescriptor.
@@ -72,129 +72,74 @@ func NewStencilDescriptor() *StencilDescriptor {
 	return stencilDescriptorAdopt(_id)
 }
 
-// WithStencilCompareFunction the comparison that is performed between the masked reference value and a masked value in the stencil attachment.
-func (x *StencilDescriptor) WithStencilCompareFunction(stencilCompareFunction CompareFunction) *StencilDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilCompareFunction:"), stencilCompareFunction)
-	return x
+// WithStencilCompareFunction sets the comparison that is performed between the masked reference value and a masked value in the stencil attachment.
+func (sd *StencilDescriptor) WithStencilCompareFunction(stencilCompareFunction CompareFunction) *StencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setStencilCompareFunction:"), stencilCompareFunction)
+	return sd
 }
 
-// WithStencilFailureOperation the operation that is performed to update the values in the stencil attachment when the stencil test fails.
-func (x *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation StencilOperation) *StencilDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilFailureOperation:"), stencilFailureOperation)
-	return x
+// WithStencilFailureOperation sets the operation that is performed to update the values in the stencil attachment when the stencil test fails.
+func (sd *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation StencilOperation) *StencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setStencilFailureOperation:"), stencilFailureOperation)
+	return sd
 }
 
-// WithDepthFailureOperation the operation that is performed to update the values in the stencil attachment when the stencil test passes, but the depth test fails.
-func (x *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation StencilOperation) *StencilDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthFailureOperation:"), depthFailureOperation)
-	return x
+// WithDepthFailureOperation sets the operation that is performed to update the values in the stencil attachment when the stencil test passes, but the depth test fails.
+func (sd *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation StencilOperation) *StencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setDepthFailureOperation:"), depthFailureOperation)
+	return sd
 }
 
-// WithDepthStencilPassOperation the operation that is performed to update the values in the stencil attachment when both the stencil test and the depth test pass.
-func (x *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperation StencilOperation) *StencilDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthStencilPassOperation:"), depthStencilPassOperation)
-	return x
+// WithDepthStencilPassOperation sets the operation that is performed to update the values in the stencil attachment when both the stencil test and the depth test pass.
+func (sd *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperation StencilOperation) *StencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setDepthStencilPassOperation:"), depthStencilPassOperation)
+	return sd
 }
 
-// WithReadMask a bitmask that determines from which bits that stencil comparison tests can read.
-func (x *StencilDescriptor) WithReadMask(readMask uint32) *StencilDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadMask:"), readMask)
-	return x
+// WithReadMask sets a bitmask that determines from which bits that stencil comparison tests can read.
+func (sd *StencilDescriptor) WithReadMask(readMask uint32) *StencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setReadMask:"), readMask)
+	return sd
 }
 
-// WithWriteMask a bitmask that determines to which bits that stencil operations can write.
-func (x *StencilDescriptor) WithWriteMask(writeMask uint32) *StencilDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWriteMask:"), writeMask)
-	return x
+// WithWriteMask sets a bitmask that determines to which bits that stencil operations can write.
+func (sd *StencilDescriptor) WithWriteMask(writeMask uint32) *StencilDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setWriteMask:"), writeMask)
+	return sd
 }
 
 // StencilCompareFunction wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) StencilCompareFunction() CompareFunction {
-	_r := objc.Send[CompareFunction](objref.IDOf(x), objc.RegisterName("stencilCompareFunction"))
+func (sd *StencilDescriptor) StencilCompareFunction() CompareFunction {
+	_r := objc.Send[CompareFunction](objref.IDOf(sd), objc.RegisterName("stencilCompareFunction"))
 	return _r
 }
 
-// SetStencilCompareFunction wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) SetStencilCompareFunction(stencilCompareFunction CompareFunction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilCompareFunction:"), stencilCompareFunction)
-}
-
-// StencilFailureOperation stencil is tested first.  stencilFailureOperation declares how the stencil buffer is updated when the stencil test fails.
-func (x *StencilDescriptor) StencilFailureOperation() StencilOperation {
-	_r := objc.Send[StencilOperation](objref.IDOf(x), objc.RegisterName("stencilFailureOperation"))
+// StencilFailureOperation returns stencil is tested first.  stencilFailureOperation declares how the stencil buffer is updated when the stencil test fails.
+func (sd *StencilDescriptor) StencilFailureOperation() StencilOperation {
+	_r := objc.Send[StencilOperation](objref.IDOf(sd), objc.RegisterName("stencilFailureOperation"))
 	return _r
 }
 
-// SetStencilFailureOperation wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) SetStencilFailureOperation(stencilFailureOperation StencilOperation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilFailureOperation:"), stencilFailureOperation)
-}
-
-// DepthFailureOperation if stencil passes, depth is tested next.  Declare what happens when the depth test fails.
-func (x *StencilDescriptor) DepthFailureOperation() StencilOperation {
-	_r := objc.Send[StencilOperation](objref.IDOf(x), objc.RegisterName("depthFailureOperation"))
+// DepthFailureOperation returns if stencil passes, depth is tested next.  Declare what happens when the depth test fails.
+func (sd *StencilDescriptor) DepthFailureOperation() StencilOperation {
+	_r := objc.Send[StencilOperation](objref.IDOf(sd), objc.RegisterName("depthFailureOperation"))
 	return _r
 }
 
-// SetDepthFailureOperation wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) SetDepthFailureOperation(depthFailureOperation StencilOperation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthFailureOperation:"), depthFailureOperation)
-}
-
-// DepthStencilPassOperation if both the stencil and depth tests pass, declare how the stencil buffer is updated.
-func (x *StencilDescriptor) DepthStencilPassOperation() StencilOperation {
-	_r := objc.Send[StencilOperation](objref.IDOf(x), objc.RegisterName("depthStencilPassOperation"))
+// DepthStencilPassOperation returns if both the stencil and depth tests pass, declare how the stencil buffer is updated.
+func (sd *StencilDescriptor) DepthStencilPassOperation() StencilOperation {
+	_r := objc.Send[StencilOperation](objref.IDOf(sd), objc.RegisterName("depthStencilPassOperation"))
 	return _r
-}
-
-// SetDepthStencilPassOperation wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) SetDepthStencilPassOperation(depthStencilPassOperation StencilOperation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthStencilPassOperation:"), depthStencilPassOperation)
 }
 
 // ReadMask wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) ReadMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("readMask"))
+func (sd *StencilDescriptor) ReadMask() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(sd), objc.RegisterName("readMask"))
 	return _r
-}
-
-// SetReadMask wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) SetReadMask(readMask uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadMask:"), readMask)
 }
 
 // WriteMask wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) WriteMask() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("writeMask"))
+func (sd *StencilDescriptor) WriteMask() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(sd), objc.RegisterName("writeMask"))
 	return _r
 }
-
-// SetWriteMask wraps the corresponding Objective-C method.
-func (x *StencilDescriptor) SetWriteMask(writeMask uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWriteMask:"), writeMask)
-}
-
-// StencilDescriptorable is the interface implemented by [StencilDescriptor], for mocking and DI.
-type StencilDescriptorable interface {
-	obj.Object
-	WithStencilCompareFunction(stencilCompareFunction CompareFunction) *StencilDescriptor
-	WithStencilFailureOperation(stencilFailureOperation StencilOperation) *StencilDescriptor
-	WithDepthFailureOperation(depthFailureOperation StencilOperation) *StencilDescriptor
-	WithDepthStencilPassOperation(depthStencilPassOperation StencilOperation) *StencilDescriptor
-	WithReadMask(readMask uint32) *StencilDescriptor
-	WithWriteMask(writeMask uint32) *StencilDescriptor
-	StencilCompareFunction() CompareFunction
-	SetStencilCompareFunction(stencilCompareFunction CompareFunction)
-	StencilFailureOperation() StencilOperation
-	SetStencilFailureOperation(stencilFailureOperation StencilOperation)
-	DepthFailureOperation() StencilOperation
-	SetDepthFailureOperation(depthFailureOperation StencilOperation)
-	DepthStencilPassOperation() StencilOperation
-	SetDepthStencilPassOperation(depthStencilPassOperation StencilOperation)
-	ReadMask() uint32
-	SetReadMask(readMask uint32)
-	WriteMask() uint32
-	SetWriteMask(writeMask uint32)
-}
-
-var _ StencilDescriptorable = (*StencilDescriptor)(nil)

@@ -5,7 +5,6 @@
 package foundation
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,238 +48,166 @@ func operationAdopt(id objc.ID) *Operation {
 }
 
 // Description returns the object's -description text.
-func (x *Operation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Operation) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Operation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Operation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Operation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Operation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Operation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Operation) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // WithQueuePriority sets the property and returns the receiver so calls can be chained.
-func (x *Operation) WithQueuePriority(queuePriority OperationQueuePriority) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
-	return x
+func (o *Operation) WithQueuePriority(queuePriority OperationQueuePriority) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setQueuePriority:"), queuePriority)
+	return o
 }
 
 // WithCompletionBlock sets the property and returns the receiver so calls can be chained.
-func (x *Operation) WithCompletionBlock(completionBlock func()) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
-	return x
+func (o *Operation) WithCompletionBlock(completionBlock func()) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
+	return o
 }
 
 // WithThreadPriority sets the property and returns the receiver so calls can be chained.
-func (x *Operation) WithThreadPriority(threadPriority float64) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
-	return x
+func (o *Operation) WithThreadPriority(threadPriority float64) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setThreadPriority:"), threadPriority)
+	return o
 }
 
 // WithQualityOfService sets the property and returns the receiver so calls can be chained.
-func (x *Operation) WithQualityOfService(qualityOfService QualityOfService) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
-	return x
+func (o *Operation) WithQualityOfService(qualityOfService QualityOfService) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setQualityOfService:"), qualityOfService)
+	return o
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *Operation) WithName(name StringProvider) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+func (o *Operation) WithName(name StringProvider) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setName:"), objref.IDOf(name))
+	return o
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Operation) WithScriptingProperties(scriptingProperties obj.Object) *Operation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (o *Operation) WithScriptingProperties(scriptingProperties obj.Object) *Operation {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return o
 }
 
 // Start wraps the corresponding Objective-C method.
-func (x *Operation) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (o *Operation) Start() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("start"))
 }
 
 // Main wraps the corresponding Objective-C method.
-func (x *Operation) Main() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("main"))
+func (o *Operation) Main() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("main"))
 }
 
 // Cancel wraps the corresponding Objective-C method.
-func (x *Operation) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (o *Operation) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("cancel"))
 }
 
 // AddDependency wraps the corresponding Objective-C method.
-func (x *Operation) AddDependency(op *Operation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addDependency:"), objref.IDOf(op))
+func (o *Operation) AddDependency(op *Operation) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addDependency:"), objref.IDOf(op))
 }
 
 // RemoveDependency wraps the corresponding Objective-C method.
-func (x *Operation) RemoveDependency(op *Operation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDependency:"), objref.IDOf(op))
+func (o *Operation) RemoveDependency(op *Operation) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeDependency:"), objref.IDOf(op))
 }
 
 // WaitUntilFinished wraps the corresponding Objective-C method.
-func (x *Operation) WaitUntilFinished() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilFinished"))
+func (o *Operation) WaitUntilFinished() {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("waitUntilFinished"))
 }
 
 // IsCancelled wraps the corresponding Objective-C method.
-func (x *Operation) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+func (o *Operation) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsExecuting wraps the corresponding Objective-C method.
-func (x *Operation) IsExecuting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExecuting"))
+func (o *Operation) IsExecuting() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isExecuting"))
 	return _r
 }
 
 // IsFinished wraps the corresponding Objective-C method.
-func (x *Operation) IsFinished() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinished"))
+func (o *Operation) IsFinished() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isFinished"))
 	return _r
 }
 
 // IsConcurrent wraps the corresponding Objective-C method.
-func (x *Operation) IsConcurrent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConcurrent"))
+func (o *Operation) IsConcurrent() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isConcurrent"))
 	return _r
 }
 
 // IsAsynchronous wraps the corresponding Objective-C method.
-func (x *Operation) IsAsynchronous() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAsynchronous"))
+func (o *Operation) IsAsynchronous() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
 // IsReady wraps the corresponding Objective-C method.
-func (x *Operation) IsReady() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReady"))
+func (o *Operation) IsReady() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isReady"))
 	return _r
 }
 
 // Dependencies wraps the corresponding Objective-C method.
 //
 // Dependencies returns the collection as a Go slice.
-func (x *Operation) Dependencies() []*Operation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependencies"))
+func (o *Operation) Dependencies() []*Operation {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
 // QueuePriority wraps the corresponding Objective-C method.
-func (x *Operation) QueuePriority() OperationQueuePriority {
-	_r := objc.Send[OperationQueuePriority](objref.IDOf(x), objc.RegisterName("queuePriority"))
+func (o *Operation) QueuePriority() OperationQueuePriority {
+	_r := objc.Send[OperationQueuePriority](objref.IDOf(o), objc.RegisterName("queuePriority"))
 	return _r
-}
-
-// SetQueuePriority wraps the corresponding Objective-C method.
-func (x *Operation) SetQueuePriority(queuePriority OperationQueuePriority) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
-}
-
-// SetCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *Operation) SetCompletionBlock(ctx context.Context) error {
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block) {
-		_ch <- nil
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 // ThreadPriority wraps the corresponding Objective-C method.
-func (x *Operation) ThreadPriority() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threadPriority"))
+func (o *Operation) ThreadPriority() float64 {
+	_r := objc.Send[float64](objref.IDOf(o), objc.RegisterName("threadPriority"))
 	return _r
-}
-
-// SetThreadPriority wraps the corresponding Objective-C method.
-func (x *Operation) SetThreadPriority(threadPriority float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 }
 
 // QualityOfService wraps the corresponding Objective-C method.
-func (x *Operation) QualityOfService() QualityOfService {
-	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
+func (o *Operation) QualityOfService() QualityOfService {
+	_r := objc.Send[QualityOfService](objref.IDOf(o), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// SetQualityOfService wraps the corresponding Objective-C method.
-func (x *Operation) SetQualityOfService(qualityOfService QualityOfService) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *Operation) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (o *Operation) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *Operation) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// Operationable is the interface implemented by [Operation], for mocking and DI.
-type Operationable interface {
-	obj.Object
-	WithQueuePriority(queuePriority OperationQueuePriority) *Operation
-	WithCompletionBlock(completionBlock func()) *Operation
-	WithThreadPriority(threadPriority float64) *Operation
-	WithQualityOfService(qualityOfService QualityOfService) *Operation
-	WithName(name StringProvider) *Operation
-	WithScriptingProperties(scriptingProperties obj.Object) *Operation
-	Start()
-	Main()
-	Cancel()
-	AddDependency(op *Operation)
-	RemoveDependency(op *Operation)
-	WaitUntilFinished()
-	IsCancelled() bool
-	IsExecuting() bool
-	IsFinished() bool
-	IsConcurrent() bool
-	IsAsynchronous() bool
-	IsReady() bool
-	Dependencies() []*Operation
-	QueuePriority() OperationQueuePriority
-	SetQueuePriority(queuePriority OperationQueuePriority)
-	SetCompletionBlock(ctx context.Context) error
-	ThreadPriority() float64
-	SetThreadPriority(threadPriority float64)
-	QualityOfService() QualityOfService
-	SetQualityOfService(qualityOfService QualityOfService)
-	Name() string
-	SetName(name string)
-}
-
-var _ Operationable = (*Operation)(nil)
-
 // isOperation marks Operation — and, by embedding promotion, its
 // subclasses — as a member of the Operation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Operation) isOperation() {}
+func (o *Operation) isOperation() {}
 
 var _ OperationProvider = (*Operation)(nil)

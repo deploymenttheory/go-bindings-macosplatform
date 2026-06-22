@@ -44,24 +44,24 @@ func mTRGeneralDiagnosticsClusterNetworkFaultChangeEventAdopt(id objc.ID) *MTRGe
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(mgdcnfce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdcnfce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdcnfce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(mgdcnfce))
 }
 
 // NewMTRGeneralDiagnosticsClusterNetworkFaultChangeEvent creates a new MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent.
@@ -71,34 +71,23 @@ func NewMTRGeneralDiagnosticsClusterNetworkFaultChangeEvent() *MTRGeneralDiagnos
 }
 
 // Current wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
+func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
-
-// MTRGeneralDiagnosticsClusterNetworkFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent], for mocking and DI.
-type MTRGeneralDiagnosticsClusterNetworkFaultChangeEventable interface {
-	obj.Object
-	Current() obj.Object
-	SetCurrent(current obj.Object)
-	Previous() obj.Object
-	SetPrevious(previous obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterNetworkFaultChangeEventable = (*MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent)(nil)

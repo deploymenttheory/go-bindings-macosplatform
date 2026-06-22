@@ -44,24 +44,24 @@ func mTROccupancySensingClusterHoldTimeLimitsStructAdopt(id objc.ID) *MTROccupan
 }
 
 // Description returns the object's -description text.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) Description() string {
+	return rt.Description(objref.IDOf(moschtls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moschtls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moschtls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) String() string {
+	return rt.Description(objref.IDOf(moschtls))
 }
 
 // NewMTROccupancySensingClusterHoldTimeLimitsStruct creates a new MTROccupancySensingClusterHoldTimeLimitsStruct.
@@ -71,68 +71,37 @@ func NewMTROccupancySensingClusterHoldTimeLimitsStruct() *MTROccupancySensingClu
 }
 
 // WithHoldTimeMin sets the property and returns the receiver so calls can be chained.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
-	return x
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
+	return moschtls
 }
 
 // WithHoldTimeMax sets the property and returns the receiver so calls can be chained.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
-	return x
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
+	return moschtls
 }
 
 // WithHoldTimeDefault sets the property and returns the receiver so calls can be chained.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
-	return x
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
+	return moschtls
 }
 
 // HoldTimeMin wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdTimeMin"))
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeMin"))
 	return obj.Wrap(_r)
-}
-
-// SetHoldTimeMin wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMin(holdTimeMin obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
 }
 
 // HoldTimeMax wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdTimeMax"))
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeMax"))
 	return obj.Wrap(_r)
-}
-
-// SetHoldTimeMax wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMax(holdTimeMax obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
 }
 
 // HoldTimeDefault wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdTimeDefault"))
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeDefault"))
 	return obj.Wrap(_r)
 }
-
-// SetHoldTimeDefault wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeDefault(holdTimeDefault obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
-}
-
-// MTROccupancySensingClusterHoldTimeLimitsStructable is the interface implemented by [MTROccupancySensingClusterHoldTimeLimitsStruct], for mocking and DI.
-type MTROccupancySensingClusterHoldTimeLimitsStructable interface {
-	obj.Object
-	WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct
-	WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct
-	WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct
-	HoldTimeMin() obj.Object
-	SetHoldTimeMin(holdTimeMin obj.Object)
-	HoldTimeMax() obj.Object
-	SetHoldTimeMax(holdTimeMax obj.Object)
-	HoldTimeDefault() obj.Object
-	SetHoldTimeDefault(holdTimeDefault obj.Object)
-}
-
-var _ MTROccupancySensingClusterHoldTimeLimitsStructable = (*MTROccupancySensingClusterHoldTimeLimitsStruct)(nil)

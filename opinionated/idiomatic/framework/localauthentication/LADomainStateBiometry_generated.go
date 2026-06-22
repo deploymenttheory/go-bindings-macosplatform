@@ -44,24 +44,24 @@ func domainStateBiometryAdopt(id objc.ID) *DomainStateBiometry {
 }
 
 // Description returns the object's -description text.
-func (x *DomainStateBiometry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dsb *DomainStateBiometry) Description() string {
+	return rt.Description(objref.IDOf(dsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DomainStateBiometry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dsb *DomainStateBiometry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DomainStateBiometry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dsb *DomainStateBiometry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DomainStateBiometry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dsb *DomainStateBiometry) String() string {
+	return rt.Description(objref.IDOf(dsb))
 }
 
 // NewDomainStateBiometry creates a new DomainStateBiometry.
@@ -71,22 +71,13 @@ func NewDomainStateBiometry() *DomainStateBiometry {
 }
 
 // BiometryType indicates biometry type available on the device.
-func (x *DomainStateBiometry) BiometryType() BiometryType {
-	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
+func (dsb *DomainStateBiometry) BiometryType() BiometryType {
+	_r := objc.Send[BiometryType](objref.IDOf(dsb), objc.RegisterName("biometryType"))
 	return _r
 }
 
 // StateHash contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls.
-func (x *DomainStateBiometry) StateHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+func (dsb *DomainStateBiometry) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsb), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
 }
-
-// DomainStateBiometryable is the interface implemented by [DomainStateBiometry], for mocking and DI.
-type DomainStateBiometryable interface {
-	obj.Object
-	BiometryType() BiometryType
-	StateHash() obj.Object
-}
-
-var _ DomainStateBiometryable = (*DomainStateBiometry)(nil)

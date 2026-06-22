@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewGlobalMetaParameterAsset() *GlobalMetaParameterAsset {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHASEGlobalMetaParameterAsset")), objc.RegisterName("new"))
 	return globalMetaParameterAssetAdopt(_id)
 }
-
-// GlobalMetaParameterAssetable is the interface implemented by [GlobalMetaParameterAsset], for mocking and DI.
-type GlobalMetaParameterAssetable interface {
-	obj.Object
-}
-
-var _ GlobalMetaParameterAssetable = (*GlobalMetaParameterAsset)(nil)
 
 var _ AssetProvider = (*GlobalMetaParameterAsset)(nil)

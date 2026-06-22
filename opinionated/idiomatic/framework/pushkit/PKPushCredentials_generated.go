@@ -46,24 +46,24 @@ func pushCredentialsAdopt(id objc.ID) *PushCredentials {
 }
 
 // Description returns the object's -description text.
-func (x *PushCredentials) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PushCredentials) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PushCredentials) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PushCredentials) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PushCredentials) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PushCredentials) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PushCredentials) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PushCredentials) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPushCredentials creates a new PushCredentials.
@@ -72,23 +72,14 @@ func NewPushCredentials() *PushCredentials {
 	return pushCredentialsAdopt(_id)
 }
 
-// Type the push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
-func (x *PushCredentials) Type() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
+func (pc *PushCredentials) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// Token a unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
-func (x *PushCredentials) Token() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+// Token returns a unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
+func (pc *PushCredentials) Token() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("token"))
 	return obj.Wrap(_r)
 }
-
-// PushCredentialsable is the interface implemented by [PushCredentials], for mocking and DI.
-type PushCredentialsable interface {
-	obj.Object
-	Type() obj.Object
-	Token() obj.Object
-}
-
-var _ PushCredentialsable = (*PushCredentials)(nil)

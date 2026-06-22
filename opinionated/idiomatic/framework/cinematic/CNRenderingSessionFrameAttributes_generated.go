@@ -46,24 +46,24 @@ func renderingSessionFrameAttributesAdopt(id objc.ID) *RenderingSessionFrameAttr
 }
 
 // Description returns the object's -description text.
-func (x *RenderingSessionFrameAttributes) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rsfa *RenderingSessionFrameAttributes) Description() string {
+	return rt.Description(objref.IDOf(rsfa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderingSessionFrameAttributes) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rsfa *RenderingSessionFrameAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rsfa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderingSessionFrameAttributes) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rsfa *RenderingSessionFrameAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rsfa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderingSessionFrameAttributes) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rsfa *RenderingSessionFrameAttributes) String() string {
+	return rt.Description(objref.IDOf(rsfa))
 }
 
 // NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
@@ -80,49 +80,26 @@ func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(m
 	return renderingSessionFrameAttributesAdopt(_id)
 }
 
-// WithFocusDisparity represents the focus plane at which the rendered image should be in focus.
-func (x *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDisparity:"), focusDisparity)
-	return x
+// WithFocusDisparity sets represents the focus plane at which the rendered image should be in focus.
+func (rsfa *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes {
+	objc.Send[objc.ID](objref.IDOf(rsfa), objc.RegisterName("setFocusDisparity:"), focusDisparity)
+	return rsfa
 }
 
-// WithFNumber the f-stop value that inversely affects the aperture used to render the Cinematic image.
-func (x *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *RenderingSessionFrameAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
-	return x
+// WithFNumber sets the f-stop value that inversely affects the aperture used to render the Cinematic image.
+func (rsfa *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *RenderingSessionFrameAttributes {
+	objc.Send[objc.ID](objref.IDOf(rsfa), objc.RegisterName("setFNumber:"), fNumber)
+	return rsfa
 }
 
-// FocusDisparity the disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
-func (x *RenderingSessionFrameAttributes) FocusDisparity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+// FocusDisparity returns the disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
+func (rsfa *RenderingSessionFrameAttributes) FocusDisparity() float32 {
+	_r := objc.Send[float32](objref.IDOf(rsfa), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// SetFocusDisparity wraps the corresponding Objective-C method.
-func (x *RenderingSessionFrameAttributes) SetFocusDisparity(focusDisparity float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDisparity:"), focusDisparity)
-}
-
-// FNumber the f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
-func (x *RenderingSessionFrameAttributes) FNumber() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
+// FNumber returns the f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
+func (rsfa *RenderingSessionFrameAttributes) FNumber() float32 {
+	_r := objc.Send[float32](objref.IDOf(rsfa), objc.RegisterName("fNumber"))
 	return _r
 }
-
-// SetFNumber wraps the corresponding Objective-C method.
-func (x *RenderingSessionFrameAttributes) SetFNumber(fNumber float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
-}
-
-// RenderingSessionFrameAttributesable is the interface implemented by [RenderingSessionFrameAttributes], for mocking and DI.
-type RenderingSessionFrameAttributesable interface {
-	obj.Object
-	WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes
-	WithFNumber(fNumber float32) *RenderingSessionFrameAttributes
-	FocusDisparity() float32
-	SetFocusDisparity(focusDisparity float32)
-	FNumber() float32
-	SetFNumber(fNumber float32)
-}
-
-var _ RenderingSessionFrameAttributesable = (*RenderingSessionFrameAttributes)(nil)

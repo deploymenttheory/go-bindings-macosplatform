@@ -6,6 +6,7 @@ package replaykit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func broadcastControllerAdopt(id objc.ID) *BroadcastController {
 }
 
 // Description returns the object's -description text.
-func (x *BroadcastController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bc *BroadcastController) Description() string {
+	return rt.Description(objref.IDOf(bc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BroadcastController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bc *BroadcastController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BroadcastController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bc *BroadcastController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BroadcastController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bc *BroadcastController) String() string {
+	return rt.Description(objref.IDOf(bc))
 }
 
 // NewBroadcastController creates a new BroadcastController.
@@ -75,26 +76,26 @@ func NewBroadcastController() *BroadcastController {
 }
 
 // PauseBroadcast pauses the current broadcast.
-func (x *BroadcastController) PauseBroadcast() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseBroadcast"))
+func (bc *BroadcastController) PauseBroadcast() {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("pauseBroadcast"))
 }
 
 // ResumeBroadcast resumes a paused broadcast.
-func (x *BroadcastController) ResumeBroadcast() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeBroadcast"))
+func (bc *BroadcastController) ResumeBroadcast() {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("resumeBroadcast"))
 }
 
 // FinishBroadcastWithHandler stops the current broadcast.
 //
 // FinishBroadcastWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) error {
+func (bc *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishBroadcastWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("finishBroadcastWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -104,39 +105,25 @@ func (x *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) er
 }
 
 // IsBroadcasting wraps the corresponding Objective-C method.
-func (x *BroadcastController) IsBroadcasting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcasting"))
+func (bc *BroadcastController) IsBroadcasting() bool {
+	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isBroadcasting"))
 	return _r
 }
 
 // IsPaused wraps the corresponding Objective-C method.
-func (x *BroadcastController) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+func (bc *BroadcastController) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isPaused"))
 	return _r
 }
 
 // BroadcastURL wraps the corresponding Objective-C method.
-func (x *BroadcastController) BroadcastURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastURL"))
+func (bc *BroadcastController) BroadcastURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("broadcastURL"))
 	return obj.Wrap(_r)
 }
 
 // ServiceInfo wraps the corresponding Objective-C method.
-func (x *BroadcastController) ServiceInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceInfo"))
+func (bc *BroadcastController) ServiceInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("serviceInfo"))
 	return obj.Wrap(_r)
 }
-
-// BroadcastControllerable is the interface implemented by [BroadcastController], for mocking and DI.
-type BroadcastControllerable interface {
-	obj.Object
-	PauseBroadcast()
-	ResumeBroadcast()
-	FinishBroadcastWithHandler(ctx context.Context) error
-	IsBroadcasting() bool
-	IsPaused() bool
-	BroadcastURL() obj.Object
-	ServiceInfo() obj.Object
-}
-
-var _ BroadcastControllerable = (*BroadcastController)(nil)

@@ -44,24 +44,24 @@ func systemExtensionInfoAdopt(id objc.ID) *SystemExtensionInfo {
 }
 
 // Description returns the object's -description text.
-func (x *SystemExtensionInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sei *SystemExtensionInfo) Description() string {
+	return rt.Description(objref.IDOf(sei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SystemExtensionInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sei *SystemExtensionInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SystemExtensionInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sei *SystemExtensionInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SystemExtensionInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sei *SystemExtensionInfo) String() string {
+	return rt.Description(objref.IDOf(sei))
 }
 
 // NewSystemExtensionInfo creates a new SystemExtensionInfo.
@@ -70,39 +70,29 @@ func NewSystemExtensionInfo() *SystemExtensionInfo {
 	return systemExtensionInfoAdopt(_id)
 }
 
-// BundleIdentifier the bundle identifier of the extension (CFBundleIdentifier)
-func (x *SystemExtensionInfo) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+// BundleIdentifier returns the bundle identifier of the extension (CFBundleIdentifier)
+func (sei *SystemExtensionInfo) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sei), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BundleVersion the bundle version of the extension (CFBundleVersion)
-func (x *SystemExtensionInfo) BundleVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleVersion"))
+// BundleVersion returns the bundle version of the extension (CFBundleVersion)
+func (sei *SystemExtensionInfo) BundleVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sei), objc.RegisterName("bundleVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BundleShortVersion the bundle short version string of the extension (CFBundleShortVersionString)
-func (x *SystemExtensionInfo) BundleShortVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleShortVersion"))
+// BundleShortVersion returns the bundle short version string of the extension (CFBundleShortVersionString)
+func (sei *SystemExtensionInfo) BundleShortVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sei), objc.RegisterName("bundleShortVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SystemExtensionInfoable is the interface implemented by [SystemExtensionInfo], for mocking and DI.
-type SystemExtensionInfoable interface {
-	obj.Object
-	BundleIdentifier() string
-	BundleVersion() string
-	BundleShortVersion() string
-}
-
-var _ SystemExtensionInfoable = (*SystemExtensionInfo)(nil)

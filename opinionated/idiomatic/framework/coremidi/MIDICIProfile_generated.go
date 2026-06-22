@@ -46,24 +46,24 @@ func cIProfileAdopt(id objc.ID) *CIProfile {
 }
 
 // Description returns the object's -description text.
-func (x *CIProfile) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CIProfile) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CIProfile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *CIProfile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CIProfile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *CIProfile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CIProfile) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CIProfile) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // NewCIProfileWithData creates a MIDI profile for the specified data.
@@ -80,26 +80,17 @@ func NewCIProfileWithDataName(data obj.Object, inName string) *CIProfile {
 	return cIProfileAdopt(_id)
 }
 
-// Name an NSString describing the profile.
-func (x *CIProfile) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns an NSString describing the profile.
+func (cp *CIProfile) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ProfileID the unique 5-byte profile identifier representing the profile.
-func (x *CIProfile) ProfileID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileID"))
+// ProfileID returns the unique 5-byte profile identifier representing the profile.
+func (cp *CIProfile) ProfileID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("profileID"))
 	return obj.Wrap(_r)
 }
-
-// CIProfileable is the interface implemented by [CIProfile], for mocking and DI.
-type CIProfileable interface {
-	obj.Object
-	Name() string
-	ProfileID() obj.Object
-}
-
-var _ CIProfileable = (*CIProfile)(nil)

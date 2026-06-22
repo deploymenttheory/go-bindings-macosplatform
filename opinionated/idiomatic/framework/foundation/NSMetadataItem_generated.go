@@ -46,24 +46,24 @@ func metadataItemAdopt(id objc.ID) *MetadataItem {
 }
 
 // Description returns the object's -description text.
-func (x *MetadataItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MetadataItem) Description() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mi *MetadataItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mi *MetadataItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MetadataItem) String() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // NewMetadataItemWithURL initializes a metadata item with a given URL.
@@ -74,38 +74,27 @@ func NewMetadataItemWithURL(url string) *MetadataItem {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MetadataItem) WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mi *MetadataItem) WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mi
 }
 
 // ValueForAttribute returns the receiver’s metadata attribute name specified by a given key.
-func (x *MetadataItem) ValueForAttribute(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForAttribute:"), purego.NSString(key))
+func (mi *MetadataItem) ValueForAttribute(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("valueForAttribute:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // ValuesForAttributes returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
-func (x *MetadataItem) ValuesForAttributes(keys []string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuesForAttributes:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (mi *MetadataItem) ValuesForAttributes(keys []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("valuesForAttributes:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
 // Attributes wraps the corresponding Objective-C method.
 //
 // Attributes returns the collection as a Go slice.
-func (x *MetadataItem) Attributes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (mi *MetadataItem) Attributes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// MetadataItemable is the interface implemented by [MetadataItem], for mocking and DI.
-type MetadataItemable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem
-	ValueForAttribute(key string) obj.Object
-	ValuesForAttributes(keys []string) obj.Object
-	Attributes() []string
-}
-
-var _ MetadataItemable = (*MetadataItem)(nil)

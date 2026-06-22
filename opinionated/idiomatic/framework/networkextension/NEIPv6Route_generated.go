@@ -46,24 +46,24 @@ func nEIPv6RouteAdopt(id objc.ID) *NEIPv6Route {
 }
 
 // Description returns the object's -description text.
-func (x *NEIPv6Route) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (npr *NEIPv6Route) Description() string {
+	return rt.Description(objref.IDOf(npr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEIPv6Route) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (npr *NEIPv6Route) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(npr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEIPv6Route) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (npr *NEIPv6Route) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(npr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEIPv6Route) String() string {
-	return rt.Description(objref.IDOf(x))
+func (npr *NEIPv6Route) String() string {
+	return rt.Description(objref.IDOf(npr))
 }
 
 // NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength initialize the NEIPv6Route
@@ -73,49 +73,32 @@ func NewNEIPv6RouteWithDestinationAddressNetworkPrefixLength(address string, net
 	return nEIPv6RouteAdopt(_id)
 }
 
-// WithGatewayAddress the address of the next-hop gateway of the route.
-func (x *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
-	return x
+// WithGatewayAddress sets the address of the next-hop gateway of the route.
+func (npr *NEIPv6Route) WithGatewayAddress(gatewayAddress string) *NEIPv6Route {
+	objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
+	return npr
 }
 
-// DestinationAddress an IPv6 address represented as a string.
-func (x *NEIPv6Route) DestinationAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationAddress"))
+// DestinationAddress returns an IPv6 address represented as a string.
+func (npr *NEIPv6Route) DestinationAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("destinationAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DestinationNetworkPrefixLength a number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
-func (x *NEIPv6Route) DestinationNetworkPrefixLength() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationNetworkPrefixLength"))
+// DestinationNetworkPrefixLength returns a number containing the length in bits of the network prefix of the destination network. This prefix in combination with the destinationAddress property is used to determine the destination network of the route.
+func (npr *NEIPv6Route) DestinationNetworkPrefixLength() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("destinationNetworkPrefixLength"))
 	return obj.Wrap(_r)
 }
 
-// GatewayAddress the IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
-func (x *NEIPv6Route) GatewayAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatewayAddress"))
+// GatewayAddress returns the IPv6 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+func (npr *NEIPv6Route) GatewayAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("gatewayAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetGatewayAddress wraps the corresponding Objective-C method.
-func (x *NEIPv6Route) SetGatewayAddress(gatewayAddress string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGatewayAddress:"), purego.NSString(gatewayAddress))
-}
-
-// NEIPv6Routeable is the interface implemented by [NEIPv6Route], for mocking and DI.
-type NEIPv6Routeable interface {
-	obj.Object
-	WithGatewayAddress(gatewayAddress string) *NEIPv6Route
-	DestinationAddress() string
-	DestinationNetworkPrefixLength() obj.Object
-	GatewayAddress() string
-	SetGatewayAddress(gatewayAddress string)
-}
-
-var _ NEIPv6Routeable = (*NEIPv6Route)(nil)

@@ -46,24 +46,24 @@ func tintConfigurationAdopt(id objc.ID) *TintConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *TintConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tc *TintConfiguration) Description() string {
+	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TintConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tc *TintConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TintConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tc *TintConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TintConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tc *TintConfiguration) String() string {
+	return rt.Description(objref.IDOf(tc))
 }
 
 // NewTintConfiguration creates a new TintConfiguration.
@@ -72,30 +72,20 @@ func NewTintConfiguration() *TintConfiguration {
 	return tintConfigurationAdopt(_id)
 }
 
-// BaseTintColor the base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
-func (x *TintConfiguration) BaseTintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseTintColor"))
+// BaseTintColor returns the base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
+func (tc *TintConfiguration) BaseTintColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("baseTintColor"))
 	return ColorFromID(_r)
 }
 
-// EquivalentContentTintColor an equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
-func (x *TintConfiguration) EquivalentContentTintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("equivalentContentTintColor"))
+// EquivalentContentTintColor returns an equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
+func (tc *TintConfiguration) EquivalentContentTintColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("equivalentContentTintColor"))
 	return ColorFromID(_r)
 }
 
-// AdaptsToUserAccentColor if YES, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
-func (x *TintConfiguration) AdaptsToUserAccentColor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("adaptsToUserAccentColor"))
+// AdaptsToUserAccentColor reports whether if true, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
+func (tc *TintConfiguration) AdaptsToUserAccentColor() bool {
+	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("adaptsToUserAccentColor"))
 	return _r
 }
-
-// TintConfigurationable is the interface implemented by [TintConfiguration], for mocking and DI.
-type TintConfigurationable interface {
-	obj.Object
-	BaseTintColor() *Color
-	EquivalentContentTintColor() *Color
-	AdaptsToUserAccentColor() bool
-}
-
-var _ TintConfigurationable = (*TintConfiguration)(nil)

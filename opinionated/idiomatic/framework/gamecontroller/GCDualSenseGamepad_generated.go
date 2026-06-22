@@ -52,40 +52,29 @@ func NewDualSenseGamepad() *DualSenseGamepad {
 	return dualSenseGamepadAdopt(_id)
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *DualSenseGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualSenseGamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (dsg *DualSenseGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualSenseGamepad {
+	objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return dsg
 }
 
-// TouchpadButton dualSense controllers have a touchpad with a button and two-finger tracking.
-func (x *DualSenseGamepad) TouchpadButton() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadButton"))
+// TouchpadButton returns dualSense controllers have a touchpad with a button and two-finger tracking.
+func (dsg *DualSenseGamepad) TouchpadButton() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // TouchpadPrimary wraps the corresponding Objective-C method.
-func (x *DualSenseGamepad) TouchpadPrimary() *ControllerDirectionPad {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadPrimary"))
+func (dsg *DualSenseGamepad) TouchpadPrimary() *ControllerDirectionPad {
+	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadPrimary"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // TouchpadSecondary wraps the corresponding Objective-C method.
-func (x *DualSenseGamepad) TouchpadSecondary() *ControllerDirectionPad {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadSecondary"))
+func (dsg *DualSenseGamepad) TouchpadSecondary() *ControllerDirectionPad {
+	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadSecondary"))
 	return ControllerDirectionPadFromID(_r)
 }
-
-// DualSenseGamepadable is the interface implemented by [DualSenseGamepad], for mocking and DI.
-type DualSenseGamepadable interface {
-	obj.Object
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualSenseGamepad
-	TouchpadButton() *ControllerButtonInput
-	TouchpadPrimary() *ControllerDirectionPad
-	TouchpadSecondary() *ControllerDirectionPad
-}
-
-var _ DualSenseGamepadable = (*DualSenseGamepad)(nil)
 
 var _ ExtendedGamepadProvider = (*DualSenseGamepad)(nil)
 

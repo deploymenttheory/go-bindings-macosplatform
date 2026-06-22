@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,51 +51,28 @@ func NewMutableFontCollection() *MutableFontCollection {
 	return mutableFontCollectionAdopt(_id)
 }
 
-// WithQueryDescriptors the font descriptors to include in query results.
-func (x *MutableFontCollection) WithQueryDescriptors(items ...*FontDescriptor) *MutableFontCollection {
+// WithQueryDescriptors sets the font descriptors to include in query results.
+func (mfc *MutableFontCollection) WithQueryDescriptors(items ...*FontDescriptor) *MutableFontCollection {
 	_arr := purego.SliceToNSArray(items, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryDescriptors:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setQueryDescriptors:"), _arr)
+	return mfc
 }
 
-// WithExclusionDescriptors the font descriptors to exclude from query results.
-func (x *MutableFontCollection) WithExclusionDescriptors(items ...*FontDescriptor) *MutableFontCollection {
+// WithExclusionDescriptors sets the font descriptors to exclude from query results.
+func (mfc *MutableFontCollection) WithExclusionDescriptors(items ...*FontDescriptor) *MutableFontCollection {
 	_arr := purego.SliceToNSArray(items, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusionDescriptors:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("setExclusionDescriptors:"), _arr)
+	return mfc
 }
 
 // AddQueryForDescriptors edits the query and exclusion arrays by adding the specified font descriptors.
-func (x *MutableFontCollection) AddQueryForDescriptors(descriptors []*FontDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
+func (mfc *MutableFontCollection) AddQueryForDescriptors(descriptors []*FontDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("addQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveQueryForDescriptors edits the query and exclusion arrays by removing the specified font descriptors.
-func (x *MutableFontCollection) RemoveQueryForDescriptors(descriptors []*FontDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
+func (mfc *MutableFontCollection) RemoveQueryForDescriptors(descriptors []*FontDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(mfc), objc.RegisterName("removeQueryForDescriptors:"), purego.SliceToNSArray(descriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
-
-// SetQueryDescriptors wraps the corresponding Objective-C method.
-func (x *MutableFontCollection) SetQueryDescriptors(queryDescriptors []*FontDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryDescriptors:"), purego.SliceToNSArray(queryDescriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetExclusionDescriptors wraps the corresponding Objective-C method.
-func (x *MutableFontCollection) SetExclusionDescriptors(exclusionDescriptors []*FontDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusionDescriptors:"), purego.SliceToNSArray(exclusionDescriptors, func(_v *FontDescriptor) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableFontCollectionable is the interface implemented by [MutableFontCollection], for mocking and DI.
-type MutableFontCollectionable interface {
-	obj.Object
-	WithQueryDescriptors(items ...*FontDescriptor) *MutableFontCollection
-	WithExclusionDescriptors(items ...*FontDescriptor) *MutableFontCollection
-	AddQueryForDescriptors(descriptors []*FontDescriptor)
-	RemoveQueryForDescriptors(descriptors []*FontDescriptor)
-	SetQueryDescriptors(queryDescriptors []*FontDescriptor)
-	SetExclusionDescriptors(exclusionDescriptors []*FontDescriptor)
-}
-
-var _ MutableFontCollectionable = (*MutableFontCollection)(nil)
 
 var _ FontCollectionProvider = (*MutableFontCollection)(nil)

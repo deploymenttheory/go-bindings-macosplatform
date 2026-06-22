@@ -47,24 +47,24 @@ func textLayoutFragmentAdopt(id objc.ID) *TextLayoutFragment {
 }
 
 // Description returns the object's -description text.
-func (x *TextLayoutFragment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tlf *TextLayoutFragment) Description() string {
+	return rt.Description(objref.IDOf(tlf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextLayoutFragment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tlf *TextLayoutFragment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tlf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextLayoutFragment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tlf *TextLayoutFragment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tlf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextLayoutFragment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tlf *TextLayoutFragment) String() string {
+	return rt.Description(objref.IDOf(tlf))
 }
 
 // NewTextLayoutFragmentWithTextElementRange create a new layout fragment using the provided text element and range.
@@ -81,136 +81,106 @@ func NewTextLayoutFragmentWithCoder(coder obj.Object) *TextLayoutFragment {
 	return textLayoutFragmentAdopt(_id)
 }
 
-// WithLayoutQueue the queue on which the framework dispatches layout operations.
-func (x *TextLayoutFragment) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutFragment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
-	return x
+// WithLayoutQueue sets the queue on which the framework dispatches layout operations.
+func (tlf *TextLayoutFragment) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutFragment {
+	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
+	return tlf
 }
 
 // TextLineFragmentForVerticalOffsetRequiresExactMatch returns the text line fragment for the vertical offset you provide, or the closest text line fragment beyond the vertical offset.
-func (x *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLineFragmentForVerticalOffset:requiresExactMatch:"), verticalOffset, requiresExactMatch)
+func (tlf *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment {
+	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLineFragmentForVerticalOffset:requiresExactMatch:"), verticalOffset, requiresExactMatch)
 	return TextLineFragmentFromID(_r)
 }
 
 // InvalidateLayout invalidates any layout information associated with the text layout fragment.
-func (x *TextLayoutFragment) InvalidateLayout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayout"))
+func (tlf *TextLayoutFragment) InvalidateLayout() {
+	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("invalidateLayout"))
 }
 
 // DrawAtPointInContext renders the visual representation of this element in the specified graphics context.
-func (x *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
+func (tlf *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
 }
 
 // TextLayoutManager wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
+func (tlf *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
+	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // TextElement wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) TextElement() *TextElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElement"))
+func (tlf *TextLayoutFragment) TextElement() *TextElement {
+	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textElement"))
 	return TextElementFromID(_r)
 }
 
 // RangeInElement wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) RangeInElement() *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeInElement"))
+func (tlf *TextLayoutFragment) RangeInElement() *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("rangeInElement"))
 	return TextRangeFromID(_r)
 }
 
 // TextLineFragments wraps the corresponding Objective-C method.
 //
 // TextLineFragments returns the collection as a Go slice.
-func (x *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLineFragments"))
+func (tlf *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
+	_arr := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLineFragments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLineFragment { return TextLineFragmentFromID(_id) })
 }
 
 // LayoutQueue wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) LayoutQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutQueue"))
+func (tlf *TextLayoutFragment) LayoutQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("layoutQueue"))
 	return obj.Wrap(_r)
 }
 
-// SetLayoutQueue wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) SetLayoutQueue(layoutQueue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
-}
-
 // State wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) State() TextLayoutFragmentState {
-	_r := objc.Send[TextLayoutFragmentState](objref.IDOf(x), objc.RegisterName("state"))
+func (tlf *TextLayoutFragment) State() TextLayoutFragmentState {
+	_r := objc.Send[TextLayoutFragmentState](objref.IDOf(tlf), objc.RegisterName("state"))
 	return _r
 }
 
 // LayoutFragmentFrame wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("layoutFragmentFrame"))
+func (tlf *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("layoutFragmentFrame"))
 	return _r
 }
 
 // RenderingSurfaceBounds wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("renderingSurfaceBounds"))
+func (tlf *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("renderingSurfaceBounds"))
 	return _r
 }
 
 // LeadingPadding wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) LeadingPadding() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leadingPadding"))
+func (tlf *TextLayoutFragment) LeadingPadding() float64 {
+	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("leadingPadding"))
 	return _r
 }
 
 // TrailingPadding wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) TrailingPadding() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("trailingPadding"))
+func (tlf *TextLayoutFragment) TrailingPadding() float64 {
+	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("trailingPadding"))
 	return _r
 }
 
 // TopMargin wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) TopMargin() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("topMargin"))
+func (tlf *TextLayoutFragment) TopMargin() float64 {
+	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("topMargin"))
 	return _r
 }
 
 // BottomMargin wraps the corresponding Objective-C method.
-func (x *TextLayoutFragment) BottomMargin() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bottomMargin"))
+func (tlf *TextLayoutFragment) BottomMargin() float64 {
+	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("bottomMargin"))
 	return _r
 }
 
 // TextAttachmentViewProviders wraps the corresponding Objective-C method.
 //
 // TextAttachmentViewProviders returns the collection as a Go slice.
-func (x *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttachmentViewProviders"))
+func (tlf *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {
+	_arr := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textAttachmentViewProviders"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextAttachmentViewProvider { return TextAttachmentViewProviderFromID(_id) })
 }
-
-// TextLayoutFragmentable is the interface implemented by [TextLayoutFragment], for mocking and DI.
-type TextLayoutFragmentable interface {
-	obj.Object
-	WithLayoutQueue(layoutQueue obj.Object) *TextLayoutFragment
-	TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment
-	InvalidateLayout()
-	DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object)
-	TextLayoutManager() *TextLayoutManager
-	TextElement() *TextElement
-	RangeInElement() *TextRange
-	TextLineFragments() []*TextLineFragment
-	LayoutQueue() obj.Object
-	SetLayoutQueue(layoutQueue obj.Object)
-	State() TextLayoutFragmentState
-	LayoutFragmentFrame() corefoundation.CGRect
-	RenderingSurfaceBounds() corefoundation.CGRect
-	LeadingPadding() float64
-	TrailingPadding() float64
-	TopMargin() float64
-	BottomMargin() float64
-	TextAttachmentViewProviders() []*TextAttachmentViewProvider
-}
-
-var _ TextLayoutFragmentable = (*TextLayoutFragment)(nil)

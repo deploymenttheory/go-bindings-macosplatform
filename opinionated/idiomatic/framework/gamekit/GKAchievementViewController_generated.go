@@ -7,7 +7,6 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,38 +52,27 @@ func NewAchievementViewController() *AchievementViewController {
 }
 
 // WithViewState sets the property and returns the receiver so calls can be chained.
-func (x *AchievementViewController) WithViewState(viewState GameCenterViewControllerState) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
-	return x
+func (avc *AchievementViewController) WithViewState(viewState GameCenterViewControllerState) *AchievementViewController {
+	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setViewState:"), viewState)
+	return avc
 }
 
 // WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
-func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
-	return x
+func (avc *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController {
+	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
+	return avc
 }
 
 // WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
-	return x
+func (avc *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
+	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	return avc
 }
 
 // WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
-func (x *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
-	return x
+func (avc *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
+	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
+	return avc
 }
-
-// AchievementViewControllerable is the interface implemented by [AchievementViewController], for mocking and DI.
-type AchievementViewControllerable interface {
-	obj.Object
-	WithViewState(viewState GameCenterViewControllerState) *AchievementViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController
-	WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController
-	WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController
-}
-
-var _ AchievementViewControllerable = (*AchievementViewController)(nil)
 
 var _ GameCenterViewControllerProvider = (*AchievementViewController)(nil)

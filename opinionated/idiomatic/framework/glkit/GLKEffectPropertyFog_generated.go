@@ -7,7 +7,6 @@ package glkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,111 +51,64 @@ func NewEffectPropertyFog() *EffectPropertyFog {
 	return effectPropertyFogAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether fog is applied to the fragment color.
-func (x *EffectPropertyFog) WithEnabled(enabled uint8) *EffectPropertyFog {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether fog is applied to the fragment color.
+func (epf *EffectPropertyFog) WithEnabled(enabled uint8) *EffectPropertyFog {
+	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setEnabled:"), enabled)
+	return epf
 }
 
-// WithMode the algorithm used to compute the density of the fog applied to the fragment color.
-func (x *EffectPropertyFog) WithMode(mode int32) *EffectPropertyFog {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
-	return x
+// WithMode sets the algorithm used to compute the density of the fog applied to the fragment color.
+func (epf *EffectPropertyFog) WithMode(mode int32) *EffectPropertyFog {
+	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setMode:"), mode)
+	return epf
 }
 
-// WithDensity the rate at which the fog exponent increases.
-func (x *EffectPropertyFog) WithDensity(density float32) *EffectPropertyFog {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDensity:"), density)
-	return x
+// WithDensity sets the rate at which the fog exponent increases.
+func (epf *EffectPropertyFog) WithDensity(density float32) *EffectPropertyFog {
+	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setDensity:"), density)
+	return epf
 }
 
-// WithStart the minimum distance in eye coordinates before fog is applied to the fragment color.
-func (x *EffectPropertyFog) WithStart(start float32) *EffectPropertyFog {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStart:"), start)
-	return x
+// WithStart sets the minimum distance in eye coordinates before fog is applied to the fragment color.
+func (epf *EffectPropertyFog) WithStart(start float32) *EffectPropertyFog {
+	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setStart:"), start)
+	return epf
 }
 
-// WithEnd the distance in eye coordinates where fog completely covers the color fragment.
-func (x *EffectPropertyFog) WithEnd(end float32) *EffectPropertyFog {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnd:"), end)
-	return x
+// WithEnd sets the distance in eye coordinates where fog completely covers the color fragment.
+func (epf *EffectPropertyFog) WithEnd(end float32) *EffectPropertyFog {
+	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setEnd:"), end)
+	return epf
 }
 
 // Enabled wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) Enabled() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("enabled"))
+func (epf *EffectPropertyFog) Enabled() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(epf), objc.RegisterName("enabled"))
 	return _r
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) SetEnabled(enabled uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // Mode wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) Mode() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("mode"))
+func (epf *EffectPropertyFog) Mode() int32 {
+	_r := objc.Send[int32](objref.IDOf(epf), objc.RegisterName("mode"))
 	return _r
-}
-
-// SetMode wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) SetMode(mode int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
 // Density wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) Density() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("density"))
+func (epf *EffectPropertyFog) Density() float32 {
+	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("density"))
 	return _r
-}
-
-// SetDensity wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) SetDensity(density float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDensity:"), density)
 }
 
 // Start wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) Start() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("start"))
+func (epf *EffectPropertyFog) Start() float32 {
+	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("start"))
 	return _r
-}
-
-// SetStart wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) SetStart(start float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStart:"), start)
 }
 
 // End wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) End() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("end"))
+func (epf *EffectPropertyFog) End() float32 {
+	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("end"))
 	return _r
 }
-
-// SetEnd wraps the corresponding Objective-C method.
-func (x *EffectPropertyFog) SetEnd(end float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnd:"), end)
-}
-
-// EffectPropertyFogable is the interface implemented by [EffectPropertyFog], for mocking and DI.
-type EffectPropertyFogable interface {
-	obj.Object
-	WithEnabled(enabled uint8) *EffectPropertyFog
-	WithMode(mode int32) *EffectPropertyFog
-	WithDensity(density float32) *EffectPropertyFog
-	WithStart(start float32) *EffectPropertyFog
-	WithEnd(end float32) *EffectPropertyFog
-	Enabled() uint8
-	SetEnabled(enabled uint8)
-	Mode() int32
-	SetMode(mode int32)
-	Density() float32
-	SetDensity(density float32)
-	Start() float32
-	SetStart(start float32)
-	End() float32
-	SetEnd(end float32)
-}
-
-var _ EffectPropertyFogable = (*EffectPropertyFog)(nil)
 
 var _ EffectPropertyProvider = (*EffectPropertyFog)(nil)

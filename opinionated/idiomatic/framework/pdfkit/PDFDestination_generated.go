@@ -47,24 +47,24 @@ func destinationAdopt(id objc.ID) *Destination {
 }
 
 // Description returns the object's -description text.
-func (x *Destination) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Destination) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Destination) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Destination) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Destination) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Destination) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Destination) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Destination) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDestinationWithPageAtPoint initializes the destination.
@@ -75,42 +75,25 @@ func NewDestinationWithPageAtPoint(page *Page, point corefoundation.CGPoint) *De
 }
 
 // WithZoom sets the property and returns the receiver so calls can be chained.
-func (x *Destination) WithZoom(zoom float64) *Destination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoom:"), zoom)
-	return x
+func (d *Destination) WithZoom(zoom float64) *Destination {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setZoom:"), zoom)
+	return d
 }
 
 // Page wraps the corresponding Objective-C method.
-func (x *Destination) Page() *Page {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("page"))
+func (d *Destination) Page() *Page {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
 // Point wraps the corresponding Objective-C method.
-func (x *Destination) Point() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("point"))
+func (d *Destination) Point() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(d), objc.RegisterName("point"))
 	return _r
 }
 
 // Zoom wraps the corresponding Objective-C method.
-func (x *Destination) Zoom() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zoom"))
+func (d *Destination) Zoom() float64 {
+	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("zoom"))
 	return _r
 }
-
-// SetZoom wraps the corresponding Objective-C method.
-func (x *Destination) SetZoom(zoom float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoom:"), zoom)
-}
-
-// Destinationable is the interface implemented by [Destination], for mocking and DI.
-type Destinationable interface {
-	obj.Object
-	WithZoom(zoom float64) *Destination
-	Page() *Page
-	Point() corefoundation.CGPoint
-	Zoom() float64
-	SetZoom(zoom float64)
-}
-
-var _ Destinationable = (*Destination)(nil)

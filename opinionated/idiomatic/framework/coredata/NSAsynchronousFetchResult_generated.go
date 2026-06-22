@@ -53,25 +53,16 @@ func NewAsynchronousFetchResult() *AsynchronousFetchResult {
 }
 
 // FetchRequest wraps the corresponding Objective-C method.
-func (x *AsynchronousFetchResult) FetchRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+func (afr *AsynchronousFetchResult) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
 // FinalResult wraps the corresponding Objective-C method.
-func (x *AsynchronousFetchResult) FinalResult() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalResult"))
+func (afr *AsynchronousFetchResult) FinalResult() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("finalResult"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// AsynchronousFetchResultable is the interface implemented by [AsynchronousFetchResult], for mocking and DI.
-type AsynchronousFetchResultable interface {
-	obj.Object
-	FetchRequest() obj.Object
-	FinalResult() []obj.Object
-}
-
-var _ AsynchronousFetchResultable = (*AsynchronousFetchResult)(nil)
 
 var _ PersistentStoreAsynchronousResultProvider = (*AsynchronousFetchResult)(nil)
 

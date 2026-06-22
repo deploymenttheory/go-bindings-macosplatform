@@ -5,12 +5,13 @@
 package mpscore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NDArray is an idiomatic wrapper over the Objective-C class MPSNDArray.
@@ -47,125 +48,101 @@ func nDArrayAdopt(id objc.ID) *NDArray {
 }
 
 // Description returns the object's -description text.
-func (x *NDArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NDArray) Description() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (na *NDArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(na), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (na *NDArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(na), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NDArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NDArray) String() string {
+	return rt.Description(objref.IDOf(na))
 }
 
-// WithLabel a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
-func (x *NDArray) WithLabel(label string) *NDArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
+func (na *NDArray) WithLabel(label string) *NDArray {
+	objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return na
 }
 
 // LengthOfDimension the number of elements in the dimension at dimensionIndex The dimension length is at least as large as the existing slice length.  Views of this MPSNDArray may have differing dimension lengths.
-func (x *NDArray) LengthOfDimension(dimensionIndex int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
+func (na *NDArray) LengthOfDimension(dimensionIndex int) int {
+	_r := objc.Send[int](objref.IDOf(na), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
 	return _r
 }
 
 // Descriptor create a MPSNDArrayDescriptor that describes this MPSNDArray The descriptor will describe the shape of the MPSNDArray after all deferred slicing and transposes have completed. A new descriptor is created each time to allow for further customization of the descriptor by the application.
-func (x *NDArray) Descriptor() *NDArrayDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+func (na *NDArray) Descriptor() *NDArrayDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("descriptor"))
 	return NDArrayDescriptorFromID(_r)
 }
 
 // ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSNDArray instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the MPSNDArray data in the MTLBuffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSNDArrays are allocated initiallly without a backing store. The backing store is allocated lazily when it is needed, typically when the MPSNDArray is written to the first time. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large.
-func (x *NDArray) ResourceSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+func (na *NDArray) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(na), objc.RegisterName("resourceSize"))
 	return _r
 }
 
 // ArrayViewWithDescriptor make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result. The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer. If aliasing is not possible nil is returned. This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended to use the `MPSNDArrayIdentity` methods.
-func (x *NDArray) ArrayViewWithDescriptor(descriptor *NDArrayDescriptor) *NDArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayViewWithDescriptor:"), objref.IDOf(descriptor))
+func (na *NDArray) ArrayViewWithDescriptor(descriptor *NDArrayDescriptor) *NDArray {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("arrayViewWithDescriptor:"), objref.IDOf(descriptor))
 	return NDArrayFromID(_r)
 }
 
 // ArrayViewWithDimensionCountDimensionSizesStrides make a new representation of a MPSNDArray with given strides and a new shape. This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
-func (x *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions int) (result *NDArray, dimensionSizes int, dimStrides int) {
+func (na *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions int) (result *NDArray, dimensionSizes int, dimStrides int) {
 	var _out0 int
 	var _out1 int
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayViewWithDimensionCount:dimensionSizes:strides:"), numberOfDimensions, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("arrayViewWithDimensionCount:dimensionSizes:strides:"), numberOfDimensions, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	_v := NDArrayFromID(_r)
 	return _v, _out0, _out1
 }
 
-// Label a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
-func (x *NDArray) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
+func (na *NDArray) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *NDArray) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// DataType the type of data stored by each element in the array
-func (x *NDArray) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns the type of data stored by each element in the array
+func (na *NDArray) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(na), objc.RegisterName("dataType"))
 	return _r
 }
 
-// DataTypeSize the size of one element in the MPSNDArray
-func (x *NDArray) DataTypeSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataTypeSize"))
+// DataTypeSize returns the size of one element in the MPSNDArray
+func (na *NDArray) DataTypeSize() int {
+	_r := objc.Send[int](objref.IDOf(na), objc.RegisterName("dataTypeSize"))
 	return _r
 }
 
-// NumberOfDimensions number of dimensions in the NDArray
-func (x *NDArray) NumberOfDimensions() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDimensions"))
+// NumberOfDimensions returns number of dimensions in the NDArray
+func (na *NDArray) NumberOfDimensions() int {
+	_r := objc.Send[int](objref.IDOf(na), objc.RegisterName("numberOfDimensions"))
 	return _r
 }
 
-// Parent the parent MPSNDArray that this object aliases If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
-func (x *NDArray) Parent() *NDArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+// Parent returns the parent MPSNDArray that this object aliases If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
+func (na *NDArray) Parent() *NDArray {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("parent"))
 	return NDArrayFromID(_r)
 }
-
-// NDArrayable is the interface implemented by [NDArray], for mocking and DI.
-type NDArrayable interface {
-	obj.Object
-	WithLabel(label string) *NDArray
-	LengthOfDimension(dimensionIndex int) int
-	Descriptor() *NDArrayDescriptor
-	ResourceSize() int
-	ArrayViewWithDescriptor(descriptor *NDArrayDescriptor) *NDArray
-	ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions int) (result *NDArray, dimensionSizes int, dimStrides int)
-	Label() string
-	SetLabel(label string)
-	DataType() DataType
-	DataTypeSize() int
-	NumberOfDimensions() int
-	Parent() *NDArray
-}
-
-var _ NDArrayable = (*NDArray)(nil)
 
 // isNDArray marks NDArray — and, by embedding promotion, its
 // subclasses — as a member of the NDArray hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArray) isNDArray() {}
+func (na *NDArray) isNDArray() {}
 
 var _ NDArrayProvider = (*NDArray)(nil)

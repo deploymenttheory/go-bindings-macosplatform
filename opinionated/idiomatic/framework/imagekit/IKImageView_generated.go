@@ -45,24 +45,24 @@ func imageViewAdopt(id objc.ID) *ImageView {
 }
 
 // Description returns the object's -description text.
-func (x *ImageView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (iv *ImageView) Description() string {
+	return rt.Description(objref.IDOf(iv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (iv *ImageView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(iv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (iv *ImageView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(iv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (iv *ImageView) String() string {
+	return rt.Description(objref.IDOf(iv))
 }
 
 // NewImageView creates a new ImageView.
@@ -71,430 +71,294 @@ func NewImageView() *ImageView {
 	return imageViewAdopt(_id)
 }
 
-// WithDelegate specifies the delegate object of the receiver.
-func (x *ImageView) WithDelegate(delegate obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+// WithDelegate sets specifies the delegate object of the receiver.
+func (iv *ImageView) WithDelegate(delegate obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return iv
 }
 
-// WithZoomFactor specifies the zoom factor for the image view.
-func (x *ImageView) WithZoomFactor(zoomFactor float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoomFactor:"), zoomFactor)
-	return x
+// WithZoomFactor sets specifies the zoom factor for the image view.
+func (iv *ImageView) WithZoomFactor(zoomFactor float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setZoomFactor:"), zoomFactor)
+	return iv
 }
 
-// WithRotationAngle specifies the rotation angle for the image view.
-func (x *ImageView) WithRotationAngle(rotationAngle float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationAngle:"), rotationAngle)
-	return x
+// WithRotationAngle sets specifies the rotation angle for the image view.
+func (iv *ImageView) WithRotationAngle(rotationAngle float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRotationAngle:"), rotationAngle)
+	return iv
 }
 
-// WithCurrentToolMode specifies the current tool mode for the image view.
-func (x *ImageView) WithCurrentToolMode(currentToolMode string) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
-	return x
+// WithCurrentToolMode sets specifies the current tool mode for the image view.
+func (iv *ImageView) WithCurrentToolMode(currentToolMode string) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
+	return iv
 }
 
-// WithAutoresizes specifies the automatic resizing state for the image view.
-func (x *ImageView) WithAutoresizes(autoresizes bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizes:"), autoresizes)
-	return x
+// WithAutoresizes sets specifies the automatic resizing state for the image view.
+func (iv *ImageView) WithAutoresizes(autoresizes bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizes:"), autoresizes)
+	return iv
 }
 
-// WithHasHorizontalScroller specifies the horizontal scroll bar state for the image view.
-func (x *ImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
-	return x
+// WithHasHorizontalScroller sets specifies the horizontal scroll bar state for the image view.
+func (iv *ImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	return iv
 }
 
-// WithHasVerticalScroller specifies the vertical scroll bar state for the image view.
-func (x *ImageView) WithHasVerticalScroller(hasVerticalScroller bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
-	return x
+// WithHasVerticalScroller sets specifies the vertical scroll bar state for the image view.
+func (iv *ImageView) WithHasVerticalScroller(hasVerticalScroller bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
+	return iv
 }
 
-// WithAutohidesScrollers specifies the automatic-hiding scroll bar state for the image view.
-func (x *ImageView) WithAutohidesScrollers(autohidesScrollers bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
-	return x
+// WithAutohidesScrollers sets specifies the automatic-hiding scroll bar state for the image view.
+func (iv *ImageView) WithAutohidesScrollers(autohidesScrollers bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
+	return iv
 }
 
-// WithSupportsDragAndDrop specifies the drag-and-drop support state for the image view.
-func (x *ImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
-	return x
+// WithSupportsDragAndDrop sets specifies the drag-and-drop support state for the image view.
+func (iv *ImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
+	return iv
 }
 
-// WithEditable specifies the editable state for the image view.
-func (x *ImageView) WithEditable(editable bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets specifies the editable state for the image view.
+func (iv *ImageView) WithEditable(editable bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEditable:"), editable)
+	return iv
 }
 
-// WithDoubleClickOpensImageEditPanel specifies the image-opening state of the editing pane in the image view.
-func (x *ImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
-	return x
+// WithDoubleClickOpensImageEditPanel sets specifies the image-opening state of the editing pane in the image view.
+func (iv *ImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
+	return iv
 }
 
-// WithImageCorrection specifies a Core Image filter for image correction.
-func (x *ImageView) WithImageCorrection(imageCorrection obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
-	return x
+// WithImageCorrection sets specifies a Core Image filter for image correction.
+func (iv *ImageView) WithImageCorrection(imageCorrection obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
+	return iv
 }
 
-// WithBackgroundColor specifies the background color for the image view.
-func (x *ImageView) WithBackgroundColor(backgroundColor obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets specifies the background color for the image view.
+func (iv *ImageView) WithBackgroundColor(backgroundColor obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return iv
 }
 
 // SetImageImageProperties sets the image & metadata (both retrieved from ImageIO).
-func (x *ImageView) SetImageImageProperties(image obj.Object, metaData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
+func (iv *ImageView) SetImageImageProperties(image obj.Object, metaData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
 }
 
 // SetImageWithURL initializes an image view with the image specified by a URL.
-func (x *ImageView) SetImageWithURL(url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageWithURL:"), rt.FileURL(url))
+func (iv *ImageView) SetImageWithURL(url string) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageWithURL:"), rt.FileURL(url))
 }
 
 // Image returns the image associated with the view, after any image corrections.
-func (x *ImageView) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (iv *ImageView) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
 // ImageSize returns the size of the image in the image view.
-func (x *ImageView) ImageSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("imageSize"))
+func (iv *ImageView) ImageSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(iv), objc.RegisterName("imageSize"))
 	return _r
 }
 
 // ImageProperties returns the metadata for the image in the view.
-func (x *ImageView) ImageProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageProperties"))
+func (iv *ImageView) ImageProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("imageProperties"))
 	return obj.Wrap(_r)
 }
 
 // SetRotationAngleCenterPoint sets the rotation angle at the provided origin.
-func (x *ImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationAngle:centerPoint:"), rotationAngle, centerPoint)
+func (iv *ImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRotationAngle:centerPoint:"), rotationAngle, centerPoint)
 }
 
 // RotateImageLeft rotates the image left.
-func (x *ImageView) RotateImageLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateImageLeft:"), objref.IDOf(sender))
+func (iv *ImageView) RotateImageLeft(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("rotateImageLeft:"), objref.IDOf(sender))
 }
 
 // RotateImageRight rotates the image right.
-func (x *ImageView) RotateImageRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateImageRight:"), objref.IDOf(sender))
+func (iv *ImageView) RotateImageRight(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("rotateImageRight:"), objref.IDOf(sender))
 }
 
 // SetImageZoomFactorCenterPoint sets the zoom factor at the provided origin.
-func (x *ImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageZoomFactor:centerPoint:"), zoomFactor, centerPoint)
+func (iv *ImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageZoomFactor:centerPoint:"), zoomFactor, centerPoint)
 }
 
 // ZoomImageToRect zooms the image so that it fits in the specified rectangle.
-func (x *ImageView) ZoomImageToRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomImageToRect:"), rect)
+func (iv *ImageView) ZoomImageToRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToRect:"), rect)
 }
 
 // ZoomImageToFit zooms the image so that it fits in the image view.
-func (x *ImageView) ZoomImageToFit(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomImageToFit:"), objref.IDOf(sender))
+func (iv *ImageView) ZoomImageToFit(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToFit:"), objref.IDOf(sender))
 }
 
 // ZoomImageToActualSize zooms the image so that it is displayed using its true size.
-func (x *ImageView) ZoomImageToActualSize(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomImageToActualSize:"), objref.IDOf(sender))
+func (iv *ImageView) ZoomImageToActualSize(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomImageToActualSize:"), objref.IDOf(sender))
 }
 
 // ZoomIn zooms the image in.
-func (x *ImageView) ZoomIn(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
+func (iv *ImageView) ZoomIn(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
 }
 
 // ZoomOut zooms the image out.
-func (x *ImageView) ZoomOut(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
+func (iv *ImageView) ZoomOut(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
 }
 
 // FlipImageHorizontal flips an image along the horizontal axis.
-func (x *ImageView) FlipImageHorizontal(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flipImageHorizontal:"), objref.IDOf(sender))
+func (iv *ImageView) FlipImageHorizontal(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("flipImageHorizontal:"), objref.IDOf(sender))
 }
 
 // FlipImageVertical flips an image along the vertical axis.
-func (x *ImageView) FlipImageVertical(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flipImageVertical:"), objref.IDOf(sender))
+func (iv *ImageView) FlipImageVertical(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("flipImageVertical:"), objref.IDOf(sender))
 }
 
 // Crop crops the image using the current selection.
-func (x *ImageView) Crop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("crop:"), objref.IDOf(sender))
+func (iv *ImageView) Crop(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("crop:"), objref.IDOf(sender))
 }
 
 // SetOverlayForType sets an overlay (Core Animation layer) for the image or the image background.
-func (x *ImageView) SetOverlayForType(layer obj.Object, layerType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlay:forType:"), objref.IDOf(layer), purego.NSString(layerType))
+func (iv *ImageView) SetOverlayForType(layer obj.Object, layerType string) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setOverlay:forType:"), objref.IDOf(layer), purego.NSString(layerType))
 }
 
 // OverlayForType returns the overlay (Core Animation layer) for the image or the image background.
-func (x *ImageView) OverlayForType(layerType string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overlayForType:"), purego.NSString(layerType))
+func (iv *ImageView) OverlayForType(layerType string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("overlayForType:"), purego.NSString(layerType))
 	return obj.Wrap(_r)
 }
 
 // ScrollToPoint scrolls the view to the specified point.
-func (x *ImageView) ScrollToPoint(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToPoint:"), point)
+func (iv *ImageView) ScrollToPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("scrollToPoint:"), point)
 }
 
 // ScrollToRect scrolls the view so that it includes the provided rectangular area.
-func (x *ImageView) ScrollToRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToRect:"), rect)
+func (iv *ImageView) ScrollToRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("scrollToRect:"), rect)
 }
 
 // ConvertViewPointToImagePoint converts an image view coordinate to an image coordinate.
-func (x *ImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertViewPointToImagePoint:"), viewPoint)
+func (iv *ImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iv), objc.RegisterName("convertViewPointToImagePoint:"), viewPoint)
 	return _r
 }
 
 // ConvertViewRectToImageRect converts an image view rectangle to an image rectangle.
-func (x *ImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertViewRectToImageRect:"), viewRect)
+func (iv *ImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iv), objc.RegisterName("convertViewRectToImageRect:"), viewRect)
 	return _r
 }
 
 // ConvertImagePointToViewPoint converts an image coordinate to an image view coordinate.
-func (x *ImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertImagePointToViewPoint:"), imagePoint)
+func (iv *ImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(iv), objc.RegisterName("convertImagePointToViewPoint:"), imagePoint)
 	return _r
 }
 
 // ConvertImageRectToViewRect converts an image rectangle to an image view rectangle.
-func (x *ImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertImageRectToViewRect:"), imageRect)
+func (iv *ImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iv), objc.RegisterName("convertImageRectToViewRect:"), imageRect)
 	return _r
 }
 
 // Delegate specifies the delegate object of the receiver.
-func (x *ImageView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (iv *ImageView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *ImageView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
 // ZoomFactor specifies the zoom factor for the image view.
-func (x *ImageView) ZoomFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("zoomFactor"))
+func (iv *ImageView) ZoomFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(iv), objc.RegisterName("zoomFactor"))
 	return _r
-}
-
-// SetZoomFactor wraps the corresponding Objective-C method.
-func (x *ImageView) SetZoomFactor(zoomFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoomFactor:"), zoomFactor)
 }
 
 // RotationAngle specifies the rotation angle for the image view.
-func (x *ImageView) RotationAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rotationAngle"))
+func (iv *ImageView) RotationAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(iv), objc.RegisterName("rotationAngle"))
 	return _r
 }
 
-// SetRotationAngle wraps the corresponding Objective-C method.
-func (x *ImageView) SetRotationAngle(rotationAngle float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationAngle:"), rotationAngle)
-}
-
 // CurrentToolMode specifies the current tool mode for the image view.
-func (x *ImageView) CurrentToolMode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentToolMode"))
+func (iv *ImageView) CurrentToolMode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("currentToolMode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCurrentToolMode wraps the corresponding Objective-C method.
-func (x *ImageView) SetCurrentToolMode(currentToolMode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentToolMode:"), purego.NSString(currentToolMode))
-}
-
-// Autoresizes specifies the automatic resizing state for the image view.
-func (x *ImageView) Autoresizes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoresizes"))
+// Autoresizes reports whether specifies the automatic resizing state for the image view.
+func (iv *ImageView) Autoresizes() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("autoresizes"))
 	return _r
 }
 
-// SetAutoresizes wraps the corresponding Objective-C method.
-func (x *ImageView) SetAutoresizes(autoresizes bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizes:"), autoresizes)
-}
-
-// HasHorizontalScroller specifies the horizontal scroll bar state for the image view.
-func (x *ImageView) HasHorizontalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHorizontalScroller"))
+// HasHorizontalScroller reports whether specifies the horizontal scroll bar state for the image view.
+func (iv *ImageView) HasHorizontalScroller() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("hasHorizontalScroller"))
 	return _r
 }
 
-// SetHasHorizontalScroller wraps the corresponding Objective-C method.
-func (x *ImageView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
-}
-
-// HasVerticalScroller specifies the vertical scroll bar state for the image view.
-func (x *ImageView) HasVerticalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasVerticalScroller"))
+// HasVerticalScroller reports whether specifies the vertical scroll bar state for the image view.
+func (iv *ImageView) HasVerticalScroller() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("hasVerticalScroller"))
 	return _r
 }
 
-// SetHasVerticalScroller wraps the corresponding Objective-C method.
-func (x *ImageView) SetHasVerticalScroller(hasVerticalScroller bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
-}
-
-// AutohidesScrollers specifies the automatic-hiding scroll bar state for the image view.
-func (x *ImageView) AutohidesScrollers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autohidesScrollers"))
+// AutohidesScrollers reports whether specifies the automatic-hiding scroll bar state for the image view.
+func (iv *ImageView) AutohidesScrollers() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("autohidesScrollers"))
 	return _r
 }
 
-// SetAutohidesScrollers wraps the corresponding Objective-C method.
-func (x *ImageView) SetAutohidesScrollers(autohidesScrollers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
-}
-
-// SupportsDragAndDrop specifies the drag-and-drop support state for the image view.
-func (x *ImageView) SupportsDragAndDrop() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsDragAndDrop"))
+// SupportsDragAndDrop reports whether specifies the drag-and-drop support state for the image view.
+func (iv *ImageView) SupportsDragAndDrop() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("supportsDragAndDrop"))
 	return _r
 }
 
-// SetSupportsDragAndDrop wraps the corresponding Objective-C method.
-func (x *ImageView) SetSupportsDragAndDrop(supportsDragAndDrop bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsDragAndDrop:"), supportsDragAndDrop)
-}
-
-// Editable specifies the editable state for the image view.
-func (x *ImageView) Editable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("editable"))
+// Editable reports whether specifies the editable state for the image view.
+func (iv *ImageView) Editable() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("editable"))
 	return _r
 }
 
-// SetEditable wraps the corresponding Objective-C method.
-func (x *ImageView) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-}
-
-// DoubleClickOpensImageEditPanel specifies the image-opening state of the editing pane in the image view.
-func (x *ImageView) DoubleClickOpensImageEditPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doubleClickOpensImageEditPanel"))
+// DoubleClickOpensImageEditPanel reports whether specifies the image-opening state of the editing pane in the image view.
+func (iv *ImageView) DoubleClickOpensImageEditPanel() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("doubleClickOpensImageEditPanel"))
 	return _r
-}
-
-// SetDoubleClickOpensImageEditPanel wraps the corresponding Objective-C method.
-func (x *ImageView) SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleClickOpensImageEditPanel:"), doubleClickOpensImageEditPanel)
 }
 
 // ImageCorrection specifies a Core Image filter for image correction.
-func (x *ImageView) ImageCorrection() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageCorrection"))
+func (iv *ImageView) ImageCorrection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("imageCorrection"))
 	return obj.Wrap(_r)
-}
-
-// SetImageCorrection wraps the corresponding Objective-C method.
-func (x *ImageView) SetImageCorrection(imageCorrection obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCorrection:"), objref.IDOf(imageCorrection))
 }
 
 // BackgroundColor specifies the background color for the image view.
-func (x *ImageView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (iv *ImageView) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *ImageView) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
-// ImageViewable is the interface implemented by [ImageView], for mocking and DI.
-type ImageViewable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *ImageView
-	WithZoomFactor(zoomFactor float64) *ImageView
-	WithRotationAngle(rotationAngle float64) *ImageView
-	WithCurrentToolMode(currentToolMode string) *ImageView
-	WithAutoresizes(autoresizes bool) *ImageView
-	WithHasHorizontalScroller(hasHorizontalScroller bool) *ImageView
-	WithHasVerticalScroller(hasVerticalScroller bool) *ImageView
-	WithAutohidesScrollers(autohidesScrollers bool) *ImageView
-	WithSupportsDragAndDrop(supportsDragAndDrop bool) *ImageView
-	WithEditable(editable bool) *ImageView
-	WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *ImageView
-	WithImageCorrection(imageCorrection obj.Object) *ImageView
-	WithBackgroundColor(backgroundColor obj.Object) *ImageView
-	SetImageImageProperties(image obj.Object, metaData obj.Object)
-	SetImageWithURL(url string)
-	Image() obj.Object
-	ImageSize() corefoundation.CGSize
-	ImageProperties() obj.Object
-	SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint)
-	RotateImageLeft(sender obj.Object)
-	RotateImageRight(sender obj.Object)
-	SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint)
-	ZoomImageToRect(rect corefoundation.CGRect)
-	ZoomImageToFit(sender obj.Object)
-	ZoomImageToActualSize(sender obj.Object)
-	ZoomIn(sender obj.Object)
-	ZoomOut(sender obj.Object)
-	FlipImageHorizontal(sender obj.Object)
-	FlipImageVertical(sender obj.Object)
-	Crop(sender obj.Object)
-	SetOverlayForType(layer obj.Object, layerType string)
-	OverlayForType(layerType string) obj.Object
-	ScrollToPoint(point corefoundation.CGPoint)
-	ScrollToRect(rect corefoundation.CGRect)
-	ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect
-	ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-	ZoomFactor() float64
-	SetZoomFactor(zoomFactor float64)
-	RotationAngle() float64
-	SetRotationAngle(rotationAngle float64)
-	CurrentToolMode() string
-	SetCurrentToolMode(currentToolMode string)
-	Autoresizes() bool
-	SetAutoresizes(autoresizes bool)
-	HasHorizontalScroller() bool
-	SetHasHorizontalScroller(hasHorizontalScroller bool)
-	HasVerticalScroller() bool
-	SetHasVerticalScroller(hasVerticalScroller bool)
-	AutohidesScrollers() bool
-	SetAutohidesScrollers(autohidesScrollers bool)
-	SupportsDragAndDrop() bool
-	SetSupportsDragAndDrop(supportsDragAndDrop bool)
-	Editable() bool
-	SetEditable(editable bool)
-	DoubleClickOpensImageEditPanel() bool
-	SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool)
-	ImageCorrection() obj.Object
-	SetImageCorrection(imageCorrection obj.Object)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-}
-
-var _ ImageViewable = (*ImageView)(nil)

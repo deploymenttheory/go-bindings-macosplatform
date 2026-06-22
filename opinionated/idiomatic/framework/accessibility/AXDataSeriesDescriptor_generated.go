@@ -46,24 +46,24 @@ func dataSeriesDescriptorAdopt(id objc.ID) *DataSeriesDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *DataSeriesDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dsd *DataSeriesDescriptor) Description() string {
+	return rt.Description(objref.IDOf(dsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DataSeriesDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dsd *DataSeriesDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DataSeriesDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dsd *DataSeriesDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DataSeriesDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dsd *DataSeriesDescriptor) String() string {
+	return rt.Description(objref.IDOf(dsd))
 }
 
 // NewDataSeriesDescriptorWithNameIsContinuousDataPoints creates a data series with the specified name, a Boolean value that indicates whether the series is continuous, and data points.
@@ -80,95 +80,56 @@ func NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints(attributedN
 	return dataSeriesDescriptorAdopt(_id)
 }
 
-// WithName the name of the data series.
-func (x *DataSeriesDescriptor) WithName(name string) *DataSeriesDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the data series.
+func (dsd *DataSeriesDescriptor) WithName(name string) *DataSeriesDescriptor {
+	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setName:"), purego.NSString(name))
+	return dsd
 }
 
-// WithAttributedName an attributed version of the data series name.
-func (x *DataSeriesDescriptor) WithAttributedName(attributedName obj.Object) *DataSeriesDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedName:"), objref.IDOf(attributedName))
-	return x
+// WithAttributedName sets an attributed version of the data series name.
+func (dsd *DataSeriesDescriptor) WithAttributedName(attributedName obj.Object) *DataSeriesDescriptor {
+	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setAttributedName:"), objref.IDOf(attributedName))
+	return dsd
 }
 
-// WithIsContinuous a Boolean value that determines whether the data series is continuous.
-func (x *DataSeriesDescriptor) WithIsContinuous(isContinuous bool) *DataSeriesDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsContinuous:"), isContinuous)
-	return x
+// WithIsContinuous sets a Boolean value that determines whether the data series is continuous.
+func (dsd *DataSeriesDescriptor) WithIsContinuous(isContinuous bool) *DataSeriesDescriptor {
+	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setIsContinuous:"), isContinuous)
+	return dsd
 }
 
-// WithDataPoints the data points that the series contains.
-func (x *DataSeriesDescriptor) WithDataPoints(items ...*DataPoint) *DataSeriesDescriptor {
+// WithDataPoints sets the data points that the series contains.
+func (dsd *DataSeriesDescriptor) WithDataPoints(items ...*DataPoint) *DataSeriesDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v *DataPoint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataPoints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setDataPoints:"), _arr)
+	return dsd
 }
 
-// Name the name or title of this data series.
-func (x *DataSeriesDescriptor) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name or title of this data series.
+func (dsd *DataSeriesDescriptor) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *DataSeriesDescriptor) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// AttributedName an attributed version of the name of this data series. When set, this will be used instead of `name`.
-func (x *DataSeriesDescriptor) AttributedName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedName"))
+// AttributedName returns an attributed version of the name of this data series. When set, this will be used instead of `name`.
+func (dsd *DataSeriesDescriptor) AttributedName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("attributedName"))
 	return obj.Wrap(_r)
 }
 
-// SetAttributedName wraps the corresponding Objective-C method.
-func (x *DataSeriesDescriptor) SetAttributedName(attributedName obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedName:"), objref.IDOf(attributedName))
-}
-
-// IsContinuous whether or not this data series should be treated as continuous.
-func (x *DataSeriesDescriptor) IsContinuous() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContinuous"))
+// IsContinuous reports whether this data series should be treated as continuous.
+func (dsd *DataSeriesDescriptor) IsContinuous() bool {
+	_r := objc.Send[bool](objref.IDOf(dsd), objc.RegisterName("isContinuous"))
 	return _r
 }
 
-// SetIsContinuous wraps the corresponding Objective-C method.
-func (x *DataSeriesDescriptor) SetIsContinuous(isContinuous bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsContinuous:"), isContinuous)
-}
-
-// DataPoints the data points that make up the series.
+// DataPoints returns the data points that make up the series.
 //
 // DataPoints returns the collection as a Go slice.
-func (x *DataSeriesDescriptor) DataPoints() []*DataPoint {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataPoints"))
+func (dsd *DataSeriesDescriptor) DataPoints() []*DataPoint {
+	_arr := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("dataPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DataPoint { return DataPointFromID(_id) })
 }
-
-// SetDataPoints wraps the corresponding Objective-C method.
-func (x *DataSeriesDescriptor) SetDataPoints(dataPoints []*DataPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataPoints:"), purego.SliceToNSArray(dataPoints, func(_v *DataPoint) objc.ID { return objref.IDOf(_v) }))
-}
-
-// DataSeriesDescriptorable is the interface implemented by [DataSeriesDescriptor], for mocking and DI.
-type DataSeriesDescriptorable interface {
-	obj.Object
-	WithName(name string) *DataSeriesDescriptor
-	WithAttributedName(attributedName obj.Object) *DataSeriesDescriptor
-	WithIsContinuous(isContinuous bool) *DataSeriesDescriptor
-	WithDataPoints(items ...*DataPoint) *DataSeriesDescriptor
-	Name() string
-	SetName(name string)
-	AttributedName() obj.Object
-	SetAttributedName(attributedName obj.Object)
-	IsContinuous() bool
-	SetIsContinuous(isContinuous bool)
-	DataPoints() []*DataPoint
-	SetDataPoints(dataPoints []*DataPoint)
-}
-
-var _ DataSeriesDescriptorable = (*DataSeriesDescriptor)(nil)

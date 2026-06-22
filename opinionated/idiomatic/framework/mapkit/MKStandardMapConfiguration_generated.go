@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -73,78 +72,46 @@ func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle StandardMapEmpha
 	return standardMapConfigurationAdopt(_id)
 }
 
-// WithEmphasisStyle the value that indicates how the framework emphasizes map features.
-func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
-	return x
+// WithEmphasisStyle sets the value that indicates how the framework emphasizes map features.
+func (smc *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
+	return smc
 }
 
-// WithPointOfInterestFilter the filter used to determine the points of interest shown on the map.
-func (x *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+// WithPointOfInterestFilter sets the filter used to determine the points of interest shown on the map.
+func (smc *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return smc
 }
 
-// WithShowsTraffic a Boolean value that controls whether the map displays traffic conditions.
-func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
-	return x
+// WithShowsTraffic sets a Boolean value that controls whether the map displays traffic conditions.
+func (smc *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("setShowsTraffic:"), showsTraffic)
+	return smc
 }
 
-// WithElevationStyle the value that indicates the map’s elevation style.
-func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
-	return x
+// WithElevationStyle sets the value that indicates the map’s elevation style.
+func (smc *StandardMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("setElevationStyle:"), elevationStyle)
+	return smc
 }
 
 // EmphasisStyle wraps the corresponding Objective-C method.
-func (x *StandardMapConfiguration) EmphasisStyle() StandardMapEmphasisStyle {
-	_r := objc.Send[StandardMapEmphasisStyle](objref.IDOf(x), objc.RegisterName("emphasisStyle"))
+func (smc *StandardMapConfiguration) EmphasisStyle() StandardMapEmphasisStyle {
+	_r := objc.Send[StandardMapEmphasisStyle](objref.IDOf(smc), objc.RegisterName("emphasisStyle"))
 	return _r
-}
-
-// SetEmphasisStyle wraps the corresponding Objective-C method.
-func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (smc *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *StandardMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
 // ShowsTraffic wraps the corresponding Objective-C method.
-func (x *StandardMapConfiguration) ShowsTraffic() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTraffic"))
+func (smc *StandardMapConfiguration) ShowsTraffic() bool {
+	_r := objc.Send[bool](objref.IDOf(smc), objc.RegisterName("showsTraffic"))
 	return _r
 }
-
-// SetShowsTraffic wraps the corresponding Objective-C method.
-func (x *StandardMapConfiguration) SetShowsTraffic(showsTraffic bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
-}
-
-// StandardMapConfigurationable is the interface implemented by [StandardMapConfiguration], for mocking and DI.
-type StandardMapConfigurationable interface {
-	obj.Object
-	WithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration
-	WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration
-	WithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration
-	EmphasisStyle() StandardMapEmphasisStyle
-	SetEmphasisStyle(emphasisStyle StandardMapEmphasisStyle)
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-	ShowsTraffic() bool
-	SetShowsTraffic(showsTraffic bool)
-}
-
-var _ StandardMapConfigurationable = (*StandardMapConfiguration)(nil)
 
 var _ MapConfigurationProvider = (*StandardMapConfiguration)(nil)

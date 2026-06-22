@@ -48,48 +48,39 @@ func broadcastHandlerAdopt(id objc.ID) *BroadcastHandler {
 }
 
 // Description returns the object's -description text.
-func (x *BroadcastHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bh *BroadcastHandler) Description() string {
+	return rt.Description(objref.IDOf(bh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BroadcastHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bh *BroadcastHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BroadcastHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bh *BroadcastHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BroadcastHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bh *BroadcastHandler) String() string {
+	return rt.Description(objref.IDOf(bh))
 }
 
 // UpdateServiceInfo sends information about the current broadcast to the broadcasting app.
-func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateServiceInfo:"), objref.IDOf(serviceInfo))
+func (bh *BroadcastHandler) UpdateServiceInfo(serviceInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bh), objc.RegisterName("updateServiceInfo:"), objref.IDOf(serviceInfo))
 }
 
 // UpdateBroadcastURL sends the current broadcast URL to the broadcast controller.
-func (x *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateBroadcastURL:"), rt.FileURL(broadcastURL))
+func (bh *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
+	objc.Send[objc.ID](objref.IDOf(bh), objc.RegisterName("updateBroadcastURL:"), rt.FileURL(broadcastURL))
 }
-
-// BroadcastHandlerable is the interface implemented by [BroadcastHandler], for mocking and DI.
-type BroadcastHandlerable interface {
-	obj.Object
-	UpdateServiceInfo(serviceInfo obj.Object)
-	UpdateBroadcastURL(broadcastURL string)
-}
-
-var _ BroadcastHandlerable = (*BroadcastHandler)(nil)
 
 // isBroadcastHandler marks BroadcastHandler — and, by embedding promotion, its
 // subclasses — as a member of the BroadcastHandler hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BroadcastHandler) isBroadcastHandler() {}
+func (bh *BroadcastHandler) isBroadcastHandler() {}
 
 var _ BroadcastHandlerProvider = (*BroadcastHandler)(nil)

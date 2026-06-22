@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
 	return symbolReplaceContentTransitionAdopt(_id)
 }
 
-// TransitionWithByLayer an effect that replaces each layer separately.
-func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionWithByLayer"))
+// TransitionWithByLayer returns an effect that replaces each layer separately.
+func (srct *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
+	_r := objc.Send[objc.ID](objref.IDOf(srct), objc.RegisterName("transitionWithByLayer"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
 
-// TransitionWithWholeSymbol an effect that replaces all layers simultaneously.
-func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionWithWholeSymbol"))
+// TransitionWithWholeSymbol returns an effect that replaces all layers simultaneously.
+func (srct *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
+	_r := objc.Send[objc.ID](objref.IDOf(srct), objc.RegisterName("transitionWithWholeSymbol"))
 	return SymbolReplaceContentTransitionFromID(_r)
 }
-
-// SymbolReplaceContentTransitionable is the interface implemented by [SymbolReplaceContentTransition], for mocking and DI.
-type SymbolReplaceContentTransitionable interface {
-	obj.Object
-	TransitionWithByLayer() *SymbolReplaceContentTransition
-	TransitionWithWholeSymbol() *SymbolReplaceContentTransition
-}
-
-var _ SymbolReplaceContentTransitionable = (*SymbolReplaceContentTransition)(nil)
 
 var _ SymbolContentTransitionProvider = (*SymbolReplaceContentTransition)(nil)

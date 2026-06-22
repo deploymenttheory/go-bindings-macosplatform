@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewNDArrayLUTQuantizationDescriptor() *NDArrayLUTQuantizationDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("new"))
 	return nDArrayLUTQuantizationDescriptorAdopt(_id)
 }
-
-// NDArrayLUTQuantizationDescriptorable is the interface implemented by [NDArrayLUTQuantizationDescriptor], for mocking and DI.
-type NDArrayLUTQuantizationDescriptorable interface {
-	obj.Object
-}
-
-var _ NDArrayLUTQuantizationDescriptorable = (*NDArrayLUTQuantizationDescriptor)(nil)
 
 var _ NDArrayQuantizationDescriptorProvider = (*NDArrayLUTQuantizationDescriptor)(nil)

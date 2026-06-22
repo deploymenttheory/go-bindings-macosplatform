@@ -6,25 +6,26 @@ package corelocation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// LocationServicesEnabled returns a Boolean value indicating whether location services are enabled on the device.
+// LocationServicesEnabled reports whether returns a Boolean value indicating whether location services are enabled on the device.
 func LocationServicesEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("locationServicesEnabled"))
 	return _r
 }
 
-// HeadingAvailable returns a Boolean value indicating whether the location manager is able to generate heading-related events.
+// HeadingAvailable reports whether returns a Boolean value indicating whether the location manager is able to generate heading-related events.
 func HeadingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("headingAvailable"))
 	return _r
 }
 
-// SignificantLocationChangeMonitoringAvailable returns a Boolean value indicating whether the significant-change location service is available on the device.
+// SignificantLocationChangeMonitoringAvailable reports whether returns a Boolean value indicating whether the significant-change location service is available on the device.
 func SignificantLocationChangeMonitoringAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("significantLocationChangeMonitoringAvailable"))
 	return _r
@@ -42,7 +43,7 @@ func RegionMonitoringEnabled() bool {
 	return _r
 }
 
-// IsRangingAvailable returns a Boolean value indicating whether the device supports ranging of beacons that use the iBeacon protocol.
+// IsRangingAvailable reports whether returns a Boolean value indicating whether the device supports ranging of beacons that use the iBeacon protocol.
 func IsRangingAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CLLocationManager")), objc.RegisterName("isRangingAvailable"))
 	return _r

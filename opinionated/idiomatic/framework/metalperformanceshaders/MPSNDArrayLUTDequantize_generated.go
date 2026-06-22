@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayLUTDequantize() *NDArrayLUTDequantize {
 	return nDArrayLUTDequantizeAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nald *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
+	objc.Send[objc.ID](objref.IDOf(nald), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nald
 }
-
-// NDArrayLUTDequantizeable is the interface implemented by [NDArrayLUTDequantize], for mocking and DI.
-type NDArrayLUTDequantizeable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayLUTDequantize
-}
-
-var _ NDArrayLUTDequantizeable = (*NDArrayLUTDequantize)(nil)
 
 var _ NDArrayMultiaryKernelProvider = (*NDArrayLUTDequantize)(nil)
 

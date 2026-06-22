@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,51 +52,38 @@ func NewPhysicsVehicle() *PhysicsVehicle {
 }
 
 // ApplyEngineForceForWheelAtIndex applies a force between the specified wheel and the ground under the vehicle.
-func (x *PhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyEngineForce:forWheelAtIndex:"), value, index)
+func (pv *PhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("applyEngineForce:forWheelAtIndex:"), value, index)
 }
 
 // SetSteeringAngleForWheelAtIndex pivots the specified wheel around its steering axis.
-func (x *PhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSteeringAngle:forWheelAtIndex:"), value, index)
+func (pv *PhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setSteeringAngle:forWheelAtIndex:"), value, index)
 }
 
 // ApplyBrakingForceForWheelAtIndex applies a force between the specified wheel and the ground under the vehicle.
-func (x *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyBrakingForce:forWheelAtIndex:"), value, index)
+func (pv *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("applyBrakingForce:forWheelAtIndex:"), value, index)
 }
 
 // SpeedInKilometersPerHour wraps the corresponding Objective-C method.
-func (x *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speedInKilometersPerHour"))
+func (pv *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
+	_r := objc.Send[float64](objref.IDOf(pv), objc.RegisterName("speedInKilometersPerHour"))
 	return _r
 }
 
 // Wheels wraps the corresponding Objective-C method.
 //
 // Wheels returns the collection as a Go slice.
-func (x *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheels"))
+func (pv *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
+	_arr := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("wheels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsVehicleWheel { return PhysicsVehicleWheelFromID(_id) })
 }
 
 // ChassisBody wraps the corresponding Objective-C method.
-func (x *PhysicsVehicle) ChassisBody() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chassisBody"))
+func (pv *PhysicsVehicle) ChassisBody() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("chassisBody"))
 	return PhysicsBodyFromID(_r)
 }
-
-// PhysicsVehicleable is the interface implemented by [PhysicsVehicle], for mocking and DI.
-type PhysicsVehicleable interface {
-	obj.Object
-	ApplyEngineForceForWheelAtIndex(value float64, index int)
-	SetSteeringAngleForWheelAtIndex(value float64, index int)
-	ApplyBrakingForceForWheelAtIndex(value float64, index int)
-	SpeedInKilometersPerHour() float64
-	Wheels() []*PhysicsVehicleWheel
-	ChassisBody() *PhysicsBody
-}
-
-var _ PhysicsVehicleable = (*PhysicsVehicle)(nil)
 
 var _ PhysicsBehaviorProvider = (*PhysicsVehicle)(nil)

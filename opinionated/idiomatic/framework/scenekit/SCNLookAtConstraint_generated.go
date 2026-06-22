@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,72 +51,46 @@ func NewLookAtConstraint() *LookAtConstraint {
 	return lookAtConstraintAdopt(_id)
 }
 
-// WithTarget the node toward which constrained nodes will point after being reoriented.
-func (x *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the node toward which constrained nodes will point after being reoriented.
+func (lac *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return lac
 }
 
-// WithGimbalLockEnabled a Boolean value that specifies whether constrained nodes are allowed to rotate.
-func (x *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGimbalLockEnabled:"), gimbalLockEnabled)
-	return x
+// WithGimbalLockEnabled sets a Boolean value that specifies whether constrained nodes are allowed to rotate.
+func (lac *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setGimbalLockEnabled:"), gimbalLockEnabled)
+	return lac
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *LookAtConstraint) WithEnabled(enabled bool) *LookAtConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (lac *LookAtConstraint) WithEnabled(enabled bool) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setEnabled:"), enabled)
+	return lac
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *LookAtConstraint) WithInfluenceFactor(influenceFactor float64) *LookAtConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (lac *LookAtConstraint) WithInfluenceFactor(influenceFactor float64) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return lac
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (lac *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint {
+	objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("setIncremental:"), incremental)
+	return lac
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *LookAtConstraint) Target() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (lac *LookAtConstraint) Target() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *LookAtConstraint) SetTarget(target *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// GimbalLockEnabled specifies whether the receiver enables the gimbal lock. Defaults to NO. Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
-func (x *LookAtConstraint) GimbalLockEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("gimbalLockEnabled"))
+// GimbalLockEnabled reports whether the receiver enables the gimbal lock. Defaults to false. Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
+func (lac *LookAtConstraint) GimbalLockEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(lac), objc.RegisterName("gimbalLockEnabled"))
 	return _r
 }
-
-// SetGimbalLockEnabled wraps the corresponding Objective-C method.
-func (x *LookAtConstraint) SetGimbalLockEnabled(gimbalLockEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGimbalLockEnabled:"), gimbalLockEnabled)
-}
-
-// LookAtConstraintable is the interface implemented by [LookAtConstraint], for mocking and DI.
-type LookAtConstraintable interface {
-	obj.Object
-	WithTarget(target NodeProvider) *LookAtConstraint
-	WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint
-	WithEnabled(enabled bool) *LookAtConstraint
-	WithInfluenceFactor(influenceFactor float64) *LookAtConstraint
-	WithIncremental(incremental bool) *LookAtConstraint
-	Target() *Node
-	SetTarget(target *Node)
-	GimbalLockEnabled() bool
-	SetGimbalLockEnabled(gimbalLockEnabled bool)
-}
-
-var _ LookAtConstraintable = (*LookAtConstraint)(nil)
 
 var _ ConstraintProvider = (*LookAtConstraint)(nil)

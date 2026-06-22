@@ -46,24 +46,24 @@ func xPCInterfaceAdopt(id objc.ID) *XPCInterface {
 }
 
 // Description returns the object's -description text.
-func (x *XPCInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (xi *XPCInterface) Description() string {
+	return rt.Description(objref.IDOf(xi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XPCInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (xi *XPCInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(xi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XPCInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (xi *XPCInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(xi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *XPCInterface) String() string {
-	return rt.Description(objref.IDOf(x))
+func (xi *XPCInterface) String() string {
+	return rt.Description(objref.IDOf(xi))
 }
 
 // NewXPCInterface creates a new XPCInterface.
@@ -73,15 +73,7 @@ func NewXPCInterface() *XPCInterface {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *XPCInterface) WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (xi *XPCInterface) WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface {
+	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return xi
 }
-
-// XPCInterfaceable is the interface implemented by [XPCInterface], for mocking and DI.
-type XPCInterfaceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface
-}
-
-var _ XPCInterfaceable = (*XPCInterface)(nil)

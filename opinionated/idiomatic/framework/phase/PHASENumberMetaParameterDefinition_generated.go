@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -74,31 +73,22 @@ func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, mini
 	return numberMetaParameterDefinitionAdopt(_id)
 }
 
-// Minimum the readonly minimum that this metaparameter definition was initialized with
-func (x *NumberMetaParameterDefinition) Minimum() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimum"))
+// Minimum returns the readonly minimum that this metaparameter definition was initialized with
+func (nmpd *NumberMetaParameterDefinition) Minimum() float64 {
+	_r := objc.Send[float64](objref.IDOf(nmpd), objc.RegisterName("minimum"))
 	return _r
 }
 
-// Maximum the readonly maximum that this metaparameter definition was initialized with
-func (x *NumberMetaParameterDefinition) Maximum() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximum"))
+// Maximum returns the readonly maximum that this metaparameter definition was initialized with
+func (nmpd *NumberMetaParameterDefinition) Maximum() float64 {
+	_r := objc.Send[float64](objref.IDOf(nmpd), objc.RegisterName("maximum"))
 	return _r
 }
-
-// NumberMetaParameterDefinitionable is the interface implemented by [NumberMetaParameterDefinition], for mocking and DI.
-type NumberMetaParameterDefinitionable interface {
-	obj.Object
-	Minimum() float64
-	Maximum() float64
-}
-
-var _ NumberMetaParameterDefinitionable = (*NumberMetaParameterDefinition)(nil)
 
 // isNumberMetaParameterDefinition marks NumberMetaParameterDefinition — and, by embedding promotion, its
 // subclasses — as a member of the NumberMetaParameterDefinition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NumberMetaParameterDefinition) isNumberMetaParameterDefinition() {}
+func (nmpd *NumberMetaParameterDefinition) isNumberMetaParameterDefinition() {}
 
 var _ NumberMetaParameterDefinitionProvider = (*NumberMetaParameterDefinition)(nil)
 

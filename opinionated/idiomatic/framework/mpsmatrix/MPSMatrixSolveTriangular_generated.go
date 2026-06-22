@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,46 +50,34 @@ func NewMatrixSolveTriangular() *MatrixSolveTriangular {
 	return matrixSolveTriangularAdopt(_id)
 }
 
-// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSolveTriangular) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
-	return x
+// WithPrimarySourceMatrixOrigin sets the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mst *MatrixSolveTriangular) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(mst), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return mst
 }
 
-// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSolveTriangular) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
-	return x
+// WithSecondarySourceMatrixOrigin sets the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mst *MatrixSolveTriangular) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(mst), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return mst
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSolveTriangular) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mst *MatrixSolveTriangular) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(mst), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return mst
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixSolveTriangular) WithBatchStart(batchStart int) *MatrixSolveTriangular {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (mst *MatrixSolveTriangular) WithBatchStart(batchStart int) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(mst), objc.RegisterName("setBatchStart:"), batchStart)
+	return mst
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixSolveTriangular) WithBatchSize(batchSize int) *MatrixSolveTriangular {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (mst *MatrixSolveTriangular) WithBatchSize(batchSize int) *MatrixSolveTriangular {
+	objc.Send[objc.ID](objref.IDOf(mst), objc.RegisterName("setBatchSize:"), batchSize)
+	return mst
 }
-
-// MatrixSolveTriangularable is the interface implemented by [MatrixSolveTriangular], for mocking and DI.
-type MatrixSolveTriangularable interface {
-	obj.Object
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
-	WithBatchStart(batchStart int) *MatrixSolveTriangular
-	WithBatchSize(batchSize int) *MatrixSolveTriangular
-}
-
-var _ MatrixSolveTriangularable = (*MatrixSolveTriangular)(nil)
 
 var _ MatrixBinaryKernelProvider = (*MatrixSolveTriangular)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,52 +47,40 @@ func imageAreaMaxAdopt(id objc.ID) *ImageAreaMax {
 	return x
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (iam *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
+	objc.Send[objc.ID](objref.IDOf(iam), objc.RegisterName("setOffset:"), offset)
+	return iam
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (iam *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
+	objc.Send[objc.ID](objref.IDOf(iam), objc.RegisterName("setClipRect:"), clipRect)
+	return iam
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageAreaMax) WithLabel(label string) *ImageAreaMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (iam *ImageAreaMax) WithLabel(label string) *ImageAreaMax {
+	objc.Send[objc.ID](objref.IDOf(iam), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return iam
 }
 
-// KernelHeight the height of the filter window. Must be an odd number.
-func (x *ImageAreaMax) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the height of the filter window. Must be an odd number.
+func (iam *ImageAreaMax) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(iam), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// KernelWidth the width of the filter window. Must be an odd number.
-func (x *ImageAreaMax) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the width of the filter window. Must be an odd number.
+func (iam *ImageAreaMax) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(iam), objc.RegisterName("kernelWidth"))
 	return _r
 }
-
-// ImageAreaMaxable is the interface implemented by [ImageAreaMax], for mocking and DI.
-type ImageAreaMaxable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageAreaMax
-	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax
-	WithLabel(label string) *ImageAreaMax
-	KernelHeight() int
-	KernelWidth() int
-}
-
-var _ ImageAreaMaxable = (*ImageAreaMax)(nil)
 
 // isImageAreaMax marks ImageAreaMax — and, by embedding promotion, its
 // subclasses — as a member of the ImageAreaMax hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageAreaMax) isImageAreaMax() {}
+func (iam *ImageAreaMax) isImageAreaMax() {}
 
 var _ ImageAreaMaxProvider = (*ImageAreaMax)(nil)
 

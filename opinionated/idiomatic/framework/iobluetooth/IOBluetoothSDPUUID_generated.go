@@ -46,24 +46,24 @@ func iOBluetoothSDPUUIDAdopt(id objc.ID) *IOBluetoothSDPUUID {
 }
 
 // Description returns the object's -description text.
-func (x *IOBluetoothSDPUUID) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ibs *IOBluetoothSDPUUID) Description() string {
+	return rt.Description(objref.IDOf(ibs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothSDPUUID) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ibs *IOBluetoothSDPUUID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ibs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothSDPUUID) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ibs *IOBluetoothSDPUUID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ibs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOBluetoothSDPUUID) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ibs *IOBluetoothSDPUUID) String() string {
+	return rt.Description(objref.IDOf(ibs))
 }
 
 // NewIOBluetoothSDPUUIDWithUUID16 initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16
@@ -81,29 +81,19 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 }
 
 // GetSDPUUIDRef returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
-func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSDPUUIDRef"))
+func (ibs *IOBluetoothSDPUUID) GetSDPUUIDRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("getSDPUUIDRef"))
 	return obj.Wrap(_r)
 }
 
 // GetUUIDWithLength returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
-func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUUIDWithLength:"), newLength)
+func (ibs *IOBluetoothSDPUUID) GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID {
+	_r := objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("getUUIDWithLength:"), newLength)
 	return IOBluetoothSDPUUIDFromID(_r)
 }
 
 // IsEqualToUUID compares the target IOBluetoothSDPUUID object with the given otherUUID object.
-func (x *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToUUID:"), objref.IDOf(otherUUID))
+func (ibs *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool {
+	_r := objc.Send[bool](objref.IDOf(ibs), objc.RegisterName("isEqualToUUID:"), objref.IDOf(otherUUID))
 	return _r
 }
-
-// IOBluetoothSDPUUIDable is the interface implemented by [IOBluetoothSDPUUID], for mocking and DI.
-type IOBluetoothSDPUUIDable interface {
-	obj.Object
-	GetSDPUUIDRef() obj.Object
-	GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID
-	IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool
-}
-
-var _ IOBluetoothSDPUUIDable = (*IOBluetoothSDPUUID)(nil)

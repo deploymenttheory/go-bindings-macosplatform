@@ -52,33 +52,23 @@ func NewDirectionalGamepad() *DirectionalGamepad {
 	return directionalGamepadAdopt(_id)
 }
 
-// WithReportsAbsoluteDpadValues a Boolean value that indicates whether the directional pad reports absolute or relative values.
-func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
-	return x
+// WithReportsAbsoluteDpadValues sets a Boolean value that indicates whether the directional pad reports absolute or relative values.
+func (dg *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
+	objc.Send[objc.ID](objref.IDOf(dg), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
+	return dg
 }
 
-// WithAllowsRotation a Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
-func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
-	return x
+// WithAllowsRotation sets a Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
+func (dg *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
+	objc.Send[objc.ID](objref.IDOf(dg), objc.RegisterName("setAllowsRotation:"), allowsRotation)
+	return dg
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DirectionalGamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (dg *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DirectionalGamepad {
+	objc.Send[objc.ID](objref.IDOf(dg), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return dg
 }
-
-// DirectionalGamepadable is the interface implemented by [DirectionalGamepad], for mocking and DI.
-type DirectionalGamepadable interface {
-	obj.Object
-	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad
-	WithAllowsRotation(allowsRotation bool) *DirectionalGamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DirectionalGamepad
-}
-
-var _ DirectionalGamepadable = (*DirectionalGamepad)(nil)
 
 var _ MicroGamepadProvider = (*DirectionalGamepad)(nil)
 

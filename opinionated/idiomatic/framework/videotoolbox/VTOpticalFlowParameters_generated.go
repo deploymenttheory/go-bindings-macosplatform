@@ -46,24 +46,24 @@ func opticalFlowParametersAdopt(id objc.ID) *OpticalFlowParameters {
 }
 
 // Description returns the object's -description text.
-func (x *OpticalFlowParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ofp *OpticalFlowParameters) Description() string {
+	return rt.Description(objref.IDOf(ofp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OpticalFlowParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ofp *OpticalFlowParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ofp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OpticalFlowParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ofp *OpticalFlowParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ofp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OpticalFlowParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ofp *OpticalFlowParameters) String() string {
+	return rt.Description(objref.IDOf(ofp))
 }
 
 // NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
@@ -73,37 +73,26 @@ func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOp
 	return opticalFlowParametersAdopt(_id)
 }
 
-// SourceFrame current source frame, which must be non `nil`.
-func (x *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+// SourceFrame returns current source frame, which must be non `nil`.
+func (ofp *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(ofp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// NextFrame the next source frame in presentation time order.
-func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextFrame"))
+// NextFrame returns the next source frame in presentation time order.
+func (ofp *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(ofp), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
-func (x *OpticalFlowParameters) SubmissionMode() OpticalFlowParametersSubmissionMode {
-	_r := objc.Send[OpticalFlowParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
+// SubmissionMode returns ordering of the input frames in this submission relative to the previous submission.
+func (ofp *OpticalFlowParameters) SubmissionMode() OpticalFlowParametersSubmissionMode {
+	_r := objc.Send[OpticalFlowParametersSubmissionMode](objref.IDOf(ofp), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// DestinationOpticalFlow output optical flow calculated by the processor.
-func (x *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationOpticalFlow"))
+// DestinationOpticalFlow returns output optical flow calculated by the processor.
+func (ofp *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
+	_r := objc.Send[objc.ID](objref.IDOf(ofp), objc.RegisterName("destinationOpticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
-
-// OpticalFlowParametersable is the interface implemented by [OpticalFlowParameters], for mocking and DI.
-type OpticalFlowParametersable interface {
-	obj.Object
-	SourceFrame() *FrameProcessorFrame
-	NextFrame() *FrameProcessorFrame
-	SubmissionMode() OpticalFlowParametersSubmissionMode
-	DestinationOpticalFlow() *FrameProcessorOpticalFlow
-}
-
-var _ OpticalFlowParametersable = (*OpticalFlowParameters)(nil)

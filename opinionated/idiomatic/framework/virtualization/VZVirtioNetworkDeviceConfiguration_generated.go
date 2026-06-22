@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
 	return virtioNetworkDeviceConfigurationAdopt(_id)
 }
 
-// WithMACAddress the media access control (MAC) address to assign to the network device.
-func (x *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
-	return x
+// WithMACAddress sets the media access control (MAC) address to assign to the network device.
+func (vndc *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vndc), objc.RegisterName("setMACAddress:"), objref.IDOf(mACAddress))
+	return vndc
 }
 
-// WithAttachment the object that defines how the virtual network device communicates with the host system.
-func (x *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-	return x
+// WithAttachment sets the object that defines how the virtual network device communicates with the host system.
+func (vndc *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vndc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return vndc
 }
-
-// VirtioNetworkDeviceConfigurationable is the interface implemented by [VirtioNetworkDeviceConfiguration], for mocking and DI.
-type VirtioNetworkDeviceConfigurationable interface {
-	obj.Object
-	WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration
-	WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration
-}
-
-var _ VirtioNetworkDeviceConfigurationable = (*VirtioNetworkDeviceConfiguration)(nil)
 
 var _ NetworkDeviceConfigurationProvider = (*VirtioNetworkDeviceConfiguration)(nil)

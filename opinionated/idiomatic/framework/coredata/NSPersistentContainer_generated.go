@@ -6,6 +6,7 @@ package coredata
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,24 +51,24 @@ func persistentContainerAdopt(id objc.ID) *PersistentContainer {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentContainer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PersistentContainer) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentContainer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PersistentContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentContainer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PersistentContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentContainer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PersistentContainer) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPersistentContainerWithName creates a container with the specified name.
@@ -84,17 +85,17 @@ func NewPersistentContainerWithNameManagedObjectModel(name string, model *Manage
 	return persistentContainerAdopt(_id)
 }
 
-// WithPersistentStoreDescriptions the descriptions of the container’s persistent stores.
-func (x *PersistentContainer) WithPersistentStoreDescriptions(items ...*PersistentStoreDescription) *PersistentContainer {
+// WithPersistentStoreDescriptions sets the descriptions of the container’s persistent stores.
+func (pc *PersistentContainer) WithPersistentStoreDescriptions(items ...*PersistentStoreDescription) *PersistentContainer {
 	_arr := purego.SliceToNSArray(items, func(_v *PersistentStoreDescription) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentStoreDescriptions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPersistentStoreDescriptions:"), _arr)
+	return pc
 }
 
 // LoadPersistentStores loads the persistent stores.
 //
 // LoadPersistentStores blocks until the operation completes or ctx is cancelled.
-func (x *PersistentContainer) LoadPersistentStores(ctx context.Context) (result *PersistentStoreDescription, err error) {
+func (pc *PersistentContainer) LoadPersistentStores(ctx context.Context) (result *PersistentStoreDescription, err error) {
 	type _result struct {
 		val *PersistentStoreDescription
 		err error
@@ -106,7 +107,7 @@ func (x *PersistentContainer) LoadPersistentStores(ctx context.Context) (result 
 		_o.val = PersistentStoreDescriptionFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadPersistentStoresWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("loadPersistentStoresWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -117,15 +118,15 @@ func (x *PersistentContainer) LoadPersistentStores(ctx context.Context) (result 
 }
 
 // NewBackgroundContext returns a new managed object context that executes on a private queue.
-func (x *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newBackgroundContext"))
+func (pc *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("newBackgroundContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // PerformBackgroundTask executes a closure on a private queue using an ephemeral managed object context.
 //
 // PerformBackgroundTask blocks until the operation completes or ctx is cancelled.
-func (x *PersistentContainer) PerformBackgroundTask(ctx context.Context) (result *ManagedObjectContext, err error) {
+func (pc *PersistentContainer) PerformBackgroundTask(ctx context.Context) (result *ManagedObjectContext, err error) {
 	type _result struct {
 		val *ManagedObjectContext
 		err error
@@ -136,7 +137,7 @@ func (x *PersistentContainer) PerformBackgroundTask(ctx context.Context) (result
 		_o.val = ManagedObjectContextFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performBackgroundTask:"), _block)
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("performBackgroundTask:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -147,8 +148,8 @@ func (x *PersistentContainer) PerformBackgroundTask(ctx context.Context) (result
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *PersistentContainer) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (pc *PersistentContainer) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -156,56 +157,34 @@ func (x *PersistentContainer) Name() string {
 }
 
 // ViewContext wraps the corresponding Objective-C method.
-func (x *PersistentContainer) ViewContext() *ManagedObjectContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewContext"))
+func (pc *PersistentContainer) ViewContext() *ManagedObjectContext {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("viewContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // ManagedObjectModel wraps the corresponding Objective-C method.
-func (x *PersistentContainer) ManagedObjectModel() *ManagedObjectModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectModel"))
+func (pc *PersistentContainer) ManagedObjectModel() *ManagedObjectModel {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // PersistentStoreCoordinator wraps the corresponding Objective-C method.
-func (x *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoordinator {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStoreCoordinator"))
+func (pc *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoordinator {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("persistentStoreCoordinator"))
 	return PersistentStoreCoordinatorFromID(_r)
 }
 
 // PersistentStoreDescriptions wraps the corresponding Objective-C method.
 //
 // PersistentStoreDescriptions returns the collection as a Go slice.
-func (x *PersistentContainer) PersistentStoreDescriptions() []*PersistentStoreDescription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStoreDescriptions"))
+func (pc *PersistentContainer) PersistentStoreDescriptions() []*PersistentStoreDescription {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("persistentStoreDescriptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStoreDescription { return PersistentStoreDescriptionFromID(_id) })
 }
-
-// SetPersistentStoreDescriptions wraps the corresponding Objective-C method.
-func (x *PersistentContainer) SetPersistentStoreDescriptions(persistentStoreDescriptions []*PersistentStoreDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentStoreDescriptions:"), purego.SliceToNSArray(persistentStoreDescriptions, func(_v *PersistentStoreDescription) objc.ID { return objref.IDOf(_v) }))
-}
-
-// PersistentContainerable is the interface implemented by [PersistentContainer], for mocking and DI.
-type PersistentContainerable interface {
-	obj.Object
-	WithPersistentStoreDescriptions(items ...*PersistentStoreDescription) *PersistentContainer
-	LoadPersistentStores(ctx context.Context) (*PersistentStoreDescription, error)
-	NewBackgroundContext() *ManagedObjectContext
-	PerformBackgroundTask(ctx context.Context) (*ManagedObjectContext, error)
-	Name() string
-	ViewContext() *ManagedObjectContext
-	ManagedObjectModel() *ManagedObjectModel
-	PersistentStoreCoordinator() *PersistentStoreCoordinator
-	PersistentStoreDescriptions() []*PersistentStoreDescription
-	SetPersistentStoreDescriptions(persistentStoreDescriptions []*PersistentStoreDescription)
-}
-
-var _ PersistentContainerable = (*PersistentContainer)(nil)
 
 // isPersistentContainer marks PersistentContainer — and, by embedding promotion, its
 // subclasses — as a member of the PersistentContainer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PersistentContainer) isPersistentContainer() {}
+func (pc *PersistentContainer) isPersistentContainer() {}
 
 var _ PersistentContainerProvider = (*PersistentContainer)(nil)

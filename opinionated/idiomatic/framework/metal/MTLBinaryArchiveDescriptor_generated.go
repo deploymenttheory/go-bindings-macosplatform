@@ -46,24 +46,24 @@ func binaryArchiveDescriptorAdopt(id objc.ID) *BinaryArchiveDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *BinaryArchiveDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bad *BinaryArchiveDescriptor) Description() string {
+	return rt.Description(objref.IDOf(bad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BinaryArchiveDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bad *BinaryArchiveDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BinaryArchiveDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bad *BinaryArchiveDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BinaryArchiveDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bad *BinaryArchiveDescriptor) String() string {
+	return rt.Description(objref.IDOf(bad))
 }
 
 // NewBinaryArchiveDescriptor creates a new BinaryArchiveDescriptor.
@@ -72,29 +72,14 @@ func NewBinaryArchiveDescriptor() *BinaryArchiveDescriptor {
 	return binaryArchiveDescriptorAdopt(_id)
 }
 
-// WithUrl a URL to a Metal binary archive file.
-func (x *BinaryArchiveDescriptor) WithUrl(url string) *BinaryArchiveDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
-	return x
+// WithURL sets a URL to a Metal binary archive file.
+func (bad *BinaryArchiveDescriptor) WithURL(url string) *BinaryArchiveDescriptor {
+	objc.Send[objc.ID](objref.IDOf(bad), objc.RegisterName("setUrl:"), rt.FileURL(url))
+	return bad
 }
 
-// Url wraps the corresponding Objective-C method.
-func (x *BinaryArchiveDescriptor) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL wraps the corresponding Objective-C method.
+func (bad *BinaryArchiveDescriptor) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bad), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
-
-// SetUrl wraps the corresponding Objective-C method.
-func (x *BinaryArchiveDescriptor) SetUrl(url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
-}
-
-// BinaryArchiveDescriptorable is the interface implemented by [BinaryArchiveDescriptor], for mocking and DI.
-type BinaryArchiveDescriptorable interface {
-	obj.Object
-	WithUrl(url string) *BinaryArchiveDescriptor
-	Url() obj.Object
-	SetUrl(url string)
-}
-
-var _ BinaryArchiveDescriptorable = (*BinaryArchiveDescriptor)(nil)

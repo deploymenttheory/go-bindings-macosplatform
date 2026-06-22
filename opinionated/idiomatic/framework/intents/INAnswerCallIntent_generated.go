@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,42 +50,31 @@ func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute CallAudioRoute, 
 	return answerCallIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (aci *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent {
+	objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return aci
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (aci *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent {
+	objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return aci
 }
 
 // AudioRoute wraps the corresponding Objective-C method.
-func (x *AnswerCallIntent) AudioRoute() CallAudioRoute {
-	_r := objc.Send[CallAudioRoute](objref.IDOf(x), objc.RegisterName("audioRoute"))
+func (aci *AnswerCallIntent) AudioRoute() CallAudioRoute {
+	_r := objc.Send[CallAudioRoute](objref.IDOf(aci), objc.RegisterName("audioRoute"))
 	return _r
 }
 
 // CallIdentifier wraps the corresponding Objective-C method.
-func (x *AnswerCallIntent) CallIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callIdentifier"))
+func (aci *AnswerCallIntent) CallIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("callIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AnswerCallIntentable is the interface implemented by [AnswerCallIntent], for mocking and DI.
-type AnswerCallIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent
-	AudioRoute() CallAudioRoute
-	CallIdentifier() string
-}
-
-var _ AnswerCallIntentable = (*AnswerCallIntent)(nil)
 
 var _ IntentProvider = (*AnswerCallIntent)(nil)

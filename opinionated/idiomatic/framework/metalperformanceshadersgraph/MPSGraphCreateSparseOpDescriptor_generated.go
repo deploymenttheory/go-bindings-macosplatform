@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewGraphCreateSparseOpDescriptor() *GraphCreateSparseOpDescriptor {
 	return graphCreateSparseOpDescriptorAdopt(_id)
 }
 
-// WithSparseStorageType defines the storage format of the sparse tensor.
-func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType GraphSparseStorageType) *GraphCreateSparseOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
-	return x
+// WithSparseStorageType sets defines the storage format of the sparse tensor.
+func (gcsod *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType GraphSparseStorageType) *GraphCreateSparseOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gcsod), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
+	return gcsod
 }
 
 // SparseStorageType defines the storage format of the sparse tensor.
-func (x *GraphCreateSparseOpDescriptor) SparseStorageType() GraphSparseStorageType {
-	_r := objc.Send[GraphSparseStorageType](objref.IDOf(x), objc.RegisterName("sparseStorageType"))
+func (gcsod *GraphCreateSparseOpDescriptor) SparseStorageType() GraphSparseStorageType {
+	_r := objc.Send[GraphSparseStorageType](objref.IDOf(gcsod), objc.RegisterName("sparseStorageType"))
 	return _r
 }
-
-// SetSparseStorageType wraps the corresponding Objective-C method.
-func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType GraphSparseStorageType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparseStorageType:"), sparseStorageType)
-}
-
-// GraphCreateSparseOpDescriptorable is the interface implemented by [GraphCreateSparseOpDescriptor], for mocking and DI.
-type GraphCreateSparseOpDescriptorable interface {
-	obj.Object
-	WithSparseStorageType(sparseStorageType GraphSparseStorageType) *GraphCreateSparseOpDescriptor
-	SparseStorageType() GraphSparseStorageType
-	SetSparseStorageType(sparseStorageType GraphSparseStorageType)
-}
-
-var _ GraphCreateSparseOpDescriptorable = (*GraphCreateSparseOpDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphCreateSparseOpDescriptor)(nil)

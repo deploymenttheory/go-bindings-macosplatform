@@ -46,24 +46,24 @@ func wKOpenPanelParametersAdopt(id objc.ID) *WKOpenPanelParameters {
 }
 
 // Description returns the object's -description text.
-func (x *WKOpenPanelParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wopp *WKOpenPanelParameters) Description() string {
+	return rt.Description(objref.IDOf(wopp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKOpenPanelParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wopp *WKOpenPanelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wopp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKOpenPanelParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wopp *WKOpenPanelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wopp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKOpenPanelParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wopp *WKOpenPanelParameters) String() string {
+	return rt.Description(objref.IDOf(wopp))
 }
 
 // NewWKOpenPanelParameters creates a new WKOpenPanelParameters.
@@ -72,23 +72,14 @@ func NewWKOpenPanelParameters() *WKOpenPanelParameters {
 	return wKOpenPanelParametersAdopt(_id)
 }
 
-// AllowsMultipleSelection whether the file upload control supports multiple files.
-func (x *WKOpenPanelParameters) AllowsMultipleSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
+// AllowsMultipleSelection reports whether the file upload control supports multiple files.
+func (wopp *WKOpenPanelParameters) AllowsMultipleSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(wopp), objc.RegisterName("allowsMultipleSelection"))
 	return _r
 }
 
-// AllowsDirectories whether the file upload control supports selecting directories.
-func (x *WKOpenPanelParameters) AllowsDirectories() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDirectories"))
+// AllowsDirectories reports whether the file upload control supports selecting directories.
+func (wopp *WKOpenPanelParameters) AllowsDirectories() bool {
+	_r := objc.Send[bool](objref.IDOf(wopp), objc.RegisterName("allowsDirectories"))
 	return _r
 }
-
-// WKOpenPanelParametersable is the interface implemented by [WKOpenPanelParameters], for mocking and DI.
-type WKOpenPanelParametersable interface {
-	obj.Object
-	AllowsMultipleSelection() bool
-	AllowsDirectories() bool
-}
-
-var _ WKOpenPanelParametersable = (*WKOpenPanelParameters)(nil)

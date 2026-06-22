@@ -5,13 +5,14 @@
 package naturallanguage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Gazetteer is an idiomatic wrapper over the Objective-C class NLGazetteer.
@@ -48,24 +49,24 @@ func gazetteerAdopt(id objc.ID) *Gazetteer {
 }
 
 // Description returns the object's -description text.
-func (x *Gazetteer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Gazetteer) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Gazetteer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Gazetteer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Gazetteer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Gazetteer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Gazetteer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Gazetteer) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // NewGazetteerWithContentsOfURLError creates a Natural Language gazetteer from a model created with the Create ML framework.
@@ -102,8 +103,8 @@ func NewGazetteerWithDictionaryLanguageError(dictionary obj.Object, language obj
 }
 
 // LabelForString retrieves the label for the given term.
-func (x *Gazetteer) LabelForString(string_ string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForString:"), purego.NSString(string_))
+func (g *Gazetteer) LabelForString(string_ string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("labelForString:"), purego.NSString(string_))
 	if _r == 0 {
 		return ""
 	}
@@ -111,23 +112,13 @@ func (x *Gazetteer) LabelForString(string_ string) string {
 }
 
 // Language wraps the corresponding Objective-C method.
-func (x *Gazetteer) Language() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (g *Gazetteer) Language() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *Gazetteer) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (g *Gazetteer) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// Gazetteerable is the interface implemented by [Gazetteer], for mocking and DI.
-type Gazetteerable interface {
-	obj.Object
-	LabelForString(string_ string) string
-	Language() obj.Object
-	Data() obj.Object
-}
-
-var _ Gazetteerable = (*Gazetteer)(nil)

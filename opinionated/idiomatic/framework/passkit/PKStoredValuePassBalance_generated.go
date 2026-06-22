@@ -46,24 +46,24 @@ func storedValuePassBalanceAdopt(id objc.ID) *StoredValuePassBalance {
 }
 
 // Description returns the object's -description text.
-func (x *StoredValuePassBalance) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (svpb *StoredValuePassBalance) Description() string {
+	return rt.Description(objref.IDOf(svpb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StoredValuePassBalance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (svpb *StoredValuePassBalance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(svpb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StoredValuePassBalance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (svpb *StoredValuePassBalance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(svpb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StoredValuePassBalance) String() string {
-	return rt.Description(objref.IDOf(x))
+func (svpb *StoredValuePassBalance) String() string {
+	return rt.Description(objref.IDOf(svpb))
 }
 
 // NewStoredValuePassBalance creates a new StoredValuePassBalance.
@@ -73,20 +73,20 @@ func NewStoredValuePassBalance() *StoredValuePassBalance {
 }
 
 // IsEqualToBalance returns a Boolean value that indicates whether two pass balance objects contain the same values.
-func (x *StoredValuePassBalance) IsEqualToBalance(balance *StoredValuePassBalance) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToBalance:"), objref.IDOf(balance))
+func (svpb *StoredValuePassBalance) IsEqualToBalance(balance *StoredValuePassBalance) bool {
+	_r := objc.Send[bool](objref.IDOf(svpb), objc.RegisterName("isEqualToBalance:"), objref.IDOf(balance))
 	return _r
 }
 
 // Amount wraps the corresponding Objective-C method.
-func (x *StoredValuePassBalance) Amount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+func (svpb *StoredValuePassBalance) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
 // CurrencyCode wraps the corresponding Objective-C method.
-func (x *StoredValuePassBalance) CurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+func (svpb *StoredValuePassBalance) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -94,25 +94,13 @@ func (x *StoredValuePassBalance) CurrencyCode() string {
 }
 
 // BalanceType wraps the corresponding Objective-C method.
-func (x *StoredValuePassBalance) BalanceType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("balanceType"))
+func (svpb *StoredValuePassBalance) BalanceType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("balanceType"))
 	return obj.Wrap(_r)
 }
 
 // ExpiryDate wraps the corresponding Objective-C method.
-func (x *StoredValuePassBalance) ExpiryDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expiryDate"))
+func (svpb *StoredValuePassBalance) ExpiryDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("expiryDate"))
 	return obj.Wrap(_r)
 }
-
-// StoredValuePassBalanceable is the interface implemented by [StoredValuePassBalance], for mocking and DI.
-type StoredValuePassBalanceable interface {
-	obj.Object
-	IsEqualToBalance(balance *StoredValuePassBalance) bool
-	Amount() obj.Object
-	CurrencyCode() string
-	BalanceType() obj.Object
-	ExpiryDate() obj.Object
-}
-
-var _ StoredValuePassBalanceable = (*StoredValuePassBalance)(nil)

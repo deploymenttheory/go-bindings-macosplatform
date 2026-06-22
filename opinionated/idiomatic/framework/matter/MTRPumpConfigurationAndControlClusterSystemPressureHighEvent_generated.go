@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterSystemPressureHighEventAdopt(id objc.I
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsphe *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccsphe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccsphe *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccsphe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccsphe *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccsphe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsphe *MTRPumpConfigurationAndControlClusterSystemPressureHighEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccsphe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSystemPressureHighEvent creates a new MTRPumpConfigurationAndControlClusterSystemPressureHighEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterSystemPressureHighEvent() *MTRPumpC
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSystemPressureHighEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterSystemPressureHighEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterSystemPressureHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSystemPressureHighEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterSystemPressureHighEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterSystemPressureHighEventable = (*MTRPumpConfigurationAndControlClusterSystemPressureHighEvent)(nil)

@@ -46,24 +46,24 @@ func credentialProviderExtensionContextAdopt(id objc.ID) *CredentialProviderExte
 }
 
 // Description returns the object's -description text.
-func (x *CredentialProviderExtensionContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpec *CredentialProviderExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(cpec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CredentialProviderExtensionContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpec *CredentialProviderExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CredentialProviderExtensionContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpec *CredentialProviderExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CredentialProviderExtensionContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpec *CredentialProviderExtensionContext) String() string {
+	return rt.Description(objref.IDOf(cpec))
 }
 
 // NewCredentialProviderExtensionContext creates a new CredentialProviderExtensionContext.
@@ -73,38 +73,26 @@ func NewCredentialProviderExtensionContext() *CredentialProviderExtensionContext
 }
 
 // CompleteRequestWithSelectedCredentialCompletionHandler provides the user-selected credential.
-func (x *CredentialProviderExtensionContext) CompleteRequestWithSelectedCredentialCompletionHandler(credential *PasswordCredential, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequestWithSelectedCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (cpec *CredentialProviderExtensionContext) CompleteRequestWithSelectedCredentialCompletionHandler(credential *PasswordCredential, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeRequestWithSelectedCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler complete the passkey assertion request by providing the user-selected passkey credential.
-func (x *CredentialProviderExtensionContext) CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyAssertionCredential, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (cpec *CredentialProviderExtensionContext) CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyAssertionCredential, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler complete the registration request by providing the newly-created passkey credential.
-func (x *CredentialProviderExtensionContext) CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyRegistrationCredential, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (cpec *CredentialProviderExtensionContext) CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyRegistrationCredential, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler provides the user-selected one-time passcode (OTP).
-func (x *CredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *OneTimeCodeCredential, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeOneTimeCodeRequestWithSelectedCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (cpec *CredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *OneTimeCodeCredential, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeOneTimeCodeRequestWithSelectedCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteExtensionConfigurationRequest completes the request to configure the extension.
-func (x *CredentialProviderExtensionContext) CompleteExtensionConfigurationRequest() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeExtensionConfigurationRequest"))
+func (cpec *CredentialProviderExtensionContext) CompleteExtensionConfigurationRequest() {
+	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeExtensionConfigurationRequest"))
 }
-
-// CredentialProviderExtensionContextable is the interface implemented by [CredentialProviderExtensionContext], for mocking and DI.
-type CredentialProviderExtensionContextable interface {
-	obj.Object
-	CompleteRequestWithSelectedCredentialCompletionHandler(credential *PasswordCredential, completionHandler func(bool))
-	CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyAssertionCredential, completionHandler func(bool))
-	CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyRegistrationCredential, completionHandler func(bool))
-	CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *OneTimeCodeCredential, completionHandler func(bool))
-	CompleteExtensionConfigurationRequest()
-}
-
-var _ CredentialProviderExtensionContextable = (*CredentialProviderExtensionContext)(nil)

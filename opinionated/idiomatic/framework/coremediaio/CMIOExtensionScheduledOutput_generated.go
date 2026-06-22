@@ -46,24 +46,24 @@ func extensionScheduledOutputAdopt(id objc.ID) *ExtensionScheduledOutput {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionScheduledOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (eso *ExtensionScheduledOutput) Description() string {
+	return rt.Description(objref.IDOf(eso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionScheduledOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (eso *ExtensionScheduledOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(eso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionScheduledOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (eso *ExtensionScheduledOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(eso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionScheduledOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (eso *ExtensionScheduledOutput) String() string {
+	return rt.Description(objref.IDOf(eso))
 }
 
 // NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a scheduled output object.
@@ -73,23 +73,14 @@ func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequence
 	return extensionScheduledOutputAdopt(_id)
 }
 
-// SequenceNumber the buffer sequence number that was output.
-func (x *ExtensionScheduledOutput) SequenceNumber() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("sequenceNumber"))
+// SequenceNumber returns the buffer sequence number that was output.
+func (eso *ExtensionScheduledOutput) SequenceNumber() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(eso), objc.RegisterName("sequenceNumber"))
 	return _r
 }
 
-// HostTimeInNanoseconds the host time in nanoseconds when the buffer was output.
-func (x *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTimeInNanoseconds"))
+// HostTimeInNanoseconds returns the host time in nanoseconds when the buffer was output.
+func (eso *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(eso), objc.RegisterName("hostTimeInNanoseconds"))
 	return _r
 }
-
-// ExtensionScheduledOutputable is the interface implemented by [ExtensionScheduledOutput], for mocking and DI.
-type ExtensionScheduledOutputable interface {
-	obj.Object
-	SequenceNumber() uint64
-	HostTimeInNanoseconds() uint64
-}
-
-var _ ExtensionScheduledOutputable = (*ExtensionScheduledOutput)(nil)

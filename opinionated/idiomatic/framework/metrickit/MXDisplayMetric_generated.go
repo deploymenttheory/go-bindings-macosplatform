@@ -53,17 +53,9 @@ func NewDisplayMetric() *DisplayMetric {
 }
 
 // AveragePixelLuminance wraps the corresponding Objective-C method.
-func (x *DisplayMetric) AveragePixelLuminance() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averagePixelLuminance"))
+func (dm *DisplayMetric) AveragePixelLuminance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("averagePixelLuminance"))
 	return obj.Wrap(_r)
 }
-
-// DisplayMetricable is the interface implemented by [DisplayMetric], for mocking and DI.
-type DisplayMetricable interface {
-	obj.Object
-	AveragePixelLuminance() obj.Object
-}
-
-var _ DisplayMetricable = (*DisplayMetric)(nil)
 
 var _ MetricProvider = (*DisplayMetric)(nil)

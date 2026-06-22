@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,64 +43,40 @@ func matrixRandomAdopt(id objc.ID) *MatrixRandom {
 	return x
 }
 
-// WithBatchStart the starting index in the destination batch.
-func (x *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the starting index in the destination batch.
+func (mr *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setBatchStart:"), batchStart)
+	return mr
 }
 
-// WithBatchSize the size of the batch to process.
-func (x *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the size of the batch to process.
+func (mr *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setBatchSize:"), batchSize)
+	return mr
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixRandom) WithLabel(label string) *MatrixRandom {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (mr *MatrixRandom) WithLabel(label string) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mr
 }
 
-// BatchStart the starting index in the destination batch.
-func (x *MatrixRandom) BatchStart() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
+// BatchStart returns the starting index in the destination batch.
+func (mr *MatrixRandom) BatchStart() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchStart"))
 	return _r
 }
 
-// SetBatchStart wraps the corresponding Objective-C method.
-func (x *MatrixRandom) SetBatchStart(batchStart int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-}
-
-// BatchSize the size of the batch to process.
-func (x *MatrixRandom) BatchSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
+// BatchSize returns the size of the batch to process.
+func (mr *MatrixRandom) BatchSize() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchSize"))
 	return _r
 }
-
-// SetBatchSize wraps the corresponding Objective-C method.
-func (x *MatrixRandom) SetBatchSize(batchSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-}
-
-// MatrixRandomable is the interface implemented by [MatrixRandom], for mocking and DI.
-type MatrixRandomable interface {
-	obj.Object
-	WithBatchStart(batchStart int) *MatrixRandom
-	WithBatchSize(batchSize int) *MatrixRandom
-	WithLabel(label string) *MatrixRandom
-	BatchStart() int
-	SetBatchStart(batchStart int)
-	BatchSize() int
-	SetBatchSize(batchSize int)
-}
-
-var _ MatrixRandomable = (*MatrixRandom)(nil)
 
 // isMatrixRandom marks MatrixRandom — and, by embedding promotion, its
 // subclasses — as a member of the MatrixRandom hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MatrixRandom) isMatrixRandom() {}
+func (mr *MatrixRandom) isMatrixRandom() {}
 
 var _ MatrixRandomProvider = (*MatrixRandom)(nil)
 

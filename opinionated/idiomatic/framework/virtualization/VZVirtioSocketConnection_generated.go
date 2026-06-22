@@ -46,24 +46,24 @@ func virtioSocketConnectionAdopt(id objc.ID) *VirtioSocketConnection {
 }
 
 // Description returns the object's -description text.
-func (x *VirtioSocketConnection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vsc *VirtioSocketConnection) Description() string {
+	return rt.Description(objref.IDOf(vsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioSocketConnection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vsc *VirtioSocketConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioSocketConnection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vsc *VirtioSocketConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtioSocketConnection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vsc *VirtioSocketConnection) String() string {
+	return rt.Description(objref.IDOf(vsc))
 }
 
 // NewVirtioSocketConnection creates a new VirtioSocketConnection.
@@ -73,35 +73,24 @@ func NewVirtioSocketConnection() *VirtioSocketConnection {
 }
 
 // Close close the file descriptor associated with the socket.
-func (x *VirtioSocketConnection) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (vsc *VirtioSocketConnection) Close() {
+	objc.Send[objc.ID](objref.IDOf(vsc), objc.RegisterName("close"))
 }
 
-// DestinationPort the destination port number of the connection.
-func (x *VirtioSocketConnection) DestinationPort() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("destinationPort"))
+// DestinationPort returns the destination port number of the connection.
+func (vsc *VirtioSocketConnection) DestinationPort() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(vsc), objc.RegisterName("destinationPort"))
 	return _r
 }
 
-// SourcePort the source port number of the connection.
-func (x *VirtioSocketConnection) SourcePort() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("sourcePort"))
+// SourcePort returns the source port number of the connection.
+func (vsc *VirtioSocketConnection) SourcePort() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(vsc), objc.RegisterName("sourcePort"))
 	return _r
 }
 
-// FileDescriptor the file descriptor associated with the socket. Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
-func (x *VirtioSocketConnection) FileDescriptor() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileDescriptor"))
+// FileDescriptor returns the file descriptor associated with the socket. Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
+func (vsc *VirtioSocketConnection) FileDescriptor() int {
+	_r := objc.Send[int](objref.IDOf(vsc), objc.RegisterName("fileDescriptor"))
 	return _r
 }
-
-// VirtioSocketConnectionable is the interface implemented by [VirtioSocketConnection], for mocking and DI.
-type VirtioSocketConnectionable interface {
-	obj.Object
-	Close()
-	DestinationPort() uint32
-	SourcePort() uint32
-	FileDescriptor() int
-}
-
-var _ VirtioSocketConnectionable = (*VirtioSocketConnection)(nil)

@@ -46,24 +46,24 @@ func blitPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *BlitPassSam
 }
 
 // Description returns the object's -description text.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(bpsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bpsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bpsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(bpsbada))
 }
 
 // NewBlitPassSampleBufferAttachmentDescriptorArray creates a new BlitPassSampleBufferAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewBlitPassSampleBufferAttachmentDescriptorArray() *BlitPassSampleBufferAtt
 }
 
 // ObjectAtIndexedSubscript accesses one of the array’s blit pass sample buffer attachment descriptor instances.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(bpsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return BlitPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(bpsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// BlitPassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [BlitPassSampleBufferAttachmentDescriptorArray], for mocking and DI.
-type BlitPassSampleBufferAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ BlitPassSampleBufferAttachmentDescriptorArrayable = (*BlitPassSampleBufferAttachmentDescriptorArray)(nil)

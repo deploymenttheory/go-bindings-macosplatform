@@ -46,24 +46,24 @@ func routePickerViewAdopt(id objc.ID) *RoutePickerView {
 }
 
 // Description returns the object's -description text.
-func (x *RoutePickerView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpv *RoutePickerView) Description() string {
+	return rt.Description(objref.IDOf(rpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RoutePickerView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpv *RoutePickerView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RoutePickerView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpv *RoutePickerView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RoutePickerView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpv *RoutePickerView) String() string {
+	return rt.Description(objref.IDOf(rpv))
 }
 
 // NewRoutePickerView creates a new RoutePickerView.
@@ -72,62 +72,37 @@ func NewRoutePickerView() *RoutePickerView {
 	return routePickerViewAdopt(_id)
 }
 
-// WithPlayer the player object to perform routing operations for.
-func (x *RoutePickerView) WithPlayer(player obj.Object) *RoutePickerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-	return x
+// WithPlayer sets the player object to perform routing operations for.
+func (rpv *RoutePickerView) WithPlayer(player obj.Object) *RoutePickerView {
+	objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	return rpv
 }
 
-// WithRoutePickerButtonBordered a Boolean value that indicates whether the route picker button has a border.
-func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
-	return x
+// WithRoutePickerButtonBordered sets a Boolean value that indicates whether the route picker button has a border.
+func (rpv *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView {
+	objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
+	return rpv
 }
 
 // RoutePickerButtonColorForState returns the color of the picker button for the specified state.
-func (x *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routePickerButtonColorForState:"), state)
+func (rpv *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("routePickerButtonColorForState:"), state)
 	return obj.Wrap(_r)
 }
 
 // SetRoutePickerButtonColorForState sets the route picker button color for the specified state.
-func (x *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
+func (rpv *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState) {
+	objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
 }
 
-// Player the player for which to perform routing operations.
-func (x *RoutePickerView) Player() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+// Player returns the player for which to perform routing operations.
+func (rpv *RoutePickerView) Player() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }
 
-// SetPlayer wraps the corresponding Objective-C method.
-func (x *RoutePickerView) SetPlayer(player obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-}
-
-// IsRoutePickerButtonBordered whether or not the picker button has a border. Default is YES.
-func (x *RoutePickerView) IsRoutePickerButtonBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRoutePickerButtonBordered"))
+// IsRoutePickerButtonBordered reports whether the picker button has a border. Default is true.
+func (rpv *RoutePickerView) IsRoutePickerButtonBordered() bool {
+	_r := objc.Send[bool](objref.IDOf(rpv), objc.RegisterName("isRoutePickerButtonBordered"))
 	return _r
 }
-
-// SetRoutePickerButtonBordered wraps the corresponding Objective-C method.
-func (x *RoutePickerView) SetRoutePickerButtonBordered(routePickerButtonBordered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
-}
-
-// RoutePickerViewable is the interface implemented by [RoutePickerView], for mocking and DI.
-type RoutePickerViewable interface {
-	obj.Object
-	WithPlayer(player obj.Object) *RoutePickerView
-	WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView
-	RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object
-	SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState)
-	Player() obj.Object
-	SetPlayer(player obj.Object)
-	IsRoutePickerButtonBordered() bool
-	SetRoutePickerButtonBordered(routePickerButtonBordered bool)
-}
-
-var _ RoutePickerViewable = (*RoutePickerView)(nil)

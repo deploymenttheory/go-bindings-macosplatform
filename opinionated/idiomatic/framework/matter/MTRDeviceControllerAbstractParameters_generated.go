@@ -46,56 +46,41 @@ func mTRDeviceControllerAbstractParametersAdopt(id objc.ID) *MTRDeviceController
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceControllerAbstractParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdcap *MTRDeviceControllerAbstractParameters) Description() string {
+	return rt.Description(objref.IDOf(mdcap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceControllerAbstractParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdcap *MTRDeviceControllerAbstractParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdcap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceControllerAbstractParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdcap *MTRDeviceControllerAbstractParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdcap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceControllerAbstractParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdcap *MTRDeviceControllerAbstractParameters) String() string {
+	return rt.Description(objref.IDOf(mdcap))
 }
 
-// WithStartSuspended whether the controller should start out suspended.
-func (x *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
-	return x
+// WithStartSuspended sets whether the controller should start out suspended.
+func (mdcap *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters {
+	objc.Send[objc.ID](objref.IDOf(mdcap), objc.RegisterName("setStartSuspended:"), startSuspended)
+	return mdcap
 }
 
 // StartSuspended wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSuspended"))
+func (mdcap *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
+	_r := objc.Send[bool](objref.IDOf(mdcap), objc.RegisterName("startSuspended"))
 	return _r
 }
-
-// SetStartSuspended wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerAbstractParameters) SetStartSuspended(startSuspended bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
-}
-
-// MTRDeviceControllerAbstractParametersable is the interface implemented by [MTRDeviceControllerAbstractParameters], for mocking and DI.
-type MTRDeviceControllerAbstractParametersable interface {
-	obj.Object
-	WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters
-	StartSuspended() bool
-	SetStartSuspended(startSuspended bool)
-}
-
-var _ MTRDeviceControllerAbstractParametersable = (*MTRDeviceControllerAbstractParameters)(nil)
 
 // isMTRDeviceControllerAbstractParameters marks MTRDeviceControllerAbstractParameters — and, by embedding promotion, its
 // subclasses — as a member of the MTRDeviceControllerAbstractParameters hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRDeviceControllerAbstractParameters) isMTRDeviceControllerAbstractParameters() {}
+func (mdcap *MTRDeviceControllerAbstractParameters) isMTRDeviceControllerAbstractParameters() {}
 
 var _ MTRDeviceControllerAbstractParametersProvider = (*MTRDeviceControllerAbstractParameters)(nil)

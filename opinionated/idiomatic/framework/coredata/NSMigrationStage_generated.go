@@ -48,59 +48,44 @@ func migrationStageAdopt(id objc.ID) *MigrationStage {
 }
 
 // Description returns the object's -description text.
-func (x *MigrationStage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MigrationStage) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MigrationStage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MigrationStage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MigrationStage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MigrationStage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MigrationStage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MigrationStage) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
-// WithLabel the textual description of the migration stage’s purpose.
-func (x *MigrationStage) WithLabel(label string) *MigrationStage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the textual description of the migration stage’s purpose.
+func (ms *MigrationStage) WithLabel(label string) *MigrationStage {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ms
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MigrationStage) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (ms *MigrationStage) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MigrationStage) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// MigrationStageable is the interface implemented by [MigrationStage], for mocking and DI.
-type MigrationStageable interface {
-	obj.Object
-	WithLabel(label string) *MigrationStage
-	Label() string
-	SetLabel(label string)
-}
-
-var _ MigrationStageable = (*MigrationStage)(nil)
-
 // isMigrationStage marks MigrationStage — and, by embedding promotion, its
 // subclasses — as a member of the MigrationStage hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MigrationStage) isMigrationStage() {}
+func (ms *MigrationStage) isMigrationStage() {}
 
 var _ MigrationStageProvider = (*MigrationStage)(nil)

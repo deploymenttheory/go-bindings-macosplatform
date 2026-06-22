@@ -46,24 +46,24 @@ func sharingCollaborationModeRestrictionAdopt(id objc.ID) *SharingCollaborationM
 }
 
 // Description returns the object's -description text.
-func (x *SharingCollaborationModeRestriction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scmr *SharingCollaborationModeRestriction) Description() string {
+	return rt.Description(objref.IDOf(scmr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharingCollaborationModeRestriction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scmr *SharingCollaborationModeRestriction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scmr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharingCollaborationModeRestriction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scmr *SharingCollaborationModeRestriction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scmr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SharingCollaborationModeRestriction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scmr *SharingCollaborationModeRestriction) String() string {
+	return rt.Description(objref.IDOf(scmr))
 }
 
 // NewSharingCollaborationModeRestrictionWithDisabledMode - Parameters: - disabledMode: The disabled type of sharing
@@ -94,63 +94,50 @@ func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessag
 	return sharingCollaborationModeRestrictionAdopt(_id)
 }
 
-// DisabledMode the type of sharing which should be disabled
-func (x *SharingCollaborationModeRestriction) DisabledMode() SharingCollaborationMode {
-	_r := objc.Send[SharingCollaborationMode](objref.IDOf(x), objc.RegisterName("disabledMode"))
+// DisabledMode returns the type of sharing which should be disabled
+func (scmr *SharingCollaborationModeRestriction) DisabledMode() SharingCollaborationMode {
+	_r := objc.Send[SharingCollaborationMode](objref.IDOf(scmr), objc.RegisterName("disabledMode"))
 	return _r
 }
 
-// AlertTitle the title of the alert if a reason for disabling is provided
-func (x *SharingCollaborationModeRestriction) AlertTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertTitle"))
+// AlertTitle returns the title of the alert if a reason for disabling is provided
+func (scmr *SharingCollaborationModeRestriction) AlertTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AlertMessage the message of the alert if a reason for disabling is provided
-func (x *SharingCollaborationModeRestriction) AlertMessage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertMessage"))
+// AlertMessage returns the message of the alert if a reason for disabling is provided
+func (scmr *SharingCollaborationModeRestriction) AlertMessage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertMessage"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AlertDismissButtonTitle the label on the alert button which will simply confirm that the alert was viewed and dismiss it Defaults to "OK"
-func (x *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertDismissButtonTitle"))
+// AlertDismissButtonTitle returns the label on the alert button which will simply confirm that the alert was viewed and dismiss it Defaults to "OK"
+func (scmr *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertDismissButtonTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AlertRecoverySuggestionButtonTitle the label on the recovery suggestion button if it is provided
-func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertRecoverySuggestionButtonTitle"))
+// AlertRecoverySuggestionButtonTitle returns the label on the recovery suggestion button if it is provided
+func (scmr *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertRecoverySuggestionButtonTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AlertRecoverySuggestionButtonLaunchURL the URL that is opened when the user selects the recovery suggestion, if any
-func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alertRecoverySuggestionButtonLaunchURL"))
+// AlertRecoverySuggestionButtonLaunchURL returns the URL that is opened when the user selects the recovery suggestion, if any
+func (scmr *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scmr), objc.RegisterName("alertRecoverySuggestionButtonLaunchURL"))
 	return obj.Wrap(_r)
 }
-
-// SharingCollaborationModeRestrictionable is the interface implemented by [SharingCollaborationModeRestriction], for mocking and DI.
-type SharingCollaborationModeRestrictionable interface {
-	obj.Object
-	DisabledMode() SharingCollaborationMode
-	AlertTitle() string
-	AlertMessage() string
-	AlertDismissButtonTitle() string
-	AlertRecoverySuggestionButtonTitle() string
-	AlertRecoverySuggestionButtonLaunchURL() obj.Object
-}
-
-var _ SharingCollaborationModeRestrictionable = (*SharingCollaborationModeRestriction)(nil)

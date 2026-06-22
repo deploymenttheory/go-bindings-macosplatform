@@ -46,24 +46,24 @@ func identifierManagerAdopt(id objc.ID) *IdentifierManager {
 }
 
 // Description returns the object's -description text.
-func (x *IdentifierManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (im *IdentifierManager) Description() string {
+	return rt.Description(objref.IDOf(im))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IdentifierManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (im *IdentifierManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(im), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IdentifierManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (im *IdentifierManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(im), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IdentifierManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (im *IdentifierManager) String() string {
+	return rt.Description(objref.IDOf(im))
 }
 
 // NewIdentifierManager creates a new IdentifierManager.
@@ -72,23 +72,14 @@ func NewIdentifierManager() *IdentifierManager {
 	return identifierManagerAdopt(_id)
 }
 
-// AdvertisingIdentifier the UUID that is specific to a device. The “ASIdentifierManager/advertisingIdentifier“ is an alphanumeric string that’s unique to each device, and which you only use for advertising. Use this string for frequency capping, attribution, conversion events, estimating the number of unique users, advertising fraud detection, and debugging. On devices running iOS 14.5 and later and iPadOS 14.5 and later, your app must request tracking authorization before it can get the advertising identifier. For more information on getting the advertising identifier, see “AdSupport“. The advertising identifier returns either a unique UUID, or all zeros. It returns a unique UUID in the following cases: - If Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track is On, you’ve requested tracking authorization from the user by calling the <doc://com.apple.documentation/documentation/apptrackingtransparency> APIs, and received authorization, indicated by <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/authorized>. - If the user changes Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track to Off after authorizing your app, and leaves the permissions On for your app. The advertising identifier returns all zeros (`00000000-0000-0000-0000-000000000000`) in the following cases: - In Simulator, regardless of any settings. - When you call this API on a device running macOS. - When you call this API in a compatible iPad or iPhone app running in visionOS. - On devices running iOS 14.5 and later and iPadOS 14.5 and later, if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework. - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/denied>. - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/restricted>. As a best practice, don’t store the advertising identifier value; access “ASIdentifierManager/advertisingIdentifier“ instead. Users can change their authorization for tracking at any time in Settings &gt; Privacy &gt; Tracking. Check your app’s authorization using the App Tracking Transparency API <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/3547038-trackingauthorizationstatus> to determine the user’s intent. For more information about asking users for permission to track, see [User Privacy and Data Use](https://developer.apple.com/app-store/user-privacy-and-data-use/).
-func (x *IdentifierManager) AdvertisingIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advertisingIdentifier"))
+// AdvertisingIdentifier returns the UUID that is specific to a device. The “ASIdentifierManager/advertisingIdentifier“ is an alphanumeric string that’s unique to each device, and which you only use for advertising. Use this string for frequency capping, attribution, conversion events, estimating the number of unique users, advertising fraud detection, and debugging. On devices running iOS 14.5 and later and iPadOS 14.5 and later, your app must request tracking authorization before it can get the advertising identifier. For more information on getting the advertising identifier, see “AdSupport“. The advertising identifier returns either a unique UUID, or all zeros. It returns a unique UUID in the following cases: - If Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track is On, you’ve requested tracking authorization from the user by calling the <doc://com.apple.documentation/documentation/apptrackingtransparency> APIs, and received authorization, indicated by <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/authorized>. - If the user changes Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track to Off after authorizing your app, and leaves the permissions On for your app. The advertising identifier returns all zeros (`00000000-0000-0000-0000-000000000000`) in the following cases: - In Simulator, regardless of any settings. - When you call this API on a device running macOS. - When you call this API in a compatible iPad or iPhone app running in visionOS. - On devices running iOS 14.5 and later and iPadOS 14.5 and later, if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework. - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/denied>. - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/restricted>. As a best practice, don’t store the advertising identifier value; access “ASIdentifierManager/advertisingIdentifier“ instead. Users can change their authorization for tracking at any time in Settings &gt; Privacy &gt; Tracking. Check your app’s authorization using the App Tracking Transparency API <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/3547038-trackingauthorizationstatus> to determine the user’s intent. For more information about asking users for permission to track, see [User Privacy and Data Use](https://developer.apple.com/app-store/user-privacy-and-data-use/).
+func (im *IdentifierManager) AdvertisingIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("advertisingIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// IsAdvertisingTrackingEnabled a Boolean value that indicates whether the user has limited ad tracking enabled. - Warning: This property is deprecated. Functionality has been replaced by the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework.
-func (x *IdentifierManager) IsAdvertisingTrackingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdvertisingTrackingEnabled"))
+// IsAdvertisingTrackingEnabled reports whether the user has limited ad tracking enabled. - Warning: This property is deprecated. Functionality has been replaced by the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework.
+func (im *IdentifierManager) IsAdvertisingTrackingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("isAdvertisingTrackingEnabled"))
 	return _r
 }
-
-// IdentifierManagerable is the interface implemented by [IdentifierManager], for mocking and DI.
-type IdentifierManagerable interface {
-	obj.Object
-	AdvertisingIdentifier() obj.Object
-	IsAdvertisingTrackingEnabled() bool
-}
-
-var _ IdentifierManagerable = (*IdentifierManager)(nil)

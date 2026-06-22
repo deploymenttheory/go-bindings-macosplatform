@@ -5,12 +5,13 @@
 package passkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PaymentRequestCouponCodeUpdate is an idiomatic wrapper over the Objective-C class PKPaymentRequestCouponCodeUpdate.
@@ -55,81 +56,65 @@ func NewPaymentRequestCouponCodeUpdateWithErrorsPaymentSummaryItemsShippingMetho
 	return paymentRequestCouponCodeUpdateAdopt(_id)
 }
 
-// WithStatus the status of the payment request that indicates whether authorization succeeds or fails.
-func (x *PaymentRequestCouponCodeUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status of the payment request that indicates whether authorization succeeds or fails.
+func (prccu *PaymentRequestCouponCodeUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate {
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setStatus:"), status)
+	return prccu
 }
 
-// WithPaymentSummaryItems the list of payment summary items for the instance.
-func (x *PaymentRequestCouponCodeUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestCouponCodeUpdate {
+// WithPaymentSummaryItems sets the list of payment summary items for the instance.
+func (prccu *PaymentRequestCouponCodeUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestCouponCodeUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setPaymentSummaryItems:"), _arr)
+	return prccu
 }
 
-// WithShippingMethods the list of shipping methods available for a payment request.
-func (x *PaymentRequestCouponCodeUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestCouponCodeUpdate {
+// WithShippingMethods sets the list of shipping methods available for a payment request.
+func (prccu *PaymentRequestCouponCodeUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestCouponCodeUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setShippingMethods:"), _arr)
+	return prccu
 }
 
-// WithMultiTokenContexts an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
-func (x *PaymentRequestCouponCodeUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestCouponCodeUpdate {
+// WithMultiTokenContexts sets an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
+func (prccu *PaymentRequestCouponCodeUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestCouponCodeUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setMultiTokenContexts:"), _arr)
+	return prccu
 }
 
-// WithRecurringPaymentRequest the recurring payment request to update the payment request with.
-func (x *PaymentRequestCouponCodeUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestCouponCodeUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
-	return x
+// WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
+func (prccu *PaymentRequestCouponCodeUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
+	return prccu
 }
 
-// WithAutomaticReloadPaymentRequest the automatic reload payment request to update the payment request with.
-func (x *PaymentRequestCouponCodeUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
-	return x
+// WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
+func (prccu *PaymentRequestCouponCodeUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
+	return prccu
 }
 
-// WithDeferredPaymentRequest the deferred payment request to update the payment request with.
-func (x *PaymentRequestCouponCodeUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestCouponCodeUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
-	return x
+// WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
+func (prccu *PaymentRequestCouponCodeUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
+	return prccu
 }
 
 // Errors wraps the corresponding Objective-C method.
-func (x *PaymentRequestCouponCodeUpdate) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
+func (prccu *PaymentRequestCouponCodeUpdate) Errors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
-func (x *PaymentRequestCouponCodeUpdate) SetErrors() error {
+func (prccu *PaymentRequestCouponCodeUpdate) SetErrors() error {
 	var _nsErr uintptr
-	_ = objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// PaymentRequestCouponCodeUpdateable is the interface implemented by [PaymentRequestCouponCodeUpdate], for mocking and DI.
-type PaymentRequestCouponCodeUpdateable interface {
-	obj.Object
-	WithStatus(status PaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate
-	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestCouponCodeUpdate
-	WithShippingMethods(items ...*ShippingMethod) *PaymentRequestCouponCodeUpdate
-	WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestCouponCodeUpdate
-	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestCouponCodeUpdate
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate
-	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestCouponCodeUpdate
-	Errors() []obj.Object
-	SetErrors() error
-}
-
-var _ PaymentRequestCouponCodeUpdateable = (*PaymentRequestCouponCodeUpdate)(nil)
 
 var _ PaymentRequestUpdateProvider = (*PaymentRequestCouponCodeUpdate)(nil)

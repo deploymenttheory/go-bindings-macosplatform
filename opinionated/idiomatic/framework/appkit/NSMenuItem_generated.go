@@ -46,24 +46,24 @@ func menuItemAdopt(id objc.ID) *MenuItem {
 }
 
 // Description returns the object's -description text.
-func (x *MenuItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MenuItem) Description() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MenuItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mi *MenuItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MenuItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mi *MenuItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MenuItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MenuItem) String() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // NewMenuItemWithCoder creates a new MenuItem.
@@ -73,269 +73,234 @@ func NewMenuItemWithCoder(coder obj.Object) *MenuItem {
 	return menuItemAdopt(_id)
 }
 
-// WithMenu the menu item’s menu.
-func (x *MenuItem) WithMenu(menu *Menu) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the menu item’s menu.
+func (mi *MenuItem) WithMenu(menu *Menu) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return mi
 }
 
-// WithSubmenu the submenu of the menu item.
-func (x *MenuItem) WithSubmenu(submenu *Menu) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubmenu:"), objref.IDOf(submenu))
-	return x
+// WithSubmenu sets the submenu of the menu item.
+func (mi *MenuItem) WithSubmenu(submenu *Menu) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setSubmenu:"), objref.IDOf(submenu))
+	return mi
 }
 
-// WithTitle the menu item’s title.
-func (x *MenuItem) WithTitle(title string) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the menu item’s title.
+func (mi *MenuItem) WithTitle(title string) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return mi
 }
 
-// WithAttributedTitle a custom string for a menu item.
-func (x *MenuItem) WithAttributedTitle(attributedTitle obj.Object) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-	return x
+// WithAttributedTitle sets a custom string for a menu item.
+func (mi *MenuItem) WithAttributedTitle(attributedTitle obj.Object) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	return mi
 }
 
-// WithSubtitle used to specify a standard subtitle for the menu item. The subtitle is displayed below the standard title.
-func (x *MenuItem) WithSubtitle(subtitle string) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets used to specify a standard subtitle for the menu item. The subtitle is displayed below the standard title.
+func (mi *MenuItem) WithSubtitle(subtitle string) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return mi
 }
 
-// WithKeyEquivalent the menu item’s unmodified key equivalent.
-func (x *MenuItem) WithKeyEquivalent(keyEquivalent string) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
-	return x
+// WithKeyEquivalent sets the menu item’s unmodified key equivalent.
+func (mi *MenuItem) WithKeyEquivalent(keyEquivalent string) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	return mi
 }
 
-// WithKeyEquivalentModifierMask the menu item’s keyboard equivalent modifiers.
-func (x *MenuItem) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
-	return x
+// WithKeyEquivalentModifierMask sets the menu item’s keyboard equivalent modifiers.
+func (mi *MenuItem) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	return mi
 }
 
 // WithAllowsKeyEquivalentWhenHidden sets the property and returns the receiver so calls can be chained.
-func (x *MenuItem) WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsKeyEquivalentWhenHidden:"), allowsKeyEquivalentWhenHidden)
-	return x
+func (mi *MenuItem) WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAllowsKeyEquivalentWhenHidden:"), allowsKeyEquivalentWhenHidden)
+	return mi
 }
 
-// WithAllowsAutomaticKeyEquivalentLocalization a Boolean value that determines whether the system automatically remaps the keyboard shortcut to support localized keyboards.
-func (x *MenuItem) WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAutomaticKeyEquivalentLocalization:"), allowsAutomaticKeyEquivalentLocalization)
-	return x
+// WithAllowsAutomaticKeyEquivalentLocalization sets a Boolean value that determines whether the system automatically remaps the keyboard shortcut to support localized keyboards.
+func (mi *MenuItem) WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAllowsAutomaticKeyEquivalentLocalization:"), allowsAutomaticKeyEquivalentLocalization)
+	return mi
 }
 
-// WithAllowsAutomaticKeyEquivalentMirroring a Boolean value that determines whether the system automatically swaps input strings for some keyboard shortcuts when the interface direction changes.
-func (x *MenuItem) WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAutomaticKeyEquivalentMirroring:"), allowsAutomaticKeyEquivalentMirroring)
-	return x
+// WithAllowsAutomaticKeyEquivalentMirroring sets a Boolean value that determines whether the system automatically swaps input strings for some keyboard shortcuts when the interface direction changes.
+func (mi *MenuItem) WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAllowsAutomaticKeyEquivalentMirroring:"), allowsAutomaticKeyEquivalentMirroring)
+	return mi
 }
 
-// WithImage the menu item’s image.
-func (x *MenuItem) WithImage(image *Image) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the menu item’s image.
+func (mi *MenuItem) WithImage(image *Image) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return mi
 }
 
-// WithState the state of the menu item.
-func (x *MenuItem) WithState(state int) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the state of the menu item.
+func (mi *MenuItem) WithState(state int) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setState:"), state)
+	return mi
 }
 
-// WithOnStateImage the image of the menu item that indicates an “on” state.
-func (x *MenuItem) WithOnStateImage(onStateImage *Image) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnStateImage:"), objref.IDOf(onStateImage))
-	return x
+// WithOnStateImage sets the image of the menu item that indicates an “on” state.
+func (mi *MenuItem) WithOnStateImage(onStateImage *Image) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setOnStateImage:"), objref.IDOf(onStateImage))
+	return mi
 }
 
-// WithOffStateImage the image of the menu item that indicates an “off” state.
-func (x *MenuItem) WithOffStateImage(offStateImage *Image) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffStateImage:"), objref.IDOf(offStateImage))
-	return x
+// WithOffStateImage sets the image of the menu item that indicates an “off” state.
+func (mi *MenuItem) WithOffStateImage(offStateImage *Image) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setOffStateImage:"), objref.IDOf(offStateImage))
+	return mi
 }
 
-// WithMixedStateImage the image of the menu item that indicates a “mixed” state, that is, a state neither “on” nor “off.”
-func (x *MenuItem) WithMixedStateImage(mixedStateImage *Image) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMixedStateImage:"), objref.IDOf(mixedStateImage))
-	return x
+// WithMixedStateImage sets the image of the menu item that indicates a “mixed” state, that is, a state neither “on” nor “off.”
+func (mi *MenuItem) WithMixedStateImage(mixedStateImage *Image) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMixedStateImage:"), objref.IDOf(mixedStateImage))
+	return mi
 }
 
-// WithEnabled a Boolean value that indicates whether the menu item is enabled.
-func (x *MenuItem) WithEnabled(enabled bool) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the menu item is enabled.
+func (mi *MenuItem) WithEnabled(enabled bool) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setEnabled:"), enabled)
+	return mi
 }
 
-// WithAlternate a Boolean value that marks the menu item as an alternate to the previous menu item.
-func (x *MenuItem) WithAlternate(alternate bool) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternate:"), alternate)
-	return x
+// WithAlternate sets a Boolean value that marks the menu item as an alternate to the previous menu item.
+func (mi *MenuItem) WithAlternate(alternate bool) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAlternate:"), alternate)
+	return mi
 }
 
-// WithIndentationLevel the menu item indentation level for the menu item.
-func (x *MenuItem) WithIndentationLevel(indentationLevel int) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentationLevel:"), indentationLevel)
-	return x
+// WithIndentationLevel sets the menu item indentation level for the menu item.
+func (mi *MenuItem) WithIndentationLevel(indentationLevel int) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setIndentationLevel:"), indentationLevel)
+	return mi
 }
 
-// WithTarget the menu item’s target.
-func (x *MenuItem) WithTarget(target obj.Object) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the menu item’s target.
+func (mi *MenuItem) WithTarget(target obj.Object) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return mi
 }
 
-// WithTag the menu item’s tag.
-func (x *MenuItem) WithTag(tag int) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the menu item’s tag.
+func (mi *MenuItem) WithTag(tag int) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTag:"), tag)
+	return mi
 }
 
-// WithRepresentedObject the object represented by the menu item.
-func (x *MenuItem) WithRepresentedObject(representedObject obj.Object) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the menu item.
+func (mi *MenuItem) WithRepresentedObject(representedObject obj.Object) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return mi
 }
 
-// WithView the content view for the menu item.
-func (x *MenuItem) WithView(view ViewProvider) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets the content view for the menu item.
+func (mi *MenuItem) WithView(view ViewProvider) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setView:"), objref.IDOf(view))
+	return mi
 }
 
-// WithHidden a Boolean value that indicates whether the menu item is hidden.
-func (x *MenuItem) WithHidden(hidden bool) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that indicates whether the menu item is hidden.
+func (mi *MenuItem) WithHidden(hidden bool) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setHidden:"), hidden)
+	return mi
 }
 
-// WithToolTip a help tag for the menu item.
-func (x *MenuItem) WithToolTip(toolTip string) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+// WithToolTip sets a help tag for the menu item.
+func (mi *MenuItem) WithToolTip(toolTip string) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return mi
 }
 
-// WithBadge a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates.
-func (x *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
-	return x
+// WithBadge sets a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates.
+func (mi *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	return mi
 }
 
 // Menu wraps the corresponding Objective-C method.
-func (x *MenuItem) Menu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
+func (mi *MenuItem) Menu() *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
-// SetMenu wraps the corresponding Objective-C method.
-func (x *MenuItem) SetMenu(menu *Menu) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-}
-
 // HasSubmenu wraps the corresponding Objective-C method.
-func (x *MenuItem) HasSubmenu() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSubmenu"))
+func (mi *MenuItem) HasSubmenu() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("hasSubmenu"))
 	return _r
 }
 
 // Submenu wraps the corresponding Objective-C method.
-func (x *MenuItem) Submenu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submenu"))
+func (mi *MenuItem) Submenu() *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("submenu"))
 	return MenuFromID(_r)
 }
 
-// SetSubmenu wraps the corresponding Objective-C method.
-func (x *MenuItem) SetSubmenu(submenu *Menu) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubmenu:"), objref.IDOf(submenu))
-}
-
 // ParentItem wraps the corresponding Objective-C method.
-func (x *MenuItem) ParentItem() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentItem"))
+func (mi *MenuItem) ParentItem() *MenuItem {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("parentItem"))
 	return MenuItemFromID(_r)
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *MenuItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (mi *MenuItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *MenuItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // AttributedTitle wraps the corresponding Objective-C method.
-func (x *MenuItem) AttributedTitle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+func (mi *MenuItem) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle wraps the corresponding Objective-C method.
-func (x *MenuItem) SetAttributedTitle(attributedTitle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-}
-
-// Subtitle used to specify a standard subtitle for the menu item. The subtitle is displayed below the standard title.
-func (x *MenuItem) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+// Subtitle returns used to specify a standard subtitle for the menu item. The subtitle is displayed below the standard title.
+func (mi *MenuItem) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSubtitle used to specify a standard subtitle for the menu item. The subtitle is displayed below the standard title.
-func (x *MenuItem) SetSubtitle(subtitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-}
-
 // IsSeparatorItem wraps the corresponding Objective-C method.
-func (x *MenuItem) IsSeparatorItem() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSeparatorItem"))
+func (mi *MenuItem) IsSeparatorItem() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isSeparatorItem"))
 	return _r
 }
 
-// IsSectionHeader indicates whether the item is a section header. Section header items are created using the `sectionHeader(title:)` class method.
-func (x *MenuItem) IsSectionHeader() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSectionHeader"))
+// IsSectionHeader reports whether the item is a section header. Section header items are created using the `sectionHeader(title:)` class method.
+func (mi *MenuItem) IsSectionHeader() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isSectionHeader"))
 	return _r
 }
 
 // KeyEquivalent wraps the corresponding Objective-C method.
-func (x *MenuItem) KeyEquivalent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyEquivalent"))
+func (mi *MenuItem) KeyEquivalent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("keyEquivalent"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetKeyEquivalent wraps the corresponding Objective-C method.
-func (x *MenuItem) SetKeyEquivalent(keyEquivalent string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
-}
-
 // KeyEquivalentModifierMask wraps the corresponding Objective-C method.
-func (x *MenuItem) KeyEquivalentModifierMask() EventModifierFlags {
-	_r := objc.Send[EventModifierFlags](objref.IDOf(x), objc.RegisterName("keyEquivalentModifierMask"))
+func (mi *MenuItem) KeyEquivalentModifierMask() EventModifierFlags {
+	_r := objc.Send[EventModifierFlags](objref.IDOf(mi), objc.RegisterName("keyEquivalentModifierMask"))
 	return _r
 }
 
-// SetKeyEquivalentModifierMask wraps the corresponding Objective-C method.
-func (x *MenuItem) SetKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
-}
-
 // UserKeyEquivalent wraps the corresponding Objective-C method.
-func (x *MenuItem) UserKeyEquivalent() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userKeyEquivalent"))
+func (mi *MenuItem) UserKeyEquivalent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("userKeyEquivalent"))
 	if _r == 0 {
 		return ""
 	}
@@ -343,232 +308,142 @@ func (x *MenuItem) UserKeyEquivalent() string {
 }
 
 // AllowsKeyEquivalentWhenHidden wraps the corresponding Objective-C method.
-func (x *MenuItem) AllowsKeyEquivalentWhenHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsKeyEquivalentWhenHidden"))
+func (mi *MenuItem) AllowsKeyEquivalentWhenHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("allowsKeyEquivalentWhenHidden"))
 	return _r
-}
-
-// SetAllowsKeyEquivalentWhenHidden wraps the corresponding Objective-C method.
-func (x *MenuItem) SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsKeyEquivalentWhenHidden:"), allowsKeyEquivalentWhenHidden)
 }
 
 // AllowsAutomaticKeyEquivalentLocalization wraps the corresponding Objective-C method.
-func (x *MenuItem) AllowsAutomaticKeyEquivalentLocalization() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAutomaticKeyEquivalentLocalization"))
+func (mi *MenuItem) AllowsAutomaticKeyEquivalentLocalization() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("allowsAutomaticKeyEquivalentLocalization"))
 	return _r
-}
-
-// SetAllowsAutomaticKeyEquivalentLocalization wraps the corresponding Objective-C method.
-func (x *MenuItem) SetAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAutomaticKeyEquivalentLocalization:"), allowsAutomaticKeyEquivalentLocalization)
 }
 
 // AllowsAutomaticKeyEquivalentMirroring wraps the corresponding Objective-C method.
-func (x *MenuItem) AllowsAutomaticKeyEquivalentMirroring() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAutomaticKeyEquivalentMirroring"))
+func (mi *MenuItem) AllowsAutomaticKeyEquivalentMirroring() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("allowsAutomaticKeyEquivalentMirroring"))
 	return _r
-}
-
-// SetAllowsAutomaticKeyEquivalentMirroring wraps the corresponding Objective-C method.
-func (x *MenuItem) SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAutomaticKeyEquivalentMirroring:"), allowsAutomaticKeyEquivalentMirroring)
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *MenuItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (mi *MenuItem) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("image"))
 	return ImageFromID(_r)
-}
-
-// SetImage wraps the corresponding Objective-C method.
-func (x *MenuItem) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *MenuItem) State() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("state"))
+func (mi *MenuItem) State() int {
+	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("state"))
 	return _r
-}
-
-// SetState wraps the corresponding Objective-C method.
-func (x *MenuItem) SetState(state int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 }
 
 // OnStateImage wraps the corresponding Objective-C method.
-func (x *MenuItem) OnStateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("onStateImage"))
+func (mi *MenuItem) OnStateImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("onStateImage"))
 	return ImageFromID(_r)
-}
-
-// SetOnStateImage wraps the corresponding Objective-C method.
-func (x *MenuItem) SetOnStateImage(onStateImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnStateImage:"), objref.IDOf(onStateImage))
 }
 
 // OffStateImage wraps the corresponding Objective-C method.
-func (x *MenuItem) OffStateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offStateImage"))
+func (mi *MenuItem) OffStateImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("offStateImage"))
 	return ImageFromID(_r)
-}
-
-// SetOffStateImage wraps the corresponding Objective-C method.
-func (x *MenuItem) SetOffStateImage(offStateImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffStateImage:"), objref.IDOf(offStateImage))
 }
 
 // MixedStateImage wraps the corresponding Objective-C method.
-func (x *MenuItem) MixedStateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mixedStateImage"))
+func (mi *MenuItem) MixedStateImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("mixedStateImage"))
 	return ImageFromID(_r)
 }
 
-// SetMixedStateImage wraps the corresponding Objective-C method.
-func (x *MenuItem) SetMixedStateImage(mixedStateImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMixedStateImage:"), objref.IDOf(mixedStateImage))
-}
-
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *MenuItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (mi *MenuItem) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isEnabled"))
 	return _r
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *MenuItem) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // IsAlternate wraps the corresponding Objective-C method.
-func (x *MenuItem) IsAlternate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAlternate"))
+func (mi *MenuItem) IsAlternate() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isAlternate"))
 	return _r
-}
-
-// SetAlternate wraps the corresponding Objective-C method.
-func (x *MenuItem) SetAlternate(alternate bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternate:"), alternate)
 }
 
 // IndentationLevel wraps the corresponding Objective-C method.
-func (x *MenuItem) IndentationLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indentationLevel"))
+func (mi *MenuItem) IndentationLevel() int {
+	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("indentationLevel"))
 	return _r
-}
-
-// SetIndentationLevel wraps the corresponding Objective-C method.
-func (x *MenuItem) SetIndentationLevel(indentationLevel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndentationLevel:"), indentationLevel)
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *MenuItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (mi *MenuItem) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
-}
-
-// SetTarget wraps the corresponding Objective-C method.
-func (x *MenuItem) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
 // Tag wraps the corresponding Objective-C method.
-func (x *MenuItem) Tag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tag"))
+func (mi *MenuItem) Tag() int {
+	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("tag"))
 	return _r
 }
 
-// SetTag wraps the corresponding Objective-C method.
-func (x *MenuItem) SetTag(tag int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-}
-
 // RepresentedObject wraps the corresponding Objective-C method.
-func (x *MenuItem) RepresentedObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedObject"))
+func (mi *MenuItem) RepresentedObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
-// SetRepresentedObject wraps the corresponding Objective-C method.
-func (x *MenuItem) SetRepresentedObject(representedObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-}
-
 // View wraps the corresponding Objective-C method.
-func (x *MenuItem) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (mi *MenuItem) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// SetView wraps the corresponding Objective-C method.
-func (x *MenuItem) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-}
-
 // IsHighlighted wraps the corresponding Objective-C method.
-func (x *MenuItem) IsHighlighted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlighted"))
+func (mi *MenuItem) IsHighlighted() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
 // IsHidden wraps the corresponding Objective-C method.
-func (x *MenuItem) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+func (mi *MenuItem) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// SetHidden wraps the corresponding Objective-C method.
-func (x *MenuItem) SetHidden(hidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-}
-
 // IsHiddenOrHasHiddenAncestor wraps the corresponding Objective-C method.
-func (x *MenuItem) IsHiddenOrHasHiddenAncestor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHiddenOrHasHiddenAncestor"))
+func (mi *MenuItem) IsHiddenOrHasHiddenAncestor() bool {
+	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHiddenOrHasHiddenAncestor"))
 	return _r
 }
 
 // ToolTip wraps the corresponding Objective-C method.
-func (x *MenuItem) ToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+func (mi *MenuItem) ToolTip() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetToolTip wraps the corresponding Objective-C method.
-func (x *MenuItem) SetToolTip(toolTip string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-}
-
-// Badge a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
-func (x *MenuItem) Badge() *MenuItemBadge {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badge"))
+// Badge returns a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
+func (mi *MenuItem) Badge() *MenuItemBadge {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("badge"))
 	return MenuItemBadgeFromID(_r)
 }
 
-// SetBadge a badge used to provide additional quantitative information specific to the menu item, such as the number of available updates. The default value of this property is `nil`.
-func (x *MenuItem) SetBadge(badge *MenuItemBadge) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
-}
-
 // SetMnemonicLocation sets the character of the menu item title at location that is to be underlined.
-func (x *MenuItem) SetMnemonicLocation(location int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMnemonicLocation:"), location)
+func (mi *MenuItem) SetMnemonicLocation(location int) {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMnemonicLocation:"), location)
 }
 
 // MnemonicLocation returns the position of the underlined character in the menu item title used as a mnemonic.
-func (x *MenuItem) MnemonicLocation() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mnemonicLocation"))
+func (mi *MenuItem) MnemonicLocation() int {
+	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("mnemonicLocation"))
 	return _r
 }
 
 // Mnemonic returns the character in the menu item title that appears underlined for use as a mnemonic.
-func (x *MenuItem) Mnemonic() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mnemonic"))
+func (mi *MenuItem) Mnemonic() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("mnemonic"))
 	if _r == 0 {
 		return ""
 	}
@@ -576,99 +451,6 @@ func (x *MenuItem) Mnemonic() string {
 }
 
 // SetTitleWithMnemonic sets the title of a menu item with a character denoting an access key.
-func (x *MenuItem) SetTitleWithMnemonic(stringWithAmpersand string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
+func (mi *MenuItem) SetTitleWithMnemonic(stringWithAmpersand string) {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
-
-// MenuItemable is the interface implemented by [MenuItem], for mocking and DI.
-type MenuItemable interface {
-	obj.Object
-	WithMenu(menu *Menu) *MenuItem
-	WithSubmenu(submenu *Menu) *MenuItem
-	WithTitle(title string) *MenuItem
-	WithAttributedTitle(attributedTitle obj.Object) *MenuItem
-	WithSubtitle(subtitle string) *MenuItem
-	WithKeyEquivalent(keyEquivalent string) *MenuItem
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItem
-	WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem
-	WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem
-	WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem
-	WithImage(image *Image) *MenuItem
-	WithState(state int) *MenuItem
-	WithOnStateImage(onStateImage *Image) *MenuItem
-	WithOffStateImage(offStateImage *Image) *MenuItem
-	WithMixedStateImage(mixedStateImage *Image) *MenuItem
-	WithEnabled(enabled bool) *MenuItem
-	WithAlternate(alternate bool) *MenuItem
-	WithIndentationLevel(indentationLevel int) *MenuItem
-	WithTarget(target obj.Object) *MenuItem
-	WithTag(tag int) *MenuItem
-	WithRepresentedObject(representedObject obj.Object) *MenuItem
-	WithView(view ViewProvider) *MenuItem
-	WithHidden(hidden bool) *MenuItem
-	WithToolTip(toolTip string) *MenuItem
-	WithBadge(badge *MenuItemBadge) *MenuItem
-	Menu() *Menu
-	SetMenu(menu *Menu)
-	HasSubmenu() bool
-	Submenu() *Menu
-	SetSubmenu(submenu *Menu)
-	ParentItem() *MenuItem
-	Title() string
-	SetTitle(title string)
-	AttributedTitle() obj.Object
-	SetAttributedTitle(attributedTitle obj.Object)
-	Subtitle() string
-	SetSubtitle(subtitle string)
-	IsSeparatorItem() bool
-	IsSectionHeader() bool
-	KeyEquivalent() string
-	SetKeyEquivalent(keyEquivalent string)
-	KeyEquivalentModifierMask() EventModifierFlags
-	SetKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags)
-	UserKeyEquivalent() string
-	AllowsKeyEquivalentWhenHidden() bool
-	SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool)
-	AllowsAutomaticKeyEquivalentLocalization() bool
-	SetAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool)
-	AllowsAutomaticKeyEquivalentMirroring() bool
-	SetAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool)
-	Image() *Image
-	SetImage(image *Image)
-	State() int
-	SetState(state int)
-	OnStateImage() *Image
-	SetOnStateImage(onStateImage *Image)
-	OffStateImage() *Image
-	SetOffStateImage(offStateImage *Image)
-	MixedStateImage() *Image
-	SetMixedStateImage(mixedStateImage *Image)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	IsAlternate() bool
-	SetAlternate(alternate bool)
-	IndentationLevel() int
-	SetIndentationLevel(indentationLevel int)
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	Tag() int
-	SetTag(tag int)
-	RepresentedObject() obj.Object
-	SetRepresentedObject(representedObject obj.Object)
-	View() *View
-	SetView(view *View)
-	IsHighlighted() bool
-	IsHidden() bool
-	SetHidden(hidden bool)
-	IsHiddenOrHasHiddenAncestor() bool
-	ToolTip() string
-	SetToolTip(toolTip string)
-	Badge() *MenuItemBadge
-	SetBadge(badge *MenuItemBadge)
-	SetMnemonicLocation(location int)
-	MnemonicLocation() int
-	Mnemonic() string
-	SetTitleWithMnemonic(stringWithAmpersand string)
-}
-
-var _ MenuItemable = (*MenuItem)(nil)

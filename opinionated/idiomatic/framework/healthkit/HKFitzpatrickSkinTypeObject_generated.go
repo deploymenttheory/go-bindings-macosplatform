@@ -46,24 +46,24 @@ func fitzpatrickSkinTypeObjectAdopt(id objc.ID) *FitzpatrickSkinTypeObject {
 }
 
 // Description returns the object's -description text.
-func (x *FitzpatrickSkinTypeObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fsto *FitzpatrickSkinTypeObject) Description() string {
+	return rt.Description(objref.IDOf(fsto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FitzpatrickSkinTypeObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fsto *FitzpatrickSkinTypeObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fsto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FitzpatrickSkinTypeObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fsto *FitzpatrickSkinTypeObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fsto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FitzpatrickSkinTypeObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fsto *FitzpatrickSkinTypeObject) String() string {
+	return rt.Description(objref.IDOf(fsto))
 }
 
 // NewFitzpatrickSkinTypeObject creates a new FitzpatrickSkinTypeObject.
@@ -73,15 +73,7 @@ func NewFitzpatrickSkinTypeObject() *FitzpatrickSkinTypeObject {
 }
 
 // SkinType wraps the corresponding Objective-C method.
-func (x *FitzpatrickSkinTypeObject) SkinType() FitzpatrickSkinType {
-	_r := objc.Send[FitzpatrickSkinType](objref.IDOf(x), objc.RegisterName("skinType"))
+func (fsto *FitzpatrickSkinTypeObject) SkinType() FitzpatrickSkinType {
+	_r := objc.Send[FitzpatrickSkinType](objref.IDOf(fsto), objc.RegisterName("skinType"))
 	return _r
 }
-
-// FitzpatrickSkinTypeObjectable is the interface implemented by [FitzpatrickSkinTypeObject], for mocking and DI.
-type FitzpatrickSkinTypeObjectable interface {
-	obj.Object
-	SkinType() FitzpatrickSkinType
-}
-
-var _ FitzpatrickSkinTypeObjectable = (*FitzpatrickSkinTypeObject)(nil)

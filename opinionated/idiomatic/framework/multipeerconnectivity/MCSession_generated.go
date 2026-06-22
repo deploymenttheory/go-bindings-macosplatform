@@ -6,13 +6,14 @@ package multipeerconnectivity
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Session is an idiomatic wrapper over the Objective-C class MCSession.
@@ -49,24 +50,24 @@ func sessionAdopt(id objc.ID) *Session {
 }
 
 // Description returns the object's -description text.
-func (x *Session) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Session) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Session) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Session) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Session) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Session) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSessionWithPeer creates a Multipeer Connectivity session.
@@ -84,9 +85,9 @@ func NewSessionWithPeerSecurityIdentityEncryptionPreference(myPeerID *PeerID, id
 }
 
 // SendDataToPeersWithMode sends a message to nearby peers.
-func (x *Session) SendDataToPeersWithMode(data obj.Object, peerIDs []*PeerID, mode SessionSendDataMode) error {
+func (s *Session) SendDataToPeersWithMode(data obj.Object, peerIDs []*PeerID, mode SessionSendDataMode) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:toPeers:withMode:error:"), objref.IDOf(data), purego.SliceToNSArray(peerIDs, func(_v *PeerID) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("sendData:toPeers:withMode:error:"), objref.IDOf(data), purego.SliceToNSArray(peerIDs, func(_v *PeerID) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -94,14 +95,14 @@ func (x *Session) SendDataToPeersWithMode(data obj.Object, peerIDs []*PeerID, mo
 }
 
 // Disconnect disconnects the local peer from the session.
-func (x *Session) Disconnect() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnect"))
+func (s *Session) Disconnect() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("disconnect"))
 }
 
 // StartStreamWithNameToPeerError opens a byte stream to a nearby peer.
-func (x *Session) StartStreamWithNameToPeerError(streamName string, peerID *PeerID) (result obj.Object, err error) {
+func (s *Session) StartStreamWithNameToPeerError(streamName string, peerID *PeerID) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startStreamWithName:toPeer:error:"), purego.NSString(streamName), objref.IDOf(peerID), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startStreamWithName:toPeer:error:"), purego.NSString(streamName), objref.IDOf(peerID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -109,35 +110,35 @@ func (x *Session) StartStreamWithNameToPeerError(streamName string, peerID *Peer
 }
 
 // MyPeerID wraps the corresponding Objective-C method.
-func (x *Session) MyPeerID() *PeerID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
+func (s *Session) MyPeerID() *PeerID {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
 // SecurityIdentity wraps the corresponding Objective-C method.
-func (x *Session) SecurityIdentity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityIdentity"))
+func (s *Session) SecurityIdentity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("securityIdentity"))
 	return obj.Wrap(_r)
 }
 
 // EncryptionPreference wraps the corresponding Objective-C method.
-func (x *Session) EncryptionPreference() EncryptionPreference {
-	_r := objc.Send[EncryptionPreference](objref.IDOf(x), objc.RegisterName("encryptionPreference"))
+func (s *Session) EncryptionPreference() EncryptionPreference {
+	_r := objc.Send[EncryptionPreference](objref.IDOf(s), objc.RegisterName("encryptionPreference"))
 	return _r
 }
 
 // ConnectedPeers wraps the corresponding Objective-C method.
 //
 // ConnectedPeers returns the collection as a Go slice.
-func (x *Session) ConnectedPeers() []*PeerID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedPeers"))
+func (s *Session) ConnectedPeers() []*PeerID {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("connectedPeers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PeerID { return PeerIDFromID(_id) })
 }
 
 // NearbyConnectionDataForPeer obtains connection data for the specified peer.
 //
 // NearbyConnectionDataForPeer blocks until the operation completes or ctx is cancelled.
-func (x *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerID) (result obj.Object, err error) {
+func (s *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerID) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -149,7 +150,7 @@ func (x *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nearbyConnectionDataForPeer:withCompletionHandler:"), objref.IDOf(peerID), _block)
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("nearbyConnectionDataForPeer:withCompletionHandler:"), objref.IDOf(peerID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -160,28 +161,11 @@ func (x *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerI
 }
 
 // ConnectPeerWithNearbyConnectionData call this method to connect a peer to the session when using your own service discovery code instead of an MCNearbyServiceBrowser or MCBrowserViewController object.
-func (x *Session) ConnectPeerWithNearbyConnectionData(peerID *PeerID, data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectPeer:withNearbyConnectionData:"), objref.IDOf(peerID), objref.IDOf(data))
+func (s *Session) ConnectPeerWithNearbyConnectionData(peerID *PeerID, data obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("connectPeer:withNearbyConnectionData:"), objref.IDOf(peerID), objref.IDOf(data))
 }
 
 // CancelConnectPeer cancels an attempt to connect to a peer.
-func (x *Session) CancelConnectPeer(peerID *PeerID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelConnectPeer:"), objref.IDOf(peerID))
+func (s *Session) CancelConnectPeer(peerID *PeerID) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("cancelConnectPeer:"), objref.IDOf(peerID))
 }
-
-// Sessionable is the interface implemented by [Session], for mocking and DI.
-type Sessionable interface {
-	obj.Object
-	SendDataToPeersWithMode(data obj.Object, peerIDs []*PeerID, mode SessionSendDataMode) error
-	Disconnect()
-	StartStreamWithNameToPeerError(streamName string, peerID *PeerID) (result obj.Object, err error)
-	MyPeerID() *PeerID
-	SecurityIdentity() obj.Object
-	EncryptionPreference() EncryptionPreference
-	ConnectedPeers() []*PeerID
-	NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerID) (obj.Object, error)
-	ConnectPeerWithNearbyConnectionData(peerID *PeerID, data obj.Object)
-	CancelConnectPeer(peerID *PeerID)
-}
-
-var _ Sessionable = (*Session)(nil)

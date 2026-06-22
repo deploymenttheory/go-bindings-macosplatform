@@ -46,24 +46,24 @@ func syncEngineSendChangesOptionsAdopt(id objc.ID) *SyncEngineSendChangesOptions
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineSendChangesOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sesco *SyncEngineSendChangesOptions) Description() string {
+	return rt.Description(objref.IDOf(sesco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineSendChangesOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sesco *SyncEngineSendChangesOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sesco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineSendChangesOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sesco *SyncEngineSendChangesOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sesco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineSendChangesOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sesco *SyncEngineSendChangesOptions) String() string {
+	return rt.Description(objref.IDOf(sesco))
 }
 
 // NewSyncEngineSendChangesOptionsWithScope initializes a set of options with the specific scope.
@@ -73,49 +73,26 @@ func NewSyncEngineSendChangesOptionsWithScope(scope *SyncEngineSendChangesScope)
 	return syncEngineSendChangesOptionsAdopt(_id)
 }
 
-// WithScope the scope in which to send changes to the server.
-func (x *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
-	return x
+// WithScope sets the scope in which to send changes to the server.
+func (sesco *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
+	objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("setScope:"), objref.IDOf(scope))
+	return sesco
 }
 
-// WithOperationGroup the operation group to use for the underlying CloudKit operations.
-func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
-	return x
+// WithOperationGroup sets the operation group to use for the underlying CloudKit operations.
+func (sesco *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
+	objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
+	return sesco
 }
 
-// Scope the scope in which to send changes to the server.
-func (x *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
+// Scope returns the scope in which to send changes to the server.
+func (sesco *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
+	_r := objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("scope"))
 	return SyncEngineSendChangesScopeFromID(_r)
 }
 
-// SetScope wraps the corresponding Objective-C method.
-func (x *SyncEngineSendChangesOptions) SetScope(scope *SyncEngineSendChangesScope) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
-}
-
-// OperationGroup the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
-func (x *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroup"))
+// OperationGroup returns the operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
+func (sesco *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(sesco), objc.RegisterName("operationGroup"))
 	return OperationGroupFromID(_r)
 }
-
-// SetOperationGroup wraps the corresponding Objective-C method.
-func (x *SyncEngineSendChangesOptions) SetOperationGroup(operationGroup *OperationGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
-}
-
-// SyncEngineSendChangesOptionsable is the interface implemented by [SyncEngineSendChangesOptions], for mocking and DI.
-type SyncEngineSendChangesOptionsable interface {
-	obj.Object
-	WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions
-	WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions
-	Scope() *SyncEngineSendChangesScope
-	SetScope(scope *SyncEngineSendChangesScope)
-	OperationGroup() *OperationGroup
-	SetOperationGroup(operationGroup *OperationGroup)
-}
-
-var _ SyncEngineSendChangesOptionsable = (*SyncEngineSendChangesOptions)(nil)

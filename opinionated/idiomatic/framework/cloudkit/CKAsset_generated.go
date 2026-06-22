@@ -46,24 +46,24 @@ func assetAdopt(id objc.ID) *Asset {
 }
 
 // Description returns the object's -description text.
-func (x *Asset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Asset) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Asset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Asset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Asset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Asset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Asset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Asset) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAssetWithFileURL creates an asset that references a file.
@@ -74,15 +74,7 @@ func NewAssetWithFileURL(fileURL string) *Asset {
 }
 
 // FileURL wraps the corresponding Objective-C method.
-func (x *Asset) FileURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+func (a *Asset) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
-
-// Assetable is the interface implemented by [Asset], for mocking and DI.
-type Assetable interface {
-	obj.Object
-	FileURL() obj.Object
-}
-
-var _ Assetable = (*Asset)(nil)

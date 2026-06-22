@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,45 +52,28 @@ func NewAudioPCMBufferWithPCMFormatFrameCapacity(format *AudioFormat, frameCapac
 	return audioPCMBufferAdopt(_id)
 }
 
-// WithFrameLength the current number of valid sample frames in the buffer.
-func (x *AudioPCMBuffer) WithFrameLength(frameLength uint32) *AudioPCMBuffer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameLength:"), frameLength)
-	return x
+// WithFrameLength sets the current number of valid sample frames in the buffer.
+func (apb *AudioPCMBuffer) WithFrameLength(frameLength uint32) *AudioPCMBuffer {
+	objc.Send[objc.ID](objref.IDOf(apb), objc.RegisterName("setFrameLength:"), frameLength)
+	return apb
 }
 
-// FrameCapacity the buffer's capacity, in audio sample frames.
-func (x *AudioPCMBuffer) FrameCapacity() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("frameCapacity"))
+// FrameCapacity returns the buffer's capacity, in audio sample frames.
+func (apb *AudioPCMBuffer) FrameCapacity() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(apb), objc.RegisterName("frameCapacity"))
 	return _r
 }
 
-// FrameLength the current number of valid sample frames in the buffer. You may modify the length of the buffer as part of an operation that modifies its contents. The length must be less than or equal to the frameCapacity. Modifying frameLength will update the mDataByteSize in each of the underlying AudioBufferList's AudioBuffer's correspondingly, and vice versa. Note that in the case of deinterleaved formats, mDataByteSize will refers the size of one channel's worth of audio samples.
-func (x *AudioPCMBuffer) FrameLength() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("frameLength"))
+// FrameLength returns the current number of valid sample frames in the buffer. You may modify the length of the buffer as part of an operation that modifies its contents. The length must be less than or equal to the frameCapacity. Modifying frameLength will update the mDataByteSize in each of the underlying AudioBufferList's AudioBuffer's correspondingly, and vice versa. Note that in the case of deinterleaved formats, mDataByteSize will refers the size of one channel's worth of audio samples.
+func (apb *AudioPCMBuffer) FrameLength() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(apb), objc.RegisterName("frameLength"))
 	return _r
 }
 
-// SetFrameLength wraps the corresponding Objective-C method.
-func (x *AudioPCMBuffer) SetFrameLength(frameLength uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameLength:"), frameLength)
-}
-
-// Stride the buffer's number of interleaved channels. Useful in conjunction with floatChannelData etc.
-func (x *AudioPCMBuffer) Stride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+// Stride returns the buffer's number of interleaved channels. Useful in conjunction with floatChannelData etc.
+func (apb *AudioPCMBuffer) Stride() int {
+	_r := objc.Send[int](objref.IDOf(apb), objc.RegisterName("stride"))
 	return _r
 }
-
-// AudioPCMBufferable is the interface implemented by [AudioPCMBuffer], for mocking and DI.
-type AudioPCMBufferable interface {
-	obj.Object
-	WithFrameLength(frameLength uint32) *AudioPCMBuffer
-	FrameCapacity() uint32
-	FrameLength() uint32
-	SetFrameLength(frameLength uint32)
-	Stride() int
-}
-
-var _ AudioPCMBufferable = (*AudioPCMBuffer)(nil)
 
 var _ AudioBufferProvider = (*AudioPCMBuffer)(nil)

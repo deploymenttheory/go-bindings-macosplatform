@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNFullyConnectedNode() *CNNFullyConnectedNode {
 	return cNNFullyConnectedNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNFullyConnectedNode) WithLabel(label string) *CNNFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cfcn *CNNFullyConnectedNode) WithLabel(label string) *CNNFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cfcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cfcn
 }
-
-// CNNFullyConnectedNodeable is the interface implemented by [CNNFullyConnectedNode], for mocking and DI.
-type CNNFullyConnectedNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNFullyConnectedNode
-}
-
-var _ CNNFullyConnectedNodeable = (*CNNFullyConnectedNode)(nil)
 
 var _ CNNConvolutionNodeProvider = (*CNNFullyConnectedNode)(nil)
 

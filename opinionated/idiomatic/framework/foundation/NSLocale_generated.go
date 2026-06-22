@@ -46,24 +46,24 @@ func localeAdopt(id objc.ID) *Locale {
 }
 
 // Description returns the object's -description text.
-func (x *Locale) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Locale) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Locale) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Locale) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Locale) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Locale) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Locale) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Locale) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // NewLocaleWithLocaleIdentifier initializes a locale using a given locale identifier.
@@ -81,20 +81,20 @@ func NewLocaleWithCoder(coder *Coder) *Locale {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Locale) WithScriptingProperties(scriptingProperties obj.Object) *Locale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (l *Locale) WithScriptingProperties(scriptingProperties obj.Object) *Locale {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return l
 }
 
 // ObjectForKey returns the value of the component corresponding to the specified key.
-func (x *Locale) ObjectForKey(key *String) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), objref.IDOf(key))
+func (l *Locale) ObjectForKey(key *String) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("objectForKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // DisplayNameForKeyValue returns the display name for the given locale component value.
-func (x *Locale) DisplayNameForKeyValue(key *String, value obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForKey:value:"), objref.IDOf(key), objref.IDOf(value))
+func (l *Locale) DisplayNameForKeyValue(key *String, value obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("displayNameForKey:value:"), objref.IDOf(key), objref.IDOf(value))
 	if _r == 0 {
 		return ""
 	}
@@ -102,8 +102,8 @@ func (x *Locale) DisplayNameForKeyValue(key *String, value obj.Object) string {
 }
 
 // LocalizedStringForLocaleIdentifier returns the localized string for the specified locale identifier.
-func (x *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForLocaleIdentifier:"), purego.NSString(localeIdentifier))
+func (l *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForLocaleIdentifier:"), purego.NSString(localeIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -111,8 +111,8 @@ func (x *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) str
 }
 
 // LocalizedStringForLanguageCode returns the localized string for the specified language code.
-func (x *Locale) LocalizedStringForLanguageCode(languageCode string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForLanguageCode:"), purego.NSString(languageCode))
+func (l *Locale) LocalizedStringForLanguageCode(languageCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForLanguageCode:"), purego.NSString(languageCode))
 	if _r == 0 {
 		return ""
 	}
@@ -120,8 +120,8 @@ func (x *Locale) LocalizedStringForLanguageCode(languageCode string) string {
 }
 
 // LocalizedStringForCountryCode returns the localized string for a country or region code.
-func (x *Locale) LocalizedStringForCountryCode(countryCode string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCountryCode:"), purego.NSString(countryCode))
+func (l *Locale) LocalizedStringForCountryCode(countryCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForCountryCode:"), purego.NSString(countryCode))
 	if _r == 0 {
 		return ""
 	}
@@ -129,8 +129,8 @@ func (x *Locale) LocalizedStringForCountryCode(countryCode string) string {
 }
 
 // LocalizedStringForScriptCode returns the localized string for the specified script code.
-func (x *Locale) LocalizedStringForScriptCode(scriptCode string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForScriptCode:"), purego.NSString(scriptCode))
+func (l *Locale) LocalizedStringForScriptCode(scriptCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForScriptCode:"), purego.NSString(scriptCode))
 	if _r == 0 {
 		return ""
 	}
@@ -138,8 +138,8 @@ func (x *Locale) LocalizedStringForScriptCode(scriptCode string) string {
 }
 
 // LocalizedStringForVariantCode returns the localized string for the specified variant code.
-func (x *Locale) LocalizedStringForVariantCode(variantCode string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForVariantCode:"), purego.NSString(variantCode))
+func (l *Locale) LocalizedStringForVariantCode(variantCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForVariantCode:"), purego.NSString(variantCode))
 	if _r == 0 {
 		return ""
 	}
@@ -147,8 +147,8 @@ func (x *Locale) LocalizedStringForVariantCode(variantCode string) string {
 }
 
 // LocalizedStringForCalendarIdentifier returns the localized string for the specified calendar identifier.
-func (x *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCalendarIdentifier:"), purego.NSString(calendarIdentifier))
+func (l *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForCalendarIdentifier:"), purego.NSString(calendarIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -156,8 +156,8 @@ func (x *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string)
 }
 
 // LocalizedStringForCollationIdentifier returns the localized string for the specified collation identifier.
-func (x *Locale) LocalizedStringForCollationIdentifier(collationIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCollationIdentifier:"), purego.NSString(collationIdentifier))
+func (l *Locale) LocalizedStringForCollationIdentifier(collationIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForCollationIdentifier:"), purego.NSString(collationIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -165,8 +165,8 @@ func (x *Locale) LocalizedStringForCollationIdentifier(collationIdentifier strin
 }
 
 // LocalizedStringForCurrencyCode returns the localized string for the specified currency code.
-func (x *Locale) LocalizedStringForCurrencyCode(currencyCode string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCurrencyCode:"), purego.NSString(currencyCode))
+func (l *Locale) LocalizedStringForCurrencyCode(currencyCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForCurrencyCode:"), purego.NSString(currencyCode))
 	if _r == 0 {
 		return ""
 	}
@@ -174,8 +174,8 @@ func (x *Locale) LocalizedStringForCurrencyCode(currencyCode string) string {
 }
 
 // LocalizedStringForCollatorIdentifier returns the localized string for the specified collator identifier.
-func (x *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCollatorIdentifier:"), purego.NSString(collatorIdentifier))
+func (l *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localizedStringForCollatorIdentifier:"), purego.NSString(collatorIdentifier))
 	if _r == 0 {
 		return ""
 	}
@@ -183,8 +183,8 @@ func (x *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string)
 }
 
 // LocaleIdentifier wraps the corresponding Objective-C method.
-func (x *Locale) LocaleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localeIdentifier"))
+func (l *Locale) LocaleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -192,8 +192,8 @@ func (x *Locale) LocaleIdentifier() string {
 }
 
 // LanguageCode wraps the corresponding Objective-C method.
-func (x *Locale) LanguageCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
+func (l *Locale) LanguageCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("languageCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -201,8 +201,8 @@ func (x *Locale) LanguageCode() string {
 }
 
 // LanguageIdentifier returns the identifier for the language part of the locale. For example, returns "en-US" for "en_US
-func (x *Locale) LanguageIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageIdentifier"))
+func (l *Locale) LanguageIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("languageIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -210,8 +210,8 @@ func (x *Locale) LanguageIdentifier() string {
 }
 
 // CountryCode wraps the corresponding Objective-C method.
-func (x *Locale) CountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+func (l *Locale) CountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -219,8 +219,8 @@ func (x *Locale) CountryCode() string {
 }
 
 // RegionCode returns the region code of the locale. If the `rg` subtag is present, the value of the subtag will be used. For example,  returns "GB" for "en_US
-func (x *Locale) RegionCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionCode"))
+func (l *Locale) RegionCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("regionCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -228,8 +228,8 @@ func (x *Locale) RegionCode() string {
 }
 
 // ScriptCode wraps the corresponding Objective-C method.
-func (x *Locale) ScriptCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptCode"))
+func (l *Locale) ScriptCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scriptCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -237,8 +237,8 @@ func (x *Locale) ScriptCode() string {
 }
 
 // VariantCode wraps the corresponding Objective-C method.
-func (x *Locale) VariantCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variantCode"))
+func (l *Locale) VariantCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("variantCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -246,14 +246,14 @@ func (x *Locale) VariantCode() string {
 }
 
 // ExemplarCharacterSet wraps the corresponding Objective-C method.
-func (x *Locale) ExemplarCharacterSet() *CharacterSet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exemplarCharacterSet"))
+func (l *Locale) ExemplarCharacterSet() *CharacterSet {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("exemplarCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
 // CalendarIdentifier wraps the corresponding Objective-C method.
-func (x *Locale) CalendarIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarIdentifier"))
+func (l *Locale) CalendarIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("calendarIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -261,8 +261,8 @@ func (x *Locale) CalendarIdentifier() string {
 }
 
 // CollationIdentifier wraps the corresponding Objective-C method.
-func (x *Locale) CollationIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collationIdentifier"))
+func (l *Locale) CollationIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("collationIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -270,14 +270,14 @@ func (x *Locale) CollationIdentifier() string {
 }
 
 // UsesMetricSystem wraps the corresponding Objective-C method.
-func (x *Locale) UsesMetricSystem() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesMetricSystem"))
+func (l *Locale) UsesMetricSystem() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("usesMetricSystem"))
 	return _r
 }
 
 // DecimalSeparator wraps the corresponding Objective-C method.
-func (x *Locale) DecimalSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalSeparator"))
+func (l *Locale) DecimalSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("decimalSeparator"))
 	if _r == 0 {
 		return ""
 	}
@@ -285,8 +285,8 @@ func (x *Locale) DecimalSeparator() string {
 }
 
 // GroupingSeparator wraps the corresponding Objective-C method.
-func (x *Locale) GroupingSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupingSeparator"))
+func (l *Locale) GroupingSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("groupingSeparator"))
 	if _r == 0 {
 		return ""
 	}
@@ -294,8 +294,8 @@ func (x *Locale) GroupingSeparator() string {
 }
 
 // CurrencySymbol wraps the corresponding Objective-C method.
-func (x *Locale) CurrencySymbol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencySymbol"))
+func (l *Locale) CurrencySymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("currencySymbol"))
 	if _r == 0 {
 		return ""
 	}
@@ -303,8 +303,8 @@ func (x *Locale) CurrencySymbol() string {
 }
 
 // CurrencyCode wraps the corresponding Objective-C method.
-func (x *Locale) CurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+func (l *Locale) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -312,8 +312,8 @@ func (x *Locale) CurrencyCode() string {
 }
 
 // CollatorIdentifier wraps the corresponding Objective-C method.
-func (x *Locale) CollatorIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collatorIdentifier"))
+func (l *Locale) CollatorIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("collatorIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -321,8 +321,8 @@ func (x *Locale) CollatorIdentifier() string {
 }
 
 // QuotationBeginDelimiter wraps the corresponding Objective-C method.
-func (x *Locale) QuotationBeginDelimiter() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quotationBeginDelimiter"))
+func (l *Locale) QuotationBeginDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("quotationBeginDelimiter"))
 	if _r == 0 {
 		return ""
 	}
@@ -330,8 +330,8 @@ func (x *Locale) QuotationBeginDelimiter() string {
 }
 
 // QuotationEndDelimiter wraps the corresponding Objective-C method.
-func (x *Locale) QuotationEndDelimiter() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quotationEndDelimiter"))
+func (l *Locale) QuotationEndDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("quotationEndDelimiter"))
 	if _r == 0 {
 		return ""
 	}
@@ -339,8 +339,8 @@ func (x *Locale) QuotationEndDelimiter() string {
 }
 
 // AlternateQuotationBeginDelimiter wraps the corresponding Objective-C method.
-func (x *Locale) AlternateQuotationBeginDelimiter() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateQuotationBeginDelimiter"))
+func (l *Locale) AlternateQuotationBeginDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("alternateQuotationBeginDelimiter"))
 	if _r == 0 {
 		return ""
 	}
@@ -348,49 +348,10 @@ func (x *Locale) AlternateQuotationBeginDelimiter() string {
 }
 
 // AlternateQuotationEndDelimiter wraps the corresponding Objective-C method.
-func (x *Locale) AlternateQuotationEndDelimiter() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateQuotationEndDelimiter"))
+func (l *Locale) AlternateQuotationEndDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("alternateQuotationEndDelimiter"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Localeable is the interface implemented by [Locale], for mocking and DI.
-type Localeable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Locale
-	ObjectForKey(key *String) obj.Object
-	DisplayNameForKeyValue(key *String, value obj.Object) string
-	LocalizedStringForLocaleIdentifier(localeIdentifier string) string
-	LocalizedStringForLanguageCode(languageCode string) string
-	LocalizedStringForCountryCode(countryCode string) string
-	LocalizedStringForScriptCode(scriptCode string) string
-	LocalizedStringForVariantCode(variantCode string) string
-	LocalizedStringForCalendarIdentifier(calendarIdentifier string) string
-	LocalizedStringForCollationIdentifier(collationIdentifier string) string
-	LocalizedStringForCurrencyCode(currencyCode string) string
-	LocalizedStringForCollatorIdentifier(collatorIdentifier string) string
-	LocaleIdentifier() string
-	LanguageCode() string
-	LanguageIdentifier() string
-	CountryCode() string
-	RegionCode() string
-	ScriptCode() string
-	VariantCode() string
-	ExemplarCharacterSet() *CharacterSet
-	CalendarIdentifier() string
-	CollationIdentifier() string
-	UsesMetricSystem() bool
-	DecimalSeparator() string
-	GroupingSeparator() string
-	CurrencySymbol() string
-	CurrencyCode() string
-	CollatorIdentifier() string
-	QuotationBeginDelimiter() string
-	QuotationEndDelimiter() string
-	AlternateQuotationBeginDelimiter() string
-	AlternateQuotationEndDelimiter() string
-}
-
-var _ Localeable = (*Locale)(nil)

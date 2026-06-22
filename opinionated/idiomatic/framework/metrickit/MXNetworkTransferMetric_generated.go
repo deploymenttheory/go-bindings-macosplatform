@@ -52,39 +52,28 @@ func NewNetworkTransferMetric() *NetworkTransferMetric {
 	return networkTransferMetricAdopt(_id)
 }
 
-// CumulativeWifiUpload cumulative amount of data uploaded over WiFi. Dimensioned as NSUnitInformationStorage.
-func (x *NetworkTransferMetric) CumulativeWifiUpload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeWifiUpload"))
+// CumulativeWifiUpload returns cumulative amount of data uploaded over WiFi. Dimensioned as NSUnitInformationStorage.
+func (ntm *NetworkTransferMetric) CumulativeWifiUpload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeWifiUpload"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeWifiDownload cumulative amount of data downloaded over WiFi. Dimensioned as NSUnitInformationStorage.
-func (x *NetworkTransferMetric) CumulativeWifiDownload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeWifiDownload"))
+// CumulativeWifiDownload returns cumulative amount of data downloaded over WiFi. Dimensioned as NSUnitInformationStorage.
+func (ntm *NetworkTransferMetric) CumulativeWifiDownload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeWifiDownload"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeCellularUpload cumulative amount of data uploaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
-func (x *NetworkTransferMetric) CumulativeCellularUpload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCellularUpload"))
+// CumulativeCellularUpload returns cumulative amount of data uploaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
+func (ntm *NetworkTransferMetric) CumulativeCellularUpload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeCellularUpload"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeCellularDownload cumulative amount of data downloaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
-func (x *NetworkTransferMetric) CumulativeCellularDownload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCellularDownload"))
+// CumulativeCellularDownload returns cumulative amount of data downloaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
+func (ntm *NetworkTransferMetric) CumulativeCellularDownload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeCellularDownload"))
 	return obj.Wrap(_r)
 }
-
-// NetworkTransferMetricable is the interface implemented by [NetworkTransferMetric], for mocking and DI.
-type NetworkTransferMetricable interface {
-	obj.Object
-	CumulativeWifiUpload() obj.Object
-	CumulativeWifiDownload() obj.Object
-	CumulativeCellularUpload() obj.Object
-	CumulativeCellularDownload() obj.Object
-}
-
-var _ NetworkTransferMetricable = (*NetworkTransferMetric)(nil)
 
 var _ MetricProvider = (*NetworkTransferMetric)(nil)

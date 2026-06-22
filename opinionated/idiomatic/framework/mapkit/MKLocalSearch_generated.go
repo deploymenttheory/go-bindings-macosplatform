@@ -46,24 +46,24 @@ func localSearchAdopt(id objc.ID) *LocalSearch {
 }
 
 // Description returns the object's -description text.
-func (x *LocalSearch) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LocalSearch) Description() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalSearch) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ls *LocalSearch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalSearch) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ls *LocalSearch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalSearch) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LocalSearch) String() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLocalSearchWithRequest creates and returns a search object with the specified parameters.
@@ -81,21 +81,12 @@ func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestReq
 }
 
 // Cancel cancels an in-progress search operation.
-func (x *LocalSearch) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (ls *LocalSearch) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cancel"))
 }
 
 // IsSearching wraps the corresponding Objective-C method.
-func (x *LocalSearch) IsSearching() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearching"))
+func (ls *LocalSearch) IsSearching() bool {
+	_r := objc.Send[bool](objref.IDOf(ls), objc.RegisterName("isSearching"))
 	return _r
 }
-
-// LocalSearchable is the interface implemented by [LocalSearch], for mocking and DI.
-type LocalSearchable interface {
-	obj.Object
-	Cancel()
-	IsSearching() bool
-}
-
-var _ LocalSearchable = (*LocalSearch)(nil)

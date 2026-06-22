@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,164 +53,125 @@ func NewCNNPoolingAverageGradient() *CNNPoolingAverageGradient {
 	return cNNPoolingAverageGradientAdopt(_id)
 }
 
-// WithZeroPadSizeX how much zero padding to apply to both left and right borders of the input image for average pooling, when using
-func (x *CNNPoolingAverageGradient) WithZeroPadSizeX(zeroPadSizeX int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeX:"), zeroPadSizeX)
-	return x
+// WithZeroPadSizeX sets how much zero padding to apply to both left and right borders of the input image for average pooling, when using
+func (cpag *CNNPoolingAverageGradient) WithZeroPadSizeX(zeroPadSizeX int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setZeroPadSizeX:"), zeroPadSizeX)
+	return cpag
 }
 
-// WithZeroPadSizeY how much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
-func (x *CNNPoolingAverageGradient) WithZeroPadSizeY(zeroPadSizeY int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeY:"), zeroPadSizeY)
-	return x
+// WithZeroPadSizeY sets how much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
+func (cpag *CNNPoolingAverageGradient) WithZeroPadSizeY(zeroPadSizeY int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setZeroPadSizeY:"), zeroPadSizeY)
+	return cpag
 }
 
-// WithSourceSize an optional source size which defines together with primaryOffset, the set of input gradient pixels to take into account in the gradient computations. A MTLSize that together with primaryOffset indicates which part of the source gradient to consider. If the area does not lie completely within the primary source image, the intersection between source area rectangle and primary source bounds is used. Default: A size where every component is NSUIntegerMax indicating the entire rest of the image, starting from an offset (see primaryOffset).
-func (x *CNNPoolingAverageGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceSize:"), sourceSize)
-	return x
+// WithSourceSize sets an optional source size which defines together with primaryOffset, the set of input gradient pixels to take into account in the gradient computations. A MTLSize that together with primaryOffset indicates which part of the source gradient to consider. If the area does not lie completely within the primary source image, the intersection between source area rectangle and primary source bounds is used. Default: A size where every component is NSUIntegerMax indicating the entire rest of the image, starting from an offset (see primaryOffset).
+func (cpag *CNNPoolingAverageGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setSourceSize:"), sourceSize)
+	return cpag
 }
 
-// WithKernelOffsetX offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-func (x *CNNPoolingAverageGradient) WithKernelOffsetX(kernelOffsetX int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
-	return x
+// WithKernelOffsetX sets offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+func (cpag *CNNPoolingAverageGradient) WithKernelOffsetX(kernelOffsetX int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
+	return cpag
 }
 
-// WithKernelOffsetY offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-func (x *CNNPoolingAverageGradient) WithKernelOffsetY(kernelOffsetY int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
-	return x
+// WithKernelOffsetY sets offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+func (cpag *CNNPoolingAverageGradient) WithKernelOffsetY(kernelOffsetY int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
+	return cpag
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNPoolingAverageGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cpag *CNNPoolingAverageGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return cpag
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNPoolingAverageGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cpag *CNNPoolingAverageGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return cpag
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNPoolingAverageGradient) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (cpag *CNNPoolingAverageGradient) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setClipRect:"), clipRect)
+	return cpag
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNPoolingAverageGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (cpag *CNNPoolingAverageGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cpag
 }
 
-// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNPoolingAverageGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-	return x
+// WithPrimarySourceFeatureChannelOffset sets the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (cpag *CNNPoolingAverageGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
+	return cpag
 }
 
-// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNPoolingAverageGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-	return x
+// WithSecondarySourceFeatureChannelOffset sets the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (cpag *CNNPoolingAverageGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
+	return cpag
 }
 
-// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNPoolingAverageGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-	return x
+// WithPrimarySourceFeatureChannelMaxCount sets the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cpag *CNNPoolingAverageGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
+	return cpag
 }
 
-// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNPoolingAverageGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-	return x
+// WithSecondarySourceFeatureChannelMaxCount sets the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cpag *CNNPoolingAverageGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
+	return cpag
 }
 
-// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNPoolingAverageGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+// WithPrimaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (cpag *CNNPoolingAverageGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return cpag
 }
 
-// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNPoolingAverageGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+// WithPrimaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (cpag *CNNPoolingAverageGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return cpag
 }
 
-// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNPoolingAverageGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+// WithSecondaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (cpag *CNNPoolingAverageGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return cpag
 }
 
-// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNPoolingAverageGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+// WithSecondaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (cpag *CNNPoolingAverageGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return cpag
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNPoolingAverageGradient) WithLabel(label string) *CNNPoolingAverageGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cpag *CNNPoolingAverageGradient) WithLabel(label string) *CNNPoolingAverageGradient {
+	objc.Send[objc.ID](objref.IDOf(cpag), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpag
 }
 
-// ZeroPadSizeX how much zero padding to apply to both left and right borders of the input image for average pooling, when using
-func (x *CNNPoolingAverageGradient) ZeroPadSizeX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zeroPadSizeX"))
+// ZeroPadSizeX returns how much zero padding to apply to both left and right borders of the input image for average pooling, when using
+func (cpag *CNNPoolingAverageGradient) ZeroPadSizeX() int {
+	_r := objc.Send[int](objref.IDOf(cpag), objc.RegisterName("zeroPadSizeX"))
 	return _r
 }
 
-// SetZeroPadSizeX wraps the corresponding Objective-C method.
-func (x *CNNPoolingAverageGradient) SetZeroPadSizeX(zeroPadSizeX int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeX:"), zeroPadSizeX)
-}
-
-// ZeroPadSizeY how much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
-func (x *CNNPoolingAverageGradient) ZeroPadSizeY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zeroPadSizeY"))
+// ZeroPadSizeY returns how much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
+func (cpag *CNNPoolingAverageGradient) ZeroPadSizeY() int {
+	_r := objc.Send[int](objref.IDOf(cpag), objc.RegisterName("zeroPadSizeY"))
 	return _r
 }
-
-// SetZeroPadSizeY wraps the corresponding Objective-C method.
-func (x *CNNPoolingAverageGradient) SetZeroPadSizeY(zeroPadSizeY int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeY:"), zeroPadSizeY)
-}
-
-// CNNPoolingAverageGradientable is the interface implemented by [CNNPoolingAverageGradient], for mocking and DI.
-type CNNPoolingAverageGradientable interface {
-	obj.Object
-	WithZeroPadSizeX(zeroPadSizeX int) *CNNPoolingAverageGradient
-	WithZeroPadSizeY(zeroPadSizeY int) *CNNPoolingAverageGradient
-	WithSourceSize(sourceSize metal.MTLSize) *CNNPoolingAverageGradient
-	WithKernelOffsetX(kernelOffsetX int) *CNNPoolingAverageGradient
-	WithKernelOffsetY(kernelOffsetY int) *CNNPoolingAverageGradient
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNPoolingAverageGradient
-	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverageGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingAverageGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNPoolingAverageGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNPoolingAverageGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNPoolingAverageGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNPoolingAverageGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNPoolingAverageGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNPoolingAverageGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNPoolingAverageGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNPoolingAverageGradient
-	WithLabel(label string) *CNNPoolingAverageGradient
-	ZeroPadSizeX() int
-	SetZeroPadSizeX(zeroPadSizeX int)
-	ZeroPadSizeY() int
-	SetZeroPadSizeY(zeroPadSizeY int)
-}
-
-var _ CNNPoolingAverageGradientable = (*CNNPoolingAverageGradient)(nil)
 
 var _ CNNPoolingGradientProvider = (*CNNPoolingAverageGradient)(nil)
 

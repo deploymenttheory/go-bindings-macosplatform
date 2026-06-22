@@ -52,82 +52,66 @@ func NewVerifiableClinicalRecord() *VerifiableClinicalRecord {
 	return verifiableClinicalRecordAdopt(_id)
 }
 
-// RecordTypes the types present in this record.
+// RecordTypes returns the types present in this record.
 //
 // RecordTypes returns the collection as a Go slice.
-func (x *VerifiableClinicalRecord) RecordTypes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordTypes"))
+func (vcr *VerifiableClinicalRecord) RecordTypes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("recordTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IssuerIdentifier the identifier for the issuer of this record.
-func (x *VerifiableClinicalRecord) IssuerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerIdentifier"))
+// IssuerIdentifier returns the identifier for the issuer of this record.
+func (vcr *VerifiableClinicalRecord) IssuerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("issuerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Subject the subject of this record.
-func (x *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
+// Subject returns the subject of this record.
+func (vcr *VerifiableClinicalRecord) Subject() *VerifiableClinicalRecordSubject {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("subject"))
 	return VerifiableClinicalRecordSubjectFromID(_r)
 }
 
-// IssuedDate the date this record was issued.
-func (x *VerifiableClinicalRecord) IssuedDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuedDate"))
+// IssuedDate returns the date this record was issued.
+func (vcr *VerifiableClinicalRecord) IssuedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("issuedDate"))
 	return obj.Wrap(_r)
 }
 
-// RelevantDate a date most relevant to this record, like when a vaccine was administered or a test was performed.
-func (x *VerifiableClinicalRecord) RelevantDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relevantDate"))
+// RelevantDate returns a date most relevant to this record, like when a vaccine was administered or a test was performed.
+func (vcr *VerifiableClinicalRecord) RelevantDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("relevantDate"))
 	return obj.Wrap(_r)
 }
 
-// ExpirationDate the date this record expires.
-func (x *VerifiableClinicalRecord) ExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+// ExpirationDate returns the date this record expires.
+func (vcr *VerifiableClinicalRecord) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
-// ItemNames a list of display names for each item contained in this record.
+// ItemNames returns a list of display names for each item contained in this record.
 //
 // ItemNames returns the collection as a Go slice.
-func (x *VerifiableClinicalRecord) ItemNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemNames"))
+func (vcr *VerifiableClinicalRecord) ItemNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("itemNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SourceType the type of the source leading to this verifiable record.
-func (x *VerifiableClinicalRecord) SourceType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceType"))
+// SourceType returns the type of the source leading to this verifiable record.
+func (vcr *VerifiableClinicalRecord) SourceType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("sourceType"))
 	return obj.Wrap(_r)
 }
 
-// DataRepresentation the record's data representation, determined by source type.
-func (x *VerifiableClinicalRecord) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+// DataRepresentation returns the record's data representation, determined by source type.
+func (vcr *VerifiableClinicalRecord) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// VerifiableClinicalRecordable is the interface implemented by [VerifiableClinicalRecord], for mocking and DI.
-type VerifiableClinicalRecordable interface {
-	obj.Object
-	RecordTypes() []string
-	IssuerIdentifier() string
-	Subject() *VerifiableClinicalRecordSubject
-	IssuedDate() obj.Object
-	RelevantDate() obj.Object
-	ExpirationDate() obj.Object
-	ItemNames() []string
-	SourceType() obj.Object
-	DataRepresentation() obj.Object
-}
-
-var _ VerifiableClinicalRecordable = (*VerifiableClinicalRecord)(nil)
 
 var _ SampleProvider = (*VerifiableClinicalRecord)(nil)
 

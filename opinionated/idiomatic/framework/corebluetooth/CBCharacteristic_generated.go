@@ -46,61 +46,48 @@ func characteristicAdopt(id objc.ID) *Characteristic {
 	return x
 }
 
-// Service a back-pointer to the service this characteristic belongs to.
-func (x *Characteristic) Service() *Service {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
+// Service returns a back-pointer to the service this characteristic belongs to.
+func (c *Characteristic) Service() *Service {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("service"))
 	return ServiceFromID(_r)
 }
 
-// Properties the properties of the characteristic.
-func (x *Characteristic) Properties() CharacteristicProperties {
-	_r := objc.Send[CharacteristicProperties](objref.IDOf(x), objc.RegisterName("properties"))
+// Properties returns the properties of the characteristic.
+func (c *Characteristic) Properties() CharacteristicProperties {
+	_r := objc.Send[CharacteristicProperties](objref.IDOf(c), objc.RegisterName("properties"))
 	return _r
 }
 
-// Value the value of the characteristic.
-func (x *Characteristic) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the value of the characteristic.
+func (c *Characteristic) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Descriptors a list of the CBDescriptors that have so far been discovered in this characteristic.
+// Descriptors returns a list of the CBDescriptors that have so far been discovered in this characteristic.
 //
 // Descriptors returns the collection as a Go slice.
-func (x *Characteristic) Descriptors() []*Descriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptors"))
+func (c *Characteristic) Descriptors() []*Descriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("descriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Descriptor { return DescriptorFromID(_id) })
 }
 
-// IsBroadcasted whether the characteristic is currently broadcasted or not.
-func (x *Characteristic) IsBroadcasted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcasted"))
+// IsBroadcasted reports whether the characteristic is currently broadcasted or not.
+func (c *Characteristic) IsBroadcasted() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isBroadcasted"))
 	return _r
 }
 
-// IsNotifying whether the characteristic is currently notifying or not.
-func (x *Characteristic) IsNotifying() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNotifying"))
+// IsNotifying reports whether the characteristic is currently notifying or not.
+func (c *Characteristic) IsNotifying() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isNotifying"))
 	return _r
 }
-
-// Characteristicable is the interface implemented by [Characteristic], for mocking and DI.
-type Characteristicable interface {
-	obj.Object
-	Service() *Service
-	Properties() CharacteristicProperties
-	Value() obj.Object
-	Descriptors() []*Descriptor
-	IsBroadcasted() bool
-	IsNotifying() bool
-}
-
-var _ Characteristicable = (*Characteristic)(nil)
 
 // isCharacteristic marks Characteristic — and, by embedding promotion, its
 // subclasses — as a member of the Characteristic hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Characteristic) isCharacteristic() {}
+func (c *Characteristic) isCharacteristic() {}
 
 var _ CharacteristicProvider = (*Characteristic)(nil)
 

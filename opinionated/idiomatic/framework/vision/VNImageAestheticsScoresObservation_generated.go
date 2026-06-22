@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewImageAestheticsScoresObservation() *ImageAestheticsScoresObservation {
 	return imageAestheticsScoresObservationAdopt(_id)
 }
 
-// IsUtility a Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
-func (x *ImageAestheticsScoresObservation) IsUtility() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUtility"))
+// IsUtility reports whether a Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
+func (iaso *ImageAestheticsScoresObservation) IsUtility() bool {
+	_r := objc.Send[bool](objref.IDOf(iaso), objc.RegisterName("isUtility"))
 	return _r
 }
 
-// OverallScore a score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
-func (x *ImageAestheticsScoresObservation) OverallScore() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overallScore"))
+// OverallScore returns a score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
+func (iaso *ImageAestheticsScoresObservation) OverallScore() float32 {
+	_r := objc.Send[float32](objref.IDOf(iaso), objc.RegisterName("overallScore"))
 	return _r
 }
-
-// ImageAestheticsScoresObservationable is the interface implemented by [ImageAestheticsScoresObservation], for mocking and DI.
-type ImageAestheticsScoresObservationable interface {
-	obj.Object
-	IsUtility() bool
-	OverallScore() float32
-}
-
-var _ ImageAestheticsScoresObservationable = (*ImageAestheticsScoresObservation)(nil)
 
 var _ ObservationProvider = (*ImageAestheticsScoresObservation)(nil)

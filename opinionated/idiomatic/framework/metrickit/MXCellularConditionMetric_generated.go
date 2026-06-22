@@ -53,17 +53,9 @@ func NewCellularConditionMetric() *CellularConditionMetric {
 }
 
 // HistogrammedCellularConditionTime wraps the corresponding Objective-C method.
-func (x *CellularConditionMetric) HistogrammedCellularConditionTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedCellularConditionTime"))
+func (ccm *CellularConditionMetric) HistogrammedCellularConditionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ccm), objc.RegisterName("histogrammedCellularConditionTime"))
 	return obj.Wrap(_r)
 }
-
-// CellularConditionMetricable is the interface implemented by [CellularConditionMetric], for mocking and DI.
-type CellularConditionMetricable interface {
-	obj.Object
-	HistogrammedCellularConditionTime() obj.Object
-}
-
-var _ CellularConditionMetricable = (*CellularConditionMetric)(nil)
 
 var _ MetricProvider = (*CellularConditionMetric)(nil)

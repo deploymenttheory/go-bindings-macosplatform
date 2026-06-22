@@ -46,24 +46,24 @@ func nWHostEndpointAdopt(id objc.ID) *NWHostEndpoint {
 }
 
 // Description returns the object's -description text.
-func (x *NWHostEndpoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nhe *NWHostEndpoint) Description() string {
+	return rt.Description(objref.IDOf(nhe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NWHostEndpoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nhe *NWHostEndpoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nhe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NWHostEndpoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nhe *NWHostEndpoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nhe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NWHostEndpoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nhe *NWHostEndpoint) String() string {
+	return rt.Description(objref.IDOf(nhe))
 }
 
 // NewNWHostEndpoint creates a new NWHostEndpoint.
@@ -72,29 +72,20 @@ func NewNWHostEndpoint() *NWHostEndpoint {
 	return nWHostEndpointAdopt(_id)
 }
 
-// Hostname the endpoint's hostname.
-func (x *NWHostEndpoint) Hostname() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostname"))
+// Hostname returns the endpoint's hostname.
+func (nhe *NWHostEndpoint) Hostname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nhe), objc.RegisterName("hostname"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Port the endpoint's port.
-func (x *NWHostEndpoint) Port() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+// Port returns the endpoint's port.
+func (nhe *NWHostEndpoint) Port() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nhe), objc.RegisterName("port"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NWHostEndpointable is the interface implemented by [NWHostEndpoint], for mocking and DI.
-type NWHostEndpointable interface {
-	obj.Object
-	Hostname() string
-	Port() string
-}
-
-var _ NWHostEndpointable = (*NWHostEndpoint)(nil)

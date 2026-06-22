@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,57 +51,28 @@ func NewCustomTouchBarItem() *CustomTouchBarItem {
 	return customTouchBarItemAdopt(_id)
 }
 
-// WithView the view displayed in the bar to represent this item.
-func (x *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets the view displayed in the bar to represent this item.
+func (ctbi *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setView:"), objref.IDOf(view))
+	return ctbi
 }
 
-// WithViewController a view controller whose view is displayed in the bar to represent this item.
-func (x *CustomTouchBarItem) WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
-	return x
+// WithViewController sets a view controller whose view is displayed in the bar to represent this item.
+func (ctbi *CustomTouchBarItem) WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
+	return ctbi
 }
 
-// WithCustomizationLabel the user-visible string identifying this item during bar customization.
-func (x *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-	return x
+// WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
+func (ctbi *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	return ctbi
 }
 
-// WithVisibilityPriority determines which items are shown in a bar when space is limited.
-func (x *CustomTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
+func (ctbi *CustomTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ctbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return ctbi
 }
-
-// SetView wraps the corresponding Objective-C method.
-func (x *CustomTouchBarItem) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-}
-
-// SetViewController wraps the corresponding Objective-C method.
-func (x *CustomTouchBarItem) SetViewController(viewController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
-}
-
-// SetCustomizationLabel wraps the corresponding Objective-C method.
-func (x *CustomTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-}
-
-// CustomTouchBarItemable is the interface implemented by [CustomTouchBarItem], for mocking and DI.
-type CustomTouchBarItemable interface {
-	obj.Object
-	WithView(view ViewProvider) *CustomTouchBarItem
-	WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem
-	WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem
-	WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem
-	SetView(view *View)
-	SetViewController(viewController *ViewController)
-	SetCustomizationLabel(customizationLabel string)
-}
-
-var _ CustomTouchBarItemable = (*CustomTouchBarItem)(nil)
 
 var _ TouchBarItemProvider = (*CustomTouchBarItem)(nil)

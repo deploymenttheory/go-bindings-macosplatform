@@ -46,24 +46,24 @@ func queryGenerationTokenAdopt(id objc.ID) *QueryGenerationToken {
 }
 
 // Description returns the object's -description text.
-func (x *QueryGenerationToken) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qgt *QueryGenerationToken) Description() string {
+	return rt.Description(objref.IDOf(qgt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QueryGenerationToken) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qgt *QueryGenerationToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qgt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QueryGenerationToken) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qgt *QueryGenerationToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qgt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QueryGenerationToken) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qgt *QueryGenerationToken) String() string {
+	return rt.Description(objref.IDOf(qgt))
 }
 
 // NewQueryGenerationToken creates a new QueryGenerationToken.
@@ -71,10 +71,3 @@ func NewQueryGenerationToken() *QueryGenerationToken {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSQueryGenerationToken")), objc.RegisterName("new"))
 	return queryGenerationTokenAdopt(_id)
 }
-
-// QueryGenerationTokenable is the interface implemented by [QueryGenerationToken], for mocking and DI.
-type QueryGenerationTokenable interface {
-	obj.Object
-}
-
-var _ QueryGenerationTokenable = (*QueryGenerationToken)(nil)

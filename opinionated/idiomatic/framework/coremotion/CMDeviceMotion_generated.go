@@ -7,7 +7,6 @@ package coremotion
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,21 @@ func NewDeviceMotion() *DeviceMotion {
 }
 
 // Attitude wraps the corresponding Objective-C method.
-func (x *DeviceMotion) Attitude() *Attitude {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attitude"))
+func (dm *DeviceMotion) Attitude() *Attitude {
+	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("attitude"))
 	return AttitudeFromID(_r)
 }
 
 // Heading wraps the corresponding Objective-C method.
-func (x *DeviceMotion) Heading() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("heading"))
+func (dm *DeviceMotion) Heading() float64 {
+	_r := objc.Send[float64](objref.IDOf(dm), objc.RegisterName("heading"))
 	return _r
 }
 
 // SensorLocation wraps the corresponding Objective-C method.
-func (x *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
-	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(x), objc.RegisterName("sensorLocation"))
+func (dm *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
+	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(dm), objc.RegisterName("sensorLocation"))
 	return _r
 }
-
-// DeviceMotionable is the interface implemented by [DeviceMotion], for mocking and DI.
-type DeviceMotionable interface {
-	obj.Object
-	Attitude() *Attitude
-	Heading() float64
-	SensorLocation() DeviceMotionSensorLocation
-}
-
-var _ DeviceMotionable = (*DeviceMotion)(nil)
 
 var _ LogItemProvider = (*DeviceMotion)(nil)

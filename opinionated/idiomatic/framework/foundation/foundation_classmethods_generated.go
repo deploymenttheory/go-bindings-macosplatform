@@ -6,6 +6,8 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -13,7 +15,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Transform creates a new affine transform initialized to the identity matrix.
@@ -1304,7 +1305,7 @@ func SetHostCacheEnabled(flag bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("setHostCacheEnabled:"), flag)
 }
 
-// IsHostCacheEnabled indicates whether caching is turned on or off.
+// IsHostCacheEnabled reports whether caching is turned on or off.
 func IsHostCacheEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSHost")), objc.RegisterName("isHostCacheEnabled"))
 	return _r
@@ -2647,7 +2648,7 @@ func SharedCoercionHandler() *ScriptCoercionHandler {
 	return ScriptCoercionHandlerFromID(_r)
 }
 
-// CurrentCommand if a command is being executed in the current thread by Cocoa scripting’s built-in Apple event handling, return the command.
+// CurrentCommand returns if a command is being executed in the current thread by Cocoa scripting’s built-in Apple event handling, return the command.
 func CurrentCommand() *ScriptCommand {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptCommand")), objc.RegisterName("currentCommand"))
 	return ScriptCommandFromID(_r)
@@ -2902,25 +2903,25 @@ func LaunchedTaskWithLaunchPathArguments(path string, arguments []string) *Task 
 	return TaskFromID(_r)
 }
 
-// Neutral term of address that uses gender-neutral pronouns (e.g. they/them/theirs in English), and an epicene grammatical gender when inflecting verbs and adjectives referring to the person
+// Neutral returns term of address that uses gender-neutral pronouns (e.g. they/them/theirs in English), and an epicene grammatical gender when inflecting verbs and adjectives referring to the person
 func Neutral() *TermOfAddress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("neutral"))
 	return TermOfAddressFromID(_r)
 }
 
-// Feminine term of address that uses feminine pronouns (e.g. she/her/hers in English), and a feminine grammatical gender when inflecting verbs and adjectives referring to the person
+// Feminine returns term of address that uses feminine pronouns (e.g. she/her/hers in English), and a feminine grammatical gender when inflecting verbs and adjectives referring to the person
 func Feminine() *TermOfAddress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("feminine"))
 	return TermOfAddressFromID(_r)
 }
 
-// Masculine term of address that uses masculine pronouns (e.g. he/him/his in English), and a masculine grammatical gender when inflecting verbs and adjectives referring to the person
+// Masculine returns term of address that uses masculine pronouns (e.g. he/him/his in English), and a masculine grammatical gender when inflecting verbs and adjectives referring to the person
 func Masculine() *TermOfAddress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("masculine"))
 	return TermOfAddressFromID(_r)
 }
 
-// CurrentUser the term of address that should be used for addressing the user
+// CurrentUser returns the term of address that should be used for addressing the user
 func CurrentUser() *TermOfAddress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("currentUser"))
 	return TermOfAddressFromID(_r)
@@ -3385,7 +3386,7 @@ func RequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLRequest
 	return URLRequestFromID(_r)
 }
 
-// SupportsSecureCoding indicates that NSURLRequest implements the NSSecureCoding protocol.
+// SupportsSecureCoding reports whether indicates that NSURLRequest implements the NSSecureCoding protocol.
 func SupportsSecureCoding() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSURLRequest")), objc.RegisterName("supportsSecureCoding"))
 	return _r
@@ -4782,7 +4783,7 @@ func ResetStandardUserDefaults() {
 	objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("resetStandardUserDefaults"))
 }
 
-// StandardUserDefaults +standardUserDefaults returns a global instance of NSUserDefaults configured to search the current application's search list.
+// StandardUserDefaults returns +standardUserDefaults returns a global instance of NSUserDefaults configured to search the current application's search list.
 func StandardUserDefaults() *UserDefaults {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("standardUserDefaults"))
 	return UserDefaultsFromID(_r)

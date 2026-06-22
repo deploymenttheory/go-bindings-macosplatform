@@ -44,24 +44,24 @@ func mTRLevelControlClusterMoveWithOnOffParamsAdopt(id objc.ID) *MTRLevelControl
 }
 
 // Description returns the object's -description text.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) Description() string {
+	return rt.Description(objref.IDOf(mlccmwoop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlccmwoop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlccmwoop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) String() string {
+	return rt.Description(objref.IDOf(mlccmwoop))
 }
 
 // NewMTRLevelControlClusterMoveWithOnOffParams creates a new MTRLevelControlClusterMoveWithOnOffParams.
@@ -71,128 +71,73 @@ func NewMTRLevelControlClusterMoveWithOnOffParams() *MTRLevelControlClusterMoveW
 }
 
 // WithMoveMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
-	return x
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
+	return mlccmwoop
 }
 
 // WithRate sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
-	return x
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setRate:"), objref.IDOf(rate))
+	return mlccmwoop
 }
 
 // WithOptionsMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
-	return x
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
+	return mlccmwoop
 }
 
 // WithOptionsOverride sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-	return x
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
+	return mlccmwoop
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mlccmwoop
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mlccmwoop
 }
 
 // MoveMode wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveMode"))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("moveMode"))
 	return obj.Wrap(_r)
-}
-
-// SetMoveMode wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetMoveMode(moveMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 }
 
 // Rate wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) Rate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rate"))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) Rate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("rate"))
 	return obj.Wrap(_r)
-}
-
-// SetRate wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetRate(rate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
 }
 
 // OptionsMask wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionsMask wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsMask(optionsMask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
 // OptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsOverride(optionsOverride obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRLevelControlClusterMoveWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterMoveWithOnOffParams], for mocking and DI.
-type MTRLevelControlClusterMoveWithOnOffParamsable interface {
-	obj.Object
-	WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
-	WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
-	WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
-	WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
-	MoveMode() obj.Object
-	SetMoveMode(moveMode obj.Object)
-	Rate() obj.Object
-	SetRate(rate obj.Object)
-	OptionsMask() obj.Object
-	SetOptionsMask(optionsMask obj.Object)
-	OptionsOverride() obj.Object
-	SetOptionsOverride(optionsOverride obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRLevelControlClusterMoveWithOnOffParamsable = (*MTRLevelControlClusterMoveWithOnOffParams)(nil)

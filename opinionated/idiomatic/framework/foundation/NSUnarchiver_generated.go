@@ -54,19 +54,19 @@ func NewUnarchiverForReadingWithData(data *Data) *Unarchiver {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Unarchiver) WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (u *Unarchiver) WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return u
 }
 
 // DecodeClassNameAsClassName instructs the receiver to use the class with a given name when instantiating objects whose ostensible class, according to the archived data, is another given name.
-func (x *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeClassName:asClassName:"), purego.NSString(inArchiveName), purego.NSString(trueName))
+func (u *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("decodeClassName:asClassName:"), purego.NSString(inArchiveName), purego.NSString(trueName))
 }
 
 // ClassNameDecodedForArchiveClassName returns the name of the class that will be used when instantiating objects whose ostensible class, according to the archived data, is a given name.
-func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classNameDecodedForArchiveClassName:"), purego.NSString(inArchiveName))
+func (u *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("classNameDecodedForArchiveClassName:"), purego.NSString(inArchiveName))
 	if _r == 0 {
 		return ""
 	}
@@ -74,26 +74,14 @@ func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) s
 }
 
 // ReplaceObjectWithObject causes the receiver to substitute one given object for another whenever the latter is extracted from the archive.
-func (x *Unarchiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
+func (u *Unarchiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
 // IsAtEnd wraps the corresponding Objective-C method.
-func (x *Unarchiver) IsAtEnd() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAtEnd"))
+func (u *Unarchiver) IsAtEnd() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isAtEnd"))
 	return _r
 }
-
-// Unarchiverable is the interface implemented by [Unarchiver], for mocking and DI.
-type Unarchiverable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver
-	DecodeClassNameAsClassName(inArchiveName string, trueName string)
-	ClassNameDecodedForArchiveClassName(inArchiveName string) string
-	ReplaceObjectWithObject(object obj.Object, newObject obj.Object)
-	IsAtEnd() bool
-}
-
-var _ Unarchiverable = (*Unarchiver)(nil)
 
 var _ CoderProvider = (*Unarchiver)(nil)

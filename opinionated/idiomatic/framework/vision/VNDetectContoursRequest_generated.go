@@ -53,140 +53,89 @@ func NewDetectContoursRequest() *DetectContoursRequest {
 	return detectContoursRequestAdopt(_id)
 }
 
-// WithContrastAdjustment the amount by which to adjust the image contrast.
-func (x *DetectContoursRequest) WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastAdjustment:"), contrastAdjustment)
-	return x
+// WithContrastAdjustment sets the amount by which to adjust the image contrast.
+func (dcr *DetectContoursRequest) WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setContrastAdjustment:"), contrastAdjustment)
+	return dcr
 }
 
-// WithContrastPivot the pixel value to use as a pivot for the contrast.
-func (x *DetectContoursRequest) WithContrastPivot(contrastPivot obj.Object) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastPivot:"), objref.IDOf(contrastPivot))
-	return x
+// WithContrastPivot sets the pixel value to use as a pivot for the contrast.
+func (dcr *DetectContoursRequest) WithContrastPivot(contrastPivot obj.Object) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setContrastPivot:"), objref.IDOf(contrastPivot))
+	return dcr
 }
 
-// WithDetectsDarkOnLight a Boolean value that indicates whether the request detects a dark object on a light background to aid in detection.
-func (x *DetectContoursRequest) WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectsDarkOnLight:"), detectsDarkOnLight)
-	return x
+// WithDetectsDarkOnLight sets a Boolean value that indicates whether the request detects a dark object on a light background to aid in detection.
+func (dcr *DetectContoursRequest) WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setDetectsDarkOnLight:"), detectsDarkOnLight)
+	return dcr
 }
 
-// WithDetectDarkOnLight a Boolean value that indicates whether the request detects a dark object on a light background.
-func (x *DetectContoursRequest) WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectDarkOnLight:"), detectDarkOnLight)
-	return x
+// WithDetectDarkOnLight sets a Boolean value that indicates whether the request detects a dark object on a light background.
+func (dcr *DetectContoursRequest) WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setDetectDarkOnLight:"), detectDarkOnLight)
+	return dcr
 }
 
-// WithMaximumImageDimension the maximum image dimension to use for contour detection.
-func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension int) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumImageDimension:"), maximumImageDimension)
-	return x
+// WithMaximumImageDimension sets the maximum image dimension to use for contour detection.
+func (dcr *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension int) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setMaximumImageDimension:"), maximumImageDimension)
+	return dcr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectContoursRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dcr *DetectContoursRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dcr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectContoursRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dcr *DetectContoursRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dcr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectContoursRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dcr *DetectContoursRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dcr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectContoursRequest) WithRevision(revision int) *DetectContoursRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dcr *DetectContoursRequest) WithRevision(revision int) *DetectContoursRequest {
+	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setRevision:"), revision)
+	return dcr
 }
 
-// ContrastAdjustment the amount to adjust the image's contrast by. A value of +1.0 means that the contrast is not adjusted. The default value is +2.0. Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
-func (x *DetectContoursRequest) ContrastAdjustment() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contrastAdjustment"))
+// ContrastAdjustment returns the amount to adjust the image's contrast by. A value of +1.0 means that the contrast is not adjusted. The default value is +2.0. Contour detection works best with high contrast images. The default value of 2 doubles the image's contrast to aid in detection. If the image already has a high contrast then this value should be set to 1.
+func (dcr *DetectContoursRequest) ContrastAdjustment() float32 {
+	_r := objc.Send[float32](objref.IDOf(dcr), objc.RegisterName("contrastAdjustment"))
 	return _r
 }
 
-// SetContrastAdjustment wraps the corresponding Objective-C method.
-func (x *DetectContoursRequest) SetContrastAdjustment(contrastAdjustment float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastAdjustment:"), contrastAdjustment)
-}
-
-// ContrastPivot the pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
-func (x *DetectContoursRequest) ContrastPivot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contrastPivot"))
+// ContrastPivot returns the pixel value to use as a pivot for the contrast. Valid values are from [0.0 ... +1.0], or nil to auto-detect based on image intensity. The default value is +0.5 (i.e. pixel center).
+func (dcr *DetectContoursRequest) ContrastPivot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("contrastPivot"))
 	return obj.Wrap(_r)
 }
 
-// SetContrastPivot wraps the corresponding Objective-C method.
-func (x *DetectContoursRequest) SetContrastPivot(contrastPivot obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContrastPivot:"), objref.IDOf(contrastPivot))
-}
-
-// DetectsDarkOnLight identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is YES.
-func (x *DetectContoursRequest) DetectsDarkOnLight() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detectsDarkOnLight"))
+// DetectsDarkOnLight reports whether identifies to the request if detecting a dark object on a light background, or vice versa, to aid in detection. The default value is true.
+func (dcr *DetectContoursRequest) DetectsDarkOnLight() bool {
+	_r := objc.Send[bool](objref.IDOf(dcr), objc.RegisterName("detectsDarkOnLight"))
 	return _r
-}
-
-// SetDetectsDarkOnLight wraps the corresponding Objective-C method.
-func (x *DetectContoursRequest) SetDetectsDarkOnLight(detectsDarkOnLight bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectsDarkOnLight:"), detectsDarkOnLight)
 }
 
 // DetectDarkOnLight wraps the corresponding Objective-C method.
-func (x *DetectContoursRequest) DetectDarkOnLight() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detectDarkOnLight"))
+func (dcr *DetectContoursRequest) DetectDarkOnLight() bool {
+	_r := objc.Send[bool](objref.IDOf(dcr), objc.RegisterName("detectDarkOnLight"))
 	return _r
 }
 
-// SetDetectDarkOnLight wraps the corresponding Objective-C method.
-func (x *DetectContoursRequest) SetDetectDarkOnLight(detectDarkOnLight bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetectDarkOnLight:"), detectDarkOnLight)
-}
-
-// MaximumImageDimension the limit on the maximum dimension of the image to be used for contour detection. Valid range of values is [64 ... NSUIntegerMax]. The default value is 512. As the contour request is compute intensive, the input image is scaled down maintaining aspect ratio (if needed), such that its maximum dimension is the value of this property. The image never gets scaled up, so specifying the maximum value ensures that the image gets processed in its original size and not downscaled.
-func (x *DetectContoursRequest) MaximumImageDimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumImageDimension"))
+// MaximumImageDimension returns the limit on the maximum dimension of the image to be used for contour detection. Valid range of values is [64 ... NSUIntegerMax]. The default value is 512. As the contour request is compute intensive, the input image is scaled down maintaining aspect ratio (if needed), such that its maximum dimension is the value of this property. The image never gets scaled up, so specifying the maximum value ensures that the image gets processed in its original size and not downscaled.
+func (dcr *DetectContoursRequest) MaximumImageDimension() int {
+	_r := objc.Send[int](objref.IDOf(dcr), objc.RegisterName("maximumImageDimension"))
 	return _r
 }
-
-// SetMaximumImageDimension wraps the corresponding Objective-C method.
-func (x *DetectContoursRequest) SetMaximumImageDimension(maximumImageDimension int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumImageDimension:"), maximumImageDimension)
-}
-
-// DetectContoursRequestable is the interface implemented by [DetectContoursRequest], for mocking and DI.
-type DetectContoursRequestable interface {
-	obj.Object
-	WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest
-	WithContrastPivot(contrastPivot obj.Object) *DetectContoursRequest
-	WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest
-	WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest
-	WithMaximumImageDimension(maximumImageDimension int) *DetectContoursRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest
-	WithRevision(revision int) *DetectContoursRequest
-	ContrastAdjustment() float32
-	SetContrastAdjustment(contrastAdjustment float32)
-	ContrastPivot() obj.Object
-	SetContrastPivot(contrastPivot obj.Object)
-	DetectsDarkOnLight() bool
-	SetDetectsDarkOnLight(detectsDarkOnLight bool)
-	DetectDarkOnLight() bool
-	SetDetectDarkOnLight(detectDarkOnLight bool)
-	MaximumImageDimension() int
-	SetMaximumImageDimension(maximumImageDimension int)
-}
-
-var _ DetectContoursRequestable = (*DetectContoursRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectContoursRequest)(nil)
 

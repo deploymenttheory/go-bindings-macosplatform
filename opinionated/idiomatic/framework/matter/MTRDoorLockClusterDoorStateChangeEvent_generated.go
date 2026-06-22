@@ -44,24 +44,24 @@ func mTRDoorLockClusterDoorStateChangeEventAdopt(id objc.ID) *MTRDoorLockCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(mdlcdsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcdsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcdsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) String() string {
+	return rt.Description(objref.IDOf(mdlcdsce))
 }
 
 // NewMTRDoorLockClusterDoorStateChangeEvent creates a new MTRDoorLockClusterDoorStateChangeEvent.
@@ -71,28 +71,13 @@ func NewMTRDoorLockClusterDoorStateChangeEvent() *MTRDoorLockClusterDoorStateCha
 }
 
 // WithDoorState sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
-	return x
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcdsce), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
+	return mdlcdsce
 }
 
 // DoorState wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) DoorState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doorState"))
+func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) DoorState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcdsce), objc.RegisterName("doorState"))
 	return obj.Wrap(_r)
 }
-
-// SetDoorState wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterDoorStateChangeEvent) SetDoorState(doorState obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
-}
-
-// MTRDoorLockClusterDoorStateChangeEventable is the interface implemented by [MTRDoorLockClusterDoorStateChangeEvent], for mocking and DI.
-type MTRDoorLockClusterDoorStateChangeEventable interface {
-	obj.Object
-	WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent
-	DoorState() obj.Object
-	SetDoorState(doorState obj.Object)
-}
-
-var _ MTRDoorLockClusterDoorStateChangeEventable = (*MTRDoorLockClusterDoorStateChangeEvent)(nil)

@@ -46,57 +46,42 @@ func mTRBridgedDeviceBasicInformationClusterStartUpEventAdopt(id objc.ID) *MTRBr
 }
 
 // Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) Description() string {
+	return rt.Description(objref.IDOf(mbdbicsue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbdbicsue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbdbicsue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) String() string {
+	return rt.Description(objref.IDOf(mbdbicsue))
 }
 
 // WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicInformationClusterStartUpEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicInformationClusterStartUpEvent {
+	objc.Send[objc.ID](objref.IDOf(mbdbicsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return mbdbicsue
 }
 
 // SoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbicsue), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
-
-// SetSoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-}
-
-// MTRBridgedDeviceBasicInformationClusterStartUpEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterStartUpEvent], for mocking and DI.
-type MTRBridgedDeviceBasicInformationClusterStartUpEventable interface {
-	obj.Object
-	WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicInformationClusterStartUpEvent
-	SoftwareVersion() obj.Object
-	SetSoftwareVersion(softwareVersion obj.Object)
-}
-
-var _ MTRBridgedDeviceBasicInformationClusterStartUpEventable = (*MTRBridgedDeviceBasicInformationClusterStartUpEvent)(nil)
 
 // isMTRBridgedDeviceBasicInformationClusterStartUpEvent marks MTRBridgedDeviceBasicInformationClusterStartUpEvent — and, by embedding promotion, its
 // subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterStartUpEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) isMTRBridgedDeviceBasicInformationClusterStartUpEvent() {
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) isMTRBridgedDeviceBasicInformationClusterStartUpEvent() {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterStartUpEventProvider = (*MTRBridgedDeviceBasicInformationClusterStartUpEvent)(nil)

@@ -46,24 +46,24 @@ func vSSubscriptionAdopt(id objc.ID) *VSSubscription {
 }
 
 // Description returns the object's -description text.
-func (x *VSSubscription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vs *VSSubscription) Description() string {
+	return rt.Description(objref.IDOf(vs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSSubscription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vs *VSSubscription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSSubscription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vs *VSSubscription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSSubscription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vs *VSSubscription) String() string {
+	return rt.Description(objref.IDOf(vs))
 }
 
 // NewVSSubscription creates a new VSSubscription.
@@ -72,95 +72,56 @@ func NewVSSubscription() *VSSubscription {
 	return vSSubscriptionAdopt(_id)
 }
 
-// WithExpirationDate the date when the user’s subscription expires.
-func (x *VSSubscription) WithExpirationDate(expirationDate obj.Object) *VSSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-	return x
+// WithExpirationDate sets the date when the user’s subscription expires.
+func (vs *VSSubscription) WithExpirationDate(expirationDate obj.Object) *VSSubscription {
+	objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+	return vs
 }
 
-// WithAccessLevel the subscriber’s level of access to your catalog of content.
-func (x *VSSubscription) WithAccessLevel(accessLevel VSSubscriptionAccessLevel) *VSSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessLevel:"), accessLevel)
-	return x
+// WithAccessLevel sets the subscriber’s level of access to your catalog of content.
+func (vs *VSSubscription) WithAccessLevel(accessLevel VSSubscriptionAccessLevel) *VSSubscription {
+	objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("setAccessLevel:"), accessLevel)
+	return vs
 }
 
-// WithTierIdentifiers a list of content from your catalog that the subscriber can access.
-func (x *VSSubscription) WithTierIdentifiers(items ...obj.Object) *VSSubscription {
+// WithTierIdentifiers sets a list of content from your catalog that the subscriber can access.
+func (vs *VSSubscription) WithTierIdentifiers(items ...obj.Object) *VSSubscription {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTierIdentifiers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("setTierIdentifiers:"), _arr)
+	return vs
 }
 
-// WithBillingIdentifier the subscriber’s billing group.
-func (x *VSSubscription) WithBillingIdentifier(billingIdentifier string) *VSSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
-	return x
+// WithBillingIdentifier sets the subscriber’s billing group.
+func (vs *VSSubscription) WithBillingIdentifier(billingIdentifier string) *VSSubscription {
+	objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
+	return vs
 }
 
-// ExpirationDate after this point in time, the subscription will be considered inactive. If the current subscription becomes inactive, the system will behave as though the user is not subscribed at all, i.e. as though the registration center's current subscription had been set to nil. Defaults to distantFuture. Providing a value is useful in a limited number of scenarios, e.g. when the a subscriber decides not to renew their subscription, you should provide an expiration date that corresponds to the point in time when the final billing cycle will end. This might also be useful if the subscription only grants access to content that is time-limited, e.g. a single season of games for a sports league.
-func (x *VSSubscription) ExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+// ExpirationDate returns after this point in time, the subscription will be considered inactive. If the current subscription becomes inactive, the system will behave as though the user is not subscribed at all, i.e. as though the registration center's current subscription had been set to nil. Defaults to distantFuture. Providing a value is useful in a limited number of scenarios, e.g. when the a subscriber decides not to renew their subscription, you should provide an expiration date that corresponds to the point in time when the final billing cycle will end. This might also be useful if the subscription only grants access to content that is time-limited, e.g. a single season of games for a sports league.
+func (vs *VSSubscription) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
-// SetExpirationDate wraps the corresponding Objective-C method.
-func (x *VSSubscription) SetExpirationDate(expirationDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-}
-
 // AccessLevel describes the level of access the subscriber has to your catalog of content. It is an error to provide a subscription with an unknown access level as the current subscription.  Instead, choose the access level that describes the content that the subscriber can play.
-func (x *VSSubscription) AccessLevel() VSSubscriptionAccessLevel {
-	_r := objc.Send[VSSubscriptionAccessLevel](objref.IDOf(x), objc.RegisterName("accessLevel"))
+func (vs *VSSubscription) AccessLevel() VSSubscriptionAccessLevel {
+	_r := objc.Send[VSSubscriptionAccessLevel](objref.IDOf(vs), objc.RegisterName("accessLevel"))
 	return _r
 }
 
-// SetAccessLevel wraps the corresponding Objective-C method.
-func (x *VSSubscription) SetAccessLevel(accessLevel VSSubscriptionAccessLevel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessLevel:"), accessLevel)
-}
-
-// TierIdentifiers identifies a subset of content from your catalog that subscriber can play. Only provide values that are used in your availability feed's tier restrictions.
+// TierIdentifiers returns identifies a subset of content from your catalog that subscriber can play. Only provide values that are used in your availability feed's tier restrictions.
 //
 // TierIdentifiers returns the collection as a Go slice.
-func (x *VSSubscription) TierIdentifiers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tierIdentifiers"))
+func (vs *VSSubscription) TierIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("tierIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetTierIdentifiers wraps the corresponding Objective-C method.
-func (x *VSSubscription) SetTierIdentifiers(tierIdentifiers []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTierIdentifiers:"), purego.SliceToNSArray(tierIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// BillingIdentifier identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.
-func (x *VSSubscription) BillingIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingIdentifier"))
+// BillingIdentifier returns identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.
+func (vs *VSSubscription) BillingIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("billingIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetBillingIdentifier wraps the corresponding Objective-C method.
-func (x *VSSubscription) SetBillingIdentifier(billingIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
-}
-
-// VSSubscriptionable is the interface implemented by [VSSubscription], for mocking and DI.
-type VSSubscriptionable interface {
-	obj.Object
-	WithExpirationDate(expirationDate obj.Object) *VSSubscription
-	WithAccessLevel(accessLevel VSSubscriptionAccessLevel) *VSSubscription
-	WithTierIdentifiers(items ...obj.Object) *VSSubscription
-	WithBillingIdentifier(billingIdentifier string) *VSSubscription
-	ExpirationDate() obj.Object
-	SetExpirationDate(expirationDate obj.Object)
-	AccessLevel() VSSubscriptionAccessLevel
-	SetAccessLevel(accessLevel VSSubscriptionAccessLevel)
-	TierIdentifiers() []string
-	SetTierIdentifiers(tierIdentifiers []string)
-	BillingIdentifier() string
-	SetBillingIdentifier(billingIdentifier string)
-}
-
-var _ VSSubscriptionable = (*VSSubscription)(nil)

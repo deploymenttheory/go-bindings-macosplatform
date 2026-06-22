@@ -44,24 +44,24 @@ func uRLSessionWebSocketMessageAdopt(id objc.ID) *URLSessionWebSocketMessage {
 }
 
 // Description returns the object's -description text.
-func (x *URLSessionWebSocketMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uswsm *URLSessionWebSocketMessage) Description() string {
+	return rt.Description(objref.IDOf(uswsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLSessionWebSocketMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uswsm *URLSessionWebSocketMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uswsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLSessionWebSocketMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uswsm *URLSessionWebSocketMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uswsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLSessionWebSocketMessage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uswsm *URLSessionWebSocketMessage) String() string {
+	return rt.Description(objref.IDOf(uswsm))
 }
 
 // NewURLSessionWebSocketMessageWithData creates a new URLSessionWebSocketMessage.
@@ -79,29 +79,19 @@ func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocke
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uswsm *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage {
+	objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uswsm
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketMessage) Type() URLSessionWebSocketMessageType {
-	_r := objc.Send[URLSessionWebSocketMessageType](objref.IDOf(x), objc.RegisterName("type"))
+func (uswsm *URLSessionWebSocketMessage) Type() URLSessionWebSocketMessageType {
+	_r := objc.Send[URLSessionWebSocketMessageType](objref.IDOf(uswsm), objc.RegisterName("type"))
 	return _r
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketMessage) Data() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (uswsm *URLSessionWebSocketMessage) Data() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("data"))
 	return DataFromID(_r)
 }
-
-// URLSessionWebSocketMessageable is the interface implemented by [URLSessionWebSocketMessage], for mocking and DI.
-type URLSessionWebSocketMessageable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage
-	Type() URLSessionWebSocketMessageType
-	Data() *Data
-}
-
-var _ URLSessionWebSocketMessageable = (*URLSessionWebSocketMessage)(nil)

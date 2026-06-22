@@ -46,24 +46,24 @@ func exceptionAdopt(id objc.ID) *Exception {
 }
 
 // Description returns the object's -description text.
-func (x *Exception) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Exception) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Exception) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Exception) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Exception) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Exception) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Exception) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Exception) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewExceptionWithNameReasonUserInfo initializes and returns a newly allocated exception object.
@@ -74,25 +74,25 @@ func NewExceptionWithNameReasonUserInfo(aName *String, aReason string, aUserInfo
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Exception) WithScriptingProperties(scriptingProperties obj.Object) *Exception {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (e *Exception) WithScriptingProperties(scriptingProperties obj.Object) *Exception {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return e
 }
 
 // Raise raises the receiver, causing program flow to jump to the local exception handler.
-func (x *Exception) Raise() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("raise"))
+func (e *Exception) Raise() {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("raise"))
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Exception) Name() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (e *Exception) Name() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
 // Reason wraps the corresponding Objective-C method.
-func (x *Exception) Reason() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reason"))
+func (e *Exception) Reason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("reason"))
 	if _r == 0 {
 		return ""
 	}
@@ -100,37 +100,23 @@ func (x *Exception) Reason() string {
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *Exception) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (e *Exception) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // CallStackReturnAddresses wraps the corresponding Objective-C method.
 //
 // CallStackReturnAddresses returns the collection as a Go slice.
-func (x *Exception) CallStackReturnAddresses() []*Number {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackReturnAddresses"))
+func (e *Exception) CallStackReturnAddresses() []*Number {
+	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("callStackReturnAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
 // CallStackSymbols wraps the corresponding Objective-C method.
 //
 // CallStackSymbols returns the collection as a Go slice.
-func (x *Exception) CallStackSymbols() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackSymbols"))
+func (e *Exception) CallStackSymbols() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("callStackSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// Exceptionable is the interface implemented by [Exception], for mocking and DI.
-type Exceptionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Exception
-	Raise()
-	Name() *String
-	Reason() string
-	UserInfo() obj.Object
-	CallStackReturnAddresses() []*Number
-	CallStackSymbols() []string
-}
-
-var _ Exceptionable = (*Exception)(nil)

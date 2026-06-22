@@ -23,7 +23,7 @@ func PropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue obj.Obje
 	return obj.Wrap(_r)
 }
 
-// ReadOnlyPropertyAttribute the class property representing a readOnly property attribute with no minValue/maxValue/validValues.
+// ReadOnlyPropertyAttribute returns the class property representing a readOnly property attribute with no minValue/maxValue/validValues.
 func ReadOnlyPropertyAttribute() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("readOnlyPropertyAttribute"))
 	return obj.Wrap(_r)

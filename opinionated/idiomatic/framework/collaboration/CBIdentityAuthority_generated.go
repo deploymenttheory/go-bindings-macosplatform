@@ -46,24 +46,24 @@ func identityAuthorityAdopt(id objc.ID) *IdentityAuthority {
 }
 
 // Description returns the object's -description text.
-func (x *IdentityAuthority) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ia *IdentityAuthority) Description() string {
+	return rt.Description(objref.IDOf(ia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IdentityAuthority) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ia *IdentityAuthority) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IdentityAuthority) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ia *IdentityAuthority) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IdentityAuthority) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ia *IdentityAuthority) String() string {
+	return rt.Description(objref.IDOf(ia))
 }
 
 // NewIdentityAuthority creates a new IdentityAuthority.
@@ -73,25 +73,16 @@ func NewIdentityAuthority() *IdentityAuthority {
 }
 
 // CSIdentityAuthority returns an identity authority for use with the Core Services Identity API. This method, along with “CBIdentityAuthority/identityAuthorityWithCSIdentityAuthority:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque authority object for use with the Core Services Identity API.
-func (x *IdentityAuthority) CSIdentityAuthority() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSIdentityAuthority"))
+func (ia *IdentityAuthority) CSIdentityAuthority() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("CSIdentityAuthority"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedName returns the localized name of the identity authority. - Returns: The computer’s name if the authority is local, or Managed Network Directory if the authority is managed.
-func (x *IdentityAuthority) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+func (ia *IdentityAuthority) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// IdentityAuthorityable is the interface implemented by [IdentityAuthority], for mocking and DI.
-type IdentityAuthorityable interface {
-	obj.Object
-	CSIdentityAuthority() obj.Object
-	LocalizedName() string
-}
-
-var _ IdentityAuthorityable = (*IdentityAuthority)(nil)

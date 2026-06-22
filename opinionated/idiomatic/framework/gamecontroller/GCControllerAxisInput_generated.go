@@ -7,7 +7,6 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,66 +51,46 @@ func NewControllerAxisInput() *ControllerAxisInput {
 	return controllerAxisInputAdopt(_id)
 }
 
-// WithValue the current value of the axis.
-func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the current value of the axis.
+func (cai *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setValue:"), value)
+	return cai
 }
 
-// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
-func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return x
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (cai *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return cai
 }
 
-// WithSfSymbolsName a system symbol for the element or the remapped element.
-func (x *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
-	return x
+// WithSfSymbolsName sets a system symbol for the element or the remapped element.
+func (cai *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
+	return cai
 }
 
-// WithLocalizedName the localized name for the element or the remapped element.
-func (x *ControllerAxisInput) WithLocalizedName(localizedName string) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
-	return x
+// WithLocalizedName sets the localized name for the element or the remapped element.
+func (cai *ControllerAxisInput) WithLocalizedName(localizedName string) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
+	return cai
 }
 
-// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
-func (x *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
-	return x
+// WithUnmappedSfSymbolsName sets the element’s system symbol, not the remapped symbol.
+func (cai *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
+	return cai
 }
 
-// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
-func (x *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
-	return x
+// WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
+func (cai *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return cai
 }
 
-// SetValue sets the normalized value of the axis.
-func (x *ControllerAxisInput) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// Value a normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
-func (x *ControllerAxisInput) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns a normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
+func (cai *ControllerAxisInput) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(cai), objc.RegisterName("value"))
 	return _r
 }
-
-// ControllerAxisInputable is the interface implemented by [ControllerAxisInput], for mocking and DI.
-type ControllerAxisInputable interface {
-	obj.Object
-	WithValue(value float32) *ControllerAxisInput
-	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput
-	WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput
-	WithLocalizedName(localizedName string) *ControllerAxisInput
-	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput
-	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput
-	SetValue(value float32)
-	Value() float32
-}
-
-var _ ControllerAxisInputable = (*ControllerAxisInput)(nil)
 
 var _ ControllerElementProvider = (*ControllerAxisInput)(nil)

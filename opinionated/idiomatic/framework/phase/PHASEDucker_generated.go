@@ -46,24 +46,24 @@ func duckerAdopt(id objc.ID) *Ducker {
 }
 
 // Description returns the object's -description text.
-func (x *Ducker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Ducker) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Ducker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Ducker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Ducker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Ducker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Ducker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Ducker) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve creates an object that manages competing sounds.
@@ -74,86 +74,68 @@ func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackC
 }
 
 // Activate instructs the ducker to begin altering sound.
-func (x *Ducker) Activate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
+func (d *Ducker) Activate() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("activate"))
 }
 
 // Deactivate stops the ducker from altering sound.
-func (x *Ducker) Deactivate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
+func (d *Ducker) Deactivate() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("deactivate"))
 }
 
-// SourceGroups the source groups that will trigger the ducker when a sound in one of the source groups starts playback.
-func (x *Ducker) SourceGroups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceGroups"))
+// SourceGroups returns the source groups that will trigger the ducker when a sound in one of the source groups starts playback.
+func (d *Ducker) SourceGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("sourceGroups"))
 	return obj.Wrap(_r)
 }
 
-// TargetGroups the target groups that will be ducked when a sound in one of the source groups triggers the ducker.
-func (x *Ducker) TargetGroups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetGroups"))
+// TargetGroups returns the target groups that will be ducked when a sound in one of the source groups triggers the ducker.
+func (d *Ducker) TargetGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("targetGroups"))
 	return obj.Wrap(_r)
 }
 
-// IsActive YES if the ducker is active; otherwise, NO.
-func (x *Ducker) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether the ducker is active; otherwise, false.
+func (d *Ducker) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isActive"))
 	return _r
 }
 
-// Gain linear gain scalar.
-func (x *Ducker) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (d *Ducker) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("gain"))
 	return _r
 }
 
-// AttackTime the time for the attenuation gain to ramp into effect.
-func (x *Ducker) AttackTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("attackTime"))
+// AttackTime returns the time for the attenuation gain to ramp into effect.
+func (d *Ducker) AttackTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("attackTime"))
 	return _r
 }
 
-// ReleaseTime the time for the ducked sounds to ramp back to their original level.
-func (x *Ducker) ReleaseTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("releaseTime"))
+// ReleaseTime returns the time for the ducked sounds to ramp back to their original level.
+func (d *Ducker) ReleaseTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("releaseTime"))
 	return _r
 }
 
-// AttackCurve the type of curve function to use during the attack phase of gain reduction.
-func (x *Ducker) AttackCurve() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("attackCurve"))
+// AttackCurve returns the type of curve function to use during the attack phase of gain reduction.
+func (d *Ducker) AttackCurve() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(d), objc.RegisterName("attackCurve"))
 	return _r
 }
 
-// ReleaseCurve the type of curve function to use during the release phase of gain reduction.
-func (x *Ducker) ReleaseCurve() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("releaseCurve"))
+// ReleaseCurve returns the type of curve function to use during the release phase of gain reduction.
+func (d *Ducker) ReleaseCurve() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(d), objc.RegisterName("releaseCurve"))
 	return _r
 }
 
-// Identifier the identifier that uniquely represents this ducker.
-func (x *Ducker) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier that uniquely represents this ducker.
+func (d *Ducker) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Duckerable is the interface implemented by [Ducker], for mocking and DI.
-type Duckerable interface {
-	obj.Object
-	Activate()
-	Deactivate()
-	SourceGroups() obj.Object
-	TargetGroups() obj.Object
-	IsActive() bool
-	Gain() float64
-	AttackTime() float64
-	ReleaseTime() float64
-	AttackCurve() CurveType
-	ReleaseCurve() CurveType
-	Identifier() string
-}
-
-var _ Duckerable = (*Ducker)(nil)

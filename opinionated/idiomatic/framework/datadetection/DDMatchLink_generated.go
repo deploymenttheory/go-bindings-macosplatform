@@ -53,17 +53,9 @@ func NewMatchLink() *MatchLink {
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *MatchLink) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (ml *MatchLink) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// MatchLinkable is the interface implemented by [MatchLink], for mocking and DI.
-type MatchLinkable interface {
-	obj.Object
-	URL() obj.Object
-}
-
-var _ MatchLinkable = (*MatchLink)(nil)
 
 var _ MatchProvider = (*MatchLink)(nil)

@@ -46,24 +46,24 @@ func minmaxStrategistAdopt(id objc.ID) *MinmaxStrategist {
 }
 
 // Description returns the object's -description text.
-func (x *MinmaxStrategist) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MinmaxStrategist) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MinmaxStrategist) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MinmaxStrategist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MinmaxStrategist) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MinmaxStrategist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MinmaxStrategist) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MinmaxStrategist) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMinmaxStrategist creates a new MinmaxStrategist.
@@ -72,29 +72,14 @@ func NewMinmaxStrategist() *MinmaxStrategist {
 	return minmaxStrategistAdopt(_id)
 }
 
-// WithMaxLookAheadDepth the number of future turns for the strategist to consider when planning moves.
-func (x *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
-	return x
+// WithMaxLookAheadDepth sets the number of future turns for the strategist to consider when planning moves.
+func (ms *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
+	return ms
 }
 
-// MaxLookAheadDepth the maximum number of future turns that will be processed when searching for a move.
-func (x *MinmaxStrategist) MaxLookAheadDepth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxLookAheadDepth"))
+// MaxLookAheadDepth returns the maximum number of future turns that will be processed when searching for a move.
+func (ms *MinmaxStrategist) MaxLookAheadDepth() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("maxLookAheadDepth"))
 	return _r
 }
-
-// SetMaxLookAheadDepth wraps the corresponding Objective-C method.
-func (x *MinmaxStrategist) SetMaxLookAheadDepth(maxLookAheadDepth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLookAheadDepth:"), maxLookAheadDepth)
-}
-
-// MinmaxStrategistable is the interface implemented by [MinmaxStrategist], for mocking and DI.
-type MinmaxStrategistable interface {
-	obj.Object
-	WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist
-	MaxLookAheadDepth() int
-	SetMaxLookAheadDepth(maxLookAheadDepth int)
-}
-
-var _ MinmaxStrategistable = (*MinmaxStrategist)(nil)

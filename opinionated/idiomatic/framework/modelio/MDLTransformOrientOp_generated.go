@@ -44,24 +44,24 @@ func transformOrientOpAdopt(id objc.ID) *TransformOrientOp {
 }
 
 // Description returns the object's -description text.
-func (x *TransformOrientOp) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (too *TransformOrientOp) Description() string {
+	return rt.Description(objref.IDOf(too))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformOrientOp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (too *TransformOrientOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(too), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformOrientOp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (too *TransformOrientOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(too), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformOrientOp) String() string {
-	return rt.Description(objref.IDOf(x))
+func (too *TransformOrientOp) String() string {
+	return rt.Description(objref.IDOf(too))
 }
 
 // NewTransformOrientOp creates a new TransformOrientOp.
@@ -71,8 +71,8 @@ func NewTransformOrientOp() *TransformOrientOp {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TransformOrientOp) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (too *TransformOrientOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(too), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *TransformOrientOp) Name() string {
 }
 
 // AnimatedValue wraps the corresponding Objective-C method.
-func (x *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+func (too *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
+	_r := objc.Send[objc.ID](objref.IDOf(too), objc.RegisterName("animatedValue"))
 	return AnimatedQuaternionFromID(_r)
 }
-
-// TransformOrientOpable is the interface implemented by [TransformOrientOp], for mocking and DI.
-type TransformOrientOpable interface {
-	obj.Object
-	Name() string
-	AnimatedValue() *AnimatedQuaternion
-}
-
-var _ TransformOrientOpable = (*TransformOrientOp)(nil)

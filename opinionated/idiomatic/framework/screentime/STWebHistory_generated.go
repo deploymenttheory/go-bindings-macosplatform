@@ -6,13 +6,14 @@ package screentime
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // WebHistory is an idiomatic wrapper over the Objective-C class STWebHistory.
@@ -49,24 +50,24 @@ func webHistoryAdopt(id objc.ID) *WebHistory {
 }
 
 // Description returns the object's -description text.
-func (x *WebHistory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wh *WebHistory) Description() string {
+	return rt.Description(objref.IDOf(wh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebHistory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wh *WebHistory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebHistory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wh *WebHistory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebHistory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wh *WebHistory) String() string {
+	return rt.Description(objref.IDOf(wh))
 }
 
 // NewWebHistoryWithBundleIdentifierProfileIdentifierError creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
@@ -101,7 +102,7 @@ func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (result *We
 // FetchHistoryDuringInterval fetches web history that occurred during the date interval you specify.
 //
 // FetchHistoryDuringInterval blocks until the operation completes or ctx is cancelled.
-func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (result obj.Object, err error) {
+func (wh *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -113,7 +114,7 @@ func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval ob
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchHistoryDuringInterval:completionHandler:"), objref.IDOf(interval), _block)
+	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("fetchHistoryDuringInterval:completionHandler:"), objref.IDOf(interval), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -126,7 +127,7 @@ func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval ob
 // FetchAllHistory fetches all web history associated with the bundle identifier and profile identifier you specified during initialization.
 //
 // FetchAllHistory blocks until the operation completes or ctx is cancelled.
-func (x *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, err error) {
+func (wh *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -138,7 +139,7 @@ func (x *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, er
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAllHistoryWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("fetchAllHistoryWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -149,28 +150,16 @@ func (x *WebHistory) FetchAllHistory(ctx context.Context) (result obj.Object, er
 }
 
 // DeleteHistoryForURL deletes all the web history for the URL you specify.
-func (x *WebHistory) DeleteHistoryForURL(url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteHistoryForURL:"), rt.FileURL(url))
+func (wh *WebHistory) DeleteHistoryForURL(url string) {
+	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("deleteHistoryForURL:"), rt.FileURL(url))
 }
 
 // DeleteHistoryDuringInterval deletes web history that occurred during the date interval you specify.
-func (x *WebHistory) DeleteHistoryDuringInterval(interval obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteHistoryDuringInterval:"), objref.IDOf(interval))
+func (wh *WebHistory) DeleteHistoryDuringInterval(interval obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("deleteHistoryDuringInterval:"), objref.IDOf(interval))
 }
 
 // DeleteAllHistory deletes all web history associated with the bundle identifier you specified during initialization.
-func (x *WebHistory) DeleteAllHistory() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteAllHistory"))
+func (wh *WebHistory) DeleteAllHistory() {
+	objc.Send[objc.ID](objref.IDOf(wh), objc.RegisterName("deleteAllHistory"))
 }
-
-// WebHistoryable is the interface implemented by [WebHistory], for mocking and DI.
-type WebHistoryable interface {
-	obj.Object
-	FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (obj.Object, error)
-	FetchAllHistory(ctx context.Context) (obj.Object, error)
-	DeleteHistoryForURL(url string)
-	DeleteHistoryDuringInterval(interval obj.Object)
-	DeleteAllHistory()
-}
-
-var _ WebHistoryable = (*WebHistory)(nil)

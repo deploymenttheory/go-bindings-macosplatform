@@ -46,24 +46,24 @@ func accessibilityCustomRotorAdopt(id objc.ID) *AccessibilityCustomRotor {
 }
 
 // Description returns the object's -description text.
-func (x *AccessibilityCustomRotor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (acr *AccessibilityCustomRotor) Description() string {
+	return rt.Description(objref.IDOf(acr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessibilityCustomRotor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (acr *AccessibilityCustomRotor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(acr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessibilityCustomRotor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (acr *AccessibilityCustomRotor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(acr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessibilityCustomRotor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (acr *AccessibilityCustomRotor) String() string {
+	return rt.Description(objref.IDOf(acr))
 }
 
 // NewAccessibilityCustomRotor creates a new AccessibilityCustomRotor.
@@ -72,52 +72,29 @@ func NewAccessibilityCustomRotor() *AccessibilityCustomRotor {
 	return accessibilityCustomRotorAdopt(_id)
 }
 
-// WithType the type of content that the rotor represents.
-func (x *AccessibilityCustomRotor) WithType(type_ AccessibilityCustomRotorType) *AccessibilityCustomRotor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of content that the rotor represents.
+func (acr *AccessibilityCustomRotor) WithType(type_ AccessibilityCustomRotorType) *AccessibilityCustomRotor {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setType:"), type_)
+	return acr
 }
 
-// WithLabel the localized label that assistive apps use to describe the custom rotor.
-func (x *AccessibilityCustomRotor) WithLabel(label string) *AccessibilityCustomRotor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the localized label that assistive apps use to describe the custom rotor.
+func (acr *AccessibilityCustomRotor) WithLabel(label string) *AccessibilityCustomRotor {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return acr
 }
 
-// Type the rotor type to provide results for.
-func (x *AccessibilityCustomRotor) Type() AccessibilityCustomRotorType {
-	_r := objc.Send[AccessibilityCustomRotorType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the rotor type to provide results for.
+func (acr *AccessibilityCustomRotor) Type() AccessibilityCustomRotorType {
+	_r := objc.Send[AccessibilityCustomRotorType](objref.IDOf(acr), objc.RegisterName("type"))
 	return _r
 }
 
-// SetType the rotor type to provide results for.
-func (x *AccessibilityCustomRotor) SetType(type_ AccessibilityCustomRotorType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-}
-
-// Label the localized label assistive technologies will use to describe the custom rotor.
-func (x *AccessibilityCustomRotor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns the localized label assistive technologies will use to describe the custom rotor.
+func (acr *AccessibilityCustomRotor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel the localized label assistive technologies will use to describe the custom rotor.
-func (x *AccessibilityCustomRotor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// AccessibilityCustomRotorable is the interface implemented by [AccessibilityCustomRotor], for mocking and DI.
-type AccessibilityCustomRotorable interface {
-	obj.Object
-	WithType(type_ AccessibilityCustomRotorType) *AccessibilityCustomRotor
-	WithLabel(label string) *AccessibilityCustomRotor
-	Type() AccessibilityCustomRotorType
-	SetType(type_ AccessibilityCustomRotorType)
-	Label() string
-	SetLabel(label string)
-}
-
-var _ AccessibilityCustomRotorable = (*AccessibilityCustomRotor)(nil)

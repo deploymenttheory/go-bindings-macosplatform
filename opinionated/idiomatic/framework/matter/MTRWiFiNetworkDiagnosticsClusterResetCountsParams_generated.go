@@ -44,24 +44,24 @@ func mTRWiFiNetworkDiagnosticsClusterResetCountsParamsAdopt(id objc.ID) *MTRWiFi
 }
 
 // Description returns the object's -description text.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) Description() string {
+	return rt.Description(objref.IDOf(mwfndcrcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwfndcrcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwfndcrcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) String() string {
+	return rt.Description(objref.IDOf(mwfndcrcp))
 }
 
 // NewMTRWiFiNetworkDiagnosticsClusterResetCountsParams creates a new MTRWiFiNetworkDiagnosticsClusterResetCountsParams.
@@ -70,49 +70,26 @@ func NewMTRWiFiNetworkDiagnosticsClusterResetCountsParams() *MTRWiFiNetworkDiagn
 	return mTRWiFiNetworkDiagnosticsClusterResetCountsParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams {
+	objc.Send[objc.ID](objref.IDOf(mwfndcrcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mwfndcrcp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams {
+	objc.Send[objc.ID](objref.IDOf(mwfndcrcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mwfndcrcp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfndcrcp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mwfndcrcp *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfndcrcp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRWiFiNetworkDiagnosticsClusterResetCountsParamsable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterResetCountsParams], for mocking and DI.
-type MTRWiFiNetworkDiagnosticsClusterResetCountsParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRWiFiNetworkDiagnosticsClusterResetCountsParamsable = (*MTRWiFiNetworkDiagnosticsClusterResetCountsParams)(nil)

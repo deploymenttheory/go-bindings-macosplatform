@@ -53,17 +53,9 @@ func NewAppResponsivenessMetric() *AppResponsivenessMetric {
 }
 
 // HistogrammedApplicationHangTime wraps the corresponding Objective-C method.
-func (x *AppResponsivenessMetric) HistogrammedApplicationHangTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedApplicationHangTime"))
+func (arm *AppResponsivenessMetric) HistogrammedApplicationHangTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(arm), objc.RegisterName("histogrammedApplicationHangTime"))
 	return obj.Wrap(_r)
 }
-
-// AppResponsivenessMetricable is the interface implemented by [AppResponsivenessMetric], for mocking and DI.
-type AppResponsivenessMetricable interface {
-	obj.Object
-	HistogrammedApplicationHangTime() obj.Object
-}
-
-var _ AppResponsivenessMetricable = (*AppResponsivenessMetric)(nil)
 
 var _ MetricProvider = (*AppResponsivenessMetric)(nil)

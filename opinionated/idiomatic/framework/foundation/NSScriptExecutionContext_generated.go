@@ -46,24 +46,24 @@ func scriptExecutionContextAdopt(id objc.ID) *ScriptExecutionContext {
 }
 
 // Description returns the object's -description text.
-func (x *ScriptExecutionContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sec *ScriptExecutionContext) Description() string {
+	return rt.Description(objref.IDOf(sec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScriptExecutionContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sec *ScriptExecutionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScriptExecutionContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sec *ScriptExecutionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScriptExecutionContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sec *ScriptExecutionContext) String() string {
+	return rt.Description(objref.IDOf(sec))
 }
 
 // NewScriptExecutionContext creates a new ScriptExecutionContext.
@@ -72,76 +72,44 @@ func NewScriptExecutionContext() *ScriptExecutionContext {
 	return scriptExecutionContextAdopt(_id)
 }
 
-// WithTopLevelObject sets the top-level object for an object-specifier evaluation.
-func (x *ScriptExecutionContext) WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
-	return x
+// WithTopLevelObject sets sets the top-level object for an object-specifier evaluation.
+func (sec *ScriptExecutionContext) WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
+	return sec
 }
 
-// WithObjectBeingTested sets the top-level container object currently being tested in a “whose” qualifier to a given object.
-func (x *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
-	return x
+// WithObjectBeingTested sets sets the top-level container object currently being tested in a “whose” qualifier to a given object.
+func (sec *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
+	return sec
 }
 
-// WithRangeContainerObject sets the top-level container object for a range-specifier evaluation to a give object.
-func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
-	return x
+// WithRangeContainerObject sets sets the top-level container object for a range-specifier evaluation to a give object.
+func (sec *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
+	return sec
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ScriptExecutionContext) WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (sec *ScriptExecutionContext) WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return sec
 }
 
 // TopLevelObject wraps the corresponding Objective-C method.
-func (x *ScriptExecutionContext) TopLevelObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topLevelObject"))
+func (sec *ScriptExecutionContext) TopLevelObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("topLevelObject"))
 	return obj.Wrap(_r)
-}
-
-// SetTopLevelObject wraps the corresponding Objective-C method.
-func (x *ScriptExecutionContext) SetTopLevelObject(topLevelObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
 }
 
 // ObjectBeingTested wraps the corresponding Objective-C method.
-func (x *ScriptExecutionContext) ObjectBeingTested() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBeingTested"))
+func (sec *ScriptExecutionContext) ObjectBeingTested() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("objectBeingTested"))
 	return obj.Wrap(_r)
-}
-
-// SetObjectBeingTested wraps the corresponding Objective-C method.
-func (x *ScriptExecutionContext) SetObjectBeingTested(objectBeingTested obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
 }
 
 // RangeContainerObject wraps the corresponding Objective-C method.
-func (x *ScriptExecutionContext) RangeContainerObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeContainerObject"))
+func (sec *ScriptExecutionContext) RangeContainerObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("rangeContainerObject"))
 	return obj.Wrap(_r)
 }
-
-// SetRangeContainerObject wraps the corresponding Objective-C method.
-func (x *ScriptExecutionContext) SetRangeContainerObject(rangeContainerObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
-}
-
-// ScriptExecutionContextable is the interface implemented by [ScriptExecutionContext], for mocking and DI.
-type ScriptExecutionContextable interface {
-	obj.Object
-	WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext
-	WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext
-	WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext
-	WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext
-	TopLevelObject() obj.Object
-	SetTopLevelObject(topLevelObject obj.Object)
-	ObjectBeingTested() obj.Object
-	SetObjectBeingTested(objectBeingTested obj.Object)
-	RangeContainerObject() obj.Object
-	SetRangeContainerObject(rangeContainerObject obj.Object)
-}
-
-var _ ScriptExecutionContextable = (*ScriptExecutionContext)(nil)

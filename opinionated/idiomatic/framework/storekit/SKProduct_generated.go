@@ -46,24 +46,24 @@ func productAdopt(id objc.ID) *Product {
 }
 
 // Description returns the object's -description text.
-func (x *Product) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Product) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Product) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Product) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Product) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Product) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Product) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Product) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewProduct creates a new Product.
@@ -73,8 +73,8 @@ func NewProduct() *Product {
 }
 
 // LocalizedDescription wraps the corresponding Objective-C method.
-func (x *Product) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+func (p *Product) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *Product) LocalizedDescription() string {
 }
 
 // LocalizedTitle wraps the corresponding Objective-C method.
-func (x *Product) LocalizedTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+func (p *Product) LocalizedTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,20 +91,20 @@ func (x *Product) LocalizedTitle() string {
 }
 
 // Price wraps the corresponding Objective-C method.
-func (x *Product) Price() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("price"))
+func (p *Product) Price() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("price"))
 	return obj.Wrap(_r)
 }
 
 // PriceLocale wraps the corresponding Objective-C method.
-func (x *Product) PriceLocale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priceLocale"))
+func (p *Product) PriceLocale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("priceLocale"))
 	return obj.Wrap(_r)
 }
 
 // ProductIdentifier wraps the corresponding Objective-C method.
-func (x *Product) ProductIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
+func (p *Product) ProductIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,34 +112,34 @@ func (x *Product) ProductIdentifier() string {
 }
 
 // IsDownloadable wraps the corresponding Objective-C method.
-func (x *Product) IsDownloadable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDownloadable"))
+func (p *Product) IsDownloadable() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isDownloadable"))
 	return _r
 }
 
 // Downloadable wraps the corresponding Objective-C method.
-func (x *Product) Downloadable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("downloadable"))
+func (p *Product) Downloadable() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("downloadable"))
 	return _r
 }
 
 // IsFamilyShareable wraps the corresponding Objective-C method.
-func (x *Product) IsFamilyShareable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFamilyShareable"))
+func (p *Product) IsFamilyShareable() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFamilyShareable"))
 	return _r
 }
 
 // DownloadContentLengths wraps the corresponding Objective-C method.
 //
 // DownloadContentLengths returns the collection as a Go slice.
-func (x *Product) DownloadContentLengths() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadContentLengths"))
+func (p *Product) DownloadContentLengths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("downloadContentLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DownloadContentVersion wraps the corresponding Objective-C method.
-func (x *Product) DownloadContentVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadContentVersion"))
+func (p *Product) DownloadContentVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("downloadContentVersion"))
 	if _r == 0 {
 		return ""
 	}
@@ -147,20 +147,20 @@ func (x *Product) DownloadContentVersion() string {
 }
 
 // SubscriptionPeriod wraps the corresponding Objective-C method.
-func (x *Product) SubscriptionPeriod() *ProductSubscriptionPeriod {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionPeriod"))
+func (p *Product) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subscriptionPeriod"))
 	return ProductSubscriptionPeriodFromID(_r)
 }
 
 // IntroductoryPrice wraps the corresponding Objective-C method.
-func (x *Product) IntroductoryPrice() *ProductDiscount {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("introductoryPrice"))
+func (p *Product) IntroductoryPrice() *ProductDiscount {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("introductoryPrice"))
 	return ProductDiscountFromID(_r)
 }
 
 // SubscriptionGroupIdentifier wraps the corresponding Objective-C method.
-func (x *Product) SubscriptionGroupIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionGroupIdentifier"))
+func (p *Product) SubscriptionGroupIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subscriptionGroupIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -170,28 +170,7 @@ func (x *Product) SubscriptionGroupIdentifier() string {
 // Discounts wraps the corresponding Objective-C method.
 //
 // Discounts returns the collection as a Go slice.
-func (x *Product) Discounts() []*ProductDiscount {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discounts"))
+func (p *Product) Discounts() []*ProductDiscount {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("discounts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProductDiscount { return ProductDiscountFromID(_id) })
 }
-
-// Productable is the interface implemented by [Product], for mocking and DI.
-type Productable interface {
-	obj.Object
-	LocalizedDescription() string
-	LocalizedTitle() string
-	Price() obj.Object
-	PriceLocale() obj.Object
-	ProductIdentifier() string
-	IsDownloadable() bool
-	Downloadable() bool
-	IsFamilyShareable() bool
-	DownloadContentLengths() []obj.Object
-	DownloadContentVersion() string
-	SubscriptionPeriod() *ProductSubscriptionPeriod
-	IntroductoryPrice() *ProductDiscount
-	SubscriptionGroupIdentifier() string
-	Discounts() []*ProductDiscount
-}
-
-var _ Productable = (*Product)(nil)

@@ -46,24 +46,24 @@ func geocoderAdopt(id objc.ID) *Geocoder {
 }
 
 // Description returns the object's -description text.
-func (x *Geocoder) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Geocoder) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Geocoder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Geocoder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Geocoder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Geocoder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Geocoder) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Geocoder) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // NewGeocoder creates a new Geocoder.
@@ -73,21 +73,12 @@ func NewGeocoder() *Geocoder {
 }
 
 // CancelGeocode cancels a pending geocoding request.
-func (x *Geocoder) CancelGeocode() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelGeocode"))
+func (g *Geocoder) CancelGeocode() {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("cancelGeocode"))
 }
 
 // IsGeocoding wraps the corresponding Objective-C method.
-func (x *Geocoder) IsGeocoding() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGeocoding"))
+func (g *Geocoder) IsGeocoding() bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("isGeocoding"))
 	return _r
 }
-
-// Geocoderable is the interface implemented by [Geocoder], for mocking and DI.
-type Geocoderable interface {
-	obj.Object
-	CancelGeocode()
-	IsGeocoding() bool
-}
-
-var _ Geocoderable = (*Geocoder)(nil)

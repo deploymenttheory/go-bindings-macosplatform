@@ -52,149 +52,122 @@ func NewMTRClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpo
 }
 
 // ReadAttributeExpressedStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeExpressedStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExpressedStateWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeExpressedStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeExpressedStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSmokeStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeSmokeStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSmokeStateWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeSmokeStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeSmokeStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCOStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeCOStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCOStateWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeCOStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeCOStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeBatteryAlertWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBatteryAlertWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeBatteryAlertWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDeviceMutedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDeviceMutedWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeDeviceMutedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTestInProgressWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeTestInProgressWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTestInProgressWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeTestInProgressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeTestInProgressWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeHardwareFaultAlertWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareFaultAlertWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeHardwareFaultAlertWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeEndOfServiceAlertWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEndOfServiceAlertWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeEndOfServiceAlertWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeInterconnectSmokeAlarmWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInterconnectSmokeAlarmWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeInterconnectSmokeAlarmWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeInterconnectCOAlarmWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInterconnectCOAlarmWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeInterconnectCOAlarmWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeContaminationStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeContaminationStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeContaminationStateWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeContaminationStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeContaminationStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSmokeSensitivityLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSmokeSensitivityLevelWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeSmokeSensitivityLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcsca *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeExpiryDateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeExpiryDateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExpiryDateWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeExpiryDateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeExpiryDateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcsca *MTRClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsca), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterSmokeCOAlarmable is the interface implemented by [MTRClusterSmokeCOAlarm], for mocking and DI.
-type MTRClusterSmokeCOAlarmable interface {
-	obj.Object
-	ReadAttributeExpressedStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSmokeStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCOStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeBatteryAlertWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDeviceMutedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTestInProgressWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeHardwareFaultAlertWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeEndOfServiceAlertWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeInterconnectSmokeAlarmWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeInterconnectCOAlarmWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeContaminationStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSmokeSensitivityLevelWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeExpiryDateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterSmokeCOAlarmable = (*MTRClusterSmokeCOAlarm)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterSmokeCOAlarm)(nil)
 

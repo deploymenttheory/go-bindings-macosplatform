@@ -7,7 +7,6 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,48 +51,31 @@ func NewAnimationGroup() *AnimationGroup {
 	return animationGroupAdopt(_id)
 }
 
-// WithAnimations an array of CAAnimation objects to be evaluated in the time space of the receiver.
-func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGroup {
+// WithAnimations sets an array of CAAnimation objects to be evaluated in the time space of the receiver.
+func (ag *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGroup {
 	_arr := purego.SliceToNSArray(items, func(_v AnimationProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimations:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("setAnimations:"), _arr)
+	return ag
 }
 
-// WithTimingFunction an optional timing function defining the pacing of the animation.
-func (x *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-	return x
+// WithTimingFunction sets an optional timing function defining the pacing of the animation.
+func (ag *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
+	objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return ag
 }
 
-// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
-func (x *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets determines if the animation is removed from the target layer’s animations upon completion.
+func (ag *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup {
+	objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return ag
 }
 
 // Animations wraps the corresponding Objective-C method.
 //
 // Animations returns the collection as a Go slice.
-func (x *AnimationGroup) Animations() []*Animation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animations"))
+func (ag *AnimationGroup) Animations() []*Animation {
+	_arr := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("animations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Animation { return AnimationFromID(_id) })
 }
-
-// SetAnimations wraps the corresponding Objective-C method.
-func (x *AnimationGroup) SetAnimations(animations []*Animation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimations:"), purego.SliceToNSArray(animations, func(_v *Animation) objc.ID { return objref.IDOf(_v) }))
-}
-
-// AnimationGroupable is the interface implemented by [AnimationGroup], for mocking and DI.
-type AnimationGroupable interface {
-	obj.Object
-	WithAnimations(items ...AnimationProvider) *AnimationGroup
-	WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup
-	WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup
-	Animations() []*Animation
-	SetAnimations(animations []*Animation)
-}
-
-var _ AnimationGroupable = (*AnimationGroup)(nil)
 
 var _ AnimationProvider = (*AnimationGroup)(nil)

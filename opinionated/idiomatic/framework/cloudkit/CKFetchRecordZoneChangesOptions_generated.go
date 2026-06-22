@@ -46,24 +46,24 @@ func fetchRecordZoneChangesOptionsAdopt(id objc.ID) *FetchRecordZoneChangesOptio
 }
 
 // Description returns the object's -description text.
-func (x *FetchRecordZoneChangesOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (frzco *FetchRecordZoneChangesOptions) Description() string {
+	return rt.Description(objref.IDOf(frzco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchRecordZoneChangesOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (frzco *FetchRecordZoneChangesOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(frzco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchRecordZoneChangesOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (frzco *FetchRecordZoneChangesOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(frzco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FetchRecordZoneChangesOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (frzco *FetchRecordZoneChangesOptions) String() string {
+	return rt.Description(objref.IDOf(frzco))
 }
 
 // NewFetchRecordZoneChangesOptions creates a new FetchRecordZoneChangesOptions.
@@ -72,72 +72,41 @@ func NewFetchRecordZoneChangesOptions() *FetchRecordZoneChangesOptions {
 	return fetchRecordZoneChangesOptionsAdopt(_id)
 }
 
-// WithPreviousServerChangeToken the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
-func (x *FetchRecordZoneChangesOptions) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
-	return x
+// WithPreviousServerChangeToken sets the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
+func (frzco *FetchRecordZoneChangesOptions) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesOptions {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
+	return frzco
 }
 
-// WithResultsLimit the maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler.
-func (x *FetchRecordZoneChangesOptions) WithResultsLimit(resultsLimit int) *FetchRecordZoneChangesOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
-	return x
+// WithResultsLimit sets the maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler.
+func (frzco *FetchRecordZoneChangesOptions) WithResultsLimit(resultsLimit int) *FetchRecordZoneChangesOptions {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setResultsLimit:"), resultsLimit)
+	return frzco
 }
 
-// WithDesiredKeys the fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
-func (x *FetchRecordZoneChangesOptions) WithDesiredKeys(items ...obj.Object) *FetchRecordZoneChangesOptions {
+// WithDesiredKeys sets the fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
+func (frzco *FetchRecordZoneChangesOptions) WithDesiredKeys(items ...obj.Object) *FetchRecordZoneChangesOptions {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setDesiredKeys:"), _arr)
+	return frzco
 }
 
-// PreviousServerChangeToken the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
-func (x *FetchRecordZoneChangesOptions) PreviousServerChangeToken() *ServerChangeToken {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousServerChangeToken"))
+// PreviousServerChangeToken returns the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
+func (frzco *FetchRecordZoneChangesOptions) PreviousServerChangeToken() *ServerChangeToken {
+	_r := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("previousServerChangeToken"))
 	return ServerChangeTokenFromID(_r)
 }
 
-// SetPreviousServerChangeToken wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOptions) SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
-}
-
-// ResultsLimit the maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler.
-func (x *FetchRecordZoneChangesOptions) ResultsLimit() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultsLimit"))
+// ResultsLimit returns the maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchCompletionBlock“ handler.
+func (frzco *FetchRecordZoneChangesOptions) ResultsLimit() int {
+	_r := objc.Send[int](objref.IDOf(frzco), objc.RegisterName("resultsLimit"))
 	return _r
 }
 
-// SetResultsLimit wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOptions) SetResultsLimit(resultsLimit int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
-}
-
-// DesiredKeys the fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
+// DesiredKeys returns the fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
 //
 // DesiredKeys returns the collection as a Go slice.
-func (x *FetchRecordZoneChangesOptions) DesiredKeys() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredKeys"))
+func (frzco *FetchRecordZoneChangesOptions) DesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetDesiredKeys wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOptions) SetDesiredKeys(desiredKeys []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// FetchRecordZoneChangesOptionsable is the interface implemented by [FetchRecordZoneChangesOptions], for mocking and DI.
-type FetchRecordZoneChangesOptionsable interface {
-	obj.Object
-	WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesOptions
-	WithResultsLimit(resultsLimit int) *FetchRecordZoneChangesOptions
-	WithDesiredKeys(items ...obj.Object) *FetchRecordZoneChangesOptions
-	PreviousServerChangeToken() *ServerChangeToken
-	SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken)
-	ResultsLimit() int
-	SetResultsLimit(resultsLimit int)
-	DesiredKeys() []obj.Object
-	SetDesiredKeys(desiredKeys []obj.Object)
-}
-
-var _ FetchRecordZoneChangesOptionsable = (*FetchRecordZoneChangesOptions)(nil)

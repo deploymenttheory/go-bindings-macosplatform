@@ -46,24 +46,24 @@ func userLocationAdopt(id objc.ID) *UserLocation {
 }
 
 // Description returns the object's -description text.
-func (x *UserLocation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ul *UserLocation) Description() string {
+	return rt.Description(objref.IDOf(ul))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserLocation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ul *UserLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ul), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserLocation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ul *UserLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ul), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserLocation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ul *UserLocation) String() string {
+	return rt.Description(objref.IDOf(ul))
 }
 
 // NewUserLocation creates a new UserLocation.
@@ -72,69 +72,44 @@ func NewUserLocation() *UserLocation {
 	return userLocationAdopt(_id)
 }
 
-// WithTitle the title to display for the user’s location annotation.
-func (x *UserLocation) WithTitle(title string) *UserLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title to display for the user’s location annotation.
+func (ul *UserLocation) WithTitle(title string) *UserLocation {
+	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ul
 }
 
-// WithSubtitle the subtitle to display for the user’s location annotation.
-func (x *UserLocation) WithSubtitle(subtitle string) *UserLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle to display for the user’s location annotation.
+func (ul *UserLocation) WithSubtitle(subtitle string) *UserLocation {
+	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return ul
 }
 
 // IsUpdating wraps the corresponding Objective-C method.
-func (x *UserLocation) IsUpdating() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdating"))
+func (ul *UserLocation) IsUpdating() bool {
+	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("isUpdating"))
 	return _r
 }
 
 // Heading wraps the corresponding Objective-C method.
-func (x *UserLocation) Heading() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heading"))
+func (ul *UserLocation) Heading() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("heading"))
 	return obj.Wrap(_r)
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *UserLocation) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (ul *UserLocation) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *UserLocation) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // Subtitle wraps the corresponding Objective-C method.
-func (x *UserLocation) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+func (ul *UserLocation) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetSubtitle wraps the corresponding Objective-C method.
-func (x *UserLocation) SetSubtitle(subtitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-}
-
-// UserLocationable is the interface implemented by [UserLocation], for mocking and DI.
-type UserLocationable interface {
-	obj.Object
-	WithTitle(title string) *UserLocation
-	WithSubtitle(subtitle string) *UserLocation
-	IsUpdating() bool
-	Heading() obj.Object
-	Title() string
-	SetTitle(title string)
-	Subtitle() string
-	SetSubtitle(subtitle string)
-}
-
-var _ UserLocationable = (*UserLocation)(nil)

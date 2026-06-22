@@ -46,119 +46,82 @@ func basicAnimationAdopt(id objc.ID) *BasicAnimation {
 	return x
 }
 
-// WithFromValue defines the value the receiver uses to start interpolation.
-func (x *BasicAnimation) WithFromValue(fromValue obj.Object) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
-	return x
+// WithFromValue sets defines the value the receiver uses to start interpolation.
+func (ba *BasicAnimation) WithFromValue(fromValue obj.Object) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
+	return ba
 }
 
-// WithToValue defines the value the receiver uses to end interpolation.
-func (x *BasicAnimation) WithToValue(toValue obj.Object) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
-	return x
+// WithToValue sets defines the value the receiver uses to end interpolation.
+func (ba *BasicAnimation) WithToValue(toValue obj.Object) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
+	return ba
 }
 
-// WithByValue defines the value the receiver uses to perform relative interpolation.
-func (x *BasicAnimation) WithByValue(byValue obj.Object) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
-	return x
+// WithByValue sets defines the value the receiver uses to perform relative interpolation.
+func (ba *BasicAnimation) WithByValue(byValue obj.Object) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
+	return ba
 }
 
-// WithKeyPath specifies the key path the receiver animates.
-func (x *BasicAnimation) WithKeyPath(keyPath string) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
-	return x
+// WithKeyPath sets specifies the key path the receiver animates.
+func (ba *BasicAnimation) WithKeyPath(keyPath string) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
+	return ba
 }
 
-// WithAdditive determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
-func (x *BasicAnimation) WithAdditive(additive bool) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
-	return x
+// WithAdditive sets determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+func (ba *BasicAnimation) WithAdditive(additive bool) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setAdditive:"), additive)
+	return ba
 }
 
-// WithCumulative determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
-func (x *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
-	return x
+// WithCumulative sets determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+func (ba *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setCumulative:"), cumulative)
+	return ba
 }
 
-// WithValueFunction an optional value function that is applied to interpolated values.
-func (x *BasicAnimation) WithValueFunction(valueFunction *ValueFunction) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
-	return x
+// WithValueFunction sets an optional value function that is applied to interpolated values.
+func (ba *BasicAnimation) WithValueFunction(valueFunction *ValueFunction) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
+	return ba
 }
 
-// WithTimingFunction an optional timing function defining the pacing of the animation.
-func (x *BasicAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-	return x
+// WithTimingFunction sets an optional timing function defining the pacing of the animation.
+func (ba *BasicAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return ba
 }
 
-// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
-func (x *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets determines if the animation is removed from the target layer’s animations upon completion.
+func (ba *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return ba
 }
 
 // FromValue wraps the corresponding Objective-C method.
-func (x *BasicAnimation) FromValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromValue"))
+func (ba *BasicAnimation) FromValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("fromValue"))
 	return obj.Wrap(_r)
-}
-
-// SetFromValue wraps the corresponding Objective-C method.
-func (x *BasicAnimation) SetFromValue(fromValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
 }
 
 // ToValue wraps the corresponding Objective-C method.
-func (x *BasicAnimation) ToValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toValue"))
+func (ba *BasicAnimation) ToValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("toValue"))
 	return obj.Wrap(_r)
-}
-
-// SetToValue wraps the corresponding Objective-C method.
-func (x *BasicAnimation) SetToValue(toValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
 }
 
 // ByValue wraps the corresponding Objective-C method.
-func (x *BasicAnimation) ByValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byValue"))
+func (ba *BasicAnimation) ByValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("byValue"))
 	return obj.Wrap(_r)
 }
-
-// SetByValue wraps the corresponding Objective-C method.
-func (x *BasicAnimation) SetByValue(byValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
-}
-
-// BasicAnimationable is the interface implemented by [BasicAnimation], for mocking and DI.
-type BasicAnimationable interface {
-	obj.Object
-	WithFromValue(fromValue obj.Object) *BasicAnimation
-	WithToValue(toValue obj.Object) *BasicAnimation
-	WithByValue(byValue obj.Object) *BasicAnimation
-	WithKeyPath(keyPath string) *BasicAnimation
-	WithAdditive(additive bool) *BasicAnimation
-	WithCumulative(cumulative bool) *BasicAnimation
-	WithValueFunction(valueFunction *ValueFunction) *BasicAnimation
-	WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation
-	WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation
-	FromValue() obj.Object
-	SetFromValue(fromValue obj.Object)
-	ToValue() obj.Object
-	SetToValue(toValue obj.Object)
-	ByValue() obj.Object
-	SetByValue(byValue obj.Object)
-}
-
-var _ BasicAnimationable = (*BasicAnimation)(nil)
 
 // isBasicAnimation marks BasicAnimation — and, by embedding promotion, its
 // subclasses — as a member of the BasicAnimation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BasicAnimation) isBasicAnimation() {}
+func (ba *BasicAnimation) isBasicAnimation() {}
 
 var _ BasicAnimationProvider = (*BasicAnimation)(nil)
 

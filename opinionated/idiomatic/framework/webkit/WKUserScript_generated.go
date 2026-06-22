@@ -46,24 +46,24 @@ func wKUserScriptAdopt(id objc.ID) *WKUserScript {
 }
 
 // Description returns the object's -description text.
-func (x *WKUserScript) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wus *WKUserScript) Description() string {
+	return rt.Description(objref.IDOf(wus))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKUserScript) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wus *WKUserScript) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wus), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKUserScript) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wus *WKUserScript) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wus), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKUserScript) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wus *WKUserScript) String() string {
+	return rt.Description(objref.IDOf(wus))
 }
 
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a user script object that contains the specified source code and attributes.
@@ -81,8 +81,8 @@ func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *WKUserScript) Source() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (wus *WKUserScript) Source() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wus), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,23 +90,13 @@ func (x *WKUserScript) Source() string {
 }
 
 // InjectionTime wraps the corresponding Objective-C method.
-func (x *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
-	_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(x), objc.RegisterName("injectionTime"))
+func (wus *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
+	_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(wus), objc.RegisterName("injectionTime"))
 	return _r
 }
 
 // IsForMainFrameOnly wraps the corresponding Objective-C method.
-func (x *WKUserScript) IsForMainFrameOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForMainFrameOnly"))
+func (wus *WKUserScript) IsForMainFrameOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(wus), objc.RegisterName("isForMainFrameOnly"))
 	return _r
 }
-
-// WKUserScriptable is the interface implemented by [WKUserScript], for mocking and DI.
-type WKUserScriptable interface {
-	obj.Object
-	Source() string
-	InjectionTime() WKUserScriptInjectionTime
-	IsForMainFrameOnly() bool
-}
-
-var _ WKUserScriptable = (*WKUserScript)(nil)

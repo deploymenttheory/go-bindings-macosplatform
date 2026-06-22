@@ -46,24 +46,24 @@ func voiceAnalyticsAdopt(id objc.ID) *VoiceAnalytics {
 }
 
 // Description returns the object's -description text.
-func (x *VoiceAnalytics) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (va *VoiceAnalytics) Description() string {
+	return rt.Description(objref.IDOf(va))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VoiceAnalytics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (va *VoiceAnalytics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(va), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VoiceAnalytics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (va *VoiceAnalytics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(va), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VoiceAnalytics) String() string {
-	return rt.Description(objref.IDOf(x))
+func (va *VoiceAnalytics) String() string {
+	return rt.Description(objref.IDOf(va))
 }
 
 // NewVoiceAnalytics creates a new VoiceAnalytics.
@@ -73,36 +73,25 @@ func NewVoiceAnalytics() *VoiceAnalytics {
 }
 
 // Jitter wraps the corresponding Objective-C method.
-func (x *VoiceAnalytics) Jitter() *AcousticFeature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jitter"))
+func (va *VoiceAnalytics) Jitter() *AcousticFeature {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("jitter"))
 	return AcousticFeatureFromID(_r)
 }
 
-// Shimmer the variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
-func (x *VoiceAnalytics) Shimmer() *AcousticFeature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shimmer"))
+// Shimmer returns the variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
+func (va *VoiceAnalytics) Shimmer() *AcousticFeature {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("shimmer"))
 	return AcousticFeatureFromID(_r)
 }
 
-// Pitch the highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
-func (x *VoiceAnalytics) Pitch() *AcousticFeature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitch"))
+// Pitch returns the highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
+func (va *VoiceAnalytics) Pitch() *AcousticFeature {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("pitch"))
 	return AcousticFeatureFromID(_r)
 }
 
 // Voicing wraps the corresponding Objective-C method.
-func (x *VoiceAnalytics) Voicing() *AcousticFeature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voicing"))
+func (va *VoiceAnalytics) Voicing() *AcousticFeature {
+	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("voicing"))
 	return AcousticFeatureFromID(_r)
 }
-
-// VoiceAnalyticsable is the interface implemented by [VoiceAnalytics], for mocking and DI.
-type VoiceAnalyticsable interface {
-	obj.Object
-	Jitter() *AcousticFeature
-	Shimmer() *AcousticFeature
-	Pitch() *AcousticFeature
-	Voicing() *AcousticFeature
-}
-
-var _ VoiceAnalyticsable = (*VoiceAnalytics)(nil)

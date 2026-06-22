@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNConvolutionTransposeNode() *CNNConvolutionTransposeNode {
 	return cNNConvolutionTransposeNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTransposeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cctn *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTransposeNode {
+	objc.Send[objc.ID](objref.IDOf(cctn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cctn
 }
-
-// CNNConvolutionTransposeNodeable is the interface implemented by [CNNConvolutionTransposeNode], for mocking and DI.
-type CNNConvolutionTransposeNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNConvolutionTransposeNode
-}
-
-var _ CNNConvolutionTransposeNodeable = (*CNNConvolutionTransposeNode)(nil)
 
 var _ CNNConvolutionNodeProvider = (*CNNConvolutionTransposeNode)(nil)
 

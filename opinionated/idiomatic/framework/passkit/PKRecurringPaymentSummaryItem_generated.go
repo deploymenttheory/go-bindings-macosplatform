@@ -52,92 +52,58 @@ func NewRecurringPaymentSummaryItem() *RecurringPaymentSummaryItem {
 	return recurringPaymentSummaryItemAdopt(_id)
 }
 
-// WithStartDate the date of the first payment.
-func (x *RecurringPaymentSummaryItem) WithStartDate(startDate obj.Object) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
-	return x
+// WithStartDate sets the date of the first payment.
+func (rpsi *RecurringPaymentSummaryItem) WithStartDate(startDate obj.Object) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+	return rpsi
 }
 
-// WithIntervalCount the number of interval units that make up the total payment interval.
-func (x *RecurringPaymentSummaryItem) WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntervalCount:"), intervalCount)
-	return x
+// WithIntervalCount sets the number of interval units that make up the total payment interval.
+func (rpsi *RecurringPaymentSummaryItem) WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setIntervalCount:"), intervalCount)
+	return rpsi
 }
 
-// WithEndDate the date of the final payment.
-func (x *RecurringPaymentSummaryItem) WithEndDate(endDate obj.Object) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
-	return x
+// WithEndDate sets the date of the final payment.
+func (rpsi *RecurringPaymentSummaryItem) WithEndDate(endDate obj.Object) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+	return rpsi
 }
 
-// WithLabel a short, localized description of the item.
-func (x *RecurringPaymentSummaryItem) WithLabel(label string) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a short, localized description of the item.
+func (rpsi *RecurringPaymentSummaryItem) WithLabel(label string) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rpsi
 }
 
-// WithAmount the summary item’s amount.
-func (x *RecurringPaymentSummaryItem) WithAmount(amount obj.Object) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-	return x
+// WithAmount sets the summary item’s amount.
+func (rpsi *RecurringPaymentSummaryItem) WithAmount(amount obj.Object) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
+	return rpsi
 }
 
-// WithType the summary item’s type that indicates whether the amount is final.
-func (x *RecurringPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *RecurringPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the summary item’s type that indicates whether the amount is final.
+func (rpsi *RecurringPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *RecurringPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("setType:"), type_)
+	return rpsi
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *RecurringPaymentSummaryItem) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (rpsi *RecurringPaymentSummaryItem) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
-}
-
-// SetStartDate wraps the corresponding Objective-C method.
-func (x *RecurringPaymentSummaryItem) SetStartDate(startDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
 // IntervalCount wraps the corresponding Objective-C method.
-func (x *RecurringPaymentSummaryItem) IntervalCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intervalCount"))
+func (rpsi *RecurringPaymentSummaryItem) IntervalCount() int {
+	_r := objc.Send[int](objref.IDOf(rpsi), objc.RegisterName("intervalCount"))
 	return _r
 }
 
-// SetIntervalCount wraps the corresponding Objective-C method.
-func (x *RecurringPaymentSummaryItem) SetIntervalCount(intervalCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntervalCount:"), intervalCount)
-}
-
 // EndDate wraps the corresponding Objective-C method.
-func (x *RecurringPaymentSummaryItem) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (rpsi *RecurringPaymentSummaryItem) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
-
-// SetEndDate wraps the corresponding Objective-C method.
-func (x *RecurringPaymentSummaryItem) SetEndDate(endDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
-}
-
-// RecurringPaymentSummaryItemable is the interface implemented by [RecurringPaymentSummaryItem], for mocking and DI.
-type RecurringPaymentSummaryItemable interface {
-	obj.Object
-	WithStartDate(startDate obj.Object) *RecurringPaymentSummaryItem
-	WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem
-	WithEndDate(endDate obj.Object) *RecurringPaymentSummaryItem
-	WithLabel(label string) *RecurringPaymentSummaryItem
-	WithAmount(amount obj.Object) *RecurringPaymentSummaryItem
-	WithType(type_ PaymentSummaryItemType) *RecurringPaymentSummaryItem
-	StartDate() obj.Object
-	SetStartDate(startDate obj.Object)
-	IntervalCount() int
-	SetIntervalCount(intervalCount int)
-	EndDate() obj.Object
-	SetEndDate(endDate obj.Object)
-}
-
-var _ RecurringPaymentSummaryItemable = (*RecurringPaymentSummaryItem)(nil)
 
 var _ PaymentSummaryItemProvider = (*RecurringPaymentSummaryItem)(nil)

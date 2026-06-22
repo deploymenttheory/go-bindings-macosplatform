@@ -46,24 +46,24 @@ func wKFrameInfoAdopt(id objc.ID) *WKFrameInfo {
 }
 
 // Description returns the object's -description text.
-func (x *WKFrameInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wfi *WKFrameInfo) Description() string {
+	return rt.Description(objref.IDOf(wfi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKFrameInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wfi *WKFrameInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wfi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKFrameInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wfi *WKFrameInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wfi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKFrameInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wfi *WKFrameInfo) String() string {
+	return rt.Description(objref.IDOf(wfi))
 }
 
 // NewWKFrameInfo creates a new WKFrameInfo.
@@ -72,37 +72,26 @@ func NewWKFrameInfo() *WKFrameInfo {
 	return wKFrameInfoAdopt(_id)
 }
 
-// IsMainFrame a Boolean value indicating whether the frame is the main frame or a subframe.
-func (x *WKFrameInfo) IsMainFrame() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMainFrame"))
+// IsMainFrame reports whether the frame is the main frame or a subframe.
+func (wfi *WKFrameInfo) IsMainFrame() bool {
+	_r := objc.Send[bool](objref.IDOf(wfi), objc.RegisterName("isMainFrame"))
 	return _r
 }
 
-// Request the frame's current request.
-func (x *WKFrameInfo) Request() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+// Request returns the frame's current request.
+func (wfi *WKFrameInfo) Request() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("request"))
 	return obj.Wrap(_r)
 }
 
-// SecurityOrigin the frame's current security origin.
-func (x *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityOrigin"))
+// SecurityOrigin returns the frame's current security origin.
+func (wfi *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
+	_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("securityOrigin"))
 	return WKSecurityOriginFromID(_r)
 }
 
-// WebView the web view of the webpage that contains this frame.
-func (x *WKFrameInfo) WebView() *WKWebView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
+// WebView returns the web view of the webpage that contains this frame.
+func (wfi *WKFrameInfo) WebView() *WKWebView {
+	_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("webView"))
 	return WKWebViewFromID(_r)
 }
-
-// WKFrameInfoable is the interface implemented by [WKFrameInfo], for mocking and DI.
-type WKFrameInfoable interface {
-	obj.Object
-	IsMainFrame() bool
-	Request() obj.Object
-	SecurityOrigin() *WKSecurityOrigin
-	WebView() *WKWebView
-}
-
-var _ WKFrameInfoable = (*WKFrameInfo)(nil)

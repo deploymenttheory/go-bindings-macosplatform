@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,71 +51,40 @@ func NewMacPlatformConfiguration() *MacPlatformConfiguration {
 	return macPlatformConfigurationAdopt(_id)
 }
 
-// WithHardwareModel the Mac hardware model.
-func (x *MacPlatformConfiguration) WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareModel:"), objref.IDOf(hardwareModel))
-	return x
+// WithHardwareModel sets the Mac hardware model.
+func (mpc *MacPlatformConfiguration) WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("setHardwareModel:"), objref.IDOf(hardwareModel))
+	return mpc
 }
 
-// WithMachineIdentifier the Mac machine identifier.
-func (x *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
-	return x
+// WithMachineIdentifier sets the Mac machine identifier.
+func (mpc *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
+	return mpc
 }
 
-// WithAuxiliaryStorage the Mac auxiliary storage.
-func (x *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryStorage:"), objref.IDOf(auxiliaryStorage))
-	return x
+// WithAuxiliaryStorage sets the Mac auxiliary storage.
+func (mpc *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("setAuxiliaryStorage:"), objref.IDOf(auxiliaryStorage))
+	return mpc
 }
 
-// HardwareModel the Mac hardware model.
-func (x *MacPlatformConfiguration) HardwareModel() *MacHardwareModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareModel"))
+// HardwareModel returns the Mac hardware model.
+func (mpc *MacPlatformConfiguration) HardwareModel() *MacHardwareModel {
+	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("hardwareModel"))
 	return MacHardwareModelFromID(_r)
 }
 
-// SetHardwareModel wraps the corresponding Objective-C method.
-func (x *MacPlatformConfiguration) SetHardwareModel(hardwareModel *MacHardwareModel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareModel:"), objref.IDOf(hardwareModel))
-}
-
-// MachineIdentifier the unique Mac machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system.
-func (x *MacPlatformConfiguration) MachineIdentifier() *MacMachineIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("machineIdentifier"))
+// MachineIdentifier returns the unique Mac machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system.
+func (mpc *MacPlatformConfiguration) MachineIdentifier() *MacMachineIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("machineIdentifier"))
 	return MacMachineIdentifierFromID(_r)
 }
 
-// SetMachineIdentifier wraps the corresponding Objective-C method.
-func (x *MacPlatformConfiguration) SetMachineIdentifier(machineIdentifier *MacMachineIdentifier) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
-}
-
-// AuxiliaryStorage the Mac auxiliary storage. When creating a virtual machine from scratch, the hardware model of the `auxiliaryStorage` must match the hardware model of the `hardwareModel` property.
-func (x *MacPlatformConfiguration) AuxiliaryStorage() *MacAuxiliaryStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auxiliaryStorage"))
+// AuxiliaryStorage returns the Mac auxiliary storage. When creating a virtual machine from scratch, the hardware model of the `auxiliaryStorage` must match the hardware model of the `hardwareModel` property.
+func (mpc *MacPlatformConfiguration) AuxiliaryStorage() *MacAuxiliaryStorage {
+	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("auxiliaryStorage"))
 	return MacAuxiliaryStorageFromID(_r)
 }
-
-// SetAuxiliaryStorage wraps the corresponding Objective-C method.
-func (x *MacPlatformConfiguration) SetAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryStorage:"), objref.IDOf(auxiliaryStorage))
-}
-
-// MacPlatformConfigurationable is the interface implemented by [MacPlatformConfiguration], for mocking and DI.
-type MacPlatformConfigurationable interface {
-	obj.Object
-	WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration
-	WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration
-	WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration
-	HardwareModel() *MacHardwareModel
-	SetHardwareModel(hardwareModel *MacHardwareModel)
-	MachineIdentifier() *MacMachineIdentifier
-	SetMachineIdentifier(machineIdentifier *MacMachineIdentifier)
-	AuxiliaryStorage() *MacAuxiliaryStorage
-	SetAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage)
-}
-
-var _ MacPlatformConfigurationable = (*MacPlatformConfiguration)(nil)
 
 var _ PlatformConfigurationProvider = (*MacPlatformConfiguration)(nil)

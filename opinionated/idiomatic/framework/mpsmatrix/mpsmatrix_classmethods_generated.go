@@ -26,7 +26,7 @@ func NormalDistributionDescriptorWithMeanStandardDeviationMinimumMaximum(mean fl
 	return MatrixRandomDistributionDescriptorFromID(_r)
 }
 
-// DefaultDistributionDescriptor make a descriptor for a default distribution.
+// DefaultDistributionDescriptor returns make a descriptor for a default distribution.
 func DefaultDistributionDescriptor() *MatrixRandomDistributionDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomDistributionDescriptor")), objc.RegisterName("defaultDistributionDescriptor"))
 	return MatrixRandomDistributionDescriptorFromID(_r)

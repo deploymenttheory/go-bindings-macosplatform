@@ -49,24 +49,24 @@ func gestureRecognizerAdopt(id objc.ID) *GestureRecognizer {
 }
 
 // Description returns the object's -description text.
-func (x *GestureRecognizer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gr *GestureRecognizer) Description() string {
+	return rt.Description(objref.IDOf(gr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GestureRecognizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gr *GestureRecognizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GestureRecognizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gr *GestureRecognizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GestureRecognizer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gr *GestureRecognizer) String() string {
+	return rt.Description(objref.IDOf(gr))
 }
 
 // NewGestureRecognizerWithCoder creates a new GestureRecognizer.
@@ -76,440 +76,308 @@ func NewGestureRecognizerWithCoder(coder obj.Object) *GestureRecognizer {
 	return gestureRecognizerAdopt(_id)
 }
 
-// WithTarget the object that implements the action method.
-func (x *GestureRecognizer) WithTarget(target obj.Object) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that implements the action method.
+func (gr *GestureRecognizer) WithTarget(target obj.Object) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return gr
 }
 
-// WithState the current state of the gesture recognizer.
-func (x *GestureRecognizer) WithState(state GestureRecognizerState) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current state of the gesture recognizer.
+func (gr *GestureRecognizer) WithState(state GestureRecognizerState) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setState:"), state)
+	return gr
 }
 
-// WithEnabled a Boolean value indicating whether the gesture recognizer is able to handle events.
-func (x *GestureRecognizer) WithEnabled(enabled bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
+func (gr *GestureRecognizer) WithEnabled(enabled bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setEnabled:"), enabled)
+	return gr
 }
 
-// WithPressureConfiguration configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
-func (x *GestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+// WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+func (gr *GestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return gr
 }
 
-// WithDelaysPrimaryMouseButtonEvents a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
-func (x *GestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
-	return x
+// WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+func (gr *GestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	return gr
 }
 
-// WithDelaysSecondaryMouseButtonEvents a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
-func (x *GestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
-	return x
+// WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+func (gr *GestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	return gr
 }
 
-// WithDelaysOtherMouseButtonEvents a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
-func (x *GestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
-	return x
+// WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+func (gr *GestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	return gr
 }
 
-// WithDelaysKeyEvents a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
-func (x *GestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
-	return x
+// WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+func (gr *GestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	return gr
 }
 
-// WithDelaysMagnificationEvents a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
-func (x *GestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
-	return x
+// WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+func (gr *GestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	return gr
 }
 
-// WithDelaysRotationEvents a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
-func (x *GestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-	return x
+// WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+func (gr *GestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	return gr
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *GestureRecognizer) WithName(name string) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (gr *GestureRecognizer) WithName(name string) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setName:"), purego.NSString(name))
+	return gr
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (gr *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return gr
 }
 
 // LocationInView returns the point computed as the location of the gesture.
-func (x *GestureRecognizer) LocationInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationInView:"), objref.IDOf(view))
+func (gr *GestureRecognizer) LocationInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(gr), objc.RegisterName("locationInView:"), objref.IDOf(view))
 	return _r
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (gr *GestureRecognizer) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
 // State wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) State() GestureRecognizerState {
-	_r := objc.Send[GestureRecognizerState](objref.IDOf(x), objc.RegisterName("state"))
+func (gr *GestureRecognizer) State() GestureRecognizerState {
+	_r := objc.Send[GestureRecognizerState](objref.IDOf(gr), objc.RegisterName("state"))
 	return _r
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (gr *GestureRecognizer) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
 // View wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (gr *GestureRecognizer) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
 // PressureConfiguration wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) PressureConfiguration() *PressureConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressureConfiguration"))
+func (gr *GestureRecognizer) PressureConfiguration() *PressureConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("pressureConfiguration"))
 	return PressureConfigurationFromID(_r)
 }
 
-// SetPressureConfiguration wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetPressureConfiguration(pressureConfiguration *PressureConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-}
-
 // DelaysPrimaryMouseButtonEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) DelaysPrimaryMouseButtonEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysPrimaryMouseButtonEvents"))
+func (gr *GestureRecognizer) DelaysPrimaryMouseButtonEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysPrimaryMouseButtonEvents"))
 	return _r
-}
-
-// SetDelaysPrimaryMouseButtonEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
 }
 
 // DelaysSecondaryMouseButtonEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) DelaysSecondaryMouseButtonEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysSecondaryMouseButtonEvents"))
+func (gr *GestureRecognizer) DelaysSecondaryMouseButtonEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysSecondaryMouseButtonEvents"))
 	return _r
-}
-
-// SetDelaysSecondaryMouseButtonEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
 }
 
 // DelaysOtherMouseButtonEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) DelaysOtherMouseButtonEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysOtherMouseButtonEvents"))
+func (gr *GestureRecognizer) DelaysOtherMouseButtonEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysOtherMouseButtonEvents"))
 	return _r
-}
-
-// SetDelaysOtherMouseButtonEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
 }
 
 // DelaysKeyEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) DelaysKeyEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysKeyEvents"))
+func (gr *GestureRecognizer) DelaysKeyEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysKeyEvents"))
 	return _r
-}
-
-// SetDelaysKeyEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetDelaysKeyEvents(delaysKeyEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
 }
 
 // DelaysMagnificationEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) DelaysMagnificationEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysMagnificationEvents"))
+func (gr *GestureRecognizer) DelaysMagnificationEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysMagnificationEvents"))
 	return _r
-}
-
-// SetDelaysMagnificationEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetDelaysMagnificationEvents(delaysMagnificationEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
 }
 
 // DelaysRotationEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) DelaysRotationEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("delaysRotationEvents"))
+func (gr *GestureRecognizer) DelaysRotationEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("delaysRotationEvents"))
 	return _r
 }
 
-// SetDelaysRotationEvents wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetDelaysRotationEvents(delaysRotationEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (gr *GestureRecognizer) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // ModifierFlags wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) ModifierFlags() EventModifierFlags {
-	_r := objc.Send[EventModifierFlags](objref.IDOf(x), objc.RegisterName("modifierFlags"))
+func (gr *GestureRecognizer) ModifierFlags() EventModifierFlags {
+	_r := objc.Send[EventModifierFlags](objref.IDOf(gr), objc.RegisterName("modifierFlags"))
 	return _r
 }
 
 // AllowedTouchTypes wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) AllowedTouchTypes() TouchTypeMask {
-	_r := objc.Send[TouchTypeMask](objref.IDOf(x), objc.RegisterName("allowedTouchTypes"))
+func (gr *GestureRecognizer) AllowedTouchTypes() TouchTypeMask {
+	_r := objc.Send[TouchTypeMask](objref.IDOf(gr), objc.RegisterName("allowedTouchTypes"))
 	return _r
 }
 
-// SetAllowedTouchTypes wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes TouchTypeMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-}
-
 // Reset overridden to reset the internal state of the gesture recognizer when an attempt completes.
-func (x *GestureRecognizer) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (gr *GestureRecognizer) Reset() {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("reset"))
 }
 
 // CanPreventGestureRecognizer overridden to indicate that the current object can prevent the specified gesture recognizer from recognizing its gesture.
-func (x *GestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *GestureRecognizer) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPreventGestureRecognizer:"), objref.IDOf(preventedGestureRecognizer))
+func (gr *GestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *GestureRecognizer) bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("canPreventGestureRecognizer:"), objref.IDOf(preventedGestureRecognizer))
 	return _r
 }
 
 // CanBePreventedByGestureRecognizer overridden to indicate that the specified gesture recognizer can prevent the current object from recognizing a gesture.
-func (x *GestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *GestureRecognizer) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBePreventedByGestureRecognizer:"), objref.IDOf(preventingGestureRecognizer))
+func (gr *GestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *GestureRecognizer) bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("canBePreventedByGestureRecognizer:"), objref.IDOf(preventingGestureRecognizer))
 	return _r
 }
 
 // ShouldRequireFailureOfGestureRecognizer overridden to indicate that the specified gesture recognizer must fail before the current object begins recognizing its gesture.
-func (x *GestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRequireFailureOfGestureRecognizer:"), objref.IDOf(otherGestureRecognizer))
+func (gr *GestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("shouldRequireFailureOfGestureRecognizer:"), objref.IDOf(otherGestureRecognizer))
 	return _r
 }
 
 // ShouldBeRequiredToFailByGestureRecognizer overridden to indicate that the current object must fail before the specified gesture recognizer begins recognizing its gesture.
-func (x *GestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeRequiredToFailByGestureRecognizer:"), objref.IDOf(otherGestureRecognizer))
+func (gr *GestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("shouldBeRequiredToFailByGestureRecognizer:"), objref.IDOf(otherGestureRecognizer))
 	return _r
 }
 
 // MouseDown informs the gesture recognizer that the user pressed the left mouse button.
-func (x *GestureRecognizer) MouseDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseDown:"), objref.IDOf(event))
+func (gr *GestureRecognizer) MouseDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseDown:"), objref.IDOf(event))
 }
 
 // RightMouseDown informs the gesture recognizer that the user pressed the right mouse button.
-func (x *GestureRecognizer) RightMouseDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
+func (gr *GestureRecognizer) RightMouseDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
 }
 
 // OtherMouseDown informs the gesture recognizer that the user pressed a mouse button other than the left or right one.
-func (x *GestureRecognizer) OtherMouseDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
+func (gr *GestureRecognizer) OtherMouseDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
 }
 
 // MouseUp informs the gesture recognizer that the user released the left mouse button.
-func (x *GestureRecognizer) MouseUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseUp:"), objref.IDOf(event))
+func (gr *GestureRecognizer) MouseUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseUp:"), objref.IDOf(event))
 }
 
 // RightMouseUp informs the gesture recognizer that the user released the right mouse button.
-func (x *GestureRecognizer) RightMouseUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
+func (gr *GestureRecognizer) RightMouseUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
 }
 
 // OtherMouseUp informs the gesture recognizer that the user released a mouse button other than the left or right one.
-func (x *GestureRecognizer) OtherMouseUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
+func (gr *GestureRecognizer) OtherMouseUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
 }
 
 // MouseDragged informs the gesture recognizer that the user moved the mouse with the left button pressed.
-func (x *GestureRecognizer) MouseDragged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
+func (gr *GestureRecognizer) MouseDragged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
 }
 
 // RightMouseDragged informs the gesture recognizer that the user moved the mouse with the right button pressed.
-func (x *GestureRecognizer) RightMouseDragged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
+func (gr *GestureRecognizer) RightMouseDragged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
 }
 
 // OtherMouseDragged informs the gesture recognizer that the user moved the mouse with a button other than the left or right one pressed.
-func (x *GestureRecognizer) OtherMouseDragged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
+func (gr *GestureRecognizer) OtherMouseDragged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
 }
 
 // MouseCancelled wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) MouseCancelled(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
+func (gr *GestureRecognizer) MouseCancelled(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
 }
 
 // KeyDown informs the gesture recognizer that the user has pressed a key.
-func (x *GestureRecognizer) KeyDown(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyDown:"), objref.IDOf(event))
+func (gr *GestureRecognizer) KeyDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("keyDown:"), objref.IDOf(event))
 }
 
 // KeyUp informs the gesture recognizer that the user released a key.
-func (x *GestureRecognizer) KeyUp(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyUp:"), objref.IDOf(event))
+func (gr *GestureRecognizer) KeyUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("keyUp:"), objref.IDOf(event))
 }
 
 // FlagsChanged informs the current object that the user pressed or released a modifier key (Shift, Control, and so on).
-func (x *GestureRecognizer) FlagsChanged(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
+func (gr *GestureRecognizer) FlagsChanged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
 }
 
 // TabletPoint informs the user that a tablet-point event occurred.
-func (x *GestureRecognizer) TabletPoint(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
+func (gr *GestureRecognizer) TabletPoint(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
 }
 
 // MagnifyWithEvent informs the gesture recognizer that the user is performing a pinch gesture.
-func (x *GestureRecognizer) MagnifyWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) MagnifyWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
 }
 
 // RotateWithEvent informs the gesture recognizer that the user is performing a rotation gesture.
-func (x *GestureRecognizer) RotateWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) RotateWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
 }
 
 // PressureChangeWithEvent informs the current object that a pressure change occurred on a system that supports pressure sensitivity.
-func (x *GestureRecognizer) PressureChangeWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) PressureChangeWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
 }
 
 // TouchesBeganWithEvent called when one or more fingers first make contact with an NSTouchBar instance on the Touch Bar.
-func (x *GestureRecognizer) TouchesBeganWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) TouchesBeganWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
 }
 
 // TouchesMovedWithEvent called when one or more fingers, associated with an in-progress event, move within an NSTouchBar instance on the Touch Bar.
-func (x *GestureRecognizer) TouchesMovedWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) TouchesMovedWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
 }
 
 // TouchesEndedWithEvent called when one or more fingers are removed from contact with an NSTouchBar instance on the Touch Bar.
-func (x *GestureRecognizer) TouchesEndedWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) TouchesEndedWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
 }
 
 // TouchesCancelledWithEvent called when a system event, such as a low-memory warning, cancels an in-progress touch event in an NSTouchBar object.
-func (x *GestureRecognizer) TouchesCancelledWithEvent(event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
+func (gr *GestureRecognizer) TouchesCancelledWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
 }
-
-// SetState wraps the corresponding Objective-C method.
-func (x *GestureRecognizer) SetState(state GestureRecognizerState) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-}
-
-// GestureRecognizerable is the interface implemented by [GestureRecognizer], for mocking and DI.
-type GestureRecognizerable interface {
-	obj.Object
-	WithTarget(target obj.Object) *GestureRecognizer
-	WithState(state GestureRecognizerState) *GestureRecognizer
-	WithEnabled(enabled bool) *GestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer
-	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *GestureRecognizer
-	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *GestureRecognizer
-	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *GestureRecognizer
-	WithDelaysKeyEvents(delaysKeyEvents bool) *GestureRecognizer
-	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *GestureRecognizer
-	WithDelaysRotationEvents(delaysRotationEvents bool) *GestureRecognizer
-	WithName(name string) *GestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GestureRecognizer
-	LocationInView(view *View) corefoundation.CGPoint
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	State() GestureRecognizerState
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	View() *View
-	PressureConfiguration() *PressureConfiguration
-	SetPressureConfiguration(pressureConfiguration *PressureConfiguration)
-	DelaysPrimaryMouseButtonEvents() bool
-	SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool)
-	DelaysSecondaryMouseButtonEvents() bool
-	SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool)
-	DelaysOtherMouseButtonEvents() bool
-	SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool)
-	DelaysKeyEvents() bool
-	SetDelaysKeyEvents(delaysKeyEvents bool)
-	DelaysMagnificationEvents() bool
-	SetDelaysMagnificationEvents(delaysMagnificationEvents bool)
-	DelaysRotationEvents() bool
-	SetDelaysRotationEvents(delaysRotationEvents bool)
-	Name() string
-	SetName(name string)
-	ModifierFlags() EventModifierFlags
-	AllowedTouchTypes() TouchTypeMask
-	SetAllowedTouchTypes(allowedTouchTypes TouchTypeMask)
-	Reset()
-	CanPreventGestureRecognizer(preventedGestureRecognizer *GestureRecognizer) bool
-	CanBePreventedByGestureRecognizer(preventingGestureRecognizer *GestureRecognizer) bool
-	ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool
-	ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *GestureRecognizer) bool
-	MouseDown(event *Event)
-	RightMouseDown(event *Event)
-	OtherMouseDown(event *Event)
-	MouseUp(event *Event)
-	RightMouseUp(event *Event)
-	OtherMouseUp(event *Event)
-	MouseDragged(event *Event)
-	RightMouseDragged(event *Event)
-	OtherMouseDragged(event *Event)
-	MouseCancelled(event *Event)
-	KeyDown(event *Event)
-	KeyUp(event *Event)
-	FlagsChanged(event *Event)
-	TabletPoint(event *Event)
-	MagnifyWithEvent(event *Event)
-	RotateWithEvent(event *Event)
-	PressureChangeWithEvent(event *Event)
-	TouchesBeganWithEvent(event *Event)
-	TouchesMovedWithEvent(event *Event)
-	TouchesEndedWithEvent(event *Event)
-	TouchesCancelledWithEvent(event *Event)
-	SetState(state GestureRecognizerState)
-}
-
-var _ GestureRecognizerable = (*GestureRecognizer)(nil)
 
 // isGestureRecognizer marks GestureRecognizer — and, by embedding promotion, its
 // subclasses — as a member of the GestureRecognizer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GestureRecognizer) isGestureRecognizer() {}
+func (gr *GestureRecognizer) isGestureRecognizer() {}
 
 var _ GestureRecognizerProvider = (*GestureRecognizer)(nil)

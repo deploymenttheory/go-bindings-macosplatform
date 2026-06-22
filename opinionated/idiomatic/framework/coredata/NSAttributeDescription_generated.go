@@ -46,226 +46,154 @@ func attributeDescriptionAdopt(id objc.ID) *AttributeDescription {
 	return x
 }
 
-// WithAttributeType the attribute’s type.
-func (x *AttributeDescription) WithAttributeType(attributeType AttributeType) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeType:"), attributeType)
-	return x
+// WithAttributeType sets the attribute’s type.
+func (ad *AttributeDescription) WithAttributeType(attributeType AttributeType) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setAttributeType:"), attributeType)
+	return ad
 }
 
-// WithAttributeValueClassName the class name that represents the attribute’s value.
-func (x *AttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
-	return x
+// WithAttributeValueClassName sets the class name that represents the attribute’s value.
+func (ad *AttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
+	return ad
 }
 
-// WithDefaultValue the default value of the attribute.
-func (x *AttributeDescription) WithDefaultValue(defaultValue obj.Object) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
-	return x
+// WithDefaultValue sets the default value of the attribute.
+func (ad *AttributeDescription) WithDefaultValue(defaultValue obj.Object) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
+	return ad
 }
 
-// WithValueTransformerName the name of the transformer to use for the attribute value.
-func (x *AttributeDescription) WithValueTransformerName(valueTransformerName string) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
-	return x
+// WithValueTransformerName sets the name of the transformer to use for the attribute value.
+func (ad *AttributeDescription) WithValueTransformerName(valueTransformerName string) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
+	return ad
 }
 
-// WithAllowsExternalBinaryDataStorage a Boolean value that indicates whether the attribute allows external binary storage.
-func (x *AttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
-	return x
+// WithAllowsExternalBinaryDataStorage sets a Boolean value that indicates whether the attribute allows external binary storage.
+func (ad *AttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
+	return ad
 }
 
-// WithPreservesValueInHistoryOnDeletion a Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
-func (x *AttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
-	return x
+// WithPreservesValueInHistoryOnDeletion sets a Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
+func (ad *AttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
+	return ad
 }
 
-// WithAllowsCloudEncryption a Boolean value that determines whether to encrypt the attribute’s value.
-func (x *AttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
-	return x
+// WithAllowsCloudEncryption sets a Boolean value that determines whether to encrypt the attribute’s value.
+func (ad *AttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
+	return ad
 }
 
-// WithName the name of the receiver.
-func (x *AttributeDescription) WithName(name string) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (ad *AttributeDescription) WithName(name string) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setName:"), purego.NSString(name))
+	return ad
 }
 
-// WithOptional a Boolean value that indicates whether the receiver is optional.
-func (x *AttributeDescription) WithOptional(optional bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
-	return x
+// WithOptional sets a Boolean value that indicates whether the receiver is optional.
+func (ad *AttributeDescription) WithOptional(optional bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setOptional:"), optional)
+	return ad
 }
 
-// WithTransient a Boolean value that indicates whether the receiver is transient.
-func (x *AttributeDescription) WithTransient(transient bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
-	return x
+// WithTransient sets a Boolean value that indicates whether the receiver is transient.
+func (ad *AttributeDescription) WithTransient(transient bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setTransient:"), transient)
+	return ad
 }
 
-// WithUserInfo the user info dictionary of the receiver.
-func (x *AttributeDescription) WithUserInfo(userInfo obj.Object) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary of the receiver.
+func (ad *AttributeDescription) WithUserInfo(userInfo obj.Object) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return ad
 }
 
-// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
-func (x *AttributeDescription) WithIndexed(indexed bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
-	return x
+// WithIndexed sets a Boolean value that indicates whether the receiver should be indexed for searching.
+func (ad *AttributeDescription) WithIndexed(indexed bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setIndexed:"), indexed)
+	return ad
 }
 
-// WithVersionHashModifier the version hash modifier for the receiver.
-func (x *AttributeDescription) WithVersionHashModifier(versionHashModifier string) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
-	return x
+// WithVersionHashModifier sets the version hash modifier for the receiver.
+func (ad *AttributeDescription) WithVersionHashModifier(versionHashModifier string) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
+	return ad
 }
 
-// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-func (x *AttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
-	return x
+// WithIndexedBySpotlight sets a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+func (ad *AttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
+	return ad
 }
 
-// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-func (x *AttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
-	return x
+// WithStoredInExternalRecord sets a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+func (ad *AttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
+	return ad
 }
 
-// WithRenamingIdentifier the renaming identifier for the receiver.
-func (x *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-	return x
+// WithRenamingIdentifier sets the renaming identifier for the receiver.
+func (ad *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
+	return ad
 }
 
 // AttributeType wraps the corresponding Objective-C method.
-func (x *AttributeDescription) AttributeType() AttributeType {
-	_r := objc.Send[AttributeType](objref.IDOf(x), objc.RegisterName("attributeType"))
+func (ad *AttributeDescription) AttributeType() AttributeType {
+	_r := objc.Send[AttributeType](objref.IDOf(ad), objc.RegisterName("attributeType"))
 	return _r
-}
-
-// SetAttributeType wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetAttributeType(attributeType AttributeType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeType:"), attributeType)
 }
 
 // AttributeValueClassName wraps the corresponding Objective-C method.
-func (x *AttributeDescription) AttributeValueClassName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeValueClassName"))
+func (ad *AttributeDescription) AttributeValueClassName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("attributeValueClassName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAttributeValueClassName wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetAttributeValueClassName(attributeValueClassName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
 }
 
 // DefaultValue wraps the corresponding Objective-C method.
-func (x *AttributeDescription) DefaultValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultValue"))
+func (ad *AttributeDescription) DefaultValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
-// SetDefaultValue wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetDefaultValue(defaultValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
-}
-
 // ValueTransformerName wraps the corresponding Objective-C method.
-func (x *AttributeDescription) ValueTransformerName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueTransformerName"))
+func (ad *AttributeDescription) ValueTransformerName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("valueTransformerName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetValueTransformerName wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetValueTransformerName(valueTransformerName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
-}
-
 // AllowsExternalBinaryDataStorage wraps the corresponding Objective-C method.
-func (x *AttributeDescription) AllowsExternalBinaryDataStorage() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExternalBinaryDataStorage"))
+func (ad *AttributeDescription) AllowsExternalBinaryDataStorage() bool {
+	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("allowsExternalBinaryDataStorage"))
 	return _r
-}
-
-// SetAllowsExternalBinaryDataStorage wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
 }
 
 // PreservesValueInHistoryOnDeletion wraps the corresponding Objective-C method.
-func (x *AttributeDescription) PreservesValueInHistoryOnDeletion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesValueInHistoryOnDeletion"))
+func (ad *AttributeDescription) PreservesValueInHistoryOnDeletion() bool {
+	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("preservesValueInHistoryOnDeletion"))
 	return _r
-}
-
-// SetPreservesValueInHistoryOnDeletion wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
 }
 
 // AllowsCloudEncryption wraps the corresponding Objective-C method.
-func (x *AttributeDescription) AllowsCloudEncryption() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCloudEncryption"))
+func (ad *AttributeDescription) AllowsCloudEncryption() bool {
+	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("allowsCloudEncryption"))
 	return _r
 }
-
-// SetAllowsCloudEncryption wraps the corresponding Objective-C method.
-func (x *AttributeDescription) SetAllowsCloudEncryption(allowsCloudEncryption bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
-}
-
-// AttributeDescriptionable is the interface implemented by [AttributeDescription], for mocking and DI.
-type AttributeDescriptionable interface {
-	obj.Object
-	WithAttributeType(attributeType AttributeType) *AttributeDescription
-	WithAttributeValueClassName(attributeValueClassName string) *AttributeDescription
-	WithDefaultValue(defaultValue obj.Object) *AttributeDescription
-	WithValueTransformerName(valueTransformerName string) *AttributeDescription
-	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *AttributeDescription
-	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *AttributeDescription
-	WithAllowsCloudEncryption(allowsCloudEncryption bool) *AttributeDescription
-	WithName(name string) *AttributeDescription
-	WithOptional(optional bool) *AttributeDescription
-	WithTransient(transient bool) *AttributeDescription
-	WithUserInfo(userInfo obj.Object) *AttributeDescription
-	WithIndexed(indexed bool) *AttributeDescription
-	WithVersionHashModifier(versionHashModifier string) *AttributeDescription
-	WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription
-	WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription
-	WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription
-	AttributeType() AttributeType
-	SetAttributeType(attributeType AttributeType)
-	AttributeValueClassName() string
-	SetAttributeValueClassName(attributeValueClassName string)
-	DefaultValue() obj.Object
-	SetDefaultValue(defaultValue obj.Object)
-	ValueTransformerName() string
-	SetValueTransformerName(valueTransformerName string)
-	AllowsExternalBinaryDataStorage() bool
-	SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool)
-	PreservesValueInHistoryOnDeletion() bool
-	SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool)
-	AllowsCloudEncryption() bool
-	SetAllowsCloudEncryption(allowsCloudEncryption bool)
-}
-
-var _ AttributeDescriptionable = (*AttributeDescription)(nil)
 
 // isAttributeDescription marks AttributeDescription — and, by embedding promotion, its
 // subclasses — as a member of the AttributeDescription hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AttributeDescription) isAttributeDescription() {}
+func (ad *AttributeDescription) isAttributeDescription() {}
 
 var _ AttributeDescriptionProvider = (*AttributeDescription)(nil)
 

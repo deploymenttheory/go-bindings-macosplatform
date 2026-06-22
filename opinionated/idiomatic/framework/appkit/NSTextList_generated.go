@@ -46,24 +46,24 @@ func textListAdopt(id objc.ID) *TextList {
 }
 
 // Description returns the object's -description text.
-func (x *TextList) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tl *TextList) Description() string {
+	return rt.Description(objref.IDOf(tl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tl *TextList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tl *TextList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextList) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tl *TextList) String() string {
+	return rt.Description(objref.IDOf(tl))
 }
 
 // NewTextListWithMarkerFormatOptionsStartingItemNumber returns a new text list with the format, options, and starting item number you provide.
@@ -87,15 +87,15 @@ func NewTextListWithCoder(coder obj.Object) *TextList {
 	return textListAdopt(_id)
 }
 
-// WithStartingItemNumber sets the starting item number for the text list.
-func (x *TextList) WithStartingItemNumber(startingItemNumber int) *TextList {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingItemNumber:"), startingItemNumber)
-	return x
+// WithStartingItemNumber sets sets the starting item number for the text list.
+func (tl *TextList) WithStartingItemNumber(startingItemNumber int) *TextList {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setStartingItemNumber:"), startingItemNumber)
+	return tl
 }
 
 // MarkerForItemNumber returns the computed value for a specific ordinal position in the list.
-func (x *TextList) MarkerForItemNumber(itemNumber int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerForItemNumber:"), itemNumber)
+func (tl *TextList) MarkerForItemNumber(itemNumber int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("markerForItemNumber:"), itemNumber)
 	if _r == 0 {
 		return ""
 	}
@@ -103,44 +103,25 @@ func (x *TextList) MarkerForItemNumber(itemNumber int) string {
 }
 
 // MarkerFormat wraps the corresponding Objective-C method.
-func (x *TextList) MarkerFormat() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerFormat"))
+func (tl *TextList) MarkerFormat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("markerFormat"))
 	return obj.Wrap(_r)
 }
 
 // ListOptions wraps the corresponding Objective-C method.
-func (x *TextList) ListOptions() TextListOptions {
-	_r := objc.Send[TextListOptions](objref.IDOf(x), objc.RegisterName("listOptions"))
+func (tl *TextList) ListOptions() TextListOptions {
+	_r := objc.Send[TextListOptions](objref.IDOf(tl), objc.RegisterName("listOptions"))
 	return _r
 }
 
 // StartingItemNumber wraps the corresponding Objective-C method.
-func (x *TextList) StartingItemNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingItemNumber"))
+func (tl *TextList) StartingItemNumber() int {
+	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("startingItemNumber"))
 	return _r
-}
-
-// SetStartingItemNumber wraps the corresponding Objective-C method.
-func (x *TextList) SetStartingItemNumber(startingItemNumber int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartingItemNumber:"), startingItemNumber)
 }
 
 // IsOrdered wraps the corresponding Objective-C method.
-func (x *TextList) IsOrdered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOrdered"))
+func (tl *TextList) IsOrdered() bool {
+	_r := objc.Send[bool](objref.IDOf(tl), objc.RegisterName("isOrdered"))
 	return _r
 }
-
-// TextListable is the interface implemented by [TextList], for mocking and DI.
-type TextListable interface {
-	obj.Object
-	WithStartingItemNumber(startingItemNumber int) *TextList
-	MarkerForItemNumber(itemNumber int) string
-	MarkerFormat() obj.Object
-	ListOptions() TextListOptions
-	StartingItemNumber() int
-	SetStartingItemNumber(startingItemNumber int)
-	IsOrdered() bool
-}
-
-var _ TextListable = (*TextList)(nil)

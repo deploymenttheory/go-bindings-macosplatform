@@ -5,13 +5,14 @@
 package cryptotokenkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // TokenAuthOperation is an idiomatic wrapper over the Objective-C class TKTokenAuthOperation.
@@ -50,49 +51,41 @@ func tokenAuthOperationAdopt(id objc.ID) *TokenAuthOperation {
 }
 
 // Description returns the object's -description text.
-func (x *TokenAuthOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tao *TokenAuthOperation) Description() string {
+	return rt.Description(objref.IDOf(tao))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenAuthOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tao *TokenAuthOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tao), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenAuthOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tao *TokenAuthOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tao), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenAuthOperation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tao *TokenAuthOperation) String() string {
+	return rt.Description(objref.IDOf(tao))
 }
 
 // Finish finishes the authentication operation.
 //
 // Finish returns an error if the operation did not succeed.
-func (x *TokenAuthOperation) Finish() error {
+func (tao *TokenAuthOperation) Finish() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("finishWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(tao), objc.RegisterName("finishWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// TokenAuthOperationable is the interface implemented by [TokenAuthOperation], for mocking and DI.
-type TokenAuthOperationable interface {
-	obj.Object
-	Finish() error
-}
-
-var _ TokenAuthOperationable = (*TokenAuthOperation)(nil)
-
 // isTokenAuthOperation marks TokenAuthOperation — and, by embedding promotion, its
 // subclasses — as a member of the TokenAuthOperation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TokenAuthOperation) isTokenAuthOperation() {}
+func (tao *TokenAuthOperation) isTokenAuthOperation() {}
 
 var _ TokenAuthOperationProvider = (*TokenAuthOperation)(nil)

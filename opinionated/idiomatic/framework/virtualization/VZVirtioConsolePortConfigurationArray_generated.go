@@ -46,24 +46,24 @@ func virtioConsolePortConfigurationArrayAdopt(id objc.ID) *VirtioConsolePortConf
 }
 
 // Description returns the object's -description text.
-func (x *VirtioConsolePortConfigurationArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcpca *VirtioConsolePortConfigurationArray) Description() string {
+	return rt.Description(objref.IDOf(vcpca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioConsolePortConfigurationArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcpca *VirtioConsolePortConfigurationArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcpca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioConsolePortConfigurationArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcpca *VirtioConsolePortConfigurationArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcpca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtioConsolePortConfigurationArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcpca *VirtioConsolePortConfigurationArray) String() string {
+	return rt.Description(objref.IDOf(vcpca))
 }
 
 // NewVirtioConsolePortConfigurationArray creates a new VirtioConsolePortConfigurationArray.
@@ -72,42 +72,25 @@ func NewVirtioConsolePortConfigurationArray() *VirtioConsolePortConfigurationArr
 	return virtioConsolePortConfigurationArrayAdopt(_id)
 }
 
-// WithMaximumPortCount an unsigned integer that represents the maximum number of ports allocated by this device.
-func (x *VirtioConsolePortConfigurationArray) WithMaximumPortCount(maximumPortCount uint32) *VirtioConsolePortConfigurationArray {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumPortCount:"), maximumPortCount)
-	return x
+// WithMaximumPortCount sets an unsigned integer that represents the maximum number of ports allocated by this device.
+func (vcpca *VirtioConsolePortConfigurationArray) WithMaximumPortCount(maximumPortCount uint32) *VirtioConsolePortConfigurationArray {
+	objc.Send[objc.ID](objref.IDOf(vcpca), objc.RegisterName("setMaximumPortCount:"), maximumPortCount)
+	return vcpca
 }
 
 // ObjectAtIndexedSubscript returns the Virtio console port configuration as the specified index.
-func (x *VirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePortConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
+func (vcpca *VirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePortConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(vcpca), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
 	return VirtioConsolePortConfigurationFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript set a port configuration at the specified index.
-func (x *VirtioConsolePortConfigurationArray) SetObjectAtIndexedSubscript(configuration *VirtioConsolePortConfiguration, portIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(configuration), portIndex)
+func (vcpca *VirtioConsolePortConfigurationArray) SetObjectAtIndexedSubscript(configuration *VirtioConsolePortConfiguration, portIndex int) {
+	objc.Send[objc.ID](objref.IDOf(vcpca), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(configuration), portIndex)
 }
 
-// MaximumPortCount the maximum number of ports allocated by this device. The default is the number of ports attached to this device.
-func (x *VirtioConsolePortConfigurationArray) MaximumPortCount() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("maximumPortCount"))
+// MaximumPortCount returns the maximum number of ports allocated by this device. The default is the number of ports attached to this device.
+func (vcpca *VirtioConsolePortConfigurationArray) MaximumPortCount() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(vcpca), objc.RegisterName("maximumPortCount"))
 	return _r
 }
-
-// SetMaximumPortCount wraps the corresponding Objective-C method.
-func (x *VirtioConsolePortConfigurationArray) SetMaximumPortCount(maximumPortCount uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumPortCount:"), maximumPortCount)
-}
-
-// VirtioConsolePortConfigurationArrayable is the interface implemented by [VirtioConsolePortConfigurationArray], for mocking and DI.
-type VirtioConsolePortConfigurationArrayable interface {
-	obj.Object
-	WithMaximumPortCount(maximumPortCount uint32) *VirtioConsolePortConfigurationArray
-	ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePortConfiguration
-	SetObjectAtIndexedSubscript(configuration *VirtioConsolePortConfiguration, portIndex int)
-	MaximumPortCount() uint32
-	SetMaximumPortCount(maximumPortCount uint32)
-}
-
-var _ VirtioConsolePortConfigurationArrayable = (*VirtioConsolePortConfigurationArray)(nil)

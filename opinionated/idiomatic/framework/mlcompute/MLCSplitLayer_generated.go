@@ -52,48 +52,36 @@ func NewSplitLayer() *SplitLayer {
 	return splitLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *SplitLayer) WithLabel(label string) *SplitLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (sl *SplitLayer) WithLabel(label string) *SplitLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return sl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (sl *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return sl
 }
 
-// Dimension the dimension (or axis) along which to split tensor
-func (x *SplitLayer) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the dimension (or axis) along which to split tensor
+func (sl *SplitLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("dimension"))
 	return _r
 }
 
-// SplitCount the number of splits. The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
-func (x *SplitLayer) SplitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("splitCount"))
+// SplitCount returns the number of splits. The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
+func (sl *SplitLayer) SplitCount() int {
+	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("splitCount"))
 	return _r
 }
 
-// SplitSectionLengths lengths of each split section. The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
+// SplitSectionLengths returns lengths of each split section. The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
 //
 // SplitSectionLengths returns the collection as a Go slice.
-func (x *SplitLayer) SplitSectionLengths() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitSectionLengths"))
+func (sl *SplitLayer) SplitSectionLengths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("splitSectionLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SplitLayerable is the interface implemented by [SplitLayer], for mocking and DI.
-type SplitLayerable interface {
-	obj.Object
-	WithLabel(label string) *SplitLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer
-	Dimension() int
-	SplitCount() int
-	SplitSectionLengths() []obj.Object
-}
-
-var _ SplitLayerable = (*SplitLayer)(nil)
 
 var _ LayerProvider = (*SplitLayer)(nil)

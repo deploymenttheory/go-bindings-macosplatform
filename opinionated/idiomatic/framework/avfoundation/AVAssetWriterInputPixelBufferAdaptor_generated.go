@@ -46,24 +46,24 @@ func assetWriterInputPixelBufferAdaptorAdopt(id objc.ID) *AssetWriterInputPixelB
 }
 
 // Description returns the object's -description text.
-func (x *AssetWriterInputPixelBufferAdaptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (awipba *AssetWriterInputPixelBufferAdaptor) Description() string {
+	return rt.Description(objref.IDOf(awipba))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetWriterInputPixelBufferAdaptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (awipba *AssetWriterInputPixelBufferAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(awipba), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetWriterInputPixelBufferAdaptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (awipba *AssetWriterInputPixelBufferAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(awipba), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetWriterInputPixelBufferAdaptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (awipba *AssetWriterInputPixelBufferAdaptor) String() string {
+	return rt.Description(objref.IDOf(awipba))
 }
 
 // NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttributes creates a new pixel buffer adaptor to receive pixel buffers for writing to the output file.
@@ -73,30 +73,20 @@ func NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferA
 	return assetWriterInputPixelBufferAdaptorAdopt(_id)
 }
 
-// AssetWriterInput the asset writer input to which the receiver should append pixel buffers.
-func (x *AssetWriterInputPixelBufferAdaptor) AssetWriterInput() *AssetWriterInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
+// AssetWriterInput returns the asset writer input to which the receiver should append pixel buffers.
+func (awipba *AssetWriterInputPixelBufferAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := objc.Send[objc.ID](objref.IDOf(awipba), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)
 }
 
-// SourcePixelBufferAttributes the pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool. The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
-func (x *AssetWriterInputPixelBufferAdaptor) SourcePixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+// SourcePixelBufferAttributes returns the pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool. The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
+func (awipba *AssetWriterInputPixelBufferAdaptor) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(awipba), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// PixelBufferPool a pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects that can be appended to the receiver. For maximum efficiency, clients should create CVPixelBuffer objects for appendPixelBuffer:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function. The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. This property is key value observable. This property throws an exception if a pixel buffer pool cannot be created with this asset writer input pixel buffer adaptor's source pixel buffer attributes (must specify width, height, and either pixel format or pixel format description).
-func (x *AssetWriterInputPixelBufferAdaptor) PixelBufferPool() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferPool"))
+// PixelBufferPool returns a pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects that can be appended to the receiver. For maximum efficiency, clients should create CVPixelBuffer objects for appendPixelBuffer:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function. The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. This property is key value observable. This property throws an exception if a pixel buffer pool cannot be created with this asset writer input pixel buffer adaptor's source pixel buffer attributes (must specify width, height, and either pixel format or pixel format description).
+func (awipba *AssetWriterInputPixelBufferAdaptor) PixelBufferPool() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(awipba), objc.RegisterName("pixelBufferPool"))
 	return obj.Wrap(_r)
 }
-
-// AssetWriterInputPixelBufferAdaptorable is the interface implemented by [AssetWriterInputPixelBufferAdaptor], for mocking and DI.
-type AssetWriterInputPixelBufferAdaptorable interface {
-	obj.Object
-	AssetWriterInput() *AssetWriterInput
-	SourcePixelBufferAttributes() obj.Object
-	PixelBufferPool() obj.Object
-}
-
-var _ AssetWriterInputPixelBufferAdaptorable = (*AssetWriterInputPixelBufferAdaptor)(nil)

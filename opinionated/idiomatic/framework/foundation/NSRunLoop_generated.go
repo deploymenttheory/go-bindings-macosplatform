@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func runLoopAdopt(id objc.ID) *RunLoop {
 }
 
 // Description returns the object's -description text.
-func (x *RunLoop) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rl *RunLoop) Description() string {
+	return rt.Description(objref.IDOf(rl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RunLoop) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rl *RunLoop) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RunLoop) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rl *RunLoop) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RunLoop) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rl *RunLoop) String() string {
+	return rt.Description(objref.IDOf(rl))
 }
 
 // NewRunLoop creates a new RunLoop.
@@ -74,79 +75,79 @@ func NewRunLoop() *RunLoop {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *RunLoop) WithScriptingProperties(scriptingProperties obj.Object) *RunLoop {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (rl *RunLoop) WithScriptingProperties(scriptingProperties obj.Object) *RunLoop {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return rl
 }
 
 // GetCFRunLoop wraps the corresponding Objective-C method.
-func (x *RunLoop) GetCFRunLoop() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCFRunLoop"))
+func (rl *RunLoop) GetCFRunLoop() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("getCFRunLoop"))
 	return obj.Wrap(_r)
 }
 
 // AddTimerForMode wraps the corresponding Objective-C method.
-func (x *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTimer:forMode:"), objref.IDOf(timer), objref.IDOf(mode))
+func (rl *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addTimer:forMode:"), objref.IDOf(timer), objref.IDOf(mode))
 }
 
 // AddPortForMode wraps the corresponding Objective-C method.
-func (x *RunLoop) AddPortForMode(aPort *Port, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
+func (rl *RunLoop) AddPortForMode(aPort *Port, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addPort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
 // RemovePortForMode wraps the corresponding Objective-C method.
-func (x *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
+func (rl *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("removePort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
 // LimitDateForMode wraps the corresponding Objective-C method.
-func (x *RunLoop) LimitDateForMode(mode *String) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("limitDateForMode:"), objref.IDOf(mode))
+func (rl *RunLoop) LimitDateForMode(mode *String) *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("limitDateForMode:"), objref.IDOf(mode))
 	return DateFromID(_r)
 }
 
 // AcceptInputForModeBeforeDate wraps the corresponding Objective-C method.
-func (x *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate *Date) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
+func (rl *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
 }
 
 // CurrentMode wraps the corresponding Objective-C method.
-func (x *RunLoop) CurrentMode() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentMode"))
+func (rl *RunLoop) CurrentMode() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("currentMode"))
 	return StringFromID(_r)
 }
 
 // Run wraps the corresponding Objective-C method.
-func (x *RunLoop) Run() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
+func (rl *RunLoop) Run() {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("run"))
 }
 
 // RunUntilDate wraps the corresponding Objective-C method.
-func (x *RunLoop) RunUntilDate(limitDate *Date) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runUntilDate:"), objref.IDOf(limitDate))
+func (rl *RunLoop) RunUntilDate(limitDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("runUntilDate:"), objref.IDOf(limitDate))
 }
 
 // RunModeBeforeDate wraps the corresponding Objective-C method.
-func (x *RunLoop) RunModeBeforeDate(mode *String, limitDate *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("runMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
+func (rl *RunLoop) RunModeBeforeDate(mode *String, limitDate *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("runMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
 	return _r
 }
 
 // ConfigureAsServer deprecated. Does nothing.
-func (x *RunLoop) ConfigureAsServer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configureAsServer"))
+func (rl *RunLoop) ConfigureAsServer() {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("configureAsServer"))
 }
 
 // PerformInModesBlock schedules the execution of a block on the target run loop in given modes. - parameter: modes   An array of input modes for which the block may be executed. - parameter: block   The block to execute
 //
 // PerformInModesBlock blocks until the operation completes or ctx is cancelled.
-func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes []*String) error {
+func (rl *RunLoop) PerformInModesBlock(ctx context.Context, modes []*String) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performInModes:block:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("performInModes:block:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -158,12 +159,12 @@ func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes []*String) erro
 // PerformBlock schedules the execution of a block on the target run loop. - parameter: block   The block to execute
 //
 // PerformBlock blocks until the operation completes or ctx is cancelled.
-func (x *RunLoop) PerformBlock(ctx context.Context) error {
+func (rl *RunLoop) PerformBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("performBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -173,28 +174,6 @@ func (x *RunLoop) PerformBlock(ctx context.Context) error {
 }
 
 // CancelPerformSelectorsWithTarget wraps the corresponding Objective-C method.
-func (x *RunLoop) CancelPerformSelectorsWithTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPerformSelectorsWithTarget:"), objref.IDOf(target))
+func (rl *RunLoop) CancelPerformSelectorsWithTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("cancelPerformSelectorsWithTarget:"), objref.IDOf(target))
 }
-
-// RunLoopable is the interface implemented by [RunLoop], for mocking and DI.
-type RunLoopable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *RunLoop
-	GetCFRunLoop() obj.Object
-	AddTimerForMode(timer *Timer, mode *String)
-	AddPortForMode(aPort *Port, mode *String)
-	RemovePortForMode(aPort *Port, mode *String)
-	LimitDateForMode(mode *String) *Date
-	AcceptInputForModeBeforeDate(mode *String, limitDate *Date)
-	CurrentMode() *String
-	Run()
-	RunUntilDate(limitDate *Date)
-	RunModeBeforeDate(mode *String, limitDate *Date) bool
-	ConfigureAsServer()
-	PerformInModesBlock(ctx context.Context, modes []*String) error
-	PerformBlock(ctx context.Context) error
-	CancelPerformSelectorsWithTarget(target obj.Object)
-}
-
-var _ RunLoopable = (*RunLoop)(nil)

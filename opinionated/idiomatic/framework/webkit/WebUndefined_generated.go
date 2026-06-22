@@ -46,24 +46,24 @@ func webUndefinedAdopt(id objc.ID) *WebUndefined {
 }
 
 // Description returns the object's -description text.
-func (x *WebUndefined) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wu *WebUndefined) Description() string {
+	return rt.Description(objref.IDOf(wu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebUndefined) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wu *WebUndefined) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebUndefined) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wu *WebUndefined) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebUndefined) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wu *WebUndefined) String() string {
+	return rt.Description(objref.IDOf(wu))
 }
 
 // NewWebUndefined creates a new WebUndefined.
@@ -71,10 +71,3 @@ func NewWebUndefined() *WebUndefined {
 	_id := objc.Send[objc.ID](objc.ID(_class("WebUndefined")), objc.RegisterName("new"))
 	return webUndefinedAdopt(_id)
 }
-
-// WebUndefinedable is the interface implemented by [WebUndefined], for mocking and DI.
-type WebUndefinedable interface {
-	obj.Object
-}
-
-var _ WebUndefinedable = (*WebUndefined)(nil)

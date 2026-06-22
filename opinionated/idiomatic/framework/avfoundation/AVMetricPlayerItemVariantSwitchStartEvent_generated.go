@@ -53,54 +53,41 @@ func NewMetricPlayerItemVariantSwitchStartEvent() *MetricPlayerItemVariantSwitch
 }
 
 // FromVariant returns the variant from which the switch is attempted. If no value is available, returns nil
-func (x *MetricPlayerItemVariantSwitchStartEvent) FromVariant() *AssetVariant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromVariant"))
+func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) FromVariant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("fromVariant"))
 	return AssetVariantFromID(_r)
 }
 
 // ToVariant returns the variant to which the switch is attempted.
-func (x *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVariant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toVariant"))
+func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("toVariant"))
 	return AssetVariantFromID(_r)
 }
 
-// LoadedTimeRanges this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges returns this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VideoRendition contains information corresponding to the currently selected video rendition.
-func (x *MetricPlayerItemVariantSwitchStartEvent) VideoRendition() *MetricMediaRendition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoRendition"))
+func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) VideoRendition() *MetricMediaRendition {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("videoRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // AudioRendition contains information corresponding to the currently selected audio rendition.
-func (x *MetricPlayerItemVariantSwitchStartEvent) AudioRendition() *MetricMediaRendition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioRendition"))
+func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) AudioRendition() *MetricMediaRendition {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("audioRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // SubtitleRendition contains information corresponding to the currently selected subtitle rendition.
-func (x *MetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *MetricMediaRendition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleRendition"))
+func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *MetricMediaRendition {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("subtitleRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
-
-// MetricPlayerItemVariantSwitchStartEventable is the interface implemented by [MetricPlayerItemVariantSwitchStartEvent], for mocking and DI.
-type MetricPlayerItemVariantSwitchStartEventable interface {
-	obj.Object
-	FromVariant() *AssetVariant
-	ToVariant() *AssetVariant
-	LoadedTimeRanges() []obj.Object
-	VideoRendition() *MetricMediaRendition
-	AudioRendition() *MetricMediaRendition
-	SubtitleRendition() *MetricMediaRendition
-}
-
-var _ MetricPlayerItemVariantSwitchStartEventable = (*MetricPlayerItemVariantSwitchStartEvent)(nil)
 
 var _ MetricEventProvider = (*MetricPlayerItemVariantSwitchStartEvent)(nil)

@@ -46,24 +46,24 @@ func lockAdopt(id objc.ID) *Lock {
 }
 
 // Description returns the object's -description text.
-func (x *Lock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Lock) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Lock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Lock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Lock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Lock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Lock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Lock) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // NewLock creates a new Lock.
@@ -72,53 +72,35 @@ func NewLock() *Lock {
 	return lockAdopt(_id)
 }
 
-// WithName the name associated with the receiver.
-func (x *Lock) WithName(name StringProvider) *Lock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets the name associated with the receiver.
+func (l *Lock) WithName(name StringProvider) *Lock {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setName:"), objref.IDOf(name))
+	return l
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Lock) WithScriptingProperties(scriptingProperties obj.Object) *Lock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (l *Lock) WithScriptingProperties(scriptingProperties obj.Object) *Lock {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return l
 }
 
-// TryLock attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
-func (x *Lock) TryLock() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
+// TryLock reports whether attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
+func (l *Lock) TryLock() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // LockBeforeDate attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
-func (x *Lock) LockBeforeDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
+func (l *Lock) LockBeforeDate(limit *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Lock) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (l *Lock) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *Lock) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// Lockable is the interface implemented by [Lock], for mocking and DI.
-type Lockable interface {
-	obj.Object
-	WithName(name StringProvider) *Lock
-	WithScriptingProperties(scriptingProperties obj.Object) *Lock
-	TryLock() bool
-	LockBeforeDate(limit *Date) bool
-	Name() string
-	SetName(name string)
-}
-
-var _ Lockable = (*Lock)(nil)

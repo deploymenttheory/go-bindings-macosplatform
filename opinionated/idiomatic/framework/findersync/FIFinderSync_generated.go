@@ -46,24 +46,24 @@ func finderSyncAdopt(id objc.ID) *FinderSync {
 }
 
 // Description returns the object's -description text.
-func (x *FinderSync) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FinderSync) Description() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FinderSync) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fs *FinderSync) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FinderSync) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fs *FinderSync) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FinderSync) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FinderSync) String() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // NewFinderSync creates a new FinderSync.
@@ -71,10 +71,3 @@ func NewFinderSync() *FinderSync {
 	_id := objc.Send[objc.ID](objc.ID(_class("FIFinderSync")), objc.RegisterName("new"))
 	return finderSyncAdopt(_id)
 }
-
-// FinderSyncable is the interface implemented by [FinderSync], for mocking and DI.
-type FinderSyncable interface {
-	obj.Object
-}
-
-var _ FinderSyncable = (*FinderSync)(nil)

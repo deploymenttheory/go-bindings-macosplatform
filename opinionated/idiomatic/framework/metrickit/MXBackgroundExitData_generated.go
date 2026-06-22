@@ -46,24 +46,24 @@ func backgroundExitDataAdopt(id objc.ID) *BackgroundExitData {
 }
 
 // Description returns the object's -description text.
-func (x *BackgroundExitData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bed *BackgroundExitData) Description() string {
+	return rt.Description(objref.IDOf(bed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BackgroundExitData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bed *BackgroundExitData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BackgroundExitData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bed *BackgroundExitData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BackgroundExitData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bed *BackgroundExitData) String() string {
+	return rt.Description(objref.IDOf(bed))
 }
 
 // NewBackgroundExitData creates a new BackgroundExitData.
@@ -72,79 +72,62 @@ func NewBackgroundExitData() *BackgroundExitData {
 	return backgroundExitDataAdopt(_id)
 }
 
-// CumulativeNormalAppExitCount cumulative number of times the application exited normally, or was gracefully terminated by the system.
-func (x *BackgroundExitData) CumulativeNormalAppExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeNormalAppExitCount"))
+// CumulativeNormalAppExitCount returns cumulative number of times the application exited normally, or was gracefully terminated by the system.
+func (bed *BackgroundExitData) CumulativeNormalAppExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeNormalAppExitCount"))
 	return _r
 }
 
-// CumulativeMemoryResourceLimitExitCount cumulative number of times the application was terminated for exceeding a memory consumption limit.
-func (x *BackgroundExitData) CumulativeMemoryResourceLimitExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeMemoryResourceLimitExitCount"))
+// CumulativeMemoryResourceLimitExitCount returns cumulative number of times the application was terminated for exceeding a memory consumption limit.
+func (bed *BackgroundExitData) CumulativeMemoryResourceLimitExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeMemoryResourceLimitExitCount"))
 	return _r
 }
 
-// CumulativeCPUResourceLimitExitCount cumulative number of times the application was terminated for exceeding a CPU consumption limit.
-func (x *BackgroundExitData) CumulativeCPUResourceLimitExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeCPUResourceLimitExitCount"))
+// CumulativeCPUResourceLimitExitCount returns cumulative number of times the application was terminated for exceeding a CPU consumption limit.
+func (bed *BackgroundExitData) CumulativeCPUResourceLimitExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeCPUResourceLimitExitCount"))
 	return _r
 }
 
-// CumulativeMemoryPressureExitCount cumulative number of times the application exited due to memory pressure on the system.
-func (x *BackgroundExitData) CumulativeMemoryPressureExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeMemoryPressureExitCount"))
+// CumulativeMemoryPressureExitCount returns cumulative number of times the application exited due to memory pressure on the system.
+func (bed *BackgroundExitData) CumulativeMemoryPressureExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeMemoryPressureExitCount"))
 	return _r
 }
 
-// CumulativeBadAccessExitCount cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
-func (x *BackgroundExitData) CumulativeBadAccessExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeBadAccessExitCount"))
+// CumulativeBadAccessExitCount returns cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
+func (bed *BackgroundExitData) CumulativeBadAccessExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeBadAccessExitCount"))
 	return _r
 }
 
-// CumulativeAbnormalExitCount cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
-func (x *BackgroundExitData) CumulativeAbnormalExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeAbnormalExitCount"))
+// CumulativeAbnormalExitCount returns cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
+func (bed *BackgroundExitData) CumulativeAbnormalExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeAbnormalExitCount"))
 	return _r
 }
 
-// CumulativeIllegalInstructionExitCount cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
-func (x *BackgroundExitData) CumulativeIllegalInstructionExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeIllegalInstructionExitCount"))
+// CumulativeIllegalInstructionExitCount returns cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
+func (bed *BackgroundExitData) CumulativeIllegalInstructionExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeIllegalInstructionExitCount"))
 	return _r
 }
 
-// CumulativeAppWatchdogExitCount cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
-func (x *BackgroundExitData) CumulativeAppWatchdogExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeAppWatchdogExitCount"))
+// CumulativeAppWatchdogExitCount returns cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
+func (bed *BackgroundExitData) CumulativeAppWatchdogExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeAppWatchdogExitCount"))
 	return _r
 }
 
-// CumulativeSuspendedWithLockedFileExitCount cumulative number of times the application was terminated because it became suspended while holding onto file locks or sqlite database locks. If your application is performing operations on a locked file or sqlite database at suspension time, it must request additional background execution time to complete those operations and relinquish the lock before suspending.
-func (x *BackgroundExitData) CumulativeSuspendedWithLockedFileExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeSuspendedWithLockedFileExitCount"))
+// CumulativeSuspendedWithLockedFileExitCount returns cumulative number of times the application was terminated because it became suspended while holding onto file locks or sqlite database locks. If your application is performing operations on a locked file or sqlite database at suspension time, it must request additional background execution time to complete those operations and relinquish the lock before suspending.
+func (bed *BackgroundExitData) CumulativeSuspendedWithLockedFileExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeSuspendedWithLockedFileExitCount"))
 	return _r
 }
 
-// CumulativeBackgroundTaskAssertionTimeoutExitCount cumulative number of times the application was terminated for exceeding the alotted time limit associated with a background tasks. If your application begins a background task, you must call endBackgroundTask() to signal completion of the task to prevent your application from being terminated. You can do this in the expiration handler of the task, but it must be done immediately.
-func (x *BackgroundExitData) CumulativeBackgroundTaskAssertionTimeoutExitCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundTaskAssertionTimeoutExitCount"))
+// CumulativeBackgroundTaskAssertionTimeoutExitCount returns cumulative number of times the application was terminated for exceeding the alotted time limit associated with a background tasks. If your application begins a background task, you must call endBackgroundTask() to signal completion of the task to prevent your application from being terminated. You can do this in the expiration handler of the task, but it must be done immediately.
+func (bed *BackgroundExitData) CumulativeBackgroundTaskAssertionTimeoutExitCount() int {
+	_r := objc.Send[int](objref.IDOf(bed), objc.RegisterName("cumulativeBackgroundTaskAssertionTimeoutExitCount"))
 	return _r
 }
-
-// BackgroundExitDataable is the interface implemented by [BackgroundExitData], for mocking and DI.
-type BackgroundExitDataable interface {
-	obj.Object
-	CumulativeNormalAppExitCount() int
-	CumulativeMemoryResourceLimitExitCount() int
-	CumulativeCPUResourceLimitExitCount() int
-	CumulativeMemoryPressureExitCount() int
-	CumulativeBadAccessExitCount() int
-	CumulativeAbnormalExitCount() int
-	CumulativeIllegalInstructionExitCount() int
-	CumulativeAppWatchdogExitCount() int
-	CumulativeSuspendedWithLockedFileExitCount() int
-	CumulativeBackgroundTaskAssertionTimeoutExitCount() int
-}
-
-var _ BackgroundExitDataable = (*BackgroundExitData)(nil)

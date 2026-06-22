@@ -44,24 +44,24 @@ func barcodeEventMetadataRequestAdopt(id objc.ID) *BarcodeEventMetadataRequest {
 }
 
 // Description returns the object's -description text.
-func (x *BarcodeEventMetadataRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bemr *BarcodeEventMetadataRequest) Description() string {
+	return rt.Description(objref.IDOf(bemr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BarcodeEventMetadataRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bemr *BarcodeEventMetadataRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bemr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BarcodeEventMetadataRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bemr *BarcodeEventMetadataRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bemr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BarcodeEventMetadataRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bemr *BarcodeEventMetadataRequest) String() string {
+	return rt.Description(objref.IDOf(bemr))
 }
 
 // NewBarcodeEventMetadataRequest creates a new BarcodeEventMetadataRequest.
@@ -71,8 +71,8 @@ func NewBarcodeEventMetadataRequest() *BarcodeEventMetadataRequest {
 }
 
 // DeviceAccountIdentifier wraps the corresponding Objective-C method.
-func (x *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+func (bemr *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,19 +80,10 @@ func (x *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
 }
 
 // LastUsedBarcodeIdentifier wraps the corresponding Objective-C method.
-func (x *BarcodeEventMetadataRequest) LastUsedBarcodeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastUsedBarcodeIdentifier"))
+func (bemr *BarcodeEventMetadataRequest) LastUsedBarcodeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("lastUsedBarcodeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// BarcodeEventMetadataRequestable is the interface implemented by [BarcodeEventMetadataRequest], for mocking and DI.
-type BarcodeEventMetadataRequestable interface {
-	obj.Object
-	DeviceAccountIdentifier() string
-	LastUsedBarcodeIdentifier() string
-}
-
-var _ BarcodeEventMetadataRequestable = (*BarcodeEventMetadataRequest)(nil)

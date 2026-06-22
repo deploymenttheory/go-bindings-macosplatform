@@ -67,133 +67,90 @@ func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, s
 	return captureSliderAdopt(_id)
 }
 
-// WithValue the current value of the slider.
-func (x *CaptureSlider) WithValue(value float32) *CaptureSlider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the current value of the slider.
+func (cs *CaptureSlider) WithValue(value float32) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setValue:"), value)
+	return cs
 }
 
-// WithLocalizedValueFormat a localized string that defines the presentation of the slider’s value.
-func (x *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedValueFormat:"), purego.NSString(localizedValueFormat))
-	return x
+// WithLocalizedValueFormat sets a localized string that defines the presentation of the slider’s value.
+func (cs *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setLocalizedValueFormat:"), purego.NSString(localizedValueFormat))
+	return cs
 }
 
-// WithProminentValues values in this array may receive unique visual representations or behaviors.
-func (x *CaptureSlider) WithProminentValues(items ...obj.Object) *CaptureSlider {
+// WithProminentValues sets values in this array may receive unique visual representations or behaviors.
+func (cs *CaptureSlider) WithProminentValues(items ...obj.Object) *CaptureSlider {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProminentValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setProminentValues:"), _arr)
+	return cs
 }
 
-// WithAccessibilityIdentifier a string identifier for the slider.
-func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
-	return x
+// WithAccessibilityIdentifier sets a string identifier for the slider.
+func (cs *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
+	return cs
 }
 
-// WithEnabled a Boolean value that indicates whether this control supports user interaction.
-func (x *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether this control supports user interaction.
+func (cs *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setEnabled:"), enabled)
+	return cs
 }
 
 // SetActionQueueAction sets the action to perform on the specified dispatch queue when the slider’s value changes.
-func (x *CaptureSlider) SetActionQueueAction(actionQueue obj.Object, action func(float32)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
+func (cs *CaptureSlider) SetActionQueueAction(actionQueue obj.Object, action func(float32)) {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setActionQueue:action:"), objref.IDOf(actionQueue), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
 }
 
-// Value the current value of the slider. Because the camera system may be independent from the main thread or `
-func (x *CaptureSlider) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the current value of the slider. Because the camera system may be independent from the main thread or `
+func (cs *CaptureSlider) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(cs), objc.RegisterName("value"))
 	return _r
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *CaptureSlider) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// LocalizedValueFormat a localized string defining the presentation of the slider's value. To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%
-func (x *CaptureSlider) LocalizedValueFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedValueFormat"))
+// LocalizedValueFormat returns a localized string defining the presentation of the slider's value. To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%
+func (cs *CaptureSlider) LocalizedValueFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedValueFormat"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLocalizedValueFormat wraps the corresponding Objective-C method.
-func (x *CaptureSlider) SetLocalizedValueFormat(localizedValueFormat string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedValueFormat:"), purego.NSString(localizedValueFormat))
-}
-
-// ProminentValues values in this array may receive unique visual representations or behaviors.
+// ProminentValues returns values in this array may receive unique visual representations or behaviors.
 //
 // ProminentValues returns the collection as a Go slice.
-func (x *CaptureSlider) ProminentValues() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prominentValues"))
+func (cs *CaptureSlider) ProminentValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("prominentValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetProminentValues wraps the corresponding Objective-C method.
-func (x *CaptureSlider) SetProminentValues(prominentValues []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProminentValues:"), purego.SliceToNSArray(prominentValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// LocalizedTitle a localized string that describes the slider's `action`.
-func (x *CaptureSlider) LocalizedTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+// LocalizedTitle returns a localized string that describes the slider's `action`.
+func (cs *CaptureSlider) LocalizedTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SymbolName the name of a symbol to represent the slider.
-func (x *CaptureSlider) SymbolName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolName"))
+// SymbolName returns the name of a symbol to represent the slider.
+func (cs *CaptureSlider) SymbolName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("symbolName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AccessibilityIdentifier a string that identifies the slider.
-func (x *CaptureSlider) AccessibilityIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityIdentifier"))
+// AccessibilityIdentifier returns a string that identifies the slider.
+func (cs *CaptureSlider) AccessibilityIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("accessibilityIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetAccessibilityIdentifier wraps the corresponding Objective-C method.
-func (x *CaptureSlider) SetAccessibilityIdentifier(accessibilityIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityIdentifier:"), purego.NSString(accessibilityIdentifier))
-}
-
-// CaptureSliderable is the interface implemented by [CaptureSlider], for mocking and DI.
-type CaptureSliderable interface {
-	obj.Object
-	WithValue(value float32) *CaptureSlider
-	WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider
-	WithProminentValues(items ...obj.Object) *CaptureSlider
-	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider
-	WithEnabled(enabled bool) *CaptureSlider
-	SetActionQueueAction(actionQueue obj.Object, action func(float32))
-	Value() float32
-	SetValue(value float32)
-	LocalizedValueFormat() string
-	SetLocalizedValueFormat(localizedValueFormat string)
-	ProminentValues() []obj.Object
-	SetProminentValues(prominentValues []obj.Object)
-	LocalizedTitle() string
-	SymbolName() string
-	AccessibilityIdentifier() string
-	SetAccessibilityIdentifier(accessibilityIdentifier string)
-}
-
-var _ CaptureSliderable = (*CaptureSlider)(nil)
 
 var _ CaptureControlProvider = (*CaptureSlider)(nil)

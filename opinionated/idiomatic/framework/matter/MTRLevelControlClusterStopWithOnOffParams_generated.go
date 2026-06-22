@@ -44,24 +44,24 @@ func mTRLevelControlClusterStopWithOnOffParamsAdopt(id objc.ID) *MTRLevelControl
 }
 
 // Description returns the object's -description text.
-func (x *MTRLevelControlClusterStopWithOnOffParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) Description() string {
+	return rt.Description(objref.IDOf(mlccswoop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRLevelControlClusterStopWithOnOffParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlccswoop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRLevelControlClusterStopWithOnOffParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlccswoop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRLevelControlClusterStopWithOnOffParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) String() string {
+	return rt.Description(objref.IDOf(mlccswoop))
 }
 
 // NewMTRLevelControlClusterStopWithOnOffParams creates a new MTRLevelControlClusterStopWithOnOffParams.
@@ -71,88 +71,49 @@ func NewMTRLevelControlClusterStopWithOnOffParams() *MTRLevelControlClusterStopW
 }
 
 // WithOptionsMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterStopWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
-	return x
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
+	return mlccswoop
 }
 
 // WithOptionsOverride sets the property and returns the receiver so calls can be chained.
-func (x *MTRLevelControlClusterStopWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-	return x
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
+	return mlccswoop
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLevelControlClusterStopWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mlccswoop
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLevelControlClusterStopWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterStopWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mlccswoop
 }
 
 // OptionsMask wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterStopWithOnOffParams) OptionsMask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionsMask wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterStopWithOnOffParams) SetOptionsMask(optionsMask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
 // OptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterStopWithOnOffParams) OptionsOverride() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterStopWithOnOffParams) SetOptionsOverride(optionsOverride obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLevelControlClusterStopWithOnOffParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterStopWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLevelControlClusterStopWithOnOffParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlccswoop *MTRLevelControlClusterStopWithOnOffParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRLevelControlClusterStopWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRLevelControlClusterStopWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterStopWithOnOffParams], for mocking and DI.
-type MTRLevelControlClusterStopWithOnOffParamsable interface {
-	obj.Object
-	WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStopWithOnOffParams
-	WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStopWithOnOffParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterStopWithOnOffParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterStopWithOnOffParams
-	OptionsMask() obj.Object
-	SetOptionsMask(optionsMask obj.Object)
-	OptionsOverride() obj.Object
-	SetOptionsOverride(optionsOverride obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRLevelControlClusterStopWithOnOffParamsable = (*MTRLevelControlClusterStopWithOnOffParams)(nil)

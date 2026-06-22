@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,93 +53,69 @@ func NewCNNBatchNormalization() *CNNBatchNormalization {
 	return cNNBatchNormalizationAdopt(_id)
 }
 
-// WithEpsilon the epsilon value used in the batch normalization formula to bias the variance when normalizing.
-func (x *CNNBatchNormalization) WithEpsilon(epsilon float32) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-	return x
+// WithEpsilon sets the epsilon value used in the batch normalization formula to bias the variance when normalizing.
+func (cbn *CNNBatchNormalization) WithEpsilon(epsilon float32) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setEpsilon:"), epsilon)
+	return cbn
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNBatchNormalization) WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cbn *CNNBatchNormalization) WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setOffset:"), offset)
+	return cbn
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNBatchNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cbn *CNNBatchNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setClipRect:"), clipRect)
+	return cbn
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNBatchNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cbn *CNNBatchNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cbn
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNBatchNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cbn *CNNBatchNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cbn
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNBatchNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cbn *CNNBatchNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cbn
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNBatchNormalization) WithLabel(label string) *CNNBatchNormalization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cbn *CNNBatchNormalization) WithLabel(label string) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbn
 }
 
 // ReloadGammaAndBetaFromDataSource reinitialize the filter's gamma and beta values using the data source provided at kernel initialization.
-func (x *CNNBatchNormalization) ReloadGammaAndBetaFromDataSource() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadGammaAndBetaFromDataSource"))
+func (cbn *CNNBatchNormalization) ReloadGammaAndBetaFromDataSource() {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("reloadGammaAndBetaFromDataSource"))
 }
 
 // ReloadMeanAndVarianceFromDataSource reinitialize the filter's mean and variance values using the data source provided at kernel initialization.
-func (x *CNNBatchNormalization) ReloadMeanAndVarianceFromDataSource() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadMeanAndVarianceFromDataSource"))
+func (cbn *CNNBatchNormalization) ReloadMeanAndVarianceFromDataSource() {
+	objc.Send[objc.ID](objref.IDOf(cbn), objc.RegisterName("reloadMeanAndVarianceFromDataSource"))
 }
 
-// NumberOfFeatureChannels the number of feature channels in an image to be normalized.
-func (x *CNNBatchNormalization) NumberOfFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfFeatureChannels"))
+// NumberOfFeatureChannels returns the number of feature channels in an image to be normalized.
+func (cbn *CNNBatchNormalization) NumberOfFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(cbn), objc.RegisterName("numberOfFeatureChannels"))
 	return _r
 }
 
-// Epsilon the epsilon value used in the batch normalization formula to bias the variance when normalizing.
-func (x *CNNBatchNormalization) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns the epsilon value used in the batch normalization formula to bias the variance when normalizing.
+func (cbn *CNNBatchNormalization) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(cbn), objc.RegisterName("epsilon"))
 	return _r
 }
-
-// SetEpsilon wraps the corresponding Objective-C method.
-func (x *CNNBatchNormalization) SetEpsilon(epsilon float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-}
-
-// CNNBatchNormalizationable is the interface implemented by [CNNBatchNormalization], for mocking and DI.
-type CNNBatchNormalizationable interface {
-	obj.Object
-	WithEpsilon(epsilon float32) *CNNBatchNormalization
-	WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization
-	WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBatchNormalization
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBatchNormalization
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBatchNormalization
-	WithLabel(label string) *CNNBatchNormalization
-	ReloadGammaAndBetaFromDataSource()
-	ReloadMeanAndVarianceFromDataSource()
-	NumberOfFeatureChannels() int
-	Epsilon() float32
-	SetEpsilon(epsilon float32)
-}
-
-var _ CNNBatchNormalizationable = (*CNNBatchNormalization)(nil)
 
 var _ CNNKernelProvider = (*CNNBatchNormalization)(nil)
 

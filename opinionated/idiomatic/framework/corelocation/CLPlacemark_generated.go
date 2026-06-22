@@ -46,24 +46,24 @@ func placemarkAdopt(id objc.ID) *Placemark {
 }
 
 // Description returns the object's -description text.
-func (x *Placemark) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Placemark) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Placemark) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Placemark) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Placemark) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Placemark) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Placemark) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Placemark) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPlacemarkWithPlacemark initializes and returns a placemark object from another placemark object.
@@ -74,26 +74,26 @@ func NewPlacemarkWithPlacemark(placemark *Placemark) *Placemark {
 }
 
 // Region wraps the corresponding Objective-C method.
-func (x *Placemark) Region() *Region {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("region"))
+func (p *Placemark) Region() *Region {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("region"))
 	return RegionFromID(_r)
 }
 
 // TimeZone wraps the corresponding Objective-C method.
-func (x *Placemark) TimeZone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+func (p *Placemark) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
 // AddressDictionary wraps the corresponding Objective-C method.
-func (x *Placemark) AddressDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressDictionary"))
+func (p *Placemark) AddressDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addressDictionary"))
 	return obj.Wrap(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Placemark) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (p *Placemark) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,8 +101,8 @@ func (x *Placemark) Name() string {
 }
 
 // Thoroughfare wraps the corresponding Objective-C method.
-func (x *Placemark) Thoroughfare() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thoroughfare"))
+func (p *Placemark) Thoroughfare() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("thoroughfare"))
 	if _r == 0 {
 		return ""
 	}
@@ -110,8 +110,8 @@ func (x *Placemark) Thoroughfare() string {
 }
 
 // SubThoroughfare wraps the corresponding Objective-C method.
-func (x *Placemark) SubThoroughfare() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subThoroughfare"))
+func (p *Placemark) SubThoroughfare() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subThoroughfare"))
 	if _r == 0 {
 		return ""
 	}
@@ -119,8 +119,8 @@ func (x *Placemark) SubThoroughfare() string {
 }
 
 // Locality wraps the corresponding Objective-C method.
-func (x *Placemark) Locality() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locality"))
+func (p *Placemark) Locality() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("locality"))
 	if _r == 0 {
 		return ""
 	}
@@ -128,8 +128,8 @@ func (x *Placemark) Locality() string {
 }
 
 // SubLocality wraps the corresponding Objective-C method.
-func (x *Placemark) SubLocality() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subLocality"))
+func (p *Placemark) SubLocality() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subLocality"))
 	if _r == 0 {
 		return ""
 	}
@@ -137,8 +137,8 @@ func (x *Placemark) SubLocality() string {
 }
 
 // AdministrativeArea wraps the corresponding Objective-C method.
-func (x *Placemark) AdministrativeArea() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("administrativeArea"))
+func (p *Placemark) AdministrativeArea() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("administrativeArea"))
 	if _r == 0 {
 		return ""
 	}
@@ -146,8 +146,8 @@ func (x *Placemark) AdministrativeArea() string {
 }
 
 // SubAdministrativeArea wraps the corresponding Objective-C method.
-func (x *Placemark) SubAdministrativeArea() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subAdministrativeArea"))
+func (p *Placemark) SubAdministrativeArea() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("subAdministrativeArea"))
 	if _r == 0 {
 		return ""
 	}
@@ -155,8 +155,8 @@ func (x *Placemark) SubAdministrativeArea() string {
 }
 
 // PostalCode wraps the corresponding Objective-C method.
-func (x *Placemark) PostalCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+func (p *Placemark) PostalCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -164,8 +164,8 @@ func (x *Placemark) PostalCode() string {
 }
 
 // ISOcountryCode wraps the corresponding Objective-C method.
-func (x *Placemark) ISOcountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ISOcountryCode"))
+func (p *Placemark) ISOcountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("ISOcountryCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -173,8 +173,8 @@ func (x *Placemark) ISOcountryCode() string {
 }
 
 // Country wraps the corresponding Objective-C method.
-func (x *Placemark) Country() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
+func (p *Placemark) Country() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""
 	}
@@ -182,8 +182,8 @@ func (x *Placemark) Country() string {
 }
 
 // InlandWater wraps the corresponding Objective-C method.
-func (x *Placemark) InlandWater() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inlandWater"))
+func (p *Placemark) InlandWater() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("inlandWater"))
 	if _r == 0 {
 		return ""
 	}
@@ -191,8 +191,8 @@ func (x *Placemark) InlandWater() string {
 }
 
 // Ocean wraps the corresponding Objective-C method.
-func (x *Placemark) Ocean() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ocean"))
+func (p *Placemark) Ocean() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("ocean"))
 	if _r == 0 {
 		return ""
 	}
@@ -202,37 +202,13 @@ func (x *Placemark) Ocean() string {
 // AreasOfInterest wraps the corresponding Objective-C method.
 //
 // AreasOfInterest returns the collection as a Go slice.
-func (x *Placemark) AreasOfInterest() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areasOfInterest"))
+func (p *Placemark) AreasOfInterest() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("areasOfInterest"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // PostalAddress wraps the corresponding Objective-C method.
-func (x *Placemark) PostalAddress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalAddress"))
+func (p *Placemark) PostalAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("postalAddress"))
 	return obj.Wrap(_r)
 }
-
-// Placemarkable is the interface implemented by [Placemark], for mocking and DI.
-type Placemarkable interface {
-	obj.Object
-	Region() *Region
-	TimeZone() obj.Object
-	AddressDictionary() obj.Object
-	Name() string
-	Thoroughfare() string
-	SubThoroughfare() string
-	Locality() string
-	SubLocality() string
-	AdministrativeArea() string
-	SubAdministrativeArea() string
-	PostalCode() string
-	ISOcountryCode() string
-	Country() string
-	InlandWater() string
-	Ocean() string
-	AreasOfInterest() []string
-	PostalAddress() obj.Object
-}
-
-var _ Placemarkable = (*Placemark)(nil)

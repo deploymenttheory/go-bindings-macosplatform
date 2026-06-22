@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,23 +46,15 @@ func metadataBodyObjectAdopt(id objc.ID) *MetadataBodyObject {
 }
 
 // BodyID wraps the corresponding Objective-C method.
-func (x *MetadataBodyObject) BodyID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bodyID"))
+func (mbo *MetadataBodyObject) BodyID() int {
+	_r := objc.Send[int](objref.IDOf(mbo), objc.RegisterName("bodyID"))
 	return _r
 }
-
-// MetadataBodyObjectable is the interface implemented by [MetadataBodyObject], for mocking and DI.
-type MetadataBodyObjectable interface {
-	obj.Object
-	BodyID() int
-}
-
-var _ MetadataBodyObjectable = (*MetadataBodyObject)(nil)
 
 // isMetadataBodyObject marks MetadataBodyObject — and, by embedding promotion, its
 // subclasses — as a member of the MetadataBodyObject hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetadataBodyObject) isMetadataBodyObject() {}
+func (mbo *MetadataBodyObject) isMetadataBodyObject() {}
 
 var _ MetadataBodyObjectProvider = (*MetadataBodyObject)(nil)
 

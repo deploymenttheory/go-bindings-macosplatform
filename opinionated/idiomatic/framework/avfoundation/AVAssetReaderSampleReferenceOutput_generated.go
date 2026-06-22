@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,32 +52,22 @@ func NewAssetReaderSampleReferenceOutputWithTrack(track *AssetTrack) *AssetReade
 	return assetReaderSampleReferenceOutputAdopt(_id)
 }
 
-// WithAlwaysCopiesSampleData a Boolean value that indicates whether the output vends copied sample data.
-func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
-	return x
+// WithAlwaysCopiesSampleData sets a Boolean value that indicates whether the output vends copied sample data.
+func (arsro *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
+	objc.Send[objc.ID](objref.IDOf(arsro), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
+	return arsro
 }
 
-// WithSupportsRandomAccess a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
-func (x *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
-	return x
+// WithSupportsRandomAccess sets a Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
+func (arsro *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {
+	objc.Send[objc.ID](objref.IDOf(arsro), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
+	return arsro
 }
 
 // Track wraps the corresponding Objective-C method.
-func (x *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("track"))
+func (arsro *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(arsro), objc.RegisterName("track"))
 	return AssetTrackFromID(_r)
 }
-
-// AssetReaderSampleReferenceOutputable is the interface implemented by [AssetReaderSampleReferenceOutput], for mocking and DI.
-type AssetReaderSampleReferenceOutputable interface {
-	obj.Object
-	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput
-	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput
-	Track() *AssetTrack
-}
-
-var _ AssetReaderSampleReferenceOutputable = (*AssetReaderSampleReferenceOutput)(nil)
 
 var _ AssetReaderOutputProvider = (*AssetReaderSampleReferenceOutput)(nil)

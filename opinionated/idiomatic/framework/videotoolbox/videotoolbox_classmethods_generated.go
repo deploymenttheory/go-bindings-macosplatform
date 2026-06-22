@@ -23,7 +23,7 @@ func DefaultRevision() FrameRateConversionConfigurationRevision {
 	return _r
 }
 
-// IsSupported reports whether the system supports this processor.
+// IsSupported reports whether reports whether the system supports this processor.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("isSupported"))
 	return _r
@@ -35,7 +35,7 @@ func ProcessorSupported() uint8 {
 	return _r
 }
 
-// VTLowLatencyFrameInterpolationConfigurationIsSupported reports whether the system supports this processor.
+// VTLowLatencyFrameInterpolationConfigurationIsSupported reports whether reports whether the system supports this processor.
 func VTLowLatencyFrameInterpolationConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("isSupported"))
 	return _r
@@ -47,19 +47,19 @@ func SupportedScaleFactorsForFrameWidthFrameHeight(frameWidth int, frameHeight i
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// MaximumDimensions maximum dimensions for a source frame for the processor.
+// MaximumDimensions returns maximum dimensions for a source frame for the processor.
 func MaximumDimensions() coremedia.CMVideoDimensions {
 	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("maximumDimensions"))
 	return _r
 }
 
-// MinimumDimensions minimum dimensions for a source frame for the processor.
+// MinimumDimensions returns minimum dimensions for a source frame for the processor.
 func MinimumDimensions() coremedia.CMVideoDimensions {
 	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("minimumDimensions"))
 	return _r
 }
 
-// VTLowLatencySuperResolutionScalerConfigurationIsSupported reports whether the system supports this processor on the current configuration.
+// VTLowLatencySuperResolutionScalerConfigurationIsSupported reports whether reports whether the system supports this processor on the current configuration.
 func VTLowLatencySuperResolutionScalerConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("isSupported"))
 	return _r
@@ -77,7 +77,7 @@ func VTMotionBlurConfigurationDefaultRevision() MotionBlurConfigurationRevision 
 	return _r
 }
 
-// VTMotionBlurConfigurationIsSupported reports whether the system supports this processor.
+// VTMotionBlurConfigurationIsSupported reports whether reports whether the system supports this processor.
 func VTMotionBlurConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("isSupported"))
 	return _r
@@ -101,7 +101,7 @@ func VTOpticalFlowConfigurationDefaultRevision() OpticalFlowConfigurationRevisio
 	return _r
 }
 
-// VTOpticalFlowConfigurationIsSupported reports whether the system supports this processor.
+// VTOpticalFlowConfigurationIsSupported reports whether reports whether the system supports this processor.
 func VTOpticalFlowConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("isSupported"))
 	return _r
@@ -125,13 +125,13 @@ func VTSuperResolutionScalerConfigurationDefaultRevision() SuperResolutionScaler
 	return _r
 }
 
-// VTSuperResolutionScalerConfigurationIsSupported reports whether the system supports this processor.
+// VTSuperResolutionScalerConfigurationIsSupported reports whether reports whether the system supports this processor.
 func VTSuperResolutionScalerConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTSuperResolutionScalerConfiguration")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// SupportedScaleFactors reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.
+// SupportedScaleFactors returns reports the set of supported scale factors to use when initializing a super-resolution scaler configuration.
 //
 // SupportedScaleFactors returns the collection as a Go slice.
 func SupportedScaleFactors() []obj.Object {
@@ -139,7 +139,7 @@ func SupportedScaleFactors() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SupportedSourcePixelFormats list of all supported pixel formats for source frames.
+// SupportedSourcePixelFormats returns list of all supported pixel formats for source frames.
 //
 // SupportedSourcePixelFormats returns the collection as a Go slice.
 func SupportedSourcePixelFormats() []obj.Object {
@@ -147,19 +147,19 @@ func SupportedSourcePixelFormats() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// VTTemporalNoiseFilterConfigurationMaximumDimensions the maximum dimensions of a source frame that the processor supports.
+// VTTemporalNoiseFilterConfigurationMaximumDimensions returns the maximum dimensions of a source frame that the processor supports.
 func VTTemporalNoiseFilterConfigurationMaximumDimensions() coremedia.CMVideoDimensions {
 	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("maximumDimensions"))
 	return _r
 }
 
-// VTTemporalNoiseFilterConfigurationMinimumDimensions the minimum dimensions of a source frame that the processor supports.
+// VTTemporalNoiseFilterConfigurationMinimumDimensions returns the minimum dimensions of a source frame that the processor supports.
 func VTTemporalNoiseFilterConfigurationMinimumDimensions() coremedia.CMVideoDimensions {
 	_r := objc.Send[coremedia.CMVideoDimensions](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("minimumDimensions"))
 	return _r
 }
 
-// VTTemporalNoiseFilterConfigurationIsSupported reports whether the system supports this processor.
+// VTTemporalNoiseFilterConfigurationIsSupported reports whether reports whether the system supports this processor.
 func VTTemporalNoiseFilterConfigurationIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("VTTemporalNoiseFilterConfiguration")), objc.RegisterName("isSupported"))
 	return _r

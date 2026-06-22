@@ -44,24 +44,24 @@ func relativeAssetResolverAdopt(id objc.ID) *RelativeAssetResolver {
 }
 
 // Description returns the object's -description text.
-func (x *RelativeAssetResolver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rar *RelativeAssetResolver) Description() string {
+	return rt.Description(objref.IDOf(rar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RelativeAssetResolver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rar *RelativeAssetResolver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RelativeAssetResolver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rar *RelativeAssetResolver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RelativeAssetResolver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rar *RelativeAssetResolver) String() string {
+	return rt.Description(objref.IDOf(rar))
 }
 
 // NewRelativeAssetResolverWithAsset creates a new RelativeAssetResolver.
@@ -72,28 +72,13 @@ func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
 }
 
 // WithAsset sets the property and returns the receiver so calls can be chained.
-func (x *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsset:"), objref.IDOf(asset))
-	return x
+func (rar *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
+	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setAsset:"), objref.IDOf(asset))
+	return rar
 }
 
 // Asset wraps the corresponding Objective-C method.
-func (x *RelativeAssetResolver) Asset() *Asset {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+func (rar *RelativeAssetResolver) Asset() *Asset {
+	_r := objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
-
-// SetAsset wraps the corresponding Objective-C method.
-func (x *RelativeAssetResolver) SetAsset(asset *Asset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsset:"), objref.IDOf(asset))
-}
-
-// RelativeAssetResolverable is the interface implemented by [RelativeAssetResolver], for mocking and DI.
-type RelativeAssetResolverable interface {
-	obj.Object
-	WithAsset(asset *Asset) *RelativeAssetResolver
-	Asset() *Asset
-	SetAsset(asset *Asset)
-}
-
-var _ RelativeAssetResolverable = (*RelativeAssetResolver)(nil)

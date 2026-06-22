@@ -6,6 +6,7 @@ package passkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -94,7 +95,7 @@ func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, pa
 	}
 }
 
-// IsPassLibraryAvailable returns a Boolean value that indicates whether the pass library is available.
+// IsPassLibraryAvailable reports whether returns a Boolean value that indicates whether the pass library is available.
 func IsPassLibraryAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isPassLibraryAvailable"))
 	return _r
@@ -105,7 +106,7 @@ func EndAutomaticPassPresentationSuppressionWithRequestToken(requestToken int) {
 	objc.Send[objc.ID](objc.ID(_class("PKPassLibrary")), objc.RegisterName("endAutomaticPassPresentationSuppressionWithRequestToken:"), requestToken)
 }
 
-// IsSuppressingAutomaticPassPresentation returns a Boolean value that indicates whether the system suppresses the automatic presentation of Apple Pay passes.
+// IsSuppressingAutomaticPassPresentation reports whether returns a Boolean value that indicates whether the system suppresses the automatic presentation of Apple Pay passes.
 func IsSuppressingAutomaticPassPresentation() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isSuppressingAutomaticPassPresentation"))
 	return _r
@@ -117,7 +118,7 @@ func IsPaymentPassActivationAvailable() bool {
 	return _r
 }
 
-// CanMakePayments returns whether the user can make payments.
+// CanMakePayments reports whether the user can make payments.
 func CanMakePayments() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePayments"))
 	return _r
@@ -135,7 +136,7 @@ func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks []obj.Object, ca
 	return _r
 }
 
-// SupportsDisbursements returns a Boolean value that indicates whether this device can process disbursement requests.
+// SupportsDisbursements reports whether returns a Boolean value that indicates whether this device can process disbursement requests.
 func SupportsDisbursements() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursements"))
 	return _r
@@ -153,7 +154,7 @@ func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []obj.Obje
 	return _r
 }
 
-// PKPaymentAuthorizationViewControllerCanMakePayments returns whether the user can make payments.
+// PKPaymentAuthorizationViewControllerCanMakePayments reports whether the user can make payments.
 func PKPaymentAuthorizationViewControllerCanMakePayments() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePayments"))
 	return _r
@@ -171,7 +172,7 @@ func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilitie
 	return _r
 }
 
-// PKPaymentAuthorizationViewControllerSupportsDisbursements returns a Boolean value that indicates whether this device can process disbursement requests.
+// PKPaymentAuthorizationViewControllerSupportsDisbursements reports whether returns a Boolean value that indicates whether this device can process disbursement requests.
 func PKPaymentAuthorizationViewControllerSupportsDisbursements() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursements"))
 	return _r

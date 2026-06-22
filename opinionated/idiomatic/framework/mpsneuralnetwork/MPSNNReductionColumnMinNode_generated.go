@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionColumnMinNode() *NNReductionColumnMinNode {
 	return nNReductionColumnMinNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionColumnMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrcmn *NNReductionColumnMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrcmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrcmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionColumnMinNode) WithLabel(label string) *NNReductionColumnMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrcmn *NNReductionColumnMinNode) WithLabel(label string) *NNReductionColumnMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrcmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrcmn
 }
-
-// NNReductionColumnMinNodeable is the interface implemented by [NNReductionColumnMinNode], for mocking and DI.
-type NNReductionColumnMinNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode
-	WithLabel(label string) *NNReductionColumnMinNode
-}
-
-var _ NNReductionColumnMinNodeable = (*NNReductionColumnMinNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionColumnMinNode)(nil)
 

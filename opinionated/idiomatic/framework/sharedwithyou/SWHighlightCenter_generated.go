@@ -6,13 +6,14 @@ package sharedwithyou
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HighlightCenter is an idiomatic wrapper over the Objective-C class SWHighlightCenter.
@@ -49,24 +50,24 @@ func highlightCenterAdopt(id objc.ID) *HighlightCenter {
 }
 
 // Description returns the object's -description text.
-func (x *HighlightCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hc *HighlightCenter) Description() string {
+	return rt.Description(objref.IDOf(hc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HighlightCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hc *HighlightCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HighlightCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hc *HighlightCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HighlightCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hc *HighlightCenter) String() string {
+	return rt.Description(objref.IDOf(hc))
 }
 
 // NewHighlightCenter creates a new HighlightCenter.
@@ -78,7 +79,7 @@ func NewHighlightCenter() *HighlightCenter {
 // GetHighlightForURL returns a highlight for a specified URL.
 //
 // GetHighlightForURL blocks until the operation completes or ctx is cancelled.
-func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (result *Highlight, err error) {
+func (hc *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (result *Highlight, err error) {
 	type _result struct {
 		val *Highlight
 		err error
@@ -90,7 +91,7 @@ func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (r
 		_o.val = HighlightFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getHighlightForURL:completionHandler:"), rt.FileURL(uRL), _block)
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getHighlightForURL:completionHandler:"), rt.FileURL(uRL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -101,9 +102,9 @@ func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (r
 }
 
 // CollaborationHighlightForIdentifierError returns a collaboration highlight for a specified collaboration identifier.
-func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error) {
+func (hc *HighlightCenter) CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationHighlightForIdentifier:error:"), objref.IDOf(collaborationIdentifier), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("collaborationHighlightForIdentifier:error:"), objref.IDOf(collaborationIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -113,7 +114,7 @@ func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaboration
 // GetCollaborationHighlightForURL returns a collaboration highlight for a specified URL.
 //
 // GetCollaborationHighlightForURL blocks until the operation completes or ctx is cancelled.
-func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (result *CollaborationHighlight, err error) {
+func (hc *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (result *CollaborationHighlight, err error) {
 	type _result struct {
 		val *CollaborationHighlight
 		err error
@@ -125,7 +126,7 @@ func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, u
 		_o.val = CollaborationHighlightFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCollaborationHighlightForURL:completionHandler:"), rt.FileURL(uRL), _block)
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getCollaborationHighlightForURL:completionHandler:"), rt.FileURL(uRL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -136,14 +137,14 @@ func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, u
 }
 
 // ClearNoticesForHighlight clears the notices for a specified collaboration highlight.
-func (x *HighlightCenter) ClearNoticesForHighlight(highlight *CollaborationHighlight) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearNoticesForHighlight:"), objref.IDOf(highlight))
+func (hc *HighlightCenter) ClearNoticesForHighlight(highlight *CollaborationHighlight) {
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("clearNoticesForHighlight:"), objref.IDOf(highlight))
 }
 
 // GetSignedIdentityProofForCollaborationHighlightUsingData signs passed-in data with the local device’s private key.
 //
 // GetSignedIdentityProofForCollaborationHighlightUsingData blocks until the operation completes or ctx is cancelled.
-func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (result obj.Object, err error) {
+func (hc *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -155,7 +156,7 @@ func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingDa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSignedIdentityProofForCollaborationHighlight:usingData:completionHandler:"), objref.IDOf(collaborationHighlight), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("getSignedIdentityProofForCollaborationHighlight:usingData:completionHandler:"), objref.IDOf(collaborationHighlight), objref.IDOf(data), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -168,20 +169,7 @@ func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingDa
 // Highlights wraps the corresponding Objective-C method.
 //
 // Highlights returns the collection as a Go slice.
-func (x *HighlightCenter) Highlights() []*Highlight {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlights"))
+func (hc *HighlightCenter) Highlights() []*Highlight {
+	_arr := objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("highlights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Highlight { return HighlightFromID(_id) })
 }
-
-// HighlightCenterable is the interface implemented by [HighlightCenter], for mocking and DI.
-type HighlightCenterable interface {
-	obj.Object
-	GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error)
-	CollaborationHighlightForIdentifierError(collaborationIdentifier obj.Object) (result *CollaborationHighlight, err error)
-	GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error)
-	ClearNoticesForHighlight(highlight *CollaborationHighlight)
-	GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *CollaborationHighlight, data obj.Object) (obj.Object, error)
-	Highlights() []*Highlight
-}
-
-var _ HighlightCenterable = (*HighlightCenter)(nil)

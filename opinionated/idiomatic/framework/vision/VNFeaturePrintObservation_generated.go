@@ -5,12 +5,13 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // FeaturePrintObservation is an idiomatic wrapper over the Objective-C class VNFeaturePrintObservation.
@@ -55,43 +56,32 @@ func NewFeaturePrintObservation() *FeaturePrintObservation {
 }
 
 // ComputeDistanceToFeaturePrintObservation computes the distance between two feature print observations.
-func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error) {
+func (fpo *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error) {
 	var _out0 float32
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("computeDistance:toFeaturePrintObservation:error:"), unsafe.Pointer(&_out0), objref.IDOf(featurePrint), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(fpo), objc.RegisterName("computeDistance:toFeaturePrintObservation:error:"), unsafe.Pointer(&_out0), objref.IDOf(featurePrint), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return _out0, nil
 }
 
-// ElementType the type of each element in the data.
-func (x *FeaturePrintObservation) ElementType() ElementType {
-	_r := objc.Send[ElementType](objref.IDOf(x), objc.RegisterName("elementType"))
+// ElementType returns the type of each element in the data.
+func (fpo *FeaturePrintObservation) ElementType() ElementType {
+	_r := objc.Send[ElementType](objref.IDOf(fpo), objc.RegisterName("elementType"))
 	return _r
 }
 
-// ElementCount the total number of elements in the data.
-func (x *FeaturePrintObservation) ElementCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+// ElementCount returns the total number of elements in the data.
+func (fpo *FeaturePrintObservation) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(fpo), objc.RegisterName("elementCount"))
 	return _r
 }
 
-// Data the feature print data.
-func (x *FeaturePrintObservation) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the feature print data.
+func (fpo *FeaturePrintObservation) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpo), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// FeaturePrintObservationable is the interface implemented by [FeaturePrintObservation], for mocking and DI.
-type FeaturePrintObservationable interface {
-	obj.Object
-	ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error)
-	ElementType() ElementType
-	ElementCount() int
-	Data() obj.Object
-}
-
-var _ FeaturePrintObservationable = (*FeaturePrintObservation)(nil)
 
 var _ ObservationProvider = (*FeaturePrintObservation)(nil)

@@ -45,23 +45,15 @@ func simpleCStringAdopt(id objc.ID) *SimpleCString {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SimpleCString) WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (scs *SimpleCString) WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString {
+	objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return scs
 }
-
-// SimpleCStringable is the interface implemented by [SimpleCString], for mocking and DI.
-type SimpleCStringable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString
-}
-
-var _ SimpleCStringable = (*SimpleCString)(nil)
 
 // isSimpleCString marks SimpleCString — and, by embedding promotion, its
 // subclasses — as a member of the SimpleCString hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SimpleCString) isSimpleCString() {}
+func (scs *SimpleCString) isSimpleCString() {}
 
 var _ SimpleCStringProvider = (*SimpleCString)(nil)
 

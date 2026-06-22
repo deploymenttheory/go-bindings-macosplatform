@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,238 +50,213 @@ func NewDOMHTMLSelectElement() *DOMHTMLSelectElement {
 }
 
 // WithAutofocus sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithAutofocus(autofocus bool) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutofocus:"), autofocus)
-	return x
+func (dse *DOMHTMLSelectElement) WithAutofocus(autofocus bool) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setAutofocus:"), autofocus)
+	return dse
 }
 
 // WithDisabled sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithDisabled(disabled bool) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
-	return x
+func (dse *DOMHTMLSelectElement) WithDisabled(disabled bool) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setDisabled:"), disabled)
+	return dse
 }
 
 // WithMultiple sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithMultiple(multiple bool) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiple:"), multiple)
-	return x
+func (dse *DOMHTMLSelectElement) WithMultiple(multiple bool) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setMultiple:"), multiple)
+	return dse
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithName(name string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (dse *DOMHTMLSelectElement) WithName(name string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setName:"), purego.NSString(name))
+	return dse
 }
 
 // WithSize sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithSize(size int) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+func (dse *DOMHTMLSelectElement) WithSize(size int) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setSize:"), size)
+	return dse
 }
 
 // WithSelectedIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithSelectedIndex(selectedIndex int) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
-	return x
+func (dse *DOMHTMLSelectElement) WithSelectedIndex(selectedIndex int) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setSelectedIndex:"), selectedIndex)
+	return dse
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithValue(value string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (dse *DOMHTMLSelectElement) WithValue(value string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setValue:"), purego.NSString(value))
+	return dse
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithTitle(title string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dse *DOMHTMLSelectElement) WithTitle(title string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dse
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithLang(lang string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dse *DOMHTMLSelectElement) WithLang(lang string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dse
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithDir(dir string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dse *DOMHTMLSelectElement) WithDir(dir string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dse
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithTabIndex(tabIndex int) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dse *DOMHTMLSelectElement) WithTabIndex(tabIndex int) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dse
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithAccessKey(accessKey string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dse *DOMHTMLSelectElement) WithAccessKey(accessKey string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dse
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithInnerText(innerText string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dse *DOMHTMLSelectElement) WithInnerText(innerText string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dse
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithOuterText(outerText string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dse *DOMHTMLSelectElement) WithOuterText(outerText string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dse
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithContentEditable(contentEditable string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dse *DOMHTMLSelectElement) WithContentEditable(contentEditable string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dse
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithIdName(idName string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dse *DOMHTMLSelectElement) WithIDName(idName string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dse
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithScrollLeft(scrollLeft int) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dse *DOMHTMLSelectElement) WithScrollLeft(scrollLeft int) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dse
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithScrollTop(scrollTop int) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dse *DOMHTMLSelectElement) WithScrollTop(scrollTop int) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dse
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithInnerHTML(innerHTML string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dse *DOMHTMLSelectElement) WithInnerHTML(innerHTML string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dse
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithOuterHTML(outerHTML string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dse *DOMHTMLSelectElement) WithOuterHTML(outerHTML string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dse
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithClassName(className string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dse *DOMHTMLSelectElement) WithClassName(className string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dse
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithNodeValue(nodeValue string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dse *DOMHTMLSelectElement) WithNodeValue(nodeValue string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dse
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithPrefix(prefix string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dse *DOMHTMLSelectElement) WithPrefix(prefix string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dse
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLSelectElement) WithTextContent(textContent string) *DOMHTMLSelectElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dse *DOMHTMLSelectElement) WithTextContent(textContent string) *DOMHTMLSelectElement {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dse
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Item(index int) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dse *DOMHTMLSelectElement) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // NamedItem wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) NamedItem(name string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedItem:"), purego.NSString(name))
+func (dse *DOMHTMLSelectElement) NamedItem(name string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // AddBefore wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) AddBefore(element *DOMHTMLElement, before *DOMHTMLElement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("add:before:"), objref.IDOf(element), objref.IDOf(before))
+func (dse *DOMHTMLSelectElement) AddBefore(element *DOMHTMLElement, before *DOMHTMLElement) {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("add:before:"), objref.IDOf(element), objref.IDOf(before))
 }
 
 // Remove wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Remove(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remove:"), index)
+func (dse *DOMHTMLSelectElement) Remove(index int) {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("remove:"), index)
 }
 
 // Autofocus wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Autofocus() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autofocus"))
+func (dse *DOMHTMLSelectElement) Autofocus() bool {
+	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("autofocus"))
 	return _r
-}
-
-// SetAutofocus wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetAutofocus(autofocus bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutofocus:"), autofocus)
 }
 
 // Disabled wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Disabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+func (dse *DOMHTMLSelectElement) Disabled() bool {
+	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("disabled"))
 	return _r
 }
 
-// SetDisabled wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetDisabled(disabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
-}
-
 // Form wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Form() *DOMHTMLFormElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("form"))
+func (dse *DOMHTMLSelectElement) Form() *DOMHTMLFormElement {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Multiple wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Multiple() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multiple"))
+func (dse *DOMHTMLSelectElement) Multiple() bool {
+	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("multiple"))
 	return _r
 }
 
-// SetMultiple wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetMultiple(multiple bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiple:"), multiple)
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (dse *DOMHTMLSelectElement) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // Size wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Size() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("size"))
+func (dse *DOMHTMLSelectElement) Size() int {
+	_r := objc.Send[int](objref.IDOf(dse), objc.RegisterName("size"))
 	return _r
 }
 
-// SetSize wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetSize(size int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-}
-
 // Type wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (dse *DOMHTMLSelectElement) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
@@ -290,107 +264,42 @@ func (x *DOMHTMLSelectElement) Type() string {
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Options() *DOMHTMLOptionsCollection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+func (dse *DOMHTMLSelectElement) Options() *DOMHTMLOptionsCollection {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("options"))
 	return DOMHTMLOptionsCollectionFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dse *DOMHTMLSelectElement) Length() int {
+	_r := objc.Send[int](objref.IDOf(dse), objc.RegisterName("length"))
 	return _r
 }
 
 // SelectedIndex wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SelectedIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
+func (dse *DOMHTMLSelectElement) SelectedIndex() int {
+	_r := objc.Send[int](objref.IDOf(dse), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
-// SetSelectedIndex wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetSelectedIndex(selectedIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
-}
-
 // Value wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (dse *DOMHTMLSelectElement) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-}
-
 // WillValidate wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) WillValidate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willValidate"))
+func (dse *DOMHTMLSelectElement) WillValidate() bool {
+	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("willValidate"))
 	return _r
 }
 
 // Add wraps the corresponding Objective-C method.
-func (x *DOMHTMLSelectElement) Add(element *DOMHTMLElement, before *DOMHTMLElement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("add::"), objref.IDOf(element), objref.IDOf(before))
+func (dse *DOMHTMLSelectElement) Add(element *DOMHTMLElement, before *DOMHTMLElement) {
+	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("add::"), objref.IDOf(element), objref.IDOf(before))
 }
-
-// DOMHTMLSelectElementable is the interface implemented by [DOMHTMLSelectElement], for mocking and DI.
-type DOMHTMLSelectElementable interface {
-	obj.Object
-	WithAutofocus(autofocus bool) *DOMHTMLSelectElement
-	WithDisabled(disabled bool) *DOMHTMLSelectElement
-	WithMultiple(multiple bool) *DOMHTMLSelectElement
-	WithName(name string) *DOMHTMLSelectElement
-	WithSize(size int) *DOMHTMLSelectElement
-	WithSelectedIndex(selectedIndex int) *DOMHTMLSelectElement
-	WithValue(value string) *DOMHTMLSelectElement
-	WithTitle(title string) *DOMHTMLSelectElement
-	WithLang(lang string) *DOMHTMLSelectElement
-	WithDir(dir string) *DOMHTMLSelectElement
-	WithTabIndex(tabIndex int) *DOMHTMLSelectElement
-	WithAccessKey(accessKey string) *DOMHTMLSelectElement
-	WithInnerText(innerText string) *DOMHTMLSelectElement
-	WithOuterText(outerText string) *DOMHTMLSelectElement
-	WithContentEditable(contentEditable string) *DOMHTMLSelectElement
-	WithIdName(idName string) *DOMHTMLSelectElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLSelectElement
-	WithScrollTop(scrollTop int) *DOMHTMLSelectElement
-	WithInnerHTML(innerHTML string) *DOMHTMLSelectElement
-	WithOuterHTML(outerHTML string) *DOMHTMLSelectElement
-	WithClassName(className string) *DOMHTMLSelectElement
-	WithNodeValue(nodeValue string) *DOMHTMLSelectElement
-	WithPrefix(prefix string) *DOMHTMLSelectElement
-	WithTextContent(textContent string) *DOMHTMLSelectElement
-	Item(index int) *DOMNode
-	NamedItem(name string) *DOMNode
-	AddBefore(element *DOMHTMLElement, before *DOMHTMLElement)
-	Remove(index int)
-	Autofocus() bool
-	SetAutofocus(autofocus bool)
-	Disabled() bool
-	SetDisabled(disabled bool)
-	Form() *DOMHTMLFormElement
-	Multiple() bool
-	SetMultiple(multiple bool)
-	Name() string
-	SetName(name string)
-	Size() int
-	SetSize(size int)
-	Type() string
-	Options() *DOMHTMLOptionsCollection
-	Length() int
-	SelectedIndex() int
-	SetSelectedIndex(selectedIndex int)
-	Value() string
-	SetValue(value string)
-	WillValidate() bool
-	Add(element *DOMHTMLElement, before *DOMHTMLElement)
-}
-
-var _ DOMHTMLSelectElementable = (*DOMHTMLSelectElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLSelectElement)(nil)
 

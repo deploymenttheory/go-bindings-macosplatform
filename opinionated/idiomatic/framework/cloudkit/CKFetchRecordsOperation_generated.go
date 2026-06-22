@@ -59,134 +59,95 @@ func NewFetchRecordsOperationWithRecordIDs(recordIDs []*RecordID) *FetchRecordsO
 	return fetchRecordsOperationAdopt(_id)
 }
 
-// WithRecordIDs the record IDs of the records to fetch.
-func (x *FetchRecordsOperation) WithRecordIDs(items ...*RecordID) *FetchRecordsOperation {
+// WithRecordIDs sets the record IDs of the records to fetch.
+func (fro *FetchRecordsOperation) WithRecordIDs(items ...*RecordID) *FetchRecordsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordID) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordIDs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setRecordIDs:"), _arr)
+	return fro
 }
 
-// WithDesiredKeys the fields of the records to fetch.
-func (x *FetchRecordsOperation) WithDesiredKeys(items ...obj.Object) *FetchRecordsOperation {
+// WithDesiredKeys sets the fields of the records to fetch.
+func (fro *FetchRecordsOperation) WithDesiredKeys(items ...obj.Object) *FetchRecordsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setDesiredKeys:"), _arr)
+	return fro
 }
 
-// WithPerRecordProgressBlock the closure to execute with progress information for individual records.
-func (x *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
-	return x
+// WithPerRecordProgressBlock sets the closure to execute with progress information for individual records.
+func (fro *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
+	return fro
 }
 
-// WithDatabase the database that the operation uses.
-func (x *FetchRecordsOperation) WithDatabase(database *Database) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (fro *FetchRecordsOperation) WithDatabase(database *Database) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return fro
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (fro *FetchRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return fro
 }
 
-// WithGroup the operation’s group.
-func (x *FetchRecordsOperation) WithGroup(group *OperationGroup) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (fro *FetchRecordsOperation) WithGroup(group *OperationGroup) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return fro
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (fro *FetchRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return fro
 }
 
-// WithContainer the operation's container.
-func (x *FetchRecordsOperation) WithContainer(container *Container) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (fro *FetchRecordsOperation) WithContainer(container *Container) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return fro
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (fro *FetchRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return fro
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchRecordsOperation) WithLongLived(longLived bool) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (fro *FetchRecordsOperation) WithLongLived(longLived bool) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setLongLived:"), longLived)
+	return fro
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (fro *FetchRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return fro
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (fro *FetchRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return fro
 }
 
-// RecordIDs the record IDs of the records to fetch. Use this property to view or change the IDs of the records you want to retrieve. If you use the operation that “CKFetchRecordsOperation/fetchCurrentUserRecordOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue. The records you fetch don't need to be in the same record zone. The record ID for each record provides the zone information that CloudKit needs to fetch the corresponding record.
+// RecordIDs returns the record IDs of the records to fetch. Use this property to view or change the IDs of the records you want to retrieve. If you use the operation that “CKFetchRecordsOperation/fetchCurrentUserRecordOperation()“ returns, CloudKit ignores the contents of this property and sets its value to `nil`. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue. The records you fetch don't need to be in the same record zone. The record ID for each record provides the zone information that CloudKit needs to fetch the corresponding record.
 //
 // RecordIDs returns the collection as a Go slice.
-func (x *FetchRecordsOperation) RecordIDs() []*RecordID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDs"))
+func (fro *FetchRecordsOperation) RecordIDs() []*RecordID {
+	_arr := objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("recordIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
-// SetRecordIDs wraps the corresponding Objective-C method.
-func (x *FetchRecordsOperation) SetRecordIDs(recordIDs []*RecordID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordIDs:"), purego.SliceToNSArray(recordIDs, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }))
-}
-
-// DesiredKeys the fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record during the fetch operation. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you're retrieving records of different types, make sure the array includes the fields you want from all of the various record types that the operation can return. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
+// DesiredKeys returns the fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record during the fetch operation. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you're retrieving records of different types, make sure the array includes the fields you want from all of the various record types that the operation can return. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
 //
 // DesiredKeys returns the collection as a Go slice.
-func (x *FetchRecordsOperation) DesiredKeys() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredKeys"))
+func (fro *FetchRecordsOperation) DesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetDesiredKeys wraps the corresponding Objective-C method.
-func (x *FetchRecordsOperation) SetDesiredKeys(desiredKeys []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetPerRecordProgressBlock wraps the corresponding Objective-C method.
-func (x *FetchRecordsOperation) SetPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
-}
-
-// FetchRecordsOperationable is the interface implemented by [FetchRecordsOperation], for mocking and DI.
-type FetchRecordsOperationable interface {
-	obj.Object
-	WithRecordIDs(items ...*RecordID) *FetchRecordsOperation
-	WithDesiredKeys(items ...obj.Object) *FetchRecordsOperation
-	WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *FetchRecordsOperation
-	WithDatabase(database *Database) *FetchRecordsOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation
-	WithGroup(group *OperationGroup) *FetchRecordsOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation
-	WithContainer(container *Container) *FetchRecordsOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordsOperation
-	WithLongLived(longLived bool) *FetchRecordsOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation
-	RecordIDs() []*RecordID
-	SetRecordIDs(recordIDs []*RecordID)
-	DesiredKeys() []obj.Object
-	SetDesiredKeys(desiredKeys []obj.Object)
-	SetPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64))
-}
-
-var _ FetchRecordsOperationable = (*FetchRecordsOperation)(nil)
 
 var _ DatabaseOperationProvider = (*FetchRecordsOperation)(nil)
 

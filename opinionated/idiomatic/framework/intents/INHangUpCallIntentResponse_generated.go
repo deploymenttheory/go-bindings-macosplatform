@@ -51,25 +51,16 @@ func NewHangUpCallIntentResponseWithCodeUserActivity(code HangUpCallIntentRespon
 	return hangUpCallIntentResponseAdopt(_id)
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *HangUpCallIntentResponse) WithUserActivity(userActivity obj.Object) *HangUpCallIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (hucir *HangUpCallIntentResponse) WithUserActivity(userActivity obj.Object) *HangUpCallIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(hucir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return hucir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *HangUpCallIntentResponse) Code() HangUpCallIntentResponseCode {
-	_r := objc.Send[HangUpCallIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (hucir *HangUpCallIntentResponse) Code() HangUpCallIntentResponseCode {
+	_r := objc.Send[HangUpCallIntentResponseCode](objref.IDOf(hucir), objc.RegisterName("code"))
 	return _r
 }
-
-// HangUpCallIntentResponseable is the interface implemented by [HangUpCallIntentResponse], for mocking and DI.
-type HangUpCallIntentResponseable interface {
-	obj.Object
-	WithUserActivity(userActivity obj.Object) *HangUpCallIntentResponse
-	Code() HangUpCallIntentResponseCode
-}
-
-var _ HangUpCallIntentResponseable = (*HangUpCallIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*HangUpCallIntentResponse)(nil)

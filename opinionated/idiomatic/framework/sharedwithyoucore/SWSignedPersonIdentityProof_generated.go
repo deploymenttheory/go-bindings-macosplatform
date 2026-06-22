@@ -52,17 +52,9 @@ func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIden
 }
 
 // SignatureData wraps the corresponding Objective-C method.
-func (x *SignedPersonIdentityProof) SignatureData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signatureData"))
+func (spip *SignedPersonIdentityProof) SignatureData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(spip), objc.RegisterName("signatureData"))
 	return obj.Wrap(_r)
 }
-
-// SignedPersonIdentityProofable is the interface implemented by [SignedPersonIdentityProof], for mocking and DI.
-type SignedPersonIdentityProofable interface {
-	obj.Object
-	SignatureData() obj.Object
-}
-
-var _ SignedPersonIdentityProofable = (*SignedPersonIdentityProof)(nil)
 
 var _ PersonIdentityProofProvider = (*SignedPersonIdentityProof)(nil)

@@ -46,24 +46,24 @@ func tableViewRowActionAdopt(id objc.ID) *TableViewRowAction {
 }
 
 // Description returns the object's -description text.
-func (x *TableViewRowAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tvra *TableViewRowAction) Description() string {
+	return rt.Description(objref.IDOf(tvra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TableViewRowAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tvra *TableViewRowAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tvra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TableViewRowAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tvra *TableViewRowAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tvra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TableViewRowAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tvra *TableViewRowAction) String() string {
+	return rt.Description(objref.IDOf(tvra))
 }
 
 // NewTableViewRowAction creates a new TableViewRowAction.
@@ -72,79 +72,47 @@ func NewTableViewRowAction() *TableViewRowAction {
 	return tableViewRowActionAdopt(_id)
 }
 
-// WithTitle the title of the action button.
-func (x *TableViewRowAction) WithTitle(title string) *TableViewRowAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the action button.
+func (tvra *TableViewRowAction) WithTitle(title string) *TableViewRowAction {
+	objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return tvra
 }
 
-// WithBackgroundColor the background color of the action button.
-func (x *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *TableViewRowAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the action button.
+func (tvra *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *TableViewRowAction {
+	objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tvra
 }
 
 // WithImage sets the property and returns the receiver so calls can be chained.
-func (x *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+func (tvra *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
+	objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return tvra
 }
 
 // Style wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) Style() TableViewRowActionStyle {
-	_r := objc.Send[TableViewRowActionStyle](objref.IDOf(x), objc.RegisterName("style"))
+func (tvra *TableViewRowAction) Style() TableViewRowActionStyle {
+	_r := objc.Send[TableViewRowActionStyle](objref.IDOf(tvra), objc.RegisterName("style"))
 	return _r
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (tvra *TableViewRowAction) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (tvra *TableViewRowAction) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // Image wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (tvra *TableViewRowAction) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
-
-// SetImage wraps the corresponding Objective-C method.
-func (x *TableViewRowAction) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-}
-
-// TableViewRowActionable is the interface implemented by [TableViewRowAction], for mocking and DI.
-type TableViewRowActionable interface {
-	obj.Object
-	WithTitle(title string) *TableViewRowAction
-	WithBackgroundColor(backgroundColor *Color) *TableViewRowAction
-	WithImage(image *Image) *TableViewRowAction
-	Style() TableViewRowActionStyle
-	Title() string
-	SetTitle(title string)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	Image() *Image
-	SetImage(image *Image)
-}
-
-var _ TableViewRowActionable = (*TableViewRowAction)(nil)

@@ -51,17 +51,9 @@ func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mbcle *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent {
+	objc.Send[objc.ID](objref.IDOf(mbcle), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mbcle
 }
-
-// MTRBasicClusterLeaveEventable is the interface implemented by [MTRBasicClusterLeaveEvent], for mocking and DI.
-type MTRBasicClusterLeaveEventable interface {
-	obj.Object
-	WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent
-}
-
-var _ MTRBasicClusterLeaveEventable = (*MTRBasicClusterLeaveEvent)(nil)
 
 var _ MTRBasicInformationClusterLeaveEventProvider = (*MTRBasicClusterLeaveEvent)(nil)

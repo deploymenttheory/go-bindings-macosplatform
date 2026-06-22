@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewVirtioGraphicsScanout() *VirtioGraphicsScanout {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioGraphicsScanout")), objc.RegisterName("new"))
 	return virtioGraphicsScanoutAdopt(_id)
 }
-
-// VirtioGraphicsScanoutable is the interface implemented by [VirtioGraphicsScanout], for mocking and DI.
-type VirtioGraphicsScanoutable interface {
-	obj.Object
-}
-
-var _ VirtioGraphicsScanoutable = (*VirtioGraphicsScanout)(nil)
 
 var _ GraphicsDisplayProvider = (*VirtioGraphicsScanout)(nil)

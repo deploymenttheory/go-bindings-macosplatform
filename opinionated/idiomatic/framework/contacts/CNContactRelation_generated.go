@@ -46,24 +46,24 @@ func contactRelationAdopt(id objc.ID) *ContactRelation {
 }
 
 // Description returns the object's -description text.
-func (x *ContactRelation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *ContactRelation) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactRelation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *ContactRelation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactRelation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *ContactRelation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactRelation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *ContactRelation) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // NewContactRelationWithName creates an object with the name of the related contact.
@@ -74,18 +74,10 @@ func NewContactRelationWithName(name string) *ContactRelation {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *ContactRelation) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (cr *ContactRelation) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ContactRelationable is the interface implemented by [ContactRelation], for mocking and DI.
-type ContactRelationable interface {
-	obj.Object
-	Name() string
-}
-
-var _ ContactRelationable = (*ContactRelation)(nil)

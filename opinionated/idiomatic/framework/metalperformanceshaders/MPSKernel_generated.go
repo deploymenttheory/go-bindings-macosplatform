@@ -48,24 +48,24 @@ func kernelAdopt(id objc.ID) *Kernel {
 }
 
 // Description returns the object's -description text.
-func (x *Kernel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (k *Kernel) Description() string {
+	return rt.Description(objref.IDOf(k))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Kernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (k *Kernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(k), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Kernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (k *Kernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(k), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Kernel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (k *Kernel) String() string {
+	return rt.Description(objref.IDOf(k))
 }
 
 // NewKernelWithCoder called by NSCoder to decode MPSKernels This isn't the right interface to decode a MPSKernel, but it is the one that NSCoder uses. To enable your NSCoder (e.g. NSKeyedUnarchiver) to set which device to use extend the object to adopt the MPSDeviceProvider protocol. Otherwise, the Metal system default device will be used.
@@ -75,39 +75,24 @@ func NewKernelWithCoder(aDecoder obj.Object) *Kernel {
 	return kernelAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *Kernel) WithLabel(label string) *Kernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (k *Kernel) WithLabel(label string) *Kernel {
+	objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return k
 }
 
-// Label a string to help identify this object.
-func (x *Kernel) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a string to help identify this object.
+func (k *Kernel) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *Kernel) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// Kernelable is the interface implemented by [Kernel], for mocking and DI.
-type Kernelable interface {
-	obj.Object
-	WithLabel(label string) *Kernel
-	Label() string
-	SetLabel(label string)
-}
-
-var _ Kernelable = (*Kernel)(nil)
-
 // isKernel marks Kernel — and, by embedding promotion, its
 // subclasses — as a member of the Kernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Kernel) isKernel() {}
+func (k *Kernel) isKernel() {}
 
 var _ KernelProvider = (*Kernel)(nil)

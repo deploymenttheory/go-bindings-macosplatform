@@ -46,24 +46,24 @@ func compositionTrackFormatDescriptionReplacementAdopt(id objc.ID) *CompositionT
 }
 
 // Description returns the object's -description text.
-func (x *CompositionTrackFormatDescriptionReplacement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ctfdr *CompositionTrackFormatDescriptionReplacement) Description() string {
+	return rt.Description(objref.IDOf(ctfdr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionTrackFormatDescriptionReplacement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ctfdr *CompositionTrackFormatDescriptionReplacement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ctfdr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionTrackFormatDescriptionReplacement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ctfdr *CompositionTrackFormatDescriptionReplacement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ctfdr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CompositionTrackFormatDescriptionReplacement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ctfdr *CompositionTrackFormatDescriptionReplacement) String() string {
+	return rt.Description(objref.IDOf(ctfdr))
 }
 
 // NewCompositionTrackFormatDescriptionReplacement creates a new CompositionTrackFormatDescriptionReplacement.
@@ -72,23 +72,14 @@ func NewCompositionTrackFormatDescriptionReplacement() *CompositionTrackFormatDe
 	return compositionTrackFormatDescriptionReplacementAdopt(_id)
 }
 
-// OriginalFormatDescription the original format description.
-func (x *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFormatDescription"))
+// OriginalFormatDescription returns the original format description.
+func (ctfdr *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ctfdr), objc.RegisterName("originalFormatDescription"))
 	return obj.Wrap(_r)
 }
 
-// ReplacementFormatDescription the replacement format description.
-func (x *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementFormatDescription"))
+// ReplacementFormatDescription returns the replacement format description.
+func (ctfdr *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ctfdr), objc.RegisterName("replacementFormatDescription"))
 	return obj.Wrap(_r)
 }
-
-// CompositionTrackFormatDescriptionReplacementable is the interface implemented by [CompositionTrackFormatDescriptionReplacement], for mocking and DI.
-type CompositionTrackFormatDescriptionReplacementable interface {
-	obj.Object
-	OriginalFormatDescription() obj.Object
-	ReplacementFormatDescription() obj.Object
-}
-
-var _ CompositionTrackFormatDescriptionReplacementable = (*CompositionTrackFormatDescriptionReplacement)(nil)

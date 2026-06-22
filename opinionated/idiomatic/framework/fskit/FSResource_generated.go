@@ -48,56 +48,46 @@ func resourceAdopt(id objc.ID) *Resource {
 }
 
 // Description returns the object's -description text.
-func (x *Resource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Resource) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Resource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Resource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Resource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Resource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Resource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Resource) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // MakeProxy creates a proxy object of this resource.
-func (x *Resource) MakeProxy() *Resource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeProxy"))
+func (r *Resource) MakeProxy() *Resource {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("makeProxy"))
 	return ResourceFromID(_r)
 }
 
 // Revoke revokes the resource.
-func (x *Resource) Revoke() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revoke"))
+func (r *Resource) Revoke() {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("revoke"))
 }
 
-// IsRevoked a Boolean value that indicates whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
-func (x *Resource) IsRevoked() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRevoked"))
+// IsRevoked reports whether the resource is revoked. If this is a proxy resource, the value of this property is always `true` (Swift) or `YES` (Objective-C).
+func (r *Resource) IsRevoked() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("isRevoked"))
 	return _r
 }
-
-// Resourceable is the interface implemented by [Resource], for mocking and DI.
-type Resourceable interface {
-	obj.Object
-	MakeProxy() *Resource
-	Revoke()
-	IsRevoked() bool
-}
-
-var _ Resourceable = (*Resource)(nil)
 
 // isResource marks Resource — and, by embedding promotion, its
 // subclasses — as a member of the Resource hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Resource) isResource() {}
+func (r *Resource) isResource() {}
 
 var _ ResourceProvider = (*Resource)(nil)

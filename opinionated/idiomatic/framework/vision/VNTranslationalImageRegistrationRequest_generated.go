@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewTranslationalImageRegistrationRequest() *TranslationalImageRegistrationR
 	return translationalImageRegistrationRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TranslationalImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (tirr *TranslationalImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(tirr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return tirr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TranslationalImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (tirr *TranslationalImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(tirr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return tirr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TranslationalImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (tirr *TranslationalImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *TranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(tirr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return tirr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TranslationalImageRegistrationRequest) WithRevision(revision int) *TranslationalImageRegistrationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (tirr *TranslationalImageRegistrationRequest) WithRevision(revision int) *TranslationalImageRegistrationRequest {
+	objc.Send[objc.ID](objref.IDOf(tirr), objc.RegisterName("setRevision:"), revision)
+	return tirr
 }
-
-// TranslationalImageRegistrationRequestable is the interface implemented by [TranslationalImageRegistrationRequest], for mocking and DI.
-type TranslationalImageRegistrationRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TranslationalImageRegistrationRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TranslationalImageRegistrationRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TranslationalImageRegistrationRequest
-	WithRevision(revision int) *TranslationalImageRegistrationRequest
-}
-
-var _ TranslationalImageRegistrationRequestable = (*TranslationalImageRegistrationRequest)(nil)
 
 var _ ImageRegistrationRequestProvider = (*TranslationalImageRegistrationRequest)(nil)
 

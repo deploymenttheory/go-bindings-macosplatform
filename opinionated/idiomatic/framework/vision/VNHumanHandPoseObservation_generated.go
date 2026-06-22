@@ -5,12 +5,13 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HumanHandPoseObservation is an idiomatic wrapper over the Objective-C class VNHumanHandPoseObservation.
@@ -55,9 +56,9 @@ func NewHumanHandPoseObservation() *HumanHandPoseObservation {
 }
 
 // RecognizedPointForJointNameError retrieves the recognized point for a joint name.
-func (x *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+func (hhpo *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hhpo), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -65,48 +66,36 @@ func (x *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName ob
 }
 
 // RecognizedPointsForJointsGroupNameError retrieves the recognized points associated with the joint group name.
-func (x *HumanHandPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+func (hhpo *HumanHandPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hhpo), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// AvailableJointNames all of the joint names available in the observation.
+// AvailableJointNames returns all of the joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
-func (x *HumanHandPoseObservation) AvailableJointNames() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointNames"))
+func (hhpo *HumanHandPoseObservation) AvailableJointNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(hhpo), objc.RegisterName("availableJointNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AvailableJointsGroupNames all of the joints group names available in the observation.
+// AvailableJointsGroupNames returns all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
-func (x *HumanHandPoseObservation) AvailableJointsGroupNames() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointsGroupNames"))
+func (hhpo *HumanHandPoseObservation) AvailableJointsGroupNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(hhpo), objc.RegisterName("availableJointsGroupNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Chirality the chirality of the hand.
-func (x *HumanHandPoseObservation) Chirality() Chirality {
-	_r := objc.Send[Chirality](objref.IDOf(x), objc.RegisterName("chirality"))
+// Chirality returns the chirality of the hand.
+func (hhpo *HumanHandPoseObservation) Chirality() Chirality {
+	_r := objc.Send[Chirality](objref.IDOf(hhpo), objc.RegisterName("chirality"))
 	return _r
 }
-
-// HumanHandPoseObservationable is the interface implemented by [HumanHandPoseObservation], for mocking and DI.
-type HumanHandPoseObservationable interface {
-	obj.Object
-	RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error)
-	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
-	AvailableJointNames() []obj.Object
-	AvailableJointsGroupNames() []obj.Object
-	Chirality() Chirality
-}
-
-var _ HumanHandPoseObservationable = (*HumanHandPoseObservation)(nil)
 
 var _ RecognizedPointsObservationProvider = (*HumanHandPoseObservation)(nil)
 

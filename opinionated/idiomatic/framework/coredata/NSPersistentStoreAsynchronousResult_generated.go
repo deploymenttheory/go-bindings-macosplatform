@@ -47,36 +47,26 @@ func persistentStoreAsynchronousResultAdopt(id objc.ID) *PersistentStoreAsynchro
 }
 
 // Cancel cancels the asynchronous fetch request.
-func (x *PersistentStoreAsynchronousResult) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (psar *PersistentStoreAsynchronousResult) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("cancel"))
 }
 
 // ManagedObjectContext wraps the corresponding Objective-C method.
-func (x *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedObjectContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
+func (psar *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedObjectContext {
+	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // Progress wraps the corresponding Objective-C method.
-func (x *PersistentStoreAsynchronousResult) Progress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
+func (psar *PersistentStoreAsynchronousResult) Progress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("progress"))
 	return obj.Wrap(_r)
 }
-
-// PersistentStoreAsynchronousResultable is the interface implemented by [PersistentStoreAsynchronousResult], for mocking and DI.
-type PersistentStoreAsynchronousResultable interface {
-	obj.Object
-	Cancel()
-	ManagedObjectContext() *ManagedObjectContext
-	Progress() obj.Object
-}
-
-var _ PersistentStoreAsynchronousResultable = (*PersistentStoreAsynchronousResult)(nil)
 
 // isPersistentStoreAsynchronousResult marks PersistentStoreAsynchronousResult — and, by embedding promotion, its
 // subclasses — as a member of the PersistentStoreAsynchronousResult hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PersistentStoreAsynchronousResult) isPersistentStoreAsynchronousResult() {}
+func (psar *PersistentStoreAsynchronousResult) isPersistentStoreAsynchronousResult() {}
 
 var _ PersistentStoreAsynchronousResultProvider = (*PersistentStoreAsynchronousResult)(nil)
 

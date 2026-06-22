@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,51 +52,28 @@ func NewListenerWithEngine(engine *Engine) *Listener {
 	return listenerAdopt(_id)
 }
 
-// WithGain modifies the volume of all audio playback for the listener’s mixers.
-func (x *Listener) WithGain(gain float64) *Listener {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets modifies the volume of all audio playback for the listener’s mixers.
+func (l *Listener) WithGain(gain float64) *Listener {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setGain:"), gain)
+	return l
 }
 
-// WithAutomaticHeadTrackingFlags a combination of flags to express automatic headtracking behaviors for this listener.
-func (x *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) *Listener {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticHeadTrackingFlags:"), automaticHeadTrackingFlags)
-	return x
+// WithAutomaticHeadTrackingFlags sets a combination of flags to express automatic headtracking behaviors for this listener.
+func (l *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) *Listener {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAutomaticHeadTrackingFlags:"), automaticHeadTrackingFlags)
+	return l
 }
 
-// Gain linear gain scalar.
-func (x *Listener) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (l *Listener) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("gain"))
 	return _r
 }
 
-// SetGain wraps the corresponding Objective-C method.
-func (x *Listener) SetGain(gain float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-}
-
-// AutomaticHeadTrackingFlags a combination of flags to express automatic headtracking behaviors for this listener.
-func (x *Listener) AutomaticHeadTrackingFlags() AutomaticHeadTrackingFlags {
-	_r := objc.Send[AutomaticHeadTrackingFlags](objref.IDOf(x), objc.RegisterName("automaticHeadTrackingFlags"))
+// AutomaticHeadTrackingFlags returns a combination of flags to express automatic headtracking behaviors for this listener.
+func (l *Listener) AutomaticHeadTrackingFlags() AutomaticHeadTrackingFlags {
+	_r := objc.Send[AutomaticHeadTrackingFlags](objref.IDOf(l), objc.RegisterName("automaticHeadTrackingFlags"))
 	return _r
 }
-
-// SetAutomaticHeadTrackingFlags a combination of flags to express automatic headtracking behaviors for this listener.
-func (x *Listener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticHeadTrackingFlags:"), automaticHeadTrackingFlags)
-}
-
-// Listenerable is the interface implemented by [Listener], for mocking and DI.
-type Listenerable interface {
-	obj.Object
-	WithGain(gain float64) *Listener
-	WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) *Listener
-	Gain() float64
-	SetGain(gain float64)
-	AutomaticHeadTrackingFlags() AutomaticHeadTrackingFlags
-	SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags)
-}
-
-var _ Listenerable = (*Listener)(nil)
 
 var _ ObjectProvider = (*Listener)(nil)

@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewCallRecordTypeResolutionResult() *CallRecordTypeResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeResolutionResult")), objc.RegisterName("new"))
 	return callRecordTypeResolutionResultAdopt(_id)
 }
-
-// CallRecordTypeResolutionResultable is the interface implemented by [CallRecordTypeResolutionResult], for mocking and DI.
-type CallRecordTypeResolutionResultable interface {
-	obj.Object
-}
-
-var _ CallRecordTypeResolutionResultable = (*CallRecordTypeResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*CallRecordTypeResolutionResult)(nil)

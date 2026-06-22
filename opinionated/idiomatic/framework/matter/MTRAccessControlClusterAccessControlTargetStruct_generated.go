@@ -46,97 +46,66 @@ func mTRAccessControlClusterAccessControlTargetStructAdopt(id objc.ID) *MTRAcces
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Description() string {
+	return rt.Description(objref.IDOf(maccacts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccacts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccacts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) String() string {
+	return rt.Description(objref.IDOf(maccacts))
 }
 
 // WithCluster sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
-	return x
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
+	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
+	return maccacts
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
+	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return maccacts
 }
 
 // WithDeviceType sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
-	return x
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
+	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
+	return maccacts
 }
 
 // Cluster wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) Cluster() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
-}
-
-// SetCluster wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) SetCluster(cluster obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetEndpoint wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) SetEndpoint(endpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }
 
 // DeviceType wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceType"))
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("deviceType"))
 	return obj.Wrap(_r)
 }
-
-// SetDeviceType wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) SetDeviceType(deviceType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
-}
-
-// MTRAccessControlClusterAccessControlTargetStructable is the interface implemented by [MTRAccessControlClusterAccessControlTargetStruct], for mocking and DI.
-type MTRAccessControlClusterAccessControlTargetStructable interface {
-	obj.Object
-	WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessControlTargetStruct
-	WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessControlTargetStruct
-	WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterAccessControlTargetStruct
-	Cluster() obj.Object
-	SetCluster(cluster obj.Object)
-	Endpoint() obj.Object
-	SetEndpoint(endpoint obj.Object)
-	DeviceType() obj.Object
-	SetDeviceType(deviceType obj.Object)
-}
-
-var _ MTRAccessControlClusterAccessControlTargetStructable = (*MTRAccessControlClusterAccessControlTargetStruct)(nil)
 
 // isMTRAccessControlClusterAccessControlTargetStruct marks MTRAccessControlClusterAccessControlTargetStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRAccessControlClusterAccessControlTargetStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRAccessControlClusterAccessControlTargetStruct) isMTRAccessControlClusterAccessControlTargetStruct() {
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) isMTRAccessControlClusterAccessControlTargetStruct() {
 }
 
 var _ MTRAccessControlClusterAccessControlTargetStructProvider = (*MTRAccessControlClusterAccessControlTargetStruct)(nil)

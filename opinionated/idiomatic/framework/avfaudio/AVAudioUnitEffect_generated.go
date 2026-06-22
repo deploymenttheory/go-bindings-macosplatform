@@ -53,37 +53,22 @@ func NewAudioUnitEffectWithAudioComponentDescription(audioComponentDescription o
 	return audioUnitEffectAdopt(_id)
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitEffect) WithBypass(bypass bool) *AudioUnitEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aue *AudioUnitEffect) WithBypass(bypass bool) *AudioUnitEffect {
+	objc.Send[objc.ID](objref.IDOf(aue), objc.RegisterName("setBypass:"), bypass)
+	return aue
 }
 
 // Bypass wraps the corresponding Objective-C method.
-func (x *AudioUnitEffect) Bypass() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
+func (aue *AudioUnitEffect) Bypass() bool {
+	_r := objc.Send[bool](objref.IDOf(aue), objc.RegisterName("bypass"))
 	return _r
 }
-
-// SetBypass wraps the corresponding Objective-C method.
-func (x *AudioUnitEffect) SetBypass(bypass bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-}
-
-// AudioUnitEffectable is the interface implemented by [AudioUnitEffect], for mocking and DI.
-type AudioUnitEffectable interface {
-	obj.Object
-	WithBypass(bypass bool) *AudioUnitEffect
-	Bypass() bool
-	SetBypass(bypass bool)
-}
-
-var _ AudioUnitEffectable = (*AudioUnitEffect)(nil)
 
 // isAudioUnitEffect marks AudioUnitEffect — and, by embedding promotion, its
 // subclasses — as a member of the AudioUnitEffect hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioUnitEffect) isAudioUnitEffect() {}
+func (aue *AudioUnitEffect) isAudioUnitEffect() {}
 
 var _ AudioUnitEffectProvider = (*AudioUnitEffect)(nil)
 

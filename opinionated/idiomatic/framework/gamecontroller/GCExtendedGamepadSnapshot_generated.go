@@ -60,39 +60,23 @@ func NewExtendedGamepadSnapshotWithControllerSnapshotData(controller *Controller
 	return extendedGamepadSnapshotAdopt(_id)
 }
 
-// WithSnapshotData flattens a snapshot into an archivable memory representation.
-func (x *ExtendedGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *ExtendedGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
-	return x
+// WithSnapshotData sets flattens a snapshot into an archivable memory representation.
+func (egs *ExtendedGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *ExtendedGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(egs), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
+	return egs
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepadSnapshot {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (egs *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(egs), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return egs
 }
 
 // SnapshotData wraps the corresponding Objective-C method.
-func (x *ExtendedGamepadSnapshot) SnapshotData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotData"))
+func (egs *ExtendedGamepadSnapshot) SnapshotData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(egs), objc.RegisterName("snapshotData"))
 	return obj.Wrap(_r)
 }
-
-// SetSnapshotData wraps the corresponding Objective-C method.
-func (x *ExtendedGamepadSnapshot) SetSnapshotData(snapshotData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
-}
-
-// ExtendedGamepadSnapshotable is the interface implemented by [ExtendedGamepadSnapshot], for mocking and DI.
-type ExtendedGamepadSnapshotable interface {
-	obj.Object
-	WithSnapshotData(snapshotData obj.Object) *ExtendedGamepadSnapshot
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepadSnapshot
-	SnapshotData() obj.Object
-	SetSnapshotData(snapshotData obj.Object)
-}
-
-var _ ExtendedGamepadSnapshotable = (*ExtendedGamepadSnapshot)(nil)
 
 var _ ExtendedGamepadProvider = (*ExtendedGamepadSnapshot)(nil)
 

@@ -46,24 +46,24 @@ func mTL4PipelineStageDynamicLinkingDescriptorAdopt(id objc.ID) *MTL4PipelineSta
 }
 
 // Description returns the object's -description text.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mpsdld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpsdld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpsdld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) String() string {
+	return rt.Description(objref.IDOf(mpsdld))
 }
 
 // NewMTL4PipelineStageDynamicLinkingDescriptor creates a new MTL4PipelineStageDynamicLinkingDescriptor.
@@ -72,55 +72,36 @@ func NewMTL4PipelineStageDynamicLinkingDescriptor() *MTL4PipelineStageDynamicLin
 	return mTL4PipelineStageDynamicLinkingDescriptorAdopt(_id)
 }
 
-// WithMaxCallStackDepth limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCallStackDepth int) *MTL4PipelineStageDynamicLinkingDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
-	return x
+// WithMaxCallStackDepth sets limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCallStackDepth int) *MTL4PipelineStageDynamicLinkingDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
+	return mpsdld
 }
 
-// MaxCallStackDepth limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCallStackDepth"))
+// MaxCallStackDepth returns limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() int {
+	_r := objc.Send[int](objref.IDOf(mpsdld), objc.RegisterName("maxCallStackDepth"))
 	return _r
 }
 
-// SetMaxCallStackDepth wraps the corresponding Objective-C method.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCallStackDepth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
-}
-
 // BinaryLinkedFunctions provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryLinkedFunctions"))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("binaryLinkedFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryLinkedFunctions wraps the corresponding Objective-C method.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryLinkedFunctions:"), purego.SliceToNSArray(binaryLinkedFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("setBinaryLinkedFunctions:"), purego.SliceToNSArray(binaryLinkedFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PreloadedLibraries provides an array of dynamic libraries the compiler loads when it builds the pipeline.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadedLibraries"))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("preloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetPreloadedLibraries wraps the corresponding Objective-C method.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mpsdld *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mpsdld), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// MTL4PipelineStageDynamicLinkingDescriptorable is the interface implemented by [MTL4PipelineStageDynamicLinkingDescriptor], for mocking and DI.
-type MTL4PipelineStageDynamicLinkingDescriptorable interface {
-	obj.Object
-	WithMaxCallStackDepth(maxCallStackDepth int) *MTL4PipelineStageDynamicLinkingDescriptor
-	MaxCallStackDepth() int
-	SetMaxCallStackDepth(maxCallStackDepth int)
-	BinaryLinkedFunctions() []obj.Object
-	SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object)
-	PreloadedLibraries() []obj.Object
-	SetPreloadedLibraries(preloadedLibraries []obj.Object)
-}
-
-var _ MTL4PipelineStageDynamicLinkingDescriptorable = (*MTL4PipelineStageDynamicLinkingDescriptor)(nil)

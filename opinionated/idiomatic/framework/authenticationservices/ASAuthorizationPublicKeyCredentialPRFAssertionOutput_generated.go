@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialPRFAssertionOutputAdopt(id objc.ID) *Author
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) Description() string {
+	return rt.Description(objref.IDOf(apkcpao))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkcpao), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkcpao), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) String() string {
+	return rt.Description(objref.IDOf(apkcpao))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFAssertionOutput creates a new AuthorizationPublicKeyCredentialPRFAssertionOutput.
@@ -73,22 +73,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionOutput() *AuthorizationPubli
 }
 
 // First wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("first"))
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpao), objc.RegisterName("first"))
 	return obj.Wrap(_r)
 }
 
 // Second wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("second"))
+func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpao), objc.RegisterName("second"))
 	return obj.Wrap(_r)
 }
-
-// AuthorizationPublicKeyCredentialPRFAssertionOutputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionOutput], for mocking and DI.
-type AuthorizationPublicKeyCredentialPRFAssertionOutputable interface {
-	obj.Object
-	First() obj.Object
-	Second() obj.Object
-}
-
-var _ AuthorizationPublicKeyCredentialPRFAssertionOutputable = (*AuthorizationPublicKeyCredentialPRFAssertionOutput)(nil)

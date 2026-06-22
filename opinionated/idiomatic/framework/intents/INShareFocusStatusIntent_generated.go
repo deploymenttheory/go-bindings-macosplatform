@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,32 +52,22 @@ func NewShareFocusStatusIntentWithFocusStatus(focusStatus *FocusStatus) *ShareFo
 	return shareFocusStatusIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (sfsi *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent {
+	objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return sfsi
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (sfsi *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
+	objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return sfsi
 }
 
 // FocusStatus wraps the corresponding Objective-C method.
-func (x *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusStatus"))
+func (sfsi *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
+	_r := objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("focusStatus"))
 	return FocusStatusFromID(_r)
 }
-
-// ShareFocusStatusIntentable is the interface implemented by [ShareFocusStatusIntent], for mocking and DI.
-type ShareFocusStatusIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *ShareFocusStatusIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent
-	FocusStatus() *FocusStatus
-}
-
-var _ ShareFocusStatusIntentable = (*ShareFocusStatusIntent)(nil)
 
 var _ IntentProvider = (*ShareFocusStatusIntent)(nil)

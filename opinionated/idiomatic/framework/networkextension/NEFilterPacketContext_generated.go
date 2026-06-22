@@ -46,24 +46,24 @@ func nEFilterPacketContextAdopt(id objc.ID) *NEFilterPacketContext {
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterPacketContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfpc *NEFilterPacketContext) Description() string {
+	return rt.Description(objref.IDOf(nfpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterPacketContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfpc *NEFilterPacketContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterPacketContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfpc *NEFilterPacketContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterPacketContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfpc *NEFilterPacketContext) String() string {
+	return rt.Description(objref.IDOf(nfpc))
 }
 
 // NewNEFilterPacketContext creates a new NEFilterPacketContext.
@@ -71,10 +71,3 @@ func NewNEFilterPacketContext() *NEFilterPacketContext {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterPacketContext")), objc.RegisterName("new"))
 	return nEFilterPacketContextAdopt(_id)
 }
-
-// NEFilterPacketContextable is the interface implemented by [NEFilterPacketContext], for mocking and DI.
-type NEFilterPacketContextable interface {
-	obj.Object
-}
-
-var _ NEFilterPacketContextable = (*NEFilterPacketContext)(nil)

@@ -7,7 +7,6 @@ package corelocation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewCircularGeographicCondition() *CircularGeographicCondition {
 	_id := objc.Send[objc.ID](objc.ID(_class("CLCircularGeographicCondition")), objc.RegisterName("new"))
 	return circularGeographicConditionAdopt(_id)
 }
-
-// CircularGeographicConditionable is the interface implemented by [CircularGeographicCondition], for mocking and DI.
-type CircularGeographicConditionable interface {
-	obj.Object
-}
-
-var _ CircularGeographicConditionable = (*CircularGeographicCondition)(nil)
 
 var _ ConditionProvider = (*CircularGeographicCondition)(nil)

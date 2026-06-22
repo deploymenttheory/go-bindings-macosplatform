@@ -46,24 +46,24 @@ func imageSymbolConfigurationAdopt(id objc.ID) *ImageSymbolConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *ImageSymbolConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ImageSymbolConfiguration) Description() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageSymbolConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (isc *ImageSymbolConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageSymbolConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (isc *ImageSymbolConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageSymbolConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ImageSymbolConfiguration) String() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // NewImageSymbolConfiguration creates a new ImageSymbolConfiguration.
@@ -73,15 +73,7 @@ func NewImageSymbolConfiguration() *ImageSymbolConfiguration {
 }
 
 // ConfigurationByApplyingConfiguration returns a new configuration object whose values are defined by applying values from the provided configuration and the receiver. Values defined by both configurations will use the provided configuration’s values.
-func (x *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationByApplyingConfiguration:"), objref.IDOf(configuration))
+func (isc *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("configurationByApplyingConfiguration:"), objref.IDOf(configuration))
 	return ImageSymbolConfigurationFromID(_r)
 }
-
-// ImageSymbolConfigurationable is the interface implemented by [ImageSymbolConfiguration], for mocking and DI.
-type ImageSymbolConfigurationable interface {
-	obj.Object
-	ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration
-}
-
-var _ ImageSymbolConfigurationable = (*ImageSymbolConfiguration)(nil)

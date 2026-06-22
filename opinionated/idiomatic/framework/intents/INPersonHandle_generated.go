@@ -46,24 +46,24 @@ func personHandleAdopt(id objc.ID) *PersonHandle {
 }
 
 // Description returns the object's -description text.
-func (x *PersonHandle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ph *PersonHandle) Description() string {
+	return rt.Description(objref.IDOf(ph))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersonHandle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ph *PersonHandle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ph), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersonHandle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ph *PersonHandle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ph), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersonHandle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ph *PersonHandle) String() string {
+	return rt.Description(objref.IDOf(ph))
 }
 
 // NewPersonHandleWithValueTypeLabel initializes and returns a person handle with the specified data.
@@ -81,8 +81,8 @@ func NewPersonHandleWithValueType(value string, type_ PersonHandleType) *PersonH
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *PersonHandle) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (ph *PersonHandle) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ph), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,23 +90,13 @@ func (x *PersonHandle) Value() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *PersonHandle) Type() PersonHandleType {
-	_r := objc.Send[PersonHandleType](objref.IDOf(x), objc.RegisterName("type"))
+func (ph *PersonHandle) Type() PersonHandleType {
+	_r := objc.Send[PersonHandleType](objref.IDOf(ph), objc.RegisterName("type"))
 	return _r
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *PersonHandle) Label() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (ph *PersonHandle) Label() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ph), objc.RegisterName("label"))
 	return obj.Wrap(_r)
 }
-
-// PersonHandleable is the interface implemented by [PersonHandle], for mocking and DI.
-type PersonHandleable interface {
-	obj.Object
-	Value() string
-	Type() PersonHandleType
-	Label() obj.Object
-}
-
-var _ PersonHandleable = (*PersonHandle)(nil)

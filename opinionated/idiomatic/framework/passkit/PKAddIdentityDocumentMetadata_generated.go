@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingIn
 	return addIdentityDocumentMetadataAdopt(_id)
 }
 
-// WithServerEnvironmentIdentifier an identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
-func (x *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
-	return x
+// WithServerEnvironmentIdentifier sets an identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
+func (aidm *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata {
+	objc.Send[objc.ID](objref.IDOf(aidm), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
+	return aidm
 }
 
 // Preview wraps the corresponding Objective-C method.
-func (x *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preview"))
+func (aidm *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
+	_r := objc.Send[objc.ID](objref.IDOf(aidm), objc.RegisterName("preview"))
 	return AddPassMetadataPreviewFromID(_r)
 }
-
-// AddIdentityDocumentMetadataable is the interface implemented by [AddIdentityDocumentMetadata], for mocking and DI.
-type AddIdentityDocumentMetadataable interface {
-	obj.Object
-	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata
-	Preview() *AddPassMetadataPreview
-}
-
-var _ AddIdentityDocumentMetadataable = (*AddIdentityDocumentMetadata)(nil)
 
 var _ IdentityDocumentMetadataProvider = (*AddIdentityDocumentMetadata)(nil)

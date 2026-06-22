@@ -44,24 +44,24 @@ func matrixCopyDescriptorAdopt(id objc.ID) *MatrixCopyDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixCopyDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcd *MatrixCopyDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixCopyDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcd *MatrixCopyDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixCopyDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcd *MatrixCopyDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixCopyDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcd *MatrixCopyDescriptor) String() string {
+	return rt.Description(objref.IDOf(mcd))
 }
 
 // NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU Use this method when the offsets needed are coming from GPU based computation.
@@ -70,10 +70,3 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), purego.SliceToNSArray(sourceMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(offsets), byteOffset)
 	return matrixCopyDescriptorAdopt(_id)
 }
-
-// MatrixCopyDescriptorable is the interface implemented by [MatrixCopyDescriptor], for mocking and DI.
-type MatrixCopyDescriptorable interface {
-	obj.Object
-}
-
-var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)

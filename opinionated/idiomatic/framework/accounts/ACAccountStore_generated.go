@@ -46,24 +46,24 @@ func accountStoreAdopt(id objc.ID) *AccountStore {
 }
 
 // Description returns the object's -description text.
-func (x *AccountStore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AccountStore) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccountStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AccountStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccountStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AccountStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccountStore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AccountStore) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAccountStore creates a new AccountStore.
@@ -73,36 +73,25 @@ func NewAccountStore() *AccountStore {
 }
 
 // AccountWithIdentifier returns the account with the specified identifier.
-func (x *AccountStore) AccountWithIdentifier(identifier string) *Account {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountWithIdentifier:"), purego.NSString(identifier))
+func (as *AccountStore) AccountWithIdentifier(identifier string) *Account {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountWithIdentifier:"), purego.NSString(identifier))
 	return AccountFromID(_r)
 }
 
 // AccountTypeWithAccountTypeIdentifier returns an account type that matches the specified identifier.
-func (x *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountTypeWithAccountTypeIdentifier:"), purego.NSString(typeIdentifier))
+func (as *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountTypeWithAccountTypeIdentifier:"), purego.NSString(typeIdentifier))
 	return AccountTypeFromID(_r)
 }
 
 // AccountsWithAccountType returns all accounts of the specified type.
-func (x *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountsWithAccountType:"), objref.IDOf(accountType))
+func (as *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountsWithAccountType:"), objref.IDOf(accountType))
 	return obj.Wrap(_r)
 }
 
 // Accounts wraps the corresponding Objective-C method.
-func (x *AccountStore) Accounts() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accounts"))
+func (as *AccountStore) Accounts() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accounts"))
 	return obj.Wrap(_r)
 }
-
-// AccountStoreable is the interface implemented by [AccountStore], for mocking and DI.
-type AccountStoreable interface {
-	obj.Object
-	AccountWithIdentifier(identifier string) *Account
-	AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType
-	AccountsWithAccountType(accountType *AccountType) obj.Object
-	Accounts() obj.Object
-}
-
-var _ AccountStoreable = (*AccountStore)(nil)

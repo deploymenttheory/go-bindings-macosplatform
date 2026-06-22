@@ -46,24 +46,24 @@ func playerItemIntegratedTimelineAdopt(id objc.ID) *PlayerItemIntegratedTimeline
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemIntegratedTimeline) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (piit *PlayerItemIntegratedTimeline) Description() string {
+	return rt.Description(objref.IDOf(piit))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemIntegratedTimeline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (piit *PlayerItemIntegratedTimeline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(piit), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemIntegratedTimeline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (piit *PlayerItemIntegratedTimeline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(piit), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemIntegratedTimeline) String() string {
-	return rt.Description(objref.IDOf(x))
+func (piit *PlayerItemIntegratedTimeline) String() string {
+	return rt.Description(objref.IDOf(piit))
 }
 
 // NewPlayerItemIntegratedTimeline creates a new PlayerItemIntegratedTimeline.
@@ -72,29 +72,19 @@ func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
 	return playerItemIntegratedTimelineAdopt(_id)
 }
 
-// CurrentSnapshot this property provides an immutable representation of the timeline state at time of request. Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
-func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSnapshot"))
+// CurrentSnapshot returns this property provides an immutable representation of the timeline state at time of request. Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
+func (piit *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("currentSnapshot"))
 	return PlayerItemIntegratedTimelineSnapshotFromID(_r)
 }
 
 // CurrentDate returns the date of current playback, or nil if playback is not mapped to any date.
-func (x *PlayerItemIntegratedTimeline) CurrentDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
+func (piit *PlayerItemIntegratedTimeline) CurrentDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("currentDate"))
 	return obj.Wrap(_r)
 }
 
 // SeekToDateCompletionHandler seeks to a particular date in the integrated time domain.
-func (x *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (piit *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
-
-// PlayerItemIntegratedTimelineable is the interface implemented by [PlayerItemIntegratedTimeline], for mocking and DI.
-type PlayerItemIntegratedTimelineable interface {
-	obj.Object
-	CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot
-	CurrentDate() obj.Object
-	SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool))
-}
-
-var _ PlayerItemIntegratedTimelineable = (*PlayerItemIntegratedTimeline)(nil)

@@ -7,7 +7,6 @@ package mediaextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +50,16 @@ func NewRAWProcessingListElementParameterWithNameDescriptionElementID(name strin
 	return rAWProcessingListElementParameterAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWProcessingListElementParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rplep *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWProcessingListElementParameter {
+	objc.Send[objc.ID](objref.IDOf(rplep), objc.RegisterName("setEnabled:"), enabled)
+	return rplep
 }
 
 // ListElementID wraps the corresponding Objective-C method.
-func (x *RAWProcessingListElementParameter) ListElementID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("listElementID"))
+func (rplep *RAWProcessingListElementParameter) ListElementID() int {
+	_r := objc.Send[int](objref.IDOf(rplep), objc.RegisterName("listElementID"))
 	return _r
 }
-
-// RAWProcessingListElementParameterable is the interface implemented by [RAWProcessingListElementParameter], for mocking and DI.
-type RAWProcessingListElementParameterable interface {
-	obj.Object
-	WithEnabled(enabled bool) *RAWProcessingListElementParameter
-	ListElementID() int
-}
-
-var _ RAWProcessingListElementParameterable = (*RAWProcessingListElementParameter)(nil)
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingListElementParameter)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,53 @@ func NewNNGramMatrixCalculation() *NNGramMatrixCalculation {
 	return nNGramMatrixCalculationAdopt(_id)
 }
 
-// WithAlpha scaling factor for the output. Default: 1.0f.
-func (x *NNGramMatrixCalculation) WithAlpha(alpha float32) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets scaling factor for the output. Default: 1.0f.
+func (ngmc *NNGramMatrixCalculation) WithAlpha(alpha float32) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setAlpha:"), alpha)
+	return ngmc
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *NNGramMatrixCalculation) WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (ngmc *NNGramMatrixCalculation) WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setOffset:"), offset)
+	return ngmc
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *NNGramMatrixCalculation) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (ngmc *NNGramMatrixCalculation) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setClipRect:"), clipRect)
+	return ngmc
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *NNGramMatrixCalculation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (ngmc *NNGramMatrixCalculation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return ngmc
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *NNGramMatrixCalculation) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (ngmc *NNGramMatrixCalculation) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return ngmc
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *NNGramMatrixCalculation) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (ngmc *NNGramMatrixCalculation) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return ngmc
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NNGramMatrixCalculation) WithLabel(label string) *NNGramMatrixCalculation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ngmc *NNGramMatrixCalculation) WithLabel(label string) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(ngmc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ngmc
 }
 
-// Alpha scaling factor for the output. Default: 1.0f.
-func (x *NNGramMatrixCalculation) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns scaling factor for the output. Default: 1.0f.
+func (ngmc *NNGramMatrixCalculation) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(ngmc), objc.RegisterName("alpha"))
 	return _r
 }
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *NNGramMatrixCalculation) SetAlpha(alpha float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// NNGramMatrixCalculationable is the interface implemented by [NNGramMatrixCalculation], for mocking and DI.
-type NNGramMatrixCalculationable interface {
-	obj.Object
-	WithAlpha(alpha float32) *NNGramMatrixCalculation
-	WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation
-	WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculation
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNGramMatrixCalculation
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNGramMatrixCalculation
-	WithLabel(label string) *NNGramMatrixCalculation
-	Alpha() float32
-	SetAlpha(alpha float32)
-}
-
-var _ NNGramMatrixCalculationable = (*NNGramMatrixCalculation)(nil)
 
 var _ CNNKernelProvider = (*NNGramMatrixCalculation)(nil)
 

@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,104 +62,94 @@ func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDele
 	return modifySubscriptionsOperationAdopt(_id)
 }
 
-// WithSubscriptionsToSave the subscriptions to save to the database.
-func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation {
+// WithSubscriptionsToSave sets the subscriptions to save to the database.
+func (mso *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v SubscriptionProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsToSave:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setSubscriptionsToSave:"), _arr)
+	return mso
 }
 
-// WithSubscriptionIDsToDelete the IDs of the subscriptions that you want to delete.
-func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation {
+// WithSubscriptionIDsToDelete sets the IDs of the subscriptions that you want to delete.
+func (mso *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDsToDelete:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setSubscriptionIDsToDelete:"), _arr)
+	return mso
 }
 
-// WithDatabase the database that the operation uses.
-func (x *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (mso *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return mso
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (mso *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return mso
 }
 
-// WithGroup the operation’s group.
-func (x *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (mso *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return mso
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (mso *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return mso
 }
 
-// WithContainer the operation's container.
-func (x *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (mso *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return mso
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *ModifySubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (mso *ModifySubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return mso
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *ModifySubscriptionsOperation) WithLongLived(longLived bool) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (mso *ModifySubscriptionsOperation) WithLongLived(longLived bool) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setLongLived:"), longLived)
+	return mso
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (mso *ModifySubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return mso
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (mso *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return mso
 }
 
-// SubscriptionsToSave the subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
+// SubscriptionsToSave returns the subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
 //
 // SubscriptionsToSave returns the collection as a Go slice.
-func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionsToSave"))
+func (mso *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
+	_arr := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("subscriptionsToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Subscription { return SubscriptionFromID(_id) })
 }
 
-// SetSubscriptionsToSave wraps the corresponding Objective-C method.
-func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave []*Subscription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsToSave:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SubscriptionIDsToDelete the IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
+// SubscriptionIDsToDelete returns the IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
 //
 // SubscriptionIDsToDelete returns the collection as a Go slice.
-func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionIDsToDelete"))
+func (mso *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("subscriptionIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetSubscriptionIDsToDelete wraps the corresponding Objective-C method.
-func (x *ModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionIDsToDelete []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetPerSubscriptionDeleteBlock wraps the corresponding Objective-C method.
 //
 // SetPerSubscriptionDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (result string, err error) {
+func (mso *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -170,7 +161,7 @@ func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerSubscriptionDeleteBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPerSubscriptionDeleteBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -179,29 +170,6 @@ func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context
 		return _zero, ctx.Err()
 	}
 }
-
-// ModifySubscriptionsOperationable is the interface implemented by [ModifySubscriptionsOperation], for mocking and DI.
-type ModifySubscriptionsOperationable interface {
-	obj.Object
-	WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation
-	WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation
-	WithDatabase(database *Database) *ModifySubscriptionsOperation
-	WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation
-	WithGroup(group *OperationGroup) *ModifySubscriptionsOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation
-	WithContainer(container *Container) *ModifySubscriptionsOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation
-	WithLongLived(longLived bool) *ModifySubscriptionsOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation
-	SubscriptionsToSave() []*Subscription
-	SetSubscriptionsToSave(subscriptionsToSave []*Subscription)
-	SubscriptionIDsToDelete() []obj.Object
-	SetSubscriptionIDsToDelete(subscriptionIDsToDelete []obj.Object)
-	SetPerSubscriptionDeleteBlock(ctx context.Context) (string, error)
-}
-
-var _ ModifySubscriptionsOperationable = (*ModifySubscriptionsOperation)(nil)
 
 var _ DatabaseOperationProvider = (*ModifySubscriptionsOperation)(nil)
 

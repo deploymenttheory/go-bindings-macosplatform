@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewTimeIntervalResolutionResult() *TimeIntervalResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INTimeIntervalResolutionResult")), objc.RegisterName("new"))
 	return timeIntervalResolutionResultAdopt(_id)
 }
-
-// TimeIntervalResolutionResultable is the interface implemented by [TimeIntervalResolutionResult], for mocking and DI.
-type TimeIntervalResolutionResultable interface {
-	obj.Object
-}
-
-var _ TimeIntervalResolutionResultable = (*TimeIntervalResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*TimeIntervalResolutionResult)(nil)

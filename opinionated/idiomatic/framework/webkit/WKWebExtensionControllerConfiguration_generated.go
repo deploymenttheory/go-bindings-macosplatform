@@ -44,24 +44,24 @@ func wKWebExtensionControllerConfigurationAdopt(id objc.ID) *WKWebExtensionContr
 }
 
 // Description returns the object's -description text.
-func (x *WKWebExtensionControllerConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwecc *WKWebExtensionControllerConfiguration) Description() string {
+	return rt.Description(objref.IDOf(wwecc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWebExtensionControllerConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwecc *WKWebExtensionControllerConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwecc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWebExtensionControllerConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwecc *WKWebExtensionControllerConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwecc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWebExtensionControllerConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwecc *WKWebExtensionControllerConfiguration) String() string {
+	return rt.Description(objref.IDOf(wwecc))
 }
 
 // NewWKWebExtensionControllerConfiguration creates a new WKWebExtensionControllerConfiguration.
@@ -70,63 +70,38 @@ func NewWKWebExtensionControllerConfiguration() *WKWebExtensionControllerConfigu
 	return wKWebExtensionControllerConfigurationAdopt(_id)
 }
 
-// WithWebViewConfiguration the web view configuration to be used as a basis for configuring web views in extension contexts.
-func (x *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
-	return x
+// WithWebViewConfiguration sets the web view configuration to be used as a basis for configuring web views in extension contexts.
+func (wwecc *WKWebExtensionControllerConfiguration) WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
+	return wwecc
 }
 
-// WithDefaultWebsiteDataStore the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
-func (x *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
-	return x
+// WithDefaultWebsiteDataStore sets the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
+func (wwecc *WKWebExtensionControllerConfiguration) WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
+	return wwecc
 }
 
-// IsPersistent a Boolean value indicating if this context will write data to the the file system.
-func (x *WKWebExtensionControllerConfiguration) IsPersistent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPersistent"))
+// IsPersistent reports whether a Boolean value indicating if this context will write data to the the file system.
+func (wwecc *WKWebExtensionControllerConfiguration) IsPersistent() bool {
+	_r := objc.Send[bool](objref.IDOf(wwecc), objc.RegisterName("isPersistent"))
 	return _r
 }
 
-// Identifier the unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
-func (x *WKWebExtensionControllerConfiguration) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
+func (wwecc *WKWebExtensionControllerConfiguration) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// WebViewConfiguration the web view configuration to be used as a basis for configuring web views in extension contexts.
-func (x *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webViewConfiguration"))
+// WebViewConfiguration returns the web view configuration to be used as a basis for configuring web views in extension contexts.
+func (wwecc *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("webViewConfiguration"))
 	return WKWebViewConfigurationFromID(_r)
 }
 
-// SetWebViewConfiguration wraps the corresponding Objective-C method.
-func (x *WKWebExtensionControllerConfiguration) SetWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebViewConfiguration:"), objref.IDOf(webViewConfiguration))
-}
-
-// DefaultWebsiteDataStore the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
-func (x *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultWebsiteDataStore"))
+// DefaultWebsiteDataStore returns the default data store for website data and cookie access in extension contexts. This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“.
+func (wwecc *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
+	_r := objc.Send[objc.ID](objref.IDOf(wwecc), objc.RegisterName("defaultWebsiteDataStore"))
 	return WKWebsiteDataStoreFromID(_r)
 }
-
-// SetDefaultWebsiteDataStore wraps the corresponding Objective-C method.
-func (x *WKWebExtensionControllerConfiguration) SetDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultWebsiteDataStore:"), objref.IDOf(defaultWebsiteDataStore))
-}
-
-// WKWebExtensionControllerConfigurationable is the interface implemented by [WKWebExtensionControllerConfiguration], for mocking and DI.
-type WKWebExtensionControllerConfigurationable interface {
-	obj.Object
-	WithWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration) *WKWebExtensionControllerConfiguration
-	WithDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) *WKWebExtensionControllerConfiguration
-	IsPersistent() bool
-	Identifier() obj.Object
-	WebViewConfiguration() *WKWebViewConfiguration
-	SetWebViewConfiguration(webViewConfiguration *WKWebViewConfiguration)
-	DefaultWebsiteDataStore() *WKWebsiteDataStore
-	SetDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore)
-}
-
-var _ WKWebExtensionControllerConfigurationable = (*WKWebExtensionControllerConfiguration)(nil)

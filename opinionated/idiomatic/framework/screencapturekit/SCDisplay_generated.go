@@ -47,24 +47,24 @@ func displayAdopt(id objc.ID) *Display {
 }
 
 // Description returns the object's -description text.
-func (x *Display) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Display) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Display) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Display) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Display) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Display) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Display) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Display) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDisplay creates a new Display.
@@ -73,37 +73,26 @@ func NewDisplay() *Display {
 	return displayAdopt(_id)
 }
 
-// DisplayID displayId the CGDirectDisplayID for the SCDisplay
-func (x *Display) DisplayID() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("displayID"))
+// DisplayID returns displayId the CGDirectDisplayID for the SCDisplay
+func (d *Display) DisplayID() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(d), objc.RegisterName("displayID"))
 	return _r
 }
 
-// Width width the width, in points, for the SCDisplay
-func (x *Display) Width() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+// Width returns width the width, in points, for the SCDisplay
+func (d *Display) Width() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("width"))
 	return _r
 }
 
-// Height height the height, in points, for the SCDisplay
-func (x *Display) Height() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+// Height returns height the height, in points, for the SCDisplay
+func (d *Display) Height() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("height"))
 	return _r
 }
 
-// Frame frame the CGRect frame for the SCDisplay
-func (x *Display) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+// Frame returns frame the CGRect frame for the SCDisplay
+func (d *Display) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("frame"))
 	return _r
 }
-
-// Displayable is the interface implemented by [Display], for mocking and DI.
-type Displayable interface {
-	obj.Object
-	DisplayID() uint32
-	Width() int
-	Height() int
-	Frame() corefoundation.CGRect
-}
-
-var _ Displayable = (*Display)(nil)

@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewMTRBridgedDeviceBasicClusterLeaveEvent() *MTRBridgedDeviceBasicClusterLe
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicClusterLeaveEvent")), objc.RegisterName("new"))
 	return mTRBridgedDeviceBasicClusterLeaveEventAdopt(_id)
 }
-
-// MTRBridgedDeviceBasicClusterLeaveEventable is the interface implemented by [MTRBridgedDeviceBasicClusterLeaveEvent], for mocking and DI.
-type MTRBridgedDeviceBasicClusterLeaveEventable interface {
-	obj.Object
-}
-
-var _ MTRBridgedDeviceBasicClusterLeaveEventable = (*MTRBridgedDeviceBasicClusterLeaveEvent)(nil)
 
 var _ MTRBridgedDeviceBasicInformationClusterLeaveEventProvider = (*MTRBridgedDeviceBasicClusterLeaveEvent)(nil)

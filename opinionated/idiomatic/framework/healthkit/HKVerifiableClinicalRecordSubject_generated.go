@@ -46,24 +46,24 @@ func verifiableClinicalRecordSubjectAdopt(id objc.ID) *VerifiableClinicalRecordS
 }
 
 // Description returns the object's -description text.
-func (x *VerifiableClinicalRecordSubject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcrs *VerifiableClinicalRecordSubject) Description() string {
+	return rt.Description(objref.IDOf(vcrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VerifiableClinicalRecordSubject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcrs *VerifiableClinicalRecordSubject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VerifiableClinicalRecordSubject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcrs *VerifiableClinicalRecordSubject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VerifiableClinicalRecordSubject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcrs *VerifiableClinicalRecordSubject) String() string {
+	return rt.Description(objref.IDOf(vcrs))
 }
 
 // NewVerifiableClinicalRecordSubject creates a new VerifiableClinicalRecordSubject.
@@ -72,26 +72,17 @@ func NewVerifiableClinicalRecordSubject() *VerifiableClinicalRecordSubject {
 	return verifiableClinicalRecordSubjectAdopt(_id)
 }
 
-// FullName the subject's full name.
-func (x *VerifiableClinicalRecordSubject) FullName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
+// FullName returns the subject's full name.
+func (vcrs *VerifiableClinicalRecordSubject) FullName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcrs), objc.RegisterName("fullName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DateOfBirthComponents the subject's date of birth components.
-func (x *VerifiableClinicalRecordSubject) DateOfBirthComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateOfBirthComponents"))
+// DateOfBirthComponents returns the subject's date of birth components.
+func (vcrs *VerifiableClinicalRecordSubject) DateOfBirthComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcrs), objc.RegisterName("dateOfBirthComponents"))
 	return obj.Wrap(_r)
 }
-
-// VerifiableClinicalRecordSubjectable is the interface implemented by [VerifiableClinicalRecordSubject], for mocking and DI.
-type VerifiableClinicalRecordSubjectable interface {
-	obj.Object
-	FullName() string
-	DateOfBirthComponents() obj.Object
-}
-
-var _ VerifiableClinicalRecordSubjectable = (*VerifiableClinicalRecordSubject)(nil)

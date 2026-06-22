@@ -53,18 +53,10 @@ func NewUnitFuelEfficiency() *UnitFuelEfficiency {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitFuelEfficiency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFuelEfficiency {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ufe *UnitFuelEfficiency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFuelEfficiency {
+	objc.Send[objc.ID](objref.IDOf(ufe), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ufe
 }
-
-// UnitFuelEfficiencyable is the interface implemented by [UnitFuelEfficiency], for mocking and DI.
-type UnitFuelEfficiencyable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitFuelEfficiency
-}
-
-var _ UnitFuelEfficiencyable = (*UnitFuelEfficiency)(nil)
 
 var _ DimensionProvider = (*UnitFuelEfficiency)(nil)
 

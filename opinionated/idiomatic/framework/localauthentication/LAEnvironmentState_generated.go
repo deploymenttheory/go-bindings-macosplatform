@@ -44,24 +44,24 @@ func environmentStateAdopt(id objc.ID) *EnvironmentState {
 }
 
 // Description returns the object's -description text.
-func (x *EnvironmentState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (es *EnvironmentState) Description() string {
+	return rt.Description(objref.IDOf(es))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnvironmentState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (es *EnvironmentState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(es), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnvironmentState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (es *EnvironmentState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(es), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EnvironmentState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (es *EnvironmentState) String() string {
+	return rt.Description(objref.IDOf(es))
 }
 
 // NewEnvironmentState creates a new EnvironmentState.
@@ -70,41 +70,30 @@ func NewEnvironmentState() *EnvironmentState {
 	return environmentStateAdopt(_id)
 }
 
-// Biometry information about biometric authentication (Touch ID, Face ID or Optic ID).
-func (x *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biometry"))
+// Biometry returns information about biometric authentication (Touch ID, Face ID or Optic ID).
+func (es *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
+	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("biometry"))
 	return EnvironmentMechanismBiometryFromID(_r)
 }
 
-// UserPassword information about local user password (on macOS) or passcode (on embedded platforms).
-func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userPassword"))
+// UserPassword returns information about local user password (on macOS) or passcode (on embedded platforms).
+func (es *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
+	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("userPassword"))
 	return EnvironmentMechanismUserPasswordFromID(_r)
 }
 
-// Companions companion authentication mechanisms. Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check
+// Companions returns companion authentication mechanisms. Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check
 //
 // Companions returns the collection as a Go slice.
-func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("companions"))
+func (es *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
+	_arr := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("companions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanismCompanion { return EnvironmentMechanismCompanionFromID(_id) })
 }
 
-// AllMechanisms information about all authentication mechanisms. This property aggregates
+// AllMechanisms returns information about all authentication mechanisms. This property aggregates
 //
 // AllMechanisms returns the collection as a Go slice.
-func (x *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allMechanisms"))
+func (es *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {
+	_arr := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("allMechanisms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanism { return EnvironmentMechanismFromID(_id) })
 }
-
-// EnvironmentStateable is the interface implemented by [EnvironmentState], for mocking and DI.
-type EnvironmentStateable interface {
-	obj.Object
-	Biometry() *EnvironmentMechanismBiometry
-	UserPassword() *EnvironmentMechanismUserPassword
-	Companions() []*EnvironmentMechanismCompanion
-	AllMechanisms() []*EnvironmentMechanism
-}
-
-var _ EnvironmentStateable = (*EnvironmentState)(nil)

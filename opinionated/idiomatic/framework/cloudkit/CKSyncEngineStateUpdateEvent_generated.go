@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewSyncEngineStateUpdateEvent() *SyncEngineStateUpdateEvent {
 }
 
 // StateSerialization wraps the corresponding Objective-C method.
-func (x *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateSerialization"))
+func (sesue *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
+	_r := objc.Send[objc.ID](objref.IDOf(sesue), objc.RegisterName("stateSerialization"))
 	return SyncEngineStateSerializationFromID(_r)
 }
-
-// SyncEngineStateUpdateEventable is the interface implemented by [SyncEngineStateUpdateEvent], for mocking and DI.
-type SyncEngineStateUpdateEventable interface {
-	obj.Object
-	StateSerialization() *SyncEngineStateSerialization
-}
-
-var _ SyncEngineStateUpdateEventable = (*SyncEngineStateUpdateEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineStateUpdateEvent)(nil)

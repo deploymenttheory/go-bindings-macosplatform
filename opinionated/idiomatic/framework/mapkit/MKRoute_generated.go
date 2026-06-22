@@ -46,24 +46,24 @@ func routeAdopt(id objc.ID) *Route {
 }
 
 // Description returns the object's -description text.
-func (x *Route) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Route) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Route) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Route) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Route) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Route) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Route) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Route) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRoute creates a new Route.
@@ -73,8 +73,8 @@ func NewRoute() *Route {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Route) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (r *Route) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,60 +84,45 @@ func (x *Route) Name() string {
 // AdvisoryNotices wraps the corresponding Objective-C method.
 //
 // AdvisoryNotices returns the collection as a Go slice.
-func (x *Route) AdvisoryNotices() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advisoryNotices"))
+func (r *Route) AdvisoryNotices() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("advisoryNotices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ExpectedTravelTime wraps the corresponding Objective-C method.
-func (x *Route) ExpectedTravelTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("expectedTravelTime"))
+func (r *Route) ExpectedTravelTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
 // TransportType wraps the corresponding Objective-C method.
-func (x *Route) TransportType() DirectionsTransportType {
-	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+func (r *Route) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(r), objc.RegisterName("transportType"))
 	return _r
 }
 
 // Polyline wraps the corresponding Objective-C method.
-func (x *Route) Polyline() *Polyline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
+func (r *Route) Polyline() *Polyline {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
 // Steps wraps the corresponding Objective-C method.
 //
 // Steps returns the collection as a Go slice.
-func (x *Route) Steps() []*RouteStep {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("steps"))
+func (r *Route) Steps() []*RouteStep {
+	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("steps"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RouteStep { return RouteStepFromID(_id) })
 }
 
 // HasTolls wraps the corresponding Objective-C method.
-func (x *Route) HasTolls() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasTolls"))
+func (r *Route) HasTolls() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("hasTolls"))
 	return _r
 }
 
 // HasHighways wraps the corresponding Objective-C method.
-func (x *Route) HasHighways() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHighways"))
+func (r *Route) HasHighways() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("hasHighways"))
 	return _r
 }
-
-// Routeable is the interface implemented by [Route], for mocking and DI.
-type Routeable interface {
-	obj.Object
-	Name() string
-	AdvisoryNotices() []string
-	ExpectedTravelTime() float64
-	TransportType() DirectionsTransportType
-	Polyline() *Polyline
-	Steps() []*RouteStep
-	HasTolls() bool
-	HasHighways() bool
-}
-
-var _ Routeable = (*Route)(nil)

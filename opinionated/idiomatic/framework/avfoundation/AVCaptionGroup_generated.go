@@ -46,24 +46,24 @@ func captionGroupAdopt(id objc.ID) *CaptionGroup {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cg *CaptionGroup) Description() string {
+	return rt.Description(objref.IDOf(cg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cg *CaptionGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cg *CaptionGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cg *CaptionGroup) String() string {
+	return rt.Description(objref.IDOf(cg))
 }
 
 // NewCaptionGroup creates a new CaptionGroup.
@@ -72,18 +72,10 @@ func NewCaptionGroup() *CaptionGroup {
 	return captionGroupAdopt(_id)
 }
 
-// Captions an array of AVCaption objects. If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
+// Captions returns an array of AVCaption objects. If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
 //
 // Captions returns the collection as a Go slice.
-func (x *CaptionGroup) Captions() []*Caption {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captions"))
+func (cg *CaptionGroup) Captions() []*Caption {
+	_arr := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("captions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
-
-// CaptionGroupable is the interface implemented by [CaptionGroup], for mocking and DI.
-type CaptionGroupable interface {
-	obj.Object
-	Captions() []*Caption
-}
-
-var _ CaptionGroupable = (*CaptionGroup)(nil)

@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,71 +51,40 @@ func NewGraphFFTDescriptor() *GraphFFTDescriptor {
 	return graphFFTDescriptorAdopt(_id)
 }
 
-// WithInverse a Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
-func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverse:"), inverse)
-	return x
+// WithInverse sets a Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
+func (gfd *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gfd), objc.RegisterName("setInverse:"), inverse)
+	return gfd
 }
 
-// WithScalingMode the scaling mode of the fast fourier transform (FFT) operation.
-func (x *GraphFFTDescriptor) WithScalingMode(scalingMode GraphFFTScalingMode) *GraphFFTDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingMode:"), scalingMode)
-	return x
+// WithScalingMode sets the scaling mode of the fast fourier transform (FFT) operation.
+func (gfd *GraphFFTDescriptor) WithScalingMode(scalingMode GraphFFTScalingMode) *GraphFFTDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gfd), objc.RegisterName("setScalingMode:"), scalingMode)
+	return gfd
 }
 
-// WithRoundToOddHermitean a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
-func (x *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
-	return x
+// WithRoundToOddHermitean sets a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
+func (gfd *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gfd), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
+	return gfd
 }
 
-// Inverse a Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
-func (x *GraphFFTDescriptor) Inverse() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inverse"))
+// Inverse reports whether a Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
+func (gfd *GraphFFTDescriptor) Inverse() bool {
+	_r := objc.Send[bool](objref.IDOf(gfd), objc.RegisterName("inverse"))
 	return _r
 }
 
-// SetInverse wraps the corresponding Objective-C method.
-func (x *GraphFFTDescriptor) SetInverse(inverse bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverse:"), inverse)
-}
-
-// ScalingMode the scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
-func (x *GraphFFTDescriptor) ScalingMode() GraphFFTScalingMode {
-	_r := objc.Send[GraphFFTScalingMode](objref.IDOf(x), objc.RegisterName("scalingMode"))
+// ScalingMode returns the scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
+func (gfd *GraphFFTDescriptor) ScalingMode() GraphFFTScalingMode {
+	_r := objc.Send[GraphFFTScalingMode](objref.IDOf(gfd), objc.RegisterName("scalingMode"))
 	return _r
 }
 
-// SetScalingMode wraps the corresponding Objective-C method.
-func (x *GraphFFTDescriptor) SetScalingMode(scalingMode GraphFFTScalingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingMode:"), scalingMode)
-}
-
-// RoundToOddHermitean a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
-func (x *GraphFFTDescriptor) RoundToOddHermitean() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("roundToOddHermitean"))
+// RoundToOddHermitean reports whether a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
+func (gfd *GraphFFTDescriptor) RoundToOddHermitean() bool {
+	_r := objc.Send[bool](objref.IDOf(gfd), objc.RegisterName("roundToOddHermitean"))
 	return _r
 }
-
-// SetRoundToOddHermitean wraps the corresponding Objective-C method.
-func (x *GraphFFTDescriptor) SetRoundToOddHermitean(roundToOddHermitean bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
-}
-
-// GraphFFTDescriptorable is the interface implemented by [GraphFFTDescriptor], for mocking and DI.
-type GraphFFTDescriptorable interface {
-	obj.Object
-	WithInverse(inverse bool) *GraphFFTDescriptor
-	WithScalingMode(scalingMode GraphFFTScalingMode) *GraphFFTDescriptor
-	WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor
-	Inverse() bool
-	SetInverse(inverse bool)
-	ScalingMode() GraphFFTScalingMode
-	SetScalingMode(scalingMode GraphFFTScalingMode)
-	RoundToOddHermitean() bool
-	SetRoundToOddHermitean(roundToOddHermitean bool)
-}
-
-var _ GraphFFTDescriptorable = (*GraphFFTDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphFFTDescriptor)(nil)

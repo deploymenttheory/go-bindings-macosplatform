@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func contentKeySessionAdopt(id objc.ID) *ContentKeySession {
 }
 
 // Description returns the object's -description text.
-func (x *ContentKeySession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cks *ContentKeySession) Description() string {
+	return rt.Description(objref.IDOf(cks))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentKeySession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cks *ContentKeySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cks), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentKeySession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cks *ContentKeySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cks), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentKeySession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cks *ContentKeySession) String() string {
+	return rt.Description(objref.IDOf(cks))
 }
 
 // NewContentKeySession creates a new ContentKeySession.
@@ -75,24 +76,24 @@ func NewContentKeySession() *ContentKeySession {
 }
 
 // Expire tells the delegate that the session expired as the result of normal, intentional processes.
-func (x *ContentKeySession) Expire() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expire"))
+func (cks *ContentKeySession) Expire() {
+	objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("expire"))
 }
 
 // ProcessContentKeyRequestWithIdentifierInitializationDataOptions tells the delegate to start loading the content decryption key with the specified identifier and initialization data.
-func (x *ContentKeySession) ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier obj.Object, initializationData obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processContentKeyRequestWithIdentifier:initializationData:options:"), objref.IDOf(identifier), objref.IDOf(initializationData), objref.IDOf(options))
+func (cks *ContentKeySession) ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier obj.Object, initializationData obj.Object, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("processContentKeyRequestWithIdentifier:initializationData:options:"), objref.IDOf(identifier), objref.IDOf(initializationData), objref.IDOf(options))
 }
 
 // RenewExpiringResponseDataForContentKeyRequest tells the delegate that previously provided response data for a content key request is about to expire.
-func (x *ContentKeySession) RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *ContentKeyRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renewExpiringResponseDataForContentKeyRequest:"), objref.IDOf(contentKeyRequest))
+func (cks *ContentKeySession) RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *ContentKeyRequest) {
+	objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("renewExpiringResponseDataForContentKeyRequest:"), objref.IDOf(contentKeyRequest))
 }
 
 // MakeSecureTokenForExpirationDateOfPersistableContentKey creates a secure server playback context that the client sends to the key server to get an expiration date for the given persistable content key data.
 //
 // MakeSecureTokenForExpirationDateOfPersistableContentKey blocks until the operation completes or ctx is cancelled.
-func (x *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContentKey(ctx context.Context, persistableContentKeyData obj.Object) (result obj.Object, err error) {
+func (cks *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContentKey(ctx context.Context, persistableContentKeyData obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -104,7 +105,7 @@ func (x *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContent
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSecureTokenForExpirationDateOfPersistableContentKey:completionHandler:"), objref.IDOf(persistableContentKeyData), _block)
+	objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("makeSecureTokenForExpirationDateOfPersistableContentKey:completionHandler:"), objref.IDOf(persistableContentKeyData), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -117,7 +118,7 @@ func (x *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContent
 // InvalidatePersistableContentKeyOptions invalidates the persistable content key and creates a secure server playback context (SPC) to verify the outcome of an invalidation request.
 //
 // InvalidatePersistableContentKeyOptions blocks until the operation completes or ctx is cancelled.
-func (x *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.Context, persistableContentKeyData obj.Object, options obj.Object) (result obj.Object, err error) {
+func (cks *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.Context, persistableContentKeyData obj.Object, options obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -129,7 +130,7 @@ func (x *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.C
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidatePersistableContentKey:options:completionHandler:"), objref.IDOf(persistableContentKeyData), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("invalidatePersistableContentKey:options:completionHandler:"), objref.IDOf(persistableContentKeyData), objref.IDOf(options), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -142,7 +143,7 @@ func (x *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.C
 // InvalidateAllPersistableContentKeysForAppOptions invalidates all of an app’s persistable content keys and creates a secure server playback context (SPC) to verify the outcome of an invalidation request.
 //
 // InvalidateAllPersistableContentKeysForAppOptions blocks until the operation completes or ctx is cancelled.
-func (x *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx context.Context, appIdentifier obj.Object, options obj.Object) (result obj.Object, err error) {
+func (cks *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx context.Context, appIdentifier obj.Object, options obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -154,7 +155,7 @@ func (x *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateAllPersistableContentKeysForApp:options:completionHandler:"), objref.IDOf(appIdentifier), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("invalidateAllPersistableContentKeysForApp:options:completionHandler:"), objref.IDOf(appIdentifier), objref.IDOf(options), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -164,50 +165,32 @@ func (x *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx
 	}
 }
 
-// DelegateQueue the dispatch queue on which all delegate methods will be invoked whenever processes requiring content keys are executed asynchronously. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
-func (x *ContentKeySession) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+// DelegateQueue returns the dispatch queue on which all delegate methods will be invoked whenever processes requiring content keys are executed asynchronously. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
+func (cks *ContentKeySession) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// StorageURL the storage URL provided when the AVContentKeySession was created. May be nil. URL to a writable directory; may be nil. The session will use this to facilitate expired session reports after abnormal session termination.
-func (x *ContentKeySession) StorageURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storageURL"))
+// StorageURL returns the storage URL provided when the AVContentKeySession was created. May be nil. URL to a writable directory; may be nil. The session will use this to facilitate expired session reports after abnormal session termination.
+func (cks *ContentKeySession) StorageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("storageURL"))
 	return obj.Wrap(_r)
 }
 
-// KeySystem the key system used for retrieving keys
-func (x *ContentKeySession) KeySystem() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySystem"))
+// KeySystem returns the key system used for retrieving keys
+func (cks *ContentKeySession) KeySystem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("keySystem"))
 	return obj.Wrap(_r)
 }
 
-// ContentProtectionSessionIdentifier an opaque identifier for the current content protection session. May be nil. Will call the delegate's contentKeySessionContentProtectionSessionIdentifierDidChange: when the identifier changes. The protection session ID is a unique string identifier generated by the AVContentKeySession that can be used by the application to identify content key session objects.
-func (x *ContentKeySession) ContentProtectionSessionIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentProtectionSessionIdentifier"))
+// ContentProtectionSessionIdentifier returns an opaque identifier for the current content protection session. May be nil. Will call the delegate's contentKeySessionContentProtectionSessionIdentifierDidChange: when the identifier changes. The protection session ID is a unique string identifier generated by the AVContentKeySession that can be used by the application to identify content key session objects.
+func (cks *ContentKeySession) ContentProtectionSessionIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("contentProtectionSessionIdentifier"))
 	return obj.Wrap(_r)
 }
 
 // ContentKeyRecipients wraps the corresponding Objective-C method.
-func (x *ContentKeySession) ContentKeyRecipients() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeyRecipients"))
+func (cks *ContentKeySession) ContentKeyRecipients() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cks), objc.RegisterName("contentKeyRecipients"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ContentKeySessionable is the interface implemented by [ContentKeySession], for mocking and DI.
-type ContentKeySessionable interface {
-	obj.Object
-	Expire()
-	ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier obj.Object, initializationData obj.Object, options obj.Object)
-	RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *ContentKeyRequest)
-	MakeSecureTokenForExpirationDateOfPersistableContentKey(ctx context.Context, persistableContentKeyData obj.Object) (obj.Object, error)
-	InvalidatePersistableContentKeyOptions(ctx context.Context, persistableContentKeyData obj.Object, options obj.Object) (obj.Object, error)
-	InvalidateAllPersistableContentKeysForAppOptions(ctx context.Context, appIdentifier obj.Object, options obj.Object) (obj.Object, error)
-	DelegateQueue() obj.Object
-	StorageURL() obj.Object
-	KeySystem() obj.Object
-	ContentProtectionSessionIdentifier() obj.Object
-	ContentKeyRecipients() []obj.Object
-}
-
-var _ ContentKeySessionable = (*ContentKeySession)(nil)

@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,18 +54,10 @@ func NewTextObservation() *TextObservation {
 // CharacterBoxes wraps the corresponding Objective-C method.
 //
 // CharacterBoxes returns the collection as a Go slice.
-func (x *TextObservation) CharacterBoxes() []*RectangleObservation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characterBoxes"))
+func (to *TextObservation) CharacterBoxes() []*RectangleObservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("characterBoxes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RectangleObservation { return RectangleObservationFromID(_id) })
 }
-
-// TextObservationable is the interface implemented by [TextObservation], for mocking and DI.
-type TextObservationable interface {
-	obj.Object
-	CharacterBoxes() []*RectangleObservation
-}
-
-var _ TextObservationable = (*TextObservation)(nil)
 
 var _ RectangleObservationProvider = (*TextObservation)(nil)
 

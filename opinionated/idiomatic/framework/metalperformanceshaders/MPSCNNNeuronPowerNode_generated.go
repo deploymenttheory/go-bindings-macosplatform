@@ -60,19 +60,11 @@ func NewCNNNeuronPowerNodeWithSource(sourceNode obj.Object) *CNNNeuronPowerNode 
 	return cNNNeuronPowerNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronPowerNode) WithLabel(label string) *CNNNeuronPowerNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnpn *CNNNeuronPowerNode) WithLabel(label string) *CNNNeuronPowerNode {
+	objc.Send[objc.ID](objref.IDOf(cnpn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnpn
 }
-
-// CNNNeuronPowerNodeable is the interface implemented by [CNNNeuronPowerNode], for mocking and DI.
-type CNNNeuronPowerNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronPowerNode
-}
-
-var _ CNNNeuronPowerNodeable = (*CNNNeuronPowerNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronPowerNode)(nil)
 

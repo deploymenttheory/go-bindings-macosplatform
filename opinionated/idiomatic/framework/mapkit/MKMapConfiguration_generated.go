@@ -48,56 +48,41 @@ func mapConfigurationAdopt(id objc.ID) *MapConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *MapConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MapConfiguration) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MapConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MapConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MapConfiguration) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
-// WithElevationStyle the value that indicates the map’s elevation style.
-func (x *MapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *MapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
-	return x
+// WithElevationStyle sets the value that indicates the map’s elevation style.
+func (mc *MapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *MapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setElevationStyle:"), elevationStyle)
+	return mc
 }
 
 // ElevationStyle wraps the corresponding Objective-C method.
-func (x *MapConfiguration) ElevationStyle() MapElevationStyle {
-	_r := objc.Send[MapElevationStyle](objref.IDOf(x), objc.RegisterName("elevationStyle"))
+func (mc *MapConfiguration) ElevationStyle() MapElevationStyle {
+	_r := objc.Send[MapElevationStyle](objref.IDOf(mc), objc.RegisterName("elevationStyle"))
 	return _r
 }
-
-// SetElevationStyle wraps the corresponding Objective-C method.
-func (x *MapConfiguration) SetElevationStyle(elevationStyle MapElevationStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
-}
-
-// MapConfigurationable is the interface implemented by [MapConfiguration], for mocking and DI.
-type MapConfigurationable interface {
-	obj.Object
-	WithElevationStyle(elevationStyle MapElevationStyle) *MapConfiguration
-	ElevationStyle() MapElevationStyle
-	SetElevationStyle(elevationStyle MapElevationStyle)
-}
-
-var _ MapConfigurationable = (*MapConfiguration)(nil)
 
 // isMapConfiguration marks MapConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the MapConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MapConfiguration) isMapConfiguration() {}
+func (mc *MapConfiguration) isMapConfiguration() {}
 
 var _ MapConfigurationProvider = (*MapConfiguration)(nil)

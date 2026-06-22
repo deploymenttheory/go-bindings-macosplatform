@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,120 +51,82 @@ func NewAccelerationStructureBoundingBoxGeometryDescriptor() *AccelerationStruct
 	return accelerationStructureBoundingBoxGeometryDescriptorAdopt(_id)
 }
 
-// WithBoundingBoxBufferOffset the offset, in bytes, to the first bounding box in the buffer.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBufferOffset(boundingBoxBufferOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxBufferOffset:"), boundingBoxBufferOffset)
-	return x
+// WithBoundingBoxBufferOffset sets the offset, in bytes, to the first bounding box in the buffer.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBufferOffset(boundingBoxBufferOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setBoundingBoxBufferOffset:"), boundingBoxBufferOffset)
+	return asbbgd
 }
 
-// WithBoundingBoxStride the stride, in bytes, between bounding boxes in the buffer.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
-	return x
+// WithBoundingBoxStride sets the stride, in bytes, between bounding boxes in the buffer.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
+	return asbbgd
 }
 
-// WithBoundingBoxCount the number of bounding boxes in the bounding box buffer.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxCount:"), boundingBoxCount)
-	return x
+// WithBoundingBoxCount sets the number of bounding boxes in the bounding box buffer.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setBoundingBoxCount:"), boundingBoxCount)
+	return asbbgd
 }
 
-// WithIntersectionFunctionTableOffset an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return asbbgd
 }
 
-// WithOpaque a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setOpaque:"), opaque)
+	return asbbgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return asbbgd
 }
 
-// WithLabel a label for the geometry structure, suitable for debugging.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a label for the geometry structure, suitable for debugging.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return asbbgd
 }
 
-// WithPrimitiveDataBufferOffset primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
-	return x
+// WithPrimitiveDataBufferOffset sets primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
+	return asbbgd
 }
 
-// WithPrimitiveDataStride stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return asbbgd
 }
 
-// WithPrimitiveDataElementSize size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(asbbgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return asbbgd
 }
 
-// BoundingBoxBufferOffset bounding box buffer offset. Must be a multiple of the bounding box stride and must be aligned to the platform's buffer offset alignment.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("boundingBoxBufferOffset"))
+// BoundingBoxBufferOffset returns bounding box buffer offset. Must be a multiple of the bounding box stride and must be aligned to the platform's buffer offset alignment.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(asbbgd), objc.RegisterName("boundingBoxBufferOffset"))
 	return _r
 }
 
-// SetBoundingBoxBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxBufferOffset(boundingBoxBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxBufferOffset:"), boundingBoxBufferOffset)
-}
-
-// BoundingBoxStride stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("boundingBoxStride"))
+// BoundingBoxStride returns stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
+	_r := objc.Send[int](objref.IDOf(asbbgd), objc.RegisterName("boundingBoxStride"))
 	return _r
 }
 
-// SetBoundingBoxStride wraps the corresponding Objective-C method.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxStride(boundingBoxStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
-}
-
-// BoundingBoxCount number of bounding boxes
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("boundingBoxCount"))
+// BoundingBoxCount returns number of bounding boxes
+func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
+	_r := objc.Send[int](objref.IDOf(asbbgd), objc.RegisterName("boundingBoxCount"))
 	return _r
 }
-
-// SetBoundingBoxCount wraps the corresponding Objective-C method.
-func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxCount:"), boundingBoxCount)
-}
-
-// AccelerationStructureBoundingBoxGeometryDescriptorable is the interface implemented by [AccelerationStructureBoundingBoxGeometryDescriptor], for mocking and DI.
-type AccelerationStructureBoundingBoxGeometryDescriptorable interface {
-	obj.Object
-	WithBoundingBoxBufferOffset(boundingBoxBufferOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithBoundingBoxStride(boundingBoxStride int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithBoundingBoxCount(boundingBoxCount int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureBoundingBoxGeometryDescriptor
-	BoundingBoxBufferOffset() int
-	SetBoundingBoxBufferOffset(boundingBoxBufferOffset int)
-	BoundingBoxStride() int
-	SetBoundingBoxStride(boundingBoxStride int)
-	BoundingBoxCount() int
-	SetBoundingBoxCount(boundingBoxCount int)
-}
-
-var _ AccelerationStructureBoundingBoxGeometryDescriptorable = (*AccelerationStructureBoundingBoxGeometryDescriptor)(nil)
 
 var _ AccelerationStructureGeometryDescriptorProvider = (*AccelerationStructureBoundingBoxGeometryDescriptor)(nil)

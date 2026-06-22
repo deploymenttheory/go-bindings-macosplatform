@@ -52,26 +52,17 @@ func NewPurgeableData() *PurgeableData {
 	return purgeableDataAdopt(_id)
 }
 
-// WithLength the number of bytes contained in the mutable data object.
-func (x *PurgeableData) WithLength(length int) *PurgeableData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-	return x
+// WithLength sets the number of bytes contained in the mutable data object.
+func (pd *PurgeableData) WithLength(length int) *PurgeableData {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setLength:"), length)
+	return pd
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PurgeableData) WithScriptingProperties(scriptingProperties obj.Object) *PurgeableData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pd *PurgeableData) WithScriptingProperties(scriptingProperties obj.Object) *PurgeableData {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pd
 }
-
-// PurgeableDataable is the interface implemented by [PurgeableData], for mocking and DI.
-type PurgeableDataable interface {
-	obj.Object
-	WithLength(length int) *PurgeableData
-	WithScriptingProperties(scriptingProperties obj.Object) *PurgeableData
-}
-
-var _ PurgeableDataable = (*PurgeableData)(nil)
 
 var _ MutableDataProvider = (*PurgeableData)(nil)
 

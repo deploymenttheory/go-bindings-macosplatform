@@ -46,24 +46,24 @@ func playerItemIntegratedTimelineSnapshotAdopt(id objc.ID) *PlayerItemIntegrated
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemIntegratedTimelineSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (piits *PlayerItemIntegratedTimelineSnapshot) Description() string {
+	return rt.Description(objref.IDOf(piits))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemIntegratedTimelineSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (piits *PlayerItemIntegratedTimelineSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(piits), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemIntegratedTimelineSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (piits *PlayerItemIntegratedTimelineSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(piits), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemIntegratedTimelineSnapshot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (piits *PlayerItemIntegratedTimelineSnapshot) String() string {
+	return rt.Description(objref.IDOf(piits))
 }
 
 // NewPlayerItemIntegratedTimelineSnapshot creates a new PlayerItemIntegratedTimelineSnapshot.
@@ -73,31 +73,21 @@ func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnap
 }
 
 // CurrentSegment returns the current AVPlayerItemSegment playback is traversing.
-func (x *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSegment"))
+func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
+	_r := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("currentSegment"))
 	return PlayerItemSegmentFromID(_r)
 }
 
 // Segments returns an array of AVPlayerItemSegment for the snapshot. Returns an array of AVPlayerItemSegment. The segments are presented in chronological order, contiguous from the previous element, and non-overlapping.
 //
 // Segments returns the collection as a Go slice.
-func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+func (piits *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
+	_arr := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemSegment { return PlayerItemSegmentFromID(_id) })
 }
 
 // CurrentDate returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
-func (x *PlayerItemIntegratedTimelineSnapshot) CurrentDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDate"))
+func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("currentDate"))
 	return obj.Wrap(_r)
 }
-
-// PlayerItemIntegratedTimelineSnapshotable is the interface implemented by [PlayerItemIntegratedTimelineSnapshot], for mocking and DI.
-type PlayerItemIntegratedTimelineSnapshotable interface {
-	obj.Object
-	CurrentSegment() *PlayerItemSegment
-	Segments() []*PlayerItemSegment
-	CurrentDate() obj.Object
-}
-
-var _ PlayerItemIntegratedTimelineSnapshotable = (*PlayerItemIntegratedTimelineSnapshot)(nil)

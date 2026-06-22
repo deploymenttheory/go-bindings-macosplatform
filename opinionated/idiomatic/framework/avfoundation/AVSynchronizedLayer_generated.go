@@ -46,24 +46,24 @@ func synchronizedLayerAdopt(id objc.ID) *SynchronizedLayer {
 }
 
 // Description returns the object's -description text.
-func (x *SynchronizedLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sl *SynchronizedLayer) Description() string {
+	return rt.Description(objref.IDOf(sl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SynchronizedLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sl *SynchronizedLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SynchronizedLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sl *SynchronizedLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SynchronizedLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sl *SynchronizedLayer) String() string {
+	return rt.Description(objref.IDOf(sl))
 }
 
 // NewSynchronizedLayer creates a new SynchronizedLayer.
@@ -72,29 +72,14 @@ func NewSynchronizedLayer() *SynchronizedLayer {
 	return synchronizedLayerAdopt(_id)
 }
 
-// WithPlayerItem the player item to which the timing of the layer is synchronized.
-func (x *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
-	return x
+// WithPlayerItem sets the player item to which the timing of the layer is synchronized.
+func (sl *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
+	return sl
 }
 
 // PlayerItem wraps the corresponding Objective-C method.
-func (x *SynchronizedLayer) PlayerItem() *PlayerItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerItem"))
+func (sl *SynchronizedLayer) PlayerItem() *PlayerItem {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("playerItem"))
 	return PlayerItemFromID(_r)
 }
-
-// SetPlayerItem wraps the corresponding Objective-C method.
-func (x *SynchronizedLayer) SetPlayerItem(playerItem *PlayerItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
-}
-
-// SynchronizedLayerable is the interface implemented by [SynchronizedLayer], for mocking and DI.
-type SynchronizedLayerable interface {
-	obj.Object
-	WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer
-	PlayerItem() *PlayerItem
-	SetPlayerItem(playerItem *PlayerItem)
-}
-
-var _ SynchronizedLayerable = (*SynchronizedLayer)(nil)

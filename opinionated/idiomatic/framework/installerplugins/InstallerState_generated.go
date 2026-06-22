@@ -44,24 +44,24 @@ func installerStateAdopt(id objc.ID) *InstallerState {
 }
 
 // Description returns the object's -description text.
-func (x *InstallerState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (is *InstallerState) Description() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InstallerState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (is *InstallerState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InstallerState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (is *InstallerState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InstallerState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (is *InstallerState) String() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // NewInstallerState creates a new InstallerState.
@@ -71,20 +71,20 @@ func NewInstallerState() *InstallerState {
 }
 
 // ChoiceDictionaryForIdentifier retrieves choice dictionaries by identifier. See choiceDictionaries for the values returned.
-func (x *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choiceDictionaryForIdentifier:"), purego.NSString(choiceIdentifier))
+func (is *InstallerState) ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("choiceDictionaryForIdentifier:"), purego.NSString(choiceIdentifier))
 	return obj.Wrap(_r)
 }
 
-// LicenseAgreed specifies the user agreed to the license, if there is no license, this will return NO.
-func (x *InstallerState) LicenseAgreed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("licenseAgreed"))
+// LicenseAgreed reports whether specifies the user agreed to the license, if there is no license, this will return false.
+func (is *InstallerState) LicenseAgreed() bool {
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("licenseAgreed"))
 	return _r
 }
 
 // LicenseAgreedLanguage specifies the language the language was last viewed or agreed with.
-func (x *InstallerState) LicenseAgreedLanguage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("licenseAgreedLanguage"))
+func (is *InstallerState) LicenseAgreedLanguage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("licenseAgreedLanguage"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,17 +92,17 @@ func (x *InstallerState) LicenseAgreedLanguage() string {
 }
 
 // TargetVolumePath specifies the mount point of the selected target Only Available after target has been selected.
-func (x *InstallerState) TargetVolumePath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetVolumePath"))
+func (is *InstallerState) TargetVolumePath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("targetVolumePath"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// TargetPath full target path selected. Specifies the full path selected by the user.  This path contains the targetVolumePath.
-func (x *InstallerState) TargetPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetPath"))
+// TargetPath returns full target path selected. Specifies the full path selected by the user.  This path contains the targetVolumePath.
+func (is *InstallerState) TargetPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("targetPath"))
 	if _r == 0 {
 		return ""
 	}
@@ -110,34 +110,19 @@ func (x *InstallerState) TargetPath() string {
 }
 
 // ChoiceDictionaries returns an array of choice dictionaries. Each choice dictionary contains the keys InstallerState_Choice_Identifier,InstallerState_Choice_Installed, and optionally InstallerState_Choice_CustomLocation.  These keys specify a choice and whether they were installed or not.  This is only available after choice selections have been made.
-func (x *InstallerState) ChoiceDictionaries() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("choiceDictionaries"))
+func (is *InstallerState) ChoiceDictionaries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("choiceDictionaries"))
 	return obj.Wrap(_r)
 }
 
-// InstallStarted specifies if the install process has started or not. Will return YES after an install has been initiated.  If YES is returned, you can assume the install has taken place.
-func (x *InstallerState) InstallStarted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("installStarted"))
+// InstallStarted reports whether specifies if the install process has started or not. Will return true after an install has been initiated. If true is returned, you can assume the install has taken place.
+func (is *InstallerState) InstallStarted() bool {
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("installStarted"))
 	return _r
 }
 
-// InstallSucceeded specifies if the install was successfull or not. This value is only valid if installStarted returns True.
-func (x *InstallerState) InstallSucceeded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("installSucceeded"))
+// InstallSucceeded reports whether specifies if the install was successfull or not. This value is only valid if installStarted returns True.
+func (is *InstallerState) InstallSucceeded() bool {
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("installSucceeded"))
 	return _r
 }
-
-// InstallerStateable is the interface implemented by [InstallerState], for mocking and DI.
-type InstallerStateable interface {
-	obj.Object
-	ChoiceDictionaryForIdentifier(choiceIdentifier string) obj.Object
-	LicenseAgreed() bool
-	LicenseAgreedLanguage() string
-	TargetVolumePath() string
-	TargetPath() string
-	ChoiceDictionaries() obj.Object
-	InstallStarted() bool
-	InstallSucceeded() bool
-}
-
-var _ InstallerStateable = (*InstallerState)(nil)

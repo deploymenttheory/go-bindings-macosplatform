@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewPointAnnotation() *PointAnnotation {
 	return pointAnnotationAdopt(_id)
 }
 
-// WithTitle the title of the shape annotation.
-func (x *PointAnnotation) WithTitle(title string) *PointAnnotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (pa *PointAnnotation) WithTitle(title string) *PointAnnotation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return pa
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (pa *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return pa
 }
-
-// PointAnnotationable is the interface implemented by [PointAnnotation], for mocking and DI.
-type PointAnnotationable interface {
-	obj.Object
-	WithTitle(title string) *PointAnnotation
-	WithSubtitle(subtitle string) *PointAnnotation
-}
-
-var _ PointAnnotationable = (*PointAnnotation)(nil)
 
 var _ ShapeProvider = (*PointAnnotation)(nil)

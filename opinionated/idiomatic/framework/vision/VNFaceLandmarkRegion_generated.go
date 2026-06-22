@@ -48,43 +48,35 @@ func faceLandmarkRegionAdopt(id objc.ID) *FaceLandmarkRegion {
 }
 
 // Description returns the object's -description text.
-func (x *FaceLandmarkRegion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (flr *FaceLandmarkRegion) Description() string {
+	return rt.Description(objref.IDOf(flr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FaceLandmarkRegion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (flr *FaceLandmarkRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(flr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FaceLandmarkRegion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (flr *FaceLandmarkRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(flr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FaceLandmarkRegion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (flr *FaceLandmarkRegion) String() string {
+	return rt.Description(objref.IDOf(flr))
 }
 
 // PointCount wraps the corresponding Objective-C method.
-func (x *FaceLandmarkRegion) PointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
+func (flr *FaceLandmarkRegion) PointCount() int {
+	_r := objc.Send[int](objref.IDOf(flr), objc.RegisterName("pointCount"))
 	return _r
 }
-
-// FaceLandmarkRegionable is the interface implemented by [FaceLandmarkRegion], for mocking and DI.
-type FaceLandmarkRegionable interface {
-	obj.Object
-	PointCount() int
-}
-
-var _ FaceLandmarkRegionable = (*FaceLandmarkRegion)(nil)
 
 // isFaceLandmarkRegion marks FaceLandmarkRegion — and, by embedding promotion, its
 // subclasses — as a member of the FaceLandmarkRegion hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *FaceLandmarkRegion) isFaceLandmarkRegion() {}
+func (flr *FaceLandmarkRegion) isFaceLandmarkRegion() {}
 
 var _ FaceLandmarkRegionProvider = (*FaceLandmarkRegion)(nil)

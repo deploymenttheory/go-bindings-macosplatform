@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,37 +45,22 @@ func mIDIChannelEventAdopt(id objc.ID) *MIDIChannelEvent {
 	return x
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDIChannelEvent) WithChannel(channel int) *MIDIChannelEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mce *MIDIChannelEvent) WithChannel(channel int) *MIDIChannelEvent {
+	objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("setChannel:"), channel)
+	return mce
 }
 
 // Channel wraps the corresponding Objective-C method.
-func (x *MIDIChannelEvent) Channel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channel"))
+func (mce *MIDIChannelEvent) Channel() int {
+	_r := objc.Send[int](objref.IDOf(mce), objc.RegisterName("channel"))
 	return _r
 }
-
-// SetChannel wraps the corresponding Objective-C method.
-func (x *MIDIChannelEvent) SetChannel(channel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-}
-
-// MIDIChannelEventable is the interface implemented by [MIDIChannelEvent], for mocking and DI.
-type MIDIChannelEventable interface {
-	obj.Object
-	WithChannel(channel int) *MIDIChannelEvent
-	Channel() int
-	SetChannel(channel int)
-}
-
-var _ MIDIChannelEventable = (*MIDIChannelEvent)(nil)
 
 // isMIDIChannelEvent marks MIDIChannelEvent — and, by embedding promotion, its
 // subclasses — as a member of the MIDIChannelEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MIDIChannelEvent) isMIDIChannelEvent() {}
+func (mce *MIDIChannelEvent) isMIDIChannelEvent() {}
 
 var _ MIDIChannelEventProvider = (*MIDIChannelEvent)(nil)
 

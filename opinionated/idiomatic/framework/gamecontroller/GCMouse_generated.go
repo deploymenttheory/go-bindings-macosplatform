@@ -46,24 +46,24 @@ func mouseAdopt(id objc.ID) *Mouse {
 }
 
 // Description returns the object's -description text.
-func (x *Mouse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Mouse) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Mouse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Mouse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Mouse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Mouse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Mouse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Mouse) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMouse creates a new Mouse.
@@ -72,16 +72,8 @@ func NewMouse() *Mouse {
 	return mouseAdopt(_id)
 }
 
-// MouseInput unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
-func (x *Mouse) MouseInput() *MouseInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseInput"))
+// MouseInput returns unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
+func (m *Mouse) MouseInput() *MouseInput {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("mouseInput"))
 	return MouseInputFromID(_r)
 }
-
-// Mouseable is the interface implemented by [Mouse], for mocking and DI.
-type Mouseable interface {
-	obj.Object
-	MouseInput() *MouseInput
-}
-
-var _ Mouseable = (*Mouse)(nil)

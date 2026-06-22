@@ -46,24 +46,24 @@ func frameRateConversionParametersAdopt(id objc.ID) *FrameRateConversionParamete
 }
 
 // Description returns the object's -description text.
-func (x *FrameRateConversionParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (frcp *FrameRateConversionParameters) Description() string {
+	return rt.Description(objref.IDOf(frcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FrameRateConversionParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (frcp *FrameRateConversionParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(frcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FrameRateConversionParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (frcp *FrameRateConversionParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(frcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FrameRateConversionParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (frcp *FrameRateConversionParameters) String() string {
+	return rt.Description(objref.IDOf(frcp))
 }
 
 // NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new frame rate conversion parameters object.
@@ -73,55 +73,42 @@ func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpol
 	return frameRateConversionParametersAdopt(_id)
 }
 
-// SourceFrame current source frame, which must be non `nil`.
-func (x *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+// SourceFrame returns current source frame, which must be non `nil`.
+func (frcp *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// NextFrame the next source frame in presentation time order, which is `nil` for the last frame.
-func (x *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextFrame"))
+// NextFrame returns the next source frame in presentation time order, which is `nil` for the last frame.
+func (frcp *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("nextFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// OpticalFlow an optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
-func (x *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opticalFlow"))
+// OpticalFlow returns an optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
+func (frcp *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow {
+	_r := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("opticalFlow"))
 	return FrameProcessorOpticalFlowFromID(_r)
 }
 
-// InterpolationPhase array of float numbers that indicate intervals at which the processor inserts a frame between the current and next frame. Array size indicates how many frames to interpolate and must match `destinationFrames` size, one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5.
+// InterpolationPhase returns array of float numbers that indicate intervals at which the processor inserts a frame between the current and next frame. Array size indicates how many frames to interpolate and must match `destinationFrames` size, one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5.
 //
 // InterpolationPhase returns the collection as a Go slice.
-func (x *FrameRateConversionParameters) InterpolationPhase() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpolationPhase"))
+func (frcp *FrameRateConversionParameters) InterpolationPhase() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("interpolationPhase"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SubmissionMode ordering of the input frames in this submission relative to the previous submission.
-func (x *FrameRateConversionParameters) SubmissionMode() FrameRateConversionParametersSubmissionMode {
-	_r := objc.Send[FrameRateConversionParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
+// SubmissionMode returns ordering of the input frames in this submission relative to the previous submission.
+func (frcp *FrameRateConversionParameters) SubmissionMode() FrameRateConversionParametersSubmissionMode {
+	_r := objc.Send[FrameRateConversionParametersSubmissionMode](objref.IDOf(frcp), objc.RegisterName("submissionMode"))
 	return _r
 }
 
-// DestinationFrames caller-allocated array of video frame objects that contain pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase` NSArray.
+// DestinationFrames returns caller-allocated array of video frame objects that contain pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase` NSArray.
 //
 // DestinationFrames returns the collection as a Go slice.
-func (x *FrameRateConversionParameters) DestinationFrames() []*FrameProcessorFrame {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrames"))
+func (frcp *FrameRateConversionParameters) DestinationFrames() []*FrameProcessorFrame {
+	_arr := objc.Send[objc.ID](objref.IDOf(frcp), objc.RegisterName("destinationFrames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }
-
-// FrameRateConversionParametersable is the interface implemented by [FrameRateConversionParameters], for mocking and DI.
-type FrameRateConversionParametersable interface {
-	obj.Object
-	SourceFrame() *FrameProcessorFrame
-	NextFrame() *FrameProcessorFrame
-	OpticalFlow() *FrameProcessorOpticalFlow
-	InterpolationPhase() []obj.Object
-	SubmissionMode() FrameRateConversionParametersSubmissionMode
-	DestinationFrames() []*FrameProcessorFrame
-}
-
-var _ FrameRateConversionParametersable = (*FrameRateConversionParameters)(nil)

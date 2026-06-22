@@ -46,24 +46,24 @@ func uRLAuthenticationChallengeAdopt(id objc.ID) *URLAuthenticationChallenge {
 }
 
 // Description returns the object's -description text.
-func (x *URLAuthenticationChallenge) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uac *URLAuthenticationChallenge) Description() string {
+	return rt.Description(objref.IDOf(uac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLAuthenticationChallenge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uac *URLAuthenticationChallenge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLAuthenticationChallenge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uac *URLAuthenticationChallenge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLAuthenticationChallenge) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uac *URLAuthenticationChallenge) String() string {
+	return rt.Description(objref.IDOf(uac))
 }
 
 // NewURLAuthenticationChallenge creates a new URLAuthenticationChallenge.
@@ -73,43 +73,31 @@ func NewURLAuthenticationChallenge() *URLAuthenticationChallenge {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uac *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge {
+	objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uac
 }
 
 // ProtectionSpace get a description of the protection space that requires authentication
-func (x *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protectionSpace"))
+func (uac *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
+	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("protectionSpace"))
 	return URLProtectionSpaceFromID(_r)
 }
 
 // ProposedCredential get the proposed credential for this challenge proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
-func (x *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proposedCredential"))
+func (uac *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
+	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("proposedCredential"))
 	return URLCredentialFromID(_r)
 }
 
 // PreviousFailureCount get count of previous failed authentication attempts
-func (x *URLAuthenticationChallenge) PreviousFailureCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("previousFailureCount"))
+func (uac *URLAuthenticationChallenge) PreviousFailureCount() int {
+	_r := objc.Send[int](objref.IDOf(uac), objc.RegisterName("previousFailureCount"))
 	return _r
 }
 
 // FailureResponse get the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
-func (x *URLAuthenticationChallenge) FailureResponse() *URLResponse {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failureResponse"))
+func (uac *URLAuthenticationChallenge) FailureResponse() *URLResponse {
+	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("failureResponse"))
 	return URLResponseFromID(_r)
 }
-
-// URLAuthenticationChallengeable is the interface implemented by [URLAuthenticationChallenge], for mocking and DI.
-type URLAuthenticationChallengeable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge
-	ProtectionSpace() *URLProtectionSpace
-	ProposedCredential() *URLCredential
-	PreviousFailureCount() int
-	FailureResponse() *URLResponse
-}
-
-var _ URLAuthenticationChallengeable = (*URLAuthenticationChallenge)(nil)

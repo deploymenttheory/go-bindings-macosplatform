@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,12 +51,5 @@ func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *RecordZoneID) *SyncEngineP
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
 	return syncEnginePendingZoneDeleteAdopt(_id)
 }
-
-// SyncEnginePendingZoneDeleteable is the interface implemented by [SyncEnginePendingZoneDelete], for mocking and DI.
-type SyncEnginePendingZoneDeleteable interface {
-	obj.Object
-}
-
-var _ SyncEnginePendingZoneDeleteable = (*SyncEnginePendingZoneDelete)(nil)
 
 var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingZoneDelete)(nil)

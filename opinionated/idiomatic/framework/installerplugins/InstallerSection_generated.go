@@ -44,24 +44,24 @@ func installerSectionAdopt(id objc.ID) *InstallerSection {
 }
 
 // Description returns the object's -description text.
-func (x *InstallerSection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (is *InstallerSection) Description() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InstallerSection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (is *InstallerSection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InstallerSection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (is *InstallerSection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InstallerSection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (is *InstallerSection) String() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // NewInstallerSection creates a new InstallerSection.
@@ -71,36 +71,36 @@ func NewInstallerSection() *InstallerSection {
 }
 
 // WillLoadMainNib each InstallerSection object can define a default nib to be loaded by the Installer at the optimal time.  Before this default nib is loaded willLoadMainNib will be called.  didLoadMainNib is called when the nib is successfully loaded.  The nib may be loaded way before the content is display on the screen, so awakeFromNib methods should not assume the content is displayed to the user.  WillEnter/DidEnter method should be used to determine when views are actually "in view." A default nib is specified for a section in the Info.plist for the section using the NSMainNibFile key. A subclass can override this method to do any necessary work before the main nib is loaded or to actually load a custom nib if no default nib is specified.
-func (x *InstallerSection) WillLoadMainNib() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willLoadMainNib"))
+func (is *InstallerSection) WillLoadMainNib() {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("willLoadMainNib"))
 }
 
 // DidLoadMainNib called immediatly after the default nib for the section is loaded. If no default nib is specified, didLoadMainNib is called immediately after willLoadMainNib is called. didLoadMainNib is called before the section's panes are in view.
-func (x *InstallerSection) DidLoadMainNib() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didLoadMainNib"))
+func (is *InstallerSection) DidLoadMainNib() {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("didLoadMainNib"))
 }
 
-// SharedDictionary a global Mutable Dictionary which is global to the Install session. Use this dictionary to pass information between sections. This dictionary should not be used to store state for your section or its panes.
-func (x *InstallerSection) SharedDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedDictionary"))
+// SharedDictionary returns a global Mutable Dictionary which is global to the Install session. Use this dictionary to pass information between sections. This dictionary should not be used to store state for your section or its panes.
+func (is *InstallerSection) SharedDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("sharedDictionary"))
 	return obj.Wrap(_r)
 }
 
 // GotoPane this method causes the current pane to exit and "pane" to be made active.  This effectively replaces the current pane and does not place the current pane onto the pane stack. gotoPane does not invoke shouldExit method for the current pane. gotoPane is typically not overriden by a subclass.
-func (x *InstallerSection) GotoPane(pane *InstallerPane) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("gotoPane:"), objref.IDOf(pane))
+func (is *InstallerSection) GotoPane(pane *InstallerPane) bool {
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("gotoPane:"), objref.IDOf(pane))
 	return _r
 }
 
-// Bundle this method returns the NSBundle in which the InstallerSection is located.  Since InstallerSection is not typically overriden, the bundle returned may not necessarily be the same bundle as the InstallerSection class. Use this method to gain access to bundle resources.
-func (x *InstallerSection) Bundle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
+// Bundle returns this method returns the NSBundle in which the InstallerSection is located.  Since InstallerSection is not typically overriden, the bundle returned may not necessarily be the same bundle as the InstallerSection class. Use this method to gain access to bundle resources.
+func (is *InstallerSection) Bundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
 // Title returns the title for the section defined in the Info.plist file for the section's bundle.  The title retrieved using the "InstallerSectionTitle" key in the Info.plist for the section's bundle and that key must be present in the InfoPlist.strings file for title to be localized. Although subclasses can override this method and return a dynamic title at runtime, the title is only retrieved for display once (immediatly following the shouldLoad method, if shouldLoad returns YES).
-func (x *InstallerSection) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (is *InstallerSection) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -108,42 +108,25 @@ func (x *InstallerSection) Title() string {
 }
 
 // FirstPane returns the first pane specified by the firstPane outlet.  This pane is the first pane entered when the section first becomes active.
-func (x *InstallerSection) FirstPane() *InstallerPane {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstPane"))
+func (is *InstallerSection) FirstPane() *InstallerPane {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("firstPane"))
 	return InstallerPaneFromID(_r)
 }
 
-// ShouldLoad called when a section is first about to be fully loaded.  By default this method returns YES.  A Subclass can override this method and determine at runtime if the section makes sense.  Return NO and the section will not be further loaded.  sections are never fully unloaded.
-func (x *InstallerSection) ShouldLoad() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldLoad"))
+// ShouldLoad reports whether called when a section is first about to be fully loaded. By default this method returns true. A Subclass can override this method and determine at runtime if the section makes sense. Return false and the section will not be further loaded. sections are never fully unloaded.
+func (is *InstallerSection) ShouldLoad() bool {
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("shouldLoad"))
 	return _r
 }
 
 // InstallerState returns the Installer State object for the current install session. Returns an object which describes the Installer choices and status at the given time.  Plugins cannot influence this state, it should only be used for informational purposes.  See InstallerState.h for more details.
-func (x *InstallerSection) InstallerState() *InstallerState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("installerState"))
+func (is *InstallerSection) InstallerState() *InstallerState {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("installerState"))
 	return InstallerStateFromID(_r)
 }
 
 // ActivePane returns the current active page for this section. If the section is active, it will return the current active page.  If the section is not active, nil will be returned.
-func (x *InstallerSection) ActivePane() *InstallerPane {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activePane"))
+func (is *InstallerSection) ActivePane() *InstallerPane {
+	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("activePane"))
 	return InstallerPaneFromID(_r)
 }
-
-// InstallerSectionable is the interface implemented by [InstallerSection], for mocking and DI.
-type InstallerSectionable interface {
-	obj.Object
-	WillLoadMainNib()
-	DidLoadMainNib()
-	SharedDictionary() obj.Object
-	GotoPane(pane *InstallerPane) bool
-	Bundle() obj.Object
-	Title() string
-	FirstPane() *InstallerPane
-	ShouldLoad() bool
-	InstallerState() *InstallerState
-	ActivePane() *InstallerPane
-}
-
-var _ InstallerSectionable = (*InstallerSection)(nil)

@@ -46,24 +46,24 @@ func textureLoaderAdopt(id objc.ID) *TextureLoader {
 }
 
 // Description returns the object's -description text.
-func (x *TextureLoader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tl *TextureLoader) Description() string {
+	return rt.Description(objref.IDOf(tl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextureLoader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tl *TextureLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextureLoader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tl *TextureLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextureLoader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tl *TextureLoader) String() string {
+	return rt.Description(objref.IDOf(tl))
 }
 
 // NewTextureLoaderWithShareContext initializes a new texture loader object.
@@ -72,10 +72,3 @@ func NewTextureLoaderWithShareContext(context_ obj.Object) *TextureLoader {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareContext:"), objref.IDOf(context_))
 	return textureLoaderAdopt(_id)
 }
-
-// TextureLoaderable is the interface implemented by [TextureLoader], for mocking and DI.
-type TextureLoaderable interface {
-	obj.Object
-}
-
-var _ TextureLoaderable = (*TextureLoader)(nil)

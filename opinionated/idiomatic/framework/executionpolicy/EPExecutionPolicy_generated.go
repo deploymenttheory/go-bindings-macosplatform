@@ -5,13 +5,14 @@
 package executionpolicy
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ExecutionPolicy is an idiomatic wrapper over the Objective-C class EPExecutionPolicy.
@@ -46,24 +47,24 @@ func executionPolicyAdopt(id objc.ID) *ExecutionPolicy {
 }
 
 // Description returns the object's -description text.
-func (x *ExecutionPolicy) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ep *ExecutionPolicy) Description() string {
+	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExecutionPolicy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ep *ExecutionPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExecutionPolicy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ep *ExecutionPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExecutionPolicy) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ep *ExecutionPolicy) String() string {
+	return rt.Description(objref.IDOf(ep))
 }
 
 // NewExecutionPolicy creates a new ExecutionPolicy.
@@ -73,19 +74,11 @@ func NewExecutionPolicy() *ExecutionPolicy {
 }
 
 // AddPolicyExceptionForURL wraps the corresponding Objective-C method.
-func (x *ExecutionPolicy) AddPolicyExceptionForURL(url string) error {
+func (ep *ExecutionPolicy) AddPolicyExceptionForURL(url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addPolicyExceptionForURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("addPolicyExceptionForURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// ExecutionPolicyable is the interface implemented by [ExecutionPolicy], for mocking and DI.
-type ExecutionPolicyable interface {
-	obj.Object
-	AddPolicyExceptionForURL(url string) error
-}
-
-var _ ExecutionPolicyable = (*ExecutionPolicy)(nil)

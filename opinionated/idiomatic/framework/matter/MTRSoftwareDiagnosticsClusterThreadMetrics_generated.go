@@ -50,46 +50,34 @@ func NewMTRSoftwareDiagnosticsClusterThreadMetrics() *MTRSoftwareDiagnosticsClus
 	return mTRSoftwareDiagnosticsClusterThreadMetricsAdopt(_id)
 }
 
-// WithId sets the property and returns the receiver so calls can be chained.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
-	return x
+// WithID sets the property and returns the receiver so calls can be chained.
+func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setId:"), objref.IDOf(id_))
+	return msdctm
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetrics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setName:"), purego.NSString(name))
+	return msdctm
 }
 
 // WithStackFreeCurrent sets the property and returns the receiver so calls can be chained.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
-	return x
+func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
+	return msdctm
 }
 
 // WithStackFreeMinimum sets the property and returns the receiver so calls can be chained.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
-	return x
+func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
+	return msdctm
 }
 
 // WithStackSize sets the property and returns the receiver so calls can be chained.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
-	return x
+func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
+	return msdctm
 }
-
-// MTRSoftwareDiagnosticsClusterThreadMetricsable is the interface implemented by [MTRSoftwareDiagnosticsClusterThreadMetrics], for mocking and DI.
-type MTRSoftwareDiagnosticsClusterThreadMetricsable interface {
-	obj.Object
-	WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics
-	WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetrics
-	WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics
-	WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics
-	WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics
-}
-
-var _ MTRSoftwareDiagnosticsClusterThreadMetricsable = (*MTRSoftwareDiagnosticsClusterThreadMetrics)(nil)
 
 var _ MTRSoftwareDiagnosticsClusterThreadMetricsStructProvider = (*MTRSoftwareDiagnosticsClusterThreadMetrics)(nil)

@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,32 +50,22 @@ func NewDOMEntityReference() *DOMEntityReference {
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMEntityReference) WithNodeValue(nodeValue string) *DOMEntityReference {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (der *DOMEntityReference) WithNodeValue(nodeValue string) *DOMEntityReference {
+	objc.Send[objc.ID](objref.IDOf(der), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return der
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMEntityReference) WithPrefix(prefix string) *DOMEntityReference {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (der *DOMEntityReference) WithPrefix(prefix string) *DOMEntityReference {
+	objc.Send[objc.ID](objref.IDOf(der), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return der
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMEntityReference) WithTextContent(textContent string) *DOMEntityReference {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (der *DOMEntityReference) WithTextContent(textContent string) *DOMEntityReference {
+	objc.Send[objc.ID](objref.IDOf(der), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return der
 }
-
-// DOMEntityReferenceable is the interface implemented by [DOMEntityReference], for mocking and DI.
-type DOMEntityReferenceable interface {
-	obj.Object
-	WithNodeValue(nodeValue string) *DOMEntityReference
-	WithPrefix(prefix string) *DOMEntityReference
-	WithTextContent(textContent string) *DOMEntityReference
-}
-
-var _ DOMEntityReferenceable = (*DOMEntityReference)(nil)
 
 var _ DOMNodeProvider = (*DOMEntityReference)(nil)
 

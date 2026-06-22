@@ -7,7 +7,6 @@ package coredata
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,27 +52,18 @@ func NewLightweightMigrationStageWithVersionChecksums(versionChecksums []string)
 	return lightweightMigrationStageAdopt(_id)
 }
 
-// WithLabel the textual description of the migration stage’s purpose.
-func (x *LightweightMigrationStage) WithLabel(label string) *LightweightMigrationStage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the textual description of the migration stage’s purpose.
+func (lms *LightweightMigrationStage) WithLabel(label string) *LightweightMigrationStage {
+	objc.Send[objc.ID](objref.IDOf(lms), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return lms
 }
 
 // VersionChecksums wraps the corresponding Objective-C method.
 //
 // VersionChecksums returns the collection as a Go slice.
-func (x *LightweightMigrationStage) VersionChecksums() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("versionChecksums"))
+func (lms *LightweightMigrationStage) VersionChecksums() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(lms), objc.RegisterName("versionChecksums"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// LightweightMigrationStageable is the interface implemented by [LightweightMigrationStage], for mocking and DI.
-type LightweightMigrationStageable interface {
-	obj.Object
-	WithLabel(label string) *LightweightMigrationStage
-	VersionChecksums() []string
-}
-
-var _ LightweightMigrationStageable = (*LightweightMigrationStage)(nil)
 
 var _ MigrationStageProvider = (*LightweightMigrationStage)(nil)

@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +50,16 @@ func NewDOMStyleSheetList() *DOMStyleSheetList {
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMStyleSheetList) Item(index int) *DOMStyleSheet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dssl *DOMStyleSheetList) Item(index int) *DOMStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(dssl), objc.RegisterName("item:"), index)
 	return DOMStyleSheetFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMStyleSheetList) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dssl *DOMStyleSheetList) Length() int {
+	_r := objc.Send[int](objref.IDOf(dssl), objc.RegisterName("length"))
 	return _r
 }
-
-// DOMStyleSheetListable is the interface implemented by [DOMStyleSheetList], for mocking and DI.
-type DOMStyleSheetListable interface {
-	obj.Object
-	Item(index int) *DOMStyleSheet
-	Length() int
-}
-
-var _ DOMStyleSheetListable = (*DOMStyleSheetList)(nil)
 
 var _ DOMObjectProvider = (*DOMStyleSheetList)(nil)
 

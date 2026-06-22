@@ -45,24 +45,24 @@ func wKWebExtensionActionAdopt(id objc.ID) *WKWebExtensionAction {
 }
 
 // Description returns the object's -description text.
-func (x *WKWebExtensionAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwea *WKWebExtensionAction) Description() string {
+	return rt.Description(objref.IDOf(wwea))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWebExtensionAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwea *WKWebExtensionAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwea), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWebExtensionAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwea *WKWebExtensionAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwea), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWebExtensionAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwea *WKWebExtensionAction) String() string {
+	return rt.Description(objref.IDOf(wwea))
 }
 
 // NewWKWebExtensionAction creates a new WKWebExtensionAction.
@@ -71,129 +71,96 @@ func NewWKWebExtensionAction() *WKWebExtensionAction {
 	return wKWebExtensionActionAdopt(_id)
 }
 
-// WithHasUnreadBadgeText a Boolean value indicating whether the badge text is unread. This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
-func (x *WKWebExtensionAction) WithHasUnreadBadgeText(hasUnreadBadgeText bool) *WKWebExtensionAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasUnreadBadgeText:"), hasUnreadBadgeText)
-	return x
+// WithHasUnreadBadgeText sets a Boolean value indicating whether the badge text is unread. This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
+func (wwea *WKWebExtensionAction) WithHasUnreadBadgeText(hasUnreadBadgeText bool) *WKWebExtensionAction {
+	objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("setHasUnreadBadgeText:"), hasUnreadBadgeText)
+	return wwea
 }
 
-// WithInspectionName the name shown when inspecting the popup web view. This is the text that will appear when inspecting the popup web view.
-func (x *WKWebExtensionAction) WithInspectionName(inspectionName string) *WKWebExtensionAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInspectionName:"), purego.NSString(inspectionName))
-	return x
+// WithInspectionName sets the name shown when inspecting the popup web view. This is the text that will appear when inspecting the popup web view.
+func (wwea *WKWebExtensionAction) WithInspectionName(inspectionName string) *WKWebExtensionAction {
+	objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("setInspectionName:"), purego.NSString(inspectionName))
+	return wwea
 }
 
 // IconForSize wraps the corresponding Objective-C method.
-func (x *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForSize:"), size)
+func (wwea *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("iconForSize:"), size)
 	return obj.Wrap(_r)
 }
 
 // ClosePopup triggers the dismissal process of the popup. Invoke this method to manage the popup's lifecycle, ensuring the web view is unloaded and resources are released once the popup closes. This method is automatically called upon the dismissal of the action's “UIViewController“ or “NSPopover“.  For custom scenarios where the popup's lifecycle is manually managed, it must be explicitly invoked to ensure proper closure.
-func (x *WKWebExtensionAction) ClosePopup() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closePopup"))
+func (wwea *WKWebExtensionAction) ClosePopup() {
+	objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("closePopup"))
 }
 
-// WebExtensionContext the extension context to which this action is related.
-func (x *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webExtensionContext"))
+// WebExtensionContext returns the extension context to which this action is related.
+func (wwea *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("webExtensionContext"))
 	return WKWebExtensionContextFromID(_r)
 }
 
-// Label the localized display label for the action.
-func (x *WKWebExtensionAction) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns the localized display label for the action.
+func (wwea *WKWebExtensionAction) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BadgeText the badge text for the action. Provides the text that appears on the badge for the action. An empty string signifies that no badge should be shown.
-func (x *WKWebExtensionAction) BadgeText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badgeText"))
+// BadgeText returns the badge text for the action. Provides the text that appears on the badge for the action. An empty string signifies that no badge should be shown.
+func (wwea *WKWebExtensionAction) BadgeText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("badgeText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HasUnreadBadgeText a Boolean value indicating whether the badge text is unread. This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
-func (x *WKWebExtensionAction) HasUnreadBadgeText() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUnreadBadgeText"))
+// HasUnreadBadgeText reports whether the badge text is unread. This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
+func (wwea *WKWebExtensionAction) HasUnreadBadgeText() bool {
+	_r := objc.Send[bool](objref.IDOf(wwea), objc.RegisterName("hasUnreadBadgeText"))
 	return _r
 }
 
-// SetHasUnreadBadgeText wraps the corresponding Objective-C method.
-func (x *WKWebExtensionAction) SetHasUnreadBadgeText(hasUnreadBadgeText bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasUnreadBadgeText:"), hasUnreadBadgeText)
-}
-
-// InspectionName the name shown when inspecting the popup web view. This is the text that will appear when inspecting the popup web view.
-func (x *WKWebExtensionAction) InspectionName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inspectionName"))
+// InspectionName returns the name shown when inspecting the popup web view. This is the text that will appear when inspecting the popup web view.
+func (wwea *WKWebExtensionAction) InspectionName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("inspectionName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetInspectionName wraps the corresponding Objective-C method.
-func (x *WKWebExtensionAction) SetInspectionName(inspectionName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInspectionName:"), purego.NSString(inspectionName))
-}
-
-// IsEnabled a Boolean value indicating whether the action is enabled.
-func (x *WKWebExtensionAction) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether the action is enabled.
+func (wwea *WKWebExtensionAction) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(wwea), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // MenuItems wraps the corresponding Objective-C method.
 //
 // MenuItems returns the collection as a Go slice.
-func (x *WKWebExtensionAction) MenuItems() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItems"))
+func (wwea *WKWebExtensionAction) MenuItems() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("menuItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PresentsPopup a Boolean value indicating whether the action has a popup. Use this property to check if the action has a popup before attempting to show any popup views.
-func (x *WKWebExtensionAction) PresentsPopup() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentsPopup"))
+// PresentsPopup reports whether the action has a popup. Use this property to check if the action has a popup before attempting to show any popup views.
+func (wwea *WKWebExtensionAction) PresentsPopup() bool {
+	_r := objc.Send[bool](objref.IDOf(wwea), objc.RegisterName("presentsPopup"))
 	return _r
 }
 
-// PopupPopover a popover that presents a web view loaded with the popup page for this action, or `nil` if no popup is specified. This popover contains a view controller with a web view preloaded with the popup page. It automatically adjusts its size to fit the web view's content size. The “presentsPopup“ property should be checked to determine the availability of a popup before using this property.  Dismissing the popover will close the popup and unload the web view.
-func (x *WKWebExtensionAction) PopupPopover() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("popupPopover"))
+// PopupPopover returns a popover that presents a web view loaded with the popup page for this action, or `nil` if no popup is specified. This popover contains a view controller with a web view preloaded with the popup page. It automatically adjusts its size to fit the web view's content size. The “presentsPopup“ property should be checked to determine the availability of a popup before using this property.  Dismissing the popover will close the popup and unload the web view.
+func (wwea *WKWebExtensionAction) PopupPopover() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("popupPopover"))
 	return obj.Wrap(_r)
 }
 
-// PopupWebView a web view loaded with the popup page for this action, or `nil` if no popup is specified. The web view will be preloaded with the popup page upon first access or after it has been unloaded. Use the “presentsPopup“ property to determine whether a popup should be displayed before using this property.
-func (x *WKWebExtensionAction) PopupWebView() *WKWebView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("popupWebView"))
+// PopupWebView returns a web view loaded with the popup page for this action, or `nil` if no popup is specified. The web view will be preloaded with the popup page upon first access or after it has been unloaded. Use the “presentsPopup“ property to determine whether a popup should be displayed before using this property.
+func (wwea *WKWebExtensionAction) PopupWebView() *WKWebView {
+	_r := objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("popupWebView"))
 	return WKWebViewFromID(_r)
 }
-
-// WKWebExtensionActionable is the interface implemented by [WKWebExtensionAction], for mocking and DI.
-type WKWebExtensionActionable interface {
-	obj.Object
-	WithHasUnreadBadgeText(hasUnreadBadgeText bool) *WKWebExtensionAction
-	WithInspectionName(inspectionName string) *WKWebExtensionAction
-	IconForSize(size corefoundation.CGSize) obj.Object
-	ClosePopup()
-	WebExtensionContext() *WKWebExtensionContext
-	Label() string
-	BadgeText() string
-	HasUnreadBadgeText() bool
-	SetHasUnreadBadgeText(hasUnreadBadgeText bool)
-	InspectionName() string
-	SetInspectionName(inspectionName string)
-	IsEnabled() bool
-	MenuItems() []obj.Object
-	PresentsPopup() bool
-	PopupPopover() obj.Object
-	PopupWebView() *WKWebView
-}
-
-var _ WKWebExtensionActionable = (*WKWebExtensionAction)(nil)

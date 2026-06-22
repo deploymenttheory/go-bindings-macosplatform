@@ -53,24 +53,15 @@ func NewPersistentHistoryResult() *PersistentHistoryResult {
 }
 
 // Result wraps the corresponding Objective-C method.
-func (x *PersistentHistoryResult) Result() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+func (phr *PersistentHistoryResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(phr), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *PersistentHistoryResult) ResultType() PersistentHistoryResultType {
-	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (phr *PersistentHistoryResult) ResultType() PersistentHistoryResultType {
+	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(phr), objc.RegisterName("resultType"))
 	return _r
 }
-
-// PersistentHistoryResultable is the interface implemented by [PersistentHistoryResult], for mocking and DI.
-type PersistentHistoryResultable interface {
-	obj.Object
-	Result() obj.Object
-	ResultType() PersistentHistoryResultType
-}
-
-var _ PersistentHistoryResultable = (*PersistentHistoryResult)(nil)
 
 var _ PersistentStoreResultProvider = (*PersistentHistoryResult)(nil)

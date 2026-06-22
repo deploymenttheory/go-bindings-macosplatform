@@ -46,24 +46,24 @@ func captureTimecodeGeneratorAdopt(id objc.ID) *CaptureTimecodeGenerator {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureTimecodeGenerator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ctg *CaptureTimecodeGenerator) Description() string {
+	return rt.Description(objref.IDOf(ctg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureTimecodeGenerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ctg *CaptureTimecodeGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ctg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureTimecodeGenerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ctg *CaptureTimecodeGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ctg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureTimecodeGenerator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ctg *CaptureTimecodeGenerator) String() string {
+	return rt.Description(objref.IDOf(ctg))
 }
 
 // NewCaptureTimecodeGenerator creates a new CaptureTimecodeGenerator.
@@ -72,78 +72,51 @@ func NewCaptureTimecodeGenerator() *CaptureTimecodeGenerator {
 	return captureTimecodeGeneratorAdopt(_id)
 }
 
-// WithSynchronizationTimeout the maximum time interval allowed for source synchronization attempts before timing out.
-func (x *CaptureTimecodeGenerator) WithSynchronizationTimeout(synchronizationTimeout float64) *CaptureTimecodeGenerator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizationTimeout:"), synchronizationTimeout)
-	return x
+// WithSynchronizationTimeout sets the maximum time interval allowed for source synchronization attempts before timing out.
+func (ctg *CaptureTimecodeGenerator) WithSynchronizationTimeout(synchronizationTimeout float64) *CaptureTimecodeGenerator {
+	objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("setSynchronizationTimeout:"), synchronizationTimeout)
+	return ctg
 }
 
-// WithTimecodeAlignmentOffset the time offset, in seconds, applied to the generated timecode.
-func (x *CaptureTimecodeGenerator) WithTimecodeAlignmentOffset(timecodeAlignmentOffset float64) *CaptureTimecodeGenerator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimecodeAlignmentOffset:"), timecodeAlignmentOffset)
-	return x
+// WithTimecodeAlignmentOffset sets the time offset, in seconds, applied to the generated timecode.
+func (ctg *CaptureTimecodeGenerator) WithTimecodeAlignmentOffset(timecodeAlignmentOffset float64) *CaptureTimecodeGenerator {
+	objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("setTimecodeAlignmentOffset:"), timecodeAlignmentOffset)
+	return ctg
 }
 
 // StartSynchronizationWithTimecodeSource synchronizes the generator with the specified timecode source.
-func (x *CaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(source *CaptureTimecodeSource) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSynchronizationWithTimecodeSource:"), objref.IDOf(source))
+func (ctg *CaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(source *CaptureTimecodeSource) {
+	objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("startSynchronizationWithTimecodeSource:"), objref.IDOf(source))
 }
 
-// AvailableSources an array of available timecode synchronization sources that can be used by the timecode generator. This property provides a list of “AVCaptureTimecodeSource“ objects representing the available timecode sources with which the generator can synchronize. The sources may include built-in options such as the frame counter and real-time clock, as well as dynamically detected sources such as connected MIDI or HID devices. This array is key-value observable, allowing you to monitor changes in real-time. For example, when a new MIDI device is connected, the array is updated to include the corresponding timecode source. - Returns: A read-only array of “AVCaptureTimecodeSource“ objects representing the available timecode synchronization sources.
+// AvailableSources returns an array of available timecode synchronization sources that can be used by the timecode generator. This property provides a list of “AVCaptureTimecodeSource“ objects representing the available timecode sources with which the generator can synchronize. The sources may include built-in options such as the frame counter and real-time clock, as well as dynamically detected sources such as connected MIDI or HID devices. This array is key-value observable, allowing you to monitor changes in real-time. For example, when a new MIDI device is connected, the array is updated to include the corresponding timecode source. - Returns: A read-only array of “AVCaptureTimecodeSource“ objects representing the available timecode synchronization sources.
 //
 // AvailableSources returns the collection as a Go slice.
-func (x *CaptureTimecodeGenerator) AvailableSources() []*CaptureTimecodeSource {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableSources"))
+func (ctg *CaptureTimecodeGenerator) AvailableSources() []*CaptureTimecodeSource {
+	_arr := objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("availableSources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureTimecodeSource { return CaptureTimecodeSourceFromID(_id) })
 }
 
-// CurrentSource the active timecode source used by “AVCaptureTimecodeGenerator“ to maintain clock synchronization for accurate timecode generation. Indicates the active timecode source, as defined in the “AVCaptureTimecodeSynchronizationSourceType“ enum. If an “AVCaptureTimecodeGenerator“ becomes disconnected from its source, it continues generating timecodes using historical data from its ring buffer. This approach allows the generator to maintain synchronization during brief disruptions, as is common in cinema workflows where timecode signals may experience discontinuities.
-func (x *CaptureTimecodeGenerator) CurrentSource() *CaptureTimecodeSource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSource"))
+// CurrentSource returns the active timecode source used by “AVCaptureTimecodeGenerator“ to maintain clock synchronization for accurate timecode generation. Indicates the active timecode source, as defined in the “AVCaptureTimecodeSynchronizationSourceType“ enum. If an “AVCaptureTimecodeGenerator“ becomes disconnected from its source, it continues generating timecodes using historical data from its ring buffer. This approach allows the generator to maintain synchronization during brief disruptions, as is common in cinema workflows where timecode signals may experience discontinuities.
+func (ctg *CaptureTimecodeGenerator) CurrentSource() *CaptureTimecodeSource {
+	_r := objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("currentSource"))
 	return CaptureTimecodeSourceFromID(_r)
 }
 
-// DelegateCallbackQueue the dispatch queue on which delegate callbacks are invoked. Provides the queue set in “setDelegate:queue:“. If no delegate is assigned, this property is `nil`.
-func (x *CaptureTimecodeGenerator) DelegateCallbackQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateCallbackQueue"))
+// DelegateCallbackQueue returns the dispatch queue on which delegate callbacks are invoked. Provides the queue set in “setDelegate:queue:“. If no delegate is assigned, this property is `nil`.
+func (ctg *CaptureTimecodeGenerator) DelegateCallbackQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("delegateCallbackQueue"))
 	return obj.Wrap(_r)
 }
 
-// SynchronizationTimeout the maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the “AVCaptureTimecodeGenerator“ will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your “AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:“ delegate method fires, informing you of the event. The default value is 15 seconds.
-func (x *CaptureTimecodeGenerator) SynchronizationTimeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("synchronizationTimeout"))
+// SynchronizationTimeout returns the maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the “AVCaptureTimecodeGenerator“ will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your “AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:“ delegate method fires, informing you of the event. The default value is 15 seconds.
+func (ctg *CaptureTimecodeGenerator) SynchronizationTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(ctg), objc.RegisterName("synchronizationTimeout"))
 	return _r
 }
 
-// SetSynchronizationTimeout wraps the corresponding Objective-C method.
-func (x *CaptureTimecodeGenerator) SetSynchronizationTimeout(synchronizationTimeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizationTimeout:"), synchronizationTimeout)
-}
-
-// TimecodeAlignmentOffset the time offset, in seconds, applied to the generated timecode. This offset allows fine-tuning of time alignment for synchronization with external sources or to accommodate any intentional delay. The default value is 0 seconds.
-func (x *CaptureTimecodeGenerator) TimecodeAlignmentOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timecodeAlignmentOffset"))
+// TimecodeAlignmentOffset returns the time offset, in seconds, applied to the generated timecode. This offset allows fine-tuning of time alignment for synchronization with external sources or to accommodate any intentional delay. The default value is 0 seconds.
+func (ctg *CaptureTimecodeGenerator) TimecodeAlignmentOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(ctg), objc.RegisterName("timecodeAlignmentOffset"))
 	return _r
 }
-
-// SetTimecodeAlignmentOffset wraps the corresponding Objective-C method.
-func (x *CaptureTimecodeGenerator) SetTimecodeAlignmentOffset(timecodeAlignmentOffset float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimecodeAlignmentOffset:"), timecodeAlignmentOffset)
-}
-
-// CaptureTimecodeGeneratorable is the interface implemented by [CaptureTimecodeGenerator], for mocking and DI.
-type CaptureTimecodeGeneratorable interface {
-	obj.Object
-	WithSynchronizationTimeout(synchronizationTimeout float64) *CaptureTimecodeGenerator
-	WithTimecodeAlignmentOffset(timecodeAlignmentOffset float64) *CaptureTimecodeGenerator
-	StartSynchronizationWithTimecodeSource(source *CaptureTimecodeSource)
-	AvailableSources() []*CaptureTimecodeSource
-	CurrentSource() *CaptureTimecodeSource
-	DelegateCallbackQueue() obj.Object
-	SynchronizationTimeout() float64
-	SetSynchronizationTimeout(synchronizationTimeout float64)
-	TimecodeAlignmentOffset() float64
-	SetTimecodeAlignmentOffset(timecodeAlignmentOffset float64)
-}
-
-var _ CaptureTimecodeGeneratorable = (*CaptureTimecodeGenerator)(nil)

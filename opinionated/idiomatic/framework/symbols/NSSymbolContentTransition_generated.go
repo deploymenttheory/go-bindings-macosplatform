@@ -48,36 +48,29 @@ func symbolContentTransitionAdopt(id objc.ID) *SymbolContentTransition {
 }
 
 // Description returns the object's -description text.
-func (x *SymbolContentTransition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sct *SymbolContentTransition) Description() string {
+	return rt.Description(objref.IDOf(sct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolContentTransition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sct *SymbolContentTransition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolContentTransition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sct *SymbolContentTransition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SymbolContentTransition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sct *SymbolContentTransition) String() string {
+	return rt.Description(objref.IDOf(sct))
 }
-
-// SymbolContentTransitionable is the interface implemented by [SymbolContentTransition], for mocking and DI.
-type SymbolContentTransitionable interface {
-	obj.Object
-}
-
-var _ SymbolContentTransitionable = (*SymbolContentTransition)(nil)
 
 // isSymbolContentTransition marks SymbolContentTransition — and, by embedding promotion, its
 // subclasses — as a member of the SymbolContentTransition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SymbolContentTransition) isSymbolContentTransition() {}
+func (sct *SymbolContentTransition) isSymbolContentTransition() {}
 
 var _ SymbolContentTransitionProvider = (*SymbolContentTransition)(nil)

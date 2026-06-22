@@ -46,24 +46,24 @@ func audioChannelLayoutAdopt(id objc.ID) *AudioChannelLayout {
 }
 
 // Description returns the object's -description text.
-func (x *AudioChannelLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (acl *AudioChannelLayout) Description() string {
+	return rt.Description(objref.IDOf(acl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioChannelLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (acl *AudioChannelLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(acl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioChannelLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (acl *AudioChannelLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(acl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioChannelLayout) String() string {
-	return rt.Description(objref.IDOf(x))
+func (acl *AudioChannelLayout) String() string {
+	return rt.Description(objref.IDOf(acl))
 }
 
 // NewAudioChannelLayoutWithLayoutTag creates an audio channel layout object from a layout tag.
@@ -73,23 +73,14 @@ func NewAudioChannelLayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
 	return audioChannelLayoutAdopt(_id)
 }
 
-// LayoutTag the layout's tag.
-func (x *AudioChannelLayout) LayoutTag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layoutTag"))
+// LayoutTag returns the layout's tag.
+func (acl *AudioChannelLayout) LayoutTag() int {
+	_r := objc.Send[int](objref.IDOf(acl), objc.RegisterName("layoutTag"))
 	return _r
 }
 
-// ChannelCount the number of channels of audio data.
-func (x *AudioChannelLayout) ChannelCount() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("channelCount"))
+// ChannelCount returns the number of channels of audio data.
+func (acl *AudioChannelLayout) ChannelCount() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(acl), objc.RegisterName("channelCount"))
 	return _r
 }
-
-// AudioChannelLayoutable is the interface implemented by [AudioChannelLayout], for mocking and DI.
-type AudioChannelLayoutable interface {
-	obj.Object
-	LayoutTag() int
-	ChannelCount() uint32
-}
-
-var _ AudioChannelLayoutable = (*AudioChannelLayout)(nil)

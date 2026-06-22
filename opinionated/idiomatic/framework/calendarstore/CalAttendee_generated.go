@@ -44,24 +44,24 @@ func calAttendeeAdopt(id objc.ID) *CalAttendee {
 }
 
 // Description returns the object's -description text.
-func (x *CalAttendee) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *CalAttendee) Description() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CalAttendee) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ca *CalAttendee) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CalAttendee) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ca *CalAttendee) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CalAttendee) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ca *CalAttendee) String() string {
+	return rt.Description(objref.IDOf(ca))
 }
 
 // NewCalAttendee creates a new CalAttendee.
@@ -71,14 +71,14 @@ func NewCalAttendee() *CalAttendee {
 }
 
 // Address wraps the corresponding Objective-C method.
-func (x *CalAttendee) Address() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+func (ca *CalAttendee) Address() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("address"))
 	return obj.Wrap(_r)
 }
 
 // CommonName wraps the corresponding Objective-C method.
-func (x *CalAttendee) CommonName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonName"))
+func (ca *CalAttendee) CommonName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("commonName"))
 	if _r == 0 {
 		return ""
 	}
@@ -86,20 +86,10 @@ func (x *CalAttendee) CommonName() string {
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *CalAttendee) Status() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (ca *CalAttendee) Status() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("status"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CalAttendeeable is the interface implemented by [CalAttendee], for mocking and DI.
-type CalAttendeeable interface {
-	obj.Object
-	Address() obj.Object
-	CommonName() string
-	Status() string
-}
-
-var _ CalAttendeeable = (*CalAttendee)(nil)

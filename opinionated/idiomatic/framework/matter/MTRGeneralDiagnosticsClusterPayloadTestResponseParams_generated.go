@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRGeneralDiagnosticsClusterPayloadTestResponseParams is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterPayloadTestResponseParams.
@@ -46,24 +47,24 @@ func mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(id objc.ID) *MTR
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mgdcptrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdcptrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdcptrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) String() string {
+	return rt.Description(objref.IDOf(mgdcptrp))
 }
 
 // NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueEr
 }
 
 // WithPayload sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayload:"), objref.IDOf(payload))
-	return x
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setPayload:"), objref.IDOf(payload))
+	return mgdcptrp
 }
 
 // Payload wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payload"))
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("payload"))
 	return obj.Wrap(_r)
 }
-
-// SetPayload wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) SetPayload(payload obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPayload:"), objref.IDOf(payload))
-}
-
-// MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterPayloadTestResponseParams], for mocking and DI.
-type MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable interface {
-	obj.Object
-	WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams
-	Payload() obj.Object
-	SetPayload(payload obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable = (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams)(nil)

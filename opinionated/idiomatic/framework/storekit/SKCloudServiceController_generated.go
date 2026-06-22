@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func cloudServiceControllerAdopt(id objc.ID) *CloudServiceController {
 }
 
 // Description returns the object's -description text.
-func (x *CloudServiceController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (csc *CloudServiceController) Description() string {
+	return rt.Description(objref.IDOf(csc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CloudServiceController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (csc *CloudServiceController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(csc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CloudServiceController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (csc *CloudServiceController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(csc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CloudServiceController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (csc *CloudServiceController) String() string {
+	return rt.Description(objref.IDOf(csc))
 }
 
 // NewCloudServiceController creates a new CloudServiceController.
@@ -77,7 +78,7 @@ func NewCloudServiceController() *CloudServiceController {
 // RequestStorefrontCountryCode gets the country code for the storefront associated with a customer’s iTunes account.
 //
 // RequestStorefrontCountryCode blocks until the operation completes or ctx is cancelled.
-func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Context) (result string, err error) {
+func (csc *CloudServiceController) RequestStorefrontCountryCode(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -89,7 +90,7 @@ func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Contex
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStorefrontCountryCodeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(csc), objc.RegisterName("requestStorefrontCountryCodeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,7 +103,7 @@ func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Contex
 // RequestStorefrontIdentifier gets the device’s storefront identifier.
 //
 // RequestStorefrontIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context) (result string, err error) {
+func (csc *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -114,7 +115,7 @@ func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStorefrontIdentifierWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(csc), objc.RegisterName("requestStorefrontIdentifierWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -127,7 +128,7 @@ func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context
 // RequestUserTokenForDeveloperToken returns a user token that you use to access personalized Apple Music content.
 //
 // RequestUserTokenForDeveloperToken blocks until the operation completes or ctx is cancelled.
-func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (result string, err error) {
+func (csc *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -139,7 +140,7 @@ func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.C
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestUserTokenForDeveloperToken:completionHandler:"), purego.NSString(developerToken), _block)
+	objc.Send[objc.ID](objref.IDOf(csc), objc.RegisterName("requestUserTokenForDeveloperToken:completionHandler:"), purego.NSString(developerToken), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -148,13 +149,3 @@ func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.C
 		return _zero, ctx.Err()
 	}
 }
-
-// CloudServiceControllerable is the interface implemented by [CloudServiceController], for mocking and DI.
-type CloudServiceControllerable interface {
-	obj.Object
-	RequestStorefrontCountryCode(ctx context.Context) (string, error)
-	RequestStorefrontIdentifier(ctx context.Context) (string, error)
-	RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (string, error)
-}
-
-var _ CloudServiceControllerable = (*CloudServiceController)(nil)

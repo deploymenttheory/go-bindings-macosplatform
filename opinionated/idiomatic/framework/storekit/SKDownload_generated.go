@@ -46,24 +46,24 @@ func downloadAdopt(id objc.ID) *Download {
 }
 
 // Description returns the object's -description text.
-func (x *Download) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Download) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Download) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Download) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Download) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Download) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Download) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Download) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDownload creates a new Download.
@@ -73,20 +73,20 @@ func NewDownload() *Download {
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *Download) State() DownloadState {
-	_r := objc.Send[DownloadState](objref.IDOf(x), objc.RegisterName("state"))
+func (d *Download) State() DownloadState {
+	_r := objc.Send[DownloadState](objref.IDOf(d), objc.RegisterName("state"))
 	return _r
 }
 
 // ExpectedContentLength wraps the corresponding Objective-C method.
-func (x *Download) ExpectedContentLength() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedContentLength"))
+func (d *Download) ExpectedContentLength() int64 {
+	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
 // ContentIdentifier wraps the corresponding Objective-C method.
-func (x *Download) ContentIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentIdentifier"))
+func (d *Download) ContentIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -94,14 +94,14 @@ func (x *Download) ContentIdentifier() string {
 }
 
 // ContentURL wraps the corresponding Objective-C method.
-func (x *Download) ContentURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentURL"))
+func (d *Download) ContentURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentURL"))
 	return obj.Wrap(_r)
 }
 
 // ContentVersion wraps the corresponding Objective-C method.
-func (x *Download) ContentVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentVersion"))
+func (d *Download) ContentVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentVersion"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,34 +109,19 @@ func (x *Download) ContentVersion() string {
 }
 
 // Progress wraps the corresponding Objective-C method.
-func (x *Download) Progress() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("progress"))
+func (d *Download) Progress() float32 {
+	_r := objc.Send[float32](objref.IDOf(d), objc.RegisterName("progress"))
 	return _r
 }
 
 // TimeRemaining wraps the corresponding Objective-C method.
-func (x *Download) TimeRemaining() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeRemaining"))
+func (d *Download) TimeRemaining() float64 {
+	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeRemaining"))
 	return _r
 }
 
 // Transaction wraps the corresponding Objective-C method.
-func (x *Download) Transaction() *PaymentTransaction {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transaction"))
+func (d *Download) Transaction() *PaymentTransaction {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("transaction"))
 	return PaymentTransactionFromID(_r)
 }
-
-// Downloadable is the interface implemented by [Download], for mocking and DI.
-type Downloadable interface {
-	obj.Object
-	State() DownloadState
-	ExpectedContentLength() int64
-	ContentIdentifier() string
-	ContentURL() obj.Object
-	ContentVersion() string
-	Progress() float32
-	TimeRemaining() float64
-	Transaction() *PaymentTransaction
-}
-
-var _ Downloadable = (*Download)(nil)

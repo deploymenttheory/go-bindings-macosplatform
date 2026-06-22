@@ -35,7 +35,7 @@ func TestWS2EmbeddingAndSealing(t *testing.T) {
 	if strings.Contains(base, "func NewBootLoader") {
 		t.Error("BootLoader is an abstract base; it must not emit a New constructor (WS3)")
 	}
-	if !strings.Contains(base, "func (x *BootLoader) isBootLoader() {}") {
+	if !strings.Contains(base, "func (bl *BootLoader) isBootLoader() {}") {
 		t.Error("BootLoader must define the sealing marker isBootLoader")
 	}
 	if !strings.Contains(base, "var _ BootLoaderProvider = (*BootLoader)(nil)") {
@@ -48,7 +48,7 @@ func TestWS2EmbeddingAndSealing(t *testing.T) {
 		if !strings.Contains(src, "type "+name+" struct {\n\tBootLoader\n}") {
 			t.Errorf("%s must embed BootLoader (not objref.Handle)", name)
 		}
-		if strings.Contains(src, "func (x *"+name+") isBootLoader() {}") {
+		if strings.Contains(src, ") isBootLoader() {}") {
 			t.Errorf("%s must not redefine the marker; it is promoted from BootLoader", name)
 		}
 		if !strings.Contains(src, "var _ BootLoaderProvider = (*"+name+")(nil)") {

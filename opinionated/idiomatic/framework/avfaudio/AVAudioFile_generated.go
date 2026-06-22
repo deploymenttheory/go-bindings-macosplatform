@@ -5,13 +5,14 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AudioFile is an idiomatic wrapper over the Objective-C class AVAudioFile.
@@ -48,24 +49,24 @@ func audioFileAdopt(id objc.ID) *AudioFile {
 }
 
 // Description returns the object's -description text.
-func (x *AudioFile) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (af *AudioFile) Description() string {
+	return rt.Description(objref.IDOf(af))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioFile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (af *AudioFile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(af), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioFile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (af *AudioFile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(af), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioFile) String() string {
-	return rt.Description(objref.IDOf(x))
+func (af *AudioFile) String() string {
+	return rt.Description(objref.IDOf(af))
 }
 
 // NewAudioFile creates a new AudioFile.
@@ -118,21 +119,21 @@ func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, 
 	return audioFileAdopt(_id), nil
 }
 
-// WithFramePosition the position in the file where the next read or write operation occurs.
-func (x *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramePosition:"), framePosition)
-	return x
+// WithFramePosition sets the position in the file where the next read or write operation occurs.
+func (af *AudioFile) WithFramePosition(framePosition int64) *AudioFile {
+	objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("setFramePosition:"), framePosition)
+	return af
 }
 
 // Close closes the audio file.
-func (x *AudioFile) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (af *AudioFile) Close() {
+	objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("close"))
 }
 
 // ReadIntoBuffer reads an entire audio buffer.
-func (x *AudioFile) ReadIntoBuffer(buffer *AudioPCMBuffer) error {
+func (af *AudioFile) ReadIntoBuffer(buffer *AudioPCMBuffer) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readIntoBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(af), objc.RegisterName("readIntoBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -140,9 +141,9 @@ func (x *AudioFile) ReadIntoBuffer(buffer *AudioPCMBuffer) error {
 }
 
 // ReadIntoBufferFrameCount reads a portion of an audio buffer using the number of frames you specify.
-func (x *AudioFile) ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint32) error {
+func (af *AudioFile) ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint32) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readIntoBuffer:frameCount:error:"), objref.IDOf(buffer), frames, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(af), objc.RegisterName("readIntoBuffer:frameCount:error:"), objref.IDOf(buffer), frames, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -150,71 +151,47 @@ func (x *AudioFile) ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint
 }
 
 // WriteFromBuffer write a buffer. Writes sequentially. The buffer's frameLength signifies how much of the buffer is to be written.
-func (x *AudioFile) WriteFromBuffer(buffer *AudioPCMBuffer) error {
+func (af *AudioFile) WriteFromBuffer(buffer *AudioPCMBuffer) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeFromBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(af), objc.RegisterName("writeFromBuffer:error:"), objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// IsOpen whether the file is open or not.
-func (x *AudioFile) IsOpen() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
+// IsOpen reports whether the file is open or not.
+func (af *AudioFile) IsOpen() bool {
+	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("isOpen"))
 	return _r
 }
 
-// Url the URL the file is reading or writing.
-func (x *AudioFile) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL the file is reading or writing.
+func (af *AudioFile) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// FileFormat the on-disk format of the file.
-func (x *AudioFile) FileFormat() *AudioFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileFormat"))
+// FileFormat returns the on-disk format of the file.
+func (af *AudioFile) FileFormat() *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("fileFormat"))
 	return AudioFormatFromID(_r)
 }
 
-// ProcessingFormat the processing format of the file.
-func (x *AudioFile) ProcessingFormat() *AudioFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processingFormat"))
+// ProcessingFormat returns the processing format of the file.
+func (af *AudioFile) ProcessingFormat() *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("processingFormat"))
 	return AudioFormatFromID(_r)
 }
 
-// Length the number of sample frames in the file. Note: this can be expensive to compute for the first time.
-func (x *AudioFile) Length() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("length"))
+// Length returns the number of sample frames in the file. Note: this can be expensive to compute for the first time.
+func (af *AudioFile) Length() int64 {
+	_r := objc.Send[int64](objref.IDOf(af), objc.RegisterName("length"))
 	return _r
 }
 
-// FramePosition the position in the file at which the next read or write will occur. Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
-func (x *AudioFile) FramePosition() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("framePosition"))
+// FramePosition returns the position in the file at which the next read or write will occur. Set framePosition to perform a seek before a read or write. A read or write operation advances the frame position by the number of frames read or written.
+func (af *AudioFile) FramePosition() int64 {
+	_r := objc.Send[int64](objref.IDOf(af), objc.RegisterName("framePosition"))
 	return _r
 }
-
-// SetFramePosition wraps the corresponding Objective-C method.
-func (x *AudioFile) SetFramePosition(framePosition int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramePosition:"), framePosition)
-}
-
-// AudioFileable is the interface implemented by [AudioFile], for mocking and DI.
-type AudioFileable interface {
-	obj.Object
-	WithFramePosition(framePosition int64) *AudioFile
-	Close()
-	ReadIntoBuffer(buffer *AudioPCMBuffer) error
-	ReadIntoBufferFrameCount(buffer *AudioPCMBuffer, frames uint32) error
-	WriteFromBuffer(buffer *AudioPCMBuffer) error
-	IsOpen() bool
-	Url() obj.Object
-	FileFormat() *AudioFormat
-	ProcessingFormat() *AudioFormat
-	Length() int64
-	FramePosition() int64
-	SetFramePosition(framePosition int64)
-}
-
-var _ AudioFileable = (*AudioFile)(nil)

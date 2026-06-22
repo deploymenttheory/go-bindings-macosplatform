@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func savedGameAdopt(id objc.ID) *SavedGame {
 }
 
 // Description returns the object's -description text.
-func (x *SavedGame) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sg *SavedGame) Description() string {
+	return rt.Description(objref.IDOf(sg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SavedGame) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sg *SavedGame) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SavedGame) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sg *SavedGame) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SavedGame) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sg *SavedGame) String() string {
+	return rt.Description(objref.IDOf(sg))
 }
 
 // NewSavedGame creates a new SavedGame.
@@ -77,7 +78,7 @@ func NewSavedGame() *SavedGame {
 // LoadData loads the game data from the file.
 //
 // LoadData blocks until the operation completes or ctx is cancelled.
-func (x *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error) {
+func (sg *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadDataWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("loadDataWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -100,8 +101,8 @@ func (x *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *SavedGame) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (sg *SavedGame) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,8 +110,8 @@ func (x *SavedGame) Name() string {
 }
 
 // DeviceName wraps the corresponding Objective-C method.
-func (x *SavedGame) DeviceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceName"))
+func (sg *SavedGame) DeviceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("deviceName"))
 	if _r == 0 {
 		return ""
 	}
@@ -118,18 +119,7 @@ func (x *SavedGame) DeviceName() string {
 }
 
 // ModificationDate wraps the corresponding Objective-C method.
-func (x *SavedGame) ModificationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+func (sg *SavedGame) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
-
-// SavedGameable is the interface implemented by [SavedGame], for mocking and DI.
-type SavedGameable interface {
-	obj.Object
-	LoadData(ctx context.Context) (obj.Object, error)
-	Name() string
-	DeviceName() string
-	ModificationDate() obj.Object
-}
-
-var _ SavedGameable = (*SavedGame)(nil)

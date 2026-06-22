@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,33 +51,23 @@ func NewYOLOLossLayer() *YOLOLossLayer {
 	return yOLOLossLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *YOLOLossLayer) WithLabel(label string) *YOLOLossLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (yll *YOLOLossLayer) WithLabel(label string) *YOLOLossLayer {
+	objc.Send[objc.ID](objref.IDOf(yll), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return yll
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *YOLOLossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (yll *YOLOLossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer {
+	objc.Send[objc.ID](objref.IDOf(yll), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return yll
 }
 
-// YoloLossDescriptor the YOLO loss descriptor
-func (x *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yoloLossDescriptor"))
+// YoloLossDescriptor returns the YOLO loss descriptor
+func (yll *YOLOLossLayer) YoloLossDescriptor() *YOLOLossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(yll), objc.RegisterName("yoloLossDescriptor"))
 	return YOLOLossDescriptorFromID(_r)
 }
-
-// YOLOLossLayerable is the interface implemented by [YOLOLossLayer], for mocking and DI.
-type YOLOLossLayerable interface {
-	obj.Object
-	WithLabel(label string) *YOLOLossLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *YOLOLossLayer
-	YoloLossDescriptor() *YOLOLossDescriptor
-}
-
-var _ YOLOLossLayerable = (*YOLOLossLayer)(nil)
 
 var _ LossLayerProvider = (*YOLOLossLayer)(nil)
 

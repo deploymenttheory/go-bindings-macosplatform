@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,51 +55,51 @@ func NewURLSessionDownloadTask() *URLSessionDownloadTask {
 }
 
 // WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
-	return x
+func (usdt *URLSessionDownloadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
+	return usdt
 }
 
 // WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
-	return x
+func (usdt *URLSessionDownloadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
+	return usdt
 }
 
 // WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
-	return x
+func (usdt *URLSessionDownloadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
+	return usdt
 }
 
 // WithTaskDescription sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
-	return x
+func (usdt *URLSessionDownloadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
+	return usdt
 }
 
 // WithPriority sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithPriority(priority float32) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+func (usdt *URLSessionDownloadTask) WithPriority(priority float32) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setPriority:"), priority)
+	return usdt
 }
 
 // WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
-	return x
+func (usdt *URLSessionDownloadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return usdt
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDownloadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDownloadTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (usdt *URLSessionDownloadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return usdt
 }
 
 // CancelByProducingResumeData wraps the corresponding Objective-C method.
 //
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
+func (usdt *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
 	type _result struct {
 		val *Data
 		err error
@@ -109,7 +110,7 @@ func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context
 		_o.val = DataFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelByProducingResumeData:"), _block)
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("cancelByProducingResumeData:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -118,20 +119,5 @@ func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context
 		return _zero, ctx.Err()
 	}
 }
-
-// URLSessionDownloadTaskable is the interface implemented by [URLSessionDownloadTask], for mocking and DI.
-type URLSessionDownloadTaskable interface {
-	obj.Object
-	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask
-	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask
-	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask
-	WithTaskDescription(taskDescription StringProvider) *URLSessionDownloadTask
-	WithPriority(priority float32) *URLSessionDownloadTask
-	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDownloadTask
-	CancelByProducingResumeData(ctx context.Context) (*Data, error)
-}
-
-var _ URLSessionDownloadTaskable = (*URLSessionDownloadTask)(nil)
 
 var _ URLSessionTaskProvider = (*URLSessionDownloadTask)(nil)

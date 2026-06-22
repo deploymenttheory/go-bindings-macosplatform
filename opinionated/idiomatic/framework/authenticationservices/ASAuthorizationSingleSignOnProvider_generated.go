@@ -46,24 +46,24 @@ func authorizationSingleSignOnProviderAdopt(id objc.ID) *AuthorizationSingleSign
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationSingleSignOnProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (assop *AuthorizationSingleSignOnProvider) Description() string {
+	return rt.Description(objref.IDOf(assop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSingleSignOnProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (assop *AuthorizationSingleSignOnProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(assop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSingleSignOnProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (assop *AuthorizationSingleSignOnProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(assop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationSingleSignOnProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (assop *AuthorizationSingleSignOnProvider) String() string {
+	return rt.Description(objref.IDOf(assop))
 }
 
 // NewAuthorizationSingleSignOnProvider creates a new AuthorizationSingleSignOnProvider.
@@ -73,29 +73,19 @@ func NewAuthorizationSingleSignOnProvider() *AuthorizationSingleSignOnProvider {
 }
 
 // CreateRequest creates a single sign-on (SSO) authorization request.
-func (x *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
+func (assop *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(assop), objc.RegisterName("createRequest"))
 	return AuthorizationSingleSignOnRequestFromID(_r)
 }
 
-// Url wraps the corresponding Objective-C method.
-func (x *AuthorizationSingleSignOnProvider) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL wraps the corresponding Objective-C method.
+func (assop *AuthorizationSingleSignOnProvider) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(assop), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// CanPerformAuthorization returns YES if the configured provider is capable of performing authorization within a given configuration.
-func (x *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformAuthorization"))
+// CanPerformAuthorization reports whether the configured provider is capable of performing authorization within a given configuration.
+func (assop *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
+	_r := objc.Send[bool](objref.IDOf(assop), objc.RegisterName("canPerformAuthorization"))
 	return _r
 }
-
-// AuthorizationSingleSignOnProviderable is the interface implemented by [AuthorizationSingleSignOnProvider], for mocking and DI.
-type AuthorizationSingleSignOnProviderable interface {
-	obj.Object
-	CreateRequest() *AuthorizationSingleSignOnRequest
-	Url() obj.Object
-	CanPerformAuthorization() bool
-}
-
-var _ AuthorizationSingleSignOnProviderable = (*AuthorizationSingleSignOnProvider)(nil)

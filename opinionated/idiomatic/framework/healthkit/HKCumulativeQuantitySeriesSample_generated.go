@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewCumulativeQuantitySeriesSample() *CumulativeQuantitySeriesSample {
 }
 
 // Sum wraps the corresponding Objective-C method.
-func (x *CumulativeQuantitySeriesSample) Sum() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sum"))
+func (cqss *CumulativeQuantitySeriesSample) Sum() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(cqss), objc.RegisterName("sum"))
 	return QuantityFromID(_r)
 }
-
-// CumulativeQuantitySeriesSampleable is the interface implemented by [CumulativeQuantitySeriesSample], for mocking and DI.
-type CumulativeQuantitySeriesSampleable interface {
-	obj.Object
-	Sum() *Quantity
-}
-
-var _ CumulativeQuantitySeriesSampleable = (*CumulativeQuantitySeriesSample)(nil)
 
 var _ CumulativeQuantitySampleProvider = (*CumulativeQuantitySeriesSample)(nil)
 

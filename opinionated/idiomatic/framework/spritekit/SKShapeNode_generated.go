@@ -53,434 +53,305 @@ func NewShapeNode() *ShapeNode {
 	return shapeNodeAdopt(_id)
 }
 
-// WithPath the path that defines the shape.
-func (x *ShapeNode) WithPath(path obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path that defines the shape.
+func (sn *ShapeNode) WithPath(path obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return sn
 }
 
-// WithStrokeColor the color used to stroke the shape.
-func (x *ShapeNode) WithStrokeColor(strokeColor obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the color used to stroke the shape.
+func (sn *ShapeNode) WithStrokeColor(strokeColor obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return sn
 }
 
-// WithFillColor the color used to fill the shape.
-func (x *ShapeNode) WithFillColor(fillColor obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the color used to fill the shape.
+func (sn *ShapeNode) WithFillColor(fillColor obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return sn
 }
 
-// WithBlendMode the blend mode used to blend the shape into the parent’s framebuffer.
-func (x *ShapeNode) WithBlendMode(blendMode BlendMode) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-	return x
+// WithBlendMode sets the blend mode used to blend the shape into the parent’s framebuffer.
+func (sn *ShapeNode) WithBlendMode(blendMode BlendMode) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setBlendMode:"), blendMode)
+	return sn
 }
 
-// WithAntialiased a Boolean value that determines whether the stroked path is smoothed when drawn.
-func (x *ShapeNode) WithAntialiased(antialiased bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAntialiased:"), antialiased)
-	return x
+// WithAntialiased sets a Boolean value that determines whether the stroked path is smoothed when drawn.
+func (sn *ShapeNode) WithAntialiased(antialiased bool) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAntialiased:"), antialiased)
+	return sn
 }
 
-// WithLineWidth the width used to stroke the path.
-func (x *ShapeNode) WithLineWidth(lineWidth float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets the width used to stroke the path.
+func (sn *ShapeNode) WithLineWidth(lineWidth float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setLineWidth:"), lineWidth)
+	return sn
 }
 
-// WithGlowWidth a glow that extends outward from the stroked line.
-func (x *ShapeNode) WithGlowWidth(glowWidth float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlowWidth:"), glowWidth)
-	return x
+// WithGlowWidth sets a glow that extends outward from the stroked line.
+func (sn *ShapeNode) WithGlowWidth(glowWidth float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setGlowWidth:"), glowWidth)
+	return sn
 }
 
-// WithMiterLimit the miter limit to use when the line is stroked using a miter join style.
-func (x *ShapeNode) WithMiterLimit(miterLimit float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the miter limit to use when the line is stroked using a miter join style.
+func (sn *ShapeNode) WithMiterLimit(miterLimit float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return sn
 }
 
-// WithFillTexture the texture used to fill the shape.
-func (x *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
-	return x
+// WithFillTexture sets the texture used to fill the shape.
+func (sn *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
+	return sn
 }
 
-// WithFillShader a custom shader used to determine the color of the filled portion of the shape node.
-func (x *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
-	return x
+// WithFillShader sets a custom shader used to determine the color of the filled portion of the shape node.
+func (sn *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
+	return sn
 }
 
-// WithStrokeTexture the texture used to stroke the shape.
-func (x *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
-	return x
+// WithStrokeTexture sets the texture used to stroke the shape.
+func (sn *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
+	return sn
 }
 
-// WithStrokeShader a custom shader used to determine the color of the stroked portion of the shape node.
-func (x *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
-	return x
+// WithStrokeShader sets a custom shader used to determine the color of the stroked portion of the shape node.
+func (sn *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
+	return sn
 }
 
-// WithPosition the position of the node in its parent’s coordinate system.
-func (x *ShapeNode) WithPosition(position corefoundation.CGPoint) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the position of the node in its parent’s coordinate system.
+func (sn *ShapeNode) WithPosition(position corefoundation.CGPoint) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPosition:"), position)
+	return sn
 }
 
-// WithZPosition the height of the node relative to its parent.
-func (x *ShapeNode) WithZPosition(zPosition float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the height of the node relative to its parent.
+func (sn *ShapeNode) WithZPosition(zPosition float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZPosition:"), zPosition)
+	return sn
 }
 
-// WithZRotation the Euler rotation about the z axis (in radians).
-func (x *ShapeNode) WithZRotation(zRotation float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
-	return x
+// WithZRotation sets the Euler rotation about the z axis (in radians).
+func (sn *ShapeNode) WithZRotation(zRotation float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setZRotation:"), zRotation)
+	return sn
 }
 
-// WithXScale a scaling factor that multiplies the width of a node and its children.
-func (x *ShapeNode) WithXScale(xScale float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
-	return x
+// WithXScale sets a scaling factor that multiplies the width of a node and its children.
+func (sn *ShapeNode) WithXScale(xScale float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setXScale:"), xScale)
+	return sn
 }
 
-// WithYScale a scaling factor that multiplies the height of a node and its children.
-func (x *ShapeNode) WithYScale(yScale float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
-	return x
+// WithYScale sets a scaling factor that multiplies the height of a node and its children.
+func (sn *ShapeNode) WithYScale(yScale float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setYScale:"), yScale)
+	return sn
 }
 
-// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
-func (x *ShapeNode) WithSpeed(speed float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
+func (sn *ShapeNode) WithSpeed(speed float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setSpeed:"), speed)
+	return sn
 }
 
-// WithAlpha the transparency value applied to the node’s contents.
-func (x *ShapeNode) WithAlpha(alpha float64) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency value applied to the node’s contents.
+func (sn *ShapeNode) WithAlpha(alpha float64) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAlpha:"), alpha)
+	return sn
 }
 
-// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
-func (x *ShapeNode) WithPaused(paused bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
+func (sn *ShapeNode) WithPaused(paused bool) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPaused:"), paused)
+	return sn
 }
 
-// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
-func (x *ShapeNode) WithHidden(hidden bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
+func (sn *ShapeNode) WithHidden(hidden bool) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setHidden:"), hidden)
+	return sn
 }
 
-// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
-func (x *ShapeNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
-	return x
+// WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
+func (sn *ShapeNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return sn
 }
 
-// WithName the node’s assignable name.
-func (x *ShapeNode) WithName(name string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the node’s assignable name.
+func (sn *ShapeNode) WithName(name string) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setName:"), purego.NSString(name))
+	return sn
 }
 
-// WithPhysicsBody the physics body associated with the node.
-func (x *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
-	return x
+// WithPhysicsBody sets the physics body associated with the node.
+func (sn *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return sn
 }
 
-// WithUserData a dictionary containing arbitrary data.
-func (x *ShapeNode) WithUserData(userData obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
-	return x
+// WithUserData sets a dictionary containing arbitrary data.
+func (sn *ShapeNode) WithUserData(userData obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return sn
 }
 
-// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
-func (x *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
-	return x
+// WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
+func (sn *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return sn
 }
 
-// WithConstraints a list of constraints to apply to the node.
-func (x *ShapeNode) WithConstraints(items ...*Constraint) *ShapeNode {
+// WithConstraints sets a list of constraints to apply to the node.
+func (sn *ShapeNode) WithConstraints(items ...*Constraint) *ShapeNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setConstraints:"), _arr)
+	return sn
 }
 
-// WithAttributeValues the values of each attribute associated with the node’s attached shader.
-func (x *ShapeNode) WithAttributeValues(attributeValues obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
-	return x
+// WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
+func (sn *ShapeNode) WithAttributeValues(attributeValues obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return sn
 }
 
-// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-func (x *ShapeNode) WithAccessibilityElement(accessibilityElement bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
-	return x
+// WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (sn *ShapeNode) WithAccessibilityElement(accessibilityElement bool) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return sn
 }
 
-// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
-func (x *ShapeNode) WithAccessibilityRole(accessibilityRole string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
-	return x
+// WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
+func (sn *ShapeNode) WithAccessibilityRole(accessibilityRole string) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return sn
 }
 
-// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
-func (x *ShapeNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
-	return x
+// WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
+func (sn *ShapeNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return sn
 }
 
-// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
-func (x *ShapeNode) WithAccessibilitySubrole(accessibilitySubrole string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
-	return x
+// WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (sn *ShapeNode) WithAccessibilitySubrole(accessibilitySubrole string) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return sn
 }
 
-// WithAccessibilityFrame the size of this user interface element, in screen points.
-func (x *ShapeNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
-	return x
+// WithAccessibilityFrame sets the size of this user interface element, in screen points.
+func (sn *ShapeNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return sn
 }
 
-// WithAccessibilityParent the user interface element that contains this element.
-func (x *ShapeNode) WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
-	return x
+// WithAccessibilityParent sets the user interface element that contains this element.
+func (sn *ShapeNode) WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return sn
 }
 
-// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
-func (x *ShapeNode) WithAccessibilityHelp(accessibilityHelp string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
-	return x
+// WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
+func (sn *ShapeNode) WithAccessibilityHelp(accessibilityHelp string) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return sn
 }
 
-// WithAccessibilityLabel a short description of this user interface element.
-func (x *ShapeNode) WithAccessibilityLabel(accessibilityLabel string) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
-	return x
+// WithAccessibilityLabel sets a short description of this user interface element.
+func (sn *ShapeNode) WithAccessibilityLabel(accessibilityLabel string) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return sn
 }
 
-// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
-func (x *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
-	return x
+// WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (sn *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return sn
 }
 
-// Path the CGPath to be drawn (in the Node's coordinate space)
-func (x *ShapeNode) Path() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+// Path returns the CGPath to be drawn (in the Node's coordinate space)
+func (sn *ShapeNode) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
 
-// SetPath wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetPath(path obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-}
-
-// StrokeColor the color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
-func (x *ShapeNode) StrokeColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeColor"))
+// StrokeColor returns the color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
+func (sn *ShapeNode) StrokeColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeColor"))
 	return obj.Wrap(_r)
 }
 
-// SetStrokeColor wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetStrokeColor(strokeColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-}
-
-// FillColor the color to fill the path with. Defaults to [SKColor clearColor] (no fill).
-func (x *ShapeNode) FillColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+// FillColor returns the color to fill the path with. Defaults to [SKColor clearColor] (no fill).
+func (sn *ShapeNode) FillColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillColor"))
 	return obj.Wrap(_r)
-}
-
-// SetFillColor wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetFillColor(fillColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
 // BlendMode sets the blend mode to use when composing the shape with the final framebuffer.
-func (x *ShapeNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+func (sn *ShapeNode) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(sn), objc.RegisterName("blendMode"))
 	return _r
 }
 
-// SetBlendMode wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetBlendMode(blendMode BlendMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-}
-
-// IsAntialiased if set to YES, the path stroke edges and caps is smoothed (antialiased) when drawn.
-func (x *ShapeNode) IsAntialiased() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAntialiased"))
+// IsAntialiased reports whether if set to true, the path stroke edges and caps is smoothed (antialiased) when drawn.
+func (sn *ShapeNode) IsAntialiased() bool {
+	_r := objc.Send[bool](objref.IDOf(sn), objc.RegisterName("isAntialiased"))
 	return _r
 }
 
-// SetAntialiased wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetAntialiased(antialiased bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAntialiased:"), antialiased)
-}
-
-// LineWidth the width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
-func (x *ShapeNode) LineWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+// LineWidth returns the width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
+func (sn *ShapeNode) LineWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("lineWidth"))
 	return _r
 }
 
-// SetLineWidth wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetLineWidth(lineWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-}
-
-// GlowWidth add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
-func (x *ShapeNode) GlowWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("glowWidth"))
+// GlowWidth returns add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
+func (sn *ShapeNode) GlowWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("glowWidth"))
 	return _r
 }
 
-// SetGlowWidth wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetGlowWidth(glowWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlowWidth:"), glowWidth)
-}
-
-// MiterLimit when a miter join is used, the maximum ratio of miter length to line with to be used
-func (x *ShapeNode) MiterLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("miterLimit"))
+// MiterLimit returns when a miter join is used, the maximum ratio of miter length to line with to be used
+func (sn *ShapeNode) MiterLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("miterLimit"))
 	return _r
 }
 
-// SetMiterLimit wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetMiterLimit(miterLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-}
-
-// LineLength the length of the node's path if it were to be stroked
-func (x *ShapeNode) LineLength() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineLength"))
+// LineLength returns the length of the node's path if it were to be stroked
+func (sn *ShapeNode) LineLength() float64 {
+	_r := objc.Send[float64](objref.IDOf(sn), objc.RegisterName("lineLength"))
 	return _r
 }
 
 // FillTexture wraps the corresponding Objective-C method.
-func (x *ShapeNode) FillTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillTexture"))
+func (sn *ShapeNode) FillTexture() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillTexture"))
 	return TextureFromID(_r)
-}
-
-// SetFillTexture wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetFillTexture(fillTexture *Texture) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
 }
 
 // FillShader wraps the corresponding Objective-C method.
-func (x *ShapeNode) FillShader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillShader"))
+func (sn *ShapeNode) FillShader() *Shader {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillShader"))
 	return ShaderFromID(_r)
-}
-
-// SetFillShader wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetFillShader(fillShader *Shader) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
 }
 
 // StrokeTexture wraps the corresponding Objective-C method.
-func (x *ShapeNode) StrokeTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeTexture"))
+func (sn *ShapeNode) StrokeTexture() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeTexture"))
 	return TextureFromID(_r)
 }
 
-// SetStrokeTexture wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetStrokeTexture(strokeTexture *Texture) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
-}
-
 // StrokeShader wraps the corresponding Objective-C method.
-func (x *ShapeNode) StrokeShader() *Shader {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeShader"))
+func (sn *ShapeNode) StrokeShader() *Shader {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeShader"))
 	return ShaderFromID(_r)
 }
-
-// SetStrokeShader wraps the corresponding Objective-C method.
-func (x *ShapeNode) SetStrokeShader(strokeShader *Shader) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
-}
-
-// ShapeNodeable is the interface implemented by [ShapeNode], for mocking and DI.
-type ShapeNodeable interface {
-	obj.Object
-	WithPath(path obj.Object) *ShapeNode
-	WithStrokeColor(strokeColor obj.Object) *ShapeNode
-	WithFillColor(fillColor obj.Object) *ShapeNode
-	WithBlendMode(blendMode BlendMode) *ShapeNode
-	WithAntialiased(antialiased bool) *ShapeNode
-	WithLineWidth(lineWidth float64) *ShapeNode
-	WithGlowWidth(glowWidth float64) *ShapeNode
-	WithMiterLimit(miterLimit float64) *ShapeNode
-	WithFillTexture(fillTexture TextureProvider) *ShapeNode
-	WithFillShader(fillShader *Shader) *ShapeNode
-	WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode
-	WithStrokeShader(strokeShader *Shader) *ShapeNode
-	WithPosition(position corefoundation.CGPoint) *ShapeNode
-	WithZPosition(zPosition float64) *ShapeNode
-	WithZRotation(zRotation float64) *ShapeNode
-	WithXScale(xScale float64) *ShapeNode
-	WithYScale(yScale float64) *ShapeNode
-	WithSpeed(speed float64) *ShapeNode
-	WithAlpha(alpha float64) *ShapeNode
-	WithPaused(paused bool) *ShapeNode
-	WithHidden(hidden bool) *ShapeNode
-	WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode
-	WithName(name string) *ShapeNode
-	WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode
-	WithUserData(userData obj.Object) *ShapeNode
-	WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode
-	WithConstraints(items ...*Constraint) *ShapeNode
-	WithAttributeValues(attributeValues obj.Object) *ShapeNode
-	WithAccessibilityElement(accessibilityElement bool) *ShapeNode
-	WithAccessibilityRole(accessibilityRole string) *ShapeNode
-	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ShapeNode
-	WithAccessibilitySubrole(accessibilitySubrole string) *ShapeNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ShapeNode
-	WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode
-	WithAccessibilityHelp(accessibilityHelp string) *ShapeNode
-	WithAccessibilityLabel(accessibilityLabel string) *ShapeNode
-	WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNode
-	Path() obj.Object
-	SetPath(path obj.Object)
-	StrokeColor() obj.Object
-	SetStrokeColor(strokeColor obj.Object)
-	FillColor() obj.Object
-	SetFillColor(fillColor obj.Object)
-	BlendMode() BlendMode
-	SetBlendMode(blendMode BlendMode)
-	IsAntialiased() bool
-	SetAntialiased(antialiased bool)
-	LineWidth() float64
-	SetLineWidth(lineWidth float64)
-	GlowWidth() float64
-	SetGlowWidth(glowWidth float64)
-	MiterLimit() float64
-	SetMiterLimit(miterLimit float64)
-	LineLength() float64
-	FillTexture() *Texture
-	SetFillTexture(fillTexture *Texture)
-	FillShader() *Shader
-	SetFillShader(fillShader *Shader)
-	StrokeTexture() *Texture
-	SetStrokeTexture(strokeTexture *Texture)
-	StrokeShader() *Shader
-	SetStrokeShader(strokeShader *Shader)
-}
-
-var _ ShapeNodeable = (*ShapeNode)(nil)
 
 var _ NodeProvider = (*ShapeNode)(nil)

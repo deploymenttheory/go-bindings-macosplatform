@@ -7,7 +7,6 @@ package fskit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,122 +49,94 @@ func NewItemSetAttributesRequest() *ItemSetAttributesRequest {
 	return itemSetAttributesRequestAdopt(_id)
 }
 
-// WithConsumedAttributes the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes ItemAttribute) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
-	return x
+// WithConsumedAttributes sets the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+func (isar *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes ItemAttribute) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
+	return isar
 }
 
-// WithUid the user identifier.
-func (x *ItemSetAttributesRequest) WithUid(uid uint32) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
-	return x
+// WithUID sets the user identifier.
+func (isar *ItemSetAttributesRequest) WithUID(uid uint32) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setUid:"), uid)
+	return isar
 }
 
-// WithGid the group identifier.
-func (x *ItemSetAttributesRequest) WithGid(gid uint32) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
-	return x
+// WithGid sets the group identifier.
+func (isar *ItemSetAttributesRequest) WithGid(gid uint32) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setGid:"), gid)
+	return isar
 }
 
-// WithMode the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
-func (x *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
-	return x
+// WithMode sets the mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
+func (isar *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setMode:"), mode)
+	return isar
 }
 
-// WithType the item type, such as a regular file, directory, or symbolic link.
-func (x *ItemSetAttributesRequest) WithType(type_ ItemType) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the item type, such as a regular file, directory, or symbolic link.
+func (isar *ItemSetAttributesRequest) WithType(type_ ItemType) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setType:"), type_)
+	return isar
 }
 
-// WithLinkCount the number of hard links to the item.
-func (x *ItemSetAttributesRequest) WithLinkCount(linkCount uint32) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
-	return x
+// WithLinkCount sets the number of hard links to the item.
+func (isar *ItemSetAttributesRequest) WithLinkCount(linkCount uint32) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setLinkCount:"), linkCount)
+	return isar
 }
 
-// WithFlags the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
-func (x *ItemSetAttributesRequest) WithFlags(flags uint32) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
-	return x
+// WithFlags sets the item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
+func (isar *ItemSetAttributesRequest) WithFlags(flags uint32) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setFlags:"), flags)
+	return isar
 }
 
-// WithSize the item's size.
-func (x *ItemSetAttributesRequest) WithSize(size uint64) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the item's size.
+func (isar *ItemSetAttributesRequest) WithSize(size uint64) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setSize:"), size)
+	return isar
 }
 
-// WithAllocSize the item's allocated size.
-func (x *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
-	return x
+// WithAllocSize sets the item's allocated size.
+func (isar *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setAllocSize:"), allocSize)
+	return isar
 }
 
-// WithFileID the item's file identifier.
-func (x *ItemSetAttributesRequest) WithFileID(fileID ItemID) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
-	return x
+// WithFileID sets the item's file identifier.
+func (isar *ItemSetAttributesRequest) WithFileID(fileID ItemID) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setFileID:"), fileID)
+	return isar
 }
 
-// WithParentID the identifier of the item's parent.
-func (x *ItemSetAttributesRequest) WithParentID(parentID ItemID) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
-	return x
+// WithParentID sets the identifier of the item's parent.
+func (isar *ItemSetAttributesRequest) WithParentID(parentID ItemID) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setParentID:"), parentID)
+	return isar
 }
 
-// WithSupportsLimitedXAttrs a Boolean value that indicates whether the item supports a limited set of extended attributes.
-func (x *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
-	return x
+// WithSupportsLimitedXAttrs sets a Boolean value that indicates whether the item supports a limited set of extended attributes.
+func (isar *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
+	return isar
 }
 
-// WithInhibitKernelOffloadedIO a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
-func (x *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
-	return x
+// WithInhibitKernelOffloadedIO sets a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
+func (isar *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
+	return isar
 }
 
 // WasAttributeConsumed a method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
-func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute ItemAttribute) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasAttributeConsumed:"), attribute)
+func (isar *ItemSetAttributesRequest) WasAttributeConsumed(attribute ItemAttribute) bool {
+	_r := objc.Send[bool](objref.IDOf(isar), objc.RegisterName("wasAttributeConsumed:"), attribute)
 	return _r
 }
 
-// ConsumedAttributes the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-func (x *ItemSetAttributesRequest) ConsumedAttributes() ItemAttribute {
-	_r := objc.Send[ItemAttribute](objref.IDOf(x), objc.RegisterName("consumedAttributes"))
+// ConsumedAttributes returns the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+func (isar *ItemSetAttributesRequest) ConsumedAttributes() ItemAttribute {
+	_r := objc.Send[ItemAttribute](objref.IDOf(isar), objc.RegisterName("consumedAttributes"))
 	return _r
 }
-
-// SetConsumedAttributes wraps the corresponding Objective-C method.
-func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes ItemAttribute) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
-}
-
-// ItemSetAttributesRequestable is the interface implemented by [ItemSetAttributesRequest], for mocking and DI.
-type ItemSetAttributesRequestable interface {
-	obj.Object
-	WithConsumedAttributes(consumedAttributes ItemAttribute) *ItemSetAttributesRequest
-	WithUid(uid uint32) *ItemSetAttributesRequest
-	WithGid(gid uint32) *ItemSetAttributesRequest
-	WithMode(mode uint32) *ItemSetAttributesRequest
-	WithType(type_ ItemType) *ItemSetAttributesRequest
-	WithLinkCount(linkCount uint32) *ItemSetAttributesRequest
-	WithFlags(flags uint32) *ItemSetAttributesRequest
-	WithSize(size uint64) *ItemSetAttributesRequest
-	WithAllocSize(allocSize uint64) *ItemSetAttributesRequest
-	WithFileID(fileID ItemID) *ItemSetAttributesRequest
-	WithParentID(parentID ItemID) *ItemSetAttributesRequest
-	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest
-	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest
-	WasAttributeConsumed(attribute ItemAttribute) bool
-	ConsumedAttributes() ItemAttribute
-	SetConsumedAttributes(consumedAttributes ItemAttribute)
-}
-
-var _ ItemSetAttributesRequestable = (*ItemSetAttributesRequest)(nil)
 
 var _ ItemAttributesProvider = (*ItemSetAttributesRequest)(nil)

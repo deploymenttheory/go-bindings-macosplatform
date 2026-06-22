@@ -46,24 +46,24 @@ func authorizationAdopt(id objc.ID) *Authorization {
 }
 
 // Description returns the object's -description text.
-func (x *Authorization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Authorization) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Authorization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Authorization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Authorization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Authorization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Authorization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Authorization) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAuthorization creates a new Authorization.
@@ -71,10 +71,3 @@ func NewAuthorization() *Authorization {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorization")), objc.RegisterName("new"))
 	return authorizationAdopt(_id)
 }
-
-// Authorizationable is the interface implemented by [Authorization], for mocking and DI.
-type Authorizationable interface {
-	obj.Object
-}
-
-var _ Authorizationable = (*Authorization)(nil)

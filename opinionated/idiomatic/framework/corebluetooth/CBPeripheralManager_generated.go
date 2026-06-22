@@ -53,78 +53,60 @@ func NewPeripheralManager() *PeripheralManager {
 }
 
 // StartAdvertising advertises peripheral manager data.
-func (x *PeripheralManager) StartAdvertising(advertisementData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAdvertising:"), objref.IDOf(advertisementData))
+func (pm *PeripheralManager) StartAdvertising(advertisementData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("startAdvertising:"), objref.IDOf(advertisementData))
 }
 
 // StopAdvertising stops advertising peripheral manager data.
-func (x *PeripheralManager) StopAdvertising() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAdvertising"))
+func (pm *PeripheralManager) StopAdvertising() {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("stopAdvertising"))
 }
 
 // SetDesiredConnectionLatencyForCentral sets the desired connection latency for an existing connection to a central device.
-func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredConnectionLatency:forCentral:"), latency, objref.IDOf(central))
+func (pm *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setDesiredConnectionLatency:forCentral:"), latency, objref.IDOf(central))
 }
 
 // AddService publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
-func (x *PeripheralManager) AddService(service *MutableService) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addService:"), objref.IDOf(service))
+func (pm *PeripheralManager) AddService(service *MutableService) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("addService:"), objref.IDOf(service))
 }
 
 // RemoveService removes a specified published service from the local GATT database.
-func (x *PeripheralManager) RemoveService(service *MutableService) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeService:"), objref.IDOf(service))
+func (pm *PeripheralManager) RemoveService(service *MutableService) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("removeService:"), objref.IDOf(service))
 }
 
 // RemoveAllServices removes all published services from the local GATT database.
-func (x *PeripheralManager) RemoveAllServices() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllServices"))
+func (pm *PeripheralManager) RemoveAllServices() {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("removeAllServices"))
 }
 
 // RespondToRequestWithResult responds to a read or write request from a connected central.
-func (x *PeripheralManager) RespondToRequestWithResult(request *ATTRequest, result ATTError) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondToRequest:withResult:"), objref.IDOf(request), result)
+func (pm *PeripheralManager) RespondToRequestWithResult(request *ATTRequest, result ATTError) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("respondToRequest:withResult:"), objref.IDOf(request), result)
 }
 
 // UpdateValueForCharacteristicOnSubscribedCentrals send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
-func (x *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:"), objref.IDOf(value), objref.IDOf(characteristic), purego.SliceToNSArray(centrals, func(_v *Central) objc.ID { return objref.IDOf(_v) }))
+func (pm *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool {
+	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:"), objref.IDOf(value), objref.IDOf(characteristic), purego.SliceToNSArray(centrals, func(_v *Central) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // PublishL2CAPChannelWithEncryption creates a listener for incoming L2CAP channel connections.
-func (x *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publishL2CAPChannelWithEncryption:"), encryptionRequired)
+func (pm *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("publishL2CAPChannelWithEncryption:"), encryptionRequired)
 }
 
 // UnpublishL2CAPChannel removes a published service from the local system.
-func (x *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unpublishL2CAPChannel:"), pSM)
+func (pm *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("unpublishL2CAPChannel:"), pSM)
 }
 
-// IsAdvertising whether or not the peripheral is currently advertising data.
-func (x *PeripheralManager) IsAdvertising() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdvertising"))
+// IsAdvertising reports whether the peripheral is currently advertising data.
+func (pm *PeripheralManager) IsAdvertising() bool {
+	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("isAdvertising"))
 	return _r
 }
-
-// PeripheralManagerable is the interface implemented by [PeripheralManager], for mocking and DI.
-type PeripheralManagerable interface {
-	obj.Object
-	StartAdvertising(advertisementData obj.Object)
-	StopAdvertising()
-	SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central)
-	AddService(service *MutableService)
-	RemoveService(service *MutableService)
-	RemoveAllServices()
-	RespondToRequestWithResult(request *ATTRequest, result ATTError)
-	UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool
-	PublishL2CAPChannelWithEncryption(encryptionRequired bool)
-	UnpublishL2CAPChannel(pSM uint16)
-	IsAdvertising() bool
-}
-
-var _ PeripheralManagerable = (*PeripheralManager)(nil)
 
 var _ ManagerProvider = (*PeripheralManager)(nil)

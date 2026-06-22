@@ -46,24 +46,24 @@ func physicsVehicleWheelAdopt(id objc.ID) *PhysicsVehicleWheel {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsVehicleWheel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pvw *PhysicsVehicleWheel) Description() string {
+	return rt.Description(objref.IDOf(pvw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsVehicleWheel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pvw *PhysicsVehicleWheel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pvw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsVehicleWheel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pvw *PhysicsVehicleWheel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pvw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsVehicleWheel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pvw *PhysicsVehicleWheel) String() string {
+	return rt.Description(objref.IDOf(pvw))
 }
 
 // NewPhysicsVehicleWheel creates a new PhysicsVehicleWheel.
@@ -72,176 +72,104 @@ func NewPhysicsVehicleWheel() *PhysicsVehicleWheel {
 	return physicsVehicleWheelAdopt(_id)
 }
 
-// WithSuspensionStiffness the spring coefficient of the suspension between the vehicle and the wheel.
-func (x *PhysicsVehicleWheel) WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionStiffness:"), suspensionStiffness)
-	return x
+// WithSuspensionStiffness sets the spring coefficient of the suspension between the vehicle and the wheel.
+func (pvw *PhysicsVehicleWheel) WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setSuspensionStiffness:"), suspensionStiffness)
+	return pvw
 }
 
-// WithSuspensionCompression the coefficient that limits the speed of the suspension returning to its rest length when compressed.
-func (x *PhysicsVehicleWheel) WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionCompression:"), suspensionCompression)
-	return x
+// WithSuspensionCompression sets the coefficient that limits the speed of the suspension returning to its rest length when compressed.
+func (pvw *PhysicsVehicleWheel) WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setSuspensionCompression:"), suspensionCompression)
+	return pvw
 }
 
-// WithSuspensionDamping the damping ratio that limits oscillation in the vehicle’s suspension.
-func (x *PhysicsVehicleWheel) WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionDamping:"), suspensionDamping)
-	return x
+// WithSuspensionDamping sets the damping ratio that limits oscillation in the vehicle’s suspension.
+func (pvw *PhysicsVehicleWheel) WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setSuspensionDamping:"), suspensionDamping)
+	return pvw
 }
 
-// WithMaximumSuspensionTravel the maximum distance that the wheel is allowed to move up or down relative to its connection point, in centimeters.
-func (x *PhysicsVehicleWheel) WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionTravel:"), maximumSuspensionTravel)
-	return x
+// WithMaximumSuspensionTravel sets the maximum distance that the wheel is allowed to move up or down relative to its connection point, in centimeters.
+func (pvw *PhysicsVehicleWheel) WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setMaximumSuspensionTravel:"), maximumSuspensionTravel)
+	return pvw
 }
 
-// WithFrictionSlip the traction between the wheel and any surface in contact with it.
-func (x *PhysicsVehicleWheel) WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrictionSlip:"), frictionSlip)
-	return x
+// WithFrictionSlip sets the traction between the wheel and any surface in contact with it.
+func (pvw *PhysicsVehicleWheel) WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setFrictionSlip:"), frictionSlip)
+	return pvw
 }
 
-// WithMaximumSuspensionForce the maximum force of the suspension between the vehicle and the wheel, in newtons.
-func (x *PhysicsVehicleWheel) WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionForce:"), maximumSuspensionForce)
-	return x
+// WithMaximumSuspensionForce sets the maximum force of the suspension between the vehicle and the wheel, in newtons.
+func (pvw *PhysicsVehicleWheel) WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setMaximumSuspensionForce:"), maximumSuspensionForce)
+	return pvw
 }
 
-// WithRadius the radius of the wheel.
-func (x *PhysicsVehicleWheel) WithRadius(radius float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the radius of the wheel.
+func (pvw *PhysicsVehicleWheel) WithRadius(radius float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setRadius:"), radius)
+	return pvw
 }
 
-// WithSuspensionRestLength the resting length of the suspension, in meters.
-func (x *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionRestLength:"), suspensionRestLength)
-	return x
+// WithSuspensionRestLength sets the resting length of the suspension, in meters.
+func (pvw *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel {
+	objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("setSuspensionRestLength:"), suspensionRestLength)
+	return pvw
 }
 
 // Node wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) Node() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+func (pvw *PhysicsVehicleWheel) Node() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
 // SuspensionStiffness wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SuspensionStiffness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionStiffness"))
+func (pvw *PhysicsVehicleWheel) SuspensionStiffness() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionStiffness"))
 	return _r
-}
-
-// SetSuspensionStiffness wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetSuspensionStiffness(suspensionStiffness float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionStiffness:"), suspensionStiffness)
 }
 
 // SuspensionCompression wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SuspensionCompression() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionCompression"))
+func (pvw *PhysicsVehicleWheel) SuspensionCompression() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionCompression"))
 	return _r
-}
-
-// SetSuspensionCompression wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetSuspensionCompression(suspensionCompression float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionCompression:"), suspensionCompression)
 }
 
 // SuspensionDamping wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SuspensionDamping() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionDamping"))
+func (pvw *PhysicsVehicleWheel) SuspensionDamping() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionDamping"))
 	return _r
-}
-
-// SetSuspensionDamping wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetSuspensionDamping(suspensionDamping float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionDamping:"), suspensionDamping)
 }
 
 // MaximumSuspensionTravel wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) MaximumSuspensionTravel() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumSuspensionTravel"))
+func (pvw *PhysicsVehicleWheel) MaximumSuspensionTravel() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionTravel"))
 	return _r
-}
-
-// SetMaximumSuspensionTravel wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetMaximumSuspensionTravel(maximumSuspensionTravel float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionTravel:"), maximumSuspensionTravel)
 }
 
 // FrictionSlip wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) FrictionSlip() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frictionSlip"))
+func (pvw *PhysicsVehicleWheel) FrictionSlip() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("frictionSlip"))
 	return _r
-}
-
-// SetFrictionSlip wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetFrictionSlip(frictionSlip float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrictionSlip:"), frictionSlip)
 }
 
 // MaximumSuspensionForce wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) MaximumSuspensionForce() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumSuspensionForce"))
+func (pvw *PhysicsVehicleWheel) MaximumSuspensionForce() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionForce"))
 	return _r
-}
-
-// SetMaximumSuspensionForce wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetMaximumSuspensionForce(maximumSuspensionForce float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumSuspensionForce:"), maximumSuspensionForce)
 }
 
 // Radius wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) Radius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+func (pvw *PhysicsVehicleWheel) Radius() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("radius"))
 	return _r
-}
-
-// SetRadius wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetRadius(radius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
 // SuspensionRestLength wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SuspensionRestLength() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("suspensionRestLength"))
+func (pvw *PhysicsVehicleWheel) SuspensionRestLength() float64 {
+	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionRestLength"))
 	return _r
 }
-
-// SetSuspensionRestLength wraps the corresponding Objective-C method.
-func (x *PhysicsVehicleWheel) SetSuspensionRestLength(suspensionRestLength float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionRestLength:"), suspensionRestLength)
-}
-
-// PhysicsVehicleWheelable is the interface implemented by [PhysicsVehicleWheel], for mocking and DI.
-type PhysicsVehicleWheelable interface {
-	obj.Object
-	WithSuspensionStiffness(suspensionStiffness float64) *PhysicsVehicleWheel
-	WithSuspensionCompression(suspensionCompression float64) *PhysicsVehicleWheel
-	WithSuspensionDamping(suspensionDamping float64) *PhysicsVehicleWheel
-	WithMaximumSuspensionTravel(maximumSuspensionTravel float64) *PhysicsVehicleWheel
-	WithFrictionSlip(frictionSlip float64) *PhysicsVehicleWheel
-	WithMaximumSuspensionForce(maximumSuspensionForce float64) *PhysicsVehicleWheel
-	WithRadius(radius float64) *PhysicsVehicleWheel
-	WithSuspensionRestLength(suspensionRestLength float64) *PhysicsVehicleWheel
-	Node() *Node
-	SuspensionStiffness() float64
-	SetSuspensionStiffness(suspensionStiffness float64)
-	SuspensionCompression() float64
-	SetSuspensionCompression(suspensionCompression float64)
-	SuspensionDamping() float64
-	SetSuspensionDamping(suspensionDamping float64)
-	MaximumSuspensionTravel() float64
-	SetMaximumSuspensionTravel(maximumSuspensionTravel float64)
-	FrictionSlip() float64
-	SetFrictionSlip(frictionSlip float64)
-	MaximumSuspensionForce() float64
-	SetMaximumSuspensionForce(maximumSuspensionForce float64)
-	Radius() float64
-	SetRadius(radius float64)
-	SuspensionRestLength() float64
-	SetSuspensionRestLength(suspensionRestLength float64)
-}
-
-var _ PhysicsVehicleWheelable = (*PhysicsVehicleWheel)(nil)

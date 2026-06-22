@@ -51,17 +51,9 @@ func NewMTREventPath() *MTREventPath {
 }
 
 // Event wraps the corresponding Objective-C method.
-func (x *MTREventPath) Event() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("event"))
+func (mep *MTREventPath) Event() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("event"))
 	return obj.Wrap(_r)
 }
-
-// MTREventPathable is the interface implemented by [MTREventPath], for mocking and DI.
-type MTREventPathable interface {
-	obj.Object
-	Event() obj.Object
-}
-
-var _ MTREventPathable = (*MTREventPath)(nil)
 
 var _ MTRClusterPathProvider = (*MTREventPath)(nil)

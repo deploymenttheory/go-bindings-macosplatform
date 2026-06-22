@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewNNLanczosScaleNode() *NNLanczosScaleNode {
 	return nNLanczosScaleNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNLanczosScaleNode) WithLabel(label string) *NNLanczosScaleNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nlsn *NNLanczosScaleNode) WithLabel(label string) *NNLanczosScaleNode {
+	objc.Send[objc.ID](objref.IDOf(nlsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nlsn
 }
-
-// NNLanczosScaleNodeable is the interface implemented by [NNLanczosScaleNode], for mocking and DI.
-type NNLanczosScaleNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNLanczosScaleNode
-}
-
-var _ NNLanczosScaleNodeable = (*NNLanczosScaleNode)(nil)
 
 var _ NNScaleNodeProvider = (*NNLanczosScaleNode)(nil)
 

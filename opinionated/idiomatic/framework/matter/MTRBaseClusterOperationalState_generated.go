@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRBaseClusterOperationalStateWithDeviceEndpointIDQueue(device *MTRBaseD
 // PauseWithParamsCompletion command Pause Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -68,7 +69,7 @@ func (x *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.C
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("pauseWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx context.C
 // PauseWithCompletion wraps the corresponding Objective-C method.
 //
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -93,7 +94,7 @@ func (x *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("pauseWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context
 // StopWithParamsCompletion command Stop Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
 //
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -118,7 +119,7 @@ func (x *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Co
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("stopWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx context.Co
 // StopWithCompletion wraps the corresponding Objective-C method.
 //
 // StopWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -143,7 +144,7 @@ func (x *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context)
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("stopWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context)
 // StartWithParamsCompletion command Start Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it can be started.
 //
 // StartWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -168,7 +169,7 @@ func (x *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.C
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("startWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx context.C
 // StartWithCompletion wraps the corresponding Objective-C method.
 //
 // StartWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -193,7 +194,7 @@ func (x *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("startWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context
 // ResumeWithParamsCompletion command Resume Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the point when it was paused by means outside of this cluster (for example by manual button press).
 //
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -218,7 +219,7 @@ func (x *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("resumeWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx context.
 // ResumeWithCompletion wraps the corresponding Objective-C method.
 //
 // ResumeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -243,7 +244,7 @@ func (x *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Contex
 		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("resumeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Contex
 // ReadAttributePhaseListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePhaseListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -268,7 +269,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributePhaseListWithCompletion(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhaseListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributePhaseListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributePhaseListWithCompletion(ct
 // SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -293,7 +294,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributePhaseListWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePhaseListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributePhaseListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributePhaseListWithParamsSu
 // ReadAttributeCurrentPhaseWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPhaseWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -318,7 +319,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeCurrentPhaseWithCompletion
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPhaseWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeCurrentPhaseWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeCurrentPhaseWithCompletion
 // SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,7 +344,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeCurrentPhaseWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPhaseWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeCurrentPhaseWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeCurrentPhaseWithParam
 // ReadAttributeCountdownTimeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCountdownTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,7 +369,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeCountdownTimeWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCountdownTimeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeCountdownTimeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeCountdownTimeWithCompletio
 // SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -393,7 +394,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeCountdownTimeWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCountdownTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeCountdownTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeCountdownTimeWithPara
 // ReadAttributeOperationalStateListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalStateListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -418,7 +419,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateListWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStateListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeOperationalStateListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateListWithCo
 // SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -443,7 +444,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalStateListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOperationalStateListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateListW
 // ReadAttributeOperationalStateWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -468,7 +469,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStateWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeOperationalStateWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalStateWithComple
 // SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -493,7 +494,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOperationalStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -506,7 +507,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateWithP
 // ReadAttributeOperationalErrorWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalErrorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (result *MTROperationalStateClusterErrorStateStruct, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (result *MTROperationalStateClusterErrorStateStruct, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterErrorStateStruct
 		err error
@@ -518,7 +519,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalErrorWithComple
 		_o.val = MTROperationalStateClusterErrorStateStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalErrorWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeOperationalErrorWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -531,7 +532,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeOperationalErrorWithComple
 // SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTROperationalStateClusterErrorStateStruct, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTROperationalStateClusterErrorStateStruct, err error) {
 	type _result struct {
 		val *MTROperationalStateClusterErrorStateStruct
 		err error
@@ -543,7 +544,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalErrorWithP
 		_o.val = MTROperationalStateClusterErrorStateStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalErrorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeOperationalErrorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -556,7 +557,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeOperationalErrorWithP
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -568,7 +569,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeGeneratedCommandListWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -581,7 +582,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeGeneratedCommandListWithCo
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -593,7 +594,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeGeneratedCommandListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -606,7 +607,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeGeneratedCommandListW
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -618,7 +619,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeAcceptedCommandListWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +632,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeAcceptedCommandListWithCom
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -643,7 +644,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeAcceptedCommandListWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -656,7 +657,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeAcceptedCommandListWi
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -668,7 +669,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeAttributeListWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -681,7 +682,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeAttributeListWithCompletio
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -693,7 +694,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeAttributeListWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -706,7 +707,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeAttributeListWithPara
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -718,7 +719,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeFeatureMapWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -731,7 +732,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeFeatureMapWithCompletion(c
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -743,7 +744,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeFeatureMapWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -756,7 +757,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeFeatureMapWithParamsS
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -768,7 +769,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeClusterRevisionWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -781,7 +782,7 @@ func (x *MTRBaseClusterOperationalState) ReadAttributeClusterRevisionWithComplet
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalState) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -793,7 +794,7 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeClusterRevisionWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcos), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -802,43 +803,6 @@ func (x *MTRBaseClusterOperationalState) SubscribeAttributeClusterRevisionWithPa
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterOperationalStateable is the interface implemented by [MTRBaseClusterOperationalState], for mocking and DI.
-type MTRBaseClusterOperationalStateable interface {
-	obj.Object
-	PauseWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	PauseWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StopWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StopWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StartWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StartWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	ResumeWithParamsCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	ResumeWithCompletion(ctx context.Context) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	ReadAttributePhaseListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOperationalStateWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (*MTROperationalStateClusterErrorStateStruct, error)
-	SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTROperationalStateClusterErrorStateStruct, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterOperationalStateable = (*MTRBaseClusterOperationalState)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterOperationalState)(nil)
 

@@ -53,17 +53,9 @@ func NewMessagePortNameServer() *MessagePortNameServer {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MessagePortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mpns *MessagePortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer {
+	objc.Send[objc.ID](objref.IDOf(mpns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mpns
 }
-
-// MessagePortNameServerable is the interface implemented by [MessagePortNameServer], for mocking and DI.
-type MessagePortNameServerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer
-}
-
-var _ MessagePortNameServerable = (*MessagePortNameServer)(nil)
 
 var _ PortNameServerProvider = (*MessagePortNameServer)(nil)

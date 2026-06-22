@@ -46,24 +46,24 @@ func materialAdopt(id objc.ID) *Material {
 }
 
 // Description returns the object's -description text.
-func (x *Material) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Material) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Material) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Material) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Material) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Material) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Material) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Material) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMaterialWithEnginePreset creates a material with the given preset.
@@ -72,10 +72,3 @@ func NewMaterialWithEnginePreset(engine *Engine, preset MaterialPreset) *Materia
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), objref.IDOf(engine), preset)
 	return materialAdopt(_id)
 }
-
-// Materialable is the interface implemented by [Material], for mocking and DI.
-type Materialable interface {
-	obj.Object
-}
-
-var _ Materialable = (*Material)(nil)

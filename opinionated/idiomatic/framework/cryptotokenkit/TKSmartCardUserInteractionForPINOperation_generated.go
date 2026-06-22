@@ -46,134 +46,85 @@ func smartCardUserInteractionForPINOperationAdopt(id objc.ID) *SmartCardUserInte
 	return x
 }
 
-// WithPINCompletion the conditions under which PIN entry should be considered complete.
-func (x *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
-	return x
+// WithPINCompletion sets the conditions under which PIN entry should be considered complete.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setPINCompletion:"), pINCompletion)
+	return scuifpo
 }
 
-// WithPINMessageIndices a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
-func (x *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForPINOperation {
+// WithPINMessageIndices sets a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForPINOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setPINMessageIndices:"), _arr)
+	return scuifpo
 }
 
-// WithLocale the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
-func (x *SmartCardUserInteractionForPINOperation) WithLocale(locale obj.Object) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+// WithLocale sets the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithLocale(locale obj.Object) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return scuifpo
 }
 
-// WithResultSW the SW1-SW2 status bytes.
-func (x *SmartCardUserInteractionForPINOperation) WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
-	return x
+// WithResultSW sets the SW1-SW2 status bytes.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setResultSW:"), resultSW)
+	return scuifpo
 }
 
-// WithResultData the returned data without SW1-SW2 bytes, if any.
-func (x *SmartCardUserInteractionForPINOperation) WithResultData(resultData obj.Object) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
-	return x
+// WithResultData sets the returned data without SW1-SW2 bytes, if any.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithResultData(resultData obj.Object) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
+	return scuifpo
 }
 
-// WithInitialTimeout the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteractionForPINOperation) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
-	return x
+// WithInitialTimeout sets the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setInitialTimeout:"), initialTimeout)
+	return scuifpo
 }
 
-// WithInteractionTimeout the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
-	return x
+// WithInteractionTimeout sets the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scuifpo *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
+	return scuifpo
 }
 
-// PINCompletion bitmask specifying condition(s) under which PIN entry should be considered complete.
-func (x *SmartCardUserInteractionForPINOperation) PINCompletion() SmartCardPINCompletion {
-	_r := objc.Send[SmartCardPINCompletion](objref.IDOf(x), objc.RegisterName("PINCompletion"))
+// PINCompletion returns bitmask specifying condition(s) under which PIN entry should be considered complete.
+func (scuifpo *SmartCardUserInteractionForPINOperation) PINCompletion() SmartCardPINCompletion {
+	_r := objc.Send[SmartCardPINCompletion](objref.IDOf(scuifpo), objc.RegisterName("PINCompletion"))
 	return _r
 }
 
-// SetPINCompletion wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion SmartCardPINCompletion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
-}
-
-// PINMessageIndices list of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages.
+// PINMessageIndices returns list of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages.
 //
 // PINMessageIndices returns the collection as a Go slice.
-func (x *SmartCardUserInteractionForPINOperation) PINMessageIndices() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PINMessageIndices"))
+func (scuifpo *SmartCardUserInteractionForPINOperation) PINMessageIndices() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("PINMessageIndices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPINMessageIndices wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessageIndices []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), purego.SliceToNSArray(pINMessageIndices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Locale locale defining the language of displayed messages. If set to nil, the user's current locale is used.
-func (x *SmartCardUserInteractionForPINOperation) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+// Locale returns locale defining the language of displayed messages. If set to nil, the user's current locale is used.
+func (scuifpo *SmartCardUserInteractionForPINOperation) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// SetLocale wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForPINOperation) SetLocale(locale obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-}
-
-// ResultSW SW1SW2 result code.
-func (x *SmartCardUserInteractionForPINOperation) ResultSW() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("resultSW"))
+// ResultSW returns SW1SW2 result code.
+func (scuifpo *SmartCardUserInteractionForPINOperation) ResultSW() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(scuifpo), objc.RegisterName("resultSW"))
 	return _r
 }
 
-// SetResultSW wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForPINOperation) SetResultSW(resultSW uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
-}
-
-// ResultData optional block of returned data (without SW1SW2 bytes).
-func (x *SmartCardUserInteractionForPINOperation) ResultData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultData"))
+// ResultData returns optional block of returned data (without SW1SW2 bytes).
+func (scuifpo *SmartCardUserInteractionForPINOperation) ResultData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scuifpo), objc.RegisterName("resultData"))
 	return obj.Wrap(_r)
 }
-
-// SetResultData wraps the corresponding Objective-C method.
-func (x *SmartCardUserInteractionForPINOperation) SetResultData(resultData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
-}
-
-// SmartCardUserInteractionForPINOperationable is the interface implemented by [SmartCardUserInteractionForPINOperation], for mocking and DI.
-type SmartCardUserInteractionForPINOperationable interface {
-	obj.Object
-	WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation
-	WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForPINOperation
-	WithLocale(locale obj.Object) *SmartCardUserInteractionForPINOperation
-	WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation
-	WithResultData(resultData obj.Object) *SmartCardUserInteractionForPINOperation
-	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation
-	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation
-	PINCompletion() SmartCardPINCompletion
-	SetPINCompletion(pINCompletion SmartCardPINCompletion)
-	PINMessageIndices() []obj.Object
-	SetPINMessageIndices(pINMessageIndices []obj.Object)
-	Locale() obj.Object
-	SetLocale(locale obj.Object)
-	ResultSW() uint16
-	SetResultSW(resultSW uint16)
-	ResultData() obj.Object
-	SetResultData(resultData obj.Object)
-}
-
-var _ SmartCardUserInteractionForPINOperationable = (*SmartCardUserInteractionForPINOperation)(nil)
 
 // isSmartCardUserInteractionForPINOperation marks SmartCardUserInteractionForPINOperation — and, by embedding promotion, its
 // subclasses — as a member of the SmartCardUserInteractionForPINOperation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SmartCardUserInteractionForPINOperation) isSmartCardUserInteractionForPINOperation() {}
+func (scuifpo *SmartCardUserInteractionForPINOperation) isSmartCardUserInteractionForPINOperation() {}
 
 var _ SmartCardUserInteractionForPINOperationProvider = (*SmartCardUserInteractionForPINOperation)(nil)
 

@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewSyncEngineAccountChangeEvent() *SyncEngineAccountChangeEvent {
 	return syncEngineAccountChangeEventAdopt(_id)
 }
 
-// ChangeType the iCloud account's change type.
-func (x *SyncEngineAccountChangeEvent) ChangeType() SyncEngineAccountChangeType {
-	_r := objc.Send[SyncEngineAccountChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
+// ChangeType returns the iCloud account's change type.
+func (seace *SyncEngineAccountChangeEvent) ChangeType() SyncEngineAccountChangeType {
+	_r := objc.Send[SyncEngineAccountChangeType](objref.IDOf(seace), objc.RegisterName("changeType"))
 	return _r
 }
 
-// PreviousUser the previous iCloud account's record identifier. If the user just signed in, this is `nil`. If the user signed out or switched accounts, this is the old account's user record ID.
-func (x *SyncEngineAccountChangeEvent) PreviousUser() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousUser"))
+// PreviousUser returns the previous iCloud account's record identifier. If the user just signed in, this is `nil`. If the user signed out or switched accounts, this is the old account's user record ID.
+func (seace *SyncEngineAccountChangeEvent) PreviousUser() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(seace), objc.RegisterName("previousUser"))
 	return RecordIDFromID(_r)
 }
 
-// CurrentUser the current iCloud account's record identifier. If the user just signed in or switched accounts, this is the new user record ID. If the user signed out, this is `nil`.
-func (x *SyncEngineAccountChangeEvent) CurrentUser() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentUser"))
+// CurrentUser returns the current iCloud account's record identifier. If the user just signed in or switched accounts, this is the new user record ID. If the user signed out, this is `nil`.
+func (seace *SyncEngineAccountChangeEvent) CurrentUser() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(seace), objc.RegisterName("currentUser"))
 	return RecordIDFromID(_r)
 }
-
-// SyncEngineAccountChangeEventable is the interface implemented by [SyncEngineAccountChangeEvent], for mocking and DI.
-type SyncEngineAccountChangeEventable interface {
-	obj.Object
-	ChangeType() SyncEngineAccountChangeType
-	PreviousUser() *RecordID
-	CurrentUser() *RecordID
-}
-
-var _ SyncEngineAccountChangeEventable = (*SyncEngineAccountChangeEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineAccountChangeEvent)(nil)

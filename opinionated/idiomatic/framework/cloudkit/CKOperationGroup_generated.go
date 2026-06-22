@@ -46,24 +46,24 @@ func operationGroupAdopt(id objc.ID) *OperationGroup {
 }
 
 // Description returns the object's -description text.
-func (x *OperationGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (og *OperationGroup) Description() string {
+	return rt.Description(objref.IDOf(og))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OperationGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (og *OperationGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(og), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OperationGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (og *OperationGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(og), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OperationGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (og *OperationGroup) String() string {
+	return rt.Description(objref.IDOf(og))
 }
 
 // NewOperationGroup creates a new OperationGroup.
@@ -79,122 +79,74 @@ func NewOperationGroupWithCoder(aDecoder obj.Object) *OperationGroup {
 	return operationGroupAdopt(_id)
 }
 
-// WithDefaultConfiguration the default configuration for operations in the group.
-func (x *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
-	return x
+// WithDefaultConfiguration sets the default configuration for operations in the group.
+func (og *OperationGroup) WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup {
+	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
+	return og
 }
 
-// WithName the operation group’s name.
-func (x *OperationGroup) WithName(name string) *OperationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the operation group’s name.
+func (og *OperationGroup) WithName(name string) *OperationGroup {
+	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("setName:"), purego.NSString(name))
+	return og
 }
 
-// WithQuantity the number of operations in the operation group.
-func (x *OperationGroup) WithQuantity(quantity int) *OperationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
-	return x
+// WithQuantity sets the number of operations in the operation group.
+func (og *OperationGroup) WithQuantity(quantity int) *OperationGroup {
+	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("setQuantity:"), quantity)
+	return og
 }
 
-// WithExpectedSendSize the estimated size of traffic to upload to CloudKit.
-func (x *OperationGroup) WithExpectedSendSize(expectedSendSize OperationGroupTransferSize) *OperationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedSendSize:"), expectedSendSize)
-	return x
+// WithExpectedSendSize sets the estimated size of traffic to upload to CloudKit.
+func (og *OperationGroup) WithExpectedSendSize(expectedSendSize OperationGroupTransferSize) *OperationGroup {
+	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("setExpectedSendSize:"), expectedSendSize)
+	return og
 }
 
-// WithExpectedReceiveSize the estimated size of traffic to download from CloudKit.
-func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize) *OperationGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedReceiveSize:"), expectedReceiveSize)
-	return x
+// WithExpectedReceiveSize sets the estimated size of traffic to download from CloudKit.
+func (og *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize) *OperationGroup {
+	objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("setExpectedReceiveSize:"), expectedReceiveSize)
+	return og
 }
 
-// OperationGroupID the operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
-func (x *OperationGroup) OperationGroupID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroupID"))
+// OperationGroupID returns the operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
+func (og *OperationGroup) OperationGroupID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("operationGroupID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DefaultConfiguration the default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
-func (x *OperationGroup) DefaultConfiguration() *OperationConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultConfiguration"))
+// DefaultConfiguration returns the default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
+func (og *OperationGroup) DefaultConfiguration() *OperationConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("defaultConfiguration"))
 	return OperationConfigurationFromID(_r)
 }
 
-// SetDefaultConfiguration wraps the corresponding Objective-C method.
-func (x *OperationGroup) SetDefaultConfiguration(defaultConfiguration *OperationConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
-}
-
-// Name the operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
-func (x *OperationGroup) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
+func (og *OperationGroup) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(og), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *OperationGroup) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// Quantity the number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
-func (x *OperationGroup) Quantity() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quantity"))
+// Quantity returns the number of operations in the operation group. This property shows the number of operations that you expect to be in this operation group. It's the developer's responsibility to set this value.
+func (og *OperationGroup) Quantity() int {
+	_r := objc.Send[int](objref.IDOf(og), objc.RegisterName("quantity"))
 	return _r
 }
 
-// SetQuantity wraps the corresponding Objective-C method.
-func (x *OperationGroup) SetQuantity(quantity int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
-}
-
-// ExpectedSendSize the estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
-func (x *OperationGroup) ExpectedSendSize() OperationGroupTransferSize {
-	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(x), objc.RegisterName("expectedSendSize"))
+// ExpectedSendSize returns the estimated size of traffic to upload to CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+func (og *OperationGroup) ExpectedSendSize() OperationGroupTransferSize {
+	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(og), objc.RegisterName("expectedSendSize"))
 	return _r
 }
 
-// SetExpectedSendSize wraps the corresponding Objective-C method.
-func (x *OperationGroup) SetExpectedSendSize(expectedSendSize OperationGroupTransferSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedSendSize:"), expectedSendSize)
-}
-
-// ExpectedReceiveSize the estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
-func (x *OperationGroup) ExpectedReceiveSize() OperationGroupTransferSize {
-	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(x), objc.RegisterName("expectedReceiveSize"))
+// ExpectedReceiveSize returns the estimated size of traffic to download from CloudKit. This property informs the system about the amount of data your app can transfer. An order-of-magnitude estimate is better than no estimate, and accuracy helps performance. The system checks this value when it schedules discretionary network requests.
+func (og *OperationGroup) ExpectedReceiveSize() OperationGroupTransferSize {
+	_r := objc.Send[OperationGroupTransferSize](objref.IDOf(og), objc.RegisterName("expectedReceiveSize"))
 	return _r
 }
-
-// SetExpectedReceiveSize wraps the corresponding Objective-C method.
-func (x *OperationGroup) SetExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpectedReceiveSize:"), expectedReceiveSize)
-}
-
-// OperationGroupable is the interface implemented by [OperationGroup], for mocking and DI.
-type OperationGroupable interface {
-	obj.Object
-	WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup
-	WithName(name string) *OperationGroup
-	WithQuantity(quantity int) *OperationGroup
-	WithExpectedSendSize(expectedSendSize OperationGroupTransferSize) *OperationGroup
-	WithExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize) *OperationGroup
-	OperationGroupID() string
-	DefaultConfiguration() *OperationConfiguration
-	SetDefaultConfiguration(defaultConfiguration *OperationConfiguration)
-	Name() string
-	SetName(name string)
-	Quantity() int
-	SetQuantity(quantity int)
-	ExpectedSendSize() OperationGroupTransferSize
-	SetExpectedSendSize(expectedSendSize OperationGroupTransferSize)
-	ExpectedReceiveSize() OperationGroupTransferSize
-	SetExpectedReceiveSize(expectedReceiveSize OperationGroupTransferSize)
-}
-
-var _ OperationGroupable = (*OperationGroup)(nil)

@@ -46,24 +46,24 @@ func contentBlockerManagerAdopt(id objc.ID) *ContentBlockerManager {
 }
 
 // Description returns the object's -description text.
-func (x *ContentBlockerManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cbm *ContentBlockerManager) Description() string {
+	return rt.Description(objref.IDOf(cbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentBlockerManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cbm *ContentBlockerManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentBlockerManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cbm *ContentBlockerManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentBlockerManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cbm *ContentBlockerManager) String() string {
+	return rt.Description(objref.IDOf(cbm))
 }
 
 // NewContentBlockerManager creates a new ContentBlockerManager.
@@ -71,10 +71,3 @@ func NewContentBlockerManager() *ContentBlockerManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFContentBlockerManager")), objc.RegisterName("new"))
 	return contentBlockerManagerAdopt(_id)
 }
-
-// ContentBlockerManagerable is the interface implemented by [ContentBlockerManager], for mocking and DI.
-type ContentBlockerManagerable interface {
-	obj.Object
-}
-
-var _ ContentBlockerManagerable = (*ContentBlockerManager)(nil)

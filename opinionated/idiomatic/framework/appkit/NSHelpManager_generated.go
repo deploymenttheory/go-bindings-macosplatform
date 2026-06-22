@@ -47,24 +47,24 @@ func helpManagerAdopt(id objc.ID) *HelpManager {
 }
 
 // Description returns the object's -description text.
-func (x *HelpManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hm *HelpManager) Description() string {
+	return rt.Description(objref.IDOf(hm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HelpManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hm *HelpManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HelpManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hm *HelpManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HelpManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hm *HelpManager) String() string {
+	return rt.Description(objref.IDOf(hm))
 }
 
 // NewHelpManager creates a new HelpManager.
@@ -74,53 +74,39 @@ func NewHelpManager() *HelpManager {
 }
 
 // SetContextHelpForObject associates help content with an object.
-func (x *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
+func (hm *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
 }
 
 // RemoveContextHelpForObject removes the association between an object and its context-sensitive help.
-func (x *HelpManager) RemoveContextHelpForObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
+func (hm *HelpManager) RemoveContextHelpForObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
 }
 
 // ContextHelpForObject returns context-sensitive help for an object.
-func (x *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
+func (hm *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // ShowContextHelpForObjectLocationHint displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
-func (x *HelpManager) ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showContextHelpForObject:locationHint:"), objref.IDOf(object), pt)
+func (hm *HelpManager) ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool {
+	_r := objc.Send[bool](objref.IDOf(hm), objc.RegisterName("showContextHelpForObject:locationHint:"), objref.IDOf(object), pt)
 	return _r
 }
 
 // OpenHelpAnchorInBook finds and displays the text at the given anchor location in the given book.
-func (x *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
+func (hm *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
 }
 
 // FindStringInBook performs a search for the specified string in the specified book.
-func (x *HelpManager) FindStringInBook(query string, book obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
+func (hm *HelpManager) FindStringInBook(query string, book obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(hm), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
 }
 
 // RegisterBooksInBundle registers one or more help books in the given bundle.
-func (x *HelpManager) RegisterBooksInBundle(bundle obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerBooksInBundle:"), objref.IDOf(bundle))
+func (hm *HelpManager) RegisterBooksInBundle(bundle obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(hm), objc.RegisterName("registerBooksInBundle:"), objref.IDOf(bundle))
 	return _r
 }
-
-// HelpManagerable is the interface implemented by [HelpManager], for mocking and DI.
-type HelpManagerable interface {
-	obj.Object
-	SetContextHelpForObject(attrString obj.Object, object obj.Object)
-	RemoveContextHelpForObject(object obj.Object)
-	ContextHelpForObject(object obj.Object) obj.Object
-	ShowContextHelpForObjectLocationHint(object obj.Object, pt corefoundation.CGPoint) bool
-	OpenHelpAnchorInBook(anchor obj.Object, book obj.Object)
-	FindStringInBook(query string, book obj.Object)
-	RegisterBooksInBundle(bundle obj.Object) bool
-}
-
-var _ HelpManagerable = (*HelpManager)(nil)

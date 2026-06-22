@@ -48,24 +48,24 @@ func tokenAdopt(id objc.ID) *Token {
 }
 
 // Description returns the object's -description text.
-func (x *Token) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Token) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Token) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Token) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Token) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Token) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Token) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Token) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTokenWithTokenDriverInstanceID initializes a token with the driver you specify.
@@ -76,36 +76,26 @@ func NewTokenWithTokenDriverInstanceID(tokenDriver *TokenDriver, instanceID obj.
 }
 
 // TokenDriver wraps the corresponding Objective-C method.
-func (x *Token) TokenDriver() *TokenDriver {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenDriver"))
+func (t *Token) TokenDriver() *TokenDriver {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tokenDriver"))
 	return TokenDriverFromID(_r)
 }
 
-// Configuration token configuration associated with this token instance.
-func (x *Token) Configuration() *TokenConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+// Configuration returns token configuration associated with this token instance.
+func (t *Token) Configuration() *TokenConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("configuration"))
 	return TokenConfigurationFromID(_r)
 }
 
-// KeychainContents keychain contents (certificate and key items) representing this token.
-func (x *Token) KeychainContents() *TokenKeychainContents {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychainContents"))
+// KeychainContents returns keychain contents (certificate and key items) representing this token.
+func (t *Token) KeychainContents() *TokenKeychainContents {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("keychainContents"))
 	return TokenKeychainContentsFromID(_r)
 }
-
-// Tokenable is the interface implemented by [Token], for mocking and DI.
-type Tokenable interface {
-	obj.Object
-	TokenDriver() *TokenDriver
-	Configuration() *TokenConfiguration
-	KeychainContents() *TokenKeychainContents
-}
-
-var _ Tokenable = (*Token)(nil)
 
 // isToken marks Token — and, by embedding promotion, its
 // subclasses — as a member of the Token hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Token) isToken() {}
+func (t *Token) isToken() {}
 
 var _ TokenProvider = (*Token)(nil)

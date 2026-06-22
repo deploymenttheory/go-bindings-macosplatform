@@ -52,37 +52,16 @@ func NewMutableNetworkProfile() *MutableNetworkProfile {
 	return mutableNetworkProfileAdopt(_id)
 }
 
-// WithSsidData the service set identifier (SSID).
-func (x *MutableNetworkProfile) WithSsidData(ssidData obj.Object) *MutableNetworkProfile {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
-	return x
+// WithSsidData sets the service set identifier (SSID).
+func (mnp *MutableNetworkProfile) WithSsidData(ssidData obj.Object) *MutableNetworkProfile {
+	objc.Send[objc.ID](objref.IDOf(mnp), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
+	return mnp
 }
 
-// WithSecurity the security type.
-func (x *MutableNetworkProfile) WithSecurity(security Security) *MutableNetworkProfile {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), security)
-	return x
+// WithSecurity sets the security type.
+func (mnp *MutableNetworkProfile) WithSecurity(security Security) *MutableNetworkProfile {
+	objc.Send[objc.ID](objref.IDOf(mnp), objc.RegisterName("setSecurity:"), security)
+	return mnp
 }
-
-// SetSsidData wraps the corresponding Objective-C method.
-func (x *MutableNetworkProfile) SetSsidData(ssidData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
-}
-
-// SetSecurity wraps the corresponding Objective-C method.
-func (x *MutableNetworkProfile) SetSecurity(security Security) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), security)
-}
-
-// MutableNetworkProfileable is the interface implemented by [MutableNetworkProfile], for mocking and DI.
-type MutableNetworkProfileable interface {
-	obj.Object
-	WithSsidData(ssidData obj.Object) *MutableNetworkProfile
-	WithSecurity(security Security) *MutableNetworkProfile
-	SetSsidData(ssidData obj.Object)
-	SetSecurity(security Security)
-}
-
-var _ MutableNetworkProfileable = (*MutableNetworkProfile)(nil)
 
 var _ NetworkProfileProvider = (*MutableNetworkProfile)(nil)

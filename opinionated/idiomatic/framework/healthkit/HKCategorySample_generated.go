@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewCategorySample() *CategorySample {
 }
 
 // CategoryType wraps the corresponding Objective-C method.
-func (x *CategorySample) CategoryType() *CategoryType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryType"))
+func (cs *CategorySample) CategoryType() *CategoryType {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("categoryType"))
 	return CategoryTypeFromID(_r)
 }
 
-// Value the preferred enum for the value is determined by the receiver's category type.
-func (x *CategorySample) Value() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the preferred enum for the value is determined by the receiver's category type.
+func (cs *CategorySample) Value() int {
+	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("value"))
 	return _r
 }
-
-// CategorySampleable is the interface implemented by [CategorySample], for mocking and DI.
-type CategorySampleable interface {
-	obj.Object
-	CategoryType() *CategoryType
-	Value() int
-}
-
-var _ CategorySampleable = (*CategorySample)(nil)
 
 var _ SampleProvider = (*CategorySample)(nil)
 

@@ -50,93 +50,64 @@ func NewAVB17221AECPVendorMessage() *AVB17221AECPVendorMessage {
 	return aVB17221AECPVendorMessageAdopt(_id)
 }
 
-// WithProtocolID the protocol_id field of the AECP Vendor Unique message.
-func (x *AVB17221AECPVendorMessage) WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolID:"), protocolID)
-	return x
+// WithProtocolID sets the protocol_id field of the AECP Vendor Unique message.
+func (aavm *AVB17221AECPVendorMessage) WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setProtocolID:"), protocolID)
+	return aavm
 }
 
-// WithProtocolSpecificData the protocol_specific_data field of the AECP Vendor Unique message.
-func (x *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificData obj.Object) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolSpecificData:"), objref.IDOf(protocolSpecificData))
-	return x
+// WithProtocolSpecificData sets the protocol_specific_data field of the AECP Vendor Unique message.
+func (aavm *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificData obj.Object) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setProtocolSpecificData:"), objref.IDOf(protocolSpecificData))
+	return aavm
 }
 
-// WithMessageType the message_type field of the AECP message.
-func (x *AVB17221AECPVendorMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
-	return x
+// WithMessageType sets the message_type field of the AECP message.
+func (aavm *AVB17221AECPVendorMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setMessageType:"), messageType)
+	return aavm
 }
 
-// WithStatus the status field of the AECP message.
-func (x *AVB17221AECPVendorMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status field of the AECP message.
+func (aavm *AVB17221AECPVendorMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setStatus:"), status)
+	return aavm
 }
 
-// WithTargetEntityID the target_entity_id field of the AECP message.
-func (x *AVB17221AECPVendorMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetEntityID:"), targetEntityID)
-	return x
+// WithTargetEntityID sets the target_entity_id field of the AECP message.
+func (aavm *AVB17221AECPVendorMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setTargetEntityID:"), targetEntityID)
+	return aavm
 }
 
-// WithControllerEntityID the controller_entity_id field of the AECP message.
-func (x *AVB17221AECPVendorMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
-	return x
+// WithControllerEntityID sets the controller_entity_id field of the AECP message.
+func (aavm *AVB17221AECPVendorMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
+	return aavm
 }
 
-// WithSequenceID the sequence_id field of the AECP message.
-func (x *AVB17221AECPVendorMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
-	return x
+// WithSequenceID sets the sequence_id field of the AECP message.
+func (aavm *AVB17221AECPVendorMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setSequenceID:"), sequenceID)
+	return aavm
 }
 
-// WithSourceMAC the source_mac field of the AECP message.
-func (x *AVB17221AECPVendorMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
-	return x
+// WithSourceMAC sets the source_mac field of the AECP message.
+func (aavm *AVB17221AECPVendorMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
+	return aavm
 }
 
-// ProtocolID the protocol_id field of the AECP Vendor Unique message.
-func (x *AVB17221AECPVendorMessage) ProtocolID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("protocolID"))
+// ProtocolID returns the protocol_id field of the AECP Vendor Unique message.
+func (aavm *AVB17221AECPVendorMessage) ProtocolID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(aavm), objc.RegisterName("protocolID"))
 	return _r
 }
 
-// SetProtocolID wraps the corresponding Objective-C method.
-func (x *AVB17221AECPVendorMessage) SetProtocolID(protocolID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolID:"), protocolID)
-}
-
-// ProtocolSpecificData the protocol_specific_data field of the AECP Vendor Unique message.
-func (x *AVB17221AECPVendorMessage) ProtocolSpecificData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocolSpecificData"))
+// ProtocolSpecificData returns the protocol_specific_data field of the AECP Vendor Unique message.
+func (aavm *AVB17221AECPVendorMessage) ProtocolSpecificData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("protocolSpecificData"))
 	return obj.Wrap(_r)
 }
-
-// SetProtocolSpecificData wraps the corresponding Objective-C method.
-func (x *AVB17221AECPVendorMessage) SetProtocolSpecificData(protocolSpecificData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolSpecificData:"), objref.IDOf(protocolSpecificData))
-}
-
-// AVB17221AECPVendorMessageable is the interface implemented by [AVB17221AECPVendorMessage], for mocking and DI.
-type AVB17221AECPVendorMessageable interface {
-	obj.Object
-	WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage
-	WithProtocolSpecificData(protocolSpecificData obj.Object) *AVB17221AECPVendorMessage
-	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPVendorMessage
-	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPVendorMessage
-	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage
-	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage
-	WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage
-	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPVendorMessage
-	ProtocolID() uint64
-	SetProtocolID(protocolID uint64)
-	ProtocolSpecificData() obj.Object
-	SetProtocolSpecificData(protocolSpecificData obj.Object)
-}
-
-var _ AVB17221AECPVendorMessageable = (*AVB17221AECPVendorMessage)(nil)
 
 var _ AVB17221AECPMessageProvider = (*AVB17221AECPVendorMessage)(nil)

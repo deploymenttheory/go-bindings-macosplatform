@@ -54,26 +54,26 @@ func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string,
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ScriptClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptClassDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (scd *ScriptClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptClassDescription {
+	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return scd
 }
 
 // MatchesAppleEventCode returns a Boolean value indicating whether a primary or secondary Apple event code in the receiver matches the passed code.
-func (x *ScriptClassDescription) MatchesAppleEventCode(appleEventCode int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesAppleEventCode:"), appleEventCode)
+func (scd *ScriptClassDescription) MatchesAppleEventCode(appleEventCode int) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("matchesAppleEventCode:"), appleEventCode)
 	return _r
 }
 
 // SupportsCommand returns a Boolean value indicating whether the receiver or any superclass supports the specified command.
-func (x *ScriptClassDescription) SupportsCommand(commandDescription *ScriptCommandDescription) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsCommand:"), objref.IDOf(commandDescription))
+func (scd *ScriptClassDescription) SupportsCommand(commandDescription *ScriptCommandDescription) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("supportsCommand:"), objref.IDOf(commandDescription))
 	return _r
 }
 
 // TypeForKey returns the name of the declared type of the attribute or relationship identified by the passed key.
-func (x *ScriptClassDescription) TypeForKey(key string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) TypeForKey(key string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("typeForKey:"), purego.NSString(key))
 	if _r == 0 {
 		return ""
 	}
@@ -81,20 +81,20 @@ func (x *ScriptClassDescription) TypeForKey(key string) string {
 }
 
 // ClassDescriptionForKey returns the class description instance for the class type of the specified attribute or relationship.
-func (x *ScriptClassDescription) ClassDescriptionForKey(key string) *ScriptClassDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classDescriptionForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) ClassDescriptionForKey(key string) *ScriptClassDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("classDescriptionForKey:"), purego.NSString(key))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // AppleEventCodeForKey returns the Apple event code for the specified attribute or relationship in the receiver.
-func (x *ScriptClassDescription) AppleEventCodeForKey(key string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCodeForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) AppleEventCodeForKey(key string) int {
+	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCodeForKey:"), purego.NSString(key))
 	return _r
 }
 
 // KeyWithAppleEventCode given an Apple event code that identifies a property or element class, returns the key for the corresponding attribute, one-to-one relationship, or one-to-many relationship.
-func (x *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyWithAppleEventCode:"), appleEventCode)
+func (scd *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("keyWithAppleEventCode:"), appleEventCode)
 	if _r == 0 {
 		return ""
 	}
@@ -102,38 +102,38 @@ func (x *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode int) strin
 }
 
 // IsLocationRequiredToCreateForKey returns a Boolean value indicating whether an insertion location must be specified when creating a new object in the specified to-many relationship of the receiver.
-func (x *ScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocationRequiredToCreateForKey:"), purego.NSString(toManyRelationshipKey))
+func (scd *ScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("isLocationRequiredToCreateForKey:"), purego.NSString(toManyRelationshipKey))
 	return _r
 }
 
 // HasPropertyForKey returns a Boolean value indicating whether the described class has a property identified by the specified key.
-func (x *ScriptClassDescription) HasPropertyForKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPropertyForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) HasPropertyForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasPropertyForKey:"), purego.NSString(key))
 	return _r
 }
 
 // HasOrderedToManyRelationshipForKey returns a Boolean value indicating whether the described class has an ordered to-many relationship identified by the specified key.
-func (x *ScriptClassDescription) HasOrderedToManyRelationshipForKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOrderedToManyRelationshipForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) HasOrderedToManyRelationshipForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasOrderedToManyRelationshipForKey:"), purego.NSString(key))
 	return _r
 }
 
 // HasReadablePropertyForKey returns a Boolean value indicating whether the described class has a readable property identified by the specified key.
-func (x *ScriptClassDescription) HasReadablePropertyForKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasReadablePropertyForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) HasReadablePropertyForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasReadablePropertyForKey:"), purego.NSString(key))
 	return _r
 }
 
 // HasWritablePropertyForKey returns a Boolean value indicating whether the described class has a writable property identified by the specified key.
-func (x *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasWritablePropertyForKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("hasWritablePropertyForKey:"), purego.NSString(key))
 	return _r
 }
 
 // SuiteName wraps the corresponding Objective-C method.
-func (x *ScriptClassDescription) SuiteName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suiteName"))
+func (scd *ScriptClassDescription) SuiteName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
 	if _r == 0 {
 		return ""
 	}
@@ -141,8 +141,8 @@ func (x *ScriptClassDescription) SuiteName() string {
 }
 
 // ImplementationClassName wraps the corresponding Objective-C method.
-func (x *ScriptClassDescription) ImplementationClassName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("implementationClassName"))
+func (scd *ScriptClassDescription) ImplementationClassName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("implementationClassName"))
 	if _r == 0 {
 		return ""
 	}
@@ -150,20 +150,20 @@ func (x *ScriptClassDescription) ImplementationClassName() string {
 }
 
 // SuperclassDescription wraps the corresponding Objective-C method.
-func (x *ScriptClassDescription) SuperclassDescription() *ScriptClassDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superclassDescription"))
+func (scd *ScriptClassDescription) SuperclassDescription() *ScriptClassDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("superclassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // AppleEventCode wraps the corresponding Objective-C method.
-func (x *ScriptClassDescription) AppleEventCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCode"))
+func (scd *ScriptClassDescription) AppleEventCode() int {
+	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
 // DefaultSubcontainerAttributeKey wraps the corresponding Objective-C method.
-func (x *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultSubcontainerAttributeKey"))
+func (scd *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("defaultSubcontainerAttributeKey"))
 	if _r == 0 {
 		return ""
 	}
@@ -171,34 +171,9 @@ func (x *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
 }
 
 // IsReadOnlyKey returns a Boolean value indicating whether a specified property in the receiver is read-only.
-func (x *ScriptClassDescription) IsReadOnlyKey(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnlyKey:"), purego.NSString(key))
+func (scd *ScriptClassDescription) IsReadOnlyKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("isReadOnlyKey:"), purego.NSString(key))
 	return _r
 }
-
-// ScriptClassDescriptionable is the interface implemented by [ScriptClassDescription], for mocking and DI.
-type ScriptClassDescriptionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ScriptClassDescription
-	MatchesAppleEventCode(appleEventCode int) bool
-	SupportsCommand(commandDescription *ScriptCommandDescription) bool
-	TypeForKey(key string) string
-	ClassDescriptionForKey(key string) *ScriptClassDescription
-	AppleEventCodeForKey(key string) int
-	KeyWithAppleEventCode(appleEventCode int) string
-	IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool
-	HasPropertyForKey(key string) bool
-	HasOrderedToManyRelationshipForKey(key string) bool
-	HasReadablePropertyForKey(key string) bool
-	HasWritablePropertyForKey(key string) bool
-	SuiteName() string
-	ImplementationClassName() string
-	SuperclassDescription() *ScriptClassDescription
-	AppleEventCode() int
-	DefaultSubcontainerAttributeKey() string
-	IsReadOnlyKey(key string) bool
-}
-
-var _ ScriptClassDescriptionable = (*ScriptClassDescription)(nil)
 
 var _ ClassDescriptionProvider = (*ScriptClassDescription)(nil)

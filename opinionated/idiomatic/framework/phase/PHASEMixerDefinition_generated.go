@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,57 +45,34 @@ func mixerDefinitionAdopt(id objc.ID) *MixerDefinition {
 	return x
 }
 
-// WithGain the mixer’s volume.
-func (x *MixerDefinition) WithGain(gain float64) *MixerDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets the mixer’s volume.
+func (md *MixerDefinition) WithGain(gain float64) *MixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setGain:"), gain)
+	return md
 }
 
-// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
-func (x *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-	return x
+// WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
+func (md *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+	return md
 }
 
-// Gain linear gain scalar.
-func (x *MixerDefinition) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (md *MixerDefinition) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(md), objc.RegisterName("gain"))
 	return _r
 }
 
-// SetGain wraps the corresponding Objective-C method.
-func (x *MixerDefinition) SetGain(gain float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-}
-
-// GainMetaParameterDefinition optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
-func (x *MixerDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameterDefinition"))
+// GainMetaParameterDefinition returns optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+func (md *MixerDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("gainMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
-
-// SetGainMetaParameterDefinition wraps the corresponding Objective-C method.
-func (x *MixerDefinition) SetGainMetaParameterDefinition(gainMetaParameterDefinition *NumberMetaParameterDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-}
-
-// MixerDefinitionable is the interface implemented by [MixerDefinition], for mocking and DI.
-type MixerDefinitionable interface {
-	obj.Object
-	WithGain(gain float64) *MixerDefinition
-	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition
-	Gain() float64
-	SetGain(gain float64)
-	GainMetaParameterDefinition() *NumberMetaParameterDefinition
-	SetGainMetaParameterDefinition(gainMetaParameterDefinition *NumberMetaParameterDefinition)
-}
-
-var _ MixerDefinitionable = (*MixerDefinition)(nil)
 
 // isMixerDefinition marks MixerDefinition — and, by embedding promotion, its
 // subclasses — as a member of the MixerDefinition hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MixerDefinition) isMixerDefinition() {}
+func (md *MixerDefinition) isMixerDefinition() {}
 
 var _ MixerDefinitionProvider = (*MixerDefinition)(nil)
 

@@ -46,24 +46,24 @@ func serverAdopt(id objc.ID) *Server {
 }
 
 // Description returns the object's -description text.
-func (x *Server) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Server) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Server) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Server) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Server) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Server) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Server) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Server) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewServerWithNameBundleIdentifier creates and returns a server object from property list information contained in the provided bundle.
@@ -74,29 +74,19 @@ func NewServerWithNameBundleIdentifier(name string, bundleIdentifier string) *Se
 }
 
 // Bundle returns an NSBundle object for the input method.
-func (x *Server) Bundle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
+func (s *Server) Bundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
-// PaletteWillTerminate call this before terminating a palette IM. Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns NO the palette should not terminate.
-func (x *Server) PaletteWillTerminate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("paletteWillTerminate"))
+// PaletteWillTerminate reports whether call this before terminating a palette IM. Palettes need to be able to terminate. When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate. The palette can terminate safely if a value of true is returned. If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns false the palette should not terminate.
+func (s *Server) PaletteWillTerminate() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("paletteWillTerminate"))
 	return _r
 }
 
-// LastKeyEventWasDeadKey returns a BOOL indicating whether or not the last key press was a dead key.
-func (x *Server) LastKeyEventWasDeadKey() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lastKeyEventWasDeadKey"))
+// LastKeyEventWasDeadKey reports whether returns a BOOL indicating whether or not the last key press was a dead key.
+func (s *Server) LastKeyEventWasDeadKey() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("lastKeyEventWasDeadKey"))
 	return _r
 }
-
-// Serverable is the interface implemented by [Server], for mocking and DI.
-type Serverable interface {
-	obj.Object
-	Bundle() obj.Object
-	PaletteWillTerminate() bool
-	LastKeyEventWasDeadKey() bool
-}
-
-var _ Serverable = (*Server)(nil)

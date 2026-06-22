@@ -46,24 +46,24 @@ func speechSynthesisVoiceAdopt(id objc.ID) *SpeechSynthesisVoice {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechSynthesisVoice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ssv *SpeechSynthesisVoice) Description() string {
+	return rt.Description(objref.IDOf(ssv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechSynthesisVoice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ssv *SpeechSynthesisVoice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ssv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechSynthesisVoice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ssv *SpeechSynthesisVoice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ssv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechSynthesisVoice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ssv *SpeechSynthesisVoice) String() string {
+	return rt.Description(objref.IDOf(ssv))
 }
 
 // NewSpeechSynthesisVoice creates a new SpeechSynthesisVoice.
@@ -73,8 +73,8 @@ func NewSpeechSynthesisVoice() *SpeechSynthesisVoice {
 }
 
 // Language wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) Language() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (ssv *SpeechSynthesisVoice) Language() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *SpeechSynthesisVoice) Language() string {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (ssv *SpeechSynthesisVoice) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,8 +91,8 @@ func (x *SpeechSynthesisVoice) Identifier() string {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (ssv *SpeechSynthesisVoice) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -100,39 +100,25 @@ func (x *SpeechSynthesisVoice) Name() string {
 }
 
 // Quality wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) Quality() SpeechSynthesisVoiceQuality {
-	_r := objc.Send[SpeechSynthesisVoiceQuality](objref.IDOf(x), objc.RegisterName("quality"))
+func (ssv *SpeechSynthesisVoice) Quality() SpeechSynthesisVoiceQuality {
+	_r := objc.Send[SpeechSynthesisVoiceQuality](objref.IDOf(ssv), objc.RegisterName("quality"))
 	return _r
 }
 
 // Gender wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) Gender() SpeechSynthesisVoiceGender {
-	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(x), objc.RegisterName("gender"))
+func (ssv *SpeechSynthesisVoice) Gender() SpeechSynthesisVoiceGender {
+	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(ssv), objc.RegisterName("gender"))
 	return _r
 }
 
 // AudioFileSettings wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) AudioFileSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioFileSettings"))
+func (ssv *SpeechSynthesisVoice) AudioFileSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("audioFileSettings"))
 	return obj.Wrap(_r)
 }
 
 // VoiceTraits wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisVoice) VoiceTraits() SpeechSynthesisVoiceTraits {
-	_r := objc.Send[SpeechSynthesisVoiceTraits](objref.IDOf(x), objc.RegisterName("voiceTraits"))
+func (ssv *SpeechSynthesisVoice) VoiceTraits() SpeechSynthesisVoiceTraits {
+	_r := objc.Send[SpeechSynthesisVoiceTraits](objref.IDOf(ssv), objc.RegisterName("voiceTraits"))
 	return _r
 }
-
-// SpeechSynthesisVoiceable is the interface implemented by [SpeechSynthesisVoice], for mocking and DI.
-type SpeechSynthesisVoiceable interface {
-	obj.Object
-	Language() string
-	Identifier() string
-	Name() string
-	Quality() SpeechSynthesisVoiceQuality
-	Gender() SpeechSynthesisVoiceGender
-	AudioFileSettings() obj.Object
-	VoiceTraits() SpeechSynthesisVoiceTraits
-}
-
-var _ SpeechSynthesisVoiceable = (*SpeechSynthesisVoice)(nil)

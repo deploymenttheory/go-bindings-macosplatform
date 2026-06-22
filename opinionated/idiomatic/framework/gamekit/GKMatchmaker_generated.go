@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func matchmakerAdopt(id objc.ID) *Matchmaker {
 }
 
 // Description returns the object's -description text.
-func (x *Matchmaker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Matchmaker) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Matchmaker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Matchmaker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Matchmaker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Matchmaker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Matchmaker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Matchmaker) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMatchmaker creates a new Matchmaker.
@@ -75,15 +76,15 @@ func NewMatchmaker() *Matchmaker {
 }
 
 // WithInviteHandler sets the property and returns the receiver so calls can be chained.
-func (x *Matchmaker) WithInviteHandler(inviteHandler func(obj.Object, obj.Object)) *Matchmaker {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInviteHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { inviteHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+func (m *Matchmaker) WithInviteHandler(inviteHandler func(obj.Object, obj.Object)) *Matchmaker {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setInviteHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { inviteHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return m
 }
 
 // MatchForInvite creates a match from an invitation that the local player accepts.
 //
 // MatchForInvite blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) MatchForInvite(ctx context.Context, invite *Invite) (result *Match, err error) {
+func (m *Matchmaker) MatchForInvite(ctx context.Context, invite *Invite) (result *Match, err error) {
 	type _result struct {
 		val *Match
 		err error
@@ -95,7 +96,7 @@ func (x *Matchmaker) MatchForInvite(ctx context.Context, invite *Invite) (result
 		_o.val = MatchFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchForInvite:completionHandler:"), objref.IDOf(invite), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("matchForInvite:completionHandler:"), objref.IDOf(invite), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -108,7 +109,7 @@ func (x *Matchmaker) MatchForInvite(ctx context.Context, invite *Invite) (result
 // FindMatchForRequest initiates a request to find players for a peer-to-peer match.
 //
 // FindMatchForRequest blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) FindMatchForRequest(ctx context.Context, request *MatchRequest) (result *Match, err error) {
+func (m *Matchmaker) FindMatchForRequest(ctx context.Context, request *MatchRequest) (result *Match, err error) {
 	type _result struct {
 		val *Match
 		err error
@@ -120,7 +121,7 @@ func (x *Matchmaker) FindMatchForRequest(ctx context.Context, request *MatchRequ
 		_o.val = MatchFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findMatchForRequest:withCompletionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("findMatchForRequest:withCompletionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -133,7 +134,7 @@ func (x *Matchmaker) FindMatchForRequest(ctx context.Context, request *MatchRequ
 // FindPlayersForHostedRequest initiates a request to find players for a hosted match.
 //
 // FindPlayersForHostedRequest blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *MatchRequest) (result obj.Object, err error) {
+func (m *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *MatchRequest) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -145,7 +146,7 @@ func (x *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *M
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPlayersForHostedRequest:withCompletionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("findPlayersForHostedRequest:withCompletionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -158,7 +159,7 @@ func (x *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *M
 // FindMatchedPlayers initiates a request to find players for a hosted match that uses matchmaking rules.
 //
 // FindMatchedPlayers blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) FindMatchedPlayers(ctx context.Context, request *MatchRequest) (result *MatchedPlayers, err error) {
+func (m *Matchmaker) FindMatchedPlayers(ctx context.Context, request *MatchRequest) (result *MatchedPlayers, err error) {
 	type _result struct {
 		val *MatchedPlayers
 		err error
@@ -170,7 +171,7 @@ func (x *Matchmaker) FindMatchedPlayers(ctx context.Context, request *MatchReque
 		_o.val = MatchedPlayersFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findMatchedPlayers:withCompletionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("findMatchedPlayers:withCompletionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -183,14 +184,14 @@ func (x *Matchmaker) FindMatchedPlayers(ctx context.Context, request *MatchReque
 // AddPlayersToMatchMatchRequest invites additional players to an existing match.
 //
 // AddPlayersToMatchMatchRequest blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *Match, matchRequest *MatchRequest) error {
+func (m *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *Match, matchRequest *MatchRequest) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPlayersToMatch:matchRequest:completionHandler:"), objref.IDOf(match), objref.IDOf(matchRequest), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addPlayersToMatch:matchRequest:completionHandler:"), objref.IDOf(match), objref.IDOf(matchRequest), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -200,34 +201,34 @@ func (x *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *M
 }
 
 // Cancel cancels a matchmaking request.
-func (x *Matchmaker) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (m *Matchmaker) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancel"))
 }
 
 // CancelPendingInviteToPlayer cancels a pending invitation to another player.
-func (x *Matchmaker) CancelPendingInviteToPlayer(player *Player) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPendingInviteToPlayer:"), objref.IDOf(player))
+func (m *Matchmaker) CancelPendingInviteToPlayer(player *Player) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancelPendingInviteToPlayer:"), objref.IDOf(player))
 }
 
 // FinishMatchmakingForMatch informs the server when programmatic matchmaking finishes.
-func (x *Matchmaker) FinishMatchmakingForMatch(match *Match) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishMatchmakingForMatch:"), objref.IDOf(match))
+func (m *Matchmaker) FinishMatchmakingForMatch(match *Match) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("finishMatchmakingForMatch:"), objref.IDOf(match))
 }
 
 // StartBrowsingForNearbyPlayersWithHandler finds nearby players through Bluetooth or WiFi on the same subnet.
-func (x *Matchmaker) StartBrowsingForNearbyPlayersWithHandler(reachableHandler func(obj.Object, bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startBrowsingForNearbyPlayersWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { reachableHandler(obj.Wrap(_b0), _b1) }))
+func (m *Matchmaker) StartBrowsingForNearbyPlayersWithHandler(reachableHandler func(obj.Object, bool)) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("startBrowsingForNearbyPlayersWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { reachableHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // StopBrowsingForNearbyPlayers stops finding nearby players.
-func (x *Matchmaker) StopBrowsingForNearbyPlayers() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopBrowsingForNearbyPlayers"))
+func (m *Matchmaker) StopBrowsingForNearbyPlayers() {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("stopBrowsingForNearbyPlayers"))
 }
 
 // StartGroupActivityWithPlayerHandler begins a SharePlay activity for your game when a FaceTime call is active.
 //
 // StartGroupActivityWithPlayerHandler blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (result *Player, err error) {
+func (m *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (result *Player, err error) {
 	type _result struct {
 		val *Player
 		err error
@@ -238,7 +239,7 @@ func (x *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (r
 		_o.val = PlayerFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startGroupActivityWithPlayerHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("startGroupActivityWithPlayerHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -249,29 +250,24 @@ func (x *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (r
 }
 
 // StopGroupActivity ends a SharePlay activity for the entire group, which the local player activates.
-func (x *Matchmaker) StopGroupActivity() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopGroupActivity"))
-}
-
-// SetInviteHandler wraps the corresponding Objective-C method.
-func (x *Matchmaker) SetInviteHandler(inviteHandler func(obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInviteHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { inviteHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+func (m *Matchmaker) StopGroupActivity() {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("stopGroupActivity"))
 }
 
 // StartBrowsingForNearbyPlayersWithReachableHandler * This method is obsolete. It will never be invoked and its implementation does nothing**
-func (x *Matchmaker) StartBrowsingForNearbyPlayersWithReachableHandler(reachableHandler func(obj.Object, bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startBrowsingForNearbyPlayersWithReachableHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { reachableHandler(obj.Wrap(_b0), _b1) }))
+func (m *Matchmaker) StartBrowsingForNearbyPlayersWithReachableHandler(reachableHandler func(obj.Object, bool)) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("startBrowsingForNearbyPlayersWithReachableHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { reachableHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // CancelInviteToPlayer * This method is obsolete. It will never be invoked and its implementation does nothing**
-func (x *Matchmaker) CancelInviteToPlayer(playerID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelInviteToPlayer:"), purego.NSString(playerID))
+func (m *Matchmaker) CancelInviteToPlayer(playerID string) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancelInviteToPlayer:"), purego.NSString(playerID))
 }
 
 // FindPlayersForHostedMatchRequest initiates a request to find players for a hosted match.
 //
 // FindPlayersForHostedMatchRequest blocks until the operation completes or ctx is cancelled.
-func (x *Matchmaker) FindPlayersForHostedMatchRequest(ctx context.Context, request *MatchRequest) (result obj.Object, err error) {
+func (m *Matchmaker) FindPlayersForHostedMatchRequest(ctx context.Context, request *MatchRequest) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,7 +279,7 @@ func (x *Matchmaker) FindPlayersForHostedMatchRequest(ctx context.Context, reque
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPlayersForHostedMatchRequest:withCompletionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("findPlayersForHostedMatchRequest:withCompletionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -292,27 +288,3 @@ func (x *Matchmaker) FindPlayersForHostedMatchRequest(ctx context.Context, reque
 		return _zero, ctx.Err()
 	}
 }
-
-// Matchmakerable is the interface implemented by [Matchmaker], for mocking and DI.
-type Matchmakerable interface {
-	obj.Object
-	WithInviteHandler(inviteHandler func(obj.Object, obj.Object)) *Matchmaker
-	MatchForInvite(ctx context.Context, invite *Invite) (*Match, error)
-	FindMatchForRequest(ctx context.Context, request *MatchRequest) (*Match, error)
-	FindPlayersForHostedRequest(ctx context.Context, request *MatchRequest) (obj.Object, error)
-	FindMatchedPlayers(ctx context.Context, request *MatchRequest) (*MatchedPlayers, error)
-	AddPlayersToMatchMatchRequest(ctx context.Context, match *Match, matchRequest *MatchRequest) error
-	Cancel()
-	CancelPendingInviteToPlayer(player *Player)
-	FinishMatchmakingForMatch(match *Match)
-	StartBrowsingForNearbyPlayersWithHandler(reachableHandler func(obj.Object, bool))
-	StopBrowsingForNearbyPlayers()
-	StartGroupActivityWithPlayerHandler(ctx context.Context) (*Player, error)
-	StopGroupActivity()
-	SetInviteHandler(inviteHandler func(obj.Object, obj.Object))
-	StartBrowsingForNearbyPlayersWithReachableHandler(reachableHandler func(obj.Object, bool))
-	CancelInviteToPlayer(playerID string)
-	FindPlayersForHostedMatchRequest(ctx context.Context, request *MatchRequest) (obj.Object, error)
-}
-
-var _ Matchmakerable = (*Matchmaker)(nil)

@@ -53,66 +53,41 @@ func NewProjectChangeRequestWithProject(project *Project) *ProjectChangeRequest 
 	return projectChangeRequestAdopt(_id)
 }
 
-// WithTitle the title of the change request.
-func (x *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the change request.
+func (pcr *ProjectChangeRequest) WithTitle(title string) *ProjectChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return pcr
 }
 
-// WithProjectExtensionData compressed project-specific data to use in the change request.
-func (x *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
-	return x
+// WithProjectExtensionData sets compressed project-specific data to use in the change request.
+func (pcr *ProjectChangeRequest) WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
+	return pcr
 }
 
 // SetKeyAsset sets the key asset representing the project.
-func (x *ProjectChangeRequest) SetKeyAsset(keyAsset *Asset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyAsset:"), objref.IDOf(keyAsset))
+func (pcr *ProjectChangeRequest) SetKeyAsset(keyAsset *Asset) {
+	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setKeyAsset:"), objref.IDOf(keyAsset))
 }
 
 // SetProjectPreviewImage updates the project preview in Photos.
-func (x *ProjectChangeRequest) SetProjectPreviewImage(previewImage obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectPreviewImage:"), objref.IDOf(previewImage))
+func (pcr *ProjectChangeRequest) SetProjectPreviewImage(previewImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setProjectPreviewImage:"), objref.IDOf(previewImage))
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *ProjectChangeRequest) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (pcr *ProjectChangeRequest) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *ProjectChangeRequest) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// ProjectExtensionData the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
-func (x *ProjectChangeRequest) ProjectExtensionData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectExtensionData"))
+// ProjectExtensionData returns the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
+func (pcr *ProjectChangeRequest) ProjectExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("projectExtensionData"))
 	return obj.Wrap(_r)
 }
-
-// SetProjectExtensionData the projectExtensionData property is intended for storage of compressed, project specific data only. Do not include things like rasterized images that can be locally cached in this data. The total size of stored data is limited to 5 MB. Attempting to store more data than allowed will result in an error.
-func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjectExtensionData:"), objref.IDOf(projectExtensionData))
-}
-
-// ProjectChangeRequestable is the interface implemented by [ProjectChangeRequest], for mocking and DI.
-type ProjectChangeRequestable interface {
-	obj.Object
-	WithTitle(title string) *ProjectChangeRequest
-	WithProjectExtensionData(projectExtensionData obj.Object) *ProjectChangeRequest
-	SetKeyAsset(keyAsset *Asset)
-	SetProjectPreviewImage(previewImage obj.Object)
-	Title() string
-	SetTitle(title string)
-	ProjectExtensionData() obj.Object
-	SetProjectExtensionData(projectExtensionData obj.Object)
-}
-
-var _ ProjectChangeRequestable = (*ProjectChangeRequest)(nil)
 
 var _ ChangeRequestProvider = (*ProjectChangeRequest)(nil)

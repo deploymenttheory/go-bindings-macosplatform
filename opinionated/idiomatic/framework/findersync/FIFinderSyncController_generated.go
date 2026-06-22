@@ -6,6 +6,7 @@ package findersync
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func finderSyncControllerAdopt(id objc.ID) *FinderSyncController {
 }
 
 // Description returns the object's -description text.
-func (x *FinderSyncController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fsc *FinderSyncController) Description() string {
+	return rt.Description(objref.IDOf(fsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FinderSyncController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fsc *FinderSyncController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FinderSyncController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fsc *FinderSyncController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FinderSyncController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fsc *FinderSyncController) String() string {
+	return rt.Description(objref.IDOf(fsc))
 }
 
 // NewFinderSyncController creates a new FinderSyncController.
@@ -74,53 +75,53 @@ func NewFinderSyncController() *FinderSyncController {
 	return finderSyncControllerAdopt(_id)
 }
 
-// WithDirectoryURLs the directories managed by this extension.
-func (x *FinderSyncController) WithDirectoryURLs(directoryURLs obj.Object) *FinderSyncController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryURLs:"), objref.IDOf(directoryURLs))
-	return x
+// WithDirectoryURLs sets the directories managed by this extension.
+func (fsc *FinderSyncController) WithDirectoryURLs(directoryURLs obj.Object) *FinderSyncController {
+	objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("setDirectoryURLs:"), objref.IDOf(directoryURLs))
+	return fsc
 }
 
 // SetBadgeImageLabelForBadgeIdentifier sets the badge image and label for the given ID.
-func (x *FinderSyncController) SetBadgeImageLabelForBadgeIdentifier(image obj.Object, label string, badgeID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeImage:label:forBadgeIdentifier:"), objref.IDOf(image), purego.NSString(label), purego.NSString(badgeID))
+func (fsc *FinderSyncController) SetBadgeImageLabelForBadgeIdentifier(image obj.Object, label string, badgeID string) {
+	objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("setBadgeImage:label:forBadgeIdentifier:"), objref.IDOf(image), purego.NSString(label), purego.NSString(badgeID))
 }
 
 // SetBadgeIdentifierForURL sets the badge for a file or directory.
-func (x *FinderSyncController) SetBadgeIdentifierForURL(badgeID string, url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeIdentifier:forURL:"), purego.NSString(badgeID), rt.FileURL(url))
+func (fsc *FinderSyncController) SetBadgeIdentifierForURL(badgeID string, url string) {
+	objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("setBadgeIdentifier:forURL:"), purego.NSString(badgeID), rt.FileURL(url))
 }
 
 // TargetedURL returns the URL of the Finder’s current target.
-func (x *FinderSyncController) TargetedURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetedURL"))
+func (fsc *FinderSyncController) TargetedURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("targetedURL"))
 	return obj.Wrap(_r)
 }
 
 // SelectedItemURLs returns an array of selected items.
 //
 // SelectedItemURLs returns the collection as a Go slice.
-func (x *FinderSyncController) SelectedItemURLs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedItemURLs"))
+func (fsc *FinderSyncController) SelectedItemURLs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("selectedItemURLs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LastUsedDateForItemWithURL wraps the corresponding Objective-C method.
-func (x *FinderSyncController) LastUsedDateForItemWithURL(itemURL string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastUsedDateForItemWithURL:"), rt.FileURL(itemURL))
+func (fsc *FinderSyncController) LastUsedDateForItemWithURL(itemURL string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("lastUsedDateForItemWithURL:"), rt.FileURL(itemURL))
 	return obj.Wrap(_r)
 }
 
 // SetLastUsedDateForItemWithURLCompletion wraps the corresponding Objective-C method.
 //
 // SetLastUsedDateForItemWithURLCompletion blocks until the operation completes or ctx is cancelled.
-func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx context.Context, lastUsedDate obj.Object, itemURL string) error {
+func (fsc *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx context.Context, lastUsedDate obj.Object, itemURL string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastUsedDate:forItemWithURL:completion:"), objref.IDOf(lastUsedDate), rt.FileURL(itemURL), _block)
+	objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("setLastUsedDate:forItemWithURL:completion:"), objref.IDOf(lastUsedDate), rt.FileURL(itemURL), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -130,22 +131,22 @@ func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx conte
 }
 
 // TagDataForItemWithURL wraps the corresponding Objective-C method.
-func (x *FinderSyncController) TagDataForItemWithURL(itemURL string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagDataForItemWithURL:"), rt.FileURL(itemURL))
+func (fsc *FinderSyncController) TagDataForItemWithURL(itemURL string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("tagDataForItemWithURL:"), rt.FileURL(itemURL))
 	return obj.Wrap(_r)
 }
 
 // SetTagDataForItemWithURLCompletion wraps the corresponding Objective-C method.
 //
 // SetTagDataForItemWithURLCompletion blocks until the operation completes or ctx is cancelled.
-func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Context, tagData obj.Object, itemURL string) error {
+func (fsc *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Context, tagData obj.Object, itemURL string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTagData:forItemWithURL:completion:"), objref.IDOf(tagData), rt.FileURL(itemURL), _block)
+	objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("setTagData:forItemWithURL:completion:"), objref.IDOf(tagData), rt.FileURL(itemURL), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -154,31 +155,8 @@ func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Co
 	}
 }
 
-// DirectoryURLs the directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
-func (x *FinderSyncController) DirectoryURLs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryURLs"))
+// DirectoryURLs returns the directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
+func (fsc *FinderSyncController) DirectoryURLs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("directoryURLs"))
 	return obj.Wrap(_r)
 }
-
-// SetDirectoryURLs the directories managed by this extension. The extension receives “FIFinderSync/beginObservingDirectoryAtURL:“ and “FIFinderSync/endObservingDirectoryAtURL:“ messages for every directory in this set and for all of their subdirectories. Always set `directoryURLs` when the extension starts. If there are no directories to watch, set `directoryURLs` to an empty set.
-func (x *FinderSyncController) SetDirectoryURLs(directoryURLs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectoryURLs:"), objref.IDOf(directoryURLs))
-}
-
-// FinderSyncControllerable is the interface implemented by [FinderSyncController], for mocking and DI.
-type FinderSyncControllerable interface {
-	obj.Object
-	WithDirectoryURLs(directoryURLs obj.Object) *FinderSyncController
-	SetBadgeImageLabelForBadgeIdentifier(image obj.Object, label string, badgeID string)
-	SetBadgeIdentifierForURL(badgeID string, url string)
-	TargetedURL() obj.Object
-	SelectedItemURLs() []obj.Object
-	LastUsedDateForItemWithURL(itemURL string) obj.Object
-	SetLastUsedDateForItemWithURLCompletion(ctx context.Context, lastUsedDate obj.Object, itemURL string) error
-	TagDataForItemWithURL(itemURL string) obj.Object
-	SetTagDataForItemWithURLCompletion(ctx context.Context, tagData obj.Object, itemURL string) error
-	DirectoryURLs() obj.Object
-	SetDirectoryURLs(directoryURLs obj.Object)
-}
-
-var _ FinderSyncControllerable = (*FinderSyncController)(nil)

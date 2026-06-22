@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewVirtioSoundDeviceInputStreamConfiguration() *VirtioSoundDeviceInputStrea
 	return virtioSoundDeviceInputStreamConfigurationAdopt(_id)
 }
 
-// WithSource an audio stream source that defines how the host supplies audio data for the guest.
-func (x *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
-	return x
+// WithSource sets an audio stream source that defines how the host supplies audio data for the guest.
+func (vsdisc *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vsdisc), objc.RegisterName("setSource:"), objref.IDOf(source))
+	return vsdisc
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (vsdisc *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
+	_r := objc.Send[objc.ID](objref.IDOf(vsdisc), objc.RegisterName("source"))
 	return AudioInputStreamSourceFromID(_r)
 }
-
-// SetSource wraps the corresponding Objective-C method.
-func (x *VirtioSoundDeviceInputStreamConfiguration) SetSource(source *AudioInputStreamSource) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
-}
-
-// VirtioSoundDeviceInputStreamConfigurationable is the interface implemented by [VirtioSoundDeviceInputStreamConfiguration], for mocking and DI.
-type VirtioSoundDeviceInputStreamConfigurationable interface {
-	obj.Object
-	WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration
-	Source() *AudioInputStreamSource
-	SetSource(source *AudioInputStreamSource)
-}
-
-var _ VirtioSoundDeviceInputStreamConfigurationable = (*VirtioSoundDeviceInputStreamConfiguration)(nil)
 
 var _ VirtioSoundDeviceStreamConfigurationProvider = (*VirtioSoundDeviceInputStreamConfiguration)(nil)

@@ -46,24 +46,24 @@ func genericMachineIdentifierAdopt(id objc.ID) *GenericMachineIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *GenericMachineIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gmi *GenericMachineIdentifier) Description() string {
+	return rt.Description(objref.IDOf(gmi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GenericMachineIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gmi *GenericMachineIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gmi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GenericMachineIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gmi *GenericMachineIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gmi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GenericMachineIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gmi *GenericMachineIdentifier) String() string {
+	return rt.Description(objref.IDOf(gmi))
 }
 
 // NewGenericMachineIdentifier creates a new GenericMachineIdentifier.
@@ -80,15 +80,7 @@ func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation obj.Ob
 }
 
 // DataRepresentation wraps the corresponding Objective-C method.
-func (x *GenericMachineIdentifier) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+func (gmi *GenericMachineIdentifier) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gmi), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// GenericMachineIdentifierable is the interface implemented by [GenericMachineIdentifier], for mocking and DI.
-type GenericMachineIdentifierable interface {
-	obj.Object
-	DataRepresentation() obj.Object
-}
-
-var _ GenericMachineIdentifierable = (*GenericMachineIdentifier)(nil)

@@ -46,24 +46,24 @@ func pGDisplayModeAdopt(id objc.ID) *PGDisplayMode {
 }
 
 // Description returns the object's -description text.
-func (x *PGDisplayMode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pdm *PGDisplayMode) Description() string {
+	return rt.Description(objref.IDOf(pdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PGDisplayMode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pdm *PGDisplayMode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PGDisplayMode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pdm *PGDisplayMode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PGDisplayMode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pdm *PGDisplayMode) String() string {
+	return rt.Description(objref.IDOf(pdm))
 }
 
 // NewPGDisplayMode creates a new PGDisplayMode.
@@ -72,16 +72,8 @@ func NewPGDisplayMode() *PGDisplayMode {
 	return pGDisplayModeAdopt(_id)
 }
 
-// RefreshRate refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
-func (x *PGDisplayMode) RefreshRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("refreshRate"))
+// RefreshRate returns refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
+func (pdm *PGDisplayMode) RefreshRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(pdm), objc.RegisterName("refreshRate"))
 	return _r
 }
-
-// PGDisplayModeable is the interface implemented by [PGDisplayMode], for mocking and DI.
-type PGDisplayModeable interface {
-	obj.Object
-	RefreshRate() float64
-}
-
-var _ PGDisplayModeable = (*PGDisplayMode)(nil)

@@ -46,24 +46,24 @@ func distantObjectRequestAdopt(id objc.ID) *DistantObjectRequest {
 }
 
 // Description returns the object's -description text.
-func (x *DistantObjectRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dor *DistantObjectRequest) Description() string {
+	return rt.Description(objref.IDOf(dor))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistantObjectRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dor *DistantObjectRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dor), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistantObjectRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dor *DistantObjectRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dor), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DistantObjectRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dor *DistantObjectRequest) String() string {
+	return rt.Description(objref.IDOf(dor))
 }
 
 // NewDistantObjectRequest creates a new DistantObjectRequest.
@@ -73,42 +73,30 @@ func NewDistantObjectRequest() *DistantObjectRequest {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DistantObjectRequest) WithScriptingProperties(scriptingProperties obj.Object) *DistantObjectRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dor *DistantObjectRequest) WithScriptingProperties(scriptingProperties obj.Object) *DistantObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dor
 }
 
 // ReplyWithException sends a reply back to the remote object making the distant object request.
-func (x *DistantObjectRequest) ReplyWithException(exception *Exception) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyWithException:"), objref.IDOf(exception))
+func (dor *DistantObjectRequest) ReplyWithException(exception *Exception) {
+	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("replyWithException:"), objref.IDOf(exception))
 }
 
 // Invocation wraps the corresponding Objective-C method.
-func (x *DistantObjectRequest) Invocation() *Invocation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invocation"))
+func (dor *DistantObjectRequest) Invocation() *Invocation {
+	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
 // Connection wraps the corresponding Objective-C method.
-func (x *DistantObjectRequest) Connection() *Connection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
+func (dor *DistantObjectRequest) Connection() *Connection {
+	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
 // Conversation wraps the corresponding Objective-C method.
-func (x *DistantObjectRequest) Conversation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conversation"))
+func (dor *DistantObjectRequest) Conversation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("conversation"))
 	return obj.Wrap(_r)
 }
-
-// DistantObjectRequestable is the interface implemented by [DistantObjectRequest], for mocking and DI.
-type DistantObjectRequestable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DistantObjectRequest
-	ReplyWithException(exception *Exception)
-	Invocation() *Invocation
-	Connection() *Connection
-	Conversation() obj.Object
-}
-
-var _ DistantObjectRequestable = (*DistantObjectRequest)(nil)

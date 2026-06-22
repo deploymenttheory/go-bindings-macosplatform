@@ -46,24 +46,24 @@ func outputSettingsAssistantAdopt(id objc.ID) *OutputSettingsAssistant {
 }
 
 // Description returns the object's -description text.
-func (x *OutputSettingsAssistant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (osa *OutputSettingsAssistant) Description() string {
+	return rt.Description(objref.IDOf(osa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OutputSettingsAssistant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (osa *OutputSettingsAssistant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(osa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OutputSettingsAssistant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (osa *OutputSettingsAssistant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(osa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OutputSettingsAssistant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (osa *OutputSettingsAssistant) String() string {
+	return rt.Description(objref.IDOf(osa))
 }
 
 // NewOutputSettingsAssistant creates a new OutputSettingsAssistant.
@@ -72,30 +72,20 @@ func NewOutputSettingsAssistant() *OutputSettingsAssistant {
 	return outputSettingsAssistantAdopt(_id)
 }
 
-// AudioSettings a dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
-func (x *OutputSettingsAssistant) AudioSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
+// AudioSettings returns a dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
+func (osa *OutputSettingsAssistant) AudioSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("audioSettings"))
 	return obj.Wrap(_r)
 }
 
-// VideoSettings a dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
-func (x *OutputSettingsAssistant) VideoSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSettings"))
+// VideoSettings returns a dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
+func (osa *OutputSettingsAssistant) VideoSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("videoSettings"))
 	return obj.Wrap(_r)
 }
 
-// OutputFileType a UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
-func (x *OutputSettingsAssistant) OutputFileType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileType"))
+// OutputFileType returns a UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
+func (osa *OutputSettingsAssistant) OutputFileType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("outputFileType"))
 	return obj.Wrap(_r)
 }
-
-// OutputSettingsAssistantable is the interface implemented by [OutputSettingsAssistant], for mocking and DI.
-type OutputSettingsAssistantable interface {
-	obj.Object
-	AudioSettings() obj.Object
-	VideoSettings() obj.Object
-	OutputFileType() obj.Object
-}
-
-var _ OutputSettingsAssistantable = (*OutputSettingsAssistant)(nil)

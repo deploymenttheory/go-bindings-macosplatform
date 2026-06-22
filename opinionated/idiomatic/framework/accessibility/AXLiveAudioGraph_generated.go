@@ -46,24 +46,24 @@ func liveAudioGraphAdopt(id objc.ID) *LiveAudioGraph {
 }
 
 // Description returns the object's -description text.
-func (x *LiveAudioGraph) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lag *LiveAudioGraph) Description() string {
+	return rt.Description(objref.IDOf(lag))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LiveAudioGraph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lag *LiveAudioGraph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lag), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LiveAudioGraph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lag *LiveAudioGraph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lag), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LiveAudioGraph) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lag *LiveAudioGraph) String() string {
+	return rt.Description(objref.IDOf(lag))
 }
 
 // NewLiveAudioGraph creates a new LiveAudioGraph.
@@ -71,10 +71,3 @@ func NewLiveAudioGraph() *LiveAudioGraph {
 	_id := objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("new"))
 	return liveAudioGraphAdopt(_id)
 }
-
-// LiveAudioGraphable is the interface implemented by [LiveAudioGraph], for mocking and DI.
-type LiveAudioGraphable interface {
-	obj.Object
-}
-
-var _ LiveAudioGraphable = (*LiveAudioGraph)(nil)

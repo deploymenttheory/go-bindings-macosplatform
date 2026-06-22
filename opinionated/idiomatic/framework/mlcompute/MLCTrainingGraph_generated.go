@@ -53,135 +53,110 @@ func NewTrainingGraph() *TrainingGraph {
 }
 
 // AddInputsLossLabels adds the inputs and loss label inputs that you specify to the training graph.
-func (x *TrainingGraph) AddInputsLossLabels(inputs obj.Object, lossLabels obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:"), objref.IDOf(inputs), objref.IDOf(lossLabels))
+func (tg *TrainingGraph) AddInputsLossLabels(inputs obj.Object, lossLabels obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("addInputs:lossLabels:"), objref.IDOf(inputs), objref.IDOf(lossLabels))
 	return _r
 }
 
 // AddInputsLossLabelsLossLabelWeights adds the inputs, loss labels, and loss label weights that you specify to the training graph.
-func (x *TrainingGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
+func (tg *TrainingGraph) AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("addInputs:lossLabels:lossLabelWeights:"), objref.IDOf(inputs), objref.IDOf(lossLabels), objref.IDOf(lossLabelWeights))
 	return _r
 }
 
 // AddOutputs adds the outputs to the training graph you specify.
-func (x *TrainingGraph) AddOutputs(outputs obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
+func (tg *TrainingGraph) AddOutputs(outputs obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("addOutputs:"), objref.IDOf(outputs))
 	return _r
 }
 
 // StopGradientForTensors adds the tensors that you specify, to indicate which contributions the graph excludes when computing gradients during gradient pass.
-func (x *TrainingGraph) StopGradientForTensors(tensors []*Tensor) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopGradientForTensors:"), purego.SliceToNSArray(tensors, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+func (tg *TrainingGraph) StopGradientForTensors(tensors []*Tensor) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("stopGradientForTensors:"), purego.SliceToNSArray(tensors, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // CompileWithOptionsDevice compiles the training graph for the options and device you specify.
-func (x *TrainingGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
+func (tg *TrainingGraph) CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("compileWithOptions:device:"), options, objref.IDOf(device))
 	return _r
 }
 
 // CompileWithOptionsDeviceInputTensorsInputTensorsData compiles the training graph for the options, device, and input tensors you specify.
-func (x *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
+func (tg *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:"), options, objref.IDOf(device), objref.IDOf(inputTensors), objref.IDOf(inputTensorsData))
 	return _r
 }
 
 // CompileOptimizer compiles the optimizer to use with a training graph you specify.
-func (x *TrainingGraph) CompileOptimizer(optimizer *Optimizer) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileOptimizer:"), objref.IDOf(optimizer))
+func (tg *TrainingGraph) CompileOptimizer(optimizer *Optimizer) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("compileOptimizer:"), objref.IDOf(optimizer))
 	return _r
 }
 
 // LinkWithGraphs links the training graphs you specify.
-func (x *TrainingGraph) LinkWithGraphs(graphs []*TrainingGraph) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *TrainingGraph) objc.ID { return objref.IDOf(_v) }))
+func (tg *TrainingGraph) LinkWithGraphs(graphs []*TrainingGraph) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("linkWithGraphs:"), purego.SliceToNSArray(graphs, func(_v *TrainingGraph) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // GradientTensorForInput gets the gradient tensor for the input tensor you specify.
-func (x *TrainingGraph) GradientTensorForInput(input *Tensor) *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientTensorForInput:"), objref.IDOf(input))
+func (tg *TrainingGraph) GradientTensorForInput(input *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("gradientTensorForInput:"), objref.IDOf(input))
 	return TensorFromID(_r)
 }
 
 // SourceGradientTensorsForLayer gets the source gradient tensors for the layer in the training graph you specify.
-func (x *TrainingGraph) SourceGradientTensorsForLayer(layer *Layer) []*Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceGradientTensorsForLayer:"), objref.IDOf(layer))
+func (tg *TrainingGraph) SourceGradientTensorsForLayer(layer *Layer) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("sourceGradientTensorsForLayer:"), objref.IDOf(layer))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
 // ResultGradientTensorsForLayer gets the result gradient tensors for the layer in the training graph you specify.
-func (x *TrainingGraph) ResultGradientTensorsForLayer(layer *Layer) []*Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultGradientTensorsForLayer:"), objref.IDOf(layer))
+func (tg *TrainingGraph) ResultGradientTensorsForLayer(layer *Layer) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("resultGradientTensorsForLayer:"), objref.IDOf(layer))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
 // GradientDataForParameterLayer gets the gradient data for the trainable parameter and associated layer you specify.
-func (x *TrainingGraph) GradientDataForParameterLayer(parameter *Tensor, layer *Layer) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientDataForParameter:layer:"), objref.IDOf(parameter), objref.IDOf(layer))
+func (tg *TrainingGraph) GradientDataForParameterLayer(parameter *Tensor, layer *Layer) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("gradientDataForParameter:layer:"), objref.IDOf(parameter), objref.IDOf(layer))
 	return obj.Wrap(_r)
 }
 
 // AllocateUserGradientForTensor allocates an entry for a gradient for the result tensor you specify.
-func (x *TrainingGraph) AllocateUserGradientForTensor(tensor *Tensor) *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocateUserGradientForTensor:"), objref.IDOf(tensor))
+func (tg *TrainingGraph) AllocateUserGradientForTensor(tensor *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("allocateUserGradientForTensor:"), objref.IDOf(tensor))
 	return TensorFromID(_r)
 }
 
 // SynchronizeUpdates synchronizes updates from device memory.
-func (x *TrainingGraph) SynchronizeUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizeUpdates"))
+func (tg *TrainingGraph) SynchronizeUpdates() {
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("synchronizeUpdates"))
 }
 
 // SetTrainingTensorParameters sets the input tensor parameters, which the optimizer then updates.
-func (x *TrainingGraph) SetTrainingTensorParameters(parameters []*TensorParameter) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setTrainingTensorParameters:"), purego.SliceToNSArray(parameters, func(_v *TensorParameter) objc.ID { return objref.IDOf(_v) }))
+func (tg *TrainingGraph) SetTrainingTensorParameters(parameters []*TensorParameter) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("setTrainingTensorParameters:"), purego.SliceToNSArray(parameters, func(_v *TensorParameter) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // BindOptimizerDataDeviceDataWithTensor associates the optimizer and device data you specify along with the tensor.
-func (x *TrainingGraph) BindOptimizerDataDeviceDataWithTensor(data []*TensorData, deviceData []*TensorOptimizerDeviceData, tensor *Tensor) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindOptimizerData:deviceData:withTensor:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(tensor))
+func (tg *TrainingGraph) BindOptimizerDataDeviceDataWithTensor(data []*TensorData, deviceData []*TensorOptimizerDeviceData, tensor *Tensor) bool {
+	_r := objc.Send[bool](objref.IDOf(tg), objc.RegisterName("bindOptimizerData:deviceData:withTensor:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(tensor))
 	return _r
 }
 
-// Optimizer the optimizer to be used with the training graph
-func (x *TrainingGraph) Optimizer() *Optimizer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizer"))
+// Optimizer returns the optimizer to be used with the training graph
+func (tg *TrainingGraph) Optimizer() *Optimizer {
+	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("optimizer"))
 	return OptimizerFromID(_r)
 }
 
 // DeviceMemorySize returns the total size in bytes of device memory used for all intermediate tensors for forward, gradient passes and optimizer update for all layers in the training graph. We recommend executing an iteration before checking the device memory size as the buffers needed get allocated when the corresponding pass such as gradient, optimizer update is executed.
-func (x *TrainingGraph) DeviceMemorySize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceMemorySize"))
+func (tg *TrainingGraph) DeviceMemorySize() int {
+	_r := objc.Send[int](objref.IDOf(tg), objc.RegisterName("deviceMemorySize"))
 	return _r
 }
-
-// TrainingGraphable is the interface implemented by [TrainingGraph], for mocking and DI.
-type TrainingGraphable interface {
-	obj.Object
-	AddInputsLossLabels(inputs obj.Object, lossLabels obj.Object) bool
-	AddInputsLossLabelsLossLabelWeights(inputs obj.Object, lossLabels obj.Object, lossLabelWeights obj.Object) bool
-	AddOutputs(outputs obj.Object) bool
-	StopGradientForTensors(tensors []*Tensor) bool
-	CompileWithOptionsDevice(options GraphCompilationOptions, device *Device) bool
-	CompileWithOptionsDeviceInputTensorsInputTensorsData(options GraphCompilationOptions, device *Device, inputTensors obj.Object, inputTensorsData obj.Object) bool
-	CompileOptimizer(optimizer *Optimizer) bool
-	LinkWithGraphs(graphs []*TrainingGraph) bool
-	GradientTensorForInput(input *Tensor) *Tensor
-	SourceGradientTensorsForLayer(layer *Layer) []*Tensor
-	ResultGradientTensorsForLayer(layer *Layer) []*Tensor
-	GradientDataForParameterLayer(parameter *Tensor, layer *Layer) obj.Object
-	AllocateUserGradientForTensor(tensor *Tensor) *Tensor
-	SynchronizeUpdates()
-	SetTrainingTensorParameters(parameters []*TensorParameter) bool
-	BindOptimizerDataDeviceDataWithTensor(data []*TensorData, deviceData []*TensorOptimizerDeviceData, tensor *Tensor) bool
-	Optimizer() *Optimizer
-	DeviceMemorySize() int
-}
-
-var _ TrainingGraphable = (*TrainingGraph)(nil)
 
 var _ GraphProvider = (*TrainingGraph)(nil)

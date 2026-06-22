@@ -46,24 +46,24 @@ func audioEnvironmentReverbParametersAdopt(id objc.ID) *AudioEnvironmentReverbPa
 }
 
 // Description returns the object's -description text.
-func (x *AudioEnvironmentReverbParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aerp *AudioEnvironmentReverbParameters) Description() string {
+	return rt.Description(objref.IDOf(aerp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioEnvironmentReverbParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aerp *AudioEnvironmentReverbParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aerp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioEnvironmentReverbParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aerp *AudioEnvironmentReverbParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aerp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioEnvironmentReverbParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aerp *AudioEnvironmentReverbParameters) String() string {
+	return rt.Description(objref.IDOf(aerp))
 }
 
 // NewAudioEnvironmentReverbParameters creates a new AudioEnvironmentReverbParameters.
@@ -72,62 +72,37 @@ func NewAudioEnvironmentReverbParameters() *AudioEnvironmentReverbParameters {
 	return audioEnvironmentReverbParametersAdopt(_id)
 }
 
-// WithEnable a Boolean value that indicates whether reverberation is in an enabled state.
-func (x *AudioEnvironmentReverbParameters) WithEnable(enable bool) *AudioEnvironmentReverbParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnable:"), enable)
-	return x
+// WithEnable sets a Boolean value that indicates whether reverberation is in an enabled state.
+func (aerp *AudioEnvironmentReverbParameters) WithEnable(enable bool) *AudioEnvironmentReverbParameters {
+	objc.Send[objc.ID](objref.IDOf(aerp), objc.RegisterName("setEnable:"), enable)
+	return aerp
 }
 
-// WithLevel controls the amount of reverb, in decibels.
-func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnvironmentReverbParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets controls the amount of reverb, in decibels.
+func (aerp *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnvironmentReverbParameters {
+	objc.Send[objc.ID](objref.IDOf(aerp), objc.RegisterName("setLevel:"), level)
+	return aerp
 }
 
 // LoadFactoryReverbPreset loads one of the reverbs factory presets.
-func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AudioUnitReverbPreset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryReverbPreset:"), preset)
+func (aerp *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AudioUnitReverbPreset) {
+	objc.Send[objc.ID](objref.IDOf(aerp), objc.RegisterName("loadFactoryReverbPreset:"), preset)
 }
 
-// Enable turns on/off the reverb Default:    NO
-func (x *AudioEnvironmentReverbParameters) Enable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enable"))
+// Enable reports whether turns on/off the reverb Default: false
+func (aerp *AudioEnvironmentReverbParameters) Enable() bool {
+	_r := objc.Send[bool](objref.IDOf(aerp), objc.RegisterName("enable"))
 	return _r
 }
 
-// SetEnable wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentReverbParameters) SetEnable(enable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnable:"), enable)
-}
-
-// Level controls the master level of the reverb Range:      -40 to 40 dB Default:    0.0
-func (x *AudioEnvironmentReverbParameters) Level() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("level"))
+// Level returns controls the master level of the reverb Range:      -40 to 40 dB Default:    0.0
+func (aerp *AudioEnvironmentReverbParameters) Level() float32 {
+	_r := objc.Send[float32](objref.IDOf(aerp), objc.RegisterName("level"))
 	return _r
 }
 
-// SetLevel wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentReverbParameters) SetLevel(level float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-}
-
-// FilterParameters filter that applies to the output of the reverb
-func (x *AudioEnvironmentReverbParameters) FilterParameters() *AudioUnitEQFilterParameters {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterParameters"))
+// FilterParameters returns filter that applies to the output of the reverb
+func (aerp *AudioEnvironmentReverbParameters) FilterParameters() *AudioUnitEQFilterParameters {
+	_r := objc.Send[objc.ID](objref.IDOf(aerp), objc.RegisterName("filterParameters"))
 	return AudioUnitEQFilterParametersFromID(_r)
 }
-
-// AudioEnvironmentReverbParametersable is the interface implemented by [AudioEnvironmentReverbParameters], for mocking and DI.
-type AudioEnvironmentReverbParametersable interface {
-	obj.Object
-	WithEnable(enable bool) *AudioEnvironmentReverbParameters
-	WithLevel(level float32) *AudioEnvironmentReverbParameters
-	LoadFactoryReverbPreset(preset AudioUnitReverbPreset)
-	Enable() bool
-	SetEnable(enable bool)
-	Level() float32
-	SetLevel(level float32)
-	FilterParameters() *AudioUnitEQFilterParameters
-}
-
-var _ AudioEnvironmentReverbParametersable = (*AudioEnvironmentReverbParameters)(nil)

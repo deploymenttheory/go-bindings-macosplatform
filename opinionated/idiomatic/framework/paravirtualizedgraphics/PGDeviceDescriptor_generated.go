@@ -46,24 +46,24 @@ func pGDeviceDescriptorAdopt(id objc.ID) *PGDeviceDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *PGDeviceDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pdd *PGDeviceDescriptor) Description() string {
+	return rt.Description(objref.IDOf(pdd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PGDeviceDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pdd *PGDeviceDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pdd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PGDeviceDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pdd *PGDeviceDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pdd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PGDeviceDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pdd *PGDeviceDescriptor) String() string {
+	return rt.Description(objref.IDOf(pdd))
 }
 
 // NewPGDeviceDescriptor creates a new PGDeviceDescriptor.
@@ -72,62 +72,32 @@ func NewPGDeviceDescriptor() *PGDeviceDescriptor {
 	return pGDeviceDescriptorAdopt(_id)
 }
 
-// WithMmioLength the length in bytes of the memory-mapped IO section.
-func (x *PGDeviceDescriptor) WithMmioLength(mmioLength int) *PGDeviceDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMmioLength:"), mmioLength)
-	return x
+// WithMmioLength sets the length in bytes of the memory-mapped IO section.
+func (pdd *PGDeviceDescriptor) WithMmioLength(mmioLength int) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setMmioLength:"), mmioLength)
+	return pdd
 }
 
-// WithRaiseInterrupt a handler that the system calls to raise an interrupt in the guest environment.
-func (x *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
-	return x
+// WithRaiseInterrupt sets a handler that the system calls to raise an interrupt in the guest environment.
+func (pdd *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
+	return pdd
 }
 
-// WithDisplayPortCount the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
-func (x *PGDeviceDescriptor) WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
-	return x
+// WithDisplayPortCount sets the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
+func (pdd *PGDeviceDescriptor) WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
+	return pdd
 }
 
-// MmioLength the length, of the memory that backs the APPLEGPU_BAR_MMIO By default, the value of mmioLength will be the recommended default size for the MMIO memory.
-func (x *PGDeviceDescriptor) MmioLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mmioLength"))
+// MmioLength returns the length, of the memory that backs the APPLEGPU_BAR_MMIO By default, the value of mmioLength will be the recommended default size for the MMIO memory.
+func (pdd *PGDeviceDescriptor) MmioLength() int {
+	_r := objc.Send[int](objref.IDOf(pdd), objc.RegisterName("mmioLength"))
 	return _r
 }
 
-// SetMmioLength wraps the corresponding Objective-C method.
-func (x *PGDeviceDescriptor) SetMmioLength(mmioLength int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMmioLength:"), mmioLength)
-}
-
-// SetRaiseInterrupt wraps the corresponding Objective-C method.
-func (x *PGDeviceDescriptor) SetRaiseInterrupt(raiseInterrupt func(uint32)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
-}
-
-// DisplayPortCount the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
-func (x *PGDeviceDescriptor) DisplayPortCount() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("displayPortCount"))
+// DisplayPortCount returns the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
+func (pdd *PGDeviceDescriptor) DisplayPortCount() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(pdd), objc.RegisterName("displayPortCount"))
 	return _r
 }
-
-// SetDisplayPortCount wraps the corresponding Objective-C method.
-func (x *PGDeviceDescriptor) SetDisplayPortCount(displayPortCount uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
-}
-
-// PGDeviceDescriptorable is the interface implemented by [PGDeviceDescriptor], for mocking and DI.
-type PGDeviceDescriptorable interface {
-	obj.Object
-	WithMmioLength(mmioLength int) *PGDeviceDescriptor
-	WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor
-	WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor
-	MmioLength() int
-	SetMmioLength(mmioLength int)
-	SetRaiseInterrupt(raiseInterrupt func(uint32))
-	DisplayPortCount() uint32
-	SetDisplayPortCount(displayPortCount uint32)
-}
-
-var _ PGDeviceDescriptorable = (*PGDeviceDescriptor)(nil)

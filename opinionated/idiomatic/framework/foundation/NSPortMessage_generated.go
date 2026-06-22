@@ -46,24 +46,24 @@ func portMessageAdopt(id objc.ID) *PortMessage {
 }
 
 // Description returns the object's -description text.
-func (x *PortMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pm *PortMessage) Description() string {
+	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PortMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pm *PortMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PortMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pm *PortMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PortMessage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pm *PortMessage) String() string {
+	return rt.Description(objref.IDOf(pm))
 }
 
 // NewPortMessageWithSendPortReceivePortComponents creates a new PortMessage.
@@ -74,63 +74,43 @@ func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *
 }
 
 // WithMsgid sets the property and returns the receiver so calls can be chained.
-func (x *PortMessage) WithMsgid(msgid uint32) *PortMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMsgid:"), msgid)
-	return x
+func (pm *PortMessage) WithMsgid(msgid uint32) *PortMessage {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setMsgid:"), msgid)
+	return pm
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PortMessage) WithScriptingProperties(scriptingProperties obj.Object) *PortMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pm *PortMessage) WithScriptingProperties(scriptingProperties obj.Object) *PortMessage {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pm
 }
 
 // SendBeforeDate wraps the corresponding Objective-C method.
-func (x *PortMessage) SendBeforeDate(date *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:"), objref.IDOf(date))
+func (pm *PortMessage) SendBeforeDate(date *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("sendBeforeDate:"), objref.IDOf(date))
 	return _r
 }
 
 // Components wraps the corresponding Objective-C method.
-func (x *PortMessage) Components() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+func (pm *PortMessage) Components() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
 // ReceivePort wraps the corresponding Objective-C method.
-func (x *PortMessage) ReceivePort() *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivePort"))
+func (pm *PortMessage) ReceivePort() *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
 }
 
 // SendPort wraps the corresponding Objective-C method.
-func (x *PortMessage) SendPort() *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPort"))
+func (pm *PortMessage) SendPort() *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
 // Msgid wraps the corresponding Objective-C method.
-func (x *PortMessage) Msgid() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("msgid"))
+func (pm *PortMessage) Msgid() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(pm), objc.RegisterName("msgid"))
 	return _r
 }
-
-// SetMsgid wraps the corresponding Objective-C method.
-func (x *PortMessage) SetMsgid(msgid uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMsgid:"), msgid)
-}
-
-// PortMessageable is the interface implemented by [PortMessage], for mocking and DI.
-type PortMessageable interface {
-	obj.Object
-	WithMsgid(msgid uint32) *PortMessage
-	WithScriptingProperties(scriptingProperties obj.Object) *PortMessage
-	SendBeforeDate(date *Date) bool
-	Components() obj.Object
-	ReceivePort() *Port
-	SendPort() *Port
-	Msgid() uint32
-	SetMsgid(msgid uint32)
-}
-
-var _ PortMessageable = (*PortMessage)(nil)

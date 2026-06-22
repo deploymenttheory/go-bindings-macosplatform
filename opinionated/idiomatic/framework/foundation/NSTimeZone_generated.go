@@ -46,24 +46,24 @@ func timeZoneAdopt(id objc.ID) *TimeZone {
 }
 
 // Description returns the object's -description text.
-func (x *TimeZone) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tz *TimeZone) Description() string {
+	return rt.Description(objref.IDOf(tz))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TimeZone) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tz *TimeZone) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tz), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TimeZone) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tz *TimeZone) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tz), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TimeZone) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tz *TimeZone) String() string {
+	return rt.Description(objref.IDOf(tz))
 }
 
 // NewTimeZoneWithName returns a time zone initialized with a given identifier.
@@ -81,20 +81,20 @@ func NewTimeZoneWithNameData(tzName string, aData *Data) *TimeZone {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *TimeZone) WithScriptingProperties(scriptingProperties obj.Object) *TimeZone {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (tz *TimeZone) WithScriptingProperties(scriptingProperties obj.Object) *TimeZone {
+	objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return tz
 }
 
 // SecondsFromGMTForDate returns the difference in seconds between the receiver and Greenwich Mean Time at a given date.
-func (x *TimeZone) SecondsFromGMTForDate(aDate *Date) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondsFromGMTForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) SecondsFromGMTForDate(aDate *Date) int {
+	_r := objc.Send[int](objref.IDOf(tz), objc.RegisterName("secondsFromGMTForDate:"), objref.IDOf(aDate))
 	return _r
 }
 
 // AbbreviationForDate returns the abbreviation for the receiver at a given date.
-func (x *TimeZone) AbbreviationForDate(aDate *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abbreviationForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) AbbreviationForDate(aDate *Date) string {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("abbreviationForDate:"), objref.IDOf(aDate))
 	if _r == 0 {
 		return ""
 	}
@@ -102,26 +102,26 @@ func (x *TimeZone) AbbreviationForDate(aDate *Date) string {
 }
 
 // IsDaylightSavingTimeForDate indicates whether the receiver uses daylight saving time on a given date.
-func (x *TimeZone) IsDaylightSavingTimeForDate(aDate *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDaylightSavingTimeForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) IsDaylightSavingTimeForDate(aDate *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isDaylightSavingTimeForDate:"), objref.IDOf(aDate))
 	return _r
 }
 
 // DaylightSavingTimeOffsetForDate returns the daylight saving time offset for a given date.
-func (x *TimeZone) DaylightSavingTimeOffsetForDate(aDate *Date) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("daylightSavingTimeOffsetForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) DaylightSavingTimeOffsetForDate(aDate *Date) float64 {
+	_r := objc.Send[float64](objref.IDOf(tz), objc.RegisterName("daylightSavingTimeOffsetForDate:"), objref.IDOf(aDate))
 	return _r
 }
 
 // NextDaylightSavingTimeTransitionAfterDate returns the next daylight saving time transition after a given date.
-func (x *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *Date) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextDaylightSavingTimeTransitionAfterDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *Date) *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("nextDaylightSavingTimeTransitionAfterDate:"), objref.IDOf(aDate))
 	return DateFromID(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TimeZone) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (tz *TimeZone) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -129,20 +129,20 @@ func (x *TimeZone) Name() string {
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *TimeZone) Data() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (tz *TimeZone) Data() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("data"))
 	return DataFromID(_r)
 }
 
 // IsEqualToTimeZone indicates whether the receiver has the same name and data as the specified time zone.
-func (x *TimeZone) IsEqualToTimeZone(aTimeZone *TimeZone) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToTimeZone:"), objref.IDOf(aTimeZone))
+func (tz *TimeZone) IsEqualToTimeZone(aTimeZone *TimeZone) bool {
+	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isEqualToTimeZone:"), objref.IDOf(aTimeZone))
 	return _r
 }
 
 // LocalizedNameLocale returns the localized name of the time zone.
-func (x *TimeZone) LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName:locale:"), style, objref.IDOf(locale))
+func (tz *TimeZone) LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale) string {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("localizedName:locale:"), style, objref.IDOf(locale))
 	if _r == 0 {
 		return ""
 	}
@@ -150,14 +150,14 @@ func (x *TimeZone) LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale) 
 }
 
 // SecondsFromGMT wraps the corresponding Objective-C method.
-func (x *TimeZone) SecondsFromGMT() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondsFromGMT"))
+func (tz *TimeZone) SecondsFromGMT() int {
+	_r := objc.Send[int](objref.IDOf(tz), objc.RegisterName("secondsFromGMT"))
 	return _r
 }
 
 // Abbreviation wraps the corresponding Objective-C method.
-func (x *TimeZone) Abbreviation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abbreviation"))
+func (tz *TimeZone) Abbreviation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("abbreviation"))
 	if _r == 0 {
 		return ""
 	}
@@ -165,41 +165,19 @@ func (x *TimeZone) Abbreviation() string {
 }
 
 // IsDaylightSavingTime wraps the corresponding Objective-C method.
-func (x *TimeZone) IsDaylightSavingTime() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDaylightSavingTime"))
+func (tz *TimeZone) IsDaylightSavingTime() bool {
+	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isDaylightSavingTime"))
 	return _r
 }
 
 // DaylightSavingTimeOffset wraps the corresponding Objective-C method.
-func (x *TimeZone) DaylightSavingTimeOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("daylightSavingTimeOffset"))
+func (tz *TimeZone) DaylightSavingTimeOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(tz), objc.RegisterName("daylightSavingTimeOffset"))
 	return _r
 }
 
 // NextDaylightSavingTimeTransition wraps the corresponding Objective-C method.
-func (x *TimeZone) NextDaylightSavingTimeTransition() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextDaylightSavingTimeTransition"))
+func (tz *TimeZone) NextDaylightSavingTimeTransition() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("nextDaylightSavingTimeTransition"))
 	return DateFromID(_r)
 }
-
-// TimeZoneable is the interface implemented by [TimeZone], for mocking and DI.
-type TimeZoneable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *TimeZone
-	SecondsFromGMTForDate(aDate *Date) int
-	AbbreviationForDate(aDate *Date) string
-	IsDaylightSavingTimeForDate(aDate *Date) bool
-	DaylightSavingTimeOffsetForDate(aDate *Date) float64
-	NextDaylightSavingTimeTransitionAfterDate(aDate *Date) *Date
-	Name() string
-	Data() *Data
-	IsEqualToTimeZone(aTimeZone *TimeZone) bool
-	LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale) string
-	SecondsFromGMT() int
-	Abbreviation() string
-	IsDaylightSavingTime() bool
-	DaylightSavingTimeOffset() float64
-	NextDaylightSavingTimeTransition() *Date
-}
-
-var _ TimeZoneable = (*TimeZone)(nil)

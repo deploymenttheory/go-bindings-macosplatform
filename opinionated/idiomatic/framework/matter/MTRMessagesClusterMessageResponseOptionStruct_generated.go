@@ -44,24 +44,24 @@ func mTRMessagesClusterMessageResponseOptionStructAdopt(id objc.ID) *MTRMessages
 }
 
 // Description returns the object's -description text.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(mmcmros))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmcmros), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmcmros), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) String() string {
+	return rt.Description(objref.IDOf(mmcmros))
 }
 
 // NewMTRMessagesClusterMessageResponseOptionStruct creates a new MTRMessagesClusterMessageResponseOptionStruct.
@@ -71,51 +71,28 @@ func NewMTRMessagesClusterMessageResponseOptionStruct() *MTRMessagesClusterMessa
 }
 
 // WithMessageResponseID sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
-	return x
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
+	return mmcmros
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mmcmros
 }
 
 // MessageResponseID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageResponseID"))
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("messageResponseID"))
 	return obj.Wrap(_r)
 }
 
-// SetMessageResponseID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) SetMessageResponseID(messageResponseID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
-}
-
 // Label wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// MTRMessagesClusterMessageResponseOptionStructable is the interface implemented by [MTRMessagesClusterMessageResponseOptionStruct], for mocking and DI.
-type MTRMessagesClusterMessageResponseOptionStructable interface {
-	obj.Object
-	WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct
-	WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct
-	MessageResponseID() obj.Object
-	SetMessageResponseID(messageResponseID obj.Object)
-	Label() string
-	SetLabel(label string)
-}
-
-var _ MTRMessagesClusterMessageResponseOptionStructable = (*MTRMessagesClusterMessageResponseOptionStruct)(nil)

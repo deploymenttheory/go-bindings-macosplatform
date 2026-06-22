@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionColumnMeanNode() *NNReductionColumnMeanNode {
 	return nNReductionColumnMeanNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionColumnMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMeanNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrcmn *NNReductionColumnMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMeanNode {
+	objc.Send[objc.ID](objref.IDOf(nrcmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrcmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionColumnMeanNode) WithLabel(label string) *NNReductionColumnMeanNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrcmn *NNReductionColumnMeanNode) WithLabel(label string) *NNReductionColumnMeanNode {
+	objc.Send[objc.ID](objref.IDOf(nrcmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrcmn
 }
-
-// NNReductionColumnMeanNodeable is the interface implemented by [NNReductionColumnMeanNode], for mocking and DI.
-type NNReductionColumnMeanNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMeanNode
-	WithLabel(label string) *NNReductionColumnMeanNode
-}
-
-var _ NNReductionColumnMeanNodeable = (*NNReductionColumnMeanNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionColumnMeanNode)(nil)
 

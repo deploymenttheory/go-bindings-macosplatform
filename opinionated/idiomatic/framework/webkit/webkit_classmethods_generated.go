@@ -6,6 +6,7 @@ package webkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -32,13 +33,13 @@ func WorldWithName(name string) *WKContentWorld {
 	return WKContentWorldFromID(_r)
 }
 
-// PageWorld retrieve the main world that page content itself uses. When interacting with page content in a WKWebView using the page content world you can disrupt the operation of page content (e.g. by conflicting with variable names in JavaScript set by the web page content itself).
+// PageWorld returns retrieve the main world that page content itself uses. When interacting with page content in a WKWebView using the page content world you can disrupt the operation of page content (e.g. by conflicting with variable names in JavaScript set by the web page content itself).
 func PageWorld() *WKContentWorld {
 	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("pageWorld"))
 	return WKContentWorldFromID(_r)
 }
 
-// DefaultClientWorld retrieve the default world for API client use. When using a content world different from the page content world you can still manipulate the DOM and built-in DOM APIs but without conflicting with other aspects of the page content (e.g. JavaScript from the web page content itself) Repeated calls will retrieve the same WKContentWorld instance.
+// DefaultClientWorld returns retrieve the default world for API client use. When using a content world different from the page content world you can still manipulate the DOM and built-in DOM APIs but without conflicting with other aspects of the page content (e.g. JavaScript from the web page content itself) Repeated calls will retrieve the same WKContentWorld instance.
 func DefaultClientWorld() *WKContentWorld {
 	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("defaultClientWorld"))
 	return WKContentWorldFromID(_r)

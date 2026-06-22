@@ -44,24 +44,24 @@ func domainStateAdopt(id objc.ID) *DomainState {
 }
 
 // Description returns the object's -description text.
-func (x *DomainState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ds *DomainState) Description() string {
+	return rt.Description(objref.IDOf(ds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DomainState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ds *DomainState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DomainState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ds *DomainState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DomainState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ds *DomainState) String() string {
+	return rt.Description(objref.IDOf(ds))
 }
 
 // NewDomainState creates a new DomainState.
@@ -71,29 +71,19 @@ func NewDomainState() *DomainState {
 }
 
 // Biometry contains biometric domain state.
-func (x *DomainState) Biometry() *DomainStateBiometry {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biometry"))
+func (ds *DomainState) Biometry() *DomainStateBiometry {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("biometry"))
 	return DomainStateBiometryFromID(_r)
 }
 
 // Companion contains companion domain state.
-func (x *DomainState) Companion() *DomainStateCompanion {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("companion"))
+func (ds *DomainState) Companion() *DomainStateCompanion {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("companion"))
 	return DomainStateCompanionFromID(_r)
 }
 
 // StateHash contains combined state hash data for biometry and companion state hashes.
-func (x *DomainState) StateHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+func (ds *DomainState) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
 }
-
-// DomainStateable is the interface implemented by [DomainState], for mocking and DI.
-type DomainStateable interface {
-	obj.Object
-	Biometry() *DomainStateBiometry
-	Companion() *DomainStateCompanion
-	StateHash() obj.Object
-}
-
-var _ DomainStateable = (*DomainState)(nil)

@@ -46,83 +46,60 @@ func mTRContentLauncherClusterAdditionalInfoStructAdopt(id objc.ID) *MTRContentL
 }
 
 // Description returns the object's -description text.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(mclcais))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mclcais), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mclcais), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) String() string {
+	return rt.Description(objref.IDOf(mclcais))
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("setName:"), purego.NSString(name))
+	return mclcais
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("setValue:"), purego.NSString(value))
+	return mclcais
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-}
-
-// MTRContentLauncherClusterAdditionalInfoStructable is the interface implemented by [MTRContentLauncherClusterAdditionalInfoStruct], for mocking and DI.
-type MTRContentLauncherClusterAdditionalInfoStructable interface {
-	obj.Object
-	WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct
-	WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct
-	Name() string
-	SetName(name string)
-	Value() string
-	SetValue(value string)
-}
-
-var _ MTRContentLauncherClusterAdditionalInfoStructable = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)
 
 // isMTRContentLauncherClusterAdditionalInfoStruct marks MTRContentLauncherClusterAdditionalInfoStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRContentLauncherClusterAdditionalInfoStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) isMTRContentLauncherClusterAdditionalInfoStruct() {
+func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) isMTRContentLauncherClusterAdditionalInfoStruct() {
 }
 
 var _ MTRContentLauncherClusterAdditionalInfoStructProvider = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)

@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,24 +51,10 @@ func NewMutableGroup() *MutableGroup {
 	return mutableGroupAdopt(_id)
 }
 
-// WithName the name of the group.
-func (x *MutableGroup) WithName(name string) *MutableGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the group.
+func (mg *MutableGroup) WithName(name string) *MutableGroup {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("setName:"), purego.NSString(name))
+	return mg
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MutableGroup) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// MutableGroupable is the interface implemented by [MutableGroup], for mocking and DI.
-type MutableGroupable interface {
-	obj.Object
-	WithName(name string) *MutableGroup
-	SetName(name string)
-}
-
-var _ MutableGroupable = (*MutableGroup)(nil)
 
 var _ GroupProvider = (*MutableGroup)(nil)

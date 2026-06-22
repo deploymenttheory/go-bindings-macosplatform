@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,60 +51,46 @@ func NewAdamWOptimizer() *AdamWOptimizer {
 	return adamWOptimizerAdopt(_id)
 }
 
-// WithLearningRate the learning rate.
-func (x *AdamWOptimizer) WithLearningRate(learningRate float32) *AdamWOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learning rate.
+func (awo *AdamWOptimizer) WithLearningRate(learningRate float32) *AdamWOptimizer {
+	objc.Send[objc.ID](objref.IDOf(awo), objc.RegisterName("setLearningRate:"), learningRate)
+	return awo
 }
 
-// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
-func (x *AdamWOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamWOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
-	return x
+// WithAppliesGradientClipping sets a Boolean value that indicates whether you apply gradient clipping.
+func (awo *AdamWOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamWOptimizer {
+	objc.Send[objc.ID](objref.IDOf(awo), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
+	return awo
 }
 
-// Beta1 coefficent used for computing running averages of gradient. The default is 0.9.
-func (x *AdamWOptimizer) Beta1() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta1"))
+// Beta1 returns coefficent used for computing running averages of gradient. The default is 0.9.
+func (awo *AdamWOptimizer) Beta1() float32 {
+	_r := objc.Send[float32](objref.IDOf(awo), objc.RegisterName("beta1"))
 	return _r
 }
 
-// Beta2 coefficent used for computing running averages of square of gradient. The default is 0.999.
-func (x *AdamWOptimizer) Beta2() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta2"))
+// Beta2 returns coefficent used for computing running averages of square of gradient. The default is 0.999.
+func (awo *AdamWOptimizer) Beta2() float32 {
+	_r := objc.Send[float32](objref.IDOf(awo), objc.RegisterName("beta2"))
 	return _r
 }
 
-// Epsilon a term added to improve numerical stability. The default is 1e-8.
-func (x *AdamWOptimizer) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns a term added to improve numerical stability. The default is 1e-8.
+func (awo *AdamWOptimizer) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(awo), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// UsesAMSGrad whether to use the AMSGrad variant of this algorithm The default is false
-func (x *AdamWOptimizer) UsesAMSGrad() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesAMSGrad"))
+// UsesAMSGrad reports whether to use the AMSGrad variant of this algorithm The default is false
+func (awo *AdamWOptimizer) UsesAMSGrad() bool {
+	_r := objc.Send[bool](objref.IDOf(awo), objc.RegisterName("usesAMSGrad"))
 	return _r
 }
 
-// TimeStep the current timestep used for the update. The default is 1.
-func (x *AdamWOptimizer) TimeStep() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
+// TimeStep returns the current timestep used for the update. The default is 1.
+func (awo *AdamWOptimizer) TimeStep() int {
+	_r := objc.Send[int](objref.IDOf(awo), objc.RegisterName("timeStep"))
 	return _r
 }
-
-// AdamWOptimizerable is the interface implemented by [AdamWOptimizer], for mocking and DI.
-type AdamWOptimizerable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *AdamWOptimizer
-	WithAppliesGradientClipping(appliesGradientClipping bool) *AdamWOptimizer
-	Beta1() float32
-	Beta2() float32
-	Epsilon() float32
-	UsesAMSGrad() bool
-	TimeStep() int
-}
-
-var _ AdamWOptimizerable = (*AdamWOptimizer)(nil)
 
 var _ OptimizerProvider = (*AdamWOptimizer)(nil)

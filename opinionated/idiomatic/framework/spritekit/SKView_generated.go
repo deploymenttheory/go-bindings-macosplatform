@@ -47,24 +47,24 @@ func viewAdopt(id objc.ID) *View {
 }
 
 // Description returns the object's -description text.
-func (x *View) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *View) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *View) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *View) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewView creates a new View.
@@ -73,376 +73,234 @@ func NewView() *View {
 	return viewAdopt(_id)
 }
 
-// WithPaused a Boolean value that indicates whether the view’s scene animations are paused.
-func (x *View) WithPaused(paused bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that indicates whether the view’s scene animations are paused.
+func (v_ *View) WithPaused(paused bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPaused:"), paused)
+	return v_
 }
 
-// WithShowsFPS a Boolean value that indicates whether the view displays a frame rate indicator.
-func (x *View) WithShowsFPS(showsFPS bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFPS:"), showsFPS)
-	return x
+// WithShowsFPS sets a Boolean value that indicates whether the view displays a frame rate indicator.
+func (v_ *View) WithShowsFPS(showsFPS bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsFPS:"), showsFPS)
+	return v_
 }
 
-// WithShowsDrawCount a Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
-func (x *View) WithShowsDrawCount(showsDrawCount bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
-	return x
+// WithShowsDrawCount sets a Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
+func (v_ *View) WithShowsDrawCount(showsDrawCount bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
+	return v_
 }
 
-// WithShowsNodeCount a Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
-func (x *View) WithShowsNodeCount(showsNodeCount bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
-	return x
+// WithShowsNodeCount sets a Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
+func (v_ *View) WithShowsNodeCount(showsNodeCount bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
+	return v_
 }
 
-// WithShowsQuadCount a Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
-func (x *View) WithShowsQuadCount(showsQuadCount bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
-	return x
+// WithShowsQuadCount sets a Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
+func (v_ *View) WithShowsQuadCount(showsQuadCount bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
+	return v_
 }
 
-// WithShowsPhysics a Boolean value that indicates whether the view displays physics-related debugging information.
-func (x *View) WithShowsPhysics(showsPhysics bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPhysics:"), showsPhysics)
-	return x
+// WithShowsPhysics sets a Boolean value that indicates whether the view displays physics-related debugging information.
+func (v_ *View) WithShowsPhysics(showsPhysics bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsPhysics:"), showsPhysics)
+	return v_
 }
 
-// WithShowsFields a Boolean value that indicates whether the view displays information about physics fields in the scene.
-func (x *View) WithShowsFields(showsFields bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFields:"), showsFields)
-	return x
+// WithShowsFields sets a Boolean value that indicates whether the view displays information about physics fields in the scene.
+func (v_ *View) WithShowsFields(showsFields bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShowsFields:"), showsFields)
+	return v_
 }
 
-// WithAsynchronous a Boolean value that indicates whether the content is rendered asynchronously.
-func (x *View) WithAsynchronous(asynchronous bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsynchronous:"), asynchronous)
-	return x
+// WithAsynchronous sets a Boolean value that indicates whether the content is rendered asynchronously.
+func (v_ *View) WithAsynchronous(asynchronous bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAsynchronous:"), asynchronous)
+	return v_
 }
 
-// WithAllowsTransparency a Boolean property that indicates whether the view is rendered using transparency.
-func (x *View) WithAllowsTransparency(allowsTransparency bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTransparency:"), allowsTransparency)
-	return x
+// WithAllowsTransparency sets a Boolean property that indicates whether the view is rendered using transparency.
+func (v_ *View) WithAllowsTransparency(allowsTransparency bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAllowsTransparency:"), allowsTransparency)
+	return v_
 }
 
-// WithIgnoresSiblingOrder a Boolean value that indicates whether parent-child and sibling relationships affect the rendering order of nodes in the scene.
-func (x *View) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
-	return x
+// WithIgnoresSiblingOrder sets a Boolean value that indicates whether parent-child and sibling relationships affect the rendering order of nodes in the scene.
+func (v_ *View) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
+	return v_
 }
 
-// WithShouldCullNonVisibleNodes a Boolean value that indicates whether the view automatically culls non-visible nodes from the rendering tree.
-func (x *View) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
-	return x
+// WithShouldCullNonVisibleNodes sets a Boolean value that indicates whether the view automatically culls non-visible nodes from the rendering tree.
+func (v_ *View) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
+	return v_
 }
 
-// WithPreferredFramesPerSecond the animation frame rate that the view uses to render its scene.
-func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
-	return x
+// WithPreferredFramesPerSecond sets the animation frame rate that the view uses to render its scene.
+func (v_ *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
+	return v_
 }
 
 // WithDisableDepthStencilBuffer sets the property and returns the receiver so calls can be chained.
-func (x *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableDepthStencilBuffer:"), disableDepthStencilBuffer)
-	return x
+func (v_ *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisableDepthStencilBuffer:"), disableDepthStencilBuffer)
+	return v_
 }
 
-// WithDelegate a delegate that allows dynamic control of the view’s render rate.
-func (x *View) WithDelegate(delegate obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+// WithDelegate sets a delegate that allows dynamic control of the view’s render rate.
+func (v_ *View) WithDelegate(delegate obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return v_
 }
 
-// WithFrameInterval the number of frames that must pass before the scene is called to update its contents.
-func (x *View) WithFrameInterval(frameInterval int) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameInterval:"), frameInterval)
-	return x
+// WithFrameInterval sets the number of frames that must pass before the scene is called to update its contents.
+func (v_ *View) WithFrameInterval(frameInterval int) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameInterval:"), frameInterval)
+	return v_
 }
 
 // WithPreferredFrameRate sets the property and returns the receiver so calls can be chained.
-func (x *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFrameRate:"), preferredFrameRate)
-	return x
+func (v_ *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFrameRate:"), preferredFrameRate)
+	return v_
 }
 
 // PresentScene presents a scene.
-func (x *View) PresentScene(scene *Scene) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentScene:"), objref.IDOf(scene))
+func (v_ *View) PresentScene(scene *Scene) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:"), objref.IDOf(scene))
 }
 
 // PresentSceneTransition transitions from the current scene to a new scene.
-func (x *View) PresentSceneTransition(scene *Scene, transition *Transition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentScene:transition:"), objref.IDOf(scene), objref.IDOf(transition))
+func (v_ *View) PresentSceneTransition(scene *Scene, transition *Transition) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("presentScene:transition:"), objref.IDOf(scene), objref.IDOf(transition))
 }
 
 // TextureFromNode renders the contents of a node tree and returns the rendered image as a texture.
-func (x *View) TextureFromNode(node *Node) *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureFromNode:"), objref.IDOf(node))
+func (v_ *View) TextureFromNode(node *Node) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textureFromNode:"), objref.IDOf(node))
 	return TextureFromID(_r)
 }
 
 // TextureFromNodeCrop renders a portion of a node’s contents and returns the rendered image as a texture.
-func (x *View) TextureFromNodeCrop(node *Node, crop corefoundation.CGRect) *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureFromNode:crop:"), objref.IDOf(node), crop)
+func (v_ *View) TextureFromNodeCrop(node *Node, crop corefoundation.CGRect) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("textureFromNode:crop:"), objref.IDOf(node), crop)
 	return TextureFromID(_r)
 }
 
 // ConvertPointToScene converts a point from view coordinates to scene coordinates.
-func (x *View) ConvertPointToScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:toScene:"), point, objref.IDOf(scene))
+func (v_ *View) ConvertPointToScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:toScene:"), point, objref.IDOf(scene))
 	return _r
 }
 
 // ConvertPointFromScene converts a point from scene coordinates to view coordinates.
-func (x *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:fromScene:"), point, objref.IDOf(scene))
+func (v_ *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:fromScene:"), point, objref.IDOf(scene))
 	return _r
 }
 
-// IsPaused pause the entire view
-func (x *View) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+// IsPaused reports whether pause the entire view
+func (v_ *View) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPaused"))
 	return _r
 }
 
-// SetPaused wraps the corresponding Objective-C method.
-func (x *View) SetPaused(paused bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-}
-
-// ShowsFPS toggles display of performance stats in the view. All default to false.
-func (x *View) ShowsFPS() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFPS"))
+// ShowsFPS reports whether toggles display of performance stats in the view. All default to false.
+func (v_ *View) ShowsFPS() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsFPS"))
 	return _r
-}
-
-// SetShowsFPS wraps the corresponding Objective-C method.
-func (x *View) SetShowsFPS(showsFPS bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFPS:"), showsFPS)
 }
 
 // ShowsDrawCount wraps the corresponding Objective-C method.
-func (x *View) ShowsDrawCount() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsDrawCount"))
+func (v_ *View) ShowsDrawCount() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsDrawCount"))
 	return _r
-}
-
-// SetShowsDrawCount wraps the corresponding Objective-C method.
-func (x *View) SetShowsDrawCount(showsDrawCount bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
 }
 
 // ShowsNodeCount wraps the corresponding Objective-C method.
-func (x *View) ShowsNodeCount() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsNodeCount"))
+func (v_ *View) ShowsNodeCount() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsNodeCount"))
 	return _r
-}
-
-// SetShowsNodeCount wraps the corresponding Objective-C method.
-func (x *View) SetShowsNodeCount(showsNodeCount bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
 }
 
 // ShowsQuadCount wraps the corresponding Objective-C method.
-func (x *View) ShowsQuadCount() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsQuadCount"))
+func (v_ *View) ShowsQuadCount() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsQuadCount"))
 	return _r
-}
-
-// SetShowsQuadCount wraps the corresponding Objective-C method.
-func (x *View) SetShowsQuadCount(showsQuadCount bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
 }
 
 // ShowsPhysics wraps the corresponding Objective-C method.
-func (x *View) ShowsPhysics() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPhysics"))
+func (v_ *View) ShowsPhysics() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsPhysics"))
 	return _r
-}
-
-// SetShowsPhysics wraps the corresponding Objective-C method.
-func (x *View) SetShowsPhysics(showsPhysics bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPhysics:"), showsPhysics)
 }
 
 // ShowsFields wraps the corresponding Objective-C method.
-func (x *View) ShowsFields() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFields"))
+func (v_ *View) ShowsFields() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("showsFields"))
 	return _r
 }
 
-// SetShowsFields wraps the corresponding Objective-C method.
-func (x *View) SetShowsFields(showsFields bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFields:"), showsFields)
-}
-
-// IsAsynchronous toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to YES.
-func (x *View) IsAsynchronous() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAsynchronous"))
+// IsAsynchronous reports whether toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to true.
+func (v_ *View) IsAsynchronous() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
-// SetAsynchronous wraps the corresponding Objective-C method.
-func (x *View) SetAsynchronous(asynchronous bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsynchronous:"), asynchronous)
-}
-
-// AllowsTransparency toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to NO.
-func (x *View) AllowsTransparency() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTransparency"))
+// AllowsTransparency reports whether toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to false.
+func (v_ *View) AllowsTransparency() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("allowsTransparency"))
 	return _r
 }
 
-// SetAllowsTransparency wraps the corresponding Objective-C method.
-func (x *View) SetAllowsTransparency(allowsTransparency bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTransparency:"), allowsTransparency)
-}
-
-// IgnoresSiblingOrder ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
-func (x *View) IgnoresSiblingOrder() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresSiblingOrder"))
+// IgnoresSiblingOrder reports whether ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to false, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to true for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+func (v_ *View) IgnoresSiblingOrder() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("ignoresSiblingOrder"))
 	return _r
-}
-
-// SetIgnoresSiblingOrder wraps the corresponding Objective-C method.
-func (x *View) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
 }
 
 // ShouldCullNonVisibleNodes wraps the corresponding Objective-C method.
-func (x *View) ShouldCullNonVisibleNodes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCullNonVisibleNodes"))
+func (v_ *View) ShouldCullNonVisibleNodes() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("shouldCullNonVisibleNodes"))
 	return _r
-}
-
-// SetShouldCullNonVisibleNodes wraps the corresponding Objective-C method.
-func (x *View) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
 }
 
 // PreferredFramesPerSecond wraps the corresponding Objective-C method.
-func (x *View) PreferredFramesPerSecond() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredFramesPerSecond"))
+func (v_ *View) PreferredFramesPerSecond() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("preferredFramesPerSecond"))
 	return _r
-}
-
-// SetPreferredFramesPerSecond wraps the corresponding Objective-C method.
-func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
 }
 
 // DisableDepthStencilBuffer wraps the corresponding Objective-C method.
-func (x *View) DisableDepthStencilBuffer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableDepthStencilBuffer"))
+func (v_ *View) DisableDepthStencilBuffer() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("disableDepthStencilBuffer"))
 	return _r
 }
 
-// SetDisableDepthStencilBuffer wraps the corresponding Objective-C method.
-func (x *View) SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableDepthStencilBuffer:"), disableDepthStencilBuffer)
-}
-
-// Delegate optional view delegate, see SKViewDelegate.
-func (x *View) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+// Delegate returns optional view delegate, see SKViewDelegate.
+func (v_ *View) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *View) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
 // FrameInterval wraps the corresponding Objective-C method.
-func (x *View) FrameInterval() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameInterval"))
+func (v_ *View) FrameInterval() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("frameInterval"))
 	return _r
-}
-
-// SetFrameInterval wraps the corresponding Objective-C method.
-func (x *View) SetFrameInterval(frameInterval int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameInterval:"), frameInterval)
 }
 
 // PreferredFrameRate wraps the corresponding Objective-C method.
-func (x *View) PreferredFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredFrameRate"))
+func (v_ *View) PreferredFrameRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("preferredFrameRate"))
 	return _r
 }
 
-// SetPreferredFrameRate wraps the corresponding Objective-C method.
-func (x *View) SetPreferredFrameRate(preferredFrameRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFrameRate:"), preferredFrameRate)
-}
-
-// Scene the currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
-func (x *View) Scene() *Scene {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+// Scene returns the currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
+func (v_ *View) Scene() *Scene {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
-
-// Viewable is the interface implemented by [View], for mocking and DI.
-type Viewable interface {
-	obj.Object
-	WithPaused(paused bool) *View
-	WithShowsFPS(showsFPS bool) *View
-	WithShowsDrawCount(showsDrawCount bool) *View
-	WithShowsNodeCount(showsNodeCount bool) *View
-	WithShowsQuadCount(showsQuadCount bool) *View
-	WithShowsPhysics(showsPhysics bool) *View
-	WithShowsFields(showsFields bool) *View
-	WithAsynchronous(asynchronous bool) *View
-	WithAllowsTransparency(allowsTransparency bool) *View
-	WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View
-	WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *View
-	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
-	WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *View
-	WithDelegate(delegate obj.Object) *View
-	WithFrameInterval(frameInterval int) *View
-	WithPreferredFrameRate(preferredFrameRate float32) *View
-	PresentScene(scene *Scene)
-	PresentSceneTransition(scene *Scene, transition *Transition)
-	TextureFromNode(node *Node) *Texture
-	TextureFromNodeCrop(node *Node, crop corefoundation.CGRect) *Texture
-	ConvertPointToScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint
-	ConvertPointFromScene(point corefoundation.CGPoint, scene *Scene) corefoundation.CGPoint
-	IsPaused() bool
-	SetPaused(paused bool)
-	ShowsFPS() bool
-	SetShowsFPS(showsFPS bool)
-	ShowsDrawCount() bool
-	SetShowsDrawCount(showsDrawCount bool)
-	ShowsNodeCount() bool
-	SetShowsNodeCount(showsNodeCount bool)
-	ShowsQuadCount() bool
-	SetShowsQuadCount(showsQuadCount bool)
-	ShowsPhysics() bool
-	SetShowsPhysics(showsPhysics bool)
-	ShowsFields() bool
-	SetShowsFields(showsFields bool)
-	IsAsynchronous() bool
-	SetAsynchronous(asynchronous bool)
-	AllowsTransparency() bool
-	SetAllowsTransparency(allowsTransparency bool)
-	IgnoresSiblingOrder() bool
-	SetIgnoresSiblingOrder(ignoresSiblingOrder bool)
-	ShouldCullNonVisibleNodes() bool
-	SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool)
-	PreferredFramesPerSecond() int
-	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
-	DisableDepthStencilBuffer() bool
-	SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool)
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-	FrameInterval() int
-	SetFrameInterval(frameInterval int)
-	PreferredFrameRate() float32
-	SetPreferredFrameRate(preferredFrameRate float32)
-	Scene() *Scene
-}
-
-var _ Viewable = (*View)(nil)

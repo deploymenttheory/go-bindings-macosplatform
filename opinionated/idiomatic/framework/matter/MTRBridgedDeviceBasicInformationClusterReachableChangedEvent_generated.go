@@ -46,57 +46,42 @@ func mTRBridgedDeviceBasicInformationClusterReachableChangedEventAdopt(id objc.I
 }
 
 // Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(mbdbicrce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbdbicrce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbdbicrce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) String() string {
+	return rt.Description(objref.IDOf(mbdbicrce))
 }
 
 // WithReachableNewValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
-	return x
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mbdbicrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
+	return mbdbicrce
 }
 
 // ReachableNewValue wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reachableNewValue"))
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbicrce), objc.RegisterName("reachableNewValue"))
 	return obj.Wrap(_r)
 }
-
-// SetReachableNewValue wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) SetReachableNewValue(reachableNewValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
-}
-
-// MTRBridgedDeviceBasicInformationClusterReachableChangedEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterReachableChangedEvent], for mocking and DI.
-type MTRBridgedDeviceBasicInformationClusterReachableChangedEventable interface {
-	obj.Object
-	WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent
-	ReachableNewValue() obj.Object
-	SetReachableNewValue(reachableNewValue obj.Object)
-}
-
-var _ MTRBridgedDeviceBasicInformationClusterReachableChangedEventable = (*MTRBridgedDeviceBasicInformationClusterReachableChangedEvent)(nil)
 
 // isMTRBridgedDeviceBasicInformationClusterReachableChangedEvent marks MTRBridgedDeviceBasicInformationClusterReachableChangedEvent — and, by embedding promotion, its
 // subclasses — as a member of the MTRBridgedDeviceBasicInformationClusterReachableChangedEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) isMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() {
+func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) isMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider = (*MTRBridgedDeviceBasicInformationClusterReachableChangedEvent)(nil)

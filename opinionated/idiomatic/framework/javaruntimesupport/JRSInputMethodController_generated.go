@@ -44,24 +44,24 @@ func inputMethodControllerAdopt(id objc.ID) *InputMethodController {
 }
 
 // Description returns the object's -description text.
-func (x *InputMethodController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (imc *InputMethodController) Description() string {
+	return rt.Description(objref.IDOf(imc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InputMethodController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (imc *InputMethodController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(imc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InputMethodController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (imc *InputMethodController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(imc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InputMethodController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (imc *InputMethodController) String() string {
+	return rt.Description(objref.IDOf(imc))
 }
 
 // NewInputMethodController creates a new InputMethodController.
@@ -71,14 +71,14 @@ func NewInputMethodController() *InputMethodController {
 }
 
 // AvailableInputMethodLocales wraps the corresponding Objective-C method.
-func (x *InputMethodController) AvailableInputMethodLocales() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableInputMethodLocales"))
+func (imc *InputMethodController) AvailableInputMethodLocales() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("availableInputMethodLocales"))
 	return obj.Wrap(_r)
 }
 
 // CurrentInputMethodName wraps the corresponding Objective-C method.
-func (x *InputMethodController) CurrentInputMethodName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentInputMethodName"))
+func (imc *InputMethodController) CurrentInputMethodName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("currentInputMethodName"))
 	if _r == 0 {
 		return ""
 	}
@@ -86,8 +86,8 @@ func (x *InputMethodController) CurrentInputMethodName() string {
 }
 
 // CurrentInputMethodLocale wraps the corresponding Objective-C method.
-func (x *InputMethodController) CurrentInputMethodLocale() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentInputMethodLocale"))
+func (imc *InputMethodController) CurrentInputMethodLocale() string {
+	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("currentInputMethodLocale"))
 	if _r == 0 {
 		return ""
 	}
@@ -95,17 +95,6 @@ func (x *InputMethodController) CurrentInputMethodLocale() string {
 }
 
 // SetCurrentInputMethodForLocale wraps the corresponding Objective-C method.
-func (x *InputMethodController) SetCurrentInputMethodForLocale(theLocale string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentInputMethodForLocale:"), purego.NSString(theLocale))
+func (imc *InputMethodController) SetCurrentInputMethodForLocale(theLocale string) {
+	objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("setCurrentInputMethodForLocale:"), purego.NSString(theLocale))
 }
-
-// InputMethodControllerable is the interface implemented by [InputMethodController], for mocking and DI.
-type InputMethodControllerable interface {
-	obj.Object
-	AvailableInputMethodLocales() obj.Object
-	CurrentInputMethodName() string
-	CurrentInputMethodLocale() string
-	SetCurrentInputMethodForLocale(theLocale string)
-}
-
-var _ InputMethodControllerable = (*InputMethodController)(nil)

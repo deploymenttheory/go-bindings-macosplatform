@@ -44,24 +44,24 @@ func workoutEffortRelationshipAdopt(id objc.ID) *WorkoutEffortRelationship {
 }
 
 // Description returns the object's -description text.
-func (x *WorkoutEffortRelationship) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wer *WorkoutEffortRelationship) Description() string {
+	return rt.Description(objref.IDOf(wer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutEffortRelationship) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wer *WorkoutEffortRelationship) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutEffortRelationship) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wer *WorkoutEffortRelationship) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkoutEffortRelationship) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wer *WorkoutEffortRelationship) String() string {
+	return rt.Description(objref.IDOf(wer))
 }
 
 // NewWorkoutEffortRelationship creates a new WorkoutEffortRelationship.
@@ -71,31 +71,21 @@ func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
 }
 
 // Workout wraps the corresponding Objective-C method.
-func (x *WorkoutEffortRelationship) Workout() *Workout {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workout"))
+func (wer *WorkoutEffortRelationship) Workout() *Workout {
+	_r := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("workout"))
 	return WorkoutFromID(_r)
 }
 
 // Activity wraps the corresponding Objective-C method.
-func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activity"))
+func (wer *WorkoutEffortRelationship) Activity() *WorkoutActivity {
+	_r := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("activity"))
 	return WorkoutActivityFromID(_r)
 }
 
-// Samples the samples related to the workout but not any sub-activities
+// Samples returns the samples related to the workout but not any sub-activities
 //
 // Samples returns the collection as a Go slice.
-func (x *WorkoutEffortRelationship) Samples() []*Sample {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samples"))
+func (wer *WorkoutEffortRelationship) Samples() []*Sample {
+	_arr := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("samples"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Sample { return SampleFromID(_id) })
 }
-
-// WorkoutEffortRelationshipable is the interface implemented by [WorkoutEffortRelationship], for mocking and DI.
-type WorkoutEffortRelationshipable interface {
-	obj.Object
-	Workout() *Workout
-	Activity() *WorkoutActivity
-	Samples() []*Sample
-}
-
-var _ WorkoutEffortRelationshipable = (*WorkoutEffortRelationship)(nil)

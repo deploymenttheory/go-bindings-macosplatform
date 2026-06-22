@@ -44,24 +44,24 @@ func mTRThermostatClusterPresetTypeStructAdopt(id objc.ID) *MTRThermostatCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterPresetTypeStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) Description() string {
+	return rt.Description(objref.IDOf(mtcpts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterPresetTypeStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcpts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterPresetTypeStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcpts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterPresetTypeStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) String() string {
+	return rt.Description(objref.IDOf(mtcpts))
 }
 
 // NewMTRThermostatClusterPresetTypeStruct creates a new MTRThermostatClusterPresetTypeStruct.
@@ -71,68 +71,37 @@ func NewMTRThermostatClusterPresetTypeStruct() *MTRThermostatClusterPresetTypeSt
 }
 
 // WithPresetScenario sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetTypeStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetTypeStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
-	return x
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetTypeStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
+	return mtcpts
 }
 
 // WithNumberOfPresets sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetTypeStruct) WithNumberOfPresets(numberOfPresets obj.Object) *MTRThermostatClusterPresetTypeStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
-	return x
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithNumberOfPresets(numberOfPresets obj.Object) *MTRThermostatClusterPresetTypeStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
+	return mtcpts
 }
 
 // WithPresetTypeFeatures sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterPresetTypeStruct) WithPresetTypeFeatures(presetTypeFeatures obj.Object) *MTRThermostatClusterPresetTypeStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
-	return x
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithPresetTypeFeatures(presetTypeFeatures obj.Object) *MTRThermostatClusterPresetTypeStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
+	return mtcpts
 }
 
 // PresetScenario wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetTypeStruct) PresetScenario() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetScenario"))
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetScenario() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("presetScenario"))
 	return obj.Wrap(_r)
-}
-
-// SetPresetScenario wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetTypeStruct) SetPresetScenario(presetScenario obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
 }
 
 // NumberOfPresets wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfPresets"))
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("numberOfPresets"))
 	return obj.Wrap(_r)
-}
-
-// SetNumberOfPresets wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetTypeStruct) SetNumberOfPresets(numberOfPresets obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
 }
 
 // PresetTypeFeatures wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetTypeFeatures"))
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("presetTypeFeatures"))
 	return obj.Wrap(_r)
 }
-
-// SetPresetTypeFeatures wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterPresetTypeStruct) SetPresetTypeFeatures(presetTypeFeatures obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
-}
-
-// MTRThermostatClusterPresetTypeStructable is the interface implemented by [MTRThermostatClusterPresetTypeStruct], for mocking and DI.
-type MTRThermostatClusterPresetTypeStructable interface {
-	obj.Object
-	WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetTypeStruct
-	WithNumberOfPresets(numberOfPresets obj.Object) *MTRThermostatClusterPresetTypeStruct
-	WithPresetTypeFeatures(presetTypeFeatures obj.Object) *MTRThermostatClusterPresetTypeStruct
-	PresetScenario() obj.Object
-	SetPresetScenario(presetScenario obj.Object)
-	NumberOfPresets() obj.Object
-	SetNumberOfPresets(numberOfPresets obj.Object)
-	PresetTypeFeatures() obj.Object
-	SetPresetTypeFeatures(presetTypeFeatures obj.Object)
-}
-
-var _ MTRThermostatClusterPresetTypeStructable = (*MTRThermostatClusterPresetTypeStruct)(nil)

@@ -52,30 +52,20 @@ func NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue(device *MTRD
 }
 
 // ReadAttributeDefaultOtaProvidersWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) ReadAttributeDefaultOtaProvidersWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:"), objref.IDOf(params))
+func (mcosur *MTRClusterOtaSoftwareUpdateRequestor) ReadAttributeDefaultOtaProvidersWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcosur *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcosur *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
-
-// MTRClusterOtaSoftwareUpdateRequestorable is the interface implemented by [MTRClusterOtaSoftwareUpdateRequestor], for mocking and DI.
-type MTRClusterOtaSoftwareUpdateRequestorable interface {
-	obj.Object
-	ReadAttributeDefaultOtaProvidersWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-}
-
-var _ MTRClusterOtaSoftwareUpdateRequestorable = (*MTRClusterOtaSoftwareUpdateRequestor)(nil)
 
 var _ MTRClusterOTASoftwareUpdateRequestorProvider = (*MTRClusterOtaSoftwareUpdateRequestor)(nil)
 

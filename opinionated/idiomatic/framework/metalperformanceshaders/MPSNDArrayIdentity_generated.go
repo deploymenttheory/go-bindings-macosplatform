@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayIdentity() *NDArrayIdentity {
 	return nDArrayIdentityAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nai *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {
+	objc.Send[objc.ID](objref.IDOf(nai), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nai
 }
-
-// NDArrayIdentityable is the interface implemented by [NDArrayIdentity], for mocking and DI.
-type NDArrayIdentityable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayIdentity
-}
-
-var _ NDArrayIdentityable = (*NDArrayIdentity)(nil)
 
 var _ NDArrayUnaryKernelProvider = (*NDArrayIdentity)(nil)
 

@@ -54,793 +54,622 @@ func NewImageView() *ImageView {
 	return imageViewAdopt(_id)
 }
 
-// WithImage the image displayed by the image view.
-func (x *ImageView) WithImage(image *Image) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the image view.
+func (iv *ImageView) WithImage(image *Image) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return iv
 }
 
-// WithEditable a Boolean value indicating whether the user can drag a new image into the image view.
-func (x *ImageView) WithEditable(editable bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the user can drag a new image into the image view.
+func (iv *ImageView) WithEditable(editable bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEditable:"), editable)
+	return iv
 }
 
-// WithImageAlignment the alignment of the cell’s image inside the image view.
-func (x *ImageView) WithImageAlignment(imageAlignment ImageAlignment) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageAlignment:"), imageAlignment)
-	return x
+// WithImageAlignment sets the alignment of the cell’s image inside the image view.
+func (iv *ImageView) WithImageAlignment(imageAlignment ImageAlignment) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageAlignment:"), imageAlignment)
+	return iv
 }
 
-// WithImageScaling the scaling mode applied to make the cell’s image fit the frame of the image view.
-func (x *ImageView) WithImageScaling(imageScaling ImageScaling) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
-	return x
+// WithImageScaling sets the scaling mode applied to make the cell’s image fit the frame of the image view.
+func (iv *ImageView) WithImageScaling(imageScaling ImageScaling) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageScaling:"), imageScaling)
+	return iv
 }
 
-// WithImageFrameStyle the style of frame that appears around the image.
-func (x *ImageView) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
-	return x
+// WithImageFrameStyle sets the style of frame that appears around the image.
+func (iv *ImageView) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
+	return iv
 }
 
-// WithSymbolConfiguration specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images.
-func (x *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
-	return x
+// WithSymbolConfiguration sets specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images.
+func (iv *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
+	return iv
 }
 
-// WithContentTintColor a tint color to be used when rendering template image content.
-func (x *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
-	return x
+// WithContentTintColor sets a tint color to be used when rendering template image content.
+func (iv *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
+	return iv
 }
 
-// WithAnimates a Boolean value indicating whether the image view automatically plays animated images.
-func (x *ImageView) WithAnimates(animates bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimates:"), animates)
-	return x
+// WithAnimates sets a Boolean value indicating whether the image view automatically plays animated images.
+func (iv *ImageView) WithAnimates(animates bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAnimates:"), animates)
+	return iv
 }
 
-// WithAllowsCutCopyPaste a Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.
-func (x *ImageView) WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCutCopyPaste:"), allowsCutCopyPaste)
-	return x
+// WithAllowsCutCopyPaste sets a Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.
+func (iv *ImageView) WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowsCutCopyPaste:"), allowsCutCopyPaste)
+	return iv
 }
 
-// WithPreferredImageDynamicRange the preferred dynamic range when displaying an image in the receiving image view.
-func (x *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange ImageDynamicRange) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredImageDynamicRange:"), preferredImageDynamicRange)
-	return x
+// WithPreferredImageDynamicRange sets the preferred dynamic range when displaying an image in the receiving image view.
+func (iv *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange ImageDynamicRange) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreferredImageDynamicRange:"), preferredImageDynamicRange)
+	return iv
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *ImageView) WithTarget(target obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (iv *ImageView) WithTarget(target obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return iv
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *ImageView) WithTag(tag int) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (iv *ImageView) WithTag(tag int) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTag:"), tag)
+	return iv
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *ImageView) WithIgnoresMultiClick(ignoresMultiClick bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (iv *ImageView) WithIgnoresMultiClick(ignoresMultiClick bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return iv
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *ImageView) WithContinuous(continuous bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (iv *ImageView) WithContinuous(continuous bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContinuous:"), continuous)
+	return iv
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *ImageView) WithEnabled(enabled bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (iv *ImageView) WithEnabled(enabled bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setEnabled:"), enabled)
+	return iv
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *ImageView) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (iv *ImageView) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return iv
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *ImageView) WithHighlighted(highlighted bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (iv *ImageView) WithHighlighted(highlighted bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHighlighted:"), highlighted)
+	return iv
 }
 
-// WithControlSize the size of the control.
-func (x *ImageView) WithControlSize(controlSize ControlSize) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (iv *ImageView) WithControlSize(controlSize ControlSize) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setControlSize:"), controlSize)
+	return iv
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *ImageView) WithFormatter(formatter obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (iv *ImageView) WithFormatter(formatter obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return iv
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *ImageView) WithObjectValue(objectValue obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (iv *ImageView) WithObjectValue(objectValue obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return iv
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *ImageView) WithStringValue(stringValue string) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (iv *ImageView) WithStringValue(stringValue string) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return iv
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *ImageView) WithAttributedStringValue(attributedStringValue obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (iv *ImageView) WithAttributedStringValue(attributedStringValue obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return iv
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *ImageView) WithIntValue(intValue int) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (iv *ImageView) WithIntValue(intValue int) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIntValue:"), intValue)
+	return iv
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *ImageView) WithIntegerValue(integerValue int) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (iv *ImageView) WithIntegerValue(integerValue int) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setIntegerValue:"), integerValue)
+	return iv
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *ImageView) WithFloatValue(floatValue float32) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (iv *ImageView) WithFloatValue(floatValue float32) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFloatValue:"), floatValue)
+	return iv
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *ImageView) WithDoubleValue(doubleValue float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (iv *ImageView) WithDoubleValue(doubleValue float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return iv
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *ImageView) WithFont(font *Font) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (iv *ImageView) WithFont(font *Font) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return iv
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *ImageView) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (iv *ImageView) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return iv
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *ImageView) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (iv *ImageView) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return iv
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *ImageView) WithAlignment(alignment TextAlignment) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (iv *ImageView) WithAlignment(alignment TextAlignment) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlignment:"), alignment)
+	return iv
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *ImageView) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (iv *ImageView) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return iv
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *ImageView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (iv *ImageView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return iv
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithCell(cell CellProvider) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (iv *ImageView) WithCell(cell CellProvider) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return iv
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithSubviews(items ...ViewProvider) *ImageView {
+func (iv *ImageView) WithSubviews(items ...ViewProvider) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSubviews:"), _arr)
+	return iv
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithHidden(hidden bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (iv *ImageView) WithHidden(hidden bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHidden:"), hidden)
+	return iv
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (iv *ImageView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return iv
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (iv *ImageView) WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return iv
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (iv *ImageView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return iv
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *ImageView) WithFrame(frame corefoundation.CGRect) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (iv *ImageView) WithFrame(frame corefoundation.CGRect) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrame:"), frame)
+	return iv
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithFrameRotation(frameRotation float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (iv *ImageView) WithFrameRotation(frameRotation float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return iv
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithFrameCenterRotation(frameCenterRotation float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (iv *ImageView) WithFrameCenterRotation(frameCenterRotation float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return iv
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithBoundsRotation(boundsRotation float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (iv *ImageView) WithBoundsRotation(boundsRotation float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return iv
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *ImageView) WithBounds(bounds corefoundation.CGRect) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (iv *ImageView) WithBounds(bounds corefoundation.CGRect) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBounds:"), bounds)
+	return iv
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithCanDrawConcurrently(canDrawConcurrently bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (iv *ImageView) WithCanDrawConcurrently(canDrawConcurrently bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return iv
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *ImageView) WithNeedsDisplay(needsDisplay bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (iv *ImageView) WithNeedsDisplay(needsDisplay bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return iv
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (iv *ImageView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return iv
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithWantsRestingTouches(wantsRestingTouches bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (iv *ImageView) WithWantsRestingTouches(wantsRestingTouches bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return iv
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (iv *ImageView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return iv
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (iv *ImageView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return iv
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithWantsLayer(wantsLayer bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (iv *ImageView) WithWantsLayer(wantsLayer bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return iv
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithLayer(layer obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (iv *ImageView) WithLayer(layer obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return iv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (iv *ImageView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return iv
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithNeedsLayout(needsLayout bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (iv *ImageView) WithNeedsLayout(needsLayout bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return iv
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithAlphaValue(alphaValue float64) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (iv *ImageView) WithAlphaValue(alphaValue float64) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return iv
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (iv *ImageView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return iv
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithBackgroundFilters(items ...obj.Object) *ImageView {
+func (iv *ImageView) WithBackgroundFilters(items ...obj.Object) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return iv
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithCompositingFilter(compositingFilter obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (iv *ImageView) WithCompositingFilter(compositingFilter obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return iv
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithContentFilters(items ...obj.Object) *ImageView {
+func (iv *ImageView) WithContentFilters(items ...obj.Object) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentFilters:"), _arr)
+	return iv
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithShadow(shadow *Shadow) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (iv *ImageView) WithShadow(shadow *Shadow) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return iv
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithClipsToBounds(clipsToBounds bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (iv *ImageView) WithClipsToBounds(clipsToBounds bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return iv
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (iv *ImageView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return iv
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithToolTip(toolTip string) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (iv *ImageView) WithToolTip(toolTip string) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return iv
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (iv *ImageView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return iv
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (iv *ImageView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return iv
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithNextKeyView(nextKeyView ViewProvider) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (iv *ImageView) WithNextKeyView(nextKeyView ViewProvider) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return iv
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithFocusRingType(focusRingType FocusRingType) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (iv *ImageView) WithFocusRingType(focusRingType FocusRingType) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return iv
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ImageView {
+func (iv *ImageView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return iv
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (iv *ImageView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return iv
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (iv *ImageView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return iv
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (iv *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return iv
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (iv *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return iv
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (iv *ImageView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return iv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (iv *ImageView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return iv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (iv *ImageView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return iv
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (iv *ImageView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return iv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (iv *ImageView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return iv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (iv *ImageView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return iv
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *ImageView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (iv *ImageView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return iv
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (iv *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return iv
 }
 
-// WithMenu returns the responder’s menu.
-func (x *ImageView) WithMenu(menu *Menu) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (iv *ImageView) WithMenu(menu *Menu) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return iv
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *ImageView) WithUserActivity(userActivity obj.Object) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (iv *ImageView) WithUserActivity(userActivity obj.Object) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return iv
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (iv *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return iv
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *ImageView) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (iv *ImageView) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// SetImage wraps the corresponding Objective-C method.
-func (x *ImageView) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-}
-
 // IsEditable wraps the corresponding Objective-C method.
-func (x *ImageView) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (iv *ImageView) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("isEditable"))
 	return _r
-}
-
-// SetEditable wraps the corresponding Objective-C method.
-func (x *ImageView) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
 // ImageAlignment wraps the corresponding Objective-C method.
-func (x *ImageView) ImageAlignment() ImageAlignment {
-	_r := objc.Send[ImageAlignment](objref.IDOf(x), objc.RegisterName("imageAlignment"))
+func (iv *ImageView) ImageAlignment() ImageAlignment {
+	_r := objc.Send[ImageAlignment](objref.IDOf(iv), objc.RegisterName("imageAlignment"))
 	return _r
-}
-
-// SetImageAlignment wraps the corresponding Objective-C method.
-func (x *ImageView) SetImageAlignment(imageAlignment ImageAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageAlignment:"), imageAlignment)
 }
 
 // ImageScaling wraps the corresponding Objective-C method.
-func (x *ImageView) ImageScaling() ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScaling"))
+func (iv *ImageView) ImageScaling() ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(iv), objc.RegisterName("imageScaling"))
 	return _r
-}
-
-// SetImageScaling wraps the corresponding Objective-C method.
-func (x *ImageView) SetImageScaling(imageScaling ImageScaling) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 }
 
 // ImageFrameStyle wraps the corresponding Objective-C method.
-func (x *ImageView) ImageFrameStyle() ImageFrameStyle {
-	_r := objc.Send[ImageFrameStyle](objref.IDOf(x), objc.RegisterName("imageFrameStyle"))
+func (iv *ImageView) ImageFrameStyle() ImageFrameStyle {
+	_r := objc.Send[ImageFrameStyle](objref.IDOf(iv), objc.RegisterName("imageFrameStyle"))
 	return _r
-}
-
-// SetImageFrameStyle wraps the corresponding Objective-C method.
-func (x *ImageView) SetImageFrameStyle(imageFrameStyle ImageFrameStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
 }
 
 // SymbolConfiguration specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
-func (x *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolConfiguration"))
+func (iv *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("symbolConfiguration"))
 	return ImageSymbolConfigurationFromID(_r)
 }
 
-// SetSymbolConfiguration specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
-func (x *ImageView) SetSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
-}
-
-// ContentTintColor a tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
-func (x *ImageView) ContentTintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentTintColor"))
+// ContentTintColor returns a tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
+func (iv *ImageView) ContentTintColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("contentTintColor"))
 	return ColorFromID(_r)
 }
 
-// SetContentTintColor a tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
-func (x *ImageView) SetContentTintColor(contentTintColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
-}
-
 // Animates wraps the corresponding Objective-C method.
-func (x *ImageView) Animates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("animates"))
+func (iv *ImageView) Animates() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("animates"))
 	return _r
-}
-
-// SetAnimates wraps the corresponding Objective-C method.
-func (x *ImageView) SetAnimates(animates bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimates:"), animates)
 }
 
 // AllowsCutCopyPaste wraps the corresponding Objective-C method.
-func (x *ImageView) AllowsCutCopyPaste() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCutCopyPaste"))
+func (iv *ImageView) AllowsCutCopyPaste() bool {
+	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("allowsCutCopyPaste"))
 	return _r
 }
 
-// SetAllowsCutCopyPaste wraps the corresponding Objective-C method.
-func (x *ImageView) SetAllowsCutCopyPaste(allowsCutCopyPaste bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCutCopyPaste:"), allowsCutCopyPaste)
-}
-
-// PreferredImageDynamicRange preferred dynamic range when displaying an image in the receiving image view.
-func (x *ImageView) PreferredImageDynamicRange() ImageDynamicRange {
-	_r := objc.Send[ImageDynamicRange](objref.IDOf(x), objc.RegisterName("preferredImageDynamicRange"))
+// PreferredImageDynamicRange returns preferred dynamic range when displaying an image in the receiving image view.
+func (iv *ImageView) PreferredImageDynamicRange() ImageDynamicRange {
+	_r := objc.Send[ImageDynamicRange](objref.IDOf(iv), objc.RegisterName("preferredImageDynamicRange"))
 	return _r
 }
 
-// SetPreferredImageDynamicRange preferred dynamic range when displaying an image in the receiving image view.
-func (x *ImageView) SetPreferredImageDynamicRange(preferredImageDynamicRange ImageDynamicRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredImageDynamicRange:"), preferredImageDynamicRange)
-}
-
-// ImageDynamicRange resolved dynamic range based on fully resolved image content. Note: this will return `NSImageDynamicRangeUnspecified` if the image view has not or can not resolve the content (either because it has no resolvable image content or has not resolved because the image view hasn't displayed.)
-func (x *ImageView) ImageDynamicRange() ImageDynamicRange {
-	_r := objc.Send[ImageDynamicRange](objref.IDOf(x), objc.RegisterName("imageDynamicRange"))
+// ImageDynamicRange returns resolved dynamic range based on fully resolved image content. Note: this will return `NSImageDynamicRangeUnspecified` if the image view has not or can not resolve the content (either because it has no resolvable image content or has not resolved because the image view hasn't displayed.)
+func (iv *ImageView) ImageDynamicRange() ImageDynamicRange {
+	_r := objc.Send[ImageDynamicRange](objref.IDOf(iv), objc.RegisterName("imageDynamicRange"))
 	return _r
 }
 
 // AddSymbolEffect adds a symbol effect to the image view with default options and animation.
-func (x *ImageView) AddSymbolEffect(symbolEffect obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSymbolEffect:"), objref.IDOf(symbolEffect))
+func (iv *ImageView) AddSymbolEffect(symbolEffect obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:"), objref.IDOf(symbolEffect))
 }
 
 // AddSymbolEffectOptions adds a symbol effect to the image view with the specified options and default animation.
-func (x *ImageView) AddSymbolEffectOptions(symbolEffect obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSymbolEffect:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
+func (iv *ImageView) AddSymbolEffectOptions(symbolEffect obj.Object, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
 }
 
 // AddSymbolEffectOptionsAnimated adds a symbol effect to the image view with the specified options and animation.
-func (x *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSymbolEffect:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
+func (iv *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
 }
 
 // RemoveSymbolEffectOfType removes the symbol effect that matches the specified effect type.
-func (x *ImageView) RemoveSymbolEffectOfType(symbolEffect obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSymbolEffectOfType:"), objref.IDOf(symbolEffect))
+func (iv *ImageView) RemoveSymbolEffectOfType(symbolEffect obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:"), objref.IDOf(symbolEffect))
 }
 
 // RemoveSymbolEffectOfTypeOptions removes the symbol effect that matches the specified effect type, using the specified options.
-func (x *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSymbolEffectOfType:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
+func (iv *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect obj.Object, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
 }
 
 // RemoveSymbolEffectOfTypeOptionsAnimated removes the symbol effect that matches the specified effect type, using the specified options and animation setting.
-func (x *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSymbolEffectOfType:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
+func (iv *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
 }
 
 // RemoveAllSymbolEffects removes all symbol effects from the image view.
-func (x *ImageView) RemoveAllSymbolEffects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllSymbolEffects"))
+func (iv *ImageView) RemoveAllSymbolEffects() {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffects"))
 }
 
 // RemoveAllSymbolEffectsWithOptions removes all symbol effects from the image view, using the specified options.
-func (x *ImageView) RemoveAllSymbolEffectsWithOptions(options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllSymbolEffectsWithOptions:"), objref.IDOf(options))
+func (iv *ImageView) RemoveAllSymbolEffectsWithOptions(options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:"), objref.IDOf(options))
 }
 
 // RemoveAllSymbolEffectsWithOptionsAnimated removes all symbol effects from the image view, using the specified options and animation setting.
-func (x *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:"), objref.IDOf(options), animated)
+func (iv *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options obj.Object, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:"), objref.IDOf(options), animated)
 }
 
 // SetSymbolImageWithContentTransition sets a symbol image using the specified content-transition effect.
-func (x *ImageView) SetSymbolImageWithContentTransition(symbolImage *Image, transition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbolImage:withContentTransition:"), objref.IDOf(symbolImage), objref.IDOf(transition))
+func (iv *ImageView) SetSymbolImageWithContentTransition(symbolImage *Image, transition obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:"), objref.IDOf(symbolImage), objref.IDOf(transition))
 }
 
 // SetSymbolImageWithContentTransitionOptions sets a symbol image using the specified content-transition effect and options.
-func (x *ImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *Image, transition obj.Object, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbolImage:withContentTransition:options:"), objref.IDOf(symbolImage), objref.IDOf(transition), objref.IDOf(options))
+func (iv *ImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *Image, transition obj.Object, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:options:"), objref.IDOf(symbolImage), objref.IDOf(transition), objref.IDOf(options))
 }
-
-// ImageViewable is the interface implemented by [ImageView], for mocking and DI.
-type ImageViewable interface {
-	obj.Object
-	WithImage(image *Image) *ImageView
-	WithEditable(editable bool) *ImageView
-	WithImageAlignment(imageAlignment ImageAlignment) *ImageView
-	WithImageScaling(imageScaling ImageScaling) *ImageView
-	WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageView
-	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView
-	WithContentTintColor(contentTintColor *Color) *ImageView
-	WithAnimates(animates bool) *ImageView
-	WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView
-	WithPreferredImageDynamicRange(preferredImageDynamicRange ImageDynamicRange) *ImageView
-	WithTarget(target obj.Object) *ImageView
-	WithTag(tag int) *ImageView
-	WithIgnoresMultiClick(ignoresMultiClick bool) *ImageView
-	WithContinuous(continuous bool) *ImageView
-	WithEnabled(enabled bool) *ImageView
-	WithRefusesFirstResponder(refusesFirstResponder bool) *ImageView
-	WithHighlighted(highlighted bool) *ImageView
-	WithControlSize(controlSize ControlSize) *ImageView
-	WithFormatter(formatter obj.Object) *ImageView
-	WithObjectValue(objectValue obj.Object) *ImageView
-	WithStringValue(stringValue string) *ImageView
-	WithAttributedStringValue(attributedStringValue obj.Object) *ImageView
-	WithIntValue(intValue int) *ImageView
-	WithIntegerValue(integerValue int) *ImageView
-	WithFloatValue(floatValue float32) *ImageView
-	WithDoubleValue(doubleValue float64) *ImageView
-	WithFont(font *Font) *ImageView
-	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView
-	WithLineBreakMode(lineBreakMode LineBreakMode) *ImageView
-	WithAlignment(alignment TextAlignment) *ImageView
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageView
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ImageView
-	WithCell(cell CellProvider) *ImageView
-	WithSubviews(items ...ViewProvider) *ImageView
-	WithHidden(hidden bool) *ImageView
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ImageView
-	WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ImageView
-	WithFrame(frame corefoundation.CGRect) *ImageView
-	WithFrameRotation(frameRotation float64) *ImageView
-	WithFrameCenterRotation(frameCenterRotation float64) *ImageView
-	WithBoundsRotation(boundsRotation float64) *ImageView
-	WithBounds(bounds corefoundation.CGRect) *ImageView
-	WithCanDrawConcurrently(canDrawConcurrently bool) *ImageView
-	WithNeedsDisplay(needsDisplay bool) *ImageView
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ImageView
-	WithWantsRestingTouches(wantsRestingTouches bool) *ImageView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ImageView
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ImageView
-	WithWantsLayer(wantsLayer bool) *ImageView
-	WithLayer(layer obj.Object) *ImageView
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ImageView
-	WithNeedsLayout(needsLayout bool) *ImageView
-	WithAlphaValue(alphaValue float64) *ImageView
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ImageView
-	WithBackgroundFilters(items ...obj.Object) *ImageView
-	WithCompositingFilter(compositingFilter obj.Object) *ImageView
-	WithContentFilters(items ...obj.Object) *ImageView
-	WithShadow(shadow *Shadow) *ImageView
-	WithClipsToBounds(clipsToBounds bool) *ImageView
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView
-	WithToolTip(toolTip string) *ImageView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ImageView
-	WithNextKeyView(nextKeyView ViewProvider) *ImageView
-	WithFocusRingType(focusRingType FocusRingType) *ImageView
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *ImageView
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ImageView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ImageView
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ImageView
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ImageView
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ImageView
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ImageView
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView
-	WithNextResponder(nextResponder ResponderProvider) *ImageView
-	WithMenu(menu *Menu) *ImageView
-	WithUserActivity(userActivity obj.Object) *ImageView
-	WithTouchBar(touchBar *TouchBar) *ImageView
-	Image() *Image
-	SetImage(image *Image)
-	IsEditable() bool
-	SetEditable(editable bool)
-	ImageAlignment() ImageAlignment
-	SetImageAlignment(imageAlignment ImageAlignment)
-	ImageScaling() ImageScaling
-	SetImageScaling(imageScaling ImageScaling)
-	ImageFrameStyle() ImageFrameStyle
-	SetImageFrameStyle(imageFrameStyle ImageFrameStyle)
-	SymbolConfiguration() *ImageSymbolConfiguration
-	SetSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration)
-	ContentTintColor() *Color
-	SetContentTintColor(contentTintColor *Color)
-	Animates() bool
-	SetAnimates(animates bool)
-	AllowsCutCopyPaste() bool
-	SetAllowsCutCopyPaste(allowsCutCopyPaste bool)
-	PreferredImageDynamicRange() ImageDynamicRange
-	SetPreferredImageDynamicRange(preferredImageDynamicRange ImageDynamicRange)
-	ImageDynamicRange() ImageDynamicRange
-	AddSymbolEffect(symbolEffect obj.Object)
-	AddSymbolEffectOptions(symbolEffect obj.Object, options obj.Object)
-	AddSymbolEffectOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool)
-	RemoveSymbolEffectOfType(symbolEffect obj.Object)
-	RemoveSymbolEffectOfTypeOptions(symbolEffect obj.Object, options obj.Object)
-	RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool)
-	RemoveAllSymbolEffects()
-	RemoveAllSymbolEffectsWithOptions(options obj.Object)
-	RemoveAllSymbolEffectsWithOptionsAnimated(options obj.Object, animated bool)
-	SetSymbolImageWithContentTransition(symbolImage *Image, transition obj.Object)
-	SetSymbolImageWithContentTransitionOptions(symbolImage *Image, transition obj.Object, options obj.Object)
-}
-
-var _ ImageViewable = (*ImageView)(nil)
 
 var _ ControlProvider = (*ImageView)(nil)
 

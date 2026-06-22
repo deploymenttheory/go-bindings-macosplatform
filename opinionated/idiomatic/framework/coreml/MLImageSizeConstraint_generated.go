@@ -47,24 +47,24 @@ func imageSizeConstraintAdopt(id objc.ID) *ImageSizeConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *ImageSizeConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ImageSizeConstraint) Description() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageSizeConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (isc *ImageSizeConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageSizeConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (isc *ImageSizeConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageSizeConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ImageSizeConstraint) String() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // NewImageSizeConstraint creates a new ImageSizeConstraint.
@@ -74,38 +74,27 @@ func NewImageSizeConstraint() *ImageSizeConstraint {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *ImageSizeConstraint) Type() ImageSizeConstraintType {
-	_r := objc.Send[ImageSizeConstraintType](objref.IDOf(x), objc.RegisterName("type"))
+func (isc *ImageSizeConstraint) Type() ImageSizeConstraintType {
+	_r := objc.Send[ImageSizeConstraintType](objref.IDOf(isc), objc.RegisterName("type"))
 	return _r
 }
 
 // PixelsWideRange wraps the corresponding Objective-C method.
-func (x *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("pixelsWideRange"))
+func (isc *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(isc), objc.RegisterName("pixelsWideRange"))
 	return _r
 }
 
 // PixelsHighRange wraps the corresponding Objective-C method.
-func (x *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("pixelsHighRange"))
+func (isc *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(isc), objc.RegisterName("pixelsHighRange"))
 	return _r
 }
 
 // EnumeratedImageSizes wraps the corresponding Objective-C method.
 //
 // EnumeratedImageSizes returns the collection as a Go slice.
-func (x *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedImageSizes"))
+func (isc *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
+	_arr := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("enumeratedImageSizes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ImageSize { return ImageSizeFromID(_id) })
 }
-
-// ImageSizeConstraintable is the interface implemented by [ImageSizeConstraint], for mocking and DI.
-type ImageSizeConstraintable interface {
-	obj.Object
-	Type() ImageSizeConstraintType
-	PixelsWideRange() foundation.NSRange
-	PixelsHighRange() foundation.NSRange
-	EnumeratedImageSizes() []*ImageSize
-}
-
-var _ ImageSizeConstraintable = (*ImageSizeConstraint)(nil)

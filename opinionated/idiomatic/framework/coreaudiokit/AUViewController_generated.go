@@ -46,24 +46,24 @@ func aUViewControllerAdopt(id objc.ID) *AUViewController {
 }
 
 // Description returns the object's -description text.
-func (x *AUViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (avc *AUViewController) Description() string {
+	return rt.Description(objref.IDOf(avc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AUViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (avc *AUViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(avc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AUViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (avc *AUViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(avc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AUViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (avc *AUViewController) String() string {
+	return rt.Description(objref.IDOf(avc))
 }
 
 // NewAUViewController creates a new AUViewController.
@@ -71,10 +71,3 @@ func NewAUViewController() *AUViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("AUViewController")), objc.RegisterName("new"))
 	return aUViewControllerAdopt(_id)
 }
-
-// AUViewControllerable is the interface implemented by [AUViewController], for mocking and DI.
-type AUViewControllerable interface {
-	obj.Object
-}
-
-var _ AUViewControllerable = (*AUViewController)(nil)

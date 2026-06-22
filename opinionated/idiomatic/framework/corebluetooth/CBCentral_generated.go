@@ -7,7 +7,6 @@ package corebluetooth
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewCentral() *Central {
 }
 
 // MaximumUpdateValueLength wraps the corresponding Objective-C method.
-func (x *Central) MaximumUpdateValueLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumUpdateValueLength"))
+func (c *Central) MaximumUpdateValueLength() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("maximumUpdateValueLength"))
 	return _r
 }
-
-// Centralable is the interface implemented by [Central], for mocking and DI.
-type Centralable interface {
-	obj.Object
-	MaximumUpdateValueLength() int
-}
-
-var _ Centralable = (*Central)(nil)
 
 var _ PeerProvider = (*Central)(nil)

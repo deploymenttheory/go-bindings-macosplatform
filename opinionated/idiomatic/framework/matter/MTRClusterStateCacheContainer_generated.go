@@ -44,24 +44,24 @@ func mTRClusterStateCacheContainerAdopt(id objc.ID) *MTRClusterStateCacheContain
 }
 
 // Description returns the object's -description text.
-func (x *MTRClusterStateCacheContainer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcscc *MTRClusterStateCacheContainer) Description() string {
+	return rt.Description(objref.IDOf(mcscc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRClusterStateCacheContainer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcscc *MTRClusterStateCacheContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcscc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRClusterStateCacheContainer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcscc *MTRClusterStateCacheContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcscc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRClusterStateCacheContainer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcscc *MTRClusterStateCacheContainer) String() string {
+	return rt.Description(objref.IDOf(mcscc))
 }
 
 // NewMTRClusterStateCacheContainer creates a new MTRClusterStateCacheContainer.
@@ -69,10 +69,3 @@ func NewMTRClusterStateCacheContainer() *MTRClusterStateCacheContainer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRClusterStateCacheContainer")), objc.RegisterName("new"))
 	return mTRClusterStateCacheContainerAdopt(_id)
 }
-
-// MTRClusterStateCacheContainerable is the interface implemented by [MTRClusterStateCacheContainer], for mocking and DI.
-type MTRClusterStateCacheContainerable interface {
-	obj.Object
-}
-
-var _ MTRClusterStateCacheContainerable = (*MTRClusterStateCacheContainer)(nil)

@@ -46,24 +46,24 @@ func distributedLockAdopt(id objc.ID) *DistributedLock {
 }
 
 // Description returns the object's -description text.
-func (x *DistributedLock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dl *DistributedLock) Description() string {
+	return rt.Description(objref.IDOf(dl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistributedLock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dl *DistributedLock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistributedLock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dl *DistributedLock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DistributedLock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dl *DistributedLock) String() string {
+	return rt.Description(objref.IDOf(dl))
 }
 
 // NewDistributedLockWithPath initializes an NSDistributedLock object to use as the lock the file-system entry specified by a given path.
@@ -74,41 +74,29 @@ func NewDistributedLockWithPath(path string) *DistributedLock {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DistributedLock) WithScriptingProperties(scriptingProperties obj.Object) *DistributedLock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dl *DistributedLock) WithScriptingProperties(scriptingProperties obj.Object) *DistributedLock {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dl
 }
 
-// TryLock attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
-func (x *DistributedLock) TryLock() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
+// TryLock reports whether attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
+func (dl *DistributedLock) TryLock() bool {
+	_r := objc.Send[bool](objref.IDOf(dl), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // Unlock relinquishes the receiver.
-func (x *DistributedLock) Unlock() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlock"))
+func (dl *DistributedLock) Unlock() {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("unlock"))
 }
 
 // BreakLock forces the lock to be relinquished.
-func (x *DistributedLock) BreakLock() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breakLock"))
+func (dl *DistributedLock) BreakLock() {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("breakLock"))
 }
 
 // LockDate wraps the corresponding Objective-C method.
-func (x *DistributedLock) LockDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockDate"))
+func (dl *DistributedLock) LockDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("lockDate"))
 	return DateFromID(_r)
 }
-
-// DistributedLockable is the interface implemented by [DistributedLock], for mocking and DI.
-type DistributedLockable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DistributedLock
-	TryLock() bool
-	Unlock()
-	BreakLock()
-	LockDate() *Date
-}
-
-var _ DistributedLockable = (*DistributedLock)(nil)

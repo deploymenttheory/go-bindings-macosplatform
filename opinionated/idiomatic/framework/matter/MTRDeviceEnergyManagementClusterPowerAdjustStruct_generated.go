@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterPowerAdjustStructAdopt(id objc.ID) *MTRDevi
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) Description() string {
+	return rt.Description(objref.IDOf(mdemcpas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcpas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcpas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) String() string {
+	return rt.Description(objref.IDOf(mdemcpas))
 }
 
 // NewMTRDeviceEnergyManagementClusterPowerAdjustStruct creates a new MTRDeviceEnergyManagementClusterPowerAdjustStruct.
@@ -71,88 +71,49 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustStruct() *MTRDeviceEnergyMana
 }
 
 // WithMinPower sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
-	return x
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
+	return mdemcpas
 }
 
 // WithMaxPower sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
-	return x
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
+	return mdemcpas
 }
 
 // WithMinDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
-	return x
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
+	return mdemcpas
 }
 
 // WithMaxDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
-	return x
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
+	return mdemcpas
 }
 
 // MinPower wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinPower() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPower"))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("minPower"))
 	return obj.Wrap(_r)
-}
-
-// SetMinPower wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMinPower(minPower obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 }
 
 // MaxPower wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxPower() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPower"))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxPower() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("maxPower"))
 	return obj.Wrap(_r)
-}
-
-// SetMaxPower wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMaxPower(maxPower obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 }
 
 // MinDuration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minDuration"))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("minDuration"))
 	return obj.Wrap(_r)
-}
-
-// SetMinDuration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMinDuration(minDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 }
 
 // MaxDuration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxDuration"))
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("maxDuration"))
 	return obj.Wrap(_r)
 }
-
-// SetMaxDuration wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMaxDuration(maxDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
-}
-
-// MTRDeviceEnergyManagementClusterPowerAdjustStructable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustStruct], for mocking and DI.
-type MTRDeviceEnergyManagementClusterPowerAdjustStructable interface {
-	obj.Object
-	WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
-	WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
-	WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
-	WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
-	MinPower() obj.Object
-	SetMinPower(minPower obj.Object)
-	MaxPower() obj.Object
-	SetMaxPower(maxPower obj.Object)
-	MinDuration() obj.Object
-	SetMinDuration(minDuration obj.Object)
-	MaxDuration() obj.Object
-	SetMaxDuration(maxDuration obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterPowerAdjustStructable = (*MTRDeviceEnergyManagementClusterPowerAdjustStruct)(nil)

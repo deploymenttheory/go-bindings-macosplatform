@@ -46,24 +46,24 @@ func smartCardSlotAdopt(id objc.ID) *SmartCardSlot {
 }
 
 // Description returns the object's -description text.
-func (x *SmartCardSlot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scs *SmartCardSlot) Description() string {
+	return rt.Description(objref.IDOf(scs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SmartCardSlot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scs *SmartCardSlot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SmartCardSlot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scs *SmartCardSlot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SmartCardSlot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scs *SmartCardSlot) String() string {
+	return rt.Description(objref.IDOf(scs))
 }
 
 // NewSmartCardSlot creates a new SmartCardSlot.
@@ -73,53 +73,40 @@ func NewSmartCardSlot() *SmartCardSlot {
 }
 
 // MakeSmartCard creates a new TKSmartCard object representing the currently inserted Smart Card.
-func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeSmartCard"))
+func (scs *SmartCardSlot) MakeSmartCard() *SmartCard {
+	_r := objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("makeSmartCard"))
 	return SmartCardFromID(_r)
 }
 
-// State current state of the slot.  Use KVO to be notified about state changes.
-func (x *SmartCardSlot) State() SmartCardSlotState {
-	_r := objc.Send[SmartCardSlotState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns current state of the slot.  Use KVO to be notified about state changes.
+func (scs *SmartCardSlot) State() SmartCardSlotState {
+	_r := objc.Send[SmartCardSlotState](objref.IDOf(scs), objc.RegisterName("state"))
 	return _r
 }
 
-// ATR ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
-func (x *SmartCardSlot) ATR() *SmartCardATR {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ATR"))
+// ATR returns ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
+func (scs *SmartCardSlot) ATR() *SmartCardATR {
+	_r := objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("ATR"))
 	return SmartCardATRFromID(_r)
 }
 
-// Name name of the SmartCard reader slot.
-func (x *SmartCardSlot) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of the SmartCard reader slot.
+func (scs *SmartCardSlot) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MaxInputLength maximal length of input APDU that the slot is able to transfer to the card.
-func (x *SmartCardSlot) MaxInputLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxInputLength"))
+// MaxInputLength returns maximal length of input APDU that the slot is able to transfer to the card.
+func (scs *SmartCardSlot) MaxInputLength() int {
+	_r := objc.Send[int](objref.IDOf(scs), objc.RegisterName("maxInputLength"))
 	return _r
 }
 
-// MaxOutputLength maximal length of output APDU that the slot is able to transfer from the card.
-func (x *SmartCardSlot) MaxOutputLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxOutputLength"))
+// MaxOutputLength returns maximal length of output APDU that the slot is able to transfer from the card.
+func (scs *SmartCardSlot) MaxOutputLength() int {
+	_r := objc.Send[int](objref.IDOf(scs), objc.RegisterName("maxOutputLength"))
 	return _r
 }
-
-// SmartCardSlotable is the interface implemented by [SmartCardSlot], for mocking and DI.
-type SmartCardSlotable interface {
-	obj.Object
-	MakeSmartCard() *SmartCard
-	State() SmartCardSlotState
-	ATR() *SmartCardATR
-	Name() string
-	MaxInputLength() int
-	MaxOutputLength() int
-}
-
-var _ SmartCardSlotable = (*SmartCardSlot)(nil)

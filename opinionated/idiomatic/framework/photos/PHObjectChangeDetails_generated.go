@@ -46,24 +46,24 @@ func objectChangeDetailsAdopt(id objc.ID) *ObjectChangeDetails {
 }
 
 // Description returns the object's -description text.
-func (x *ObjectChangeDetails) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ocd *ObjectChangeDetails) Description() string {
+	return rt.Description(objref.IDOf(ocd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectChangeDetails) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ocd *ObjectChangeDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ocd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectChangeDetails) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ocd *ObjectChangeDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ocd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ObjectChangeDetails) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ocd *ObjectChangeDetails) String() string {
+	return rt.Description(objref.IDOf(ocd))
 }
 
 // NewObjectChangeDetails creates a new ObjectChangeDetails.
@@ -73,36 +73,25 @@ func NewObjectChangeDetails() *ObjectChangeDetails {
 }
 
 // ObjectBeforeChanges wraps the corresponding Objective-C method.
-func (x *ObjectChangeDetails) ObjectBeforeChanges() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBeforeChanges"))
+func (ocd *ObjectChangeDetails) ObjectBeforeChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("objectBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
 // ObjectAfterChanges wraps the corresponding Objective-C method.
-func (x *ObjectChangeDetails) ObjectAfterChanges() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAfterChanges"))
+func (ocd *ObjectChangeDetails) ObjectAfterChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("objectAfterChanges"))
 	return obj.Wrap(_r)
 }
 
 // AssetContentChanged wraps the corresponding Objective-C method.
-func (x *ObjectChangeDetails) AssetContentChanged() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assetContentChanged"))
+func (ocd *ObjectChangeDetails) AssetContentChanged() bool {
+	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("assetContentChanged"))
 	return _r
 }
 
 // ObjectWasDeleted wraps the corresponding Objective-C method.
-func (x *ObjectChangeDetails) ObjectWasDeleted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("objectWasDeleted"))
+func (ocd *ObjectChangeDetails) ObjectWasDeleted() bool {
+	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("objectWasDeleted"))
 	return _r
 }
-
-// ObjectChangeDetailsable is the interface implemented by [ObjectChangeDetails], for mocking and DI.
-type ObjectChangeDetailsable interface {
-	obj.Object
-	ObjectBeforeChanges() obj.Object
-	ObjectAfterChanges() obj.Object
-	AssetContentChanged() bool
-	ObjectWasDeleted() bool
-}
-
-var _ ObjectChangeDetailsable = (*ObjectChangeDetails)(nil)

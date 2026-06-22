@@ -46,24 +46,24 @@ func lookAroundSceneRequestAdopt(id objc.ID) *LookAroundSceneRequest {
 }
 
 // Description returns the object's -description text.
-func (x *LookAroundSceneRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lasr *LookAroundSceneRequest) Description() string {
+	return rt.Description(objref.IDOf(lasr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LookAroundSceneRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lasr *LookAroundSceneRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lasr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LookAroundSceneRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lasr *LookAroundSceneRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lasr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LookAroundSceneRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lasr *LookAroundSceneRequest) String() string {
+	return rt.Description(objref.IDOf(lasr))
 }
 
 // NewLookAroundSceneRequestWithMapItem creates a LookAround scene with the location described by the specified map item.
@@ -74,35 +74,24 @@ func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequ
 }
 
 // Cancel cancels the pending scene request.
-func (x *LookAroundSceneRequest) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (lasr *LookAroundSceneRequest) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("cancel"))
 }
 
 // MapItem wraps the corresponding Objective-C method.
-func (x *LookAroundSceneRequest) MapItem() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
+func (lasr *LookAroundSceneRequest) MapItem() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
 
 // IsCancelled wraps the corresponding Objective-C method.
-func (x *LookAroundSceneRequest) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+func (lasr *LookAroundSceneRequest) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(lasr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsLoading wraps the corresponding Objective-C method.
-func (x *LookAroundSceneRequest) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+func (lasr *LookAroundSceneRequest) IsLoading() bool {
+	_r := objc.Send[bool](objref.IDOf(lasr), objc.RegisterName("isLoading"))
 	return _r
 }
-
-// LookAroundSceneRequestable is the interface implemented by [LookAroundSceneRequest], for mocking and DI.
-type LookAroundSceneRequestable interface {
-	obj.Object
-	Cancel()
-	MapItem() *MapItem
-	IsCancelled() bool
-	IsLoading() bool
-}
-
-var _ LookAroundSceneRequestable = (*LookAroundSceneRequest)(nil)

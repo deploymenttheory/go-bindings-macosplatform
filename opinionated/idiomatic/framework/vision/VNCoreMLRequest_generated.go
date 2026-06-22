@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,67 +53,47 @@ func NewCoreMLRequestWithModel(model *CoreMLModel) *CoreMLRequest {
 	return coreMLRequestAdopt(_id)
 }
 
-// WithImageCropAndScaleOption an optional setting that tells the Vision algorithm how to scale an input image.
-func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
-	return x
+// WithImageCropAndScaleOption sets an optional setting that tells the Vision algorithm how to scale an input image.
+func (cmr *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
+	return cmr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *CoreMLRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (cmr *CoreMLRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return cmr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *CoreMLRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (cmr *CoreMLRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return cmr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *CoreMLRequest) WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (cmr *CoreMLRequest) WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return cmr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *CoreMLRequest) WithRevision(revision int) *CoreMLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (cmr *CoreMLRequest) WithRevision(revision int) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("setRevision:"), revision)
+	return cmr
 }
 
-// Model the model from CoreML wrapped in a VNCoreMLModel.
-func (x *CoreMLRequest) Model() *CoreMLModel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+// Model returns the model from CoreML wrapped in a VNCoreMLModel.
+func (cmr *CoreMLRequest) Model() *CoreMLModel {
+	_r := objc.Send[objc.ID](objref.IDOf(cmr), objc.RegisterName("model"))
 	return CoreMLModelFromID(_r)
 }
 
 // ImageCropAndScaleOption wraps the corresponding Objective-C method.
-func (x *CoreMLRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
-	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(x), objc.RegisterName("imageCropAndScaleOption"))
+func (cmr *CoreMLRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
+	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(cmr), objc.RegisterName("imageCropAndScaleOption"))
 	return _r
 }
-
-// SetImageCropAndScaleOption wraps the corresponding Objective-C method.
-func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
-}
-
-// CoreMLRequestable is the interface implemented by [CoreMLRequest], for mocking and DI.
-type CoreMLRequestable interface {
-	obj.Object
-	WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest
-	WithRevision(revision int) *CoreMLRequest
-	Model() *CoreMLModel
-	ImageCropAndScaleOption() ImageCropAndScaleOption
-	SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption)
-}
-
-var _ CoreMLRequestable = (*CoreMLRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*CoreMLRequest)(nil)
 

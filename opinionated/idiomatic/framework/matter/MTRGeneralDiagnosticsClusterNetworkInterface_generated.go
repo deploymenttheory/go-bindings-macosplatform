@@ -46,186 +46,127 @@ func mTRGeneralDiagnosticsClusterNetworkInterfaceAdopt(id objc.ID) *MTRGeneralDi
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) Description() string {
+	return rt.Description(objref.IDOf(mgdcni))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdcni), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdcni), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) String() string {
+	return rt.Description(objref.IDOf(mgdcni))
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterface {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setName:"), purego.NSString(name))
+	return mgdcni
 }
 
 // WithIsOperational sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithIsOperational(isOperational obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOperational:"), objref.IDOf(isOperational))
-	return x
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) WithIsOperational(isOperational obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setIsOperational:"), objref.IDOf(isOperational))
+	return mgdcni
 }
 
 // WithOffPremiseServicesReachableIPv4 sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffPremiseServicesReachableIPv4:"), objref.IDOf(offPremiseServicesReachableIPv4))
-	return x
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setOffPremiseServicesReachableIPv4:"), objref.IDOf(offPremiseServicesReachableIPv4))
+	return mgdcni
 }
 
 // WithOffPremiseServicesReachableIPv6 sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffPremiseServicesReachableIPv6:"), objref.IDOf(offPremiseServicesReachableIPv6))
-	return x
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setOffPremiseServicesReachableIPv6:"), objref.IDOf(offPremiseServicesReachableIPv6))
+	return mgdcni
 }
 
 // WithHardwareAddress sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithHardwareAddress(hardwareAddress obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareAddress:"), objref.IDOf(hardwareAddress))
-	return x
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) WithHardwareAddress(hardwareAddress obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setHardwareAddress:"), objref.IDOf(hardwareAddress))
+	return mgdcni
 }
 
 // WithType sets the property and returns the receiver so calls can be chained.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithType(type_ obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-	return x
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) WithType(type_ obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setType:"), objref.IDOf(type_))
+	return mgdcni
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // IsOperational wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IsOperational() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isOperational"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) IsOperational() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("isOperational"))
 	return obj.Wrap(_r)
-}
-
-// SetIsOperational wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetIsOperational(isOperational obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOperational:"), objref.IDOf(isOperational))
 }
 
 // OffPremiseServicesReachableIPv4 wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv4() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offPremiseServicesReachableIPv4"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv4() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("offPremiseServicesReachableIPv4"))
 	return obj.Wrap(_r)
-}
-
-// SetOffPremiseServicesReachableIPv4 wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffPremiseServicesReachableIPv4:"), objref.IDOf(offPremiseServicesReachableIPv4))
 }
 
 // OffPremiseServicesReachableIPv6 wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv6() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("offPremiseServicesReachableIPv6"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv6() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("offPremiseServicesReachableIPv6"))
 	return obj.Wrap(_r)
-}
-
-// SetOffPremiseServicesReachableIPv6 wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffPremiseServicesReachableIPv6:"), objref.IDOf(offPremiseServicesReachableIPv6))
 }
 
 // HardwareAddress wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) HardwareAddress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareAddress"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) HardwareAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("hardwareAddress"))
 	return obj.Wrap(_r)
 }
 
-// SetHardwareAddress wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetHardwareAddress(hardwareAddress obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareAddress:"), objref.IDOf(hardwareAddress))
-}
-
 // IPv4Addresses wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IPv4Addresses() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iPv4Addresses"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) IPv4Addresses() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("iPv4Addresses"))
 	return obj.Wrap(_r)
 }
 
 // SetIPv4Addresses wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv4Addresses(iPv4Addresses obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIPv4Addresses:"), objref.IDOf(iPv4Addresses))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv4Addresses(iPv4Addresses obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setIPv4Addresses:"), objref.IDOf(iPv4Addresses))
 }
 
 // IPv6Addresses wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IPv6Addresses() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iPv6Addresses"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) IPv6Addresses() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("iPv6Addresses"))
 	return obj.Wrap(_r)
 }
 
 // SetIPv6Addresses wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv6Addresses(iPv6Addresses obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIPv6Addresses:"), objref.IDOf(iPv6Addresses))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv6Addresses(iPv6Addresses obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("setIPv6Addresses:"), objref.IDOf(iPv6Addresses))
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Type() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdcni), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
-
-// SetType wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetType(type_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-}
-
-// MTRGeneralDiagnosticsClusterNetworkInterfaceable is the interface implemented by [MTRGeneralDiagnosticsClusterNetworkInterface], for mocking and DI.
-type MTRGeneralDiagnosticsClusterNetworkInterfaceable interface {
-	obj.Object
-	WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterface
-	WithIsOperational(isOperational obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface
-	WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface
-	WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface
-	WithHardwareAddress(hardwareAddress obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface
-	WithType(type_ obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterface
-	Name() string
-	SetName(name string)
-	IsOperational() obj.Object
-	SetIsOperational(isOperational obj.Object)
-	OffPremiseServicesReachableIPv4() obj.Object
-	SetOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object)
-	OffPremiseServicesReachableIPv6() obj.Object
-	SetOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object)
-	HardwareAddress() obj.Object
-	SetHardwareAddress(hardwareAddress obj.Object)
-	IPv4Addresses() obj.Object
-	SetIPv4Addresses(iPv4Addresses obj.Object)
-	IPv6Addresses() obj.Object
-	SetIPv6Addresses(iPv6Addresses obj.Object)
-	Type() obj.Object
-	SetType(type_ obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterNetworkInterfaceable = (*MTRGeneralDiagnosticsClusterNetworkInterface)(nil)
 
 // isMTRGeneralDiagnosticsClusterNetworkInterface marks MTRGeneralDiagnosticsClusterNetworkInterface — and, by embedding promotion, its
 // subclasses — as a member of the MTRGeneralDiagnosticsClusterNetworkInterface hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRGeneralDiagnosticsClusterNetworkInterface) isMTRGeneralDiagnosticsClusterNetworkInterface() {
+func (mgdcni *MTRGeneralDiagnosticsClusterNetworkInterface) isMTRGeneralDiagnosticsClusterNetworkInterface() {
 }
 
 var _ MTRGeneralDiagnosticsClusterNetworkInterfaceProvider = (*MTRGeneralDiagnosticsClusterNetworkInterface)(nil)

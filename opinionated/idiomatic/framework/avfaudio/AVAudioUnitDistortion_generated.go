@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,65 +51,40 @@ func NewAudioUnitDistortion() *AudioUnitDistortion {
 	return audioUnitDistortionAdopt(_id)
 }
 
-// WithPreGain the gain that the audio unit applies to the signal before distortion, in decibels.
-func (x *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGain:"), preGain)
-	return x
+// WithPreGain sets the gain that the audio unit applies to the signal before distortion, in decibels.
+func (aud *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setPreGain:"), preGain)
+	return aud
 }
 
-// WithWetDryMix the blend of the distorted and dry signals.
-func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistortion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
-	return x
+// WithWetDryMix sets the blend of the distorted and dry signals.
+func (aud *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistortion {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setWetDryMix:"), wetDryMix)
+	return aud
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aud *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("setBypass:"), bypass)
+	return aud
 }
 
 // LoadFactoryPreset configures the audio distortion unit by loading a distortion preset.
-func (x *AudioUnitDistortion) LoadFactoryPreset(preset AudioUnitDistortionPreset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryPreset:"), preset)
+func (aud *AudioUnitDistortion) LoadFactoryPreset(preset AudioUnitDistortionPreset) {
+	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
-// PreGain gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
-func (x *AudioUnitDistortion) PreGain() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preGain"))
+// PreGain returns gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
+func (aud *AudioUnitDistortion) PreGain() float32 {
+	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("preGain"))
 	return _r
 }
 
-// SetPreGain wraps the corresponding Objective-C method.
-func (x *AudioUnitDistortion) SetPreGain(preGain float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGain:"), preGain)
-}
-
-// WetDryMix blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
-func (x *AudioUnitDistortion) WetDryMix() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
+// WetDryMix returns blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
+func (aud *AudioUnitDistortion) WetDryMix() float32 {
+	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("wetDryMix"))
 	return _r
 }
-
-// SetWetDryMix wraps the corresponding Objective-C method.
-func (x *AudioUnitDistortion) SetWetDryMix(wetDryMix float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
-}
-
-// AudioUnitDistortionable is the interface implemented by [AudioUnitDistortion], for mocking and DI.
-type AudioUnitDistortionable interface {
-	obj.Object
-	WithPreGain(preGain float32) *AudioUnitDistortion
-	WithWetDryMix(wetDryMix float32) *AudioUnitDistortion
-	WithBypass(bypass bool) *AudioUnitDistortion
-	LoadFactoryPreset(preset AudioUnitDistortionPreset)
-	PreGain() float32
-	SetPreGain(preGain float32)
-	WetDryMix() float32
-	SetWetDryMix(wetDryMix float32)
-}
-
-var _ AudioUnitDistortionable = (*AudioUnitDistortion)(nil)
 
 var _ AudioUnitEffectProvider = (*AudioUnitDistortion)(nil)
 

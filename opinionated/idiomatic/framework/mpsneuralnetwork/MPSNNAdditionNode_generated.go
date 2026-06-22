@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,95 +52,76 @@ func NewNNAdditionNode() *NNAdditionNode {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithPrimaryScale(primaryScale float32) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (nan *NNAdditionNode) WithPrimaryScale(primaryScale float32) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return nan
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithSecondaryScale(secondaryScale float32) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (nan *NNAdditionNode) WithSecondaryScale(secondaryScale float32) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return nan
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithBias(bias float32) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (nan *NNAdditionNode) WithBias(bias float32) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setBias:"), bias)
+	return nan
 }
 
 // WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+func (nan *NNAdditionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return nan
 }
 
 // WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+func (nan *NNAdditionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return nan
 }
 
 // WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
-	return x
+func (nan *NNAdditionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
+	return nan
 }
 
 // WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+func (nan *NNAdditionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nan
 }
 
 // WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+func (nan *NNAdditionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nan
 }
 
 // WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+func (nan *NNAdditionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return nan
 }
 
 // WithMinimumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithMinimumValue(minimumValue float32) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+func (nan *NNAdditionNode) WithMinimumValue(minimumValue float32) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return nan
 }
 
 // WithMaximumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionNode) WithMaximumValue(maximumValue float32) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+func (nan *NNAdditionNode) WithMaximumValue(maximumValue float32) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return nan
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNAdditionNode) WithLabel(label string) *NNAdditionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nan *NNAdditionNode) WithLabel(label string) *NNAdditionNode {
+	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nan
 }
-
-// NNAdditionNodeable is the interface implemented by [NNAdditionNode], for mocking and DI.
-type NNAdditionNodeable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *NNAdditionNode
-	WithSecondaryScale(secondaryScale float32) *NNAdditionNode
-	WithBias(bias float32) *NNAdditionNode
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNAdditionNode
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNAdditionNode
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNAdditionNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionNode
-	WithMinimumValue(minimumValue float32) *NNAdditionNode
-	WithMaximumValue(maximumValue float32) *NNAdditionNode
-	WithLabel(label string) *NNAdditionNode
-}
-
-var _ NNAdditionNodeable = (*NNAdditionNode)(nil)
 
 var _ NNBinaryArithmeticNodeProvider = (*NNAdditionNode)(nil)
 

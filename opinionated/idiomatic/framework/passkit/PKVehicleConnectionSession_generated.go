@@ -5,13 +5,14 @@
 package passkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // VehicleConnectionSession is an idiomatic wrapper over the Objective-C class PKVehicleConnectionSession.
@@ -46,24 +47,24 @@ func vehicleConnectionSessionAdopt(id objc.ID) *VehicleConnectionSession {
 }
 
 // Description returns the object's -description text.
-func (x *VehicleConnectionSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcs *VehicleConnectionSession) Description() string {
+	return rt.Description(objref.IDOf(vcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VehicleConnectionSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcs *VehicleConnectionSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VehicleConnectionSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcs *VehicleConnectionSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VehicleConnectionSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcs *VehicleConnectionSession) String() string {
+	return rt.Description(objref.IDOf(vcs))
 }
 
 // NewVehicleConnectionSession creates a new VehicleConnectionSession.
@@ -73,9 +74,9 @@ func NewVehicleConnectionSession() *VehicleConnectionSession {
 }
 
 // SendData wraps the corresponding Objective-C method.
-func (x *VehicleConnectionSession) SendData(message obj.Object) error {
+func (vcs *VehicleConnectionSession) SendData(message obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(vcs), objc.RegisterName("sendData:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -83,22 +84,12 @@ func (x *VehicleConnectionSession) SendData(message obj.Object) error {
 }
 
 // Invalidate wraps the corresponding Objective-C method.
-func (x *VehicleConnectionSession) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (vcs *VehicleConnectionSession) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(vcs), objc.RegisterName("invalidate"))
 }
 
 // ConnectionStatus wraps the corresponding Objective-C method.
-func (x *VehicleConnectionSession) ConnectionStatus() VehicleConnectionSessionConnectionState {
-	_r := objc.Send[VehicleConnectionSessionConnectionState](objref.IDOf(x), objc.RegisterName("connectionStatus"))
+func (vcs *VehicleConnectionSession) ConnectionStatus() VehicleConnectionSessionConnectionState {
+	_r := objc.Send[VehicleConnectionSessionConnectionState](objref.IDOf(vcs), objc.RegisterName("connectionStatus"))
 	return _r
 }
-
-// VehicleConnectionSessionable is the interface implemented by [VehicleConnectionSession], for mocking and DI.
-type VehicleConnectionSessionable interface {
-	obj.Object
-	SendData(message obj.Object) error
-	Invalidate()
-	ConnectionStatus() VehicleConnectionSessionConnectionState
-}
-
-var _ VehicleConnectionSessionable = (*VehicleConnectionSession)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,216 +52,154 @@ func NewNNLossGradient() *NNLossGradient {
 }
 
 // WithWeight sets the property and returns the receiver so calls can be chained.
-func (x *NNLossGradient) WithWeight(weight float32) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
-	return x
+func (nlg *NNLossGradient) WithWeight(weight float32) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setWeight:"), weight)
+	return nlg
 }
 
 // WithLabelSmoothing sets the property and returns the receiver so calls can be chained.
-func (x *NNLossGradient) WithLabelSmoothing(labelSmoothing float32) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelSmoothing:"), labelSmoothing)
-	return x
+func (nlg *NNLossGradient) WithLabelSmoothing(labelSmoothing float32) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setLabelSmoothing:"), labelSmoothing)
+	return nlg
 }
 
 // WithEpsilon sets the property and returns the receiver so calls can be chained.
-func (x *NNLossGradient) WithEpsilon(epsilon float32) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
-	return x
+func (nlg *NNLossGradient) WithEpsilon(epsilon float32) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setEpsilon:"), epsilon)
+	return nlg
 }
 
 // WithDelta sets the property and returns the receiver so calls can be chained.
-func (x *NNLossGradient) WithDelta(delta float32) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+func (nlg *NNLossGradient) WithDelta(delta float32) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setDelta:"), delta)
+	return nlg
 }
 
-// WithComputeLabelGradients the computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: NO.
-func (x *NNLossGradient) WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeLabelGradients:"), computeLabelGradients)
-	return x
+// WithComputeLabelGradients sets the computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: NO.
+func (nlg *NNLossGradient) WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setComputeLabelGradients:"), computeLabelGradients)
+	return nlg
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *NNLossGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (nlg *NNLossGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return nlg
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *NNLossGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (nlg *NNLossGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return nlg
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *NNLossGradient) WithClipRect(clipRect metal.MTLRegion) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (nlg *NNLossGradient) WithClipRect(clipRect metal.MTLRegion) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setClipRect:"), clipRect)
+	return nlg
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *NNLossGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (nlg *NNLossGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return nlg
 }
 
-// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *NNLossGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-	return x
+// WithPrimarySourceFeatureChannelOffset sets the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (nlg *NNLossGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
+	return nlg
 }
 
-// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *NNLossGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-	return x
+// WithSecondarySourceFeatureChannelOffset sets the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (nlg *NNLossGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
+	return nlg
 }
 
-// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *NNLossGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-	return x
+// WithPrimarySourceFeatureChannelMaxCount sets the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (nlg *NNLossGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
+	return nlg
 }
 
-// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *NNLossGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-	return x
+// WithSecondarySourceFeatureChannelMaxCount sets the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (nlg *NNLossGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
+	return nlg
 }
 
-// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *NNLossGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+// WithPrimaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (nlg *NNLossGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return nlg
 }
 
-// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *NNLossGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+// WithPrimaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (nlg *NNLossGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return nlg
 }
 
-// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *NNLossGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+// WithSecondaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (nlg *NNLossGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nlg
 }
 
-// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *NNLossGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+// WithSecondaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (nlg *NNLossGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nlg
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NNLossGradient) WithLabel(label string) *NNLossGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nlg *NNLossGradient) WithLabel(label string) *NNLossGradient {
+	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nlg
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
-func (x *NNLossGradient) ReduceAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+func (nlg *NNLossGradient) ReduceAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(nlg), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // NumberOfClasses wraps the corresponding Objective-C method.
-func (x *NNLossGradient) NumberOfClasses() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+func (nlg *NNLossGradient) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(nlg), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // Weight wraps the corresponding Objective-C method.
-func (x *NNLossGradient) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+func (nlg *NNLossGradient) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("weight"))
 	return _r
-}
-
-// SetWeight wraps the corresponding Objective-C method.
-func (x *NNLossGradient) SetWeight(weight float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
 }
 
 // LabelSmoothing wraps the corresponding Objective-C method.
-func (x *NNLossGradient) LabelSmoothing() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+func (nlg *NNLossGradient) LabelSmoothing() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("labelSmoothing"))
 	return _r
-}
-
-// SetLabelSmoothing wraps the corresponding Objective-C method.
-func (x *NNLossGradient) SetLabelSmoothing(labelSmoothing float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelSmoothing:"), labelSmoothing)
 }
 
 // Epsilon wraps the corresponding Objective-C method.
-func (x *NNLossGradient) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+func (nlg *NNLossGradient) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("epsilon"))
 	return _r
-}
-
-// SetEpsilon wraps the corresponding Objective-C method.
-func (x *NNLossGradient) SetEpsilon(epsilon float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 }
 
 // Delta wraps the corresponding Objective-C method.
-func (x *NNLossGradient) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+func (nlg *NNLossGradient) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("delta"))
 	return _r
 }
 
-// SetDelta wraps the corresponding Objective-C method.
-func (x *NNLossGradient) SetDelta(delta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-}
-
-// ComputeLabelGradients the computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: NO.
-func (x *NNLossGradient) ComputeLabelGradients() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("computeLabelGradients"))
+// ComputeLabelGradients reports whether the computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: false.
+func (nlg *NNLossGradient) ComputeLabelGradients() bool {
+	_r := objc.Send[bool](objref.IDOf(nlg), objc.RegisterName("computeLabelGradients"))
 	return _r
 }
-
-// SetComputeLabelGradients wraps the corresponding Objective-C method.
-func (x *NNLossGradient) SetComputeLabelGradients(computeLabelGradients bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeLabelGradients:"), computeLabelGradients)
-}
-
-// NNLossGradientable is the interface implemented by [NNLossGradient], for mocking and DI.
-type NNLossGradientable interface {
-	obj.Object
-	WithWeight(weight float32) *NNLossGradient
-	WithLabelSmoothing(labelSmoothing float32) *NNLossGradient
-	WithEpsilon(epsilon float32) *NNLossGradient
-	WithDelta(delta float32) *NNLossGradient
-	WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLossGradient
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLossGradient
-	WithClipRect(clipRect metal.MTLRegion) *NNLossGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNLossGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNLossGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNLossGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNLossGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNLossGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNLossGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNLossGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNLossGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNLossGradient
-	WithLabel(label string) *NNLossGradient
-	ReduceAcrossBatch() bool
-	NumberOfClasses() int
-	Weight() float32
-	SetWeight(weight float32)
-	LabelSmoothing() float32
-	SetLabelSmoothing(labelSmoothing float32)
-	Epsilon() float32
-	SetEpsilon(epsilon float32)
-	Delta() float32
-	SetDelta(delta float32)
-	ComputeLabelGradients() bool
-	SetComputeLabelGradients(computeLabelGradients bool)
-}
-
-var _ NNLossGradientable = (*NNLossGradient)(nil)
 
 var _ CNNBinaryKernelProvider = (*NNLossGradient)(nil)
 

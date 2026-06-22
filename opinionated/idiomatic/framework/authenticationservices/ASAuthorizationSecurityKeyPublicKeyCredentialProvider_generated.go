@@ -46,24 +46,24 @@ func authorizationSecurityKeyPublicKeyCredentialProviderAdopt(id objc.ID) *Autho
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) Description() string {
+	return rt.Description(objref.IDOf(askpkcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(askpkcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(askpkcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) String() string {
+	return rt.Description(objref.IDOf(askpkcp))
 }
 
 // NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdentifier creates the object with a relying party identifier.
@@ -74,32 +74,22 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdent
 }
 
 // CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID creates a registration request with a challenge, display name, and user ID.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge obj.Object, displayName string, name string, userID obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:displayName:name:userID:"), objref.IDOf(challenge), purego.NSString(displayName), purego.NSString(name), objref.IDOf(userID))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge obj.Object, displayName string, name string, userID obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:displayName:name:userID:"), objref.IDOf(challenge), purego.NSString(displayName), purego.NSString(name), objref.IDOf(userID))
 	return AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(_r)
 }
 
 // CreateCredentialAssertionRequestWithChallenge creates an assertion request with a challenge.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialAssertionRequestWithChallenge:"), objref.IDOf(challenge))
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("createCredentialAssertionRequestWithChallenge:"), objref.IDOf(challenge))
 	return AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(_r)
 }
 
-// RelyingPartyIdentifier the Relying Party identifier used for all requests created by this object.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+// RelyingPartyIdentifier returns the Relying Party identifier used for all requests created by this object.
+func (askpkcp *AuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcp), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AuthorizationSecurityKeyPublicKeyCredentialProviderable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialProvider], for mocking and DI.
-type AuthorizationSecurityKeyPublicKeyCredentialProviderable interface {
-	obj.Object
-	CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge obj.Object, displayName string, name string, userID obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
-	CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest
-	RelyingPartyIdentifier() string
-}
-
-var _ AuthorizationSecurityKeyPublicKeyCredentialProviderable = (*AuthorizationSecurityKeyPublicKeyCredentialProvider)(nil)

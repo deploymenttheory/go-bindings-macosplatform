@@ -46,24 +46,24 @@ func sharedTextureHandleAdopt(id objc.ID) *SharedTextureHandle {
 }
 
 // Description returns the object's -description text.
-func (x *SharedTextureHandle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sth *SharedTextureHandle) Description() string {
+	return rt.Description(objref.IDOf(sth))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharedTextureHandle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sth *SharedTextureHandle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sth), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharedTextureHandle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sth *SharedTextureHandle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sth), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SharedTextureHandle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sth *SharedTextureHandle) String() string {
+	return rt.Description(objref.IDOf(sth))
 }
 
 // NewSharedTextureHandle creates a new SharedTextureHandle.
@@ -72,19 +72,11 @@ func NewSharedTextureHandle() *SharedTextureHandle {
 	return sharedTextureHandleAdopt(_id)
 }
 
-// Label a copy of the original texture's label property, if any
-func (x *SharedTextureHandle) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a copy of the original texture's label property, if any
+func (sth *SharedTextureHandle) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sth), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SharedTextureHandleable is the interface implemented by [SharedTextureHandle], for mocking and DI.
-type SharedTextureHandleable interface {
-	obj.Object
-	Label() string
-}
-
-var _ SharedTextureHandleable = (*SharedTextureHandle)(nil)

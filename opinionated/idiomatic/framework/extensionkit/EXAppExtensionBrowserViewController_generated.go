@@ -46,24 +46,24 @@ func appExtensionBrowserViewControllerAdopt(id objc.ID) *AppExtensionBrowserView
 }
 
 // Description returns the object's -description text.
-func (x *AppExtensionBrowserViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aebvc *AppExtensionBrowserViewController) Description() string {
+	return rt.Description(objref.IDOf(aebvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppExtensionBrowserViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aebvc *AppExtensionBrowserViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aebvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppExtensionBrowserViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aebvc *AppExtensionBrowserViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aebvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppExtensionBrowserViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aebvc *AppExtensionBrowserViewController) String() string {
+	return rt.Description(objref.IDOf(aebvc))
 }
 
 // NewAppExtensionBrowserViewController creates a new AppExtensionBrowserViewController.
@@ -71,10 +71,3 @@ func NewAppExtensionBrowserViewController() *AppExtensionBrowserViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("EXAppExtensionBrowserViewController")), objc.RegisterName("new"))
 	return appExtensionBrowserViewControllerAdopt(_id)
 }
-
-// AppExtensionBrowserViewControllerable is the interface implemented by [AppExtensionBrowserViewController], for mocking and DI.
-type AppExtensionBrowserViewControllerable interface {
-	obj.Object
-}
-
-var _ AppExtensionBrowserViewControllerable = (*AppExtensionBrowserViewController)(nil)

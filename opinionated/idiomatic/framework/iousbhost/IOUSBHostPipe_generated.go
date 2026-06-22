@@ -5,12 +5,13 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostPipe is an idiomatic wrapper over the Objective-C class IOUSBHostPipe.
@@ -55,9 +56,9 @@ func NewHostPipe() *HostPipe {
 }
 
 // SetIdleTimeout sets the desired idle suspend timeout for the interface.
-func (x *HostPipe) SetIdleTimeout(idleTimeout float64) error {
+func (hp *HostPipe) SetIdleTimeout(idleTimeout float64) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("setIdleTimeout:error:"), idleTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -67,9 +68,9 @@ func (x *HostPipe) SetIdleTimeout(idleTimeout float64) error {
 // ClearStall clears the halt condition of the pipe.
 //
 // ClearStall returns an error if the operation did not succeed.
-func (x *HostPipe) ClearStall() error {
+func (hp *HostPipe) ClearStall() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("clearStallWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("clearStallWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -77,9 +78,9 @@ func (x *HostPipe) ClearStall() error {
 }
 
 // AbortWithOption aborts pending input/output requests.
-func (x *HostPipe) AbortWithOption(option HostAbortOption) error {
+func (hp *HostPipe) AbortWithOption(option HostAbortOption) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -89,9 +90,9 @@ func (x *HostPipe) AbortWithOption(option HostAbortOption) error {
 // Abort aborts pending input/output requests synchronously.
 //
 // Abort returns an error if the operation did not succeed.
-func (x *HostPipe) Abort() error {
+func (hp *HostPipe) Abort() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -99,10 +100,10 @@ func (x *HostPipe) Abort() error {
 }
 
 // SendIORequestWithDataBytesTransferredCompletionTimeout sends an input/output request on the pipe.
-func (x *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+func (hp *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
 	var _out0 int
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendIORequestWithData:bytesTransferred:completionTimeout:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendIORequestWithData:bytesTransferred:completionTimeout:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -112,9 +113,9 @@ func (x *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data o
 // EnableStreams enables streams for the pipe.
 //
 // EnableStreams returns an error if the operation did not succeed.
-func (x *HostPipe) EnableStreams() error {
+func (hp *HostPipe) EnableStreams() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableStreamsWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enableStreamsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -124,9 +125,9 @@ func (x *HostPipe) EnableStreams() error {
 // DisableStreams disables streams for the pipe.
 //
 // DisableStreams returns an error if the operation did not succeed.
-func (x *HostPipe) DisableStreams() error {
+func (hp *HostPipe) DisableStreams() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableStreamsWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("disableStreamsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -134,35 +135,19 @@ func (x *HostPipe) DisableStreams() error {
 }
 
 // CopyStreamWithStreamIDError returns the stream for a stream ID.
-func (x *HostPipe) CopyStreamWithStreamIDError(streamID int) (result *HostStream, err error) {
+func (hp *HostPipe) CopyStreamWithStreamIDError(streamID int) (result *HostStream, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyStreamWithStreamID:error:"), streamID, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hp), objc.RegisterName("copyStreamWithStreamID:error:"), streamID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return HostStreamFromID(_r), nil
 }
 
-// IdleTimeout retrieve the current idle suspend timeout. See
-func (x *HostPipe) IdleTimeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("idleTimeout"))
+// IdleTimeout returns retrieve the current idle suspend timeout. See
+func (hp *HostPipe) IdleTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(hp), objc.RegisterName("idleTimeout"))
 	return _r
 }
-
-// HostPipeable is the interface implemented by [HostPipe], for mocking and DI.
-type HostPipeable interface {
-	obj.Object
-	SetIdleTimeout(idleTimeout float64) error
-	ClearStall() error
-	AbortWithOption(option HostAbortOption) error
-	Abort() error
-	SendIORequestWithDataBytesTransferredCompletionTimeout(data obj.Object, completionTimeout float64) (bytesTransferred int, err error)
-	EnableStreams() error
-	DisableStreams() error
-	CopyStreamWithStreamIDError(streamID int) (result *HostStream, err error)
-	IdleTimeout() float64
-}
-
-var _ HostPipeable = (*HostPipe)(nil)
 
 var _ HostIOSourceProvider = (*HostPipe)(nil)

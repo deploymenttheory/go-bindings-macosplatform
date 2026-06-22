@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewCalculateImageAestheticsScoresRequest() *CalculateImageAestheticsScoresR
 	return calculateImageAestheticsScoresRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *CalculateImageAestheticsScoresRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (ciasr *CalculateImageAestheticsScoresRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest {
+	objc.Send[objc.ID](objref.IDOf(ciasr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return ciasr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *CalculateImageAestheticsScoresRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (ciasr *CalculateImageAestheticsScoresRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest {
+	objc.Send[objc.ID](objref.IDOf(ciasr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return ciasr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *CalculateImageAestheticsScoresRequest) WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (ciasr *CalculateImageAestheticsScoresRequest) WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest {
+	objc.Send[objc.ID](objref.IDOf(ciasr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return ciasr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *CalculateImageAestheticsScoresRequest) WithRevision(revision int) *CalculateImageAestheticsScoresRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (ciasr *CalculateImageAestheticsScoresRequest) WithRevision(revision int) *CalculateImageAestheticsScoresRequest {
+	objc.Send[objc.ID](objref.IDOf(ciasr), objc.RegisterName("setRevision:"), revision)
+	return ciasr
 }
-
-// CalculateImageAestheticsScoresRequestable is the interface implemented by [CalculateImageAestheticsScoresRequest], for mocking and DI.
-type CalculateImageAestheticsScoresRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest
-	WithRevision(revision int) *CalculateImageAestheticsScoresRequest
-}
-
-var _ CalculateImageAestheticsScoresRequestable = (*CalculateImageAestheticsScoresRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*CalculateImageAestheticsScoresRequest)(nil)
 

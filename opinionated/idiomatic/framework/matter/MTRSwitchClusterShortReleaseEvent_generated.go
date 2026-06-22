@@ -44,24 +44,24 @@ func mTRSwitchClusterShortReleaseEventAdopt(id objc.ID) *MTRSwitchClusterShortRe
 }
 
 // Description returns the object's -description text.
-func (x *MTRSwitchClusterShortReleaseEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscsre *MTRSwitchClusterShortReleaseEvent) Description() string {
+	return rt.Description(objref.IDOf(mscsre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSwitchClusterShortReleaseEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscsre *MTRSwitchClusterShortReleaseEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscsre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSwitchClusterShortReleaseEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscsre *MTRSwitchClusterShortReleaseEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscsre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSwitchClusterShortReleaseEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscsre *MTRSwitchClusterShortReleaseEvent) String() string {
+	return rt.Description(objref.IDOf(mscsre))
 }
 
 // NewMTRSwitchClusterShortReleaseEvent creates a new MTRSwitchClusterShortReleaseEvent.
@@ -71,28 +71,13 @@ func NewMTRSwitchClusterShortReleaseEvent() *MTRSwitchClusterShortReleaseEvent {
 }
 
 // WithPreviousPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRSwitchClusterShortReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterShortReleaseEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
-	return x
+func (mscsre *MTRSwitchClusterShortReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterShortReleaseEvent {
+	objc.Send[objc.ID](objref.IDOf(mscsre), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
+	return mscsre
 }
 
 // PreviousPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterShortReleaseEvent) PreviousPosition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousPosition"))
+func (mscsre *MTRSwitchClusterShortReleaseEvent) PreviousPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mscsre), objc.RegisterName("previousPosition"))
 	return obj.Wrap(_r)
 }
-
-// SetPreviousPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterShortReleaseEvent) SetPreviousPosition(previousPosition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
-}
-
-// MTRSwitchClusterShortReleaseEventable is the interface implemented by [MTRSwitchClusterShortReleaseEvent], for mocking and DI.
-type MTRSwitchClusterShortReleaseEventable interface {
-	obj.Object
-	WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterShortReleaseEvent
-	PreviousPosition() obj.Object
-	SetPreviousPosition(previousPosition obj.Object)
-}
-
-var _ MTRSwitchClusterShortReleaseEventable = (*MTRSwitchClusterShortReleaseEvent)(nil)

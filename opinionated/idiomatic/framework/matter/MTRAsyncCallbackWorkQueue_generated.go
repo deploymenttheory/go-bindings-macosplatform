@@ -44,24 +44,24 @@ func mTRAsyncCallbackWorkQueueAdopt(id objc.ID) *MTRAsyncCallbackWorkQueue {
 }
 
 // Description returns the object's -description text.
-func (x *MTRAsyncCallbackWorkQueue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (macwq *MTRAsyncCallbackWorkQueue) Description() string {
+	return rt.Description(objref.IDOf(macwq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAsyncCallbackWorkQueue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (macwq *MTRAsyncCallbackWorkQueue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(macwq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAsyncCallbackWorkQueue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (macwq *MTRAsyncCallbackWorkQueue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(macwq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAsyncCallbackWorkQueue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (macwq *MTRAsyncCallbackWorkQueue) String() string {
+	return rt.Description(objref.IDOf(macwq))
 }
 
 // NewMTRAsyncCallbackWorkQueueWithContextQueue creates a new MTRAsyncCallbackWorkQueue.
@@ -72,20 +72,11 @@ func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ obj.Object, queue obj
 }
 
 // Invalidate wraps the corresponding Objective-C method.
-func (x *MTRAsyncCallbackWorkQueue) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (macwq *MTRAsyncCallbackWorkQueue) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(macwq), objc.RegisterName("invalidate"))
 }
 
 // EnqueueWorkItem wraps the corresponding Objective-C method.
-func (x *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueWorkItem:"), objref.IDOf(item))
+func (macwq *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem) {
+	objc.Send[objc.ID](objref.IDOf(macwq), objc.RegisterName("enqueueWorkItem:"), objref.IDOf(item))
 }
-
-// MTRAsyncCallbackWorkQueueable is the interface implemented by [MTRAsyncCallbackWorkQueue], for mocking and DI.
-type MTRAsyncCallbackWorkQueueable interface {
-	obj.Object
-	Invalidate()
-	EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem)
-}
-
-var _ MTRAsyncCallbackWorkQueueable = (*MTRAsyncCallbackWorkQueue)(nil)

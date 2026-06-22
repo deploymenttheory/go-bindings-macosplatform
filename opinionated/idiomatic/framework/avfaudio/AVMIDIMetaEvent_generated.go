@@ -54,17 +54,9 @@ func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data obj.Object) *MID
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *MIDIMetaEvent) Type() MIDIMetaEventType {
-	_r := objc.Send[MIDIMetaEventType](objref.IDOf(x), objc.RegisterName("type"))
+func (mme *MIDIMetaEvent) Type() MIDIMetaEventType {
+	_r := objc.Send[MIDIMetaEventType](objref.IDOf(mme), objc.RegisterName("type"))
 	return _r
 }
-
-// MIDIMetaEventable is the interface implemented by [MIDIMetaEvent], for mocking and DI.
-type MIDIMetaEventable interface {
-	obj.Object
-	Type() MIDIMetaEventType
-}
-
-var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)
 
 var _ MusicEventProvider = (*MIDIMetaEvent)(nil)

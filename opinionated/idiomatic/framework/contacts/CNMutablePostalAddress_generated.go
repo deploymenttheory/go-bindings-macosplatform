@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,115 +51,52 @@ func NewMutablePostalAddress() *MutablePostalAddress {
 	return mutablePostalAddressAdopt(_id)
 }
 
-// WithStreet the street name of the address.
-func (x *MutablePostalAddress) WithStreet(street string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreet:"), purego.NSString(street))
-	return x
+// WithStreet sets the street name of the address.
+func (mpa *MutablePostalAddress) WithStreet(street string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setStreet:"), purego.NSString(street))
+	return mpa
 }
 
-// WithSubLocality additional information associated with the location, typically defined at the city or town level, in a postal address.
-func (x *MutablePostalAddress) WithSubLocality(subLocality string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubLocality:"), purego.NSString(subLocality))
-	return x
+// WithSubLocality sets additional information associated with the location, typically defined at the city or town level, in a postal address.
+func (mpa *MutablePostalAddress) WithSubLocality(subLocality string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setSubLocality:"), purego.NSString(subLocality))
+	return mpa
 }
 
-// WithCity the city name of the address.
-func (x *MutablePostalAddress) WithCity(city string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCity:"), purego.NSString(city))
-	return x
+// WithCity sets the city name of the address.
+func (mpa *MutablePostalAddress) WithCity(city string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setCity:"), purego.NSString(city))
+	return mpa
 }
 
-// WithSubAdministrativeArea the subadministrative area (such as a county or other region) in a postal address.
-func (x *MutablePostalAddress) WithSubAdministrativeArea(subAdministrativeArea string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubAdministrativeArea:"), purego.NSString(subAdministrativeArea))
-	return x
+// WithSubAdministrativeArea sets the subadministrative area (such as a county or other region) in a postal address.
+func (mpa *MutablePostalAddress) WithSubAdministrativeArea(subAdministrativeArea string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setSubAdministrativeArea:"), purego.NSString(subAdministrativeArea))
+	return mpa
 }
 
-// WithState the state name of the address.
-func (x *MutablePostalAddress) WithState(state string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
-	return x
+// WithState sets the state name of the address.
+func (mpa *MutablePostalAddress) WithState(state string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setState:"), purego.NSString(state))
+	return mpa
 }
 
-// WithPostalCode the postal code of the address.
-func (x *MutablePostalAddress) WithPostalCode(postalCode string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
-	return x
+// WithPostalCode sets the postal code of the address.
+func (mpa *MutablePostalAddress) WithPostalCode(postalCode string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
+	return mpa
 }
 
-// WithCountry the country or region name of the address.
-func (x *MutablePostalAddress) WithCountry(country string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountry:"), purego.NSString(country))
-	return x
+// WithCountry sets the country or region name of the address.
+func (mpa *MutablePostalAddress) WithCountry(country string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setCountry:"), purego.NSString(country))
+	return mpa
 }
 
-// WithISOCountryCode the ISO country code, using the ISO 3166-1 alpha-2 standard.
-func (x *MutablePostalAddress) WithISOCountryCode(iSOCountryCode string) *MutablePostalAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setISOCountryCode:"), purego.NSString(iSOCountryCode))
-	return x
+// WithISOCountryCode sets the ISO country code, using the ISO 3166-1 alpha-2 standard.
+func (mpa *MutablePostalAddress) WithISOCountryCode(iSOCountryCode string) *MutablePostalAddress {
+	objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("setISOCountryCode:"), purego.NSString(iSOCountryCode))
+	return mpa
 }
-
-// SetStreet wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetStreet(street string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreet:"), purego.NSString(street))
-}
-
-// SetSubLocality wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetSubLocality(subLocality string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubLocality:"), purego.NSString(subLocality))
-}
-
-// SetCity wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetCity(city string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCity:"), purego.NSString(city))
-}
-
-// SetSubAdministrativeArea wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetSubAdministrativeArea(subAdministrativeArea string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubAdministrativeArea:"), purego.NSString(subAdministrativeArea))
-}
-
-// SetState wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetState(state string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
-}
-
-// SetPostalCode wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetPostalCode(postalCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
-}
-
-// SetCountry wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetCountry(country string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountry:"), purego.NSString(country))
-}
-
-// SetISOCountryCode wraps the corresponding Objective-C method.
-func (x *MutablePostalAddress) SetISOCountryCode(iSOCountryCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setISOCountryCode:"), purego.NSString(iSOCountryCode))
-}
-
-// MutablePostalAddressable is the interface implemented by [MutablePostalAddress], for mocking and DI.
-type MutablePostalAddressable interface {
-	obj.Object
-	WithStreet(street string) *MutablePostalAddress
-	WithSubLocality(subLocality string) *MutablePostalAddress
-	WithCity(city string) *MutablePostalAddress
-	WithSubAdministrativeArea(subAdministrativeArea string) *MutablePostalAddress
-	WithState(state string) *MutablePostalAddress
-	WithPostalCode(postalCode string) *MutablePostalAddress
-	WithCountry(country string) *MutablePostalAddress
-	WithISOCountryCode(iSOCountryCode string) *MutablePostalAddress
-	SetStreet(street string)
-	SetSubLocality(subLocality string)
-	SetCity(city string)
-	SetSubAdministrativeArea(subAdministrativeArea string)
-	SetState(state string)
-	SetPostalCode(postalCode string)
-	SetCountry(country string)
-	SetISOCountryCode(iSOCountryCode string)
-}
-
-var _ MutablePostalAddressable = (*MutablePostalAddress)(nil)
 
 var _ PostalAddressProvider = (*MutablePostalAddress)(nil)

@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func smartCardSlotManagerAdopt(id objc.ID) *SmartCardSlotManager {
 }
 
 // Description returns the object's -description text.
-func (x *SmartCardSlotManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scsm *SmartCardSlotManager) Description() string {
+	return rt.Description(objref.IDOf(scsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SmartCardSlotManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scsm *SmartCardSlotManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SmartCardSlotManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scsm *SmartCardSlotManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SmartCardSlotManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scsm *SmartCardSlotManager) String() string {
+	return rt.Description(objref.IDOf(scsm))
 }
 
 // NewSmartCardSlotManager creates a new SmartCardSlotManager.
@@ -76,7 +77,7 @@ func NewSmartCardSlotManager() *SmartCardSlotManager {
 // GetSlotWithNameReply asynchronously calls a block with a Smart Card reader slot for a specified name.
 //
 // GetSlotWithNameReply blocks until the operation completes or ctx is cancelled.
-func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (result *SmartCardSlot, err error) {
+func (scsm *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (result *SmartCardSlot, err error) {
 	type _result struct {
 		val *SmartCardSlot
 		err error
@@ -87,7 +88,7 @@ func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name st
 		_o.val = SmartCardSlotFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSlotWithName:reply:"), purego.NSString(name), _block)
+	objc.Send[objc.ID](objref.IDOf(scsm), objc.RegisterName("getSlotWithName:reply:"), purego.NSString(name), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,25 +99,15 @@ func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name st
 }
 
 // SlotNamed returns the Smart Card slot with a given name.
-func (x *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotNamed:"), purego.NSString(name))
+func (scsm *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
+	_r := objc.Send[objc.ID](objref.IDOf(scsm), objc.RegisterName("slotNamed:"), purego.NSString(name))
 	return SmartCardSlotFromID(_r)
 }
 
-// SlotNames array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
+// SlotNames returns array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
 //
 // SlotNames returns the collection as a Go slice.
-func (x *SmartCardSlotManager) SlotNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotNames"))
+func (scsm *SmartCardSlotManager) SlotNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(scsm), objc.RegisterName("slotNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SmartCardSlotManagerable is the interface implemented by [SmartCardSlotManager], for mocking and DI.
-type SmartCardSlotManagerable interface {
-	obj.Object
-	GetSlotWithNameReply(ctx context.Context, name string) (*SmartCardSlot, error)
-	SlotNamed(name string) *SmartCardSlot
-	SlotNames() []string
-}
-
-var _ SmartCardSlotManagerable = (*SmartCardSlotManager)(nil)

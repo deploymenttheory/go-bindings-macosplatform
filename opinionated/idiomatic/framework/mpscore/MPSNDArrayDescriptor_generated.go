@@ -5,12 +5,13 @@
 package mpscore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NDArrayDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayDescriptor.
@@ -45,24 +46,24 @@ func nDArrayDescriptorAdopt(id objc.ID) *NDArrayDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *NDArrayDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nad *NDArrayDescriptor) Description() string {
+	return rt.Description(objref.IDOf(nad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NDArrayDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nad *NDArrayDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NDArrayDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nad *NDArrayDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NDArrayDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nad *NDArrayDescriptor) String() string {
+	return rt.Description(objref.IDOf(nad))
 }
 
 // NewNDArrayDescriptor creates a new NDArrayDescriptor.
@@ -71,113 +72,76 @@ func NewNDArrayDescriptor() *NDArrayDescriptor {
 	return nDArrayDescriptorAdopt(_id)
 }
 
-// WithDataType data Type of the MPSNDArray elements
-func (x *NDArrayDescriptor) WithDataType(dataType DataType) *NDArrayDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
-	return x
+// WithDataType sets data Type of the MPSNDArray elements
+func (nad *NDArrayDescriptor) WithDataType(dataType DataType) *NDArrayDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("setDataType:"), dataType)
+	return nad
 }
 
-// WithNumberOfDimensions the number of dimensions in the NDArray. May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
-func (x *NDArrayDescriptor) WithNumberOfDimensions(numberOfDimensions int) *NDArrayDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfDimensions:"), numberOfDimensions)
-	return x
+// WithNumberOfDimensions sets the number of dimensions in the NDArray. May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
+func (nad *NDArrayDescriptor) WithNumberOfDimensions(numberOfDimensions int) *NDArrayDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("setNumberOfDimensions:"), numberOfDimensions)
+	return nad
 }
 
-// WithPreferPackedRows if YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
-func (x *NDArrayDescriptor) WithPreferPackedRows(preferPackedRows bool) *NDArrayDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferPackedRows:"), preferPackedRows)
-	return x
+// WithPreferPackedRows sets if YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
+func (nad *NDArrayDescriptor) WithPreferPackedRows(preferPackedRows bool) *NDArrayDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("setPreferPackedRows:"), preferPackedRows)
+	return nad
 }
 
 // LengthOfDimension the number of elements of type dataType in the indicated dimension. If dimensionIndex >= numberOfDimensions, 1 will be returned.
-func (x *NDArrayDescriptor) LengthOfDimension(dimensionIndex int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
+func (nad *NDArrayDescriptor) LengthOfDimension(dimensionIndex int) int {
+	_r := objc.Send[int](objref.IDOf(nad), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
 	return _r
 }
 
 // TransposeDimensionWithDimension transpose two dimensions
-func (x *NDArrayDescriptor) TransposeDimensionWithDimension(dimensionIndex int, dimensionIndex2 int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeDimension:withDimension:"), dimensionIndex, dimensionIndex2)
+func (nad *NDArrayDescriptor) TransposeDimensionWithDimension(dimensionIndex int, dimensionIndex2 int) {
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("transposeDimension:withDimension:"), dimensionIndex, dimensionIndex2)
 }
 
 // PermuteWithDimensionOrder permutes the dimensions of the current descriptor This permutation is applied on top of whatever transpostions/permutations that may have been performed on the descriptor before.
-func (x *NDArrayDescriptor) PermuteWithDimensionOrder() (dimensionOrder int) {
+func (nad *NDArrayDescriptor) PermuteWithDimensionOrder() (dimensionOrder int) {
 	var _out0 int
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("permuteWithDimensionOrder:"), unsafe.Pointer(&_out0))
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("permuteWithDimensionOrder:"), unsafe.Pointer(&_out0))
 	return _out0
 }
 
 // GetShape returns the shape of the NDArray as MPSShape The length of the array is the number of dimensions and the size of the fastest running dimension is the last element in the array.
 //
 // GetShape returns the collection as a Go slice.
-func (x *NDArrayDescriptor) GetShape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getShape"))
+func (nad *NDArrayDescriptor) GetShape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("getShape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReshapeWithDimensionCountDimensionSizes changes dimension sizes and number of dimensions on the current descriptor
-func (x *NDArrayDescriptor) ReshapeWithDimensionCountDimensionSizes(numberOfDimensions int) (dimensionSizes int) {
+func (nad *NDArrayDescriptor) ReshapeWithDimensionCountDimensionSizes(numberOfDimensions int) (dimensionSizes int) {
 	var _out0 int
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshapeWithDimensionCount:dimensionSizes:"), numberOfDimensions, unsafe.Pointer(&_out0))
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("reshapeWithDimensionCount:dimensionSizes:"), numberOfDimensions, unsafe.Pointer(&_out0))
 	return _out0
 }
 
 // ReshapeWithShape changes dimension sizes and number of dimensions on the current descriptor
-func (x *NDArrayDescriptor) ReshapeWithShape(shape []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshapeWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nad *NDArrayDescriptor) ReshapeWithShape(shape []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("reshapeWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// DataType data Type of the MPSNDArray elements
-func (x *NDArrayDescriptor) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns data Type of the MPSNDArray elements
+func (nad *NDArrayDescriptor) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(nad), objc.RegisterName("dataType"))
 	return _r
 }
 
-// SetDataType wraps the corresponding Objective-C method.
-func (x *NDArrayDescriptor) SetDataType(dataType DataType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
-}
-
-// NumberOfDimensions the number of dimensions in the NDArray. May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
-func (x *NDArrayDescriptor) NumberOfDimensions() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDimensions"))
+// NumberOfDimensions returns the number of dimensions in the NDArray. May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
+func (nad *NDArrayDescriptor) NumberOfDimensions() int {
+	_r := objc.Send[int](objref.IDOf(nad), objc.RegisterName("numberOfDimensions"))
 	return _r
 }
 
-// SetNumberOfDimensions wraps the corresponding Objective-C method.
-func (x *NDArrayDescriptor) SetNumberOfDimensions(numberOfDimensions int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfDimensions:"), numberOfDimensions)
-}
-
-// PreferPackedRows if YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
-func (x *NDArrayDescriptor) PreferPackedRows() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preferPackedRows"))
+// PreferPackedRows reports whether if true, then new NDArrays created with this descriptor will pack the rows. Default: false.
+func (nad *NDArrayDescriptor) PreferPackedRows() bool {
+	_r := objc.Send[bool](objref.IDOf(nad), objc.RegisterName("preferPackedRows"))
 	return _r
 }
-
-// SetPreferPackedRows if YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
-func (x *NDArrayDescriptor) SetPreferPackedRows(preferPackedRows bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferPackedRows:"), preferPackedRows)
-}
-
-// NDArrayDescriptorable is the interface implemented by [NDArrayDescriptor], for mocking and DI.
-type NDArrayDescriptorable interface {
-	obj.Object
-	WithDataType(dataType DataType) *NDArrayDescriptor
-	WithNumberOfDimensions(numberOfDimensions int) *NDArrayDescriptor
-	WithPreferPackedRows(preferPackedRows bool) *NDArrayDescriptor
-	LengthOfDimension(dimensionIndex int) int
-	TransposeDimensionWithDimension(dimensionIndex int, dimensionIndex2 int)
-	PermuteWithDimensionOrder() (dimensionOrder int)
-	GetShape() []obj.Object
-	ReshapeWithDimensionCountDimensionSizes(numberOfDimensions int) (dimensionSizes int)
-	ReshapeWithShape(shape []obj.Object)
-	DataType() DataType
-	SetDataType(dataType DataType)
-	NumberOfDimensions() int
-	SetNumberOfDimensions(numberOfDimensions int)
-	PreferPackedRows() bool
-	SetPreferPackedRows(preferPackedRows bool)
-}
-
-var _ NDArrayDescriptorable = (*NDArrayDescriptor)(nil)

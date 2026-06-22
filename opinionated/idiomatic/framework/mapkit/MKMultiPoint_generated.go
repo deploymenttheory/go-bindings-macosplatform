@@ -46,52 +46,40 @@ func multiPointAdopt(id objc.ID) *MultiPoint {
 	return x
 }
 
-// WithTitle the title of the shape annotation.
-func (x *MultiPoint) WithTitle(title string) *MultiPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (mp *MultiPoint) WithTitle(title string) *MultiPoint {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return mp
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (mp *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return mp
 }
 
 // LocationAtPointIndex translates a point index into a unit distance along the shape.
-func (x *MultiPoint) LocationAtPointIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("locationAtPointIndex:"), index)
+func (mp *MultiPoint) LocationAtPointIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("locationAtPointIndex:"), index)
 	return _r
 }
 
 // LocationsAtPointIndexes returns a set of unit distance values that correspond to the point indexes along the shape.
-func (x *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationsAtPointIndexes:"), objref.IDOf(indexes))
+func (mp *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("locationsAtPointIndexes:"), objref.IDOf(indexes))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PointCount wraps the corresponding Objective-C method.
-func (x *MultiPoint) PointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
+func (mp *MultiPoint) PointCount() int {
+	_r := objc.Send[int](objref.IDOf(mp), objc.RegisterName("pointCount"))
 	return _r
 }
-
-// MultiPointable is the interface implemented by [MultiPoint], for mocking and DI.
-type MultiPointable interface {
-	obj.Object
-	WithTitle(title string) *MultiPoint
-	WithSubtitle(subtitle string) *MultiPoint
-	LocationAtPointIndex(index int) float64
-	LocationsAtPointIndexes(indexes obj.Object) []obj.Object
-	PointCount() int
-}
-
-var _ MultiPointable = (*MultiPoint)(nil)
 
 // isMultiPoint marks MultiPoint — and, by embedding promotion, its
 // subclasses — as a member of the MultiPoint hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MultiPoint) isMultiPoint() {}
+func (mp *MultiPoint) isMultiPoint() {}
 
 var _ MultiPointProvider = (*MultiPoint)(nil)
 

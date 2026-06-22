@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,40 +53,29 @@ func NewImageThresholdToZeroInverse() *ImageThresholdToZeroInverse {
 	return imageThresholdToZeroInverseAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ittzi *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse {
+	objc.Send[objc.ID](objref.IDOf(ittzi), objc.RegisterName("setOffset:"), offset)
+	return ittzi
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ittzi *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse {
+	objc.Send[objc.ID](objref.IDOf(ittzi), objc.RegisterName("setClipRect:"), clipRect)
+	return ittzi
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageThresholdToZeroInverse) WithLabel(label string) *ImageThresholdToZeroInverse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ittzi *ImageThresholdToZeroInverse) WithLabel(label string) *ImageThresholdToZeroInverse {
+	objc.Send[objc.ID](objref.IDOf(ittzi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ittzi
 }
 
-// ThresholdValue the threshold value used to init the threshold filter
-func (x *ImageThresholdToZeroInverse) ThresholdValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+// ThresholdValue returns the threshold value used to init the threshold filter
+func (ittzi *ImageThresholdToZeroInverse) ThresholdValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(ittzi), objc.RegisterName("thresholdValue"))
 	return _r
 }
-
-// ImageThresholdToZeroInverseable is the interface implemented by [ImageThresholdToZeroInverse], for mocking and DI.
-type ImageThresholdToZeroInverseable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse
-	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse
-	WithLabel(label string) *ImageThresholdToZeroInverse
-	ThresholdValue() float32
-}
-
-var _ ImageThresholdToZeroInverseable = (*ImageThresholdToZeroInverse)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageThresholdToZeroInverse)(nil)
 

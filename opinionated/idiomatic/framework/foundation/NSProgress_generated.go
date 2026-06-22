@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func progressAdopt(id objc.ID) *Progress {
 }
 
 // Description returns the object's -description text.
-func (x *Progress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Progress) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Progress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Progress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Progress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Progress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Progress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Progress) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewProgressWithParentUserInfo creates a new Progress.
@@ -75,121 +76,121 @@ func NewProgressWithParentUserInfo(parentProgressOrNil *Progress, userInfoOrNil 
 }
 
 // WithTotalUnitCount sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithTotalUnitCount(totalUnitCount int64) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalUnitCount:"), totalUnitCount)
-	return x
+func (p *Progress) WithTotalUnitCount(totalUnitCount int64) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTotalUnitCount:"), totalUnitCount)
+	return p
 }
 
 // WithCompletedUnitCount sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithCompletedUnitCount(completedUnitCount int64) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletedUnitCount:"), completedUnitCount)
-	return x
+func (p *Progress) WithCompletedUnitCount(completedUnitCount int64) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCompletedUnitCount:"), completedUnitCount)
+	return p
 }
 
 // WithLocalizedDescription sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithLocalizedDescription(localizedDescription StringProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), objref.IDOf(localizedDescription))
-	return x
+func (p *Progress) WithLocalizedDescription(localizedDescription StringProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setLocalizedDescription:"), objref.IDOf(localizedDescription))
+	return p
 }
 
 // WithLocalizedAdditionalDescription sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithLocalizedAdditionalDescription(localizedAdditionalDescription StringProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedAdditionalDescription:"), objref.IDOf(localizedAdditionalDescription))
-	return x
+func (p *Progress) WithLocalizedAdditionalDescription(localizedAdditionalDescription StringProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setLocalizedAdditionalDescription:"), objref.IDOf(localizedAdditionalDescription))
+	return p
 }
 
 // WithCancellable sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithCancellable(cancellable bool) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancellable:"), cancellable)
-	return x
+func (p *Progress) WithCancellable(cancellable bool) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCancellable:"), cancellable)
+	return p
 }
 
 // WithPausable sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithPausable(pausable bool) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausable:"), pausable)
-	return x
+func (p *Progress) WithPausable(pausable bool) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPausable:"), pausable)
+	return p
 }
 
 // WithCancellationHandler sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithCancellationHandler(cancellationHandler func()) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancellationHandler:"), objc.NewBlock(func(_ objc.Block) { cancellationHandler() }))
-	return x
+func (p *Progress) WithCancellationHandler(cancellationHandler func()) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setCancellationHandler:"), objc.NewBlock(func(_ objc.Block) { cancellationHandler() }))
+	return p
 }
 
 // WithPausingHandler sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithPausingHandler(pausingHandler func()) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausingHandler:"), objc.NewBlock(func(_ objc.Block) { pausingHandler() }))
-	return x
+func (p *Progress) WithPausingHandler(pausingHandler func()) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPausingHandler:"), objc.NewBlock(func(_ objc.Block) { pausingHandler() }))
+	return p
 }
 
 // WithResumingHandler sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithResumingHandler(resumingHandler func()) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResumingHandler:"), objc.NewBlock(func(_ objc.Block) { resumingHandler() }))
-	return x
+func (p *Progress) WithResumingHandler(resumingHandler func()) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setResumingHandler:"), objc.NewBlock(func(_ objc.Block) { resumingHandler() }))
+	return p
 }
 
 // WithKind sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithKind(kind StringProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKind:"), objref.IDOf(kind))
-	return x
+func (p *Progress) WithKind(kind StringProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setKind:"), objref.IDOf(kind))
+	return p
 }
 
-// WithEstimatedTimeRemaining a value that indicates the estimated amount of time remaining to complete the progress.
-func (x *Progress) WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedTimeRemaining:"), objref.IDOf(estimatedTimeRemaining))
-	return x
+// WithEstimatedTimeRemaining sets a value that indicates the estimated amount of time remaining to complete the progress.
+func (p *Progress) WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEstimatedTimeRemaining:"), objref.IDOf(estimatedTimeRemaining))
+	return p
 }
 
-// WithThroughput a value that represents the speed of data processing, in bytes per second.
-func (x *Progress) WithThroughput(throughput NumberProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThroughput:"), objref.IDOf(throughput))
-	return x
+// WithThroughput sets a value that represents the speed of data processing, in bytes per second.
+func (p *Progress) WithThroughput(throughput NumberProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setThroughput:"), objref.IDOf(throughput))
+	return p
 }
 
 // WithFileOperationKind sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithFileOperationKind(fileOperationKind StringProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileOperationKind:"), objref.IDOf(fileOperationKind))
-	return x
+func (p *Progress) WithFileOperationKind(fileOperationKind StringProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileOperationKind:"), objref.IDOf(fileOperationKind))
+	return p
 }
 
 // WithFileURL sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithFileURL(fileURL string) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
-	return x
+func (p *Progress) WithFileURL(fileURL string) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
+	return p
 }
 
-// WithFileTotalCount the total number of files for a file progress object.
-func (x *Progress) WithFileTotalCount(fileTotalCount NumberProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileTotalCount:"), objref.IDOf(fileTotalCount))
-	return x
+// WithFileTotalCount sets the total number of files for a file progress object.
+func (p *Progress) WithFileTotalCount(fileTotalCount NumberProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileTotalCount:"), objref.IDOf(fileTotalCount))
+	return p
 }
 
-// WithFileCompletedCount the number of completed files for a file progress object.
-func (x *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileCompletedCount:"), objref.IDOf(fileCompletedCount))
-	return x
+// WithFileCompletedCount sets the number of completed files for a file progress object.
+func (p *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileCompletedCount:"), objref.IDOf(fileCompletedCount))
+	return p
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Progress) WithScriptingProperties(scriptingProperties obj.Object) *Progress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (p *Progress) WithScriptingProperties(scriptingProperties obj.Object) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return p
 }
 
 // BecomeCurrentWithPendingUnitCount wraps the corresponding Objective-C method.
-func (x *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("becomeCurrentWithPendingUnitCount:"), unitCount)
+func (p *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("becomeCurrentWithPendingUnitCount:"), unitCount)
 }
 
 // PerformAsCurrentWithPendingUnitCountUsing retrieves the current thread’s progress object, executes the specified block, and increments the progress object by the specified units of work.
 //
 // PerformAsCurrentWithPendingUnitCountUsing blocks until the operation completes or ctx is cancelled.
-func (x *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error {
+func (p *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAsCurrentWithPendingUnitCount:usingBlock:"), unitCount, _block)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("performAsCurrentWithPendingUnitCount:usingBlock:"), unitCount, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -199,353 +200,167 @@ func (x *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context
 }
 
 // ResignCurrent wraps the corresponding Objective-C method.
-func (x *Progress) ResignCurrent() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resignCurrent"))
+func (p *Progress) ResignCurrent() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("resignCurrent"))
 }
 
 // AddChildWithPendingUnitCount wraps the corresponding Objective-C method.
-func (x *Progress) AddChildWithPendingUnitCount(child *Progress, inUnitCount int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:withPendingUnitCount:"), objref.IDOf(child), inUnitCount)
+func (p *Progress) AddChildWithPendingUnitCount(child *Progress, inUnitCount int64) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addChild:withPendingUnitCount:"), objref.IDOf(child), inUnitCount)
 }
 
 // SetUserInfoObjectForKey wraps the corresponding Objective-C method.
-func (x *Progress) SetUserInfoObjectForKey(objectOrNil obj.Object, key *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfoObject:forKey:"), objref.IDOf(objectOrNil), objref.IDOf(key))
+func (p *Progress) SetUserInfoObjectForKey(objectOrNil obj.Object, key *String) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserInfoObject:forKey:"), objref.IDOf(objectOrNil), objref.IDOf(key))
 }
 
 // Cancel wraps the corresponding Objective-C method.
-func (x *Progress) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (p *Progress) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("cancel"))
 }
 
 // Pause wraps the corresponding Objective-C method.
-func (x *Progress) Pause() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+func (p *Progress) Pause() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pause"))
 }
 
 // Resume wraps the corresponding Objective-C method.
-func (x *Progress) Resume() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
+func (p *Progress) Resume() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("resume"))
 }
 
 // Publish wraps the corresponding Objective-C method.
-func (x *Progress) Publish() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publish"))
+func (p *Progress) Publish() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("publish"))
 }
 
 // Unpublish wraps the corresponding Objective-C method.
-func (x *Progress) Unpublish() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unpublish"))
+func (p *Progress) Unpublish() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("unpublish"))
 }
 
 // TotalUnitCount wraps the corresponding Objective-C method.
-func (x *Progress) TotalUnitCount() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("totalUnitCount"))
+func (p *Progress) TotalUnitCount() int64 {
+	_r := objc.Send[int64](objref.IDOf(p), objc.RegisterName("totalUnitCount"))
 	return _r
-}
-
-// SetTotalUnitCount wraps the corresponding Objective-C method.
-func (x *Progress) SetTotalUnitCount(totalUnitCount int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTotalUnitCount:"), totalUnitCount)
 }
 
 // CompletedUnitCount wraps the corresponding Objective-C method.
-func (x *Progress) CompletedUnitCount() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("completedUnitCount"))
+func (p *Progress) CompletedUnitCount() int64 {
+	_r := objc.Send[int64](objref.IDOf(p), objc.RegisterName("completedUnitCount"))
 	return _r
-}
-
-// SetCompletedUnitCount wraps the corresponding Objective-C method.
-func (x *Progress) SetCompletedUnitCount(completedUnitCount int64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletedUnitCount:"), completedUnitCount)
 }
 
 // LocalizedDescription wraps the corresponding Objective-C method.
-func (x *Progress) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+func (p *Progress) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetLocalizedDescription wraps the corresponding Objective-C method.
-func (x *Progress) SetLocalizedDescription(localizedDescription string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 }
 
 // LocalizedAdditionalDescription wraps the corresponding Objective-C method.
-func (x *Progress) LocalizedAdditionalDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedAdditionalDescription"))
+func (p *Progress) LocalizedAdditionalDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedAdditionalDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLocalizedAdditionalDescription wraps the corresponding Objective-C method.
-func (x *Progress) SetLocalizedAdditionalDescription(localizedAdditionalDescription string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedAdditionalDescription:"), purego.NSString(localizedAdditionalDescription))
-}
-
 // IsCancellable wraps the corresponding Objective-C method.
-func (x *Progress) IsCancellable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancellable"))
+func (p *Progress) IsCancellable() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCancellable"))
 	return _r
-}
-
-// SetCancellable wraps the corresponding Objective-C method.
-func (x *Progress) SetCancellable(cancellable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancellable:"), cancellable)
 }
 
 // IsPausable wraps the corresponding Objective-C method.
-func (x *Progress) IsPausable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPausable"))
+func (p *Progress) IsPausable() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isPausable"))
 	return _r
 }
 
-// SetPausable wraps the corresponding Objective-C method.
-func (x *Progress) SetPausable(pausable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausable:"), pausable)
-}
-
 // IsCancelled wraps the corresponding Objective-C method.
-func (x *Progress) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+func (p *Progress) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsPaused wraps the corresponding Objective-C method.
-func (x *Progress) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+func (p *Progress) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isPaused"))
 	return _r
 }
 
-// SetCancellationHandler wraps the corresponding Objective-C method.
-//
-// SetCancellationHandler blocks until the operation completes or ctx is cancelled.
-func (x *Progress) SetCancellationHandler(ctx context.Context) error {
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block) {
-		_ch <- nil
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancellationHandler:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// SetPausingHandler wraps the corresponding Objective-C method.
-//
-// SetPausingHandler blocks until the operation completes or ctx is cancelled.
-func (x *Progress) SetPausingHandler(ctx context.Context) error {
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block) {
-		_ch <- nil
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausingHandler:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// SetResumingHandler wraps the corresponding Objective-C method.
-//
-// SetResumingHandler blocks until the operation completes or ctx is cancelled.
-func (x *Progress) SetResumingHandler(ctx context.Context) error {
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block) {
-		_ch <- nil
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResumingHandler:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
 // IsIndeterminate wraps the corresponding Objective-C method.
-func (x *Progress) IsIndeterminate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndeterminate"))
+func (p *Progress) IsIndeterminate() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isIndeterminate"))
 	return _r
 }
 
 // FractionCompleted wraps the corresponding Objective-C method.
-func (x *Progress) FractionCompleted() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fractionCompleted"))
+func (p *Progress) FractionCompleted() float64 {
+	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("fractionCompleted"))
 	return _r
 }
 
 // IsFinished wraps the corresponding Objective-C method.
-func (x *Progress) IsFinished() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinished"))
+func (p *Progress) IsFinished() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFinished"))
 	return _r
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *Progress) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (p *Progress) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // Kind wraps the corresponding Objective-C method.
-func (x *Progress) Kind() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kind"))
+func (p *Progress) Kind() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("kind"))
 	return StringFromID(_r)
-}
-
-// SetKind wraps the corresponding Objective-C method.
-func (x *Progress) SetKind(kind *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKind:"), objref.IDOf(kind))
 }
 
 // EstimatedTimeRemaining wraps the corresponding Objective-C method.
-func (x *Progress) EstimatedTimeRemaining() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("estimatedTimeRemaining"))
+func (p *Progress) EstimatedTimeRemaining() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("estimatedTimeRemaining"))
 	return NumberFromID(_r)
-}
-
-// SetEstimatedTimeRemaining wraps the corresponding Objective-C method.
-func (x *Progress) SetEstimatedTimeRemaining(estimatedTimeRemaining *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedTimeRemaining:"), objref.IDOf(estimatedTimeRemaining))
 }
 
 // Throughput wraps the corresponding Objective-C method.
-func (x *Progress) Throughput() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("throughput"))
+func (p *Progress) Throughput() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("throughput"))
 	return NumberFromID(_r)
-}
-
-// SetThroughput wraps the corresponding Objective-C method.
-func (x *Progress) SetThroughput(throughput *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThroughput:"), objref.IDOf(throughput))
 }
 
 // FileOperationKind wraps the corresponding Objective-C method.
-func (x *Progress) FileOperationKind() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileOperationKind"))
+func (p *Progress) FileOperationKind() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileOperationKind"))
 	return StringFromID(_r)
 }
 
-// SetFileOperationKind wraps the corresponding Objective-C method.
-func (x *Progress) SetFileOperationKind(fileOperationKind *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileOperationKind:"), objref.IDOf(fileOperationKind))
-}
-
 // FileURL wraps the corresponding Objective-C method.
-func (x *Progress) FileURL() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+func (p *Progress) FileURL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileURL"))
 	return URLFromID(_r)
 }
 
-// SetFileURL wraps the corresponding Objective-C method.
-func (x *Progress) SetFileURL(fileURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
-}
-
 // FileTotalCount wraps the corresponding Objective-C method.
-func (x *Progress) FileTotalCount() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileTotalCount"))
+func (p *Progress) FileTotalCount() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileTotalCount"))
 	return NumberFromID(_r)
-}
-
-// SetFileTotalCount wraps the corresponding Objective-C method.
-func (x *Progress) SetFileTotalCount(fileTotalCount *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileTotalCount:"), objref.IDOf(fileTotalCount))
 }
 
 // FileCompletedCount wraps the corresponding Objective-C method.
-func (x *Progress) FileCompletedCount() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileCompletedCount"))
+func (p *Progress) FileCompletedCount() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileCompletedCount"))
 	return NumberFromID(_r)
 }
 
-// SetFileCompletedCount wraps the corresponding Objective-C method.
-func (x *Progress) SetFileCompletedCount(fileCompletedCount *Number) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileCompletedCount:"), objref.IDOf(fileCompletedCount))
-}
-
 // IsOld wraps the corresponding Objective-C method.
-func (x *Progress) IsOld() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOld"))
+func (p *Progress) IsOld() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isOld"))
 	return _r
 }
-
-// Progressable is the interface implemented by [Progress], for mocking and DI.
-type Progressable interface {
-	obj.Object
-	WithTotalUnitCount(totalUnitCount int64) *Progress
-	WithCompletedUnitCount(completedUnitCount int64) *Progress
-	WithLocalizedDescription(localizedDescription StringProvider) *Progress
-	WithLocalizedAdditionalDescription(localizedAdditionalDescription StringProvider) *Progress
-	WithCancellable(cancellable bool) *Progress
-	WithPausable(pausable bool) *Progress
-	WithCancellationHandler(cancellationHandler func()) *Progress
-	WithPausingHandler(pausingHandler func()) *Progress
-	WithResumingHandler(resumingHandler func()) *Progress
-	WithKind(kind StringProvider) *Progress
-	WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress
-	WithThroughput(throughput NumberProvider) *Progress
-	WithFileOperationKind(fileOperationKind StringProvider) *Progress
-	WithFileURL(fileURL string) *Progress
-	WithFileTotalCount(fileTotalCount NumberProvider) *Progress
-	WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress
-	WithScriptingProperties(scriptingProperties obj.Object) *Progress
-	BecomeCurrentWithPendingUnitCount(unitCount int64)
-	PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error
-	ResignCurrent()
-	AddChildWithPendingUnitCount(child *Progress, inUnitCount int64)
-	SetUserInfoObjectForKey(objectOrNil obj.Object, key *String)
-	Cancel()
-	Pause()
-	Resume()
-	Publish()
-	Unpublish()
-	TotalUnitCount() int64
-	SetTotalUnitCount(totalUnitCount int64)
-	CompletedUnitCount() int64
-	SetCompletedUnitCount(completedUnitCount int64)
-	LocalizedDescription() string
-	SetLocalizedDescription(localizedDescription string)
-	LocalizedAdditionalDescription() string
-	SetLocalizedAdditionalDescription(localizedAdditionalDescription string)
-	IsCancellable() bool
-	SetCancellable(cancellable bool)
-	IsPausable() bool
-	SetPausable(pausable bool)
-	IsCancelled() bool
-	IsPaused() bool
-	SetCancellationHandler(ctx context.Context) error
-	SetPausingHandler(ctx context.Context) error
-	SetResumingHandler(ctx context.Context) error
-	IsIndeterminate() bool
-	FractionCompleted() float64
-	IsFinished() bool
-	UserInfo() obj.Object
-	Kind() *String
-	SetKind(kind *String)
-	EstimatedTimeRemaining() *Number
-	SetEstimatedTimeRemaining(estimatedTimeRemaining *Number)
-	Throughput() *Number
-	SetThroughput(throughput *Number)
-	FileOperationKind() *String
-	SetFileOperationKind(fileOperationKind *String)
-	FileURL() *URL
-	SetFileURL(fileURL string)
-	FileTotalCount() *Number
-	SetFileTotalCount(fileTotalCount *Number)
-	FileCompletedCount() *Number
-	SetFileCompletedCount(fileCompletedCount *Number)
-	IsOld() bool
-}
-
-var _ Progressable = (*Progress)(nil)

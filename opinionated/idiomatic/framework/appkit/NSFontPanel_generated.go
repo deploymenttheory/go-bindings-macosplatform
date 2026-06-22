@@ -54,597 +54,496 @@ func NewFontPanel() *FontPanel {
 	return fontPanelAdopt(_id)
 }
 
-// WithAccessoryView the specified view as the receiver’s accessory view, allowing you to add custom controls to your application’s Font panel without having to create a subclass.
-func (x *FontPanel) WithAccessoryView(accessoryView ViewProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-	return x
+// WithAccessoryView sets the specified view as the receiver’s accessory view, allowing you to add custom controls to your application’s Font panel without having to create a subclass.
+func (fp *FontPanel) WithAccessoryView(accessoryView ViewProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	return fp
 }
 
-// WithEnabled a Boolean that shows whether the receiver’s Set button is enabled.
-func (x *FontPanel) WithEnabled(enabled bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean that shows whether the receiver’s Set button is enabled.
+func (fp *FontPanel) WithEnabled(enabled bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setEnabled:"), enabled)
+	return fp
 }
 
-// WithFloatingPanel a Boolean value that indicates whether the receiver is a floating panel.
-func (x *FontPanel) WithFloatingPanel(floatingPanel bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatingPanel:"), floatingPanel)
-	return x
+// WithFloatingPanel sets a Boolean value that indicates whether the receiver is a floating panel.
+func (fp *FontPanel) WithFloatingPanel(floatingPanel bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFloatingPanel:"), floatingPanel)
+	return fp
 }
 
-// WithBecomesKeyOnlyIfNeeded a Boolean value that indicates whether the receiver becomes the key window only when needed.
-func (x *FontPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
-	return x
+// WithBecomesKeyOnlyIfNeeded sets a Boolean value that indicates whether the receiver becomes the key window only when needed.
+func (fp *FontPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBecomesKeyOnlyIfNeeded:"), becomesKeyOnlyIfNeeded)
+	return fp
 }
 
-// WithWorksWhenModal a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
-func (x *FontPanel) WithWorksWhenModal(worksWhenModal bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
-	return x
+// WithWorksWhenModal sets a Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
+func (fp *FontPanel) WithWorksWhenModal(worksWhenModal bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWorksWhenModal:"), worksWhenModal)
+	return fp
 }
 
-// WithTitle the string that appears in the title bar of the window or the path to the represented file.
-func (x *FontPanel) WithTitle(title string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the string that appears in the title bar of the window or the path to the represented file.
+func (fp *FontPanel) WithTitle(title string) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return fp
 }
 
-// WithSubtitle a secondary line of text that appears in the title bar of the window.
-func (x *FontPanel) WithSubtitle(subtitle string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets a secondary line of text that appears in the title bar of the window.
+func (fp *FontPanel) WithSubtitle(subtitle string) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return fp
 }
 
-// WithTitleVisibility a value that indicates the visibility of the window’s title and title bar buttons.
-func (x *FontPanel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleVisibility:"), titleVisibility)
-	return x
+// WithTitleVisibility sets a value that indicates the visibility of the window’s title and title bar buttons.
+func (fp *FontPanel) WithTitleVisibility(titleVisibility WindowTitleVisibility) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitleVisibility:"), titleVisibility)
+	return fp
 }
 
-// WithTitlebarAppearsTransparent a Boolean value that indicates whether the title bar draws its background.
-func (x *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
-	return x
+// WithTitlebarAppearsTransparent sets a Boolean value that indicates whether the title bar draws its background.
+func (fp *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarAppearsTransparent:"), titlebarAppearsTransparent)
+	return fp
 }
 
-// WithToolbarStyle the style that determines the appearance and location of the toolbar in relation to the title bar.
-func (x *FontPanel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
-	return x
+// WithToolbarStyle sets the style that determines the appearance and location of the toolbar in relation to the title bar.
+func (fp *FontPanel) WithToolbarStyle(toolbarStyle WindowToolbarStyle) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbarStyle:"), toolbarStyle)
+	return fp
 }
 
-// WithTitlebarAccessoryViewControllers an array of title bar accessory view controllers that are currently added to the window.
-func (x *FontPanel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *FontPanel {
+// WithTitlebarAccessoryViewControllers sets an array of title bar accessory view controllers that are currently added to the window.
+func (fp *FontPanel) WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *FontPanel {
 	_arr := purego.SliceToNSArray(items, func(_v *TitlebarAccessoryViewController) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarAccessoryViewControllers:"), _arr)
+	return fp
 }
 
-// WithRepresentedURL the URL of the file the window represents.
-func (x *FontPanel) WithRepresentedURL(representedURL string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
-	return x
+// WithRepresentedURL sets the URL of the file the window represents.
+func (fp *FontPanel) WithRepresentedURL(representedURL string) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRepresentedURL:"), rt.FileURL(representedURL))
+	return fp
 }
 
-// WithRepresentedFilename the path to the file of the window’s represented file.
-func (x *FontPanel) WithRepresentedFilename(representedFilename string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
-	return x
+// WithRepresentedFilename sets the path to the file of the window’s represented file.
+func (fp *FontPanel) WithRepresentedFilename(representedFilename string) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRepresentedFilename:"), purego.NSString(representedFilename))
+	return fp
 }
 
-// WithExcludedFromWindowsMenu a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
-func (x *FontPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
-	return x
+// WithExcludedFromWindowsMenu sets a Boolean value that indicates whether the window is excluded from the application’s Windows menu.
+func (fp *FontPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setExcludedFromWindowsMenu:"), excludedFromWindowsMenu)
+	return fp
 }
 
-// WithContentView the window’s content view, the highest accessible view object in the window’s view hierarchy.
-func (x *FontPanel) WithContentView(contentView ViewProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-	return x
+// WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
+func (fp *FontPanel) WithContentView(contentView ViewProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	return fp
 }
 
-// WithStyleMask flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
-func (x *FontPanel) WithStyleMask(styleMask WindowStyleMask) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyleMask:"), styleMask)
-	return x
+// WithStyleMask sets flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
+func (fp *FontPanel) WithStyleMask(styleMask WindowStyleMask) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setStyleMask:"), styleMask)
+	return fp
 }
 
-// WithResizeIncrements the window’s resizing increments.
-func (x *FontPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
-	return x
+// WithResizeIncrements sets the window’s resizing increments.
+func (fp *FontPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setResizeIncrements:"), resizeIncrements)
+	return fp
 }
 
-// WithAspectRatio the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
-func (x *FontPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAspectRatio:"), aspectRatio)
-	return x
+// WithAspectRatio sets the window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+func (fp *FontPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAspectRatio:"), aspectRatio)
+	return fp
 }
 
-// WithContentResizeIncrements the window’s content-view resizing increments.
-func (x *FontPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
-	return x
+// WithContentResizeIncrements sets the window’s content-view resizing increments.
+func (fp *FontPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentResizeIncrements:"), contentResizeIncrements)
+	return fp
 }
 
-// WithContentAspectRatio the window’s content aspect ratio.
-func (x *FontPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
-	return x
+// WithContentAspectRatio sets the window’s content aspect ratio.
+func (fp *FontPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentAspectRatio:"), contentAspectRatio)
+	return fp
 }
 
-// WithViewsNeedDisplay a Boolean value that indicates whether any of the window’s views need to be displayed.
-func (x *FontPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
-	return x
+// WithViewsNeedDisplay sets a Boolean value that indicates whether any of the window’s views need to be displayed.
+func (fp *FontPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setViewsNeedDisplay:"), viewsNeedDisplay)
+	return fp
 }
 
-// WithPreservesContentDuringLiveResize a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
-func (x *FontPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
-	return x
+// WithPreservesContentDuringLiveResize sets a Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
+func (fp *FontPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreservesContentDuringLiveResize:"), preservesContentDuringLiveResize)
+	return fp
 }
 
-// WithReleasedWhenClosed a Boolean value that indicates whether the window is released when it receives the close message.
-func (x *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
-	return x
+// WithReleasedWhenClosed sets a Boolean value that indicates whether the window is released when it receives the close message.
+func (fp *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setReleasedWhenClosed:"), releasedWhenClosed)
+	return fp
 }
 
-// WithBackgroundColor the color of the window’s background.
-func (x *FontPanel) WithBackgroundColor(backgroundColor *Color) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the window’s background.
+func (fp *FontPanel) WithBackgroundColor(backgroundColor *Color) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return fp
 }
 
-// WithMovable a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
-func (x *FontPanel) WithMovable(movable bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
-	return x
+// WithMovable sets a Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
+func (fp *FontPanel) WithMovable(movable bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMovable:"), movable)
+	return fp
 }
 
-// WithMovableByWindowBackground a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
-func (x *FontPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
-	return x
+// WithMovableByWindowBackground sets a Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
+func (fp *FontPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMovableByWindowBackground:"), movableByWindowBackground)
+	return fp
 }
 
-// WithHidesOnDeactivate a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
-func (x *FontPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
-	return x
+// WithHidesOnDeactivate sets a Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
+func (fp *FontPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setHidesOnDeactivate:"), hidesOnDeactivate)
+	return fp
 }
 
-// WithCanHide a Boolean value that indicates whether the window can hide when its application becomes hidden.
-func (x *FontPanel) WithCanHide(canHide bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHide:"), canHide)
-	return x
+// WithCanHide sets a Boolean value that indicates whether the window can hide when its application becomes hidden.
+func (fp *FontPanel) WithCanHide(canHide bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCanHide:"), canHide)
+	return fp
 }
 
-// WithMiniwindowImage the custom miniaturized window image of the window.
-func (x *FontPanel) WithMiniwindowImage(miniwindowImage *Image) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
-	return x
+// WithMiniwindowImage sets the custom miniaturized window image of the window.
+func (fp *FontPanel) WithMiniwindowImage(miniwindowImage *Image) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
+	return fp
 }
 
-// WithMiniwindowTitle the title displayed in the window’s minimized window.
-func (x *FontPanel) WithMiniwindowTitle(miniwindowTitle string) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
-	return x
+// WithMiniwindowTitle sets the title displayed in the window’s minimized window.
+func (fp *FontPanel) WithMiniwindowTitle(miniwindowTitle string) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMiniwindowTitle:"), purego.NSString(miniwindowTitle))
+	return fp
 }
 
-// WithDocumentEdited a Boolean value that indicates whether the window’s document has been edited.
-func (x *FontPanel) WithDocumentEdited(documentEdited bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentEdited:"), documentEdited)
-	return x
+// WithDocumentEdited sets a Boolean value that indicates whether the window’s document has been edited.
+func (fp *FontPanel) WithDocumentEdited(documentEdited bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDocumentEdited:"), documentEdited)
+	return fp
 }
 
-// WithPreventsApplicationTerminationWhenModal a Boolean value that indicates whether the window prevents application termination when modal.
-func (x *FontPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
-	return x
+// WithPreventsApplicationTerminationWhenModal sets a Boolean value that indicates whether the window prevents application termination when modal.
+func (fp *FontPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreventsApplicationTerminationWhenModal:"), preventsApplicationTerminationWhenModal)
+	return fp
 }
 
-// WithAllowsToolTipsWhenApplicationIsInactive a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
-func (x *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
-	return x
+// WithAllowsToolTipsWhenApplicationIsInactive sets a Boolean value that indicates whether the window can display tooltips even when the application is in the background.
+func (fp *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAllowsToolTipsWhenApplicationIsInactive:"), allowsToolTipsWhenApplicationIsInactive)
+	return fp
 }
 
-// WithBackingType the window’s backing store type.
-func (x *FontPanel) WithBackingType(backingType BackingStoreType) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackingType:"), backingType)
-	return x
+// WithBackingType sets the window’s backing store type.
+func (fp *FontPanel) WithBackingType(backingType BackingStoreType) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setBackingType:"), backingType)
+	return fp
 }
 
-// WithLevel the window level of the window.
-func (x *FontPanel) WithLevel(level int) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets the window level of the window.
+func (fp *FontPanel) WithLevel(level int) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setLevel:"), level)
+	return fp
 }
 
-// WithDepthLimit the depth limit of the window.
-func (x *FontPanel) WithDepthLimit(depthLimit WindowDepth) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthLimit:"), depthLimit)
-	return x
+// WithDepthLimit sets the depth limit of the window.
+func (fp *FontPanel) WithDepthLimit(depthLimit WindowDepth) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDepthLimit:"), depthLimit)
+	return fp
 }
 
-// WithHasShadow a Boolean value that indicates whether the window has a shadow.
-func (x *FontPanel) WithHasShadow(hasShadow bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasShadow:"), hasShadow)
-	return x
+// WithHasShadow sets a Boolean value that indicates whether the window has a shadow.
+func (fp *FontPanel) WithHasShadow(hasShadow bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setHasShadow:"), hasShadow)
+	return fp
 }
 
-// WithAlphaValue the window’s alpha value.
-func (x *FontPanel) WithAlphaValue(alphaValue float64) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+// WithAlphaValue sets the window’s alpha value.
+func (fp *FontPanel) WithAlphaValue(alphaValue float64) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return fp
 }
 
-// WithOpaque a Boolean value that indicates whether the window is opaque.
-func (x *FontPanel) WithOpaque(opaque bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the window is opaque.
+func (fp *FontPanel) WithOpaque(opaque bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOpaque:"), opaque)
+	return fp
 }
 
-// WithSharingType a Boolean value that indicates the level of access other processes have to the window’s content.
-func (x *FontPanel) WithSharingType(sharingType WindowSharingType) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharingType:"), sharingType)
-	return x
+// WithSharingType sets a Boolean value that indicates the level of access other processes have to the window’s content.
+func (fp *FontPanel) WithSharingType(sharingType WindowSharingType) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setSharingType:"), sharingType)
+	return fp
 }
 
-// WithAllowsConcurrentViewDrawing a Boolean value that indicates whether the window allows multithreaded view drawing.
-func (x *FontPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
-	return x
+// WithAllowsConcurrentViewDrawing sets a Boolean value that indicates whether the window allows multithreaded view drawing.
+func (fp *FontPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAllowsConcurrentViewDrawing:"), allowsConcurrentViewDrawing)
+	return fp
 }
 
-// WithDisplaysWhenScreenProfileChanges a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
-func (x *FontPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
-	return x
+// WithDisplaysWhenScreenProfileChanges sets a Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
+func (fp *FontPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDisplaysWhenScreenProfileChanges:"), displaysWhenScreenProfileChanges)
+	return fp
 }
 
-// WithCanBecomeVisibleWithoutLogin a Boolean value that indicates whether the window can be displayed at the login window.
-func (x *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
-	return x
+// WithCanBecomeVisibleWithoutLogin sets a Boolean value that indicates whether the window can be displayed at the login window.
+func (fp *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCanBecomeVisibleWithoutLogin:"), canBecomeVisibleWithoutLogin)
+	return fp
 }
 
-// WithCollectionBehavior a value that identifies the window’s behavior in window collections.
-func (x *FontPanel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
-	return x
+// WithCollectionBehavior sets a value that identifies the window’s behavior in window collections.
+func (fp *FontPanel) WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setCollectionBehavior:"), collectionBehavior)
+	return fp
 }
 
-// WithAnimationBehavior the window’s automatic animation behavior.
-func (x *FontPanel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
-	return x
+// WithAnimationBehavior sets the window’s automatic animation behavior.
+func (fp *FontPanel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAnimationBehavior:"), animationBehavior)
+	return fp
 }
 
-// WithFrameAutosaveName the name used to automatically save the window’s frame rectangle data in the defaults system.
-func (x *FontPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
-	return x
+// WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
+func (fp *FontPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
+	return fp
 }
 
-// WithMinSize the minimum size to which the window’s frame (including its title bar) can be sized.
-func (x *FontPanel) WithMinSize(minSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
-	return x
+// WithMinSize sets the minimum size to which the window’s frame (including its title bar) can be sized.
+func (fp *FontPanel) WithMinSize(minSize corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMinSize:"), minSize)
+	return fp
 }
 
-// WithMaxSize the maximum size to which the window’s frame (including its title bar) can be sized.
-func (x *FontPanel) WithMaxSize(maxSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
-	return x
+// WithMaxSize sets the maximum size to which the window’s frame (including its title bar) can be sized.
+func (fp *FontPanel) WithMaxSize(maxSize corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMaxSize:"), maxSize)
+	return fp
 }
 
-// WithContentMinSize the minimum size of the window’s content view in the window’s base coordinate system.
-func (x *FontPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMinSize:"), contentMinSize)
-	return x
+// WithContentMinSize sets the minimum size of the window’s content view in the window’s base coordinate system.
+func (fp *FontPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentMinSize:"), contentMinSize)
+	return fp
 }
 
-// WithContentMaxSize the maximum size of the window’s content view in the window’s base coordinate system.
-func (x *FontPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
-	return x
+// WithContentMaxSize sets the maximum size of the window’s content view in the window’s base coordinate system.
+func (fp *FontPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentMaxSize:"), contentMaxSize)
+	return fp
 }
 
-// WithMinFullScreenContentSize a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
-func (x *FontPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
-	return x
+// WithMinFullScreenContentSize sets a minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (fp *FontPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMinFullScreenContentSize:"), minFullScreenContentSize)
+	return fp
 }
 
-// WithMaxFullScreenContentSize a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
-func (x *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
-	return x
+// WithMaxFullScreenContentSize sets a maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+func (fp *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMaxFullScreenContentSize:"), maxFullScreenContentSize)
+	return fp
 }
 
-// WithWindowController the window’s window controller.
-func (x *FontPanel) WithWindowController(windowController *WindowController) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
-	return x
+// WithWindowController sets the window’s window controller.
+func (fp *FontPanel) WithWindowController(windowController *WindowController) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
+	return fp
 }
 
-// WithParentWindow the parent window to which the window is attached as a child.
-func (x *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
-	return x
+// WithParentWindow sets the parent window to which the window is attached as a child.
+func (fp *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	return fp
 }
 
-// WithAppearanceSource an object that the window inherits its appearance from.
-func (x *FontPanel) WithAppearanceSource(appearanceSource obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
-	return x
+// WithAppearanceSource sets an object that the window inherits its appearance from.
+func (fp *FontPanel) WithAppearanceSource(appearanceSource obj.Object) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
+	return fp
 }
 
-// WithColorSpace the window’s color space.
-func (x *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
-	return x
+// WithColorSpace sets the window’s color space.
+func (fp *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	return fp
 }
 
-// WithTitlebarSeparatorStyle the type of separator that the app displays between the title bar and content of a window.
-func (x *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
-	return x
+// WithTitlebarSeparatorStyle sets the type of separator that the app displays between the title bar and content of a window.
+func (fp *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTitlebarSeparatorStyle:"), titlebarSeparatorStyle)
+	return fp
 }
 
-// WithContentViewController the main content view controller for the window.
-func (x *FontPanel) WithContentViewController(contentViewController ViewControllerProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
-	return x
+// WithContentViewController sets the main content view controller for the window.
+func (fp *FontPanel) WithContentViewController(contentViewController ViewControllerProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
+	return fp
 }
 
-// WithInitialFirstResponder the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
-func (x *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
-	return x
+// WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
+func (fp *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
+	return fp
 }
 
-// WithDefaultButtonCell the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
-func (x *FontPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
-	return x
+// WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
+func (fp *FontPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
+	return fp
 }
 
-// WithAutorecalculatesKeyViewLoop a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
-func (x *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
-	return x
+// WithAutorecalculatesKeyViewLoop sets a Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
+func (fp *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutorecalculatesKeyViewLoop:"), autorecalculatesKeyViewLoop)
+	return fp
 }
 
-// WithToolbar the window’s toolbar.
-func (x *FontPanel) WithToolbar(toolbar *Toolbar) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
-	return x
+// WithToolbar sets the window’s toolbar.
+func (fp *FontPanel) WithToolbar(toolbar *Toolbar) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
+	return fp
 }
 
-// WithShowsToolbarButton a Boolean value that indicates whether the toolbar control button is currently displayed.
-func (x *FontPanel) WithShowsToolbarButton(showsToolbarButton bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
-	return x
+// WithShowsToolbarButton sets a Boolean value that indicates whether the toolbar control button is currently displayed.
+func (fp *FontPanel) WithShowsToolbarButton(showsToolbarButton bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsToolbarButton:"), showsToolbarButton)
+	return fp
 }
 
-// WithTabbingMode a value that indicates when a window displays tabs.
-func (x *FontPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingMode:"), tabbingMode)
-	return x
+// WithTabbingMode sets a value that indicates when a window displays tabs.
+func (fp *FontPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingMode:"), tabbingMode)
+	return fp
 }
 
-// WithTabbingIdentifier a value that allows a group of related windows.
-func (x *FontPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
-	return x
+// WithTabbingIdentifier sets a value that allows a group of related windows.
+func (fp *FontPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
+	return fp
 }
 
-// WithAcceptsMouseMovedEvents a Boolean value that indicates whether the window accepts mouse-moved events.
-func (x *FontPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
-	return x
+// WithAcceptsMouseMovedEvents sets a Boolean value that indicates whether the window accepts mouse-moved events.
+func (fp *FontPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAcceptsMouseMovedEvents:"), acceptsMouseMovedEvents)
+	return fp
 }
 
-// WithIgnoresMouseEvents a Boolean value that indicates whether the window is transparent to mouse events.
-func (x *FontPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
-	return x
+// WithIgnoresMouseEvents sets a Boolean value that indicates whether the window is transparent to mouse events.
+func (fp *FontPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setIgnoresMouseEvents:"), ignoresMouseEvents)
+	return fp
 }
 
 // WithAutodisplay sets the property and returns the receiver so calls can be chained.
-func (x *FontPanel) WithAutodisplay(autodisplay bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutodisplay:"), autodisplay)
-	return x
+func (fp *FontPanel) WithAutodisplay(autodisplay bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutodisplay:"), autodisplay)
+	return fp
 }
 
 // WithOneShot sets the property and returns the receiver so calls can be chained.
-func (x *FontPanel) WithOneShot(oneShot bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOneShot:"), oneShot)
-	return x
+func (fp *FontPanel) WithOneShot(oneShot bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOneShot:"), oneShot)
+	return fp
 }
 
 // WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
-func (x *FontPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
-	return x
+func (fp *FontPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
+	return fp
 }
 
 // WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
-func (x *FontPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
-	return x
+func (fp *FontPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
+	return fp
 }
 
-// WithOrderedIndex the zero-based position of the window, based on its order from front to back among all visible application windows.
-func (x *FontPanel) WithOrderedIndex(orderedIndex int) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderedIndex:"), orderedIndex)
-	return x
+// WithOrderedIndex sets the zero-based position of the window, based on its order from front to back among all visible application windows.
+func (fp *FontPanel) WithOrderedIndex(orderedIndex int) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOrderedIndex:"), orderedIndex)
+	return fp
 }
 
-// WithRestorable a Boolean value indicating whether the window configuration is preserved between application launches.
-func (x *FontPanel) WithRestorable(restorable bool) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestorable:"), restorable)
-	return x
+// WithRestorable sets a Boolean value indicating whether the window configuration is preserved between application launches.
+func (fp *FontPanel) WithRestorable(restorable bool) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorable:"), restorable)
+	return fp
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (fp *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return fp
 }
 
-// WithMenu returns the responder’s menu.
-func (x *FontPanel) WithMenu(menu *Menu) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (fp *FontPanel) WithMenu(menu *Menu) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return fp
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *FontPanel) WithUserActivity(userActivity obj.Object) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (fp *FontPanel) WithUserActivity(userActivity obj.Object) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return fp
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (fp *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return fp
 }
 
 // SetPanelFontIsMultiple sets the selected font in the receiver to the specified font.
-func (x *FontPanel) SetPanelFontIsMultiple(fontObj *Font, flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPanelFont:isMultiple:"), objref.IDOf(fontObj), flag)
+func (fp *FontPanel) SetPanelFontIsMultiple(fontObj *Font, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPanelFont:isMultiple:"), objref.IDOf(fontObj), flag)
 }
 
 // PanelConvertFont converts the specified font using the settings in the receiver, with the aid of the shared NSFontManager if necessary.
-func (x *FontPanel) PanelConvertFont(fontObj *Font) *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("panelConvertFont:"), objref.IDOf(fontObj))
+func (fp *FontPanel) PanelConvertFont(fontObj *Font) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("panelConvertFont:"), objref.IDOf(fontObj))
 	return FontFromID(_r)
 }
 
 // ReloadDefaultFontFamilies triggers a reload to the default state, so that the delegate is called.
-func (x *FontPanel) ReloadDefaultFontFamilies() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadDefaultFontFamilies"))
+func (fp *FontPanel) ReloadDefaultFontFamilies() {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("reloadDefaultFontFamilies"))
 }
 
 // AccessoryView wraps the corresponding Objective-C method.
-func (x *FontPanel) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+func (fp *FontPanel) AccessoryView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
-// SetAccessoryView wraps the corresponding Objective-C method.
-func (x *FontPanel) SetAccessoryView(accessoryView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-}
-
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *FontPanel) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (fp *FontPanel) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(fp), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *FontPanel) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// FontPanelable is the interface implemented by [FontPanel], for mocking and DI.
-type FontPanelable interface {
-	obj.Object
-	WithAccessoryView(accessoryView ViewProvider) *FontPanel
-	WithEnabled(enabled bool) *FontPanel
-	WithFloatingPanel(floatingPanel bool) *FontPanel
-	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel
-	WithWorksWhenModal(worksWhenModal bool) *FontPanel
-	WithTitle(title string) *FontPanel
-	WithSubtitle(subtitle string) *FontPanel
-	WithTitleVisibility(titleVisibility WindowTitleVisibility) *FontPanel
-	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel
-	WithToolbarStyle(toolbarStyle WindowToolbarStyle) *FontPanel
-	WithTitlebarAccessoryViewControllers(items ...*TitlebarAccessoryViewController) *FontPanel
-	WithRepresentedURL(representedURL string) *FontPanel
-	WithRepresentedFilename(representedFilename string) *FontPanel
-	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel
-	WithContentView(contentView ViewProvider) *FontPanel
-	WithStyleMask(styleMask WindowStyleMask) *FontPanel
-	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel
-	WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel
-	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel
-	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel
-	WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel
-	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel
-	WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel
-	WithBackgroundColor(backgroundColor *Color) *FontPanel
-	WithMovable(movable bool) *FontPanel
-	WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel
-	WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel
-	WithCanHide(canHide bool) *FontPanel
-	WithMiniwindowImage(miniwindowImage *Image) *FontPanel
-	WithMiniwindowTitle(miniwindowTitle string) *FontPanel
-	WithDocumentEdited(documentEdited bool) *FontPanel
-	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel
-	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel
-	WithBackingType(backingType BackingStoreType) *FontPanel
-	WithLevel(level int) *FontPanel
-	WithDepthLimit(depthLimit WindowDepth) *FontPanel
-	WithHasShadow(hasShadow bool) *FontPanel
-	WithAlphaValue(alphaValue float64) *FontPanel
-	WithOpaque(opaque bool) *FontPanel
-	WithSharingType(sharingType WindowSharingType) *FontPanel
-	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel
-	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel
-	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel
-	WithCollectionBehavior(collectionBehavior WindowCollectionBehavior) *FontPanel
-	WithAnimationBehavior(animationBehavior WindowAnimationBehavior) *FontPanel
-	WithFrameAutosaveName(frameAutosaveName obj.Object) *FontPanel
-	WithMinSize(minSize corefoundation.CGSize) *FontPanel
-	WithMaxSize(maxSize corefoundation.CGSize) *FontPanel
-	WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel
-	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel
-	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel
-	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel
-	WithWindowController(windowController *WindowController) *FontPanel
-	WithParentWindow(parentWindow WindowProvider) *FontPanel
-	WithAppearanceSource(appearanceSource obj.Object) *FontPanel
-	WithColorSpace(colorSpace *ColorSpace) *FontPanel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSeparatorStyle) *FontPanel
-	WithContentViewController(contentViewController ViewControllerProvider) *FontPanel
-	WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel
-	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel
-	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel
-	WithToolbar(toolbar *Toolbar) *FontPanel
-	WithShowsToolbarButton(showsToolbarButton bool) *FontPanel
-	WithTabbingMode(tabbingMode WindowTabbingMode) *FontPanel
-	WithTabbingIdentifier(tabbingIdentifier obj.Object) *FontPanel
-	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel
-	WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel
-	WithAutodisplay(autodisplay bool) *FontPanel
-	WithOneShot(oneShot bool) *FontPanel
-	WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *FontPanel
-	WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel
-	WithOrderedIndex(orderedIndex int) *FontPanel
-	WithRestorable(restorable bool) *FontPanel
-	WithNextResponder(nextResponder ResponderProvider) *FontPanel
-	WithMenu(menu *Menu) *FontPanel
-	WithUserActivity(userActivity obj.Object) *FontPanel
-	WithTouchBar(touchBar *TouchBar) *FontPanel
-	SetPanelFontIsMultiple(fontObj *Font, flag bool)
-	PanelConvertFont(fontObj *Font) *Font
-	ReloadDefaultFontFamilies()
-	AccessoryView() *View
-	SetAccessoryView(accessoryView *View)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ FontPanelable = (*FontPanel)(nil)
 
 var _ PanelProvider = (*FontPanel)(nil)
 

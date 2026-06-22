@@ -53,151 +53,124 @@ func NewUserLocationView() *UserLocationView {
 	return userLocationViewAdopt(_id)
 }
 
-// WithImage the image the annotation view displays.
-func (x *UserLocationView) WithImage(image obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image the annotation view displays.
+func (ulv *UserLocationView) WithImage(image obj.Object) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return ulv
 }
 
-// WithCenterOffset the offset (in points) at which to display the view.
-func (x *UserLocationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterOffset:"), centerOffset)
-	return x
+// WithCenterOffset sets the offset (in points) at which to display the view.
+func (ulv *UserLocationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCenterOffset:"), centerOffset)
+	return ulv
 }
 
-// WithAccessoryOffset an offset that changes the accessory’s default anchor point.
-func (x *UserLocationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
-	return x
+// WithAccessoryOffset sets an offset that changes the accessory’s default anchor point.
+func (ulv *UserLocationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	return ulv
 }
 
-// WithCalloutOffset the offset (in points) at which to place the callout.
-func (x *UserLocationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalloutOffset:"), calloutOffset)
-	return x
+// WithCalloutOffset sets the offset (in points) at which to place the callout.
+func (ulv *UserLocationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	return ulv
 }
 
-// WithLeftCalloutOffset the offset in points from the middle-left of the annotation view.
-func (x *UserLocationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
-	return x
+// WithLeftCalloutOffset sets the offset in points from the middle-left of the annotation view.
+func (ulv *UserLocationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	return ulv
 }
 
-// WithRightCalloutOffset the offset in points from the middle-right of the annotation view.
-func (x *UserLocationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
-	return x
+// WithRightCalloutOffset sets the offset in points from the middle-right of the annotation view.
+func (ulv *UserLocationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	return ulv
 }
 
-// WithEnabled a Boolean value that indicates whether the annotation is in an enabled state.
-func (x *UserLocationView) WithEnabled(enabled bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the annotation is in an enabled state.
+func (ulv *UserLocationView) WithEnabled(enabled bool) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setEnabled:"), enabled)
+	return ulv
 }
 
-// WithHighlighted a Boolean value that indicates whether the map view highlights the annotation view.
-func (x *UserLocationView) WithHighlighted(highlighted bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the map view highlights the annotation view.
+func (ulv *UserLocationView) WithHighlighted(highlighted bool) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setHighlighted:"), highlighted)
+	return ulv
 }
 
-// WithSelected a Boolean value that indicates whether the annotation view is in a selected state.
-func (x *UserLocationView) WithSelected(selected bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
-	return x
+// WithSelected sets a Boolean value that indicates whether the annotation view is in a selected state.
+func (ulv *UserLocationView) WithSelected(selected bool) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setSelected:"), selected)
+	return ulv
 }
 
-// WithCanShowCallout a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
-func (x *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanShowCallout:"), canShowCallout)
-	return x
+// WithCanShowCallout sets a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
+func (ulv *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	return ulv
 }
 
-// WithLeftCalloutAccessoryView the view to display on the left side of the standard callout.
-func (x *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
-	return x
+// WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
+func (ulv *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	return ulv
 }
 
-// WithRightCalloutAccessoryView the view to display on the right side of the standard callout.
-func (x *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
-	return x
+// WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
+func (ulv *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	return ulv
 }
 
-// WithDetailCalloutAccessoryView the detail accessory view to use in the standard callout.
-func (x *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
-	return x
+// WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
+func (ulv *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	return ulv
 }
 
-// WithDraggable a Boolean value that indicates whether the annotation view is draggable.
-func (x *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggable:"), draggable)
-	return x
+// WithDraggable sets a Boolean value that indicates whether the annotation view is draggable.
+func (ulv *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDraggable:"), draggable)
+	return ulv
 }
 
-// WithDragState the drag state of the annotation view.
-func (x *UserLocationView) WithDragState(dragState AnnotationViewDragState) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:"), dragState)
-	return x
+// WithDragState sets the drag state of the annotation view.
+func (ulv *UserLocationView) WithDragState(dragState AnnotationViewDragState) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDragState:"), dragState)
+	return ulv
 }
 
-// WithClusteringIdentifier an identifier that determines whether the annotation view participates in clustering.
-func (x *UserLocationView) WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
-	return x
+// WithClusteringIdentifier sets an identifier that determines whether the annotation view participates in clustering.
+func (ulv *UserLocationView) WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	return ulv
 }
 
-// WithDisplayPriority the display priority of the annotation view.
-func (x *UserLocationView) WithDisplayPriority(displayPriority float32) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPriority:"), displayPriority)
-	return x
+// WithDisplayPriority sets the display priority of the annotation view.
+func (ulv *UserLocationView) WithDisplayPriority(displayPriority float32) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	return ulv
 }
 
-// WithZPriority the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
-func (x *UserLocationView) WithZPriority(zPriority float32) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPriority:"), zPriority)
-	return x
+// WithZPriority sets the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
+func (ulv *UserLocationView) WithZPriority(zPriority float32) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setZPriority:"), zPriority)
+	return ulv
 }
 
-// WithSelectedZPriority the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
-func (x *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
-	return x
+// WithSelectedZPriority sets the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
+func (ulv *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	return ulv
 }
 
-// WithCollisionMode the collision mode to use when interpreting the collision frame rectangle.
-func (x *UserLocationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *UserLocationView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionMode:"), collisionMode)
-	return x
+// WithCollisionMode sets the collision mode to use when interpreting the collision frame rectangle.
+func (ulv *UserLocationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *UserLocationView {
+	objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setCollisionMode:"), collisionMode)
+	return ulv
 }
-
-// UserLocationViewable is the interface implemented by [UserLocationView], for mocking and DI.
-type UserLocationViewable interface {
-	obj.Object
-	WithImage(image obj.Object) *UserLocationView
-	WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView
-	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView
-	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView
-	WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView
-	WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView
-	WithEnabled(enabled bool) *UserLocationView
-	WithHighlighted(highlighted bool) *UserLocationView
-	WithSelected(selected bool) *UserLocationView
-	WithCanShowCallout(canShowCallout bool) *UserLocationView
-	WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *UserLocationView
-	WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *UserLocationView
-	WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *UserLocationView
-	WithDraggable(draggable bool) *UserLocationView
-	WithDragState(dragState AnnotationViewDragState) *UserLocationView
-	WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView
-	WithDisplayPriority(displayPriority float32) *UserLocationView
-	WithZPriority(zPriority float32) *UserLocationView
-	WithSelectedZPriority(selectedZPriority float32) *UserLocationView
-	WithCollisionMode(collisionMode AnnotationViewCollisionMode) *UserLocationView
-}
-
-var _ UserLocationViewable = (*UserLocationView)(nil)
 
 var _ AnnotationViewProvider = (*UserLocationView)(nil)

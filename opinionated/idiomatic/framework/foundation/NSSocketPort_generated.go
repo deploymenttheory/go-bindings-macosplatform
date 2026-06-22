@@ -88,52 +88,39 @@ func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, 
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SocketPort) WithScriptingProperties(scriptingProperties obj.Object) *SocketPort {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (sp *SocketPort) WithScriptingProperties(scriptingProperties obj.Object) *SocketPort {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return sp
 }
 
 // ProtocolFamily wraps the corresponding Objective-C method.
-func (x *SocketPort) ProtocolFamily() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("protocolFamily"))
+func (sp *SocketPort) ProtocolFamily() int {
+	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
 // SocketType wraps the corresponding Objective-C method.
-func (x *SocketPort) SocketType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socketType"))
+func (sp *SocketPort) SocketType() int {
+	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socketType"))
 	return _r
 }
 
 // Protocol wraps the corresponding Objective-C method.
-func (x *SocketPort) Protocol() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("protocol"))
+func (sp *SocketPort) Protocol() int {
+	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocol"))
 	return _r
 }
 
 // Address wraps the corresponding Objective-C method.
-func (x *SocketPort) Address() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+func (sp *SocketPort) Address() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("address"))
 	return DataFromID(_r)
 }
 
 // Socket wraps the corresponding Objective-C method.
-func (x *SocketPort) Socket() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socket"))
+func (sp *SocketPort) Socket() int {
+	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socket"))
 	return _r
 }
-
-// SocketPortable is the interface implemented by [SocketPort], for mocking and DI.
-type SocketPortable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *SocketPort
-	ProtocolFamily() int
-	SocketType() int
-	Protocol() int
-	Address() *Data
-	Socket() int
-}
-
-var _ SocketPortable = (*SocketPort)(nil)
 
 var _ PortProvider = (*SocketPort)(nil)

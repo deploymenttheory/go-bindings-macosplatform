@@ -46,24 +46,24 @@ func multiheadAttentionDescriptorAdopt(id objc.ID) *MultiheadAttentionDescriptor
 }
 
 // Description returns the object's -description text.
-func (x *MultiheadAttentionDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mad *MultiheadAttentionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MultiheadAttentionDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mad *MultiheadAttentionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MultiheadAttentionDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mad *MultiheadAttentionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MultiheadAttentionDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mad *MultiheadAttentionDescriptor) String() string {
+	return rt.Description(objref.IDOf(mad))
 }
 
 // NewMultiheadAttentionDescriptor creates a new MultiheadAttentionDescriptor.
@@ -72,65 +72,50 @@ func NewMultiheadAttentionDescriptor() *MultiheadAttentionDescriptor {
 	return multiheadAttentionDescriptorAdopt(_id)
 }
 
-// ModelDimension model or embedding dimension
-func (x *MultiheadAttentionDescriptor) ModelDimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("modelDimension"))
+// ModelDimension returns model or embedding dimension
+func (mad *MultiheadAttentionDescriptor) ModelDimension() int {
+	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("modelDimension"))
 	return _r
 }
 
-// KeyDimension total dimension of key space, Default = modelDimension
-func (x *MultiheadAttentionDescriptor) KeyDimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keyDimension"))
+// KeyDimension returns total dimension of key space, Default = modelDimension
+func (mad *MultiheadAttentionDescriptor) KeyDimension() int {
+	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("keyDimension"))
 	return _r
 }
 
-// ValueDimension total dimension of value space, Default = modelDimension
-func (x *MultiheadAttentionDescriptor) ValueDimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("valueDimension"))
+// ValueDimension returns total dimension of value space, Default = modelDimension
+func (mad *MultiheadAttentionDescriptor) ValueDimension() int {
+	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("valueDimension"))
 	return _r
 }
 
-// HeadCount number of parallel attention heads
-func (x *MultiheadAttentionDescriptor) HeadCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("headCount"))
+// HeadCount returns number of parallel attention heads
+func (mad *MultiheadAttentionDescriptor) HeadCount() int {
+	_r := objc.Send[int](objref.IDOf(mad), objc.RegisterName("headCount"))
 	return _r
 }
 
-// Dropout a droupout layer applied to the output projection weights. Default = 0.0
-func (x *MultiheadAttentionDescriptor) Dropout() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("dropout"))
+// Dropout returns a droupout layer applied to the output projection weights. Default = 0.0
+func (mad *MultiheadAttentionDescriptor) Dropout() float32 {
+	_r := objc.Send[float32](objref.IDOf(mad), objc.RegisterName("dropout"))
 	return _r
 }
 
-// HasBiases if true, bias is used for query/key/value/output projections. Default = true
-func (x *MultiheadAttentionDescriptor) HasBiases() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBiases"))
+// HasBiases reports whether if true, bias is used for query/key/value/output projections. Default = true
+func (mad *MultiheadAttentionDescriptor) HasBiases() bool {
+	_r := objc.Send[bool](objref.IDOf(mad), objc.RegisterName("hasBiases"))
 	return _r
 }
 
-// HasAttentionBiases if true, an array of biases is added to key and value respectively. Default = false
-func (x *MultiheadAttentionDescriptor) HasAttentionBiases() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttentionBiases"))
+// HasAttentionBiases reports whether if true, an array of biases is added to key and value respectively. Default = false
+func (mad *MultiheadAttentionDescriptor) HasAttentionBiases() bool {
+	_r := objc.Send[bool](objref.IDOf(mad), objc.RegisterName("hasAttentionBiases"))
 	return _r
 }
 
-// AddsZeroAttention if true, a row of zeroes is added to projected key and value. Default = false
-func (x *MultiheadAttentionDescriptor) AddsZeroAttention() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addsZeroAttention"))
+// AddsZeroAttention reports whether if true, a row of zeroes is added to projected key and value. Default = false
+func (mad *MultiheadAttentionDescriptor) AddsZeroAttention() bool {
+	_r := objc.Send[bool](objref.IDOf(mad), objc.RegisterName("addsZeroAttention"))
 	return _r
 }
-
-// MultiheadAttentionDescriptorable is the interface implemented by [MultiheadAttentionDescriptor], for mocking and DI.
-type MultiheadAttentionDescriptorable interface {
-	obj.Object
-	ModelDimension() int
-	KeyDimension() int
-	ValueDimension() int
-	HeadCount() int
-	Dropout() float32
-	HasBiases() bool
-	HasAttentionBiases() bool
-	AddsZeroAttention() bool
-}
-
-var _ MultiheadAttentionDescriptorable = (*MultiheadAttentionDescriptor)(nil)

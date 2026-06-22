@@ -52,430 +52,348 @@ func NewTokenFieldCell() *TokenFieldCell {
 	return tokenFieldCellAdopt(_id)
 }
 
-// WithTokenStyle the token style of the receiver.
-func (x *TokenFieldCell) WithTokenStyle(tokenStyle TokenStyle) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenStyle:"), tokenStyle)
-	return x
+// WithTokenStyle sets the token style of the receiver.
+func (tfc *TokenFieldCell) WithTokenStyle(tokenStyle TokenStyle) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenStyle:"), tokenStyle)
+	return tfc
 }
 
-// WithCompletionDelay the receiver’s completion delay to a given delay.
-func (x *TokenFieldCell) WithCompletionDelay(completionDelay float64) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDelay:"), completionDelay)
-	return x
+// WithCompletionDelay sets the receiver’s completion delay to a given delay.
+func (tfc *TokenFieldCell) WithCompletionDelay(completionDelay float64) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setCompletionDelay:"), completionDelay)
+	return tfc
 }
 
-// WithTokenizingCharacterSet the receiver’s tokenizing character set to a given character set.
-func (x *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
-	return x
+// WithTokenizingCharacterSet sets the receiver’s tokenizing character set to a given character set.
+func (tfc *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
+	return tfc
 }
 
-// WithBackgroundColor the color of the cell’s background.
-func (x *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the cell’s background.
+func (tfc *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tfc
 }
 
-// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
-func (x *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that indicates whether the cell draws its background color.
+func (tfc *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return tfc
 }
 
-// WithTextColor the color to use to draw the cell’s text.
-func (x *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the color to use to draw the cell’s text.
+func (tfc *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return tfc
 }
 
-// WithBezelStyle the bezel style to use when drawing the text field.
-func (x *TokenFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-	return x
+// WithBezelStyle sets the bezel style to use when drawing the text field.
+func (tfc *TokenFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	return tfc
 }
 
-// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
-func (x *TokenFieldCell) WithPlaceholderString(placeholderString string) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+// WithPlaceholderString sets the placeholder text for the cell, specified as a plain text string.
+func (tfc *TokenFieldCell) WithPlaceholderString(placeholderString string) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return tfc
 }
 
-// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
-func (x *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+// WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
+func (tfc *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return tfc
 }
 
-// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-func (x *TokenFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TokenFieldCell {
+// WithAllowedInputSourceLocales sets an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+func (tfc *TokenFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TokenFieldCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	return tfc
 }
 
-// WithControlView the view associated with the cell.
-func (x *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (tfc *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return tfc
 }
 
-// WithType the type of the cell.
-func (x *TokenFieldCell) WithType(type_ CellType) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (tfc *TokenFieldCell) WithType(type_ CellType) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setType:"), type_)
+	return tfc
 }
 
-// WithState the cell’s current state.
-func (x *TokenFieldCell) WithState(state int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (tfc *TokenFieldCell) WithState(state int) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setState:"), state)
+	return tfc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *TokenFieldCell) WithTarget(target obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (tfc *TokenFieldCell) WithTarget(target obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return tfc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *TokenFieldCell) WithTag(tag int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (tfc *TokenFieldCell) WithTag(tag int) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTag:"), tag)
+	return tfc
 }
 
-// WithTitle the cell’s title text.
-func (x *TokenFieldCell) WithTitle(title string) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (tfc *TokenFieldCell) WithTitle(title string) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return tfc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *TokenFieldCell) WithEnabled(enabled bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (tfc *TokenFieldCell) WithEnabled(enabled bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEnabled:"), enabled)
+	return tfc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *TokenFieldCell) WithContinuous(continuous bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (tfc *TokenFieldCell) WithContinuous(continuous bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setContinuous:"), continuous)
+	return tfc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *TokenFieldCell) WithEditable(editable bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (tfc *TokenFieldCell) WithEditable(editable bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEditable:"), editable)
+	return tfc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *TokenFieldCell) WithSelectable(selectable bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (tfc *TokenFieldCell) WithSelectable(selectable bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSelectable:"), selectable)
+	return tfc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *TokenFieldCell) WithBordered(bordered bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (tfc *TokenFieldCell) WithBordered(bordered bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBordered:"), bordered)
+	return tfc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *TokenFieldCell) WithBezeled(bezeled bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (tfc *TokenFieldCell) WithBezeled(bezeled bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezeled:"), bezeled)
+	return tfc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *TokenFieldCell) WithScrollable(scrollable bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (tfc *TokenFieldCell) WithScrollable(scrollable bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setScrollable:"), scrollable)
+	return tfc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *TokenFieldCell) WithHighlighted(highlighted bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (tfc *TokenFieldCell) WithHighlighted(highlighted bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setHighlighted:"), highlighted)
+	return tfc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *TokenFieldCell) WithAlignment(alignment TextAlignment) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (tfc *TokenFieldCell) WithAlignment(alignment TextAlignment) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAlignment:"), alignment)
+	return tfc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (tfc *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWraps:"), wraps)
+	return tfc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (tfc *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return tfc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *TokenFieldCell) WithFormatter(formatter obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (tfc *TokenFieldCell) WithFormatter(formatter obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return tfc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *TokenFieldCell) WithObjectValue(objectValue obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (tfc *TokenFieldCell) WithObjectValue(objectValue obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return tfc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *TokenFieldCell) WithStringValue(stringValue string) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (tfc *TokenFieldCell) WithStringValue(stringValue string) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return tfc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *TokenFieldCell) WithIntValue(intValue int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (tfc *TokenFieldCell) WithIntValue(intValue int) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntValue:"), intValue)
+	return tfc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *TokenFieldCell) WithFloatValue(floatValue float32) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (tfc *TokenFieldCell) WithFloatValue(floatValue float32) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFloatValue:"), floatValue)
+	return tfc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *TokenFieldCell) WithDoubleValue(doubleValue float64) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (tfc *TokenFieldCell) WithDoubleValue(doubleValue float64) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return tfc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (tfc *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return tfc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (tfc *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return tfc
 }
 
-// WithControlSize the size of the cell.
-func (x *TokenFieldCell) WithControlSize(controlSize ControlSize) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (tfc *TokenFieldCell) WithControlSize(controlSize ControlSize) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlSize:"), controlSize)
+	return tfc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *TokenFieldCell) WithRepresentedObject(representedObject obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (tfc *TokenFieldCell) WithRepresentedObject(representedObject obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return tfc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (tfc *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return tfc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *TokenFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (tfc *TokenFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return tfc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (tfc *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return tfc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *TokenFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (tfc *TokenFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return tfc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *TokenFieldCell) WithAllowsUndo(allowsUndo bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (tfc *TokenFieldCell) WithAllowsUndo(allowsUndo bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return tfc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *TokenFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (tfc *TokenFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return tfc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (tfc *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return tfc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *TokenFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (tfc *TokenFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return tfc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *TokenFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (tfc *TokenFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return tfc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *TokenFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (tfc *TokenFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return tfc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *TokenFieldCell) WithFocusRingType(focusRingType FocusRingType) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (tfc *TokenFieldCell) WithFocusRingType(focusRingType FocusRingType) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return tfc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *TokenFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (tfc *TokenFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return tfc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *TokenFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (tfc *TokenFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return tfc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *TokenFieldCell) WithImportsGraphics(importsGraphics bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (tfc *TokenFieldCell) WithImportsGraphics(importsGraphics bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return tfc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *TokenFieldCell) WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (tfc *TokenFieldCell) WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return tfc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *TokenFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (tfc *TokenFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return tfc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *TokenFieldCell) WithControlTint(controlTint ControlTint) *TokenFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (tfc *TokenFieldCell) WithControlTint(controlTint ControlTint) *TokenFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlTint:"), controlTint)
+	return tfc
 }
 
 // TokenStyle wraps the corresponding Objective-C method.
-func (x *TokenFieldCell) TokenStyle() TokenStyle {
-	_r := objc.Send[TokenStyle](objref.IDOf(x), objc.RegisterName("tokenStyle"))
+func (tfc *TokenFieldCell) TokenStyle() TokenStyle {
+	_r := objc.Send[TokenStyle](objref.IDOf(tfc), objc.RegisterName("tokenStyle"))
 	return _r
-}
-
-// SetTokenStyle wraps the corresponding Objective-C method.
-func (x *TokenFieldCell) SetTokenStyle(tokenStyle TokenStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenStyle:"), tokenStyle)
 }
 
 // CompletionDelay wraps the corresponding Objective-C method.
-func (x *TokenFieldCell) CompletionDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("completionDelay"))
+func (tfc *TokenFieldCell) CompletionDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(tfc), objc.RegisterName("completionDelay"))
 	return _r
 }
 
-// SetCompletionDelay wraps the corresponding Objective-C method.
-func (x *TokenFieldCell) SetCompletionDelay(completionDelay float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionDelay:"), completionDelay)
-}
-
 // TokenizingCharacterSet wraps the corresponding Objective-C method.
-func (x *TokenFieldCell) TokenizingCharacterSet() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenizingCharacterSet"))
+func (tfc *TokenFieldCell) TokenizingCharacterSet() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("tokenizingCharacterSet"))
 	return obj.Wrap(_r)
 }
-
-// SetTokenizingCharacterSet wraps the corresponding Objective-C method.
-func (x *TokenFieldCell) SetTokenizingCharacterSet(tokenizingCharacterSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
-}
-
-// TokenFieldCellable is the interface implemented by [TokenFieldCell], for mocking and DI.
-type TokenFieldCellable interface {
-	obj.Object
-	WithTokenStyle(tokenStyle TokenStyle) *TokenFieldCell
-	WithCompletionDelay(completionDelay float64) *TokenFieldCell
-	WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenFieldCell
-	WithBackgroundColor(backgroundColor *Color) *TokenFieldCell
-	WithDrawsBackground(drawsBackground bool) *TokenFieldCell
-	WithTextColor(textColor *Color) *TokenFieldCell
-	WithBezelStyle(bezelStyle TextFieldBezelStyle) *TokenFieldCell
-	WithPlaceholderString(placeholderString string) *TokenFieldCell
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenFieldCell
-	WithAllowedInputSourceLocales(items ...obj.Object) *TokenFieldCell
-	WithControlView(controlView ViewProvider) *TokenFieldCell
-	WithType(type_ CellType) *TokenFieldCell
-	WithState(state int) *TokenFieldCell
-	WithTarget(target obj.Object) *TokenFieldCell
-	WithTag(tag int) *TokenFieldCell
-	WithTitle(title string) *TokenFieldCell
-	WithEnabled(enabled bool) *TokenFieldCell
-	WithContinuous(continuous bool) *TokenFieldCell
-	WithEditable(editable bool) *TokenFieldCell
-	WithSelectable(selectable bool) *TokenFieldCell
-	WithBordered(bordered bool) *TokenFieldCell
-	WithBezeled(bezeled bool) *TokenFieldCell
-	WithScrollable(scrollable bool) *TokenFieldCell
-	WithHighlighted(highlighted bool) *TokenFieldCell
-	WithAlignment(alignment TextAlignment) *TokenFieldCell
-	WithWraps(wraps bool) *TokenFieldCell
-	WithFont(font *Font) *TokenFieldCell
-	WithFormatter(formatter obj.Object) *TokenFieldCell
-	WithObjectValue(objectValue obj.Object) *TokenFieldCell
-	WithStringValue(stringValue string) *TokenFieldCell
-	WithIntValue(intValue int) *TokenFieldCell
-	WithFloatValue(floatValue float32) *TokenFieldCell
-	WithDoubleValue(doubleValue float64) *TokenFieldCell
-	WithIntegerValue(integerValue int) *TokenFieldCell
-	WithImage(image *Image) *TokenFieldCell
-	WithControlSize(controlSize ControlSize) *TokenFieldCell
-	WithRepresentedObject(representedObject obj.Object) *TokenFieldCell
-	WithMenu(menu *Menu) *TokenFieldCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TokenFieldCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *TokenFieldCell
-	WithAllowsUndo(allowsUndo bool) *TokenFieldCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenFieldCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell
-	WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell
-	WithFocusRingType(focusRingType FocusRingType) *TokenFieldCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *TokenFieldCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell
-	WithImportsGraphics(importsGraphics bool) *TokenFieldCell
-	WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TokenFieldCell
-	WithControlTint(controlTint ControlTint) *TokenFieldCell
-	TokenStyle() TokenStyle
-	SetTokenStyle(tokenStyle TokenStyle)
-	CompletionDelay() float64
-	SetCompletionDelay(completionDelay float64)
-	TokenizingCharacterSet() obj.Object
-	SetTokenizingCharacterSet(tokenizingCharacterSet obj.Object)
-}
-
-var _ TokenFieldCellable = (*TokenFieldCell)(nil)
 
 var _ TextFieldCellProvider = (*TokenFieldCell)(nil)
 

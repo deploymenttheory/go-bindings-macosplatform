@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewGenerateObjectnessBasedSaliencyImageRequest() *GenerateObjectnessBasedSa
 	return generateObjectnessBasedSaliencyImageRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gobsir *GenerateObjectnessBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gobsir), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gobsir
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gobsir *GenerateObjectnessBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gobsir), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gobsir
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gobsir *GenerateObjectnessBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gobsir), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gobsir
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gobsir *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(gobsir), objc.RegisterName("setRevision:"), revision)
+	return gobsir
 }
-
-// GenerateObjectnessBasedSaliencyImageRequestable is the interface implemented by [GenerateObjectnessBasedSaliencyImageRequest], for mocking and DI.
-type GenerateObjectnessBasedSaliencyImageRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest
-	WithRevision(revision int) *GenerateObjectnessBasedSaliencyImageRequest
-}
-
-var _ GenerateObjectnessBasedSaliencyImageRequestable = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
 

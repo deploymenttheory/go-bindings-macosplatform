@@ -74,11 +74,4 @@ func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority(ident
 	return uRLDownloadAdopt(_id)
 }
 
-// URLDownloadable is the interface implemented by [URLDownload], for mocking and DI.
-type URLDownloadable interface {
-	obj.Object
-}
-
-var _ URLDownloadable = (*URLDownload)(nil)
-
 var _ DownloadProvider = (*URLDownload)(nil)

@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,91 +52,52 @@ func NewVoronoiNoiseSourceWithFrequencyDisplacementDistanceEnabledSeed(frequency
 	return voronoiNoiseSourceAdopt(_id)
 }
 
-// WithFrequency a value that determines the number and size of cells in generated noise.
-func (x *VoronoiNoiseSource) WithFrequency(frequency float64) *VoronoiNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the number and size of cells in generated noise.
+func (vns *VoronoiNoiseSource) WithFrequency(frequency float64) *VoronoiNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(vns), objc.RegisterName("setFrequency:"), frequency)
+	return vns
 }
 
-// WithDisplacement the range of random values to assign to each cell in generated noise.
-func (x *VoronoiNoiseSource) WithDisplacement(displacement float64) *VoronoiNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplacement:"), displacement)
-	return x
+// WithDisplacement sets the range of random values to assign to each cell in generated noise.
+func (vns *VoronoiNoiseSource) WithDisplacement(displacement float64) *VoronoiNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(vns), objc.RegisterName("setDisplacement:"), displacement)
+	return vns
 }
 
-// WithDistanceEnabled a Boolean value that specifies whether generated noise values incorporate the distance from each point to the nearest seed point.
-func (x *VoronoiNoiseSource) WithDistanceEnabled(distanceEnabled bool) *VoronoiNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistanceEnabled:"), distanceEnabled)
-	return x
+// WithDistanceEnabled sets a Boolean value that specifies whether generated noise values incorporate the distance from each point to the nearest seed point.
+func (vns *VoronoiNoiseSource) WithDistanceEnabled(distanceEnabled bool) *VoronoiNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(vns), objc.RegisterName("setDistanceEnabled:"), distanceEnabled)
+	return vns
 }
 
-// WithSeed the value that determines the specific configuration of noise produced by the noise source.
-func (x *VoronoiNoiseSource) WithSeed(seed int32) *VoronoiNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the value that determines the specific configuration of noise produced by the noise source.
+func (vns *VoronoiNoiseSource) WithSeed(seed int32) *VoronoiNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(vns), objc.RegisterName("setSeed:"), seed)
+	return vns
 }
 
 // Frequency wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) Frequency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+func (vns *VoronoiNoiseSource) Frequency() float64 {
+	_r := objc.Send[float64](objref.IDOf(vns), objc.RegisterName("frequency"))
 	return _r
-}
-
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) SetFrequency(frequency float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
 // Displacement wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) Displacement() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("displacement"))
+func (vns *VoronoiNoiseSource) Displacement() float64 {
+	_r := objc.Send[float64](objref.IDOf(vns), objc.RegisterName("displacement"))
 	return _r
-}
-
-// SetDisplacement wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) SetDisplacement(displacement float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplacement:"), displacement)
 }
 
 // IsDistanceEnabled wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) IsDistanceEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDistanceEnabled"))
+func (vns *VoronoiNoiseSource) IsDistanceEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(vns), objc.RegisterName("isDistanceEnabled"))
 	return _r
-}
-
-// SetDistanceEnabled wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) SetDistanceEnabled(distanceEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistanceEnabled:"), distanceEnabled)
 }
 
 // Seed wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) Seed() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("seed"))
+func (vns *VoronoiNoiseSource) Seed() int32 {
+	_r := objc.Send[int32](objref.IDOf(vns), objc.RegisterName("seed"))
 	return _r
 }
-
-// SetSeed wraps the corresponding Objective-C method.
-func (x *VoronoiNoiseSource) SetSeed(seed int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-}
-
-// VoronoiNoiseSourceable is the interface implemented by [VoronoiNoiseSource], for mocking and DI.
-type VoronoiNoiseSourceable interface {
-	obj.Object
-	WithFrequency(frequency float64) *VoronoiNoiseSource
-	WithDisplacement(displacement float64) *VoronoiNoiseSource
-	WithDistanceEnabled(distanceEnabled bool) *VoronoiNoiseSource
-	WithSeed(seed int32) *VoronoiNoiseSource
-	Frequency() float64
-	SetFrequency(frequency float64)
-	Displacement() float64
-	SetDisplacement(displacement float64)
-	IsDistanceEnabled() bool
-	SetDistanceEnabled(distanceEnabled bool)
-	Seed() int32
-	SetSeed(seed int32)
-}
-
-var _ VoronoiNoiseSourceable = (*VoronoiNoiseSource)(nil)
 
 var _ NoiseSourceProvider = (*VoronoiNoiseSource)(nil)

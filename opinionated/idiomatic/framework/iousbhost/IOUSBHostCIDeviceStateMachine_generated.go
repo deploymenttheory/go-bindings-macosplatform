@@ -46,24 +46,24 @@ func hostCIDeviceStateMachineAdopt(id objc.ID) *HostCIDeviceStateMachine {
 }
 
 // Description returns the object's -description text.
-func (x *HostCIDeviceStateMachine) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hcdsm *HostCIDeviceStateMachine) Description() string {
+	return rt.Description(objref.IDOf(hcdsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostCIDeviceStateMachine) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hcdsm *HostCIDeviceStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hcdsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostCIDeviceStateMachine) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hcdsm *HostCIDeviceStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hcdsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostCIDeviceStateMachine) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hcdsm *HostCIDeviceStateMachine) String() string {
+	return rt.Description(objref.IDOf(hcdsm))
 }
 
 // NewHostCIDeviceStateMachine creates a new HostCIDeviceStateMachine.
@@ -73,36 +73,25 @@ func NewHostCIDeviceStateMachine() *HostCIDeviceStateMachine {
 }
 
 // DeviceState wraps the corresponding Objective-C method.
-func (x *HostCIDeviceStateMachine) DeviceState() HostCIDeviceState {
-	_r := objc.Send[HostCIDeviceState](objref.IDOf(x), objc.RegisterName("deviceState"))
+func (hcdsm *HostCIDeviceStateMachine) DeviceState() HostCIDeviceState {
+	_r := objc.Send[HostCIDeviceState](objref.IDOf(hcdsm), objc.RegisterName("deviceState"))
 	return _r
 }
 
 // CompleteRoute wraps the corresponding Objective-C method.
-func (x *HostCIDeviceStateMachine) CompleteRoute() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("completeRoute"))
+func (hcdsm *HostCIDeviceStateMachine) CompleteRoute() int {
+	_r := objc.Send[int](objref.IDOf(hcdsm), objc.RegisterName("completeRoute"))
 	return _r
 }
 
 // DeviceAddress wraps the corresponding Objective-C method.
-func (x *HostCIDeviceStateMachine) DeviceAddress() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+func (hcdsm *HostCIDeviceStateMachine) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(hcdsm), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
 // ControllerInterface wraps the corresponding Objective-C method.
-func (x *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+func (hcdsm *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(hcdsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }
-
-// HostCIDeviceStateMachineable is the interface implemented by [HostCIDeviceStateMachine], for mocking and DI.
-type HostCIDeviceStateMachineable interface {
-	obj.Object
-	DeviceState() HostCIDeviceState
-	CompleteRoute() int
-	DeviceAddress() int
-	ControllerInterface() *HostControllerInterface
-}
-
-var _ HostCIDeviceStateMachineable = (*HostCIDeviceStateMachine)(nil)

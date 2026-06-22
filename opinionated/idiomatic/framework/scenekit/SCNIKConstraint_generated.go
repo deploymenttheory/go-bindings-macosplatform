@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,52 +52,39 @@ func NewIKConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
 	return iKConstraintAdopt(_id)
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (ic *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setEnabled:"), enabled)
+	return ic
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (ic *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return ic
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (ic *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setIncremental:"), incremental)
+	return ic
 }
 
 // SetMaxAllowedRotationAngleForJoint sets the rotation limit, in degrees, for the specified node.
-func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAllowedRotationAngle:forJoint:"), angle, objref.IDOf(node))
+func (ic *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *Node) {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setMaxAllowedRotationAngle:forJoint:"), angle, objref.IDOf(node))
 }
 
 // MaxAllowedRotationAngleForJoint returns the rotation limit, in degrees, for the specified node.
-func (x *IKConstraint) MaxAllowedRotationAngleForJoint(node *Node) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxAllowedRotationAngleForJoint:"), objref.IDOf(node))
+func (ic *IKConstraint) MaxAllowedRotationAngleForJoint(node *Node) float64 {
+	_r := objc.Send[float64](objref.IDOf(ic), objc.RegisterName("maxAllowedRotationAngleForJoint:"), objref.IDOf(node))
 	return _r
 }
 
 // ChainRootNode specifies the root node of the kinematic chain.
-func (x *IKConstraint) ChainRootNode() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chainRootNode"))
+func (ic *IKConstraint) ChainRootNode() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("chainRootNode"))
 	return NodeFromID(_r)
 }
-
-// IKConstraintable is the interface implemented by [IKConstraint], for mocking and DI.
-type IKConstraintable interface {
-	obj.Object
-	WithEnabled(enabled bool) *IKConstraint
-	WithInfluenceFactor(influenceFactor float64) *IKConstraint
-	WithIncremental(incremental bool) *IKConstraint
-	SetMaxAllowedRotationAngleForJoint(angle float64, node *Node)
-	MaxAllowedRotationAngleForJoint(node *Node) float64
-	ChainRootNode() *Node
-}
-
-var _ IKConstraintable = (*IKConstraint)(nil)
 
 var _ ConstraintProvider = (*IKConstraint)(nil)

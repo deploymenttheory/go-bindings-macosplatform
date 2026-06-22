@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewDateComponentsResolutionResult() *DateComponentsResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INDateComponentsResolutionResult")), objc.RegisterName("new"))
 	return dateComponentsResolutionResultAdopt(_id)
 }
-
-// DateComponentsResolutionResultable is the interface implemented by [DateComponentsResolutionResult], for mocking and DI.
-type DateComponentsResolutionResultable interface {
-	obj.Object
-}
-
-var _ DateComponentsResolutionResultable = (*DateComponentsResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*DateComponentsResolutionResult)(nil)

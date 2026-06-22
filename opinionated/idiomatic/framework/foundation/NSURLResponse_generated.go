@@ -48,24 +48,24 @@ func uRLResponseAdopt(id objc.ID) *URLResponse {
 }
 
 // Description returns the object's -description text.
-func (x *URLResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ur *URLResponse) Description() string {
+	return rt.Description(objref.IDOf(ur))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ur *URLResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ur), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ur *URLResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ur), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ur *URLResponse) String() string {
+	return rt.Description(objref.IDOf(ur))
 }
 
 // NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName initialize an NSURLResponse with the provided values. This is the designated initializer for NSURLResponse.
@@ -76,20 +76,20 @@ func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL stri
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLResponse) WithScriptingProperties(scriptingProperties obj.Object) *URLResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ur *URLResponse) WithScriptingProperties(scriptingProperties obj.Object) *URLResponse {
+	objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ur
 }
 
 // URL returns the URL of the receiver.
-func (x *URLResponse) URL() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (ur *URLResponse) URL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
 // MIMEType returns the MIME type of the receiver. The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information.
-func (x *URLResponse) MIMEType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MIMEType"))
+func (ur *URLResponse) MIMEType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("MIMEType"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,14 +97,14 @@ func (x *URLResponse) MIMEType() string {
 }
 
 // ExpectedContentLength returns the expected content length of the receiver. Some protocol implementations report a content length as part of delivering load metadata, but not all protocols guarantee the amount of data that will be delivered in actuality. Hence, this method returns an expected amount. Clients should use this value as an advisory, and should be prepared to deal with either more or less data.
-func (x *URLResponse) ExpectedContentLength() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedContentLength"))
+func (ur *URLResponse) ExpectedContentLength() int64 {
+	_r := objc.Send[int64](objref.IDOf(ur), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
 // TextEncodingName returns the name of the text encoding of the receiver. This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework.
-func (x *URLResponse) TextEncodingName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textEncodingName"))
+func (ur *URLResponse) TextEncodingName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("textEncodingName"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,30 +112,17 @@ func (x *URLResponse) TextEncodingName() string {
 }
 
 // SuggestedFilename returns a suggested filename if the resource were saved to disk. The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename.
-func (x *URLResponse) SuggestedFilename() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suggestedFilename"))
+func (ur *URLResponse) SuggestedFilename() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("suggestedFilename"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// URLResponseable is the interface implemented by [URLResponse], for mocking and DI.
-type URLResponseable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLResponse
-	URL() *URL
-	MIMEType() string
-	ExpectedContentLength() int64
-	TextEncodingName() string
-	SuggestedFilename() string
-}
-
-var _ URLResponseable = (*URLResponse)(nil)
-
 // isURLResponse marks URLResponse — and, by embedding promotion, its
 // subclasses — as a member of the URLResponse hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *URLResponse) isURLResponse() {}
+func (ur *URLResponse) isURLResponse() {}
 
 var _ URLResponseProvider = (*URLResponse)(nil)

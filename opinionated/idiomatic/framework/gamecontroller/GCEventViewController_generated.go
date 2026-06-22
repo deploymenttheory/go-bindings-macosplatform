@@ -46,24 +46,24 @@ func eventViewControllerAdopt(id objc.ID) *EventViewController {
 }
 
 // Description returns the object's -description text.
-func (x *EventViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (evc *EventViewController) Description() string {
+	return rt.Description(objref.IDOf(evc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EventViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (evc *EventViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(evc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EventViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (evc *EventViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(evc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EventViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (evc *EventViewController) String() string {
+	return rt.Description(objref.IDOf(evc))
 }
 
 // NewEventViewController creates a new EventViewController.
@@ -72,29 +72,14 @@ func NewEventViewController() *EventViewController {
 	return eventViewControllerAdopt(_id)
 }
 
-// WithControllerUserInteractionEnabled a Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
-func (x *EventViewController) WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
-	return x
+// WithControllerUserInteractionEnabled sets a Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
+func (evc *EventViewController) WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController {
+	objc.Send[objc.ID](objref.IDOf(evc), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
+	return evc
 }
 
 // ControllerUserInteractionEnabled wraps the corresponding Objective-C method.
-func (x *EventViewController) ControllerUserInteractionEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("controllerUserInteractionEnabled"))
+func (evc *EventViewController) ControllerUserInteractionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(evc), objc.RegisterName("controllerUserInteractionEnabled"))
 	return _r
 }
-
-// SetControllerUserInteractionEnabled wraps the corresponding Objective-C method.
-func (x *EventViewController) SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
-}
-
-// EventViewControllerable is the interface implemented by [EventViewController], for mocking and DI.
-type EventViewControllerable interface {
-	obj.Object
-	WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController
-	ControllerUserInteractionEnabled() bool
-	SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool)
-}
-
-var _ EventViewControllerable = (*EventViewController)(nil)

@@ -44,24 +44,24 @@ func mTRIdentifyClusterTriggerEffectParamsAdopt(id objc.ID) *MTRIdentifyClusterT
 }
 
 // Description returns the object's -description text.
-func (x *MTRIdentifyClusterTriggerEffectParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mictep *MTRIdentifyClusterTriggerEffectParams) Description() string {
+	return rt.Description(objref.IDOf(mictep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRIdentifyClusterTriggerEffectParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mictep *MTRIdentifyClusterTriggerEffectParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mictep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRIdentifyClusterTriggerEffectParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mictep *MTRIdentifyClusterTriggerEffectParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mictep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRIdentifyClusterTriggerEffectParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mictep *MTRIdentifyClusterTriggerEffectParams) String() string {
+	return rt.Description(objref.IDOf(mictep))
 }
 
 // NewMTRIdentifyClusterTriggerEffectParams creates a new MTRIdentifyClusterTriggerEffectParams.
@@ -71,88 +71,49 @@ func NewMTRIdentifyClusterTriggerEffectParams() *MTRIdentifyClusterTriggerEffect
 }
 
 // WithEffectIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRIdentifyClusterTriggerEffectParams) WithEffectIdentifier(effectIdentifier obj.Object) *MTRIdentifyClusterTriggerEffectParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
-	return x
+func (mictep *MTRIdentifyClusterTriggerEffectParams) WithEffectIdentifier(effectIdentifier obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
+	return mictep
 }
 
 // WithEffectVariant sets the property and returns the receiver so calls can be chained.
-func (x *MTRIdentifyClusterTriggerEffectParams) WithEffectVariant(effectVariant obj.Object) *MTRIdentifyClusterTriggerEffectParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
-	return x
+func (mictep *MTRIdentifyClusterTriggerEffectParams) WithEffectVariant(effectVariant obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
+	return mictep
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRIdentifyClusterTriggerEffectParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRIdentifyClusterTriggerEffectParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mictep *MTRIdentifyClusterTriggerEffectParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mictep
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRIdentifyClusterTriggerEffectParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRIdentifyClusterTriggerEffectParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mictep *MTRIdentifyClusterTriggerEffectParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mictep
 }
 
 // EffectIdentifier wraps the corresponding Objective-C method.
-func (x *MTRIdentifyClusterTriggerEffectParams) EffectIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectIdentifier"))
+func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("effectIdentifier"))
 	return obj.Wrap(_r)
-}
-
-// SetEffectIdentifier wraps the corresponding Objective-C method.
-func (x *MTRIdentifyClusterTriggerEffectParams) SetEffectIdentifier(effectIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
 }
 
 // EffectVariant wraps the corresponding Objective-C method.
-func (x *MTRIdentifyClusterTriggerEffectParams) EffectVariant() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectVariant"))
+func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectVariant() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("effectVariant"))
 	return obj.Wrap(_r)
 }
 
-// SetEffectVariant wraps the corresponding Objective-C method.
-func (x *MTRIdentifyClusterTriggerEffectParams) SetEffectVariant(effectVariant obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRIdentifyClusterTriggerEffectParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mictep *MTRIdentifyClusterTriggerEffectParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRIdentifyClusterTriggerEffectParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRIdentifyClusterTriggerEffectParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mictep *MTRIdentifyClusterTriggerEffectParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRIdentifyClusterTriggerEffectParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRIdentifyClusterTriggerEffectParamsable is the interface implemented by [MTRIdentifyClusterTriggerEffectParams], for mocking and DI.
-type MTRIdentifyClusterTriggerEffectParamsable interface {
-	obj.Object
-	WithEffectIdentifier(effectIdentifier obj.Object) *MTRIdentifyClusterTriggerEffectParams
-	WithEffectVariant(effectVariant obj.Object) *MTRIdentifyClusterTriggerEffectParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRIdentifyClusterTriggerEffectParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRIdentifyClusterTriggerEffectParams
-	EffectIdentifier() obj.Object
-	SetEffectIdentifier(effectIdentifier obj.Object)
-	EffectVariant() obj.Object
-	SetEffectVariant(effectVariant obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRIdentifyClusterTriggerEffectParamsable = (*MTRIdentifyClusterTriggerEffectParams)(nil)

@@ -54,102 +54,82 @@ func NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MTRDev
 }
 
 // ReadAttributeESATypeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESATypeWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeESATypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeESACanGenerateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESACanGenerateWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeESACanGenerateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeESAStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESAStateWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeESAStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAbsMinPowerWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMinPowerWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAbsMinPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAbsMaxPowerWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMaxPowerWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAbsMaxPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributePowerAdjustmentCapabilityWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeForecastWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeForecastWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeForecastWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOptOutStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptOutStateWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeOptOutStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterDeviceEnergyManagementable is the interface implemented by [MTRClusterDeviceEnergyManagement], for mocking and DI.
-type MTRClusterDeviceEnergyManagementable interface {
-	obj.Object
-	ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object
-	ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterDeviceEnergyManagementable = (*MTRClusterDeviceEnergyManagement)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterDeviceEnergyManagement)(nil)
 

@@ -46,24 +46,24 @@ func extensionAdopt(id objc.ID) *Extension {
 }
 
 // Description returns the object's -description text.
-func (x *Extension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Extension) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Extension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Extension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Extension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Extension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Extension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Extension) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewExtension creates a new Extension.
@@ -71,10 +71,3 @@ func NewExtension() *Extension {
 	_id := objc.Send[objc.ID](objc.ID(_class("INExtension")), objc.RegisterName("new"))
 	return extensionAdopt(_id)
 }
-
-// Extensionable is the interface implemented by [Extension], for mocking and DI.
-type Extensionable interface {
-	obj.Object
-}
-
-var _ Extensionable = (*Extension)(nil)

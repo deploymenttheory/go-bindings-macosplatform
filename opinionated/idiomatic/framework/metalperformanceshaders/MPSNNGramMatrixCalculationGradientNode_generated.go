@@ -60,26 +60,17 @@ func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradient
 	return nNGramMatrixCalculationGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNGramMatrixCalculationGradientNode) WithLabel(label string) *NNGramMatrixCalculationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ngmcgn *NNGramMatrixCalculationGradientNode) WithLabel(label string) *NNGramMatrixCalculationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(ngmcgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ngmcgn
 }
 
-// Alpha scaling factor for the output. Default: 1.0f.
-func (x *NNGramMatrixCalculationGradientNode) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns scaling factor for the output. Default: 1.0f.
+func (ngmcgn *NNGramMatrixCalculationGradientNode) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(ngmcgn), objc.RegisterName("alpha"))
 	return _r
 }
-
-// NNGramMatrixCalculationGradientNodeable is the interface implemented by [NNGramMatrixCalculationGradientNode], for mocking and DI.
-type NNGramMatrixCalculationGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNGramMatrixCalculationGradientNode
-	Alpha() float32
-}
-
-var _ NNGramMatrixCalculationGradientNodeable = (*NNGramMatrixCalculationGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*NNGramMatrixCalculationGradientNode)(nil)
 

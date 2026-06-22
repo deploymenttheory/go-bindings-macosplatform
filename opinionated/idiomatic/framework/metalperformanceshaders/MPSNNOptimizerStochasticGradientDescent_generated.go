@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,54 +51,41 @@ func NewNNOptimizerStochasticGradientDescent() *NNOptimizerStochasticGradientDes
 	return nNOptimizerStochasticGradientDescentAdopt(_id)
 }
 
-// WithLearningRate the learningRate at which we update values The default value is 1e-3
-func (x *NNOptimizerStochasticGradientDescent) WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learningRate at which we update values The default value is 1e-3
+func (nosgd *NNOptimizerStochasticGradientDescent) WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent {
+	objc.Send[objc.ID](objref.IDOf(nosgd), objc.RegisterName("setLearningRate:"), learningRate)
+	return nosgd
 }
 
-// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
-func (x *NNOptimizerStochasticGradientDescent) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
-	return x
+// WithApplyGradientClipping sets a bool which decides if gradient will be clipped The default value is NO
+func (nosgd *NNOptimizerStochasticGradientDescent) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent {
+	objc.Send[objc.ID](objref.IDOf(nosgd), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
+	return nosgd
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOptimizerStochasticGradientDescent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nosgd *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOptimizerStochasticGradientDescent {
+	objc.Send[objc.ID](objref.IDOf(nosgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nosgd
 }
 
-// MomentumScale the momentumScale at which we update momentum for values array Default value is 0.0
-func (x *NNOptimizerStochasticGradientDescent) MomentumScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
+// MomentumScale returns the momentumScale at which we update momentum for values array Default value is 0.0
+func (nosgd *NNOptimizerStochasticGradientDescent) MomentumScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(nosgd), objc.RegisterName("momentumScale"))
 	return _r
 }
 
-// UseNesterovMomentum nesterov momentum is considered an improvement on the usual momentum update Default value is NO
-func (x *NNOptimizerStochasticGradientDescent) UseNesterovMomentum() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useNesterovMomentum"))
+// UseNesterovMomentum reports whether nesterov momentum is considered an improvement on the usual momentum update Default value is false
+func (nosgd *NNOptimizerStochasticGradientDescent) UseNesterovMomentum() bool {
+	_r := objc.Send[bool](objref.IDOf(nosgd), objc.RegisterName("useNesterovMomentum"))
 	return _r
 }
 
 // UseNestrovMomentum wraps the corresponding Objective-C method.
-func (x *NNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useNestrovMomentum"))
+func (nosgd *NNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
+	_r := objc.Send[bool](objref.IDOf(nosgd), objc.RegisterName("useNestrovMomentum"))
 	return _r
 }
-
-// NNOptimizerStochasticGradientDescentable is the interface implemented by [NNOptimizerStochasticGradientDescent], for mocking and DI.
-type NNOptimizerStochasticGradientDescentable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent
-	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent
-	WithLabel(label string) *NNOptimizerStochasticGradientDescent
-	MomentumScale() float32
-	UseNesterovMomentum() bool
-	UseNestrovMomentum() bool
-}
-
-var _ NNOptimizerStochasticGradientDescentable = (*NNOptimizerStochasticGradientDescent)(nil)
 
 var _ NNOptimizerProvider = (*NNOptimizerStochasticGradientDescent)(nil)
 

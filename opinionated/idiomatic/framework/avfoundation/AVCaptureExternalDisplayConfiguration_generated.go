@@ -47,24 +47,24 @@ func captureExternalDisplayConfigurationAdopt(id objc.ID) *CaptureExternalDispla
 }
 
 // Description returns the object's -description text.
-func (x *CaptureExternalDisplayConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cedc *CaptureExternalDisplayConfiguration) Description() string {
+	return rt.Description(objref.IDOf(cedc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureExternalDisplayConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cedc *CaptureExternalDisplayConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cedc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureExternalDisplayConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cedc *CaptureExternalDisplayConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cedc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureExternalDisplayConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cedc *CaptureExternalDisplayConfiguration) String() string {
+	return rt.Description(objref.IDOf(cedc))
 }
 
 // NewCaptureExternalDisplayConfiguration creates a new CaptureExternalDisplayConfiguration.
@@ -73,69 +73,38 @@ func NewCaptureExternalDisplayConfiguration() *CaptureExternalDisplayConfigurati
 	return captureExternalDisplayConfigurationAdopt(_id)
 }
 
-// WithShouldMatchFrameRate a property indicating whether the frame rate of the external display should be configured to match the camera’s frame rate.
-func (x *CaptureExternalDisplayConfiguration) WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMatchFrameRate:"), shouldMatchFrameRate)
-	return x
+// WithShouldMatchFrameRate sets a property indicating whether the frame rate of the external display should be configured to match the camera’s frame rate.
+func (cedc *CaptureExternalDisplayConfiguration) WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration {
+	objc.Send[objc.ID](objref.IDOf(cedc), objc.RegisterName("setShouldMatchFrameRate:"), shouldMatchFrameRate)
+	return cedc
 }
 
-// WithBypassColorSpaceConversion a property indicating whether the color space of the configurator’s preview layer should be preserved on the output display by avoiding color space conversions.
-func (x *CaptureExternalDisplayConfiguration) WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypassColorSpaceConversion:"), bypassColorSpaceConversion)
-	return x
+// WithBypassColorSpaceConversion sets a property indicating whether the color space of the configurator’s preview layer should be preserved on the output display by avoiding color space conversions.
+func (cedc *CaptureExternalDisplayConfiguration) WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration {
+	objc.Send[objc.ID](objref.IDOf(cedc), objc.RegisterName("setBypassColorSpaceConversion:"), bypassColorSpaceConversion)
+	return cedc
 }
 
-// WithPreferredResolution your preferred external display resolution.
-func (x *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredResolution:"), preferredResolution)
-	return x
+// WithPreferredResolution sets your preferred external display resolution.
+func (cedc *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration {
+	objc.Send[objc.ID](objref.IDOf(cedc), objc.RegisterName("setPreferredResolution:"), preferredResolution)
+	return cedc
 }
 
-// ShouldMatchFrameRate a property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
-func (x *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMatchFrameRate"))
+// ShouldMatchFrameRate reports whether a property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
+func (cedc *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
+	_r := objc.Send[bool](objref.IDOf(cedc), objc.RegisterName("shouldMatchFrameRate"))
 	return _r
 }
 
-// SetShouldMatchFrameRate wraps the corresponding Objective-C method.
-func (x *CaptureExternalDisplayConfiguration) SetShouldMatchFrameRate(shouldMatchFrameRate bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMatchFrameRate:"), shouldMatchFrameRate)
-}
-
-// BypassColorSpaceConversion a property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's  “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
-func (x *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypassColorSpaceConversion"))
+// BypassColorSpaceConversion reports whether a property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
+func (cedc *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
+	_r := objc.Send[bool](objref.IDOf(cedc), objc.RegisterName("bypassColorSpaceConversion"))
 	return _r
 }
 
-// SetBypassColorSpaceConversion wraps the corresponding Objective-C method.
-func (x *CaptureExternalDisplayConfiguration) SetBypassColorSpaceConversion(bypassColorSpaceConversion bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypassColorSpaceConversion:"), bypassColorSpaceConversion)
-}
-
-// PreferredResolution your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
-func (x *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(x), objc.RegisterName("preferredResolution"))
+// PreferredResolution returns your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
+func (cedc *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cedc), objc.RegisterName("preferredResolution"))
 	return _r
 }
-
-// SetPreferredResolution wraps the corresponding Objective-C method.
-func (x *CaptureExternalDisplayConfiguration) SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredResolution:"), preferredResolution)
-}
-
-// CaptureExternalDisplayConfigurationable is the interface implemented by [CaptureExternalDisplayConfiguration], for mocking and DI.
-type CaptureExternalDisplayConfigurationable interface {
-	obj.Object
-	WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration
-	WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration
-	WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration
-	ShouldMatchFrameRate() bool
-	SetShouldMatchFrameRate(shouldMatchFrameRate bool)
-	BypassColorSpaceConversion() bool
-	SetBypassColorSpaceConversion(bypassColorSpaceConversion bool)
-	PreferredResolution() coremedia.CMVideoDimensions
-	SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions)
-}
-
-var _ CaptureExternalDisplayConfigurationable = (*CaptureExternalDisplayConfiguration)(nil)

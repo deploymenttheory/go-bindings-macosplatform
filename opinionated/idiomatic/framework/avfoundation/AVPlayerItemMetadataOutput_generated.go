@@ -53,45 +53,28 @@ func NewPlayerItemMetadataOutputWithIdentifiers(identifiers []string) *PlayerIte
 	return playerItemMetadataOutputAdopt(_id)
 }
 
-// WithAdvanceIntervalForDelegateInvocation the time interval, in seconds, the player item metadata output object messages its delegate earlier than normal.
-func (x *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
-	return x
+// WithAdvanceIntervalForDelegateInvocation sets the time interval, in seconds, the player item metadata output object messages its delegate earlier than normal.
+func (pimo *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput {
+	objc.Send[objc.ID](objref.IDOf(pimo), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
+	return pimo
 }
 
-// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
-func (x *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
-	return x
+// WithSuppressesPlayerRendering sets a Boolean value that indicates whether the player object renders the receiver’s output.
+func (pimo *PlayerItemMetadataOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput {
+	objc.Send[objc.ID](objref.IDOf(pimo), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return pimo
 }
 
-// DelegateQueue the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
-func (x *PlayerItemMetadataOutput) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+// DelegateQueue returns the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
+func (pimo *PlayerItemMetadataOutput) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pimo), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// AdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
-func (x *PlayerItemMetadataOutput) AdvanceIntervalForDelegateInvocation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
+// AdvanceIntervalForDelegateInvocation returns permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemMetadataOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemMetadataOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+func (pimo *PlayerItemMetadataOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	_r := objc.Send[float64](objref.IDOf(pimo), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
-
-// SetAdvanceIntervalForDelegateInvocation wraps the corresponding Objective-C method.
-func (x *PlayerItemMetadataOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
-}
-
-// PlayerItemMetadataOutputable is the interface implemented by [PlayerItemMetadataOutput], for mocking and DI.
-type PlayerItemMetadataOutputable interface {
-	obj.Object
-	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput
-	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemMetadataOutput
-	DelegateQueue() obj.Object
-	AdvanceIntervalForDelegateInvocation() float64
-	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
-}
-
-var _ PlayerItemMetadataOutputable = (*PlayerItemMetadataOutput)(nil)
 
 var _ PlayerItemOutputProvider = (*PlayerItemMetadataOutput)(nil)

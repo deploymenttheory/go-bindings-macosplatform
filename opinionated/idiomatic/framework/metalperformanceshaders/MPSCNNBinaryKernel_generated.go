@@ -48,369 +48,250 @@ func cNNBinaryKernelAdopt(id objc.ID) *CNNBinaryKernel {
 	return x
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNBinaryKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cbk *CNNBinaryKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return cbk
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNBinaryKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cbk *CNNBinaryKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return cbk
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNBinaryKernel) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (cbk *CNNBinaryKernel) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setClipRect:"), clipRect)
+	return cbk
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNBinaryKernel) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (cbk *CNNBinaryKernel) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cbk
 }
 
-// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNBinaryKernel) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-	return x
+// WithPrimarySourceFeatureChannelOffset sets the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (cbk *CNNBinaryKernel) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
+	return cbk
 }
 
-// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNBinaryKernel) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-	return x
+// WithSecondarySourceFeatureChannelOffset sets the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (cbk *CNNBinaryKernel) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
+	return cbk
 }
 
-// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNBinaryKernel) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-	return x
+// WithPrimarySourceFeatureChannelMaxCount sets the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cbk *CNNBinaryKernel) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
+	return cbk
 }
 
-// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNBinaryKernel) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-	return x
+// WithSecondarySourceFeatureChannelMaxCount sets the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cbk *CNNBinaryKernel) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
+	return cbk
 }
 
-// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+// WithPrimaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return cbk
 }
 
-// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+// WithPrimaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return cbk
 }
 
-// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+// WithSecondaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return cbk
 }
 
-// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+// WithSecondaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return cbk
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNBinaryKernel) WithLabel(label string) *CNNBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cbk *CNNBinaryKernel) WithLabel(label string) *CNNBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbk
 }
 
 // ResultStateForPrimaryImageSecondaryImageSourceStatesDestinationImage allocate a MPSState (subclass) to hold the results from a -encodeBatchToCommandBuffer... operation A graph may need to allocate storage up front before executing.  This may be necessary to avoid using too much memory and to manage large batches.  The function should allocate a MPSState object (if any) that will be produced by an -encode call with the indicated sourceImages and sourceStates inputs. Though the states can be further adjusted in the ensuing -encode call, the states should be initialized with all important data and all MTLResource storage allocated. The data stored in the MTLResource need not be initialized, unless the ensuing -encode call expects it to be. The MTLDevice used by the result is derived from the source image. The padding policy will be applied to the filter before this is called to give it the chance to configure any properties like MPSCNNKernel.offset. CAUTION: the result state should be made after the kernel properties are configured for the -encode call that will write to the state, and after -destinationImageDescriptorForSourceImages:sourceStates: is called (if it is called). Otherwise, behavior is undefined. Please see the description of -[MPSCNNKernel resultStateForSourceImage:sourceStates:destinationImage:] for more. Default: returns nil
-func (x *CNNBinaryKernel) ResultStateForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), objref.IDOf(primaryImage), objref.IDOf(secondaryImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+func (cbk *CNNBinaryKernel) ResultStateForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("resultStateForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), objref.IDOf(primaryImage), objref.IDOf(secondaryImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
-// IsResultStateReusedAcrossBatch returns YES if the same state is used for every operation in a batch If NO, then each image in a MPSImageBatch will need a corresponding (and different) state to go with it. Set to YES to avoid allocating redundant state in the case when the same state is used all the time. Default: NO
-func (x *CNNBinaryKernel) IsResultStateReusedAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResultStateReusedAcrossBatch"))
+// IsResultStateReusedAcrossBatch reports whether the same state is used for every operation in a batch If false, then each image in a MPSImageBatch will need a corresponding (and different) state to go with it. Set to true to avoid allocating redundant state in the case when the same state is used all the time. Default: false
+func (cbk *CNNBinaryKernel) IsResultStateReusedAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(cbk), objc.RegisterName("isResultStateReusedAcrossBatch"))
 	return _r
 }
 
-// AppendBatchBarrier returns YES if the filter must be run over the entire batch before its results may be considered complete The MPSNNGraph may split batches into sub-batches to save memory. However, some filters, like batch statistics calculations, need to operate over the entire batch to calculate a valid result, in this case, the mean and variance per channel over the set of images. In such cases, the accumulated result is commonly stored in a MPSState containing a MTLBuffer. (MTLTextures may not be able to be read from and written to in the same filter on some devices.) -isResultStateReusedAcrossBatch is set to YES, so that the state is allocated once and passed in for each sub-batch and the filter accumulates its results into it, one sub-batch at a time. Note that sub-batches may frequently be as small as 1. Default: NO
-func (x *CNNBinaryKernel) AppendBatchBarrier() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendBatchBarrier"))
+// AppendBatchBarrier reports whether the filter must be run over the entire batch before its results may be considered complete The MPSNNGraph may split batches into sub-batches to save memory. However, some filters, like batch statistics calculations, need to operate over the entire batch to calculate a valid result, in this case, the mean and variance per channel over the set of images. In such cases, the accumulated result is commonly stored in a MPSState containing a MTLBuffer. (MTLTextures may not be able to be read from and written to in the same filter on some devices.) -isResultStateReusedAcrossBatch is set to true, so that the state is allocated once and passed in for each sub-batch and the filter accumulates its results into it, one sub-batch at a time. Note that sub-batches may frequently be as small as 1. Default: false
+func (cbk *CNNBinaryKernel) AppendBatchBarrier() bool {
+	_r := objc.Send[bool](objref.IDOf(cbk), objc.RegisterName("appendBatchBarrier"))
 	return _r
 }
 
 // DestinationImageDescriptorForSourceImagesSourceStates get a suggested destination image descriptor for a source image Your application is certainly free to pass in any destinationImage it likes to encodeToCommandBuffer:sourceImage:destinationImage, within reason. This is the basic design for iOS 10. This method is therefore not required. However, calculating the MPSImage size and MPSCNNBinaryKernel properties for each filter can be tedious and complicated work, so this method is made available to automate the process. The application may modify the properties of the descriptor before a MPSImage is made from it, so long as the choice is sensible for the kernel in question. Please see individual kernel descriptions for restrictions. The expected timeline for use is as follows: 1) This method is called: a) The default MPS padding calculation is applied. It uses the MPSNNPaddingMethod of the .padding property to provide a consistent addressing scheme over the graph. It creates the MPSImageDescriptor and adjusts the .offset property of the MPSNNKernel. When using a MPSNNGraph, the padding is set using the MPSNNFilterNode as a proxy. b) This method may be overridden by MPSCNNBinaryKernel subclass to achieve any customization appropriate to the object type. c) Source states are then applied in order. These may modify the descriptor and may update other object properties. See: -destinationImageDescriptorForSourceImages:sourceStates: forKernel:suggestedDescriptor:  This is the typical way in which MPS may attempt to influence the operation of its kernels. d) If the .padding property has a custom padding policy method of the same name, it is called. Similarly, it may also adjust the descriptor and any MPSCNNBinaryKernel properties. This is the typical way in which your application may attempt to influence the operation of the MPS kernels. 2) A result is returned from this method and the caller may further adjust the descriptor and kernel properties directly. 3) The caller uses the descriptor to make a new MPSImage to use as the destination image for the -encode call in step 5. 4) The caller calls -resultStateForSourceImage:sourceStates:destinationImage: to make any result states needed for the kernel. If there isn't one, it will return nil. A variant is available to return a temporary state instead. 5) a -encode method is called to encode the kernel. The entire process 1-5 is more simply achieved by just calling an -encode... method that returns a MPSImage out the left hand sid of the method. Simpler still, use the MPSNNGraph to coordinate the entire process from end to end. Opportunities to influence the process are of course reduced, as (2) is no longer possible with either method. Your application may opt to use the five step method if it requires greater customization as described, or if it would like to estimate storage in advance based on the sum of MPSImageDescriptors before processing a graph. Storage estimation is done by using the MPSImageDescriptor to create a MPSImage (without passing it a texture), and then call -resourceSize. As long as the MPSImage is not used in an encode call and the .texture property is not invoked, the underlying MTLTexture is not created. No destination state or destination image is provided as an argument to this function because it is expected they will be made / configured after this is called. This method is expected to auto-configure important object properties that may be needed in the ensuing destination image and state creation steps.
-func (x *CNNBinaryKernel) DestinationImageDescriptorForSourceImagesSourceStates(sourceImages []obj.Object, sourceStates []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationImageDescriptorForSourceImages:sourceStates:"), purego.SliceToNSArray(sourceImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (cbk *CNNBinaryKernel) DestinationImageDescriptorForSourceImagesSourceStates(sourceImages []obj.Object, sourceStates []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cbk), objc.RegisterName("destinationImageDescriptorForSourceImages:sourceStates:"), purego.SliceToNSArray(sourceImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // EncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage the size of extra MPS heap storage allocated while the kernel is encoding This is best effort and just describes things that are likely to end up on the MPS heap. It does not describe all allocation done by the -encode call.  It is intended for use with high water calculations for MTLHeap sizing. Allocations are typically for temporary storage needed for multipass algorithms. This interface should not be used to detect multipass algorithms.
-func (x *CNNBinaryKernel) EncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("encodingStorageSizeForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), objref.IDOf(primaryImage), objref.IDOf(secondaryImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+func (cbk *CNNBinaryKernel) EncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("encodingStorageSizeForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), objref.IDOf(primaryImage), objref.IDOf(secondaryImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return _r
 }
 
-// PrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNBinaryKernel) PrimaryOffset() mpscore.MPSOffset {
-	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("primaryOffset"))
+// PrimaryOffset returns the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cbk *CNNBinaryKernel) PrimaryOffset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(cbk), objc.RegisterName("primaryOffset"))
 	return _r
 }
 
-// SetPrimaryOffset wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetPrimaryOffset(primaryOffset mpscore.MPSOffset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-}
-
-// SecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNBinaryKernel) SecondaryOffset() mpscore.MPSOffset {
-	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("secondaryOffset"))
+// SecondaryOffset returns the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cbk *CNNBinaryKernel) SecondaryOffset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(cbk), objc.RegisterName("secondaryOffset"))
 	return _r
 }
 
-// SetSecondaryOffset wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-}
-
-// ClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNBinaryKernel) ClipRect() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRect"))
+// ClipRect returns an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (cbk *CNNBinaryKernel) ClipRect() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(cbk), objc.RegisterName("clipRect"))
 	return _r
 }
 
-// SetClipRect wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetClipRect(clipRect metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-}
-
-// DestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNBinaryKernel) DestinationFeatureChannelOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destinationFeatureChannelOffset"))
+// DestinationFeatureChannelOffset returns the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (cbk *CNNBinaryKernel) DestinationFeatureChannelOffset() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("destinationFeatureChannelOffset"))
 	return _r
 }
 
-// SetDestinationFeatureChannelOffset wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-}
-
-// PrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNBinaryKernel) PrimarySourceFeatureChannelOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primarySourceFeatureChannelOffset"))
+// PrimarySourceFeatureChannelOffset returns the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (cbk *CNNBinaryKernel) PrimarySourceFeatureChannelOffset() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primarySourceFeatureChannelOffset"))
 	return _r
 }
 
-// SetPrimarySourceFeatureChannelOffset wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-}
-
-// SecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNBinaryKernel) SecondarySourceFeatureChannelOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondarySourceFeatureChannelOffset"))
+// SecondarySourceFeatureChannelOffset returns the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (cbk *CNNBinaryKernel) SecondarySourceFeatureChannelOffset() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondarySourceFeatureChannelOffset"))
 	return _r
 }
 
-// SetSecondarySourceFeatureChannelOffset wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-}
-
-// PrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNBinaryKernel) PrimarySourceFeatureChannelMaxCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primarySourceFeatureChannelMaxCount"))
+// PrimarySourceFeatureChannelMaxCount returns the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cbk *CNNBinaryKernel) PrimarySourceFeatureChannelMaxCount() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primarySourceFeatureChannelMaxCount"))
 	return _r
 }
 
-// SetPrimarySourceFeatureChannelMaxCount wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-}
-
-// SecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNBinaryKernel) SecondarySourceFeatureChannelMaxCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondarySourceFeatureChannelMaxCount"))
+// SecondarySourceFeatureChannelMaxCount returns the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cbk *CNNBinaryKernel) SecondarySourceFeatureChannelMaxCount() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondarySourceFeatureChannelMaxCount"))
 	return _r
 }
 
-// SetSecondarySourceFeatureChannelMaxCount wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-}
-
-// PrimaryKernelWidth the width of the MPSCNNBinaryKernel filter window This is the horizontal diameter of the region read by the filter for each result pixel. If the MPSCNNKernel does not have a filter window, then 1 will be returned.
-func (x *CNNBinaryKernel) PrimaryKernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryKernelWidth"))
+// PrimaryKernelWidth returns the width of the MPSCNNBinaryKernel filter window This is the horizontal diameter of the region read by the filter for each result pixel. If the MPSCNNKernel does not have a filter window, then 1 will be returned.
+func (cbk *CNNBinaryKernel) PrimaryKernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primaryKernelWidth"))
 	return _r
 }
 
-// PrimaryKernelHeight the height of the MPSCNNBinaryKernel filter window This is the vertical diameter of the region read by the filter for each result pixel. If the MPSCNNKernel does not have a filter window, then 1 will be returned.
-func (x *CNNBinaryKernel) PrimaryKernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryKernelHeight"))
+// PrimaryKernelHeight returns the height of the MPSCNNBinaryKernel filter window This is the vertical diameter of the region read by the filter for each result pixel. If the MPSCNNKernel does not have a filter window, then 1 will be returned.
+func (cbk *CNNBinaryKernel) PrimaryKernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primaryKernelHeight"))
 	return _r
 }
 
-// SecondaryKernelWidth the width of the MPSCNNBinaryKernel filter window for the second image source This is the horizontal diameter of the region read by the filter for each result pixel. If the MPSCNNBinaryKernel does not have a filter window, then 1 will be returned.
-func (x *CNNBinaryKernel) SecondaryKernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryKernelWidth"))
+// SecondaryKernelWidth returns the width of the MPSCNNBinaryKernel filter window for the second image source This is the horizontal diameter of the region read by the filter for each result pixel. If the MPSCNNBinaryKernel does not have a filter window, then 1 will be returned.
+func (cbk *CNNBinaryKernel) SecondaryKernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondaryKernelWidth"))
 	return _r
 }
 
-// SecondaryKernelHeight the height of the MPSCNNBinaryKernel filter window for the second image source This is the vertical diameter of the region read by the filter for each result pixel. If the MPSCNNBinaryKernel does not have a filter window, then 1 will be returned.
-func (x *CNNBinaryKernel) SecondaryKernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryKernelHeight"))
+// SecondaryKernelHeight returns the height of the MPSCNNBinaryKernel filter window for the second image source This is the vertical diameter of the region read by the filter for each result pixel. If the MPSCNNBinaryKernel does not have a filter window, then 1 will be returned.
+func (cbk *CNNBinaryKernel) SecondaryKernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondaryKernelHeight"))
 	return _r
 }
 
-// PrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) PrimaryStrideInPixelsX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryStrideInPixelsX"))
+// PrimaryStrideInPixelsX returns the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) PrimaryStrideInPixelsX() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primaryStrideInPixelsX"))
 	return _r
 }
 
-// SetPrimaryStrideInPixelsX wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetPrimaryStrideInPixelsX(primaryStrideInPixelsX int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-}
-
-// PrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) PrimaryStrideInPixelsY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryStrideInPixelsY"))
+// PrimaryStrideInPixelsY returns the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) PrimaryStrideInPixelsY() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primaryStrideInPixelsY"))
 	return _r
 }
 
-// SetPrimaryStrideInPixelsY wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetPrimaryStrideInPixelsY(primaryStrideInPixelsY int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-}
-
-// SecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) SecondaryStrideInPixelsX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixelsX"))
+// SecondaryStrideInPixelsX returns the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) SecondaryStrideInPixelsX() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondaryStrideInPixelsX"))
 	return _r
 }
 
-// SetSecondaryStrideInPixelsX wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-}
-
-// SecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNBinaryKernel) SecondaryStrideInPixelsY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixelsY"))
+// SecondaryStrideInPixelsY returns the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (cbk *CNNBinaryKernel) SecondaryStrideInPixelsY() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondaryStrideInPixelsY"))
 	return _r
 }
 
-// SetSecondaryStrideInPixelsY wraps the corresponding Objective-C method.
-func (x *CNNBinaryKernel) SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-}
-
-// PrimaryDilationRateX stride in source coordinates from one kernel tap to the next in the X dimension.
-func (x *CNNBinaryKernel) PrimaryDilationRateX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryDilationRateX"))
+// PrimaryDilationRateX returns stride in source coordinates from one kernel tap to the next in the X dimension.
+func (cbk *CNNBinaryKernel) PrimaryDilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primaryDilationRateX"))
 	return _r
 }
 
-// PrimaryDilationRateY stride in source coordinates from one kernel tap to the next in the Y dimension.
-func (x *CNNBinaryKernel) PrimaryDilationRateY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryDilationRateY"))
+// PrimaryDilationRateY returns stride in source coordinates from one kernel tap to the next in the Y dimension.
+func (cbk *CNNBinaryKernel) PrimaryDilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("primaryDilationRateY"))
 	return _r
 }
 
-// SecondaryDilationRateX stride in source coordinates from one kernel tap to the next in the X dimension. As applied to the secondary source image.
-func (x *CNNBinaryKernel) SecondaryDilationRateX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryDilationRateX"))
+// SecondaryDilationRateX returns stride in source coordinates from one kernel tap to the next in the X dimension. As applied to the secondary source image.
+func (cbk *CNNBinaryKernel) SecondaryDilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondaryDilationRateX"))
 	return _r
 }
 
-// SecondaryDilationRateY stride in source coordinates from one kernel tap to the next in the Y dimension. As applied to the secondary source image.
-func (x *CNNBinaryKernel) SecondaryDilationRateY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryDilationRateY"))
+// SecondaryDilationRateY returns stride in source coordinates from one kernel tap to the next in the Y dimension. As applied to the secondary source image.
+func (cbk *CNNBinaryKernel) SecondaryDilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("secondaryDilationRateY"))
 	return _r
 }
 
-// IsBackwards YES if the filter operates backwards. This influences how strideInPixelsX/Y should be interpreted.
-func (x *CNNBinaryKernel) IsBackwards() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBackwards"))
+// IsBackwards reports whether the filter operates backwards. This influences how strideInPixelsX/Y should be interpreted.
+func (cbk *CNNBinaryKernel) IsBackwards() bool {
+	_r := objc.Send[bool](objref.IDOf(cbk), objc.RegisterName("isBackwards"))
 	return _r
 }
 
-// IsStateModified returns true if the -encode call modifies the state object it accepts.
-func (x *CNNBinaryKernel) IsStateModified() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStateModified"))
+// IsStateModified reports whether the -encode call modifies the state object it accepts.
+func (cbk *CNNBinaryKernel) IsStateModified() bool {
+	_r := objc.Send[bool](objref.IDOf(cbk), objc.RegisterName("isStateModified"))
 	return _r
 }
-
-// CNNBinaryKernelable is the interface implemented by [CNNBinaryKernel], for mocking and DI.
-type CNNBinaryKernelable interface {
-	obj.Object
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNBinaryKernel
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNBinaryKernel
-	WithClipRect(clipRect metal.MTLRegion) *CNNBinaryKernel
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBinaryKernel
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNBinaryKernel
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNBinaryKernel
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNBinaryKernel
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNBinaryKernel
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNBinaryKernel
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNBinaryKernel
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNBinaryKernel
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNBinaryKernel
-	WithLabel(label string) *CNNBinaryKernel
-	ResultStateForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object
-	IsResultStateReusedAcrossBatch() bool
-	AppendBatchBarrier() bool
-	DestinationImageDescriptorForSourceImagesSourceStates(sourceImages []obj.Object, sourceStates []obj.Object) obj.Object
-	EncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) int
-	PrimaryOffset() mpscore.MPSOffset
-	SetPrimaryOffset(primaryOffset mpscore.MPSOffset)
-	SecondaryOffset() mpscore.MPSOffset
-	SetSecondaryOffset(secondaryOffset mpscore.MPSOffset)
-	ClipRect() metal.MTLRegion
-	SetClipRect(clipRect metal.MTLRegion)
-	DestinationFeatureChannelOffset() int
-	SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset int)
-	PrimarySourceFeatureChannelOffset() int
-	SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int)
-	SecondarySourceFeatureChannelOffset() int
-	SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int)
-	PrimarySourceFeatureChannelMaxCount() int
-	SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int)
-	SecondarySourceFeatureChannelMaxCount() int
-	SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int)
-	PrimaryKernelWidth() int
-	PrimaryKernelHeight() int
-	SecondaryKernelWidth() int
-	SecondaryKernelHeight() int
-	PrimaryStrideInPixelsX() int
-	SetPrimaryStrideInPixelsX(primaryStrideInPixelsX int)
-	PrimaryStrideInPixelsY() int
-	SetPrimaryStrideInPixelsY(primaryStrideInPixelsY int)
-	SecondaryStrideInPixelsX() int
-	SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX int)
-	SecondaryStrideInPixelsY() int
-	SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY int)
-	PrimaryDilationRateX() int
-	PrimaryDilationRateY() int
-	SecondaryDilationRateX() int
-	SecondaryDilationRateY() int
-	IsBackwards() bool
-	IsStateModified() bool
-}
-
-var _ CNNBinaryKernelable = (*CNNBinaryKernel)(nil)
 
 // isCNNBinaryKernel marks CNNBinaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the CNNBinaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNBinaryKernel) isCNNBinaryKernel() {}
+func (cbk *CNNBinaryKernel) isCNNBinaryKernel() {}
 
 var _ CNNBinaryKernelProvider = (*CNNBinaryKernel)(nil)
 

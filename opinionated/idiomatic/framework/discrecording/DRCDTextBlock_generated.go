@@ -46,24 +46,24 @@ func cDTextBlockAdopt(id objc.ID) *CDTextBlock {
 }
 
 // Description returns the object's -description text.
-func (x *CDTextBlock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ctb *CDTextBlock) Description() string {
+	return rt.Description(objref.IDOf(ctb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CDTextBlock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ctb *CDTextBlock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ctb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CDTextBlock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ctb *CDTextBlock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ctb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CDTextBlock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ctb *CDTextBlock) String() string {
+	return rt.Description(objref.IDOf(ctb))
 }
 
 // NewCDTextBlockWithLanguageEncoding initializes an empty CD-Text block.
@@ -74,47 +74,47 @@ func NewCDTextBlockWithLanguageEncoding(lang string, enc int) *CDTextBlock {
 }
 
 // Properties returns the properties dictionary of the CD-Text block.
-func (x *CDTextBlock) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (ctb *CDTextBlock) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // SetProperties sets the properties dictionary of the CD-Text block.
-func (x *CDTextBlock) SetProperties(properties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+func (ctb *CDTextBlock) SetProperties(properties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("setProperties:"), objref.IDOf(properties))
 }
 
 // TrackDictionaries returns a copy of the array of track dictionaries for the block. Each item in the array is a dictionary, which in turn holds key-value encoded information about the track/disc.  Array index 0 holds information about the disc, index 1 holds information about track 1, index 2 holds information about track 2, etc.
-func (x *CDTextBlock) TrackDictionaries() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackDictionaries"))
+func (ctb *CDTextBlock) TrackDictionaries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("trackDictionaries"))
 	return obj.Wrap(_r)
 }
 
 // SetTrackDictionaries sets the array of track dictionaries for the block. Each item in the array is a dictionary, which in turn holds key-value encoded information about the track/disc.  Array index 0 holds information about the disc, index 1 holds information about track 1, index 2 holds information about track 2, etc. Any incoming strings are automatically modified to conform to the character set specified in the language block. Calling -trackDictionaries immediately after -setTrackDictionaries: will provide the modified values.  These may not be the same as the ones you passed in, but instead correspond to what will actually be used.
-func (x *CDTextBlock) SetTrackDictionaries(tracks obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackDictionaries:"), objref.IDOf(tracks))
+func (ctb *CDTextBlock) SetTrackDictionaries(tracks obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("setTrackDictionaries:"), objref.IDOf(tracks))
 }
 
 // ObjectForKeyOfTrack returns a single value from the block.
-func (x *CDTextBlock) ObjectForKeyOfTrack(key string, trackIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:ofTrack:"), purego.NSString(key), trackIndex)
+func (ctb *CDTextBlock) ObjectForKeyOfTrack(key string, trackIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("objectForKey:ofTrack:"), purego.NSString(key), trackIndex)
 	return obj.Wrap(_r)
 }
 
 // SetObjectForKeyOfTrack changes a single string in the block.
-func (x *CDTextBlock) SetObjectForKeyOfTrack(value obj.Object, key string, trackIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:ofTrack:"), objref.IDOf(value), purego.NSString(key), trackIndex)
+func (ctb *CDTextBlock) SetObjectForKeyOfTrack(value obj.Object, key string, trackIndex int) {
+	objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("setObject:forKey:ofTrack:"), objref.IDOf(value), purego.NSString(key), trackIndex)
 }
 
-// Flatten flattens the CD-Text block to determine whether any information will be truncated. When burning your CD-Text information to a CD, DiscRecording will automatically truncate some of the information you've specified if it does not fit. The size limit for CD-Text is approximately 3K of strings per block.  This limit is only approximate because some of this space is taken up as overhead, and duplicate strings can sometimes be combined.  The only way to tell for sure how big your CD-Text block is going to be is to ask DiscRecording to try flattening it.  You can use this function to determine whether truncation will be needed. Some clients will want to accept DiscRecording's truncation since it preserves the most important information and provides the simplest user experience.  If you do not wish to use DiscRecording's automatic truncation, it is your responsibility to make sure that you specify a CD-Text block that will fit. Following is a simple algorithm to avoid having your CD-Text data truncated: <ol> <li>Call -[myCDTextBlock flatten]. <li>If the result is 0, no truncation is necessary. Stop. <li>Otherwise, truncation will occur -- edit or remove some data. <li>Repeat. </ol>
-func (x *CDTextBlock) Flatten() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("flatten"))
+// Flatten returns flattens the CD-Text block to determine whether any information will be truncated. When burning your CD-Text information to a CD, DiscRecording will automatically truncate some of the information you've specified if it does not fit. The size limit for CD-Text is approximately 3K of strings per block.  This limit is only approximate because some of this space is taken up as overhead, and duplicate strings can sometimes be combined.  The only way to tell for sure how big your CD-Text block is going to be is to ask DiscRecording to try flattening it.  You can use this function to determine whether truncation will be needed. Some clients will want to accept DiscRecording's truncation since it preserves the most important information and provides the simplest user experience.  If you do not wish to use DiscRecording's automatic truncation, it is your responsibility to make sure that you specify a CD-Text block that will fit. Following is a simple algorithm to avoid having your CD-Text data truncated: <ol> <li>Call -[myCDTextBlock flatten]. <li>If the result is 0, no truncation is necessary. Stop. <li>Otherwise, truncation will occur -- edit or remove some data. <li>Repeat. </ol>
+func (ctb *CDTextBlock) Flatten() int {
+	_r := objc.Send[int](objref.IDOf(ctb), objc.RegisterName("flatten"))
 	return _r
 }
 
 // Language returns the ISO 639 language code describing the language associated with the CD-Text block.  CD-Text allows the concept of an unknown language, which is represented here by an empty string.
-func (x *CDTextBlock) Language() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (ctb *CDTextBlock) Language() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ctb), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
 	}
@@ -122,23 +122,7 @@ func (x *CDTextBlock) Language() string {
 }
 
 // Encoding returns the string encoding associated with the CD-Text block.
-func (x *CDTextBlock) Encoding() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("encoding"))
+func (ctb *CDTextBlock) Encoding() int {
+	_r := objc.Send[int](objref.IDOf(ctb), objc.RegisterName("encoding"))
 	return _r
 }
-
-// CDTextBlockable is the interface implemented by [CDTextBlock], for mocking and DI.
-type CDTextBlockable interface {
-	obj.Object
-	Properties() obj.Object
-	SetProperties(properties obj.Object)
-	TrackDictionaries() obj.Object
-	SetTrackDictionaries(tracks obj.Object)
-	ObjectForKeyOfTrack(key string, trackIndex int) obj.Object
-	SetObjectForKeyOfTrack(value obj.Object, key string, trackIndex int)
-	Flatten() int
-	Language() string
-	Encoding() int
-}
-
-var _ CDTextBlockable = (*CDTextBlock)(nil)

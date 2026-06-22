@@ -54,17 +54,9 @@ func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetwor
 }
 
 // Network wraps the corresponding Objective-C method.
-func (x *VmnetNetworkDeviceAttachment) Network() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("network"))
+func (vnda *VmnetNetworkDeviceAttachment) Network() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vnda), objc.RegisterName("network"))
 	return obj.Wrap(_r)
 }
-
-// VmnetNetworkDeviceAttachmentable is the interface implemented by [VmnetNetworkDeviceAttachment], for mocking and DI.
-type VmnetNetworkDeviceAttachmentable interface {
-	obj.Object
-	Network() obj.Object
-}
-
-var _ VmnetNetworkDeviceAttachmentable = (*VmnetNetworkDeviceAttachment)(nil)
 
 var _ NetworkDeviceAttachmentProvider = (*VmnetNetworkDeviceAttachment)(nil)

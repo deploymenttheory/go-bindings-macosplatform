@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRRVCRunModeClusterChangeToModeResponseParams is an idiomatic wrapper over the Objective-C class MTRRVCRunModeClusterChangeToModeResponseParams.
@@ -46,24 +47,24 @@ func mTRRVCRunModeClusterChangeToModeResponseParamsAdopt(id objc.ID) *MTRRVCRunM
 }
 
 // Description returns the object's -description text.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mrmcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mrmcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mrmcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(mrmcctmrp))
 }
 
 // NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRRVCRunModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -78,51 +79,28 @@ func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(res
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return mrmcctmrp
 }
 
 // WithStatusText sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-	return x
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
+	return mrmcctmrp
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
 // StatusText wraps the corresponding Objective-C method.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
+func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStatusText wraps the corresponding Objective-C method.
-func (x *MTRRVCRunModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-}
-
-// MTRRVCRunModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRRVCRunModeClusterChangeToModeResponseParams], for mocking and DI.
-type MTRRVCRunModeClusterChangeToModeResponseParamsable interface {
-	obj.Object
-	WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams
-	WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	StatusText() string
-	SetStatusText(statusText string)
-}
-
-var _ MTRRVCRunModeClusterChangeToModeResponseParamsable = (*MTRRVCRunModeClusterChangeToModeResponseParams)(nil)

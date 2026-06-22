@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func nWUDPSessionAdopt(id objc.ID) *NWUDPSession {
 }
 
 // Description returns the object's -description text.
-func (x *NWUDPSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NWUDPSession) Description() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NWUDPSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ns *NWUDPSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NWUDPSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ns *NWUDPSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NWUDPSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NWUDPSession) String() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // NewNWUDPSessionWithUpgradeForSession this convenience initializer can be used to create a new session based on the original session’s endpoint and parameters.
@@ -76,21 +77,21 @@ func NewNWUDPSessionWithUpgradeForSession(session *NWUDPSession) *NWUDPSession {
 }
 
 // TryNextResolvedEndpoint mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint.
-func (x *NWUDPSession) TryNextResolvedEndpoint() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tryNextResolvedEndpoint"))
+func (ns *NWUDPSession) TryNextResolvedEndpoint() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("tryNextResolvedEndpoint"))
 }
 
 // WriteMultipleDatagrams write multiple datagrams.
 //
 // WriteMultipleDatagrams blocks until the operation completes or ctx is cancelled.
-func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray []obj.Object) error {
+func (ns *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray []obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeMultipleDatagrams:completionHandler:"), purego.SliceToNSArray(datagramArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("writeMultipleDatagrams:completionHandler:"), purego.SliceToNSArray(datagramArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -102,14 +103,14 @@ func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray
 // WriteDatagram write a single datagram.
 //
 // WriteDatagram blocks until the operation completes or ctx is cancelled.
-func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram obj.Object) error {
+func (ns *NWUDPSession) WriteDatagram(ctx context.Context, datagram obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeDatagram:completionHandler:"), objref.IDOf(datagram), _block)
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("writeDatagram:completionHandler:"), objref.IDOf(datagram), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -119,52 +120,36 @@ func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram obj.Object) e
 }
 
 // Cancel cancel the session.
-func (x *NWUDPSession) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (ns *NWUDPSession) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("cancel"))
 }
 
-// State the current state of the UDP session. If the state is NWUDPSessionStateReady, then the connection is eligible for reading and writing. The state will be NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been rejected. Use KVO to watch for changes.
-func (x *NWUDPSession) State() NWUDPSessionState {
-	_r := objc.Send[NWUDPSessionState](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the current state of the UDP session. If the state is NWUDPSessionStateReady, then the connection is eligible for reading and writing. The state will be NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been rejected. Use KVO to watch for changes.
+func (ns *NWUDPSession) State() NWUDPSessionState {
+	_r := objc.Send[NWUDPSessionState](objref.IDOf(ns), objc.RegisterName("state"))
 	return _r
 }
 
-// IsViable YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
-func (x *NWUDPSession) IsViable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isViable"))
+// IsViable reports whether the connection can read and write data, false otherwise. Use KVO to watch this property.
+func (ns *NWUDPSession) IsViable() bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("isViable"))
 	return _r
 }
 
-// HasBetterPath YES if there is another path available that is preferred over the currentPath. To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
-func (x *NWUDPSession) HasBetterPath() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBetterPath"))
+// HasBetterPath reports whether there is another path available that is preferred over the currentPath. To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
+func (ns *NWUDPSession) HasBetterPath() bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("hasBetterPath"))
 	return _r
 }
 
-// CurrentPath the current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
-func (x *NWUDPSession) CurrentPath() *NWPath {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPath"))
+// CurrentPath returns the current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
+func (ns *NWUDPSession) CurrentPath() *NWPath {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("currentPath"))
 	return NWPathFromID(_r)
 }
 
-// MaximumDatagramLength the maximum size of a datagram to be written currently. If a datagram is written with a longer length, the datagram may be fragmented or encounter an error. Note that this value is not guaranteed to be the maximum datagram length for end-to-end communication across the network. Use KVO to watch for changes.
-func (x *NWUDPSession) MaximumDatagramLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumDatagramLength"))
+// MaximumDatagramLength returns the maximum size of a datagram to be written currently. If a datagram is written with a longer length, the datagram may be fragmented or encounter an error. Note that this value is not guaranteed to be the maximum datagram length for end-to-end communication across the network. Use KVO to watch for changes.
+func (ns *NWUDPSession) MaximumDatagramLength() int {
+	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("maximumDatagramLength"))
 	return _r
 }
-
-// NWUDPSessionable is the interface implemented by [NWUDPSession], for mocking and DI.
-type NWUDPSessionable interface {
-	obj.Object
-	TryNextResolvedEndpoint()
-	WriteMultipleDatagrams(ctx context.Context, datagramArray []obj.Object) error
-	WriteDatagram(ctx context.Context, datagram obj.Object) error
-	Cancel()
-	State() NWUDPSessionState
-	IsViable() bool
-	HasBetterPath() bool
-	CurrentPath() *NWPath
-	MaximumDatagramLength() int
-}
-
-var _ NWUDPSessionable = (*NWUDPSession)(nil)

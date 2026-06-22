@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,151 +52,124 @@ func NewCNNSubtractGradient() *CNNSubtractGradient {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *CNNSubtractGradient) WithPrimaryScale(primaryScale float32) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (csg *CNNSubtractGradient) WithPrimaryScale(primaryScale float32) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return csg
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *CNNSubtractGradient) WithSecondaryScale(secondaryScale float32) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (csg *CNNSubtractGradient) WithSecondaryScale(secondaryScale float32) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return csg
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *CNNSubtractGradient) WithBias(bias float32) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (csg *CNNSubtractGradient) WithBias(bias float32) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setBias:"), bias)
+	return csg
 }
 
-// WithSecondaryStrideInFeatureChannels the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *CNNSubtractGradient) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+// WithSecondaryStrideInFeatureChannels sets the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (csg *CNNSubtractGradient) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return csg
 }
 
-// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *CNNSubtractGradient) WithMinimumValue(minimumValue float32) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+// WithMinimumValue sets minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (csg *CNNSubtractGradient) WithMinimumValue(minimumValue float32) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return csg
 }
 
-// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *CNNSubtractGradient) WithMaximumValue(maximumValue float32) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+// WithMaximumValue sets maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (csg *CNNSubtractGradient) WithMaximumValue(maximumValue float32) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return csg
 }
 
-// WithKernelOffsetX offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-func (x *CNNSubtractGradient) WithKernelOffsetX(kernelOffsetX int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
-	return x
+// WithKernelOffsetX sets offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+func (csg *CNNSubtractGradient) WithKernelOffsetX(kernelOffsetX int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
+	return csg
 }
 
-// WithKernelOffsetY offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-func (x *CNNSubtractGradient) WithKernelOffsetY(kernelOffsetY int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
-	return x
+// WithKernelOffsetY sets offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+func (csg *CNNSubtractGradient) WithKernelOffsetY(kernelOffsetY int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
+	return csg
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNSubtractGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (csg *CNNSubtractGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return csg
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNSubtractGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (csg *CNNSubtractGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return csg
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNSubtractGradient) WithClipRect(clipRect metal.MTLRegion) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (csg *CNNSubtractGradient) WithClipRect(clipRect metal.MTLRegion) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setClipRect:"), clipRect)
+	return csg
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNSubtractGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (csg *CNNSubtractGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return csg
 }
 
-// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNSubtractGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-	return x
+// WithPrimarySourceFeatureChannelOffset sets the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (csg *CNNSubtractGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
+	return csg
 }
 
-// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNSubtractGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-	return x
+// WithSecondarySourceFeatureChannelOffset sets the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (csg *CNNSubtractGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
+	return csg
 }
 
-// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNSubtractGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-	return x
+// WithPrimarySourceFeatureChannelMaxCount sets the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (csg *CNNSubtractGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
+	return csg
 }
 
-// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNSubtractGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-	return x
+// WithSecondarySourceFeatureChannelMaxCount sets the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (csg *CNNSubtractGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
+	return csg
 }
 
-// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNSubtractGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+// WithPrimaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (csg *CNNSubtractGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return csg
 }
 
-// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNSubtractGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+// WithPrimaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (csg *CNNSubtractGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return csg
 }
 
-// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNSubtractGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+// WithSecondaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (csg *CNNSubtractGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return csg
 }
 
-// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNSubtractGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNSubtractGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+// WithSecondaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (csg *CNNSubtractGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNSubtractGradient {
+	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return csg
 }
-
-// CNNSubtractGradientable is the interface implemented by [CNNSubtractGradient], for mocking and DI.
-type CNNSubtractGradientable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *CNNSubtractGradient
-	WithSecondaryScale(secondaryScale float32) *CNNSubtractGradient
-	WithBias(bias float32) *CNNSubtractGradient
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNSubtractGradient
-	WithMinimumValue(minimumValue float32) *CNNSubtractGradient
-	WithMaximumValue(maximumValue float32) *CNNSubtractGradient
-	WithKernelOffsetX(kernelOffsetX int) *CNNSubtractGradient
-	WithKernelOffsetY(kernelOffsetY int) *CNNSubtractGradient
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtractGradient
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtractGradient
-	WithClipRect(clipRect metal.MTLRegion) *CNNSubtractGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNSubtractGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNSubtractGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNSubtractGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNSubtractGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNSubtractGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNSubtractGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNSubtractGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNSubtractGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNSubtractGradient
-}
-
-var _ CNNSubtractGradientable = (*CNNSubtractGradient)(nil)
 
 var _ CNNArithmeticGradientProvider = (*CNNSubtractGradient)(nil)
 

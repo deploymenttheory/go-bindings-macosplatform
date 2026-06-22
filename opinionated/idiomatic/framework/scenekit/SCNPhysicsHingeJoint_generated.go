@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewPhysicsHingeJoint() *PhysicsHingeJoint {
 }
 
 // BodyA wraps the corresponding Objective-C method.
-func (x *PhysicsHingeJoint) BodyA() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+func (phj *PhysicsHingeJoint) BodyA() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyB wraps the corresponding Objective-C method.
-func (x *PhysicsHingeJoint) BodyB() *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+func (phj *PhysicsHingeJoint) BodyB() *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
-
-// PhysicsHingeJointable is the interface implemented by [PhysicsHingeJoint], for mocking and DI.
-type PhysicsHingeJointable interface {
-	obj.Object
-	BodyA() *PhysicsBody
-	BodyB() *PhysicsBody
-}
-
-var _ PhysicsHingeJointable = (*PhysicsHingeJoint)(nil)
 
 var _ PhysicsBehaviorProvider = (*PhysicsHingeJoint)(nil)

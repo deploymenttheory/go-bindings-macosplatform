@@ -44,24 +44,24 @@ func decodedMessageBannerAdopt(id objc.ID) *DecodedMessageBanner {
 }
 
 // Description returns the object's -description text.
-func (x *DecodedMessageBanner) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dmb *DecodedMessageBanner) Description() string {
+	return rt.Description(objref.IDOf(dmb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DecodedMessageBanner) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dmb *DecodedMessageBanner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dmb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DecodedMessageBanner) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dmb *DecodedMessageBanner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dmb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DecodedMessageBanner) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dmb *DecodedMessageBanner) String() string {
+	return rt.Description(objref.IDOf(dmb))
 }
 
 // NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable creates a new DecodedMessageBanner.
@@ -72,8 +72,8 @@ func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string,
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *DecodedMessageBanner) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (dmb *DecodedMessageBanner) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dmb), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -81,8 +81,8 @@ func (x *DecodedMessageBanner) Title() string {
 }
 
 // PrimaryActionTitle wraps the corresponding Objective-C method.
-func (x *DecodedMessageBanner) PrimaryActionTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryActionTitle"))
+func (dmb *DecodedMessageBanner) PrimaryActionTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dmb), objc.RegisterName("primaryActionTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,17 +90,7 @@ func (x *DecodedMessageBanner) PrimaryActionTitle() string {
 }
 
 // IsDismissable wraps the corresponding Objective-C method.
-func (x *DecodedMessageBanner) IsDismissable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDismissable"))
+func (dmb *DecodedMessageBanner) IsDismissable() bool {
+	_r := objc.Send[bool](objref.IDOf(dmb), objc.RegisterName("isDismissable"))
 	return _r
 }
-
-// DecodedMessageBannerable is the interface implemented by [DecodedMessageBanner], for mocking and DI.
-type DecodedMessageBannerable interface {
-	obj.Object
-	Title() string
-	PrimaryActionTitle() string
-	IsDismissable() bool
-}
-
-var _ DecodedMessageBannerable = (*DecodedMessageBanner)(nil)

@@ -44,24 +44,24 @@ func cNNNormalizationMeanAndVarianceStateAdopt(id objc.ID) *CNNNormalizationMean
 }
 
 // Description returns the object's -description text.
-func (x *CNNNormalizationMeanAndVarianceState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cnmavs *CNNNormalizationMeanAndVarianceState) Description() string {
+	return rt.Description(objref.IDOf(cnmavs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNNormalizationMeanAndVarianceState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cnmavs *CNNNormalizationMeanAndVarianceState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cnmavs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNNormalizationMeanAndVarianceState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cnmavs *CNNNormalizationMeanAndVarianceState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cnmavs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CNNNormalizationMeanAndVarianceState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cnmavs *CNNNormalizationMeanAndVarianceState) String() string {
+	return rt.Description(objref.IDOf(cnmavs))
 }
 
 // NewCNNNormalizationMeanAndVarianceState creates a new CNNNormalizationMeanAndVarianceState.
@@ -69,10 +69,3 @@ func NewCNNNormalizationMeanAndVarianceState() *CNNNormalizationMeanAndVarianceS
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationMeanAndVarianceState")), objc.RegisterName("new"))
 	return cNNNormalizationMeanAndVarianceStateAdopt(_id)
 }
-
-// CNNNormalizationMeanAndVarianceStateable is the interface implemented by [CNNNormalizationMeanAndVarianceState], for mocking and DI.
-type CNNNormalizationMeanAndVarianceStateable interface {
-	obj.Object
-}
-
-var _ CNNNormalizationMeanAndVarianceStateable = (*CNNNormalizationMeanAndVarianceState)(nil)

@@ -52,41 +52,30 @@ func NewMaterialPropertyGraphWithNodesConnections(nodes []*MaterialPropertyNode,
 }
 
 // WithEvaluationFunction sets the property and returns the receiver so calls can be chained.
-func (x *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyGraph {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
-	return x
+func (mpg *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyGraph {
+	objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
+	return mpg
 }
 
 // Evaluate wraps the corresponding Objective-C method.
-func (x *MaterialPropertyGraph) Evaluate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate"))
+func (mpg *MaterialPropertyGraph) Evaluate() {
+	objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("evaluate"))
 }
 
 // Nodes wraps the corresponding Objective-C method.
 //
 // Nodes returns the collection as a Go slice.
-func (x *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodes"))
+func (mpg *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("nodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyNode { return MaterialPropertyNodeFromID(_id) })
 }
 
 // Connections wraps the corresponding Objective-C method.
 //
 // Connections returns the collection as a Go slice.
-func (x *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connections"))
+func (mpg *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("connections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyConnection { return MaterialPropertyConnectionFromID(_id) })
 }
-
-// MaterialPropertyGraphable is the interface implemented by [MaterialPropertyGraph], for mocking and DI.
-type MaterialPropertyGraphable interface {
-	obj.Object
-	WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyGraph
-	Evaluate()
-	Nodes() []*MaterialPropertyNode
-	Connections() []*MaterialPropertyConnection
-}
-
-var _ MaterialPropertyGraphable = (*MaterialPropertyGraph)(nil)
 
 var _ MaterialPropertyNodeProvider = (*MaterialPropertyGraph)(nil)

@@ -44,24 +44,24 @@ func sliderAccessoryBehaviorAdopt(id objc.ID) *SliderAccessoryBehavior {
 }
 
 // Description returns the object's -description text.
-func (x *SliderAccessoryBehavior) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sab *SliderAccessoryBehavior) Description() string {
+	return rt.Description(objref.IDOf(sab))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SliderAccessoryBehavior) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sab *SliderAccessoryBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sab), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SliderAccessoryBehavior) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sab *SliderAccessoryBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sab), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SliderAccessoryBehavior) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sab *SliderAccessoryBehavior) String() string {
+	return rt.Description(objref.IDOf(sab))
 }
 
 // NewSliderAccessoryBehavior creates a new SliderAccessoryBehavior.
@@ -71,14 +71,6 @@ func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
 }
 
 // HandleAction override point for custom subclasses to handle interaction.
-func (x *SliderAccessoryBehavior) HandleAction(sender *SliderAccessory) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleAction:"), objref.IDOf(sender))
+func (sab *SliderAccessoryBehavior) HandleAction(sender *SliderAccessory) {
+	objc.Send[objc.ID](objref.IDOf(sab), objc.RegisterName("handleAction:"), objref.IDOf(sender))
 }
-
-// SliderAccessoryBehaviorable is the interface implemented by [SliderAccessoryBehavior], for mocking and DI.
-type SliderAccessoryBehaviorable interface {
-	obj.Object
-	HandleAction(sender *SliderAccessory)
-}
-
-var _ SliderAccessoryBehaviorable = (*SliderAccessoryBehavior)(nil)

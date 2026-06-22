@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,38 +52,27 @@ func NewTextureReferenceType() *TextureReferenceType {
 }
 
 // TextureDataType wraps the corresponding Objective-C method.
-func (x *TextureReferenceType) TextureDataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("textureDataType"))
+func (trt *TextureReferenceType) TextureDataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(trt), objc.RegisterName("textureDataType"))
 	return _r
 }
 
 // TextureType wraps the corresponding Objective-C method.
-func (x *TextureReferenceType) TextureType() TextureType {
-	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+func (trt *TextureReferenceType) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(trt), objc.RegisterName("textureType"))
 	return _r
 }
 
 // Access wraps the corresponding Objective-C method.
-func (x *TextureReferenceType) Access() BindingAccess {
-	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+func (trt *TextureReferenceType) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(trt), objc.RegisterName("access"))
 	return _r
 }
 
 // IsDepthTexture wraps the corresponding Objective-C method.
-func (x *TextureReferenceType) IsDepthTexture() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDepthTexture"))
+func (trt *TextureReferenceType) IsDepthTexture() bool {
+	_r := objc.Send[bool](objref.IDOf(trt), objc.RegisterName("isDepthTexture"))
 	return _r
 }
-
-// TextureReferenceTypeable is the interface implemented by [TextureReferenceType], for mocking and DI.
-type TextureReferenceTypeable interface {
-	obj.Object
-	TextureDataType() DataType
-	TextureType() TextureType
-	Access() BindingAccess
-	IsDepthTexture() bool
-}
-
-var _ TextureReferenceTypeable = (*TextureReferenceType)(nil)
 
 var _ TypeProvider = (*TextureReferenceType)(nil)

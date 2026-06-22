@@ -46,116 +46,77 @@ func mTRReadParamsAdopt(id objc.ID) *MTRReadParams {
 }
 
 // Description returns the object's -description text.
-func (x *MTRReadParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mrp *MTRReadParams) Description() string {
+	return rt.Description(objref.IDOf(mrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRReadParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mrp *MTRReadParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRReadParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mrp *MTRReadParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRReadParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mrp *MTRReadParams) String() string {
+	return rt.Description(objref.IDOf(mrp))
 }
 
 // WithFilterByFabric sets the property and returns the receiver so calls can be chained.
-func (x *MTRReadParams) WithFilterByFabric(filterByFabric bool) *MTRReadParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterByFabric:"), filterByFabric)
-	return x
+func (mrp *MTRReadParams) WithFilterByFabric(filterByFabric bool) *MTRReadParams {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setFilterByFabric:"), filterByFabric)
+	return mrp
 }
 
-// WithMinEventNumber sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
-func (x *MTRReadParams) WithMinEventNumber(minEventNumber obj.Object) *MTRReadParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinEventNumber:"), objref.IDOf(minEventNumber))
-	return x
+// WithMinEventNumber sets sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
+func (mrp *MTRReadParams) WithMinEventNumber(minEventNumber obj.Object) *MTRReadParams {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setMinEventNumber:"), objref.IDOf(minEventNumber))
+	return mrp
 }
 
-// WithAssumeUnknownAttributesReportable controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
-func (x *MTRReadParams) WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRReadParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumeUnknownAttributesReportable:"), assumeUnknownAttributesReportable)
-	return x
+// WithAssumeUnknownAttributesReportable sets controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
+func (mrp *MTRReadParams) WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRReadParams {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setAssumeUnknownAttributesReportable:"), assumeUnknownAttributesReportable)
+	return mrp
 }
 
 // WithFabricFiltered sets the property and returns the receiver so calls can be chained.
-func (x *MTRReadParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRReadParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
-	return x
+func (mrp *MTRReadParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRReadParams {
+	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
+	return mrp
 }
 
 // ShouldFilterByFabric wraps the corresponding Objective-C method.
-func (x *MTRReadParams) ShouldFilterByFabric() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldFilterByFabric"))
+func (mrp *MTRReadParams) ShouldFilterByFabric() bool {
+	_r := objc.Send[bool](objref.IDOf(mrp), objc.RegisterName("shouldFilterByFabric"))
 	return _r
-}
-
-// SetFilterByFabric wraps the corresponding Objective-C method.
-func (x *MTRReadParams) SetFilterByFabric(filterByFabric bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterByFabric:"), filterByFabric)
 }
 
 // MinEventNumber sets a filter for which events will be reported in the read/subscribe interaction. If nil (the default value), all of the queued events will be reported from lowest to highest event number. If not nil, queued events with an event number smaller than minEventNumber will not be reported.
-func (x *MTRReadParams) MinEventNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minEventNumber"))
+func (mrp *MTRReadParams) MinEventNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("minEventNumber"))
 	return obj.Wrap(_r)
 }
 
-// SetMinEventNumber wraps the corresponding Objective-C method.
-func (x *MTRReadParams) SetMinEventNumber(minEventNumber obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinEventNumber:"), objref.IDOf(minEventNumber))
-}
-
-// ShouldAssumeUnknownAttributesReportable controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is YES. This setting is only relevant to some consumers of MTRReadParams.  One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
-func (x *MTRReadParams) ShouldAssumeUnknownAttributesReportable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAssumeUnknownAttributesReportable"))
+// ShouldAssumeUnknownAttributesReportable reports whether controls whether attributes without known schema (e.g. vendor-specific attributes) should be assumed to be reportable normally via subscriptions. The default is true. This setting is only relevant to some consumers of MTRReadParams. One of those consumers is readAttributeWithEndpointID:clusterID:attributeID:params: on MTRDevice.
+func (mrp *MTRReadParams) ShouldAssumeUnknownAttributesReportable() bool {
+	_r := objc.Send[bool](objref.IDOf(mrp), objc.RegisterName("shouldAssumeUnknownAttributesReportable"))
 	return _r
 }
 
-// SetAssumeUnknownAttributesReportable wraps the corresponding Objective-C method.
-func (x *MTRReadParams) SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumeUnknownAttributesReportable:"), assumeUnknownAttributesReportable)
-}
-
 // FabricFiltered wraps the corresponding Objective-C method.
-func (x *MTRReadParams) FabricFiltered() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricFiltered"))
+func (mrp *MTRReadParams) FabricFiltered() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("fabricFiltered"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricFiltered wraps the corresponding Objective-C method.
-func (x *MTRReadParams) SetFabricFiltered(fabricFiltered obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
-}
-
-// MTRReadParamsable is the interface implemented by [MTRReadParams], for mocking and DI.
-type MTRReadParamsable interface {
-	obj.Object
-	WithFilterByFabric(filterByFabric bool) *MTRReadParams
-	WithMinEventNumber(minEventNumber obj.Object) *MTRReadParams
-	WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRReadParams
-	WithFabricFiltered(fabricFiltered obj.Object) *MTRReadParams
-	ShouldFilterByFabric() bool
-	SetFilterByFabric(filterByFabric bool)
-	MinEventNumber() obj.Object
-	SetMinEventNumber(minEventNumber obj.Object)
-	ShouldAssumeUnknownAttributesReportable() bool
-	SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool)
-	FabricFiltered() obj.Object
-	SetFabricFiltered(fabricFiltered obj.Object)
-}
-
-var _ MTRReadParamsable = (*MTRReadParams)(nil)
 
 // isMTRReadParams marks MTRReadParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRReadParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRReadParams) isMTRReadParams() {}
+func (mrp *MTRReadParams) isMTRReadParams() {}
 
 var _ MTRReadParamsProvider = (*MTRReadParams)(nil)

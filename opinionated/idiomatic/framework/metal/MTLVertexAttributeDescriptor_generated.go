@@ -46,24 +46,24 @@ func vertexAttributeDescriptorAdopt(id objc.ID) *VertexAttributeDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *VertexAttributeDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vad *VertexAttributeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexAttributeDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vad *VertexAttributeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexAttributeDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vad *VertexAttributeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexAttributeDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vad *VertexAttributeDescriptor) String() string {
+	return rt.Description(objref.IDOf(vad))
 }
 
 // NewVertexAttributeDescriptor creates a new VertexAttributeDescriptor.
@@ -72,69 +72,38 @@ func NewVertexAttributeDescriptor() *VertexAttributeDescriptor {
 	return vertexAttributeDescriptorAdopt(_id)
 }
 
-// WithFormat the format of the vertex attribute.
-func (x *VertexAttributeDescriptor) WithFormat(format VertexFormat) *VertexAttributeDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
-	return x
+// WithFormat sets the format of the vertex attribute.
+func (vad *VertexAttributeDescriptor) WithFormat(format VertexFormat) *VertexAttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setFormat:"), format)
+	return vad
 }
 
-// WithOffset the location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
-func (x *VertexAttributeDescriptor) WithOffset(offset int) *VertexAttributeDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the location of an attribute in vertex data, determined by the byte offset from the start of the vertex data.
+func (vad *VertexAttributeDescriptor) WithOffset(offset int) *VertexAttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setOffset:"), offset)
+	return vad
 }
 
-// WithBufferIndex the index in the argument table for the associated vertex buffer.
-func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex int) *VertexAttributeDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
-	return x
+// WithBufferIndex sets the index in the argument table for the associated vertex buffer.
+func (vad *VertexAttributeDescriptor) WithBufferIndex(bufferIndex int) *VertexAttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setBufferIndex:"), bufferIndex)
+	return vad
 }
 
 // Format wraps the corresponding Objective-C method.
-func (x *VertexAttributeDescriptor) Format() VertexFormat {
-	_r := objc.Send[VertexFormat](objref.IDOf(x), objc.RegisterName("format"))
+func (vad *VertexAttributeDescriptor) Format() VertexFormat {
+	_r := objc.Send[VertexFormat](objref.IDOf(vad), objc.RegisterName("format"))
 	return _r
-}
-
-// SetFormat wraps the corresponding Objective-C method.
-func (x *VertexAttributeDescriptor) SetFormat(format VertexFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
 // Offset wraps the corresponding Objective-C method.
-func (x *VertexAttributeDescriptor) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+func (vad *VertexAttributeDescriptor) Offset() int {
+	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("offset"))
 	return _r
-}
-
-// SetOffset wraps the corresponding Objective-C method.
-func (x *VertexAttributeDescriptor) SetOffset(offset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
 // BufferIndex wraps the corresponding Objective-C method.
-func (x *VertexAttributeDescriptor) BufferIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
+func (vad *VertexAttributeDescriptor) BufferIndex() int {
+	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("bufferIndex"))
 	return _r
 }
-
-// SetBufferIndex wraps the corresponding Objective-C method.
-func (x *VertexAttributeDescriptor) SetBufferIndex(bufferIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
-}
-
-// VertexAttributeDescriptorable is the interface implemented by [VertexAttributeDescriptor], for mocking and DI.
-type VertexAttributeDescriptorable interface {
-	obj.Object
-	WithFormat(format VertexFormat) *VertexAttributeDescriptor
-	WithOffset(offset int) *VertexAttributeDescriptor
-	WithBufferIndex(bufferIndex int) *VertexAttributeDescriptor
-	Format() VertexFormat
-	SetFormat(format VertexFormat)
-	Offset() int
-	SetOffset(offset int)
-	BufferIndex() int
-	SetBufferIndex(bufferIndex int)
-}
-
-var _ VertexAttributeDescriptorable = (*VertexAttributeDescriptor)(nil)

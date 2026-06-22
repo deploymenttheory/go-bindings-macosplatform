@@ -83,7 +83,10 @@ func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
 	if className != "NSMutableDictionary" {
 		return
 	}
-	renderTemplate(w, "dict_augment", struct{ GoTypeName string }{GoTypeName: goTypeName})
+	renderTemplate(w, "dict_augment", struct {
+		GoTypeName string
+		RecvVar    string
+	}{GoTypeName: goTypeName, RecvVar: receiverName(goTypeName)})
 }
 
 // providerIfaceItem / providersView are the template data for providers.tmpl.

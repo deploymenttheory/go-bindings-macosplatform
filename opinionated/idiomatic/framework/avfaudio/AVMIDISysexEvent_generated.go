@@ -54,17 +54,9 @@ func NewMIDISysexEventWithData(data obj.Object) *MIDISysexEvent {
 }
 
 // SizeInBytes wraps the corresponding Objective-C method.
-func (x *MIDISysexEvent) SizeInBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytes"))
+func (mse *MIDISysexEvent) SizeInBytes() int {
+	_r := objc.Send[int](objref.IDOf(mse), objc.RegisterName("sizeInBytes"))
 	return _r
 }
-
-// MIDISysexEventable is the interface implemented by [MIDISysexEvent], for mocking and DI.
-type MIDISysexEventable interface {
-	obj.Object
-	SizeInBytes() int
-}
-
-var _ MIDISysexEventable = (*MIDISysexEvent)(nil)
 
 var _ MusicEventProvider = (*MIDISysexEvent)(nil)

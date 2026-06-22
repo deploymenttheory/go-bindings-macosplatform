@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,23 @@ func NewMIDIProgramChangeEventWithChannelProgramNumber(channel int, programNumbe
 	return mIDIProgramChangeEventAdopt(_id)
 }
 
-// WithProgramNumber the MIDI program number.
-func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber int) *MIDIProgramChangeEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramNumber:"), programNumber)
-	return x
+// WithProgramNumber sets the MIDI program number.
+func (mpce *MIDIProgramChangeEvent) WithProgramNumber(programNumber int) *MIDIProgramChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(mpce), objc.RegisterName("setProgramNumber:"), programNumber)
+	return mpce
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDIProgramChangeEvent) WithChannel(channel int) *MIDIProgramChangeEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mpce *MIDIProgramChangeEvent) WithChannel(channel int) *MIDIProgramChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(mpce), objc.RegisterName("setChannel:"), channel)
+	return mpce
 }
 
 // ProgramNumber wraps the corresponding Objective-C method.
-func (x *MIDIProgramChangeEvent) ProgramNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("programNumber"))
+func (mpce *MIDIProgramChangeEvent) ProgramNumber() int {
+	_r := objc.Send[int](objref.IDOf(mpce), objc.RegisterName("programNumber"))
 	return _r
 }
-
-// SetProgramNumber wraps the corresponding Objective-C method.
-func (x *MIDIProgramChangeEvent) SetProgramNumber(programNumber int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramNumber:"), programNumber)
-}
-
-// MIDIProgramChangeEventable is the interface implemented by [MIDIProgramChangeEvent], for mocking and DI.
-type MIDIProgramChangeEventable interface {
-	obj.Object
-	WithProgramNumber(programNumber int) *MIDIProgramChangeEvent
-	WithChannel(channel int) *MIDIProgramChangeEvent
-	ProgramNumber() int
-	SetProgramNumber(programNumber int)
-}
-
-var _ MIDIProgramChangeEventable = (*MIDIProgramChangeEvent)(nil)
 
 var _ MIDIChannelEventProvider = (*MIDIProgramChangeEvent)(nil)
 

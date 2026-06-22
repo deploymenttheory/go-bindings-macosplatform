@@ -46,24 +46,24 @@ func messageSignerAdopt(id objc.ID) *MessageSigner {
 }
 
 // Description returns the object's -description text.
-func (x *MessageSigner) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MessageSigner) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MessageSigner) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MessageSigner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MessageSigner) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MessageSigner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MessageSigner) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MessageSigner) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMessageSignerWithEmailAddressesSignatureLabelContext creates a new message signer object that contains the email addresses of the signers, a label, and context data.
@@ -73,35 +73,25 @@ func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses []*E
 	return messageSignerAdopt(_id)
 }
 
-// EmailAddresses email addresses associated with the signature.
+// EmailAddresses returns email addresses associated with the signature.
 //
 // EmailAddresses returns the collection as a Go slice.
-func (x *MessageSigner) EmailAddresses() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddresses"))
+func (ms *MessageSigner) EmailAddresses() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("emailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// Label the message signers label. Shown in the message header view. For instance, "John Smith".
-func (x *MessageSigner) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns the message signers label. Shown in the message header view. For instance, "John Smith".
+func (ms *MessageSigner) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Context the context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
-func (x *MessageSigner) Context() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+// Context returns the context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
+func (ms *MessageSigner) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("context"))
 	return obj.Wrap(_r)
 }
-
-// MessageSignerable is the interface implemented by [MessageSigner], for mocking and DI.
-type MessageSignerable interface {
-	obj.Object
-	EmailAddresses() []*EmailAddress
-	Label() string
-	Context() obj.Object
-}
-
-var _ MessageSignerable = (*MessageSigner)(nil)

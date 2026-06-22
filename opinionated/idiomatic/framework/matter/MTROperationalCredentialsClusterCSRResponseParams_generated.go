@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTROperationalCredentialsClusterCSRResponseParams is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterCSRResponseParams.
@@ -46,24 +47,24 @@ func mTROperationalCredentialsClusterCSRResponseParamsAdopt(id objc.ID) *MTROper
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mocccrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mocccrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mocccrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) String() string {
+	return rt.Description(objref.IDOf(mocccrp))
 }
 
 // NewMTROperationalCredentialsClusterCSRResponseParamsWithResponseValueError initialize an MTROperationalCredentialsClusterCSRResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -78,68 +79,37 @@ func NewMTROperationalCredentialsClusterCSRResponseParamsWithResponseValueError(
 }
 
 // WithNocsrElements sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) WithNocsrElements(nocsrElements obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNocsrElements:"), objref.IDOf(nocsrElements))
-	return x
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) WithNocsrElements(nocsrElements obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setNocsrElements:"), objref.IDOf(nocsrElements))
+	return mocccrp
 }
 
 // WithAttestationSignature sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
-	return x
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
+	return mocccrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mocccrp
 }
 
 // NocsrElements wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) NocsrElements() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nocsrElements"))
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) NocsrElements() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("nocsrElements"))
 	return obj.Wrap(_r)
-}
-
-// SetNocsrElements wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) SetNocsrElements(nocsrElements obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNocsrElements:"), objref.IDOf(nocsrElements))
 }
 
 // AttestationSignature wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) AttestationSignature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationSignature"))
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) AttestationSignature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("attestationSignature"))
 	return obj.Wrap(_r)
 }
 
-// SetAttestationSignature wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) SetAttestationSignature(attestationSignature obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
-
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCSRResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// MTROperationalCredentialsClusterCSRResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterCSRResponseParams], for mocking and DI.
-type MTROperationalCredentialsClusterCSRResponseParamsable interface {
-	obj.Object
-	WithNocsrElements(nocsrElements obj.Object) *MTROperationalCredentialsClusterCSRResponseParams
-	WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterCSRResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCSRResponseParams
-	NocsrElements() obj.Object
-	SetNocsrElements(nocsrElements obj.Object)
-	AttestationSignature() obj.Object
-	SetAttestationSignature(attestationSignature obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterCSRResponseParamsable = (*MTROperationalCredentialsClusterCSRResponseParams)(nil)

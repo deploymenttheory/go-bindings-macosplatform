@@ -53,52 +53,39 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 	return assetCreationRequestAdopt(_id)
 }
 
-// WithCreationDate the date and time at which the asset claims to have been originally created.
-func (x *AssetCreationRequest) WithCreationDate(creationDate obj.Object) *AssetCreationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
-	return x
+// WithCreationDate sets the date and time at which the asset claims to have been originally created.
+func (acr *AssetCreationRequest) WithCreationDate(creationDate obj.Object) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
+	return acr
 }
 
-// WithFavorite a Boolean value that indicates whether the asset is marked as one of the user’s favorites.
-func (x *AssetCreationRequest) WithFavorite(favorite bool) *AssetCreationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFavorite:"), favorite)
-	return x
+// WithFavorite sets a Boolean value that indicates whether the asset is marked as one of the user’s favorites.
+func (acr *AssetCreationRequest) WithFavorite(favorite bool) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setFavorite:"), favorite)
+	return acr
 }
 
-// WithHidden a Boolean value that indicates whether the asset is hidden in collections.
-func (x *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that indicates whether the asset is hidden in collections.
+func (acr *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setHidden:"), hidden)
+	return acr
 }
 
-// WithContentEditingOutput the output of an asset content editing session.
-func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
-	return x
+// WithContentEditingOutput sets the output of an asset content editing session.
+func (acr *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
+	return acr
 }
 
 // AddResourceWithTypeFileURLOptions adds a data resource to the asset being created, using the file at the specified URL.
-func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addResourceWithType:fileURL:options:"), type_, rt.FileURL(fileURL), objref.IDOf(options))
+func (acr *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions) {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addResourceWithType:fileURL:options:"), type_, rt.FileURL(fileURL), objref.IDOf(options))
 }
 
 // AddResourceWithTypeDataOptions adds a data resource to the asset being created, using the specified data.
-func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addResourceWithType:data:options:"), type_, objref.IDOf(data), objref.IDOf(options))
+func (acr *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions) {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addResourceWithType:data:options:"), type_, objref.IDOf(data), objref.IDOf(options))
 }
-
-// AssetCreationRequestable is the interface implemented by [AssetCreationRequest], for mocking and DI.
-type AssetCreationRequestable interface {
-	obj.Object
-	WithCreationDate(creationDate obj.Object) *AssetCreationRequest
-	WithFavorite(favorite bool) *AssetCreationRequest
-	WithHidden(hidden bool) *AssetCreationRequest
-	WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest
-	AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions)
-	AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions)
-}
-
-var _ AssetCreationRequestable = (*AssetCreationRequest)(nil)
 
 var _ AssetChangeRequestProvider = (*AssetCreationRequest)(nil)
 

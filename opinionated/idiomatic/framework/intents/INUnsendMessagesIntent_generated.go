@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,34 +50,24 @@ func NewUnsendMessagesIntentWithMessageIdentifiers(messageIdentifiers []string) 
 	return unsendMessagesIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (umi *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent {
+	objc.Send[objc.ID](objref.IDOf(umi), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return umi
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (umi *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
+	objc.Send[objc.ID](objref.IDOf(umi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return umi
 }
 
 // MessageIdentifiers wraps the corresponding Objective-C method.
 //
 // MessageIdentifiers returns the collection as a Go slice.
-func (x *UnsendMessagesIntent) MessageIdentifiers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageIdentifiers"))
+func (umi *UnsendMessagesIntent) MessageIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(umi), objc.RegisterName("messageIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// UnsendMessagesIntentable is the interface implemented by [UnsendMessagesIntent], for mocking and DI.
-type UnsendMessagesIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent
-	MessageIdentifiers() []string
-}
-
-var _ UnsendMessagesIntentable = (*UnsendMessagesIntent)(nil)
 
 var _ IntentProvider = (*UnsendMessagesIntent)(nil)

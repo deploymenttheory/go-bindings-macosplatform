@@ -46,24 +46,24 @@ func inkAdopt(id objc.ID) *Ink {
 }
 
 // Description returns the object's -description text.
-func (x *Ink) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Ink) Description() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Ink) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (i *Ink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Ink) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (i *Ink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Ink) String() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Ink) String() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // NewInkWithInkTypeColor creates a new Ink.
@@ -73,30 +73,20 @@ func NewInkWithInkTypeColor(type_ obj.Object, color obj.Object) *Ink {
 	return inkAdopt(_id)
 }
 
-// InkType the type of ink, eg. pen, pencil...
-func (x *Ink) InkType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkType"))
+// InkType returns the type of ink, eg. pen, pencil...
+func (i *Ink) InkType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("inkType"))
 	return obj.Wrap(_r)
 }
 
 // Color wraps the corresponding Objective-C method.
-func (x *Ink) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (i *Ink) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// RequiredContentVersion the PencilKit version required to use this ink.
-func (x *Ink) RequiredContentVersion() ContentVersion {
-	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+// RequiredContentVersion returns the PencilKit version required to use this ink.
+func (i *Ink) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(i), objc.RegisterName("requiredContentVersion"))
 	return _r
 }
-
-// Inkable is the interface implemented by [Ink], for mocking and DI.
-type Inkable interface {
-	obj.Object
-	InkType() obj.Object
-	Color() obj.Object
-	RequiredContentVersion() ContentVersion
-}
-
-var _ Inkable = (*Ink)(nil)

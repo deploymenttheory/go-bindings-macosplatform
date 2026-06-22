@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams is an idiomatic wrapper over the Objective-C class MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams.
@@ -46,24 +47,24 @@ func mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRespon
 }
 
 // Description returns the object's -description text.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mratccmcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mratccmcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mratccmcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(mratccmcctmrp))
 }
 
 // NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,51 +79,28 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRes
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return mratccmcctmrp
 }
 
 // WithStatusText sets the property and returns the receiver so calls can be chained.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-	return x
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
+	return mratccmcctmrp
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
 // StatusText wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) StatusText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
+func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStatusText wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-}
-
-// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams], for mocking and DI.
-type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable interface {
-	obj.Object
-	WithStatus(status obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
-	WithStatusText(statusText string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	StatusText() string
-	SetStatusText(statusText string)
-}
-
-var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams)(nil)

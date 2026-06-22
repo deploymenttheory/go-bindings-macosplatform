@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,18 +58,10 @@ func NewImageryMapConfigurationWithElevationStyle(elevationStyle MapElevationSty
 	return imageryMapConfigurationAdopt(_id)
 }
 
-// WithElevationStyle the value that indicates the map’s elevation style.
-func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
-	return x
+// WithElevationStyle sets the value that indicates the map’s elevation style.
+func (imc *ImageryMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("setElevationStyle:"), elevationStyle)
+	return imc
 }
-
-// ImageryMapConfigurationable is the interface implemented by [ImageryMapConfiguration], for mocking and DI.
-type ImageryMapConfigurationable interface {
-	obj.Object
-	WithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration
-}
-
-var _ ImageryMapConfigurationable = (*ImageryMapConfiguration)(nil)
 
 var _ MapConfigurationProvider = (*ImageryMapConfiguration)(nil)

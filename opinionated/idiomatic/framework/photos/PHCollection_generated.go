@@ -7,7 +7,6 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,47 +46,36 @@ func collectionAdopt(id objc.ID) *Collection {
 }
 
 // CanPerformEditOperation returns whether the collection supports the specified editing operation.
-func (x *Collection) CanPerformEditOperation(anOperation CollectionEditOperation) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformEditOperation:"), anOperation)
+func (c *Collection) CanPerformEditOperation(anOperation CollectionEditOperation) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("canPerformEditOperation:"), anOperation)
 	return _r
 }
 
 // CanContainAssets wraps the corresponding Objective-C method.
-func (x *Collection) CanContainAssets() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainAssets"))
+func (c *Collection) CanContainAssets() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("canContainAssets"))
 	return _r
 }
 
 // CanContainCollections wraps the corresponding Objective-C method.
-func (x *Collection) CanContainCollections() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainCollections"))
+func (c *Collection) CanContainCollections() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("canContainCollections"))
 	return _r
 }
 
 // LocalizedTitle wraps the corresponding Objective-C method.
-func (x *Collection) LocalizedTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+func (c *Collection) LocalizedTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Collectionable is the interface implemented by [Collection], for mocking and DI.
-type Collectionable interface {
-	obj.Object
-	CanPerformEditOperation(anOperation CollectionEditOperation) bool
-	CanContainAssets() bool
-	CanContainCollections() bool
-	LocalizedTitle() string
-}
-
-var _ Collectionable = (*Collection)(nil)
-
 // isCollection marks Collection — and, by embedding promotion, its
 // subclasses — as a member of the Collection hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Collection) isCollection() {}
+func (c *Collection) isCollection() {}
 
 var _ CollectionProvider = (*Collection)(nil)
 

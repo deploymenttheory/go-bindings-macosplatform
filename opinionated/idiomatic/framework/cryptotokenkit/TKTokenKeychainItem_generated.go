@@ -48,24 +48,24 @@ func tokenKeychainItemAdopt(id objc.ID) *TokenKeychainItem {
 }
 
 // Description returns the object's -description text.
-func (x *TokenKeychainItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tki *TokenKeychainItem) Description() string {
+	return rt.Description(objref.IDOf(tki))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenKeychainItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tki *TokenKeychainItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tki), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenKeychainItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tki *TokenKeychainItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tki), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenKeychainItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tki *TokenKeychainItem) String() string {
+	return rt.Description(objref.IDOf(tki))
 }
 
 // NewTokenKeychainItemWithObjectID initializes a token keychain item with the specified object ID.
@@ -75,66 +75,42 @@ func NewTokenKeychainItemWithObjectID(objectID obj.Object) *TokenKeychainItem {
 	return tokenKeychainItemAdopt(_id)
 }
 
-// WithLabel the user-visible label for the keychain item.
-func (x *TokenKeychainItem) WithLabel(label string) *TokenKeychainItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the user-visible label for the keychain item.
+func (tki *TokenKeychainItem) WithLabel(label string) *TokenKeychainItem {
+	objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return tki
 }
 
-// WithConstraints access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
-func (x *TokenKeychainItem) WithConstraints(constraints obj.Object) *TokenKeychainItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
-	return x
+// WithConstraints sets access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
+func (tki *TokenKeychainItem) WithConstraints(constraints obj.Object) *TokenKeychainItem {
+	objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
+	return tki
 }
 
-// ObjectID object ID for item identification
-func (x *TokenKeychainItem) ObjectID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
+// ObjectID returns object ID for item identification
+func (tki *TokenKeychainItem) ObjectID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("objectID"))
 	return obj.Wrap(_r)
 }
 
 // Label contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
-func (x *TokenKeychainItem) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (tki *TokenKeychainItem) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *TokenKeychainItem) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Constraints contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
-func (x *TokenKeychainItem) Constraints() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraints"))
+func (tki *TokenKeychainItem) Constraints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("constraints"))
 	return obj.Wrap(_r)
 }
-
-// SetConstraints wraps the corresponding Objective-C method.
-func (x *TokenKeychainItem) SetConstraints(constraints obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
-}
-
-// TokenKeychainItemable is the interface implemented by [TokenKeychainItem], for mocking and DI.
-type TokenKeychainItemable interface {
-	obj.Object
-	WithLabel(label string) *TokenKeychainItem
-	WithConstraints(constraints obj.Object) *TokenKeychainItem
-	ObjectID() obj.Object
-	Label() string
-	SetLabel(label string)
-	Constraints() obj.Object
-	SetConstraints(constraints obj.Object)
-}
-
-var _ TokenKeychainItemable = (*TokenKeychainItem)(nil)
 
 // isTokenKeychainItem marks TokenKeychainItem — and, by embedding promotion, its
 // subclasses — as a member of the TokenKeychainItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TokenKeychainItem) isTokenKeychainItem() {}
+func (tki *TokenKeychainItem) isTokenKeychainItem() {}
 
 var _ TokenKeychainItemProvider = (*TokenKeychainItem)(nil)

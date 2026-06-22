@@ -46,24 +46,24 @@ func headingAdopt(id objc.ID) *Heading {
 }
 
 // Description returns the object's -description text.
-func (x *Heading) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Heading) Description() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Heading) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (h *Heading) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Heading) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (h *Heading) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Heading) String() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Heading) String() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // NewHeading creates a new Heading.
@@ -73,36 +73,25 @@ func NewHeading() *Heading {
 }
 
 // X wraps the corresponding Objective-C method.
-func (x *Heading) X() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
+func (h *Heading) X() float64 {
+	_r := objc.Send[float64](objref.IDOf(h), objc.RegisterName("x"))
 	return _r
 }
 
 // Y wraps the corresponding Objective-C method.
-func (x *Heading) Y() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
+func (h *Heading) Y() float64 {
+	_r := objc.Send[float64](objref.IDOf(h), objc.RegisterName("y"))
 	return _r
 }
 
 // Z wraps the corresponding Objective-C method.
-func (x *Heading) Z() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("z"))
+func (h *Heading) Z() float64 {
+	_r := objc.Send[float64](objref.IDOf(h), objc.RegisterName("z"))
 	return _r
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *Heading) Timestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (h *Heading) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
-
-// Headingable is the interface implemented by [Heading], for mocking and DI.
-type Headingable interface {
-	obj.Object
-	X() float64
-	Y() float64
-	Z() float64
-	Timestamp() obj.Object
-}
-
-var _ Headingable = (*Heading)(nil)

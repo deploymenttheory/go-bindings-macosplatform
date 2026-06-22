@@ -52,32 +52,22 @@ func NewContainerIdentifier() *ContainerIdentifier {
 	return containerIdentifierAdopt(_id)
 }
 
-// WithUuid a UUID to uniquely identify this entity.
-func (x *ContainerIdentifier) WithUuid(uuid obj.Object) *ContainerIdentifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
-	return x
+// WithUUID sets a UUID to uniquely identify this entity.
+func (ci *ContainerIdentifier) WithUUID(uuid obj.Object) *ContainerIdentifier {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
+	return ci
 }
 
-// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (x *ContainerIdentifier) WithQualifier(qualifier obj.Object) *ContainerIdentifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
-	return x
+// WithQualifier sets an optional piece of data to distinguish entities that otherwise share the same UUID.
+func (ci *ContainerIdentifier) WithQualifier(qualifier obj.Object) *ContainerIdentifier {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+	return ci
 }
 
 // VolumeIdentifier wraps the corresponding Objective-C method.
-func (x *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeIdentifier"))
+func (ci *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("volumeIdentifier"))
 	return VolumeIdentifierFromID(_r)
 }
-
-// ContainerIdentifierable is the interface implemented by [ContainerIdentifier], for mocking and DI.
-type ContainerIdentifierable interface {
-	obj.Object
-	WithUuid(uuid obj.Object) *ContainerIdentifier
-	WithQualifier(qualifier obj.Object) *ContainerIdentifier
-	VolumeIdentifier() *VolumeIdentifier
-}
-
-var _ ContainerIdentifierable = (*ContainerIdentifier)(nil)
 
 var _ EntityIdentifierProvider = (*ContainerIdentifier)(nil)

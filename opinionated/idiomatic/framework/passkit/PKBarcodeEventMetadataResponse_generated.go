@@ -44,24 +44,24 @@ func barcodeEventMetadataResponseAdopt(id objc.ID) *BarcodeEventMetadataResponse
 }
 
 // Description returns the object's -description text.
-func (x *BarcodeEventMetadataResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bemr *BarcodeEventMetadataResponse) Description() string {
+	return rt.Description(objref.IDOf(bemr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BarcodeEventMetadataResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bemr *BarcodeEventMetadataResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bemr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BarcodeEventMetadataResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bemr *BarcodeEventMetadataResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bemr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BarcodeEventMetadataResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bemr *BarcodeEventMetadataResponse) String() string {
+	return rt.Description(objref.IDOf(bemr))
 }
 
 // NewBarcodeEventMetadataResponseWithPaymentInformation creates a new BarcodeEventMetadataResponse.
@@ -72,28 +72,13 @@ func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation ob
 }
 
 // WithPaymentInformation sets the property and returns the receiver so calls can be chained.
-func (x *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
-	return x
+func (bemr *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
+	objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
+	return bemr
 }
 
 // PaymentInformation wraps the corresponding Objective-C method.
-func (x *BarcodeEventMetadataResponse) PaymentInformation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentInformation"))
+func (bemr *BarcodeEventMetadataResponse) PaymentInformation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("paymentInformation"))
 	return obj.Wrap(_r)
 }
-
-// SetPaymentInformation wraps the corresponding Objective-C method.
-func (x *BarcodeEventMetadataResponse) SetPaymentInformation(paymentInformation obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
-}
-
-// BarcodeEventMetadataResponseable is the interface implemented by [BarcodeEventMetadataResponse], for mocking and DI.
-type BarcodeEventMetadataResponseable interface {
-	obj.Object
-	WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse
-	PaymentInformation() obj.Object
-	SetPaymentInformation(paymentInformation obj.Object)
-}
-
-var _ BarcodeEventMetadataResponseable = (*BarcodeEventMetadataResponse)(nil)

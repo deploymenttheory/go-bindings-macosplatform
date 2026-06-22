@@ -46,24 +46,24 @@ func capturePhotoAdopt(id objc.ID) *CapturePhoto {
 }
 
 // Description returns the object's -description text.
-func (x *CapturePhoto) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CapturePhoto) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CapturePhoto) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *CapturePhoto) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CapturePhoto) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *CapturePhoto) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CapturePhoto) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CapturePhoto) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // NewCapturePhoto creates a new CapturePhoto.
@@ -72,51 +72,38 @@ func NewCapturePhoto() *CapturePhoto {
 	return capturePhotoAdopt(_id)
 }
 
-// ResolvedSettings the AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.
-func (x *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedSettings"))
+// ResolvedSettings returns the AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.
+func (cp *CapturePhoto) ResolvedSettings() *CaptureResolvedPhotoSettings {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("resolvedSettings"))
 	return CaptureResolvedPhotoSettingsFromID(_r)
 }
 
-// PhotoCount this photo's index (1-based) in the total expected photo count. The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
-func (x *CapturePhoto) PhotoCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("photoCount"))
+// PhotoCount returns this photo's index (1-based) in the total expected photo count. The resolvedSettings.expectedPhotoCount property indicates the total number of images that will be returned for a given capture request. This property indicates this photo's index (1-based). When you receive a -captureOutput:didFinishProcessingPhoto:error: callback with a photo whose photoCount matches resolvedSettings.expectedPhotoCount, you know you've received the last one for the given capture request.
+func (cp *CapturePhoto) PhotoCount() int {
+	_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("photoCount"))
 	return _r
 }
 
 // ConstantColorCenterWeightedMeanConfidenceLevel returns a score summarizing the overall confidence level of a constant color photo -- 1.0 means full confidence, 0.0 means zero confidence. Default is 0.0. In most use cases (document scanning for example), the central region of the photo is considered more important than the peripherals, therefore the confidence level of the central pixels are weighted more heavily than pixels on the edges of the photo. Use constantColorConfidenceMap for more use case specific analyses of the confidence level.
-func (x *CapturePhoto) ConstantColorCenterWeightedMeanConfidenceLevel() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantColorCenterWeightedMeanConfidenceLevel"))
+func (cp *CapturePhoto) ConstantColorCenterWeightedMeanConfidenceLevel() float32 {
+	_r := objc.Send[float32](objref.IDOf(cp), objc.RegisterName("constantColorCenterWeightedMeanConfidenceLevel"))
 	return _r
 }
 
-// IsConstantColorFallbackPhoto indicates whether this photo is a fallback photo for a constant color capture.
-func (x *CapturePhoto) IsConstantColorFallbackPhoto() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorFallbackPhoto"))
+// IsConstantColorFallbackPhoto reports whether this photo is a fallback photo for a constant color capture.
+func (cp *CapturePhoto) IsConstantColorFallbackPhoto() bool {
+	_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("isConstantColorFallbackPhoto"))
 	return _r
 }
 
-// FileDataRepresentation generates and returns a flat data representation of the photo and its attachments.
-func (x *CapturePhoto) FileDataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileDataRepresentation"))
+// FileDataRepresentation returns generates and returns a flat data representation of the photo and its attachments.
+func (cp *CapturePhoto) FileDataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("fileDataRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// CGImageRepresentation extracts and returns the captured photo’s primary image as a Core Graphics image object.
-func (x *CapturePhoto) CGImageRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImageRepresentation"))
+// CGImageRepresentation returns extracts and returns the captured photo’s primary image as a Core Graphics image object.
+func (cp *CapturePhoto) CGImageRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("CGImageRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// CapturePhotoable is the interface implemented by [CapturePhoto], for mocking and DI.
-type CapturePhotoable interface {
-	obj.Object
-	ResolvedSettings() *CaptureResolvedPhotoSettings
-	PhotoCount() int
-	ConstantColorCenterWeightedMeanConfidenceLevel() float32
-	IsConstantColorFallbackPhoto() bool
-	FileDataRepresentation() obj.Object
-	CGImageRepresentation() obj.Object
-}
-
-var _ CapturePhotoable = (*CapturePhoto)(nil)

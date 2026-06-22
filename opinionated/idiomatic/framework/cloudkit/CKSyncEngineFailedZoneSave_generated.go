@@ -46,24 +46,24 @@ func syncEngineFailedZoneSaveAdopt(id objc.ID) *SyncEngineFailedZoneSave {
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineFailedZoneSave) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sefzs *SyncEngineFailedZoneSave) Description() string {
+	return rt.Description(objref.IDOf(sefzs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFailedZoneSave) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sefzs *SyncEngineFailedZoneSave) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sefzs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFailedZoneSave) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sefzs *SyncEngineFailedZoneSave) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sefzs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineFailedZoneSave) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sefzs *SyncEngineFailedZoneSave) String() string {
+	return rt.Description(objref.IDOf(sefzs))
 }
 
 // NewSyncEngineFailedZoneSave creates a new SyncEngineFailedZoneSave.
@@ -72,16 +72,8 @@ func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
 	return syncEngineFailedZoneSaveAdopt(_id)
 }
 
-// RecordZone the record zone that CloudKit is unable to modify.
-func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZone"))
+// RecordZone returns the record zone that CloudKit is unable to modify.
+func (sefzs *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
+	_r := objc.Send[objc.ID](objref.IDOf(sefzs), objc.RegisterName("recordZone"))
 	return RecordZoneFromID(_r)
 }
-
-// SyncEngineFailedZoneSaveable is the interface implemented by [SyncEngineFailedZoneSave], for mocking and DI.
-type SyncEngineFailedZoneSaveable interface {
-	obj.Object
-	RecordZone() *RecordZone
-}
-
-var _ SyncEngineFailedZoneSaveable = (*SyncEngineFailedZoneSave)(nil)

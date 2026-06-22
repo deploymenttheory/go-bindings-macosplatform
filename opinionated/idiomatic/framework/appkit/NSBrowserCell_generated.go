@@ -67,398 +67,320 @@ func NewBrowserCellWithCoder(coder obj.Object) *BrowserCell {
 	return browserCellAdopt(_id)
 }
 
-// WithLeaf a Boolean that indicates whether the browser cell is a leaf or a branch cell.
-func (x *BrowserCell) WithLeaf(leaf bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaf:"), leaf)
-	return x
+// WithLeaf sets a Boolean that indicates whether the browser cell is a leaf or a branch cell.
+func (bc *BrowserCell) WithLeaf(leaf bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLeaf:"), leaf)
+	return bc
 }
 
-// WithLoaded a Boolean that indicates whether the cell is ready to display.
-func (x *BrowserCell) WithLoaded(loaded bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoaded:"), loaded)
-	return x
+// WithLoaded sets a Boolean that indicates whether the cell is ready to display.
+func (bc *BrowserCell) WithLoaded(loaded bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLoaded:"), loaded)
+	return bc
 }
 
-// WithAlternateImage the browser cell’s image for the highlighted state.
-func (x *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
-	return x
+// WithAlternateImage sets the browser cell’s image for the highlighted state.
+func (bc *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	return bc
 }
 
-// WithControlView the view associated with the cell.
-func (x *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (bc *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return bc
 }
 
-// WithType the type of the cell.
-func (x *BrowserCell) WithType(type_ CellType) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (bc *BrowserCell) WithType(type_ CellType) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setType:"), type_)
+	return bc
 }
 
-// WithState the cell’s current state.
-func (x *BrowserCell) WithState(state int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (bc *BrowserCell) WithState(state int) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setState:"), state)
+	return bc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *BrowserCell) WithTarget(target obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (bc *BrowserCell) WithTarget(target obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return bc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *BrowserCell) WithTag(tag int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (bc *BrowserCell) WithTag(tag int) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTag:"), tag)
+	return bc
 }
 
-// WithTitle the cell’s title text.
-func (x *BrowserCell) WithTitle(title string) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (bc *BrowserCell) WithTitle(title string) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return bc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *BrowserCell) WithEnabled(enabled bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (bc *BrowserCell) WithEnabled(enabled bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEnabled:"), enabled)
+	return bc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *BrowserCell) WithContinuous(continuous bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (bc *BrowserCell) WithContinuous(continuous bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setContinuous:"), continuous)
+	return bc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *BrowserCell) WithEditable(editable bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (bc *BrowserCell) WithEditable(editable bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEditable:"), editable)
+	return bc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *BrowserCell) WithSelectable(selectable bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (bc *BrowserCell) WithSelectable(selectable bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSelectable:"), selectable)
+	return bc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *BrowserCell) WithBordered(bordered bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (bc *BrowserCell) WithBordered(bordered bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBordered:"), bordered)
+	return bc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *BrowserCell) WithBezeled(bezeled bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (bc *BrowserCell) WithBezeled(bezeled bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBezeled:"), bezeled)
+	return bc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *BrowserCell) WithScrollable(scrollable bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (bc *BrowserCell) WithScrollable(scrollable bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setScrollable:"), scrollable)
+	return bc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *BrowserCell) WithHighlighted(highlighted bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (bc *BrowserCell) WithHighlighted(highlighted bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setHighlighted:"), highlighted)
+	return bc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *BrowserCell) WithAlignment(alignment TextAlignment) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (bc *BrowserCell) WithAlignment(alignment TextAlignment) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAlignment:"), alignment)
+	return bc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *BrowserCell) WithWraps(wraps bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (bc *BrowserCell) WithWraps(wraps bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setWraps:"), wraps)
+	return bc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *BrowserCell) WithFont(font *Font) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (bc *BrowserCell) WithFont(font *Font) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return bc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *BrowserCell) WithFormatter(formatter obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (bc *BrowserCell) WithFormatter(formatter obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return bc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *BrowserCell) WithObjectValue(objectValue obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (bc *BrowserCell) WithObjectValue(objectValue obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return bc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *BrowserCell) WithStringValue(stringValue string) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (bc *BrowserCell) WithStringValue(stringValue string) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return bc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *BrowserCell) WithIntValue(intValue int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (bc *BrowserCell) WithIntValue(intValue int) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntValue:"), intValue)
+	return bc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *BrowserCell) WithFloatValue(floatValue float32) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (bc *BrowserCell) WithFloatValue(floatValue float32) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFloatValue:"), floatValue)
+	return bc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *BrowserCell) WithDoubleValue(doubleValue float64) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (bc *BrowserCell) WithDoubleValue(doubleValue float64) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return bc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (bc *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return bc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *BrowserCell) WithImage(image *Image) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (bc *BrowserCell) WithImage(image *Image) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return bc
 }
 
-// WithControlSize the size of the cell.
-func (x *BrowserCell) WithControlSize(controlSize ControlSize) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (bc *BrowserCell) WithControlSize(controlSize ControlSize) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlSize:"), controlSize)
+	return bc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *BrowserCell) WithRepresentedObject(representedObject obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (bc *BrowserCell) WithRepresentedObject(representedObject obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return bc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *BrowserCell) WithMenu(menu *Menu) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (bc *BrowserCell) WithMenu(menu *Menu) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return bc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *BrowserCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (bc *BrowserCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return bc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *BrowserCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (bc *BrowserCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return bc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *BrowserCell) WithLineBreakMode(lineBreakMode LineBreakMode) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (bc *BrowserCell) WithLineBreakMode(lineBreakMode LineBreakMode) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return bc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *BrowserCell) WithAllowsUndo(allowsUndo bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (bc *BrowserCell) WithAllowsUndo(allowsUndo bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return bc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *BrowserCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (bc *BrowserCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return bc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (bc *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return bc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *BrowserCell) WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (bc *BrowserCell) WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return bc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *BrowserCell) WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (bc *BrowserCell) WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return bc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *BrowserCell) WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (bc *BrowserCell) WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return bc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *BrowserCell) WithFocusRingType(focusRingType FocusRingType) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (bc *BrowserCell) WithFocusRingType(focusRingType FocusRingType) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return bc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *BrowserCell) WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (bc *BrowserCell) WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return bc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *BrowserCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (bc *BrowserCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return bc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *BrowserCell) WithImportsGraphics(importsGraphics bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (bc *BrowserCell) WithImportsGraphics(importsGraphics bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return bc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *BrowserCell) WithAllowsMixedState(allowsMixedState bool) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (bc *BrowserCell) WithAllowsMixedState(allowsMixedState bool) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return bc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *BrowserCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (bc *BrowserCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return bc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *BrowserCell) WithControlTint(controlTint ControlTint) *BrowserCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (bc *BrowserCell) WithControlTint(controlTint ControlTint) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setControlTint:"), controlTint)
+	return bc
 }
 
 // HighlightColorInView returns the highlight color that the receiver wants to display.
-func (x *BrowserCell) HighlightColorInView(controlView *View) *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightColorInView:"), objref.IDOf(controlView))
+func (bc *BrowserCell) HighlightColorInView(controlView *View) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("highlightColorInView:"), objref.IDOf(controlView))
 	return ColorFromID(_r)
 }
 
 // Reset unhighlights the receiver and unsets its state.
-func (x *BrowserCell) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (bc *BrowserCell) Reset() {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("reset"))
 }
 
 // Set highlights the receiver and sets its state.
-func (x *BrowserCell) Set() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+func (bc *BrowserCell) Set() {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("set"))
 }
 
 // IsLeaf wraps the corresponding Objective-C method.
-func (x *BrowserCell) IsLeaf() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLeaf"))
+func (bc *BrowserCell) IsLeaf() bool {
+	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLeaf"))
 	return _r
-}
-
-// SetLeaf wraps the corresponding Objective-C method.
-func (x *BrowserCell) SetLeaf(leaf bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaf:"), leaf)
 }
 
 // IsLoaded wraps the corresponding Objective-C method.
-func (x *BrowserCell) IsLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoaded"))
+func (bc *BrowserCell) IsLoaded() bool {
+	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLoaded"))
 	return _r
 }
 
-// SetLoaded wraps the corresponding Objective-C method.
-func (x *BrowserCell) SetLoaded(loaded bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoaded:"), loaded)
-}
-
 // AlternateImage wraps the corresponding Objective-C method.
-func (x *BrowserCell) AlternateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateImage"))
+func (bc *BrowserCell) AlternateImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
-
-// SetAlternateImage wraps the corresponding Objective-C method.
-func (x *BrowserCell) SetAlternateImage(alternateImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
-}
-
-// BrowserCellable is the interface implemented by [BrowserCell], for mocking and DI.
-type BrowserCellable interface {
-	obj.Object
-	WithLeaf(leaf bool) *BrowserCell
-	WithLoaded(loaded bool) *BrowserCell
-	WithAlternateImage(alternateImage *Image) *BrowserCell
-	WithControlView(controlView ViewProvider) *BrowserCell
-	WithType(type_ CellType) *BrowserCell
-	WithState(state int) *BrowserCell
-	WithTarget(target obj.Object) *BrowserCell
-	WithTag(tag int) *BrowserCell
-	WithTitle(title string) *BrowserCell
-	WithEnabled(enabled bool) *BrowserCell
-	WithContinuous(continuous bool) *BrowserCell
-	WithEditable(editable bool) *BrowserCell
-	WithSelectable(selectable bool) *BrowserCell
-	WithBordered(bordered bool) *BrowserCell
-	WithBezeled(bezeled bool) *BrowserCell
-	WithScrollable(scrollable bool) *BrowserCell
-	WithHighlighted(highlighted bool) *BrowserCell
-	WithAlignment(alignment TextAlignment) *BrowserCell
-	WithWraps(wraps bool) *BrowserCell
-	WithFont(font *Font) *BrowserCell
-	WithFormatter(formatter obj.Object) *BrowserCell
-	WithObjectValue(objectValue obj.Object) *BrowserCell
-	WithStringValue(stringValue string) *BrowserCell
-	WithIntValue(intValue int) *BrowserCell
-	WithFloatValue(floatValue float32) *BrowserCell
-	WithDoubleValue(doubleValue float64) *BrowserCell
-	WithIntegerValue(integerValue int) *BrowserCell
-	WithImage(image *Image) *BrowserCell
-	WithControlSize(controlSize ControlSize) *BrowserCell
-	WithRepresentedObject(representedObject obj.Object) *BrowserCell
-	WithMenu(menu *Menu) *BrowserCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *BrowserCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *BrowserCell
-	WithAllowsUndo(allowsUndo bool) *BrowserCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BrowserCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell
-	WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell
-	WithFocusRingType(focusRingType FocusRingType) *BrowserCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell
-	WithImportsGraphics(importsGraphics bool) *BrowserCell
-	WithAllowsMixedState(allowsMixedState bool) *BrowserCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *BrowserCell
-	WithControlTint(controlTint ControlTint) *BrowserCell
-	HighlightColorInView(controlView *View) *Color
-	Reset()
-	Set()
-	IsLeaf() bool
-	SetLeaf(leaf bool)
-	IsLoaded() bool
-	SetLoaded(loaded bool)
-	AlternateImage() *Image
-	SetAlternateImage(alternateImage *Image)
-}
-
-var _ BrowserCellable = (*BrowserCell)(nil)
 
 var _ CellProvider = (*BrowserCell)(nil)

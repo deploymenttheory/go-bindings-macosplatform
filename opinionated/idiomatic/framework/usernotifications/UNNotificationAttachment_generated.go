@@ -46,24 +46,24 @@ func notificationAttachmentAdopt(id objc.ID) *NotificationAttachment {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NotificationAttachment) Description() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (na *NotificationAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(na), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (na *NotificationAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(na), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationAttachment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NotificationAttachment) String() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // NewNotificationAttachment creates a new NotificationAttachment.
@@ -73,8 +73,8 @@ func NewNotificationAttachment() *NotificationAttachment {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *NotificationAttachment) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (na *NotificationAttachment) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,26 +82,16 @@ func (x *NotificationAttachment) Identifier() string {
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *NotificationAttachment) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (na *NotificationAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *NotificationAttachment) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (na *NotificationAttachment) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NotificationAttachmentable is the interface implemented by [NotificationAttachment], for mocking and DI.
-type NotificationAttachmentable interface {
-	obj.Object
-	Identifier() string
-	URL() obj.Object
-	Type() string
-}
-
-var _ NotificationAttachmentable = (*NotificationAttachment)(nil)

@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,47 +51,35 @@ func NewElectrocardiogram() *Electrocardiogram {
 	return electrocardiogramAdopt(_id)
 }
 
-// NumberOfVoltageMeasurements the number of voltage measurements in the electrocardiogram.
-func (x *Electrocardiogram) NumberOfVoltageMeasurements() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVoltageMeasurements"))
+// NumberOfVoltageMeasurements returns the number of voltage measurements in the electrocardiogram.
+func (e *Electrocardiogram) NumberOfVoltageMeasurements() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("numberOfVoltageMeasurements"))
 	return _r
 }
 
-// SamplingFrequency the frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
-func (x *Electrocardiogram) SamplingFrequency() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samplingFrequency"))
+// SamplingFrequency returns the frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
+func (e *Electrocardiogram) SamplingFrequency() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("samplingFrequency"))
 	return QuantityFromID(_r)
 }
 
-// Classification the classification of this electrocardiogram sample.
-func (x *Electrocardiogram) Classification() ElectrocardiogramClassification {
-	_r := objc.Send[ElectrocardiogramClassification](objref.IDOf(x), objc.RegisterName("classification"))
+// Classification returns the classification of this electrocardiogram sample.
+func (e *Electrocardiogram) Classification() ElectrocardiogramClassification {
+	_r := objc.Send[ElectrocardiogramClassification](objref.IDOf(e), objc.RegisterName("classification"))
 	return _r
 }
 
-// AverageHeartRate the average heart rate of the user while the electrocardiogram was recorded.
-func (x *Electrocardiogram) AverageHeartRate() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageHeartRate"))
+// AverageHeartRate returns the average heart rate of the user while the electrocardiogram was recorded.
+func (e *Electrocardiogram) AverageHeartRate() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("averageHeartRate"))
 	return QuantityFromID(_r)
 }
 
-// SymptomsStatus whether the user experienced symptoms during this electrocardiogram.
-func (x *Electrocardiogram) SymptomsStatus() ElectrocardiogramSymptomsStatus {
-	_r := objc.Send[ElectrocardiogramSymptomsStatus](objref.IDOf(x), objc.RegisterName("symptomsStatus"))
+// SymptomsStatus returns whether the user experienced symptoms during this electrocardiogram.
+func (e *Electrocardiogram) SymptomsStatus() ElectrocardiogramSymptomsStatus {
+	_r := objc.Send[ElectrocardiogramSymptomsStatus](objref.IDOf(e), objc.RegisterName("symptomsStatus"))
 	return _r
 }
-
-// Electrocardiogramable is the interface implemented by [Electrocardiogram], for mocking and DI.
-type Electrocardiogramable interface {
-	obj.Object
-	NumberOfVoltageMeasurements() int
-	SamplingFrequency() *Quantity
-	Classification() ElectrocardiogramClassification
-	AverageHeartRate() *Quantity
-	SymptomsStatus() ElectrocardiogramSymptomsStatus
-}
-
-var _ Electrocardiogramable = (*Electrocardiogram)(nil)
 
 var _ SampleProvider = (*Electrocardiogram)(nil)
 

@@ -46,24 +46,24 @@ func wKContentWorldAdopt(id objc.ID) *WKContentWorld {
 }
 
 // Description returns the object's -description text.
-func (x *WKContentWorld) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wcw *WKContentWorld) Description() string {
+	return rt.Description(objref.IDOf(wcw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKContentWorld) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wcw *WKContentWorld) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wcw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKContentWorld) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wcw *WKContentWorld) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wcw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKContentWorld) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wcw *WKContentWorld) String() string {
+	return rt.Description(objref.IDOf(wcw))
 }
 
 // NewWKContentWorld creates a new WKContentWorld.
@@ -72,19 +72,11 @@ func NewWKContentWorld() *WKContentWorld {
 	return wKContentWorldAdopt(_id)
 }
 
-// Name the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
-func (x *WKContentWorld) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the WKContentWorld The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
+func (wcw *WKContentWorld) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wcw), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// WKContentWorldable is the interface implemented by [WKContentWorld], for mocking and DI.
-type WKContentWorldable interface {
-	obj.Object
-	Name() string
-}
-
-var _ WKContentWorldable = (*WKContentWorld)(nil)

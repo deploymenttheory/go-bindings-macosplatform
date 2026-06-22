@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,38 +52,27 @@ func NewCNNConvolutionWeightsAndBiasesState() *CNNConvolutionWeightsAndBiasesSta
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNConvolutionWeightsAndBiasesState) WithReadCount(readCount int) *CNNConvolutionWeightsAndBiasesState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) WithReadCount(readCount int) *CNNConvolutionWeightsAndBiasesState {
+	objc.Send[objc.ID](objref.IDOf(ccwabs), objc.RegisterName("setReadCount:"), readCount)
+	return ccwabs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionWeightsAndBiasesState) WithLabel(label string) *CNNConvolutionWeightsAndBiasesState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) WithLabel(label string) *CNNConvolutionWeightsAndBiasesState {
+	objc.Send[objc.ID](objref.IDOf(ccwabs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ccwabs
 }
 
-// WeightsOffset offset at which weights start in weights buffer Default value is 0.
-func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weightsOffset"))
+// WeightsOffset returns offset at which weights start in weights buffer Default value is 0.
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) WeightsOffset() int {
+	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("weightsOffset"))
 	return _r
 }
 
-// BiasesOffset offset at which weights start in biases buffer Default value is 0.
-func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("biasesOffset"))
+// BiasesOffset returns offset at which weights start in biases buffer Default value is 0.
+func (ccwabs *CNNConvolutionWeightsAndBiasesState) BiasesOffset() int {
+	_r := objc.Send[int](objref.IDOf(ccwabs), objc.RegisterName("biasesOffset"))
 	return _r
 }
-
-// CNNConvolutionWeightsAndBiasesStateable is the interface implemented by [CNNConvolutionWeightsAndBiasesState], for mocking and DI.
-type CNNConvolutionWeightsAndBiasesStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNConvolutionWeightsAndBiasesState
-	WithLabel(label string) *CNNConvolutionWeightsAndBiasesState
-	WeightsOffset() int
-	BiasesOffset() int
-}
-
-var _ CNNConvolutionWeightsAndBiasesStateable = (*CNNConvolutionWeightsAndBiasesState)(nil)
 
 var _ StateProvider = (*CNNConvolutionWeightsAndBiasesState)(nil)

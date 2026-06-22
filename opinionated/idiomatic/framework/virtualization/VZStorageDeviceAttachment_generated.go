@@ -48,36 +48,29 @@ func storageDeviceAttachmentAdopt(id objc.ID) *StorageDeviceAttachment {
 }
 
 // Description returns the object's -description text.
-func (x *StorageDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sda *StorageDeviceAttachment) Description() string {
+	return rt.Description(objref.IDOf(sda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StorageDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sda *StorageDeviceAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StorageDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sda *StorageDeviceAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StorageDeviceAttachment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sda *StorageDeviceAttachment) String() string {
+	return rt.Description(objref.IDOf(sda))
 }
-
-// StorageDeviceAttachmentable is the interface implemented by [StorageDeviceAttachment], for mocking and DI.
-type StorageDeviceAttachmentable interface {
-	obj.Object
-}
-
-var _ StorageDeviceAttachmentable = (*StorageDeviceAttachment)(nil)
 
 // isStorageDeviceAttachment marks StorageDeviceAttachment — and, by embedding promotion, its
 // subclasses — as a member of the StorageDeviceAttachment hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *StorageDeviceAttachment) isStorageDeviceAttachment() {}
+func (sda *StorageDeviceAttachment) isStorageDeviceAttachment() {}
 
 var _ StorageDeviceAttachmentProvider = (*StorageDeviceAttachment)(nil)

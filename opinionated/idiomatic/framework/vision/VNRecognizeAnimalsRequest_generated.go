@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RecognizeAnimalsRequest is an idiomatic wrapper over the Objective-C class VNRecognizeAnimalsRequest.
@@ -55,53 +56,41 @@ func NewRecognizeAnimalsRequest() *RecognizeAnimalsRequest {
 	return recognizeAnimalsRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *RecognizeAnimalsRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (rar *RecognizeAnimalsRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest {
+	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return rar
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *RecognizeAnimalsRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (rar *RecognizeAnimalsRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest {
+	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return rar
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *RecognizeAnimalsRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (rar *RecognizeAnimalsRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest {
+	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return rar
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *RecognizeAnimalsRequest) WithRevision(revision int) *RecognizeAnimalsRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (rar *RecognizeAnimalsRequest) WithRevision(revision int) *RecognizeAnimalsRequest {
+	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setRevision:"), revision)
+	return rar
 }
 
 // SupportedIdentifiers returns the identifiers of the animals that the request detects.
 //
 // SupportedIdentifiers returns the collection as a Go slice.
-func (x *RecognizeAnimalsRequest) SupportedIdentifiers() (result []obj.Object, err error) {
+func (rar *RecognizeAnimalsRequest) SupportedIdentifiers() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("supportedIdentifiersAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
-
-// RecognizeAnimalsRequestable is the interface implemented by [RecognizeAnimalsRequest], for mocking and DI.
-type RecognizeAnimalsRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeAnimalsRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeAnimalsRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *RecognizeAnimalsRequest
-	WithRevision(revision int) *RecognizeAnimalsRequest
-	SupportedIdentifiers() ([]obj.Object, error)
-}
-
-var _ RecognizeAnimalsRequestable = (*RecognizeAnimalsRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*RecognizeAnimalsRequest)(nil)
 

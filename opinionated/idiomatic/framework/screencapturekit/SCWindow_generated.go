@@ -47,24 +47,24 @@ func windowAdopt(id objc.ID) *Window {
 }
 
 // Description returns the object's -description text.
-func (x *Window) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (w *Window) Description() string {
+	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Window) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (w *Window) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Window) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (w *Window) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Window) String() string {
-	return rt.Description(objref.IDOf(x))
+func (w *Window) String() string {
+	return rt.Description(objref.IDOf(w))
 }
 
 // NewWindow creates a new Window.
@@ -73,61 +73,47 @@ func NewWindow() *Window {
 	return windowAdopt(_id)
 }
 
-// WindowID windowID the CGWindowID for the SCWindow
-func (x *Window) WindowID() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("windowID"))
+// WindowID returns windowID the CGWindowID for the SCWindow
+func (w *Window) WindowID() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(w), objc.RegisterName("windowID"))
 	return _r
 }
 
-// Frame frame the CGRect for the SCWindow
-func (x *Window) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+// Frame returns frame the CGRect for the SCWindow
+func (w *Window) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(w), objc.RegisterName("frame"))
 	return _r
 }
 
-// Title title the window title for the SCWindow
-func (x *Window) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns title the window title for the SCWindow
+func (w *Window) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// WindowLayer windowLayer the window layer for the SCWindow
-func (x *Window) WindowLayer() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowLayer"))
+// WindowLayer returns windowLayer the window layer for the SCWindow
+func (w *Window) WindowLayer() int {
+	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("windowLayer"))
 	return _r
 }
 
-// OwningApplication owningApplication is the SCRunningApplication that owns this SCWindow
-func (x *Window) OwningApplication() *RunningApplication {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owningApplication"))
+// OwningApplication returns owningApplication is the SCRunningApplication that owns this SCWindow
+func (w *Window) OwningApplication() *RunningApplication {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("owningApplication"))
 	return RunningApplicationFromID(_r)
 }
 
-// IsOnScreen onScreen the bool property denoting of the SCWindow is on the screen
-func (x *Window) IsOnScreen() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOnScreen"))
+// IsOnScreen reports whether onScreen the bool property denoting of the SCWindow is on the screen
+func (w *Window) IsOnScreen() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isOnScreen"))
 	return _r
 }
 
-// IsActive active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
-func (x *Window) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
+func (w *Window) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isActive"))
 	return _r
 }
-
-// Windowable is the interface implemented by [Window], for mocking and DI.
-type Windowable interface {
-	obj.Object
-	WindowID() uint32
-	Frame() corefoundation.CGRect
-	Title() string
-	WindowLayer() int
-	OwningApplication() *RunningApplication
-	IsOnScreen() bool
-	IsActive() bool
-}
-
-var _ Windowable = (*Window)(nil)

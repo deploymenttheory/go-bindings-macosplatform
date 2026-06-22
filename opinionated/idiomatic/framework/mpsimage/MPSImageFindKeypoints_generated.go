@@ -44,24 +44,24 @@ func imageFindKeypointsAdopt(id objc.ID) *ImageFindKeypoints {
 }
 
 // Description returns the object's -description text.
-func (x *ImageFindKeypoints) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ifk *ImageFindKeypoints) Description() string {
+	return rt.Description(objref.IDOf(ifk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageFindKeypoints) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ifk *ImageFindKeypoints) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ifk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageFindKeypoints) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ifk *ImageFindKeypoints) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ifk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageFindKeypoints) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ifk *ImageFindKeypoints) String() string {
+	return rt.Description(objref.IDOf(ifk))
 }
 
 // NewImageFindKeypoints creates a new ImageFindKeypoints.
@@ -69,10 +69,3 @@ func NewImageFindKeypoints() *ImageFindKeypoints {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageFindKeypoints")), objc.RegisterName("new"))
 	return imageFindKeypointsAdopt(_id)
 }
-
-// ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
-type ImageFindKeypointsable interface {
-	obj.Object
-}
-
-var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)

@@ -48,37 +48,37 @@ func metadataGroupAdopt(id objc.ID) *MetadataGroup {
 }
 
 // Description returns the object's -description text.
-func (x *MetadataGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mg *MetadataGroup) Description() string {
+	return rt.Description(objref.IDOf(mg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mg *MetadataGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mg *MetadataGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mg *MetadataGroup) String() string {
+	return rt.Description(objref.IDOf(mg))
 }
 
 // Items wraps the corresponding Objective-C method.
 //
 // Items returns the collection as a Go slice.
-func (x *MetadataGroup) Items() []*MetadataItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+func (mg *MetadataGroup) Items() []*MetadataItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // ClassifyingLabel wraps the corresponding Objective-C method.
-func (x *MetadataGroup) ClassifyingLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classifyingLabel"))
+func (mg *MetadataGroup) ClassifyingLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("classifyingLabel"))
 	if _r == 0 {
 		return ""
 	}
@@ -86,27 +86,17 @@ func (x *MetadataGroup) ClassifyingLabel() string {
 }
 
 // UniqueID wraps the corresponding Objective-C method.
-func (x *MetadataGroup) UniqueID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueID"))
+func (mg *MetadataGroup) UniqueID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("uniqueID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MetadataGroupable is the interface implemented by [MetadataGroup], for mocking and DI.
-type MetadataGroupable interface {
-	obj.Object
-	Items() []*MetadataItem
-	ClassifyingLabel() string
-	UniqueID() string
-}
-
-var _ MetadataGroupable = (*MetadataGroup)(nil)
-
 // isMetadataGroup marks MetadataGroup — and, by embedding promotion, its
 // subclasses — as a member of the MetadataGroup hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetadataGroup) isMetadataGroup() {}
+func (mg *MetadataGroup) isMetadataGroup() {}
 
 var _ MetadataGroupProvider = (*MetadataGroup)(nil)

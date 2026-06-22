@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewCheckerboardNoiseSourceWithSquareSize(squareSize float64) *CheckerboardN
 	return checkerboardNoiseSourceAdopt(_id)
 }
 
-// WithSquareSize the size (both width and height) of squares in the generated checkerboard pattern.
-func (x *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *CheckerboardNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSquareSize:"), squareSize)
-	return x
+// WithSquareSize sets the size (both width and height) of squares in the generated checkerboard pattern.
+func (cns *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *CheckerboardNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setSquareSize:"), squareSize)
+	return cns
 }
 
 // SquareSize wraps the corresponding Objective-C method.
-func (x *CheckerboardNoiseSource) SquareSize() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("squareSize"))
+func (cns *CheckerboardNoiseSource) SquareSize() float64 {
+	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("squareSize"))
 	return _r
 }
-
-// SetSquareSize wraps the corresponding Objective-C method.
-func (x *CheckerboardNoiseSource) SetSquareSize(squareSize float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSquareSize:"), squareSize)
-}
-
-// CheckerboardNoiseSourceable is the interface implemented by [CheckerboardNoiseSource], for mocking and DI.
-type CheckerboardNoiseSourceable interface {
-	obj.Object
-	WithSquareSize(squareSize float64) *CheckerboardNoiseSource
-	SquareSize() float64
-	SetSquareSize(squareSize float64)
-}
-
-var _ CheckerboardNoiseSourceable = (*CheckerboardNoiseSource)(nil)
 
 var _ NoiseSourceProvider = (*CheckerboardNoiseSource)(nil)

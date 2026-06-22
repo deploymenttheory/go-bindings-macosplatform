@@ -46,24 +46,24 @@ func cachedURLResponseAdopt(id objc.ID) *CachedURLResponse {
 }
 
 // Description returns the object's -description text.
-func (x *CachedURLResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cur *CachedURLResponse) Description() string {
+	return rt.Description(objref.IDOf(cur))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CachedURLResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cur *CachedURLResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cur), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CachedURLResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cur *CachedURLResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cur), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CachedURLResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cur *CachedURLResponse) String() string {
+	return rt.Description(objref.IDOf(cur))
 }
 
 // NewCachedURLResponseWithResponseData initializes an NSCachedURLResponse with the given response and data. A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed.
@@ -81,43 +81,31 @@ func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *URLResp
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *CachedURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *CachedURLResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cur *CachedURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *CachedURLResponse {
+	objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cur
 }
 
 // Response returns the response wrapped by this instance.
-func (x *CachedURLResponse) Response() *URLResponse {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
+func (cur *CachedURLResponse) Response() *URLResponse {
+	_r := objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
 // Data returns the data of the receiver.
-func (x *CachedURLResponse) Data() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (cur *CachedURLResponse) Data() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("data"))
 	return DataFromID(_r)
 }
 
 // UserInfo returns the userInfo dictionary of the receiver.
-func (x *CachedURLResponse) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (cur *CachedURLResponse) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // StoragePolicy returns the NSURLCacheStoragePolicy constant of the receiver.
-func (x *CachedURLResponse) StoragePolicy() URLCacheStoragePolicy {
-	_r := objc.Send[URLCacheStoragePolicy](objref.IDOf(x), objc.RegisterName("storagePolicy"))
+func (cur *CachedURLResponse) StoragePolicy() URLCacheStoragePolicy {
+	_r := objc.Send[URLCacheStoragePolicy](objref.IDOf(cur), objc.RegisterName("storagePolicy"))
 	return _r
 }
-
-// CachedURLResponseable is the interface implemented by [CachedURLResponse], for mocking and DI.
-type CachedURLResponseable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *CachedURLResponse
-	Response() *URLResponse
-	Data() *Data
-	UserInfo() obj.Object
-	StoragePolicy() URLCacheStoragePolicy
-}
-
-var _ CachedURLResponseable = (*CachedURLResponse)(nil)

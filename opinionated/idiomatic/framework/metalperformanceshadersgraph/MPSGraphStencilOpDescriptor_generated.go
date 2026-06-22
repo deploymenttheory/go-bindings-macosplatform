@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,91 +51,52 @@ func NewGraphStencilOpDescriptor() *GraphStencilOpDescriptor {
 	return graphStencilOpDescriptorAdopt(_id)
 }
 
-// WithReductionMode the reduction mode to use within the stencil window.
-func (x *GraphStencilOpDescriptor) WithReductionMode(reductionMode GraphReductionMode) *GraphStencilOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReductionMode:"), reductionMode)
-	return x
+// WithReductionMode sets the reduction mode to use within the stencil window.
+func (gsod *GraphStencilOpDescriptor) WithReductionMode(reductionMode GraphReductionMode) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setReductionMode:"), reductionMode)
+	return gsod
 }
 
-// WithBoundaryMode the property that determines which values to use for padding the input tensor.
-func (x *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode GraphPaddingMode) *GraphStencilOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundaryMode:"), boundaryMode)
-	return x
+// WithBoundaryMode sets the property that determines which values to use for padding the input tensor.
+func (gsod *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode GraphPaddingMode) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setBoundaryMode:"), boundaryMode)
+	return gsod
 }
 
-// WithPaddingStyle the property that defines what kind of padding to apply to the stencil operation.
-func (x *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphStencilOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
-	return x
+// WithPaddingStyle sets the property that defines what kind of padding to apply to the stencil operation.
+func (gsod *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setPaddingStyle:"), paddingStyle)
+	return gsod
 }
 
-// WithPaddingConstant the padding value for boundaryMode = MPSGraphPaddingModeConstant.
-func (x *GraphStencilOpDescriptor) WithPaddingConstant(paddingConstant float32) *GraphStencilOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingConstant:"), paddingConstant)
-	return x
+// WithPaddingConstant sets the padding value for boundaryMode = MPSGraphPaddingModeConstant.
+func (gsod *GraphStencilOpDescriptor) WithPaddingConstant(paddingConstant float32) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setPaddingConstant:"), paddingConstant)
+	return gsod
 }
 
-// ReductionMode the reduction mode to use within the stencil window. Default value: `MPSGraphReductionModeSum`.
-func (x *GraphStencilOpDescriptor) ReductionMode() GraphReductionMode {
-	_r := objc.Send[GraphReductionMode](objref.IDOf(x), objc.RegisterName("reductionMode"))
+// ReductionMode returns the reduction mode to use within the stencil window. Default value: `MPSGraphReductionModeSum`.
+func (gsod *GraphStencilOpDescriptor) ReductionMode() GraphReductionMode {
+	_r := objc.Send[GraphReductionMode](objref.IDOf(gsod), objc.RegisterName("reductionMode"))
 	return _r
 }
 
-// SetReductionMode wraps the corresponding Objective-C method.
-func (x *GraphStencilOpDescriptor) SetReductionMode(reductionMode GraphReductionMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReductionMode:"), reductionMode)
-}
-
-// BoundaryMode the property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
-func (x *GraphStencilOpDescriptor) BoundaryMode() GraphPaddingMode {
-	_r := objc.Send[GraphPaddingMode](objref.IDOf(x), objc.RegisterName("boundaryMode"))
+// BoundaryMode returns the property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
+func (gsod *GraphStencilOpDescriptor) BoundaryMode() GraphPaddingMode {
+	_r := objc.Send[GraphPaddingMode](objref.IDOf(gsod), objc.RegisterName("boundaryMode"))
 	return _r
 }
 
-// SetBoundaryMode wraps the corresponding Objective-C method.
-func (x *GraphStencilOpDescriptor) SetBoundaryMode(boundaryMode GraphPaddingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundaryMode:"), boundaryMode)
-}
-
-// PaddingStyle the property that defines what kind of padding to apply to the stencil operation. Default value: `MPSGraphPaddingStyleExplicit`.
-func (x *GraphStencilOpDescriptor) PaddingStyle() GraphPaddingStyle {
-	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
+// PaddingStyle returns the property that defines what kind of padding to apply to the stencil operation. Default value: `MPSGraphPaddingStyleExplicit`.
+func (gsod *GraphStencilOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gsod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
-// SetPaddingStyle wraps the corresponding Objective-C method.
-func (x *GraphStencilOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
-}
-
-// PaddingConstant the padding value for `boundaryMode = MPSGraphPaddingModeConstant`. Default value: 0.
-func (x *GraphStencilOpDescriptor) PaddingConstant() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("paddingConstant"))
+// PaddingConstant returns the padding value for `boundaryMode = MPSGraphPaddingModeConstant`. Default value: 0.
+func (gsod *GraphStencilOpDescriptor) PaddingConstant() float32 {
+	_r := objc.Send[float32](objref.IDOf(gsod), objc.RegisterName("paddingConstant"))
 	return _r
 }
-
-// SetPaddingConstant wraps the corresponding Objective-C method.
-func (x *GraphStencilOpDescriptor) SetPaddingConstant(paddingConstant float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingConstant:"), paddingConstant)
-}
-
-// GraphStencilOpDescriptorable is the interface implemented by [GraphStencilOpDescriptor], for mocking and DI.
-type GraphStencilOpDescriptorable interface {
-	obj.Object
-	WithReductionMode(reductionMode GraphReductionMode) *GraphStencilOpDescriptor
-	WithBoundaryMode(boundaryMode GraphPaddingMode) *GraphStencilOpDescriptor
-	WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphStencilOpDescriptor
-	WithPaddingConstant(paddingConstant float32) *GraphStencilOpDescriptor
-	ReductionMode() GraphReductionMode
-	SetReductionMode(reductionMode GraphReductionMode)
-	BoundaryMode() GraphPaddingMode
-	SetBoundaryMode(boundaryMode GraphPaddingMode)
-	PaddingStyle() GraphPaddingStyle
-	SetPaddingStyle(paddingStyle GraphPaddingStyle)
-	PaddingConstant() float32
-	SetPaddingConstant(paddingConstant float32)
-}
-
-var _ GraphStencilOpDescriptorable = (*GraphStencilOpDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphStencilOpDescriptor)(nil)

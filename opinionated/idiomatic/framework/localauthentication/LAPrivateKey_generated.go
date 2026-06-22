@@ -46,24 +46,24 @@ func privateKeyAdopt(id objc.ID) *PrivateKey {
 }
 
 // Description returns the object's -description text.
-func (x *PrivateKey) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pk *PrivateKey) Description() string {
+	return rt.Description(objref.IDOf(pk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PrivateKey) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pk *PrivateKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PrivateKey) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pk *PrivateKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PrivateKey) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pk *PrivateKey) String() string {
+	return rt.Description(objref.IDOf(pk))
 }
 
 // NewPrivateKey creates a new PrivateKey.
@@ -72,16 +72,8 @@ func NewPrivateKey() *PrivateKey {
 	return privateKeyAdopt(_id)
 }
 
-// PublicKey offers the public key counterpart of a
-func (x *PrivateKey) PublicKey() *PublicKey {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKey"))
+// PublicKey returns offers the public key counterpart of a
+func (pk *PrivateKey) PublicKey() *PublicKey {
+	_r := objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("publicKey"))
 	return PublicKeyFromID(_r)
 }
-
-// PrivateKeyable is the interface implemented by [PrivateKey], for mocking and DI.
-type PrivateKeyable interface {
-	obj.Object
-	PublicKey() *PublicKey
-}
-
-var _ PrivateKeyable = (*PrivateKey)(nil)

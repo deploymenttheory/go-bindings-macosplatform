@@ -46,24 +46,24 @@ func cIResponderAdopt(id objc.ID) *CIResponder {
 }
 
 // Description returns the object's -description text.
-func (x *CIResponder) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CIResponder) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CIResponder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *CIResponder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CIResponder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *CIResponder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CIResponder) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CIResponder) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // NewCIResponder creates a new CIResponder.
@@ -73,42 +73,30 @@ func NewCIResponder() *CIResponder {
 }
 
 // NotifyProfileOnChannelIsEnabled enables or disables a profile and notifies all connected initiators.
-func (x *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyProfile:onChannel:isEnabled:"), objref.IDOf(aProfile), channel, enabledState)
+func (cr *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool {
+	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("notifyProfile:onChannel:isEnabled:"), objref.IDOf(aProfile), channel, enabledState)
 	return _r
 }
 
 // SendProfileOnChannelProfileData sends profile-specific data to all connected initiators.
-func (x *CIResponder) SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(aProfile), channel, objref.IDOf(profileSpecificData))
+func (cr *CIResponder) SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(aProfile), channel, objref.IDOf(profileSpecificData))
 	return _r
 }
 
-// Start starts receiving initiator requests.
-func (x *CIResponder) Start() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("start"))
+// Start reports whether starts receiving initiator requests.
+func (cr *CIResponder) Start() bool {
+	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("start"))
 	return _r
 }
 
 // Stop stops receiving initiator requests and disconnects all connected initiators.
-func (x *CIResponder) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (cr *CIResponder) Stop() {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("stop"))
 }
 
 // DeviceInfo wraps the corresponding Objective-C method.
-func (x *CIResponder) DeviceInfo() *CIDeviceInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+func (cr *CIResponder) DeviceInfo() *CIDeviceInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
-
-// CIResponderable is the interface implemented by [CIResponder], for mocking and DI.
-type CIResponderable interface {
-	obj.Object
-	NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool
-	SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool
-	Start() bool
-	Stop()
-	DeviceInfo() *CIDeviceInfo
-}
-
-var _ CIResponderable = (*CIResponder)(nil)

@@ -53,39 +53,28 @@ func NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(error
 	return aztecCodeDescriptorAdopt(_id)
 }
 
-// ErrorCorrectedPayload the error-corrected payload that comprises the the Aztec code symbol. Aztec Codes are formally specified in ISO/IEC 24778:2008(E). The error corrected payload consists of the 6-, 8-, 10-, or 12-bit message codewords produced at the end of the step described in section 7.3.1.2 "Formation of data codewords", which exists immediately prior to adding error correction. These codewords have dummy bits inserted to ensure that an entire codeword isn't all 0's or all 1's. Clients will need to remove these extra bits as part of interpreting the payload.
-func (x *AztecCodeDescriptor) ErrorCorrectedPayload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+// ErrorCorrectedPayload returns the error-corrected payload that comprises the the Aztec code symbol. Aztec Codes are formally specified in ISO/IEC 24778:2008(E). The error corrected payload consists of the 6-, 8-, 10-, or 12-bit message codewords produced at the end of the step described in section 7.3.1.2 "Formation of data codewords", which exists immediately prior to adding error correction. These codewords have dummy bits inserted to ensure that an entire codeword isn't all 0's or all 1's. Clients will need to remove these extra bits as part of interpreting the payload.
+func (acd *AztecCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(acd), objc.RegisterName("errorCorrectedPayload"))
 	return obj.Wrap(_r)
 }
 
-// IsCompact a Boolean value telling if the Aztec code is compact. Compact Aztec symbols use one-fewer ring in the central finder pattern than full-range Aztec symbols of the same number of data layers.
-func (x *AztecCodeDescriptor) IsCompact() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompact"))
+// IsCompact reports whether a Boolean value telling if the Aztec code is compact. Compact Aztec symbols use one-fewer ring in the central finder pattern than full-range Aztec symbols of the same number of data layers.
+func (acd *AztecCodeDescriptor) IsCompact() bool {
+	_r := objc.Send[bool](objref.IDOf(acd), objc.RegisterName("isCompact"))
 	return _r
 }
 
-// LayerCount the number of data layers in the Aztec code symbol. Combined with “isCompact-property“, the number of data layers determines the number of modules in the Aztec Code symbol. Valid values range from 1 to 32. Compact symbols can have up to 4 data layers. The number of data layers also determines the number of bits in each data codeword of the message carried by the Aztec Code symbol.
-func (x *AztecCodeDescriptor) LayerCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
+// LayerCount returns the number of data layers in the Aztec code symbol. Combined with “isCompact-property“, the number of data layers determines the number of modules in the Aztec Code symbol. Valid values range from 1 to 32. Compact symbols can have up to 4 data layers. The number of data layers also determines the number of bits in each data codeword of the message carried by the Aztec Code symbol.
+func (acd *AztecCodeDescriptor) LayerCount() int {
+	_r := objc.Send[int](objref.IDOf(acd), objc.RegisterName("layerCount"))
 	return _r
 }
 
-// DataCodewordCount the number of non-error-correction codewords carried by the Aztec code symbol. Used to determine the level of error correction in conjunction with the number of data layers. Valid values are 1 to 2048. Compact symbols can have up to 64 message codewords. > Note: this value can exceed the number of message codewords allowed by the number of data layers in this symbol. In this case, the actual number of message codewords is 1024 fewer than this value and the message payload is to be interpreted in an application-defined manner.
-func (x *AztecCodeDescriptor) DataCodewordCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataCodewordCount"))
+// DataCodewordCount returns the number of non-error-correction codewords carried by the Aztec code symbol. Used to determine the level of error correction in conjunction with the number of data layers. Valid values are 1 to 2048. Compact symbols can have up to 64 message codewords. > Note: this value can exceed the number of message codewords allowed by the number of data layers in this symbol. In this case, the actual number of message codewords is 1024 fewer than this value and the message payload is to be interpreted in an application-defined manner.
+func (acd *AztecCodeDescriptor) DataCodewordCount() int {
+	_r := objc.Send[int](objref.IDOf(acd), objc.RegisterName("dataCodewordCount"))
 	return _r
 }
-
-// AztecCodeDescriptorable is the interface implemented by [AztecCodeDescriptor], for mocking and DI.
-type AztecCodeDescriptorable interface {
-	obj.Object
-	ErrorCorrectedPayload() obj.Object
-	IsCompact() bool
-	LayerCount() int
-	DataCodewordCount() int
-}
-
-var _ AztecCodeDescriptorable = (*AztecCodeDescriptor)(nil)
 
 var _ BarcodeDescriptorProvider = (*AztecCodeDescriptor)(nil)

@@ -47,24 +47,24 @@ func asynchronousCIImageFilteringRequestAdopt(id objc.ID) *AsynchronousCIImageFi
 }
 
 // Description returns the object's -description text.
-func (x *AsynchronousCIImageFilteringRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (acifr *AsynchronousCIImageFilteringRequest) Description() string {
+	return rt.Description(objref.IDOf(acifr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AsynchronousCIImageFilteringRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (acifr *AsynchronousCIImageFilteringRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(acifr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AsynchronousCIImageFilteringRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (acifr *AsynchronousCIImageFilteringRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(acifr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AsynchronousCIImageFilteringRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (acifr *AsynchronousCIImageFilteringRequest) String() string {
+	return rt.Description(objref.IDOf(acifr))
 }
 
 // NewAsynchronousCIImageFilteringRequest creates a new AsynchronousCIImageFilteringRequest.
@@ -74,28 +74,18 @@ func NewAsynchronousCIImageFilteringRequest() *AsynchronousCIImageFilteringReque
 }
 
 // FinishWithImageContext provides the filtered video frame image to AVFoundation for further processing or display.
-func (x *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage obj.Object, context_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishWithImage:context:"), objref.IDOf(filteredImage), objref.IDOf(context_))
+func (acifr *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage obj.Object, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("finishWithImage:context:"), objref.IDOf(filteredImage), objref.IDOf(context_))
 }
 
-// RenderSize width and height for rendering frames.
-func (x *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("renderSize"))
+// RenderSize returns width and height for rendering frames.
+func (acifr *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(acifr), objc.RegisterName("renderSize"))
 	return _r
 }
 
-// SourceImage CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image.
-func (x *AsynchronousCIImageFilteringRequest) SourceImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceImage"))
+// SourceImage returns CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image.
+func (acifr *AsynchronousCIImageFilteringRequest) SourceImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("sourceImage"))
 	return obj.Wrap(_r)
 }
-
-// AsynchronousCIImageFilteringRequestable is the interface implemented by [AsynchronousCIImageFilteringRequest], for mocking and DI.
-type AsynchronousCIImageFilteringRequestable interface {
-	obj.Object
-	FinishWithImageContext(filteredImage obj.Object, context_ obj.Object)
-	RenderSize() corefoundation.CGSize
-	SourceImage() obj.Object
-}
-
-var _ AsynchronousCIImageFilteringRequestable = (*AsynchronousCIImageFilteringRequest)(nil)

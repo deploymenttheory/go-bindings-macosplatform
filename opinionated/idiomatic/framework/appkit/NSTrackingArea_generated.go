@@ -47,24 +47,24 @@ func trackingAreaAdopt(id objc.ID) *TrackingArea {
 }
 
 // Description returns the object's -description text.
-func (x *TrackingArea) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ta *TrackingArea) Description() string {
+	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrackingArea) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ta *TrackingArea) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrackingArea) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ta *TrackingArea) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TrackingArea) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ta *TrackingArea) String() string {
+	return rt.Description(objref.IDOf(ta))
 }
 
 // NewTrackingAreaWithRectOptionsOwnerUserInfo initializes and returns an object defining a region of a view to receive mouse-tracking events, mouse-moved events, cursor-update events, or possibly all these events.
@@ -75,36 +75,25 @@ func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, opt
 }
 
 // Rect wraps the corresponding Objective-C method.
-func (x *TrackingArea) Rect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rect"))
+func (ta *TrackingArea) Rect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ta), objc.RegisterName("rect"))
 	return _r
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *TrackingArea) Options() TrackingAreaOptions {
-	_r := objc.Send[TrackingAreaOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (ta *TrackingArea) Options() TrackingAreaOptions {
+	_r := objc.Send[TrackingAreaOptions](objref.IDOf(ta), objc.RegisterName("options"))
 	return _r
 }
 
 // Owner wraps the corresponding Objective-C method.
-func (x *TrackingArea) Owner() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owner"))
+func (ta *TrackingArea) Owner() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("owner"))
 	return obj.Wrap(_r)
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *TrackingArea) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (ta *TrackingArea) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
-
-// TrackingAreaable is the interface implemented by [TrackingArea], for mocking and DI.
-type TrackingAreaable interface {
-	obj.Object
-	Rect() corefoundation.CGRect
-	Options() TrackingAreaOptions
-	Owner() obj.Object
-	UserInfo() obj.Object
-}
-
-var _ TrackingAreaable = (*TrackingArea)(nil)

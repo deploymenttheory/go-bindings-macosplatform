@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewWorkoutType() *WorkoutType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutType")), objc.RegisterName("new"))
 	return workoutTypeAdopt(_id)
 }
-
-// WorkoutTypeable is the interface implemented by [WorkoutType], for mocking and DI.
-type WorkoutTypeable interface {
-	obj.Object
-}
-
-var _ WorkoutTypeable = (*WorkoutType)(nil)
 
 var _ SampleTypeProvider = (*WorkoutType)(nil)
 

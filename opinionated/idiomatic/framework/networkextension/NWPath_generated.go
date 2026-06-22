@@ -46,24 +46,24 @@ func nWPathAdopt(id objc.ID) *NWPath {
 }
 
 // Description returns the object's -description text.
-func (x *NWPath) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NWPath) Description() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NWPath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (np *NWPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NWPath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (np *NWPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NWPath) String() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NWPath) String() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // NewNWPath creates a new NWPath.
@@ -73,36 +73,25 @@ func NewNWPath() *NWPath {
 }
 
 // IsEqualToPath comparison method for NWPath objects.
-func (x *NWPath) IsEqualToPath(path *NWPath) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToPath:"), objref.IDOf(path))
+func (np *NWPath) IsEqualToPath(path *NWPath) bool {
+	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isEqualToPath:"), objref.IDOf(path))
 	return _r
 }
 
-// Status the evaluated NWPathStatus of the NWPath.
-func (x *NWPath) Status() NWPathStatus {
-	_r := objc.Send[NWPathStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the evaluated NWPathStatus of the NWPath.
+func (np *NWPath) Status() NWPathStatus {
+	_r := objc.Send[NWPathStatus](objref.IDOf(np), objc.RegisterName("status"))
 	return _r
 }
 
-// IsExpensive returns YES if the path is considered expensive, as when using a cellular data plan.
-func (x *NWPath) IsExpensive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExpensive"))
+// IsExpensive reports whether the path is considered expensive, as when using a cellular data plan.
+func (np *NWPath) IsExpensive() bool {
+	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isExpensive"))
 	return _r
 }
 
-// IsConstrained returns YES if the path is considered constrained, as when it is in save data mode.
-func (x *NWPath) IsConstrained() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstrained"))
+// IsConstrained reports whether the path is considered constrained, as when it is in save data mode.
+func (np *NWPath) IsConstrained() bool {
+	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isConstrained"))
 	return _r
 }
-
-// NWPathable is the interface implemented by [NWPath], for mocking and DI.
-type NWPathable interface {
-	obj.Object
-	IsEqualToPath(path *NWPath) bool
-	Status() NWPathStatus
-	IsExpensive() bool
-	IsConstrained() bool
-}
-
-var _ NWPathable = (*NWPath)(nil)

@@ -46,24 +46,24 @@ func extensionContextAdopt(id objc.ID) *ExtensionContext {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ec *ExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(ec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ec *ExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ec *ExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ec *ExtensionContext) String() string {
+	return rt.Description(objref.IDOf(ec))
 }
 
 // NewExtensionContext creates a new ExtensionContext.
@@ -73,34 +73,23 @@ func NewExtensionContext() *ExtensionContext {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ec *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ec
 }
 
 // CompleteRequestReturningItemsCompletionHandler tells the host app to complete the app extension request with an array of result items.
-func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequestReturningItems:completionHandler:"), objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (ec *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("completeRequestReturningItems:completionHandler:"), objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // OpenURLCompletionHandler asks the system to open a URL on behalf of the currently running app extension.
-func (x *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(uRL), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (ec *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(uRL), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // InputItems wraps the corresponding Objective-C method.
-func (x *ExtensionContext) InputItems() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputItems"))
+func (ec *ExtensionContext) InputItems() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("inputItems"))
 	return obj.Wrap(_r)
 }
-
-// ExtensionContextable is the interface implemented by [ExtensionContext], for mocking and DI.
-type ExtensionContextable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext
-	CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool))
-	OpenURLCompletionHandler(uRL string, completionHandler func(bool))
-	InputItems() obj.Object
-}
-
-var _ ExtensionContextable = (*ExtensionContext)(nil)

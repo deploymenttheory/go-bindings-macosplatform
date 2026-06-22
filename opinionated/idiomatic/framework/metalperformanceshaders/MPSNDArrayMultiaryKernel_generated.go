@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func nDArrayMultiaryKernelAdopt(id objc.ID) *NDArrayMultiaryKernel {
 	return x
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayMultiaryKernel) WithLabel(label string) *NDArrayMultiaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (namk *NDArrayMultiaryKernel) WithLabel(label string) *NDArrayMultiaryKernel {
+	objc.Send[objc.ID](objref.IDOf(namk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return namk
 }
-
-// NDArrayMultiaryKernelable is the interface implemented by [NDArrayMultiaryKernel], for mocking and DI.
-type NDArrayMultiaryKernelable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayMultiaryKernel
-}
-
-var _ NDArrayMultiaryKernelable = (*NDArrayMultiaryKernel)(nil)
 
 // isNDArrayMultiaryKernel marks NDArrayMultiaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayMultiaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayMultiaryKernel) isNDArrayMultiaryKernel() {}
+func (namk *NDArrayMultiaryKernel) isNDArrayMultiaryKernel() {}
 
 var _ NDArrayMultiaryKernelProvider = (*NDArrayMultiaryKernel)(nil)
 

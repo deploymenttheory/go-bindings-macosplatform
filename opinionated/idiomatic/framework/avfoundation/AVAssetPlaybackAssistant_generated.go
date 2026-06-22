@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func assetPlaybackAssistantAdopt(id objc.ID) *AssetPlaybackAssistant {
 }
 
 // Description returns the object's -description text.
-func (x *AssetPlaybackAssistant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apa *AssetPlaybackAssistant) Description() string {
+	return rt.Description(objref.IDOf(apa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetPlaybackAssistant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apa *AssetPlaybackAssistant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetPlaybackAssistant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apa *AssetPlaybackAssistant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetPlaybackAssistant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apa *AssetPlaybackAssistant) String() string {
+	return rt.Description(objref.IDOf(apa))
 }
 
 // NewAssetPlaybackAssistant creates a new AssetPlaybackAssistant.
@@ -76,7 +77,7 @@ func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 // LoadPlaybackConfigurationOptions loads playback configuration options for an asset.
 //
 // LoadPlaybackConfigurationOptions blocks until the operation completes or ctx is cancelled.
-func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (result obj.Object, err error) {
+func (apa *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -87,7 +88,7 @@ func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadPlaybackConfigurationOptionsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(apa), objc.RegisterName("loadPlaybackConfigurationOptionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -96,11 +97,3 @@ func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Co
 		return _zero, ctx.Err()
 	}
 }
-
-// AssetPlaybackAssistantable is the interface implemented by [AssetPlaybackAssistant], for mocking and DI.
-type AssetPlaybackAssistantable interface {
-	obj.Object
-	LoadPlaybackConfigurationOptions(ctx context.Context) (obj.Object, error)
-}
-
-var _ AssetPlaybackAssistantable = (*AssetPlaybackAssistant)(nil)

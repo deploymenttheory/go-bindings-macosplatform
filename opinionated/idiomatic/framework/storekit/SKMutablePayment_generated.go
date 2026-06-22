@@ -52,99 +52,49 @@ func NewMutablePayment() *MutablePayment {
 	return mutablePaymentAdopt(_id)
 }
 
-// WithApplicationUsername a string that associates the transaction with a user account on your service.
-func (x *MutablePayment) WithApplicationUsername(applicationUsername string) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
-	return x
+// WithApplicationUsername sets a string that associates the transaction with a user account on your service.
+func (mp *MutablePayment) WithApplicationUsername(applicationUsername string) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
+	return mp
 }
 
-// WithPaymentDiscount the details of the discount offer to apply to the payment.
-func (x *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
-	return x
+// WithPaymentDiscount sets the details of the discount offer to apply to the payment.
+func (mp *MutablePayment) WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
+	return mp
 }
 
-// WithProductIdentifier a string that identifies a product that can be purchased from within your app.
-func (x *MutablePayment) WithProductIdentifier(productIdentifier string) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
-	return x
+// WithProductIdentifier sets a string that identifies a product that can be purchased from within your app.
+func (mp *MutablePayment) WithProductIdentifier(productIdentifier string) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
+	return mp
 }
 
-// WithQuantity the number of items the user wants to purchase.
-func (x *MutablePayment) WithQuantity(quantity int) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
-	return x
+// WithQuantity sets the number of items the user wants to purchase.
+func (mp *MutablePayment) WithQuantity(quantity int) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setQuantity:"), quantity)
+	return mp
 }
 
-// WithRequestData reserved for future use.
-func (x *MutablePayment) WithRequestData(requestData obj.Object) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
-	return x
+// WithRequestData sets reserved for future use.
+func (mp *MutablePayment) WithRequestData(requestData obj.Object) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
+	return mp
 }
 
-// WithSimulatesAskToBuyInSandbox a Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
-func (x *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
-	return x
-}
-
-// SetApplicationUsername wraps the corresponding Objective-C method.
-func (x *MutablePayment) SetApplicationUsername(applicationUsername string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationUsername:"), purego.NSString(applicationUsername))
-}
-
-// SetPaymentDiscount wraps the corresponding Objective-C method.
-func (x *MutablePayment) SetPaymentDiscount(paymentDiscount *PaymentDiscount) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDiscount:"), objref.IDOf(paymentDiscount))
+// WithSimulatesAskToBuyInSandbox sets a Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
+func (mp *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
+	return mp
 }
 
 // ProductIdentifier wraps the corresponding Objective-C method.
-func (x *MutablePayment) ProductIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
+func (mp *MutablePayment) ProductIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetProductIdentifier wraps the corresponding Objective-C method.
-func (x *MutablePayment) SetProductIdentifier(productIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifier:"), purego.NSString(productIdentifier))
-}
-
-// SetQuantity wraps the corresponding Objective-C method.
-func (x *MutablePayment) SetQuantity(quantity int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuantity:"), quantity)
-}
-
-// SetRequestData wraps the corresponding Objective-C method.
-func (x *MutablePayment) SetRequestData(requestData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestData:"), objref.IDOf(requestData))
-}
-
-// SetSimulatesAskToBuyInSandbox wraps the corresponding Objective-C method.
-func (x *MutablePayment) SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatesAskToBuyInSandbox:"), simulatesAskToBuyInSandbox)
-}
-
-// MutablePaymentable is the interface implemented by [MutablePayment], for mocking and DI.
-type MutablePaymentable interface {
-	obj.Object
-	WithApplicationUsername(applicationUsername string) *MutablePayment
-	WithPaymentDiscount(paymentDiscount *PaymentDiscount) *MutablePayment
-	WithProductIdentifier(productIdentifier string) *MutablePayment
-	WithQuantity(quantity int) *MutablePayment
-	WithRequestData(requestData obj.Object) *MutablePayment
-	WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) *MutablePayment
-	SetApplicationUsername(applicationUsername string)
-	SetPaymentDiscount(paymentDiscount *PaymentDiscount)
-	ProductIdentifier() string
-	SetProductIdentifier(productIdentifier string)
-	SetQuantity(quantity int)
-	SetRequestData(requestData obj.Object)
-	SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool)
-}
-
-var _ MutablePaymentable = (*MutablePayment)(nil)
 
 var _ PaymentProvider = (*MutablePayment)(nil)

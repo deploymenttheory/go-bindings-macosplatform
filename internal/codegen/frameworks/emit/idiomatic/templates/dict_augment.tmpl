@@ -5,22 +5,22 @@
 */}}
 {{define "dict_augment"}}// Set stores value under key (an object) and returns the receiver so calls can
 // be chained.
-func (x *{{.GoTypeName}}) Set(key, value obj.Object) *{{.GoTypeName}} {
-objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
-return x
+func ({{.RecvVar}} *{{.GoTypeName}}) Set(key, value obj.Object) *{{.GoTypeName}} {
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
+return {{.RecvVar}}
 }
 
 // SetString stores value under the given string key and returns the receiver so
 // calls can be chained.
-func (x *{{.GoTypeName}}) SetString(key string, value obj.Object) *{{.GoTypeName}} {
-objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
-return x
+func ({{.RecvVar}} *{{.GoTypeName}}) SetString(key string, value obj.Object) *{{.GoTypeName}} {
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
+return {{.RecvVar}}
 }
 
 // Get returns the value stored under the given string key, or nil when there is
 // none.
-func (x *{{.GoTypeName}}) Get(key string) obj.Object {
-return obj.Wrap(objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(key)))
+func ({{.RecvVar}} *{{.GoTypeName}}) Get(key string) obj.Object {
+return obj.Wrap(objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName("objectForKey:"), purego.NSString(key)))
 }
 
 {{end}}

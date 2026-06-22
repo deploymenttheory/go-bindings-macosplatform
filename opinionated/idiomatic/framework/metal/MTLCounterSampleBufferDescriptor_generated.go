@@ -46,24 +46,24 @@ func counterSampleBufferDescriptorAdopt(id objc.ID) *CounterSampleBufferDescript
 }
 
 // Description returns the object's -description text.
-func (x *CounterSampleBufferDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (csbd *CounterSampleBufferDescriptor) Description() string {
+	return rt.Description(objref.IDOf(csbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CounterSampleBufferDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (csbd *CounterSampleBufferDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(csbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CounterSampleBufferDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (csbd *CounterSampleBufferDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(csbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CounterSampleBufferDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (csbd *CounterSampleBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(csbd))
 }
 
 // NewCounterSampleBufferDescriptor creates a new CounterSampleBufferDescriptor.
@@ -72,72 +72,41 @@ func NewCounterSampleBufferDescriptor() *CounterSampleBufferDescriptor {
 	return counterSampleBufferDescriptorAdopt(_id)
 }
 
-// WithLabel the name for the counter sample buffer you create with the descriptor.
-func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBufferDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the name for the counter sample buffer you create with the descriptor.
+func (csbd *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(csbd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return csbd
 }
 
-// WithStorageMode the memory storage mode for the counter sample buffers you create with the descriptor.
-func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode StorageMode) *CounterSampleBufferDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
-	return x
+// WithStorageMode sets the memory storage mode for the counter sample buffers you create with the descriptor.
+func (csbd *CounterSampleBufferDescriptor) WithStorageMode(storageMode StorageMode) *CounterSampleBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(csbd), objc.RegisterName("setStorageMode:"), storageMode)
+	return csbd
 }
 
-// WithSampleCount the number of instances of a counter set’s data that a counter sample buffer can store.
-func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount int) *CounterSampleBufferDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
-	return x
+// WithSampleCount sets the number of instances of a counter set’s data that a counter sample buffer can store.
+func (csbd *CounterSampleBufferDescriptor) WithSampleCount(sampleCount int) *CounterSampleBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(csbd), objc.RegisterName("setSampleCount:"), sampleCount)
+	return csbd
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *CounterSampleBufferDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (csbd *CounterSampleBufferDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(csbd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *CounterSampleBufferDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // StorageMode wraps the corresponding Objective-C method.
-func (x *CounterSampleBufferDescriptor) StorageMode() StorageMode {
-	_r := objc.Send[StorageMode](objref.IDOf(x), objc.RegisterName("storageMode"))
+func (csbd *CounterSampleBufferDescriptor) StorageMode() StorageMode {
+	_r := objc.Send[StorageMode](objref.IDOf(csbd), objc.RegisterName("storageMode"))
 	return _r
-}
-
-// SetStorageMode wraps the corresponding Objective-C method.
-func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode StorageMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 }
 
 // SampleCount wraps the corresponding Objective-C method.
-func (x *CounterSampleBufferDescriptor) SampleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+func (csbd *CounterSampleBufferDescriptor) SampleCount() int {
+	_r := objc.Send[int](objref.IDOf(csbd), objc.RegisterName("sampleCount"))
 	return _r
 }
-
-// SetSampleCount wraps the corresponding Objective-C method.
-func (x *CounterSampleBufferDescriptor) SetSampleCount(sampleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
-}
-
-// CounterSampleBufferDescriptorable is the interface implemented by [CounterSampleBufferDescriptor], for mocking and DI.
-type CounterSampleBufferDescriptorable interface {
-	obj.Object
-	WithLabel(label string) *CounterSampleBufferDescriptor
-	WithStorageMode(storageMode StorageMode) *CounterSampleBufferDescriptor
-	WithSampleCount(sampleCount int) *CounterSampleBufferDescriptor
-	Label() string
-	SetLabel(label string)
-	StorageMode() StorageMode
-	SetStorageMode(storageMode StorageMode)
-	SampleCount() int
-	SetSampleCount(sampleCount int)
-}
-
-var _ CounterSampleBufferDescriptorable = (*CounterSampleBufferDescriptor)(nil)

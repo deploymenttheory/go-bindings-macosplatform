@@ -51,87 +51,69 @@ func NewMTRTestClusterClusterTestComplexNullableOptionalRequestParams() *MTRTest
 }
 
 // WithNullableInt sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableInt(nullableInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableInt(nullableInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
+	return mtcctcnorp
 }
 
 // WithOptionalInt sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalInt(optionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalInt(optionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
+	return mtcctcnorp
 }
 
 // WithNullableOptionalInt sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
+	return mtcctcnorp
 }
 
 // WithNullableString sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableString(nullableString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableString:"), purego.NSString(nullableString))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableString(nullableString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableString:"), purego.NSString(nullableString))
+	return mtcctcnorp
 }
 
 // WithOptionalString sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalString(optionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalString:"), purego.NSString(optionalString))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalString(optionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setOptionalString:"), purego.NSString(optionalString))
+	return mtcctcnorp
 }
 
 // WithNullableOptionalString sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalString(nullableOptionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalString:"), purego.NSString(nullableOptionalString))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalString(nullableOptionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableOptionalString:"), purego.NSString(nullableOptionalString))
+	return mtcctcnorp
 }
 
 // WithNullableStruct sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
+	return mtcctcnorp
 }
 
 // WithOptionalStruct sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
+	return mtcctcnorp
 }
 
 // WithNullableOptionalStruct sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
-	return x
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
+	return mtcctcnorp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcctcnorp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtcctcnorp
 }
-
-// MTRTestClusterClusterTestComplexNullableOptionalRequestParamsable is the interface implemented by [MTRTestClusterClusterTestComplexNullableOptionalRequestParams], for mocking and DI.
-type MTRTestClusterClusterTestComplexNullableOptionalRequestParamsable interface {
-	obj.Object
-	WithNullableInt(nullableInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithOptionalInt(optionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithNullableString(nullableString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithOptionalString(optionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithNullableOptionalString(nullableOptionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
-}
-
-var _ MTRTestClusterClusterTestComplexNullableOptionalRequestParamsable = (*MTRTestClusterClusterTestComplexNullableOptionalRequestParams)(nil)
 
 var _ MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider = (*MTRTestClusterClusterTestComplexNullableOptionalRequestParams)(nil)

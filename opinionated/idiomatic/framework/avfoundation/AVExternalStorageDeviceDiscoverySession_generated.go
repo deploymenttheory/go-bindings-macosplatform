@@ -46,24 +46,24 @@ func externalStorageDeviceDiscoverySessionAdopt(id objc.ID) *ExternalStorageDevi
 }
 
 // Description returns the object's -description text.
-func (x *ExternalStorageDeviceDiscoverySession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esdds *ExternalStorageDeviceDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(esdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExternalStorageDeviceDiscoverySession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esdds *ExternalStorageDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExternalStorageDeviceDiscoverySession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esdds *ExternalStorageDeviceDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExternalStorageDeviceDiscoverySession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esdds *ExternalStorageDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(esdds))
 }
 
 // NewExternalStorageDeviceDiscoverySession creates a new ExternalStorageDeviceDiscoverySession.
@@ -72,18 +72,10 @@ func NewExternalStorageDeviceDiscoverySession() *ExternalStorageDeviceDiscoveryS
 	return externalStorageDeviceDiscoverySessionAdopt(_id)
 }
 
-// ExternalStorageDevices an array of external storage devices connected to this device. Read only. Key-value observable. An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
+// ExternalStorageDevices returns an array of external storage devices connected to this device. Read only. Key-value observable. An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
 //
 // ExternalStorageDevices returns the collection as a Go slice.
-func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("externalStorageDevices"))
+func (esdds *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(esdds), objc.RegisterName("externalStorageDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExternalStorageDevice { return ExternalStorageDeviceFromID(_id) })
 }
-
-// ExternalStorageDeviceDiscoverySessionable is the interface implemented by [ExternalStorageDeviceDiscoverySession], for mocking and DI.
-type ExternalStorageDeviceDiscoverySessionable interface {
-	obj.Object
-	ExternalStorageDevices() []*ExternalStorageDevice
-}
-
-var _ ExternalStorageDeviceDiscoverySessionable = (*ExternalStorageDeviceDiscoverySession)(nil)

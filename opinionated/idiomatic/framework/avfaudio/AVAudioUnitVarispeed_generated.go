@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,23 @@ func NewAudioUnitVarispeed() *AudioUnitVarispeed {
 	return audioUnitVarispeedAdopt(_id)
 }
 
-// WithRate the audio playback rate.
-func (x *AudioUnitVarispeed) WithRate(rate float32) *AudioUnitVarispeed {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the audio playback rate.
+func (auv *AudioUnitVarispeed) WithRate(rate float32) *AudioUnitVarispeed {
+	objc.Send[objc.ID](objref.IDOf(auv), objc.RegisterName("setRate:"), rate)
+	return auv
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (auv *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {
+	objc.Send[objc.ID](objref.IDOf(auv), objc.RegisterName("setBypass:"), bypass)
+	return auv
 }
 
 // Rate wraps the corresponding Objective-C method.
-func (x *AudioUnitVarispeed) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+func (auv *AudioUnitVarispeed) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(auv), objc.RegisterName("rate"))
 	return _r
 }
-
-// SetRate wraps the corresponding Objective-C method.
-func (x *AudioUnitVarispeed) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-}
-
-// AudioUnitVarispeedable is the interface implemented by [AudioUnitVarispeed], for mocking and DI.
-type AudioUnitVarispeedable interface {
-	obj.Object
-	WithRate(rate float32) *AudioUnitVarispeed
-	WithBypass(bypass bool) *AudioUnitVarispeed
-	Rate() float32
-	SetRate(rate float32)
-}
-
-var _ AudioUnitVarispeedable = (*AudioUnitVarispeed)(nil)
 
 var _ AudioUnitTimeEffectProvider = (*AudioUnitVarispeed)(nil)
 

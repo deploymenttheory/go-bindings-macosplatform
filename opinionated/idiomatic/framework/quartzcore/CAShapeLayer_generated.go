@@ -53,613 +53,459 @@ func NewShapeLayer() *ShapeLayer {
 	return shapeLayerAdopt(_id)
 }
 
-// WithPath the path defining the shape to be rendered. Animatable.
-func (x *ShapeLayer) WithPath(path obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path defining the shape to be rendered. Animatable.
+func (sl *ShapeLayer) WithPath(path obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return sl
 }
 
-// WithFillColor the color used to fill the shape’s path. Animatable.
-func (x *ShapeLayer) WithFillColor(fillColor obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the color used to fill the shape’s path. Animatable.
+func (sl *ShapeLayer) WithFillColor(fillColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return sl
 }
 
-// WithFillRule the fill rule used when filling the shape’s path.
-func (x *ShapeLayer) WithFillRule(fillRule obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillRule:"), objref.IDOf(fillRule))
-	return x
+// WithFillRule sets the fill rule used when filling the shape’s path.
+func (sl *ShapeLayer) WithFillRule(fillRule obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFillRule:"), objref.IDOf(fillRule))
+	return sl
 }
 
-// WithStrokeColor the color used to stroke the shape’s path. Animatable.
-func (x *ShapeLayer) WithStrokeColor(strokeColor obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the color used to stroke the shape’s path. Animatable.
+func (sl *ShapeLayer) WithStrokeColor(strokeColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return sl
 }
 
-// WithStrokeStart the relative location at which to begin stroking the path. Animatable.
-func (x *ShapeLayer) WithStrokeStart(strokeStart float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
-	return x
+// WithStrokeStart sets the relative location at which to begin stroking the path. Animatable.
+func (sl *ShapeLayer) WithStrokeStart(strokeStart float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStrokeStart:"), strokeStart)
+	return sl
 }
 
-// WithStrokeEnd the relative location at which to stop stroking the path. Animatable.
-func (x *ShapeLayer) WithStrokeEnd(strokeEnd float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
-	return x
+// WithStrokeEnd sets the relative location at which to stop stroking the path. Animatable.
+func (sl *ShapeLayer) WithStrokeEnd(strokeEnd float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStrokeEnd:"), strokeEnd)
+	return sl
 }
 
-// WithLineWidth specifies the line width of the shape’s path. Animatable.
-func (x *ShapeLayer) WithLineWidth(lineWidth float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets specifies the line width of the shape’s path. Animatable.
+func (sl *ShapeLayer) WithLineWidth(lineWidth float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineWidth:"), lineWidth)
+	return sl
 }
 
-// WithMiterLimit the miter limit used when stroking the shape’s path. Animatable.
-func (x *ShapeLayer) WithMiterLimit(miterLimit float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the miter limit used when stroking the shape’s path. Animatable.
+func (sl *ShapeLayer) WithMiterLimit(miterLimit float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return sl
 }
 
-// WithLineCap specifies the line cap style for the shape’s path.
-func (x *ShapeLayer) WithLineCap(lineCap obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineCap:"), objref.IDOf(lineCap))
-	return x
+// WithLineCap sets specifies the line cap style for the shape’s path.
+func (sl *ShapeLayer) WithLineCap(lineCap obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineCap:"), objref.IDOf(lineCap))
+	return sl
 }
 
-// WithLineJoin specifies the line join style for the shape’s path.
-func (x *ShapeLayer) WithLineJoin(lineJoin obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineJoin:"), objref.IDOf(lineJoin))
-	return x
+// WithLineJoin sets specifies the line join style for the shape’s path.
+func (sl *ShapeLayer) WithLineJoin(lineJoin obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineJoin:"), objref.IDOf(lineJoin))
+	return sl
 }
 
-// WithLineDashPhase the dash phase applied to the shape’s path when stroked. Animatable.
-func (x *ShapeLayer) WithLineDashPhase(lineDashPhase float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
-	return x
+// WithLineDashPhase sets the dash phase applied to the shape’s path when stroked. Animatable.
+func (sl *ShapeLayer) WithLineDashPhase(lineDashPhase float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return sl
 }
 
-// WithLineDashPattern the dash pattern applied to the shape’s path when stroked.
-func (x *ShapeLayer) WithLineDashPattern(items ...obj.Object) *ShapeLayer {
+// WithLineDashPattern sets the dash pattern applied to the shape’s path when stroked.
+func (sl *ShapeLayer) WithLineDashPattern(items ...obj.Object) *ShapeLayer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineDashPattern:"), _arr)
+	return sl
 }
 
-// WithBounds the layer’s bounds rectangle. Animatable.
-func (x *ShapeLayer) WithBounds(bounds corefoundation.CGRect) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the layer’s bounds rectangle. Animatable.
+func (sl *ShapeLayer) WithBounds(bounds corefoundation.CGRect) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBounds:"), bounds)
+	return sl
 }
 
-// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
-func (x *ShapeLayer) WithPosition(position corefoundation.CGPoint) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the layer’s position in its superlayer’s coordinate space. Animatable.
+func (sl *ShapeLayer) WithPosition(position corefoundation.CGPoint) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPosition:"), position)
+	return sl
 }
 
-// WithZPosition the layer’s position on the z axis. Animatable.
-func (x *ShapeLayer) WithZPosition(zPosition float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the layer’s position on the z axis. Animatable.
+func (sl *ShapeLayer) WithZPosition(zPosition float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setZPosition:"), zPosition)
+	return sl
 }
 
-// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
-func (x *ShapeLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (sl *ShapeLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return sl
 }
 
-// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
-func (x *ShapeLayer) WithAnchorPointZ(anchorPointZ float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
-	return x
+// WithAnchorPointZ sets the anchor point for the layer’s position along the z axis. Animatable.
+func (sl *ShapeLayer) WithAnchorPointZ(anchorPointZ float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return sl
 }
 
-// WithFrame the layer’s frame rectangle.
-func (x *ShapeLayer) WithFrame(frame corefoundation.CGRect) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the layer’s frame rectangle.
+func (sl *ShapeLayer) WithFrame(frame corefoundation.CGRect) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFrame:"), frame)
+	return sl
 }
 
-// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
-func (x *ShapeLayer) WithHidden(hidden bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean indicating whether the layer is displayed. Animatable.
+func (sl *ShapeLayer) WithHidden(hidden bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setHidden:"), hidden)
+	return sl
 }
 
-// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-func (x *ShapeLayer) WithDoubleSided(doubleSided bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
-	return x
+// WithDoubleSided sets a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (sl *ShapeLayer) WithDoubleSided(doubleSided bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return sl
 }
 
-// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-func (x *ShapeLayer) WithGeometryFlipped(geometryFlipped bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-	return x
+// WithGeometryFlipped sets a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (sl *ShapeLayer) WithGeometryFlipped(geometryFlipped bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return sl
 }
 
-// WithSublayers an array containing the layer’s sublayers.
-func (x *ShapeLayer) WithSublayers(items ...LayerProvider) *ShapeLayer {
+// WithSublayers sets an array containing the layer’s sublayers.
+func (sl *ShapeLayer) WithSublayers(items ...LayerProvider) *ShapeLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setSublayers:"), _arr)
+	return sl
 }
 
-// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
-func (x *ShapeLayer) WithMask(mask LayerProvider) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+// WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
+func (sl *ShapeLayer) WithMask(mask LayerProvider) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return sl
 }
 
-// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-func (x *ShapeLayer) WithMasksToBounds(masksToBounds bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
-	return x
+// WithMasksToBounds sets a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (sl *ShapeLayer) WithMasksToBounds(masksToBounds bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return sl
 }
 
-// WithContents an object that provides the contents of the layer. Animatable.
-func (x *ShapeLayer) WithContents(contents obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
-	return x
+// WithContents sets an object that provides the contents of the layer. Animatable.
+func (sl *ShapeLayer) WithContents(contents obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return sl
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-func (x *ShapeLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (sl *ShapeLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsRect:"), contentsRect)
+	return sl
 }
 
-// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-func (x *ShapeLayer) WithContentsGravity(contentsGravity obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
-	return x
+// WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (sl *ShapeLayer) WithContentsGravity(contentsGravity obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return sl
 }
 
-// WithContentsScale the scale factor applied to the layer.
-func (x *ShapeLayer) WithContentsScale(contentsScale float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
-	return x
+// WithContentsScale sets the scale factor applied to the layer.
+func (sl *ShapeLayer) WithContentsScale(contentsScale float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsScale:"), contentsScale)
+	return sl
 }
 
-// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-func (x *ShapeLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
-	return x
+// WithContentsCenter sets the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (sl *ShapeLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return sl
 }
 
-// WithContentsFormat a hint for the desired storage format of the layer contents.
-func (x *ShapeLayer) WithContentsFormat(contentsFormat obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
-	return x
+// WithContentsFormat sets a hint for the desired storage format of the layer contents.
+func (sl *ShapeLayer) WithContentsFormat(contentsFormat obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return sl
 }
 
 // WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
-func (x *ShapeLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
-	return x
+func (sl *ShapeLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return sl
 }
 
 // WithToneMapMode sets the property and returns the receiver so calls can be chained.
-func (x *ShapeLayer) WithToneMapMode(toneMapMode obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
-	return x
+func (sl *ShapeLayer) WithToneMapMode(toneMapMode obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return sl
 }
 
 // WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
-func (x *ShapeLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
-	return x
+func (sl *ShapeLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return sl
 }
 
 // WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
-func (x *ShapeLayer) WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
-	return x
+func (sl *ShapeLayer) WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return sl
 }
 
-// WithMinificationFilter the filter used when reducing the size of the content.
-func (x *ShapeLayer) WithMinificationFilter(minificationFilter obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
-	return x
+// WithMinificationFilter sets the filter used when reducing the size of the content.
+func (sl *ShapeLayer) WithMinificationFilter(minificationFilter obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return sl
 }
 
-// WithMagnificationFilter the filter used when increasing the size of the content.
-func (x *ShapeLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
-	return x
+// WithMagnificationFilter sets the filter used when increasing the size of the content.
+func (sl *ShapeLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return sl
 }
 
-// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
-func (x *ShapeLayer) WithMinificationFilterBias(minificationFilterBias float32) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
-	return x
+// WithMinificationFilterBias sets the bias factor used by the minification filter to determine the levels of detail.
+func (sl *ShapeLayer) WithMinificationFilterBias(minificationFilterBias float32) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return sl
 }
 
-// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
-func (x *ShapeLayer) WithOpaque(opaque bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value indicating whether the layer contains completely opaque content.
+func (sl *ShapeLayer) WithOpaque(opaque bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setOpaque:"), opaque)
+	return sl
 }
 
-// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-func (x *ShapeLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
-	return x
+// WithNeedsDisplayOnBoundsChange sets a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (sl *ShapeLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return sl
 }
 
-// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-func (x *ShapeLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
-	return x
+// WithDrawsAsynchronously sets a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (sl *ShapeLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return sl
 }
 
-// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
-func (x *ShapeLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
-	return x
+// WithEdgeAntialiasingMask sets a bitmask defining how the edges of the receiver are rasterized.
+func (sl *ShapeLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return sl
 }
 
-// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
-func (x *ShapeLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
-	return x
+// WithAllowsEdgeAntialiasing sets a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (sl *ShapeLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return sl
 }
 
-// WithBackgroundColor the background color of the receiver. Animatable.
-func (x *ShapeLayer) WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the receiver. Animatable.
+func (sl *ShapeLayer) WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return sl
 }
 
-// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
-func (x *ShapeLayer) WithCornerRadius(cornerRadius float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (sl *ShapeLayer) WithCornerRadius(cornerRadius float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return sl
 }
 
 // WithMaskedCorners sets the property and returns the receiver so calls can be chained.
-func (x *ShapeLayer) WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
-	return x
+func (sl *ShapeLayer) WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return sl
 }
 
 // WithCornerCurve sets the property and returns the receiver so calls can be chained.
-func (x *ShapeLayer) WithCornerCurve(cornerCurve obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
-	return x
+func (sl *ShapeLayer) WithCornerCurve(cornerCurve obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return sl
 }
 
-// WithBorderWidth the width of the layer’s border. Animatable.
-func (x *ShapeLayer) WithBorderWidth(borderWidth float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the layer’s border. Animatable.
+func (sl *ShapeLayer) WithBorderWidth(borderWidth float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return sl
 }
 
-// WithBorderColor the color of the layer’s border. Animatable.
-func (x *ShapeLayer) WithBorderColor(borderColor obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the layer’s border. Animatable.
+func (sl *ShapeLayer) WithBorderColor(borderColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return sl
 }
 
-// WithOpacity the opacity of the receiver. Animatable.
-func (x *ShapeLayer) WithOpacity(opacity float32) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
-	return x
+// WithOpacity sets the opacity of the receiver. Animatable.
+func (sl *ShapeLayer) WithOpacity(opacity float32) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setOpacity:"), opacity)
+	return sl
 }
 
-// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-func (x *ShapeLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-	return x
+// WithAllowsGroupOpacity sets a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (sl *ShapeLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return sl
 }
 
-// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
-func (x *ShapeLayer) WithCompositingFilter(compositingFilter obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+// WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (sl *ShapeLayer) WithCompositingFilter(compositingFilter obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return sl
 }
 
-// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-func (x *ShapeLayer) WithShouldRasterize(shouldRasterize bool) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (sl *ShapeLayer) WithShouldRasterize(shouldRasterize bool) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return sl
 }
 
-// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-func (x *ShapeLayer) WithRasterizationScale(rasterizationScale float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
-	return x
+// WithRasterizationScale sets the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (sl *ShapeLayer) WithRasterizationScale(rasterizationScale float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return sl
 }
 
-// WithShadowColor the color of the layer’s shadow. Animatable.
-func (x *ShapeLayer) WithShadowColor(shadowColor obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
-	return x
+// WithShadowColor sets the color of the layer’s shadow. Animatable.
+func (sl *ShapeLayer) WithShadowColor(shadowColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return sl
 }
 
-// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
-func (x *ShapeLayer) WithShadowOpacity(shadowOpacity float32) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
-	return x
+// WithShadowOpacity sets the opacity of the layer’s shadow. Animatable.
+func (sl *ShapeLayer) WithShadowOpacity(shadowOpacity float32) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return sl
 }
 
-// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
-func (x *ShapeLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
-	return x
+// WithShadowOffset sets the offset (in points) of the layer’s shadow. Animatable.
+func (sl *ShapeLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return sl
 }
 
-// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
-func (x *ShapeLayer) WithShadowRadius(shadowRadius float64) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
-	return x
+// WithShadowRadius sets the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (sl *ShapeLayer) WithShadowRadius(shadowRadius float64) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return sl
 }
 
-// WithShadowPath the shape of the layer’s shadow. Animatable.
-func (x *ShapeLayer) WithShadowPath(shadowPath obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
-	return x
+// WithShadowPath sets the shape of the layer’s shadow. Animatable.
+func (sl *ShapeLayer) WithShadowPath(shadowPath obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return sl
 }
 
-// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
-func (x *ShapeLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+// WithAutoresizingMask sets a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (sl *ShapeLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return sl
 }
 
-// WithActions a dictionary containing layer actions.
-func (x *ShapeLayer) WithActions(actions obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-	return x
+// WithActions sets a dictionary containing layer actions.
+func (sl *ShapeLayer) WithActions(actions obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return sl
 }
 
-// WithName the name of the receiver.
-func (x *ShapeLayer) WithName(name string) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (sl *ShapeLayer) WithName(name string) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setName:"), purego.NSString(name))
+	return sl
 }
 
-// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
-func (x *ShapeLayer) WithStyle(style obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-	return x
+// WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (sl *ShapeLayer) WithStyle(style obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return sl
 }
 
-// WithConstraints the constraints used to position current layer’s sublayers.
-func (x *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
+// WithConstraints sets the constraints used to position current layer’s sublayers.
+func (sl *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setConstraints:"), _arr)
+	return sl
 }
 
 // Path wraps the corresponding Objective-C method.
-func (x *ShapeLayer) Path() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (sl *ShapeLayer) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("path"))
 	return obj.Wrap(_r)
-}
-
-// SetPath wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetPath(path obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
 // FillColor wraps the corresponding Objective-C method.
-func (x *ShapeLayer) FillColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+func (sl *ShapeLayer) FillColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillColor"))
 	return obj.Wrap(_r)
-}
-
-// SetFillColor wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetFillColor(fillColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
 // FillRule wraps the corresponding Objective-C method.
-func (x *ShapeLayer) FillRule() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillRule"))
+func (sl *ShapeLayer) FillRule() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillRule"))
 	return obj.Wrap(_r)
-}
-
-// SetFillRule wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetFillRule(fillRule obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillRule:"), objref.IDOf(fillRule))
 }
 
 // StrokeColor wraps the corresponding Objective-C method.
-func (x *ShapeLayer) StrokeColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeColor"))
+func (sl *ShapeLayer) StrokeColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("strokeColor"))
 	return obj.Wrap(_r)
-}
-
-// SetStrokeColor wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetStrokeColor(strokeColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 }
 
 // StrokeStart wraps the corresponding Objective-C method.
-func (x *ShapeLayer) StrokeStart() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeStart"))
+func (sl *ShapeLayer) StrokeStart() float64 {
+	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("strokeStart"))
 	return _r
-}
-
-// SetStrokeStart wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetStrokeStart(strokeStart float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 }
 
 // StrokeEnd wraps the corresponding Objective-C method.
-func (x *ShapeLayer) StrokeEnd() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeEnd"))
+func (sl *ShapeLayer) StrokeEnd() float64 {
+	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("strokeEnd"))
 	return _r
-}
-
-// SetStrokeEnd wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetStrokeEnd(strokeEnd float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 }
 
 // LineWidth wraps the corresponding Objective-C method.
-func (x *ShapeLayer) LineWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+func (sl *ShapeLayer) LineWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("lineWidth"))
 	return _r
-}
-
-// SetLineWidth wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetLineWidth(lineWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
 // MiterLimit wraps the corresponding Objective-C method.
-func (x *ShapeLayer) MiterLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("miterLimit"))
+func (sl *ShapeLayer) MiterLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("miterLimit"))
 	return _r
-}
-
-// SetMiterLimit wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetMiterLimit(miterLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 }
 
 // LineCap wraps the corresponding Objective-C method.
-func (x *ShapeLayer) LineCap() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineCap"))
+func (sl *ShapeLayer) LineCap() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineCap"))
 	return obj.Wrap(_r)
-}
-
-// SetLineCap wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetLineCap(lineCap obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineCap:"), objref.IDOf(lineCap))
 }
 
 // LineJoin wraps the corresponding Objective-C method.
-func (x *ShapeLayer) LineJoin() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineJoin"))
+func (sl *ShapeLayer) LineJoin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineJoin"))
 	return obj.Wrap(_r)
 }
 
-// SetLineJoin wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetLineJoin(lineJoin obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineJoin:"), objref.IDOf(lineJoin))
-}
-
 // LineDashPhase wraps the corresponding Objective-C method.
-func (x *ShapeLayer) LineDashPhase() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineDashPhase"))
+func (sl *ShapeLayer) LineDashPhase() float64 {
+	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("lineDashPhase"))
 	return _r
-}
-
-// SetLineDashPhase wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetLineDashPhase(lineDashPhase float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 }
 
 // LineDashPattern wraps the corresponding Objective-C method.
 //
 // LineDashPattern returns the collection as a Go slice.
-func (x *ShapeLayer) LineDashPattern() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineDashPattern"))
+func (sl *ShapeLayer) LineDashPattern() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineDashPattern"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetLineDashPattern wraps the corresponding Objective-C method.
-func (x *ShapeLayer) SetLineDashPattern(lineDashPattern []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), purego.SliceToNSArray(lineDashPattern, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ShapeLayerable is the interface implemented by [ShapeLayer], for mocking and DI.
-type ShapeLayerable interface {
-	obj.Object
-	WithPath(path obj.Object) *ShapeLayer
-	WithFillColor(fillColor obj.Object) *ShapeLayer
-	WithFillRule(fillRule obj.Object) *ShapeLayer
-	WithStrokeColor(strokeColor obj.Object) *ShapeLayer
-	WithStrokeStart(strokeStart float64) *ShapeLayer
-	WithStrokeEnd(strokeEnd float64) *ShapeLayer
-	WithLineWidth(lineWidth float64) *ShapeLayer
-	WithMiterLimit(miterLimit float64) *ShapeLayer
-	WithLineCap(lineCap obj.Object) *ShapeLayer
-	WithLineJoin(lineJoin obj.Object) *ShapeLayer
-	WithLineDashPhase(lineDashPhase float64) *ShapeLayer
-	WithLineDashPattern(items ...obj.Object) *ShapeLayer
-	WithBounds(bounds corefoundation.CGRect) *ShapeLayer
-	WithPosition(position corefoundation.CGPoint) *ShapeLayer
-	WithZPosition(zPosition float64) *ShapeLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ShapeLayer
-	WithAnchorPointZ(anchorPointZ float64) *ShapeLayer
-	WithFrame(frame corefoundation.CGRect) *ShapeLayer
-	WithHidden(hidden bool) *ShapeLayer
-	WithDoubleSided(doubleSided bool) *ShapeLayer
-	WithGeometryFlipped(geometryFlipped bool) *ShapeLayer
-	WithSublayers(items ...LayerProvider) *ShapeLayer
-	WithMask(mask LayerProvider) *ShapeLayer
-	WithMasksToBounds(masksToBounds bool) *ShapeLayer
-	WithContents(contents obj.Object) *ShapeLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *ShapeLayer
-	WithContentsGravity(contentsGravity obj.Object) *ShapeLayer
-	WithContentsScale(contentsScale float64) *ShapeLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *ShapeLayer
-	WithContentsFormat(contentsFormat obj.Object) *ShapeLayer
-	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ShapeLayer
-	WithToneMapMode(toneMapMode obj.Object) *ShapeLayer
-	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer
-	WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer
-	WithMinificationFilter(minificationFilter obj.Object) *ShapeLayer
-	WithMagnificationFilter(magnificationFilter obj.Object) *ShapeLayer
-	WithMinificationFilterBias(minificationFilterBias float32) *ShapeLayer
-	WithOpaque(opaque bool) *ShapeLayer
-	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ShapeLayer
-	WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ShapeLayer
-	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ShapeLayer
-	WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer
-	WithCornerRadius(cornerRadius float64) *ShapeLayer
-	WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer
-	WithCornerCurve(cornerCurve obj.Object) *ShapeLayer
-	WithBorderWidth(borderWidth float64) *ShapeLayer
-	WithBorderColor(borderColor obj.Object) *ShapeLayer
-	WithOpacity(opacity float32) *ShapeLayer
-	WithAllowsGroupOpacity(allowsGroupOpacity bool) *ShapeLayer
-	WithCompositingFilter(compositingFilter obj.Object) *ShapeLayer
-	WithShouldRasterize(shouldRasterize bool) *ShapeLayer
-	WithRasterizationScale(rasterizationScale float64) *ShapeLayer
-	WithShadowColor(shadowColor obj.Object) *ShapeLayer
-	WithShadowOpacity(shadowOpacity float32) *ShapeLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *ShapeLayer
-	WithShadowRadius(shadowRadius float64) *ShapeLayer
-	WithShadowPath(shadowPath obj.Object) *ShapeLayer
-	WithAutoresizingMask(autoresizingMask AutoresizingMask) *ShapeLayer
-	WithActions(actions obj.Object) *ShapeLayer
-	WithName(name string) *ShapeLayer
-	WithStyle(style obj.Object) *ShapeLayer
-	WithConstraints(items ...*Constraint) *ShapeLayer
-	Path() obj.Object
-	SetPath(path obj.Object)
-	FillColor() obj.Object
-	SetFillColor(fillColor obj.Object)
-	FillRule() obj.Object
-	SetFillRule(fillRule obj.Object)
-	StrokeColor() obj.Object
-	SetStrokeColor(strokeColor obj.Object)
-	StrokeStart() float64
-	SetStrokeStart(strokeStart float64)
-	StrokeEnd() float64
-	SetStrokeEnd(strokeEnd float64)
-	LineWidth() float64
-	SetLineWidth(lineWidth float64)
-	MiterLimit() float64
-	SetMiterLimit(miterLimit float64)
-	LineCap() obj.Object
-	SetLineCap(lineCap obj.Object)
-	LineJoin() obj.Object
-	SetLineJoin(lineJoin obj.Object)
-	LineDashPhase() float64
-	SetLineDashPhase(lineDashPhase float64)
-	LineDashPattern() []obj.Object
-	SetLineDashPattern(lineDashPattern []obj.Object)
-}
-
-var _ ShapeLayerable = (*ShapeLayer)(nil)
 
 var _ LayerProvider = (*ShapeLayer)(nil)

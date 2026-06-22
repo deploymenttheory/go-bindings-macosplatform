@@ -44,24 +44,24 @@ func mTRDoorLockClusterGetWeekDayScheduleParamsAdopt(id objc.ID) *MTRDoorLockClu
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) Description() string {
+	return rt.Description(objref.IDOf(mdlcgwdsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcgwdsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcgwdsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) String() string {
+	return rt.Description(objref.IDOf(mdlcgwdsp))
 }
 
 // NewMTRDoorLockClusterGetWeekDayScheduleParams creates a new MTRDoorLockClusterGetWeekDayScheduleParams.
@@ -71,88 +71,49 @@ func NewMTRDoorLockClusterGetWeekDayScheduleParams() *MTRDoorLockClusterGetWeekD
 }
 
 // WithWeekDayIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
-	return x
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
+	return mdlcgwdsp
 }
 
 // WithUserIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
-	return x
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
+	return mdlcgwdsp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdlcgwdsp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdlcgwdsp
 }
 
 // WeekDayIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) WeekDayIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weekDayIndex"))
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WeekDayIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("weekDayIndex"))
 	return obj.Wrap(_r)
-}
-
-// SetWeekDayIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) SetWeekDayIndex(weekDayIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 }
 
 // UserIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) UserIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) UserIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// SetUserIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) SetUserIndex(userIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterGetWeekDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDoorLockClusterGetWeekDayScheduleParamsable is the interface implemented by [MTRDoorLockClusterGetWeekDayScheduleParams], for mocking and DI.
-type MTRDoorLockClusterGetWeekDayScheduleParamsable interface {
-	obj.Object
-	WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams
-	WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams
-	WeekDayIndex() obj.Object
-	SetWeekDayIndex(weekDayIndex obj.Object)
-	UserIndex() obj.Object
-	SetUserIndex(userIndex obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDoorLockClusterGetWeekDayScheduleParamsable = (*MTRDoorLockClusterGetWeekDayScheduleParams)(nil)

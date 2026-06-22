@@ -53,283 +53,192 @@ func NewCapturePhotoOutput() *CapturePhotoOutput {
 	return capturePhotoOutputAdopt(_id)
 }
 
-// WithMaxPhotoQualityPrioritization the highest quality the photo output should prepare to deliver on a capture-by-capture basis.
-func (x *CapturePhotoOutput) WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization CapturePhotoQualityPrioritization) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPhotoQualityPrioritization:"), maxPhotoQualityPrioritization)
-	return x
+// WithMaxPhotoQualityPrioritization sets the highest quality the photo output should prepare to deliver on a capture-by-capture basis.
+func (cpo *CapturePhotoOutput) WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization CapturePhotoQualityPrioritization) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setMaxPhotoQualityPrioritization:"), maxPhotoQualityPrioritization)
+	return cpo
 }
 
-// WithFastCapturePrioritizationSupported a Boolean value that indicates whether the photo output supports fast capture prioritization.
-func (x *CapturePhotoOutput) WithFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFastCapturePrioritizationSupported:"), fastCapturePrioritizationSupported)
-	return x
+// WithFastCapturePrioritizationSupported sets a Boolean value that indicates whether the photo output supports fast capture prioritization.
+func (cpo *CapturePhotoOutput) WithFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setFastCapturePrioritizationSupported:"), fastCapturePrioritizationSupported)
+	return cpo
 }
 
-// WithFastCapturePrioritizationEnabled a Boolean value that indicates whether the output enables fast capture prioritization.
-func (x *CapturePhotoOutput) WithFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFastCapturePrioritizationEnabled:"), fastCapturePrioritizationEnabled)
-	return x
+// WithFastCapturePrioritizationEnabled sets a Boolean value that indicates whether the output enables fast capture prioritization.
+func (cpo *CapturePhotoOutput) WithFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setFastCapturePrioritizationEnabled:"), fastCapturePrioritizationEnabled)
+	return cpo
 }
 
-// WithHighResolutionCaptureEnabled a Boolean value that specifies whether to configure the capture pipeline for high resolution still image capture.
-func (x *CapturePhotoOutput) WithHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighResolutionCaptureEnabled:"), highResolutionCaptureEnabled)
-	return x
+// WithHighResolutionCaptureEnabled sets a Boolean value that specifies whether to configure the capture pipeline for high resolution still image capture.
+func (cpo *CapturePhotoOutput) WithHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setHighResolutionCaptureEnabled:"), highResolutionCaptureEnabled)
+	return cpo
 }
 
-// WithMaxPhotoDimensions the maximum resolution of the requested photo.
-func (x *CapturePhotoOutput) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
-	return x
+// WithMaxPhotoDimensions sets the maximum resolution of the requested photo.
+func (cpo *CapturePhotoOutput) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
+	return cpo
 }
 
-// WithPreservesLivePhotoCaptureSuspendedOnSessionStop a Boolean value that indicates whether to preserve the suspended state of Live Photo capture when the session stops.
-func (x *CapturePhotoOutput) WithPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesLivePhotoCaptureSuspendedOnSessionStop:"), preservesLivePhotoCaptureSuspendedOnSessionStop)
-	return x
+// WithPreservesLivePhotoCaptureSuspendedOnSessionStop sets a Boolean value that indicates whether to preserve the suspended state of Live Photo capture when the session stops.
+func (cpo *CapturePhotoOutput) WithPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setPreservesLivePhotoCaptureSuspendedOnSessionStop:"), preservesLivePhotoCaptureSuspendedOnSessionStop)
+	return cpo
 }
 
-// WithZeroShutterLagEnabled a Boolean value that indicates whether the photo output configuration enables zero shutter lag.
-func (x *CapturePhotoOutput) WithZeroShutterLagEnabled(zeroShutterLagEnabled bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroShutterLagEnabled:"), zeroShutterLagEnabled)
-	return x
+// WithZeroShutterLagEnabled sets a Boolean value that indicates whether the photo output configuration enables zero shutter lag.
+func (cpo *CapturePhotoOutput) WithZeroShutterLagEnabled(zeroShutterLagEnabled bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setZeroShutterLagEnabled:"), zeroShutterLagEnabled)
+	return cpo
 }
 
-// WithResponsiveCaptureEnabled a Boolean value that indicates whether the photo output configuration enables responsive capture.
-func (x *CapturePhotoOutput) WithResponsiveCaptureEnabled(responsiveCaptureEnabled bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponsiveCaptureEnabled:"), responsiveCaptureEnabled)
-	return x
+// WithResponsiveCaptureEnabled sets a Boolean value that indicates whether the photo output configuration enables responsive capture.
+func (cpo *CapturePhotoOutput) WithResponsiveCaptureEnabled(responsiveCaptureEnabled bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setResponsiveCaptureEnabled:"), responsiveCaptureEnabled)
+	return cpo
 }
 
-// WithConstantColorEnabled a Boolean value that indicates whether the photo output configures the render pipeline to perform constant color capture.
-func (x *CapturePhotoOutput) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
-	return x
+// WithConstantColorEnabled sets a Boolean value that indicates whether the photo output configures the render pipeline to perform constant color capture.
+func (cpo *CapturePhotoOutput) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
+	return cpo
 }
 
-// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
-func (x *CapturePhotoOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CapturePhotoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-	return x
+// WithDeferredStartEnabled sets a Boolean value that indicates whether to defer starting this capture output.
+func (cpo *CapturePhotoOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CapturePhotoOutput {
+	objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return cpo
 }
 
 // SupportedPhotoPixelFormatTypesForFileType returns the list of uncompressed pixel formats supported for photo data in the specified file type.
-func (x *CapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPhotoPixelFormatTypesForFileType:"), objref.IDOf(fileType))
+func (cpo *CapturePhotoOutput) SupportedPhotoPixelFormatTypesForFileType(fileType obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("supportedPhotoPixelFormatTypesForFileType:"), objref.IDOf(fileType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SupportedPhotoCodecTypesForFileType returns the list of photo codecs (such as JPEG or HEVC) supported for photo data in the specified file type.
-func (x *CapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPhotoCodecTypesForFileType:"), objref.IDOf(fileType))
+func (cpo *CapturePhotoOutput) SupportedPhotoCodecTypesForFileType(fileType obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("supportedPhotoCodecTypesForFileType:"), objref.IDOf(fileType))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AvailablePhotoPixelFormatTypes an array of kCVPixelBufferPixelFormatTypeKey values that are currently supported by the receiver. If you wish to capture a photo in an uncompressed format, such as 420f, 420v, or BGRA, you must ensure that the format you want is present in the receiver's availablePhotoPixelFormatTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are available. This property is key-value observable.
+// AvailablePhotoPixelFormatTypes returns an array of kCVPixelBufferPixelFormatTypeKey values that are currently supported by the receiver. If you wish to capture a photo in an uncompressed format, such as 420f, 420v, or BGRA, you must ensure that the format you want is present in the receiver's availablePhotoPixelFormatTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no pixel format types are available. This property is key-value observable.
 //
 // AvailablePhotoPixelFormatTypes returns the collection as a Go slice.
-func (x *CapturePhotoOutput) AvailablePhotoPixelFormatTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availablePhotoPixelFormatTypes"))
+func (cpo *CapturePhotoOutput) AvailablePhotoPixelFormatTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("availablePhotoPixelFormatTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AvailablePhotoCodecTypes an array of AVVideoCodecKey values that are currently supported by the receiver. If you wish to capture a photo in a compressed format, such as JPEG, you must ensure that the format you want is present in the receiver's availablePhotoCodecTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are available. This property is key-value observable.
+// AvailablePhotoCodecTypes returns an array of AVVideoCodecKey values that are currently supported by the receiver. If you wish to capture a photo in a compressed format, such as JPEG, you must ensure that the format you want is present in the receiver's availablePhotoCodecTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no codec types are available. This property is key-value observable.
 //
 // AvailablePhotoCodecTypes returns the collection as a Go slice.
-func (x *CapturePhotoOutput) AvailablePhotoCodecTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availablePhotoCodecTypes"))
+func (cpo *CapturePhotoOutput) AvailablePhotoCodecTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("availablePhotoCodecTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AvailablePhotoFileTypes an array of AVFileType values that are currently supported by the receiver. If you wish to capture a photo that is formatted for a particular file container, such as HEIF or DICOM, you must ensure that the fileType you desire is present in the receiver's availablePhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
+// AvailablePhotoFileTypes returns an array of AVFileType values that are currently supported by the receiver. If you wish to capture a photo that is formatted for a particular file container, such as HEIF or DICOM, you must ensure that the fileType you desire is present in the receiver's availablePhotoFileTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no file types are available. This property is key-value observable.
 //
 // AvailablePhotoFileTypes returns the collection as a Go slice.
-func (x *CapturePhotoOutput) AvailablePhotoFileTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availablePhotoFileTypes"))
+func (cpo *CapturePhotoOutput) AvailablePhotoFileTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("availablePhotoFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MaxPhotoQualityPrioritization indicates the highest quality the receiver should be prepared to output on a capture-by-capture basis. Default value is AVCapturePhotoQualityPrioritizationBalanced when attached to an AVCaptureSession, and AVCapturePhotoQualityPrioritizationSpeed when attached to an AVCaptureMultiCamSession. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc). Some techniques improve image quality at the expense of speed (shot-to-shot time). Before starting your session, you may set this property to indicate the highest quality prioritization you intend to request when calling -capturePhotoWithSettings:delegate:. When configuring an AVCapturePhotoSettings object, you may not exceed this quality prioritization level, but you may select a lower (speedier) prioritization level. Changing the maxPhotoQualityPrioritization while the session is running can result in a lengthy rebuild of the session in which video preview is disrupted. Setting the maxPhotoQualityPrioritization to .quality will turn on optical image stabilization if the -isHighPhotoQualitySupported of the source device's -activeFormat is true.
-func (x *CapturePhotoOutput) MaxPhotoQualityPrioritization() CapturePhotoQualityPrioritization {
-	_r := objc.Send[CapturePhotoQualityPrioritization](objref.IDOf(x), objc.RegisterName("maxPhotoQualityPrioritization"))
+func (cpo *CapturePhotoOutput) MaxPhotoQualityPrioritization() CapturePhotoQualityPrioritization {
+	_r := objc.Send[CapturePhotoQualityPrioritization](objref.IDOf(cpo), objc.RegisterName("maxPhotoQualityPrioritization"))
 	return _r
 }
 
-// SetMaxPhotoQualityPrioritization wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization CapturePhotoQualityPrioritization) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPhotoQualityPrioritization:"), maxPhotoQualityPrioritization)
-}
-
-// IsFastCapturePrioritizationSupported specifies whether fast capture prioritization is supported. Fast capture prioritization allows capture quality to be automatically reduced from the selected AVCapturePhotoQualityPrioritization to ensure the photo output can keep up when captures are requested in rapid succession. Fast capture prioritization is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats and only when responsiveCaptureEnabled is YES. When switching cameras or formats this property may change. When this property changes from YES to NO, fastCapturePrioritizationEnabled also reverts to NO. If you've previously opted in for fast capture prioritization and then change configurations, you may need to set fastCapturePrioritizationEnabled = YES again.
-func (x *CapturePhotoOutput) IsFastCapturePrioritizationSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFastCapturePrioritizationSupported"))
+// IsFastCapturePrioritizationSupported reports whether fast capture prioritization is supported. Fast capture prioritization allows capture quality to be automatically reduced from the selected AVCapturePhotoQualityPrioritization to ensure the photo output can keep up when captures are requested in rapid succession. Fast capture prioritization is only supported for certain AVCaptureSession sessionPresets and AVCaptureDevice activeFormats and only when responsiveCaptureEnabled is true. When switching cameras or formats this property may change. When this property changes from true to false, fastCapturePrioritizationEnabled also reverts to false. If you've previously opted in for fast capture prioritization and then change configurations, you may need to set fastCapturePrioritizationEnabled = true again.
+func (cpo *CapturePhotoOutput) IsFastCapturePrioritizationSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isFastCapturePrioritizationSupported"))
 	return _r
 }
 
-// SetFastCapturePrioritizationSupported wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFastCapturePrioritizationSupported:"), fastCapturePrioritizationSupported)
-}
-
-// IsFastCapturePrioritizationEnabled specifies whether fast capture prioritization is enabled. This property defaults to NO. This property may only be set to YES if fastCapturePrioritizationSupported is YES, otherwise an NSInvalidArgumentException is thrown. By setting this property to YES, the photo output prepares itself to automatically reduce capture quality from the selected AVCapturePhotoQualityPrioritization when needed to keep up with rapid capture requests. In many cases the slightly reduced quality is preferable to missing the moment entirely. If you intend to use fast capture prioritization, you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
-func (x *CapturePhotoOutput) IsFastCapturePrioritizationEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFastCapturePrioritizationEnabled"))
+// IsFastCapturePrioritizationEnabled reports whether fast capture prioritization is enabled. This property defaults to false. This property may only be set to true if fastCapturePrioritizationSupported is true, otherwise an NSInvalidArgumentException is thrown. By setting this property to true, the photo output prepares itself to automatically reduce capture quality from the selected AVCapturePhotoQualityPrioritization when needed to keep up with rapid capture requests. In many cases the slightly reduced quality is preferable to missing the moment entirely. If you intend to use fast capture prioritization, you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+func (cpo *CapturePhotoOutput) IsFastCapturePrioritizationEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isFastCapturePrioritizationEnabled"))
 	return _r
 }
 
-// SetFastCapturePrioritizationEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFastCapturePrioritizationEnabled:"), fastCapturePrioritizationEnabled)
-}
-
-// SupportedFlashModes an array of AVCaptureFlashMode constants for the current capture session configuration. This property supersedes AVCaptureDevice's isFlashModeSupported: It returns an array of AVCaptureFlashMode constants. To test whether a particular flash mode is supported, use NSArray's containsObject API: [photoOutput.supportedFlashModes containsObject:
+// SupportedFlashModes returns an array of AVCaptureFlashMode constants for the current capture session configuration. This property supersedes AVCaptureDevice's isFlashModeSupported: It returns an array of AVCaptureFlashMode constants. To test whether a particular flash mode is supported, use NSArray's containsObject API: [photoOutput.supportedFlashModes containsObject:
 //
 // SupportedFlashModes returns the collection as a Go slice.
-func (x *CapturePhotoOutput) SupportedFlashModes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedFlashModes"))
+func (cpo *CapturePhotoOutput) SupportedFlashModes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cpo), objc.RegisterName("supportedFlashModes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsHighResolutionCaptureEnabled indicates whether the photo render pipeline should be configured to deliver high resolution still images. Some AVCaptureDeviceFormats support outputting higher resolution stills than their streaming resolution (See AVCaptureDeviceFormat.highResolutionStillImageDimensions). Under some conditions, AVCaptureSession needs to set up the photo render pipeline differently to support high resolution still image capture. If you intend to take high resolution still images at all, you should set this property to YES before calling -[AVCaptureSession startRunning]. Once you've opted in for high resolution capture, you are free to issue photo capture requests with or without highResolutionCaptureEnabled in the AVCapturePhotoSettings. If you have not set this property to YES and call capturePhotoWithSettings:delegate: with settings.highResolutionCaptureEnabled set to YES, an NSInvalidArgumentException will be thrown.
-func (x *CapturePhotoOutput) IsHighResolutionCaptureEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighResolutionCaptureEnabled"))
+// IsHighResolutionCaptureEnabled reports whether the photo render pipeline should be configured to deliver high resolution still images. Some AVCaptureDeviceFormats support outputting higher resolution stills than their streaming resolution (See AVCaptureDeviceFormat.highResolutionStillImageDimensions). Under some conditions, AVCaptureSession needs to set up the photo render pipeline differently to support high resolution still image capture. If you intend to take high resolution still images at all, you should set this property to true before calling -[AVCaptureSession startRunning]. Once you've opted in for high resolution capture, you are free to issue photo capture requests with or without highResolutionCaptureEnabled in the AVCapturePhotoSettings. If you have not set this property to true and call capturePhotoWithSettings:delegate: with settings.highResolutionCaptureEnabled set to true, an NSInvalidArgumentException will be thrown.
+func (cpo *CapturePhotoOutput) IsHighResolutionCaptureEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isHighResolutionCaptureEnabled"))
 	return _r
-}
-
-// SetHighResolutionCaptureEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighResolutionCaptureEnabled:"), highResolutionCaptureEnabled)
 }
 
 // MaxPhotoDimensions indicates the maximum resolution of the requested photo. Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning]. Note: When supported, the 24MP setting (5712, 4284) is only serviced as 24MP when opted-in to autoDeferredPhotoDeliveryEnabled.
-func (x *CapturePhotoOutput) MaxPhotoDimensions() coremedia.CMVideoDimensions {
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(x), objc.RegisterName("maxPhotoDimensions"))
+func (cpo *CapturePhotoOutput) MaxPhotoDimensions() coremedia.CMVideoDimensions {
+	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cpo), objc.RegisterName("maxPhotoDimensions"))
 	return _r
 }
 
-// SetMaxPhotoDimensions wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxPhotoDimensions:"), maxPhotoDimensions)
-}
-
-// PreservesLivePhotoCaptureSuspendedOnSessionStop by default, Live Photo capture is resumed when the session stops. This property allows clients to opt out of this and preserve the value of livePhotoCaptureSuspended. Defaults to NO.
-func (x *CapturePhotoOutput) PreservesLivePhotoCaptureSuspendedOnSessionStop() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesLivePhotoCaptureSuspendedOnSessionStop"))
+// PreservesLivePhotoCaptureSuspendedOnSessionStop reports whether by default, Live Photo capture is resumed when the session stops. This property allows clients to opt out of this and preserve the value of livePhotoCaptureSuspended. Defaults to false.
+func (cpo *CapturePhotoOutput) PreservesLivePhotoCaptureSuspendedOnSessionStop() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("preservesLivePhotoCaptureSuspendedOnSessionStop"))
 	return _r
 }
 
-// SetPreservesLivePhotoCaptureSuspendedOnSessionStop wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesLivePhotoCaptureSuspendedOnSessionStop:"), preservesLivePhotoCaptureSuspendedOnSessionStop)
-}
-
-// IsZeroShutterLagSupported a BOOL value specifying whether zero shutter lag is supported. This property returns YES if the session's current configuration allows zero shutter lag. When switching cameras or formats, setting depthDataDeliveryEnabled, or setting virtualDeviceConstituentPhotoDeliveryEnabled this property may change. When this property changes from YES to NO, zeroShutterLagEnabled also reverts to NO. This property is key-value observable.
-func (x *CapturePhotoOutput) IsZeroShutterLagSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isZeroShutterLagSupported"))
+// IsZeroShutterLagSupported reports whether a BOOL value specifying whether zero shutter lag is supported. This property returns true if the session's current configuration allows zero shutter lag. When switching cameras or formats, setting depthDataDeliveryEnabled, or setting virtualDeviceConstituentPhotoDeliveryEnabled this property may change. When this property changes from true to false, zeroShutterLagEnabled also reverts to false. This property is key-value observable.
+func (cpo *CapturePhotoOutput) IsZeroShutterLagSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isZeroShutterLagSupported"))
 	return _r
 }
 
-// IsZeroShutterLagEnabled a BOOL value specifying whether the output is set up to support zero shutter lag. This property may only be set to YES if zeroShutterLagSupported is YES, otherwise an NSInvalidArgumentException is thrown. For apps linked on or after iOS 17 zero shutter lag is automatically enabled when supported. Enabling zero shutter lag reduces or eliminates shutter lag when using AVCapturePhotoQualityPrioritizationBalanced or Quality at the cost of additional memory usage by the photo output. The timestamp of the AVCapturePhoto may be slightly earlier than when -capturePhotoWithSettings:delegate: was called. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Zero shutter lag isn't available when using manual exposure or bracketed capture. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
-func (x *CapturePhotoOutput) IsZeroShutterLagEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isZeroShutterLagEnabled"))
+// IsZeroShutterLagEnabled reports whether a BOOL value specifying whether the output is set up to support zero shutter lag. This property may only be set to true if zeroShutterLagSupported is true, otherwise an NSInvalidArgumentException is thrown. For apps linked on or after iOS 17 zero shutter lag is automatically enabled when supported. Enabling zero shutter lag reduces or eliminates shutter lag when using AVCapturePhotoQualityPrioritizationBalanced or Quality at the cost of additional memory usage by the photo output. The timestamp of the AVCapturePhoto may be slightly earlier than when -capturePhotoWithSettings:delegate: was called. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Zero shutter lag isn't available when using manual exposure or bracketed capture. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+func (cpo *CapturePhotoOutput) IsZeroShutterLagEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isZeroShutterLagEnabled"))
 	return _r
 }
 
-// SetZeroShutterLagEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetZeroShutterLagEnabled(zeroShutterLagEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroShutterLagEnabled:"), zeroShutterLagEnabled)
-}
-
-// IsResponsiveCaptureSupported a BOOL value specifying whether responsive capture is supported. Enabling responsive capture increases peak and sustained capture rates, and reduces shutter lag at the cost of additional memory usage by the photo output. This property returns YES if the session's current configuration allows responsive capture. When switching cameras or formats, enabling depth data delivery, or enabling zero shutter lag this property may change. Responsive capture is only supported when zero shutter lag is enabled. When this property changes from YES to NO, responsiveCaptureEnabled also reverts to NO. This property is key-value observable.
-func (x *CapturePhotoOutput) IsResponsiveCaptureSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResponsiveCaptureSupported"))
+// IsResponsiveCaptureSupported reports whether a BOOL value specifying whether responsive capture is supported. Enabling responsive capture increases peak and sustained capture rates, and reduces shutter lag at the cost of additional memory usage by the photo output. This property returns true if the session's current configuration allows responsive capture. When switching cameras or formats, enabling depth data delivery, or enabling zero shutter lag this property may change. Responsive capture is only supported when zero shutter lag is enabled. When this property changes from true to false, responsiveCaptureEnabled also reverts to false. This property is key-value observable.
+func (cpo *CapturePhotoOutput) IsResponsiveCaptureSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isResponsiveCaptureSupported"))
 	return _r
 }
 
-// IsResponsiveCaptureEnabled a BOOL value specifying whether the photo output is set up to support responsive capture. This property may only be set to YES if responsiveCaptureSupported is YES, otherwise an NSInvalidArgumentException is thrown. When responsiveCaptureEnabled is YES the captureReadiness property should be used to determine whether new capture requests can be serviced in a reasonable time and whether the shutter control should be available to the user. Responsive capture adds buffering between the capture and photo processing stages which allows a new capture to start before processing has completed for the previous capture, so be prepared to handle -captureOutput:willBeginCaptureForResolvedSettings: being called before the -captureOutput:didFinishProcessingPhoto: for the prior requests. Processed photos continue to be delivered in the order they were captured. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Enabling responsive capture allows the fast capture prioritization feature to be used, which further increases capture rates and reduces preview and recording disruptions. See the fastCapturePrioritizationEnabled property. When requesting uncompressed output using kCVPixelBufferPixelFormatTypeKey in AVCapturePhotoSetting.format the AVCapturePhoto's pixelBuffer is allocated from a pool with enough capacity for that request only, and overlap between capture and processing is disabled. The client must release the AVCapturePhoto and references to the pixelBuffer before capturing again and the pixelBuffer's IOSurface must also no longer be in use. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
-func (x *CapturePhotoOutput) IsResponsiveCaptureEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResponsiveCaptureEnabled"))
+// IsResponsiveCaptureEnabled reports whether a BOOL value specifying whether the photo output is set up to support responsive capture. This property may only be set to true if responsiveCaptureSupported is true, otherwise an NSInvalidArgumentException is thrown. When responsiveCaptureEnabled is true the captureReadiness property should be used to determine whether new capture requests can be serviced in a reasonable time and whether the shutter control should be available to the user. Responsive capture adds buffering between the capture and photo processing stages which allows a new capture to start before processing has completed for the previous capture, so be prepared to handle -captureOutput:willBeginCaptureForResolvedSettings: being called before the -captureOutput:didFinishProcessingPhoto: for the prior requests. Processed photos continue to be delivered in the order they were captured. To minimize camera shake from the user's tapping gesture it is recommended that -capturePhotoWithSettings:delegate: be called as early as possible when handling the touch down event. Enabling responsive capture allows the fast capture prioritization feature to be used, which further increases capture rates and reduces preview and recording disruptions. See the fastCapturePrioritizationEnabled property. When requesting uncompressed output using kCVPixelBufferPixelFormatTypeKey in AVCapturePhotoSetting.format the AVCapturePhoto's pixelBuffer is allocated from a pool with enough capacity for that request only, and overlap between capture and processing is disabled. The client must release the AVCapturePhoto and references to the pixelBuffer before capturing again and the pixelBuffer's IOSurface must also no longer be in use. Changing this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+func (cpo *CapturePhotoOutput) IsResponsiveCaptureEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isResponsiveCaptureEnabled"))
 	return _r
 }
 
-// SetResponsiveCaptureEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetResponsiveCaptureEnabled(responsiveCaptureEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponsiveCaptureEnabled:"), responsiveCaptureEnabled)
-}
-
-// CaptureReadiness a value specifying whether the photo output is ready to respond to new capture requests in a timely manner. This property can be key-value observed to enable and disable shutter button UI depending on whether the output is ready to capture, which is especially important when the responsiveCaptureEnabled property is YES. When interacting with AVCapturePhotoOutput on a background queue AVCapturePhotoOutputReadinessCoordinator should instead be used to observe readiness changes and perform UI updates. Capturing only when the output is ready limits the number of requests inflight to minimize shutter lag while maintaining the fastest shot to shot time. When the property returns a value other than Ready the output is not ready to capture and the shutter button should be disabled to prevent the user from initiating new requests. The output continues to accept requests when the captureReadiness property returns a value other than Ready, but the request may not be serviced for a longer period. The visual presentation of the shutter button can be customized based on the readiness value. When the user rapidly taps the shutter button the property may transition to NotReadyMomentarily for a brief period. Although the shutter button should be disabled during this period it is short lived enough that dimming or changing the appearance of the shutter is not recommended as it would be visually distracting to the user. Longer running capture types like flash or captures with AVCapturePhotoQualityPrioritizationQuality may prevent the output from capturing for an extended period, indicated by NotReadyWaitingForCapture or NotReadyWaitingForProcessing, which is appropriate to show by dimming or disabling the shutter button. For NotReadyWaitingForProcessing it is also appropriate to show a spinner or other indication that the shutter is busy.
-func (x *CapturePhotoOutput) CaptureReadiness() CapturePhotoOutputCaptureReadiness {
-	_r := objc.Send[CapturePhotoOutputCaptureReadiness](objref.IDOf(x), objc.RegisterName("captureReadiness"))
+// CaptureReadiness returns a value specifying whether the photo output is ready to respond to new capture requests in a timely manner. This property can be key-value observed to enable and disable shutter button UI depending on whether the output is ready to capture, which is especially important when the responsiveCaptureEnabled property is YES. When interacting with AVCapturePhotoOutput on a background queue AVCapturePhotoOutputReadinessCoordinator should instead be used to observe readiness changes and perform UI updates. Capturing only when the output is ready limits the number of requests inflight to minimize shutter lag while maintaining the fastest shot to shot time. When the property returns a value other than Ready the output is not ready to capture and the shutter button should be disabled to prevent the user from initiating new requests. The output continues to accept requests when the captureReadiness property returns a value other than Ready, but the request may not be serviced for a longer period. The visual presentation of the shutter button can be customized based on the readiness value. When the user rapidly taps the shutter button the property may transition to NotReadyMomentarily for a brief period. Although the shutter button should be disabled during this period it is short lived enough that dimming or changing the appearance of the shutter is not recommended as it would be visually distracting to the user. Longer running capture types like flash or captures with AVCapturePhotoQualityPrioritizationQuality may prevent the output from capturing for an extended period, indicated by NotReadyWaitingForCapture or NotReadyWaitingForProcessing, which is appropriate to show by dimming or disabling the shutter button. For NotReadyWaitingForProcessing it is also appropriate to show a spinner or other indication that the shutter is busy.
+func (cpo *CapturePhotoOutput) CaptureReadiness() CapturePhotoOutputCaptureReadiness {
+	_r := objc.Send[CapturePhotoOutputCaptureReadiness](objref.IDOf(cpo), objc.RegisterName("captureReadiness"))
 	return _r
 }
 
-// IsConstantColorSupported a BOOL value specifying whether constant color capture is supported. An object's color in a photograph is affected by the light sources illuminating the scene, so the color of the same object photographed in warm light might look markedly different than in colder light. In some use cases, such ambient light induced color variation is undesirable, and the user may prefer an estimate of what these materials would look like under a standard light such as daylight (D65), regardless of the lighting conditions at the time the photograph was taken. Some devices are capable of producing such constant color photos. Constant color captures require the flash to be fired and may require pre-flash sequence to determine the correct focus and exposure, therefore it might take several seconds to acquire a constant color photo. Due to this flash requirement, a constant color capture can only be taken with AVCaptureFlashModeAuto or AVCaptureFlashModeOn as the flash mode, otherwise an exception is thrown. Constant color can only be achieved when the flash has a discernible effect on the scene so it may not perform well in bright conditions such as direct sunlight. Use the constantColorConfidenceMap property to examine the confidence level, and therefore the usefulness, of each region of a constant color photo. Constant color should not be used in conjunction with locked or manual white balance. This property returns YES if the session's current configuration allows photos to be captured with constant color. When switching cameras or formats this property may change. When this property changes from YES to NO, constantColorEnabled also reverts to NO. If you've previously opted in for constant color and then change configurations, you may need to set constantColorEnabled = YES again. This property is key-value observable.
-func (x *CapturePhotoOutput) IsConstantColorSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorSupported"))
+// IsConstantColorSupported reports whether a BOOL value specifying whether constant color capture is supported. An object's color in a photograph is affected by the light sources illuminating the scene, so the color of the same object photographed in warm light might look markedly different than in colder light. In some use cases, such ambient light induced color variation is undesirable, and the user may prefer an estimate of what these materials would look like under a standard light such as daylight (D65), regardless of the lighting conditions at the time the photograph was taken. Some devices are capable of producing such constant color photos. Constant color captures require the flash to be fired and may require pre-flash sequence to determine the correct focus and exposure, therefore it might take several seconds to acquire a constant color photo. Due to this flash requirement, a constant color capture can only be taken with AVCaptureFlashModeAuto or AVCaptureFlashModeOn as the flash mode, otherwise an exception is thrown. Constant color can only be achieved when the flash has a discernible effect on the scene so it may not perform well in bright conditions such as direct sunlight. Use the constantColorConfidenceMap property to examine the confidence level, and therefore the usefulness, of each region of a constant color photo. Constant color should not be used in conjunction with locked or manual white balance. This property returns true if the session's current configuration allows photos to be captured with constant color. When switching cameras or formats this property may change. When this property changes from true to false, constantColorEnabled also reverts to false. If you've previously opted in for constant color and then change configurations, you may need to set constantColorEnabled = true again. This property is key-value observable.
+func (cpo *CapturePhotoOutput) IsConstantColorSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isConstantColorSupported"))
 	return _r
 }
 
-// IsConstantColorEnabled a BOOL value specifying whether the photo render pipeline is set up to perform constant color captures. Default is NO. Set to YES to enable support for taking constant color photos. This property may only be set to YES if constantColorSupported is YES. Enabling constant color requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture constant color photos, you should set this property to YES before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
-func (x *CapturePhotoOutput) IsConstantColorEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstantColorEnabled"))
+// IsConstantColorEnabled reports whether a BOOL value specifying whether the photo render pipeline is set up to perform constant color captures. Default is false. Set to true to enable support for taking constant color photos. This property may only be set to true if constantColorSupported is true. Enabling constant color requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture constant color photos, you should set this property to true before calling -[AVCaptureSession startRunning] or within -[AVCaptureSession beginConfiguration] and -[AVCaptureSession commitConfiguration] while running.
+func (cpo *CapturePhotoOutput) IsConstantColorEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isConstantColorEnabled"))
 	return _r
 }
 
-// SetConstantColorEnabled wraps the corresponding Objective-C method.
-func (x *CapturePhotoOutput) SetConstantColorEnabled(constantColorEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantColorEnabled:"), constantColorEnabled)
-}
-
-// IsShutterSoundSuppressionSupported specifies whether suppressing the shutter sound is supported. On iOS, this property returns NO in jurisdictions where shutter sound production cannot be disabled. On all other platforms, it always returns NO.
-func (x *CapturePhotoOutput) IsShutterSoundSuppressionSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isShutterSoundSuppressionSupported"))
+// IsShutterSoundSuppressionSupported reports whether suppressing the shutter sound is supported. On iOS, this property returns false in jurisdictions where shutter sound production cannot be disabled. On all other platforms, it always returns false.
+func (cpo *CapturePhotoOutput) IsShutterSoundSuppressionSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cpo), objc.RegisterName("isShutterSoundSuppressionSupported"))
 	return _r
 }
-
-// CapturePhotoOutputable is the interface implemented by [CapturePhotoOutput], for mocking and DI.
-type CapturePhotoOutputable interface {
-	obj.Object
-	WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization CapturePhotoQualityPrioritization) *CapturePhotoOutput
-	WithFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) *CapturePhotoOutput
-	WithFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) *CapturePhotoOutput
-	WithHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) *CapturePhotoOutput
-	WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoOutput
-	WithPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool) *CapturePhotoOutput
-	WithZeroShutterLagEnabled(zeroShutterLagEnabled bool) *CapturePhotoOutput
-	WithResponsiveCaptureEnabled(responsiveCaptureEnabled bool) *CapturePhotoOutput
-	WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoOutput
-	WithDeferredStartEnabled(deferredStartEnabled bool) *CapturePhotoOutput
-	SupportedPhotoPixelFormatTypesForFileType(fileType obj.Object) []obj.Object
-	SupportedPhotoCodecTypesForFileType(fileType obj.Object) []obj.Object
-	AvailablePhotoPixelFormatTypes() []obj.Object
-	AvailablePhotoCodecTypes() []obj.Object
-	AvailablePhotoFileTypes() []obj.Object
-	MaxPhotoQualityPrioritization() CapturePhotoQualityPrioritization
-	SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization CapturePhotoQualityPrioritization)
-	IsFastCapturePrioritizationSupported() bool
-	SetFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool)
-	IsFastCapturePrioritizationEnabled() bool
-	SetFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool)
-	SupportedFlashModes() []obj.Object
-	IsHighResolutionCaptureEnabled() bool
-	SetHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool)
-	MaxPhotoDimensions() coremedia.CMVideoDimensions
-	SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions)
-	PreservesLivePhotoCaptureSuspendedOnSessionStop() bool
-	SetPreservesLivePhotoCaptureSuspendedOnSessionStop(preservesLivePhotoCaptureSuspendedOnSessionStop bool)
-	IsZeroShutterLagSupported() bool
-	IsZeroShutterLagEnabled() bool
-	SetZeroShutterLagEnabled(zeroShutterLagEnabled bool)
-	IsResponsiveCaptureSupported() bool
-	IsResponsiveCaptureEnabled() bool
-	SetResponsiveCaptureEnabled(responsiveCaptureEnabled bool)
-	CaptureReadiness() CapturePhotoOutputCaptureReadiness
-	IsConstantColorSupported() bool
-	IsConstantColorEnabled() bool
-	SetConstantColorEnabled(constantColorEnabled bool)
-	IsShutterSoundSuppressionSupported() bool
-}
-
-var _ CapturePhotoOutputable = (*CapturePhotoOutput)(nil)
 
 var _ CaptureOutputProvider = (*CapturePhotoOutput)(nil)

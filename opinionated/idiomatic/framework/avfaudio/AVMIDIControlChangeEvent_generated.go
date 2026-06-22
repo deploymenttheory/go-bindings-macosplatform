@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,33 +52,23 @@ func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel int, messageTy
 	return mIDIControlChangeEventAdopt(_id)
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDIControlChangeEvent) WithChannel(channel int) *MIDIControlChangeEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mcce *MIDIControlChangeEvent) WithChannel(channel int) *MIDIControlChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(mcce), objc.RegisterName("setChannel:"), channel)
+	return mcce
 }
 
 // MessageType wraps the corresponding Objective-C method.
-func (x *MIDIControlChangeEvent) MessageType() MIDIControlChangeMessageType {
-	_r := objc.Send[MIDIControlChangeMessageType](objref.IDOf(x), objc.RegisterName("messageType"))
+func (mcce *MIDIControlChangeEvent) MessageType() MIDIControlChangeMessageType {
+	_r := objc.Send[MIDIControlChangeMessageType](objref.IDOf(mcce), objc.RegisterName("messageType"))
 	return _r
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MIDIControlChangeEvent) Value() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+func (mcce *MIDIControlChangeEvent) Value() int {
+	_r := objc.Send[int](objref.IDOf(mcce), objc.RegisterName("value"))
 	return _r
 }
-
-// MIDIControlChangeEventable is the interface implemented by [MIDIControlChangeEvent], for mocking and DI.
-type MIDIControlChangeEventable interface {
-	obj.Object
-	WithChannel(channel int) *MIDIControlChangeEvent
-	MessageType() MIDIControlChangeMessageType
-	Value() int
-}
-
-var _ MIDIControlChangeEventable = (*MIDIControlChangeEvent)(nil)
 
 var _ MIDIChannelEventProvider = (*MIDIControlChangeEvent)(nil)
 

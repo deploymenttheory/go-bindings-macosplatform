@@ -7,7 +7,6 @@ package cinematic
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewCompositionInfo() *CompositionInfo {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNCompositionInfo")), objc.RegisterName("new"))
 	return compositionInfoAdopt(_id)
 }
-
-// CompositionInfoable is the interface implemented by [CompositionInfo], for mocking and DI.
-type CompositionInfoable interface {
-	obj.Object
-}
-
-var _ CompositionInfoable = (*CompositionInfo)(nil)
 
 var _ AssetInfoProvider = (*CompositionInfo)(nil)

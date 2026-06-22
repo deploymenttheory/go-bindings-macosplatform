@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,17 +43,10 @@ func arrayMultiaryKernelAdopt(id objc.ID) *ArrayMultiaryKernel {
 	return x
 }
 
-// ArrayMultiaryKernelable is the interface implemented by [ArrayMultiaryKernel], for mocking and DI.
-type ArrayMultiaryKernelable interface {
-	obj.Object
-}
-
-var _ ArrayMultiaryKernelable = (*ArrayMultiaryKernel)(nil)
-
 // isArrayMultiaryKernel marks ArrayMultiaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the ArrayMultiaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayMultiaryKernel) isArrayMultiaryKernel() {}
+func (amk *ArrayMultiaryKernel) isArrayMultiaryKernel() {}
 
 var _ ArrayMultiaryKernelProvider = (*ArrayMultiaryKernel)(nil)
 

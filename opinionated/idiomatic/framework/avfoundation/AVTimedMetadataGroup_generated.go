@@ -53,17 +53,10 @@ func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer obj.Object) *TimedMetada
 	return timedMetadataGroupAdopt(_id)
 }
 
-// TimedMetadataGroupable is the interface implemented by [TimedMetadataGroup], for mocking and DI.
-type TimedMetadataGroupable interface {
-	obj.Object
-}
-
-var _ TimedMetadataGroupable = (*TimedMetadataGroup)(nil)
-
 // isTimedMetadataGroup marks TimedMetadataGroup — and, by embedding promotion, its
 // subclasses — as a member of the TimedMetadataGroup hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TimedMetadataGroup) isTimedMetadataGroup() {}
+func (tmg *TimedMetadataGroup) isTimedMetadataGroup() {}
 
 var _ TimedMetadataGroupProvider = (*TimedMetadataGroup)(nil)
 

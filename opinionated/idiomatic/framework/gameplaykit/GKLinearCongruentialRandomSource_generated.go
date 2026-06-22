@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,31 +58,16 @@ func NewLinearCongruentialRandomSourceWithSeed(seed uint64) *LinearCongruentialR
 	return linearCongruentialRandomSourceAdopt(_id)
 }
 
-// WithSeed the seed value that determines the random source’s behavior.
-func (x *LinearCongruentialRandomSource) WithSeed(seed uint64) *LinearCongruentialRandomSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the seed value that determines the random source’s behavior.
+func (lcrs *LinearCongruentialRandomSource) WithSeed(seed uint64) *LinearCongruentialRandomSource {
+	objc.Send[objc.ID](objref.IDOf(lcrs), objc.RegisterName("setSeed:"), seed)
+	return lcrs
 }
 
-// Seed the seed used to stir the linear congruential random source. The seed changes each time a random value is generated from this source, as the seed is the state buffer. The seed is encoded through archiving.
-func (x *LinearCongruentialRandomSource) Seed() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("seed"))
+// Seed returns the seed used to stir the linear congruential random source. The seed changes each time a random value is generated from this source, as the seed is the state buffer. The seed is encoded through archiving.
+func (lcrs *LinearCongruentialRandomSource) Seed() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(lcrs), objc.RegisterName("seed"))
 	return _r
 }
-
-// SetSeed wraps the corresponding Objective-C method.
-func (x *LinearCongruentialRandomSource) SetSeed(seed uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-}
-
-// LinearCongruentialRandomSourceable is the interface implemented by [LinearCongruentialRandomSource], for mocking and DI.
-type LinearCongruentialRandomSourceable interface {
-	obj.Object
-	WithSeed(seed uint64) *LinearCongruentialRandomSource
-	Seed() uint64
-	SetSeed(seed uint64)
-}
-
-var _ LinearCongruentialRandomSourceable = (*LinearCongruentialRandomSource)(nil)
 
 var _ RandomSourceProvider = (*LinearCongruentialRandomSource)(nil)

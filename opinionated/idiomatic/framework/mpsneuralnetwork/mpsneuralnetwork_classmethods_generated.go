@@ -30,7 +30,7 @@ func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutp
 	return CNNConvolutionDescriptorFromID(_r)
 }
 
-// SupportsSecureCoding <NSSecureCoding> support
+// SupportsSecureCoding reports whether <NSSecureCoding> support
 func SupportsSecureCoding() bool {
 	_r := objc.Send[bool](objc.ID(_class("MPSCNNConvolutionDescriptor")), objc.RegisterName("supportsSecureCoding"))
 	return _r
@@ -432,13 +432,13 @@ func PaddingWithMethod(method NNPaddingMethod) *NNDefaultPadding {
 	return NNDefaultPaddingFromID(_r)
 }
 
-// PaddingForTensorflowAveragePooling a padding policy that attempts to reproduce TensorFlow behavior for average pooling Most TensorFlow padding is covered by the standard MPSNNPaddingMethod encodings. You can use +paddingWithMethod to get quick access to MPSNNPadding objects, when default filter behavior isn't enough. (It often is.)  However, the edging for max pooling in TensorFlow is a bit unusual. This padding method attempts to reproduce TensorFlow padding for average pooling. In addition to setting MPSNNPaddingMethodSizeSame | MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToBottomRight, it also configures the filter to run with MPSImageEdgeModeClamp, which (as a special case for average pooling only), normalizes the sum of contributing samples to the area of valid contributing pixels only.
+// PaddingForTensorflowAveragePooling returns a padding policy that attempts to reproduce TensorFlow behavior for average pooling Most TensorFlow padding is covered by the standard MPSNNPaddingMethod encodings. You can use +paddingWithMethod to get quick access to MPSNNPadding objects, when default filter behavior isn't enough. (It often is.)  However, the edging for max pooling in TensorFlow is a bit unusual. This padding method attempts to reproduce TensorFlow padding for average pooling. In addition to setting MPSNNPaddingMethodSizeSame | MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToBottomRight, it also configures the filter to run with MPSImageEdgeModeClamp, which (as a special case for average pooling only), normalizes the sum of contributing samples to the area of valid contributing pixels only.
 func PaddingForTensorflowAveragePooling() *NNDefaultPadding {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingForTensorflowAveragePooling"))
 	return NNDefaultPaddingFromID(_r)
 }
 
-// PaddingForTensorflowAveragePoolingValidOnly typical pooling padding policy for valid only mode
+// PaddingForTensorflowAveragePoolingValidOnly returns typical pooling padding policy for valid only mode
 func PaddingForTensorflowAveragePoolingValidOnly() *NNDefaultPadding {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNDefaultPadding")), objc.RegisterName("paddingForTensorflowAveragePoolingValidOnly"))
 	return NNDefaultPaddingFromID(_r)

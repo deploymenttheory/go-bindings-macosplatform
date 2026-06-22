@@ -7,7 +7,6 @@ package gamecontroller
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,47 +51,35 @@ func NewDeviceCursor() *DeviceCursor {
 	return deviceCursorAdopt(_id)
 }
 
-// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
-func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
-	return x
+// WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.
+func (dc *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
+	return dc
 }
 
-// WithSfSymbolsName a system symbol for the element or the remapped element.
-func (x *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
-	return x
+// WithSfSymbolsName sets a system symbol for the element or the remapped element.
+func (dc *DeviceCursor) WithSfSymbolsName(sfSymbolsName string) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
+	return dc
 }
 
-// WithLocalizedName the localized name for the element or the remapped element.
-func (x *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
-	return x
+// WithLocalizedName sets the localized name for the element or the remapped element.
+func (dc *DeviceCursor) WithLocalizedName(localizedName string) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
+	return dc
 }
 
-// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
-func (x *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
-	return x
+// WithUnmappedSfSymbolsName sets the element’s system symbol, not the remapped symbol.
+func (dc *DeviceCursor) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
+	return dc
 }
 
-// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
-func (x *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
-	return x
+// WithUnmappedLocalizedName sets the element’s localized name, not the remapped name.
+func (dc *DeviceCursor) WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
+	return dc
 }
-
-// DeviceCursorable is the interface implemented by [DeviceCursor], for mocking and DI.
-type DeviceCursorable interface {
-	obj.Object
-	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DeviceCursor
-	WithSfSymbolsName(sfSymbolsName string) *DeviceCursor
-	WithLocalizedName(localizedName string) *DeviceCursor
-	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor
-	WithUnmappedLocalizedName(unmappedLocalizedName string) *DeviceCursor
-}
-
-var _ DeviceCursorable = (*DeviceCursor)(nil)
 
 var _ ControllerDirectionPadProvider = (*DeviceCursor)(nil)
 

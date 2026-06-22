@@ -48,85 +48,71 @@ func graphNodeAdopt(id objc.ID) *GraphNode {
 }
 
 // Description returns the object's -description text.
-func (x *GraphNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gn *GraphNode) Description() string {
+	return rt.Description(objref.IDOf(gn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gn *GraphNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gn *GraphNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GraphNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gn *GraphNode) String() string {
+	return rt.Description(objref.IDOf(gn))
 }
 
 // AddConnectionsToNodesBidirectional connects this node to all nodes in the specified list.
-func (x *GraphNode) AddConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
+func (gn *GraphNode) AddConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
+	objc.Send[objc.ID](objref.IDOf(gn), objc.RegisterName("addConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
 }
 
 // RemoveConnectionsToNodesBidirectional removes the connections from this node to the specified nodes.
-func (x *GraphNode) RemoveConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
+func (gn *GraphNode) RemoveConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool) {
+	objc.Send[objc.ID](objref.IDOf(gn), objc.RegisterName("removeConnectionsToNodes:bidirectional:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }), bidirectional)
 }
 
 // EstimatedCostToNode returns an underestimate of the cost of travel from this node to the specified node.
-func (x *GraphNode) EstimatedCostToNode(node *GraphNode) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("estimatedCostToNode:"), objref.IDOf(node))
+func (gn *GraphNode) EstimatedCostToNode(node *GraphNode) float32 {
+	_r := objc.Send[float32](objref.IDOf(gn), objc.RegisterName("estimatedCostToNode:"), objref.IDOf(node))
 	return _r
 }
 
 // CostToNode returns the cost to travel from this node to the specified, directly connected, node.
-func (x *GraphNode) CostToNode(node *GraphNode) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("costToNode:"), objref.IDOf(node))
+func (gn *GraphNode) CostToNode(node *GraphNode) float32 {
+	_r := objc.Send[float32](objref.IDOf(gn), objc.RegisterName("costToNode:"), objref.IDOf(node))
 	return _r
 }
 
 // FindPathToNode computes and returns a sequence of nodes that represents the lowest-cost graph traversal from this node to the specified node.
-func (x *GraphNode) FindPathToNode(goalNode *GraphNode) []*GraphNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathToNode:"), objref.IDOf(goalNode))
+func (gn *GraphNode) FindPathToNode(goalNode *GraphNode) []*GraphNode {
+	_r := objc.Send[objc.ID](objref.IDOf(gn), objc.RegisterName("findPathToNode:"), objref.IDOf(goalNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
 // FindPathFromNode computes and returns a sequence of nodes that represents the lowest-cost graph traversal from the specified node to this node.
-func (x *GraphNode) FindPathFromNode(startNode *GraphNode) []*GraphNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathFromNode:"), objref.IDOf(startNode))
+func (gn *GraphNode) FindPathFromNode(startNode *GraphNode) []*GraphNode {
+	_r := objc.Send[objc.ID](objref.IDOf(gn), objc.RegisterName("findPathFromNode:"), objref.IDOf(startNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
-// ConnectedNodes list of other graph nodes that this node has an edge leading to.
+// ConnectedNodes returns list of other graph nodes that this node has an edge leading to.
 //
 // ConnectedNodes returns the collection as a Go slice.
-func (x *GraphNode) ConnectedNodes() []*GraphNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedNodes"))
+func (gn *GraphNode) ConnectedNodes() []*GraphNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(gn), objc.RegisterName("connectedNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
-
-// GraphNodeable is the interface implemented by [GraphNode], for mocking and DI.
-type GraphNodeable interface {
-	obj.Object
-	AddConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool)
-	RemoveConnectionsToNodesBidirectional(nodes []*GraphNode, bidirectional bool)
-	EstimatedCostToNode(node *GraphNode) float32
-	CostToNode(node *GraphNode) float32
-	FindPathToNode(goalNode *GraphNode) []*GraphNode
-	FindPathFromNode(startNode *GraphNode) []*GraphNode
-	ConnectedNodes() []*GraphNode
-}
-
-var _ GraphNodeable = (*GraphNode)(nil)
 
 // isGraphNode marks GraphNode — and, by embedding promotion, its
 // subclasses — as a member of the GraphNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphNode) isGraphNode() {}
+func (gn *GraphNode) isGraphNode() {}
 
 var _ GraphNodeProvider = (*GraphNode)(nil)

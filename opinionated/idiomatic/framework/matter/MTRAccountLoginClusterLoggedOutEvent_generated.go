@@ -44,24 +44,24 @@ func mTRAccountLoginClusterLoggedOutEventAdopt(id objc.ID) *MTRAccountLoginClust
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccountLoginClusterLoggedOutEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) Description() string {
+	return rt.Description(objref.IDOf(malcloe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccountLoginClusterLoggedOutEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(malcloe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccountLoginClusterLoggedOutEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(malcloe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccountLoginClusterLoggedOutEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) String() string {
+	return rt.Description(objref.IDOf(malcloe))
 }
 
 // NewMTRAccountLoginClusterLoggedOutEvent creates a new MTRAccountLoginClusterLoggedOutEvent.
@@ -71,28 +71,13 @@ func NewMTRAccountLoginClusterLoggedOutEvent() *MTRAccountLoginClusterLoggedOutE
 }
 
 // WithNode sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccountLoginClusterLoggedOutEvent) WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
-	return x
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent {
+	objc.Send[objc.ID](objref.IDOf(malcloe), objc.RegisterName("setNode:"), objref.IDOf(node))
+	return malcloe
 }
 
 // Node wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterLoggedOutEvent) Node() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malcloe), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }
-
-// SetNode wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterLoggedOutEvent) SetNode(node obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
-}
-
-// MTRAccountLoginClusterLoggedOutEventable is the interface implemented by [MTRAccountLoginClusterLoggedOutEvent], for mocking and DI.
-type MTRAccountLoginClusterLoggedOutEventable interface {
-	obj.Object
-	WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent
-	Node() obj.Object
-	SetNode(node obj.Object)
-}
-
-var _ MTRAccountLoginClusterLoggedOutEventable = (*MTRAccountLoginClusterLoggedOutEvent)(nil)

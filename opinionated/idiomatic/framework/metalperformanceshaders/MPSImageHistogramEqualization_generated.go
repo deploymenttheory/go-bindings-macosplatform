@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageHistogramEqualization() *ImageHistogramEqualization {
 	return imageHistogramEqualizationAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ihe *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
+	objc.Send[objc.ID](objref.IDOf(ihe), objc.RegisterName("setOffset:"), offset)
+	return ihe
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ihe *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
+	objc.Send[objc.ID](objref.IDOf(ihe), objc.RegisterName("setClipRect:"), clipRect)
+	return ihe
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageHistogramEqualization) WithLabel(label string) *ImageHistogramEqualization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ihe *ImageHistogramEqualization) WithLabel(label string) *ImageHistogramEqualization {
+	objc.Send[objc.ID](objref.IDOf(ihe), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ihe
 }
-
-// ImageHistogramEqualizationable is the interface implemented by [ImageHistogramEqualization], for mocking and DI.
-type ImageHistogramEqualizationable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization
-	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization
-	WithLabel(label string) *ImageHistogramEqualization
-}
-
-var _ ImageHistogramEqualizationable = (*ImageHistogramEqualization)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageHistogramEqualization)(nil)
 

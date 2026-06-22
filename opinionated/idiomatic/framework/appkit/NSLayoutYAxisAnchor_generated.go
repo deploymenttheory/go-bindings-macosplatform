@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,38 +52,27 @@ func NewLayoutYAxisAnchor() *LayoutYAxisAnchor {
 }
 
 // AnchorWithOffsetToAnchor creates a layout dimension object from two anchors.
-func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
+func (lyaa *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
 	return LayoutDimensionFromID(_r)
 }
 
 // ConstraintEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
-func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+func (lyaa *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("constraintEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
-func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+func (lyaa *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
-func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+func (lyaa *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lyaa), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
-
-// LayoutYAxisAnchorable is the interface implemented by [LayoutYAxisAnchor], for mocking and DI.
-type LayoutYAxisAnchorable interface {
-	obj.Object
-	AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension
-	ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint
-}
-
-var _ LayoutYAxisAnchorable = (*LayoutYAxisAnchor)(nil)
 
 var _ LayoutAnchorProvider = (*LayoutYAxisAnchor)(nil)

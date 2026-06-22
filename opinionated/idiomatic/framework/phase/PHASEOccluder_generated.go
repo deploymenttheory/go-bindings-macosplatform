@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,17 +55,9 @@ func NewOccluderWithEngineShapes(engine *Engine, shapes []*Shape) *Occluder {
 // Shapes wraps the corresponding Objective-C method.
 //
 // Shapes returns the collection as a Go slice.
-func (x *Occluder) Shapes() []*Shape {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapes"))
+func (o *Occluder) Shapes() []*Shape {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("shapes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }
-
-// Occluderable is the interface implemented by [Occluder], for mocking and DI.
-type Occluderable interface {
-	obj.Object
-	Shapes() []*Shape
-}
-
-var _ Occluderable = (*Occluder)(nil)
 
 var _ ObjectProvider = (*Occluder)(nil)

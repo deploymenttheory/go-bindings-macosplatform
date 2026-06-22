@@ -46,24 +46,24 @@ func coneDirectivityModelSubbandParametersAdopt(id objc.ID) *ConeDirectivityMode
 }
 
 // Description returns the object's -description text.
-func (x *ConeDirectivityModelSubbandParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdmsp *ConeDirectivityModelSubbandParameters) Description() string {
+	return rt.Description(objref.IDOf(cdmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConeDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdmsp *ConeDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConeDirectivityModelSubbandParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdmsp *ConeDirectivityModelSubbandParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ConeDirectivityModelSubbandParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdmsp *ConeDirectivityModelSubbandParameters) String() string {
+	return rt.Description(objref.IDOf(cdmsp))
 }
 
 // NewConeDirectivityModelSubbandParameters creates a new ConeDirectivityModelSubbandParameters.
@@ -72,69 +72,43 @@ func NewConeDirectivityModelSubbandParameters() *ConeDirectivityModelSubbandPara
 	return coneDirectivityModelSubbandParametersAdopt(_id)
 }
 
-// WithFrequency a frequency in the audio spectrum where the subband resonates most.
-func (x *ConeDirectivityModelSubbandParameters) WithFrequency(frequency float64) *ConeDirectivityModelSubbandParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a frequency in the audio spectrum where the subband resonates most.
+func (cdmsp *ConeDirectivityModelSubbandParameters) WithFrequency(frequency float64) *ConeDirectivityModelSubbandParameters {
+	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setFrequency:"), frequency)
+	return cdmsp
 }
 
-// WithOuterGain the loudness of the audio the outside area of the cone emits.
-func (x *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain float64) *ConeDirectivityModelSubbandParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterGain:"), outerGain)
-	return x
+// WithOuterGain sets the loudness of the audio the outside area of the cone emits.
+func (cdmsp *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain float64) *ConeDirectivityModelSubbandParameters {
+	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setOuterGain:"), outerGain)
+	return cdmsp
 }
 
 // SetInnerAngleOuterAngle configures a focus area for cone-based sound directivity.
-func (x *ConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerAngle:outerAngle:"), innerAngle, outerAngle)
+func (cdmsp *ConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {
+	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setInnerAngle:outerAngle:"), innerAngle, outerAngle)
 }
 
-// Frequency the frequency of the subband, in hertz.
-func (x *ConeDirectivityModelSubbandParameters) Frequency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+// Frequency returns the frequency of the subband, in hertz.
+func (cdmsp *ConeDirectivityModelSubbandParameters) Frequency() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("frequency"))
 	return _r
 }
 
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *ConeDirectivityModelSubbandParameters) SetFrequency(frequency float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-}
-
-// InnerAngle the inner angle, in degrees.
-func (x *ConeDirectivityModelSubbandParameters) InnerAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("innerAngle"))
+// InnerAngle returns the inner angle, in degrees.
+func (cdmsp *ConeDirectivityModelSubbandParameters) InnerAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("innerAngle"))
 	return _r
 }
 
-// OuterAngle the outer angle, in degrees.
-func (x *ConeDirectivityModelSubbandParameters) OuterAngle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("outerAngle"))
+// OuterAngle returns the outer angle, in degrees.
+func (cdmsp *ConeDirectivityModelSubbandParameters) OuterAngle() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("outerAngle"))
 	return _r
 }
 
-// OuterGain the outer gain.
-func (x *ConeDirectivityModelSubbandParameters) OuterGain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("outerGain"))
+// OuterGain returns the outer gain.
+func (cdmsp *ConeDirectivityModelSubbandParameters) OuterGain() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("outerGain"))
 	return _r
 }
-
-// SetOuterGain wraps the corresponding Objective-C method.
-func (x *ConeDirectivityModelSubbandParameters) SetOuterGain(outerGain float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterGain:"), outerGain)
-}
-
-// ConeDirectivityModelSubbandParametersable is the interface implemented by [ConeDirectivityModelSubbandParameters], for mocking and DI.
-type ConeDirectivityModelSubbandParametersable interface {
-	obj.Object
-	WithFrequency(frequency float64) *ConeDirectivityModelSubbandParameters
-	WithOuterGain(outerGain float64) *ConeDirectivityModelSubbandParameters
-	SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64)
-	Frequency() float64
-	SetFrequency(frequency float64)
-	InnerAngle() float64
-	OuterAngle() float64
-	OuterGain() float64
-	SetOuterGain(outerGain float64)
-}
-
-var _ ConeDirectivityModelSubbandParametersable = (*ConeDirectivityModelSubbandParameters)(nil)

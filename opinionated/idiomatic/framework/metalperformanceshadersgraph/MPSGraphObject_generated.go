@@ -48,36 +48,29 @@ func graphObjectAdopt(id objc.ID) *GraphObject {
 }
 
 // Description returns the object's -description text.
-func (x *GraphObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (go_ *GraphObject) Description() string {
+	return rt.Description(objref.IDOf(go_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (go_ *GraphObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(go_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (go_ *GraphObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(go_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GraphObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (go_ *GraphObject) String() string {
+	return rt.Description(objref.IDOf(go_))
 }
-
-// GraphObjectable is the interface implemented by [GraphObject], for mocking and DI.
-type GraphObjectable interface {
-	obj.Object
-}
-
-var _ GraphObjectable = (*GraphObject)(nil)
 
 // isGraphObject marks GraphObject — and, by embedding promotion, its
 // subclasses — as a member of the GraphObject hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphObject) isGraphObject() {}
+func (go_ *GraphObject) isGraphObject() {}
 
 var _ GraphObjectProvider = (*GraphObject)(nil)

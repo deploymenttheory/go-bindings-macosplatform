@@ -46,24 +46,24 @@ func productDiscountAdopt(id objc.ID) *ProductDiscount {
 }
 
 // Description returns the object's -description text.
-func (x *ProductDiscount) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *ProductDiscount) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProductDiscount) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *ProductDiscount) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProductDiscount) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *ProductDiscount) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProductDiscount) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *ProductDiscount) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // NewProductDiscount creates a new ProductDiscount.
@@ -73,20 +73,20 @@ func NewProductDiscount() *ProductDiscount {
 }
 
 // Price wraps the corresponding Objective-C method.
-func (x *ProductDiscount) Price() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("price"))
+func (pd *ProductDiscount) Price() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("price"))
 	return obj.Wrap(_r)
 }
 
 // PriceLocale wraps the corresponding Objective-C method.
-func (x *ProductDiscount) PriceLocale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priceLocale"))
+func (pd *ProductDiscount) PriceLocale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("priceLocale"))
 	return obj.Wrap(_r)
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *ProductDiscount) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (pd *ProductDiscount) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -94,39 +94,25 @@ func (x *ProductDiscount) Identifier() string {
 }
 
 // SubscriptionPeriod wraps the corresponding Objective-C method.
-func (x *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionPeriod"))
+func (pd *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("subscriptionPeriod"))
 	return ProductSubscriptionPeriodFromID(_r)
 }
 
 // NumberOfPeriods wraps the corresponding Objective-C method.
-func (x *ProductDiscount) NumberOfPeriods() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfPeriods"))
+func (pd *ProductDiscount) NumberOfPeriods() int {
+	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("numberOfPeriods"))
 	return _r
 }
 
 // PaymentMode wraps the corresponding Objective-C method.
-func (x *ProductDiscount) PaymentMode() ProductDiscountPaymentMode {
-	_r := objc.Send[ProductDiscountPaymentMode](objref.IDOf(x), objc.RegisterName("paymentMode"))
+func (pd *ProductDiscount) PaymentMode() ProductDiscountPaymentMode {
+	_r := objc.Send[ProductDiscountPaymentMode](objref.IDOf(pd), objc.RegisterName("paymentMode"))
 	return _r
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *ProductDiscount) Type() ProductDiscountType {
-	_r := objc.Send[ProductDiscountType](objref.IDOf(x), objc.RegisterName("type"))
+func (pd *ProductDiscount) Type() ProductDiscountType {
+	_r := objc.Send[ProductDiscountType](objref.IDOf(pd), objc.RegisterName("type"))
 	return _r
 }
-
-// ProductDiscountable is the interface implemented by [ProductDiscount], for mocking and DI.
-type ProductDiscountable interface {
-	obj.Object
-	Price() obj.Object
-	PriceLocale() obj.Object
-	Identifier() string
-	SubscriptionPeriod() *ProductSubscriptionPeriod
-	NumberOfPeriods() int
-	PaymentMode() ProductDiscountPaymentMode
-	Type() ProductDiscountType
-}
-
-var _ ProductDiscountable = (*ProductDiscount)(nil)

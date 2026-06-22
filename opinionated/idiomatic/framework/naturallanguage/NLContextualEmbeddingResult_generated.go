@@ -46,24 +46,24 @@ func contextualEmbeddingResultAdopt(id objc.ID) *ContextualEmbeddingResult {
 }
 
 // Description returns the object's -description text.
-func (x *ContextualEmbeddingResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cer *ContextualEmbeddingResult) Description() string {
+	return rt.Description(objref.IDOf(cer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContextualEmbeddingResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cer *ContextualEmbeddingResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContextualEmbeddingResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cer *ContextualEmbeddingResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContextualEmbeddingResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cer *ContextualEmbeddingResult) String() string {
+	return rt.Description(objref.IDOf(cer))
 }
 
 // NewContextualEmbeddingResult creates a new ContextualEmbeddingResult.
@@ -72,23 +72,14 @@ func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
 	return contextualEmbeddingResultAdopt(_id)
 }
 
-// Language the language that the framework identified or used when processing the input string.
-func (x *ContextualEmbeddingResult) Language() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+// Language returns the language that the framework identified or used when processing the input string.
+func (cer *ContextualEmbeddingResult) Language() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cer), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
-// SequenceLength the number of embedding vectors the request generates.
-func (x *ContextualEmbeddingResult) SequenceLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sequenceLength"))
+// SequenceLength returns the number of embedding vectors the request generates.
+func (cer *ContextualEmbeddingResult) SequenceLength() int {
+	_r := objc.Send[int](objref.IDOf(cer), objc.RegisterName("sequenceLength"))
 	return _r
 }
-
-// ContextualEmbeddingResultable is the interface implemented by [ContextualEmbeddingResult], for mocking and DI.
-type ContextualEmbeddingResultable interface {
-	obj.Object
-	Language() obj.Object
-	SequenceLength() int
-}
-
-var _ ContextualEmbeddingResultable = (*ContextualEmbeddingResult)(nil)

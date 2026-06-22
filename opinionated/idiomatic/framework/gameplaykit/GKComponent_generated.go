@@ -48,61 +48,50 @@ func componentAdopt(id objc.ID) *Component {
 }
 
 // Description returns the object's -description text.
-func (x *Component) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Component) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Component) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Component) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Component) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Component) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Component) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Component) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // UpdateWithDeltaTime performs any custom periodic actions defined by the component subclass.
-func (x *Component) UpdateWithDeltaTime(seconds float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+func (c *Component) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // DidAddToEntity notifies the component that it has been assigned to an entity.
-func (x *Component) DidAddToEntity() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAddToEntity"))
+func (c *Component) DidAddToEntity() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("didAddToEntity"))
 }
 
 // WillRemoveFromEntity notifies the component that it has been removed from an entity.
-func (x *Component) WillRemoveFromEntity() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willRemoveFromEntity"))
+func (c *Component) WillRemoveFromEntity() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("willRemoveFromEntity"))
 }
 
-// Entity the entity that this component belongs to. Defaults to nil until the component is added to an entity.
-func (x *Component) Entity() *Entity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+// Entity returns the entity that this component belongs to. Defaults to nil until the component is added to an entity.
+func (c *Component) Entity() *Entity {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("entity"))
 	return EntityFromID(_r)
 }
-
-// Componentable is the interface implemented by [Component], for mocking and DI.
-type Componentable interface {
-	obj.Object
-	UpdateWithDeltaTime(seconds float64)
-	DidAddToEntity()
-	WillRemoveFromEntity()
-	Entity() *Entity
-}
-
-var _ Componentable = (*Component)(nil)
 
 // isComponent marks Component — and, by embedding promotion, its
 // subclasses — as a member of the Component hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Component) isComponent() {}
+func (c *Component) isComponent() {}
 
 var _ ComponentProvider = (*Component)(nil)

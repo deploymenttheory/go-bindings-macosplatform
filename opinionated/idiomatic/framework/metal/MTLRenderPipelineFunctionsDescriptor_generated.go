@@ -46,24 +46,24 @@ func renderPipelineFunctionsDescriptorAdopt(id objc.ID) *RenderPipelineFunctions
 }
 
 // Description returns the object's -description text.
-func (x *RenderPipelineFunctionsDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpfd *RenderPipelineFunctionsDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rpfd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPipelineFunctionsDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpfd *RenderPipelineFunctionsDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpfd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPipelineFunctionsDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpfd *RenderPipelineFunctionsDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpfd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPipelineFunctionsDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpfd *RenderPipelineFunctionsDescriptor) String() string {
+	return rt.Description(objref.IDOf(rpfd))
 }
 
 // NewRenderPipelineFunctionsDescriptor creates a new RenderPipelineFunctionsDescriptor.
@@ -72,48 +72,35 @@ func NewRenderPipelineFunctionsDescriptor() *RenderPipelineFunctionsDescriptor {
 	return renderPipelineFunctionsDescriptorAdopt(_id)
 }
 
-// VertexAdditionalBinaryFunctions the set of additional binary functions to be accessed from the vertex function in an incrementally created pipeline state.
-func (x *RenderPipelineFunctionsDescriptor) VertexAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexAdditionalBinaryFunctions"))
+// VertexAdditionalBinaryFunctions returns the set of additional binary functions to be accessed from the vertex function in an incrementally created pipeline state.
+func (rpfd *RenderPipelineFunctionsDescriptor) VertexAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("vertexAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetVertexAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *RenderPipelineFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexAdditionalBinaryFunctions:"), purego.SliceToNSArray(vertexAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (rpfd *RenderPipelineFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("setVertexAdditionalBinaryFunctions:"), purego.SliceToNSArray(vertexAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// FragmentAdditionalBinaryFunctions the set of additional binary functions to be accessed from the fragment function in an incrementally created pipeline state.
-func (x *RenderPipelineFunctionsDescriptor) FragmentAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragmentAdditionalBinaryFunctions"))
+// FragmentAdditionalBinaryFunctions returns the set of additional binary functions to be accessed from the fragment function in an incrementally created pipeline state.
+func (rpfd *RenderPipelineFunctionsDescriptor) FragmentAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("fragmentAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFragmentAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *RenderPipelineFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentAdditionalBinaryFunctions:"), purego.SliceToNSArray(fragmentAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (rpfd *RenderPipelineFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("setFragmentAdditionalBinaryFunctions:"), purego.SliceToNSArray(fragmentAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// TileAdditionalBinaryFunctions the set of additional binary functions to be accessed from the tile function in an incrementally created pipeline state.
-func (x *RenderPipelineFunctionsDescriptor) TileAdditionalBinaryFunctions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileAdditionalBinaryFunctions"))
+// TileAdditionalBinaryFunctions returns the set of additional binary functions to be accessed from the tile function in an incrementally created pipeline state.
+func (rpfd *RenderPipelineFunctionsDescriptor) TileAdditionalBinaryFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("tileAdditionalBinaryFunctions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetTileAdditionalBinaryFunctions wraps the corresponding Objective-C method.
-func (x *RenderPipelineFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileAdditionalBinaryFunctions:"), purego.SliceToNSArray(tileAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (rpfd *RenderPipelineFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(rpfd), objc.RegisterName("setTileAdditionalBinaryFunctions:"), purego.SliceToNSArray(tileAdditionalBinaryFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// RenderPipelineFunctionsDescriptorable is the interface implemented by [RenderPipelineFunctionsDescriptor], for mocking and DI.
-type RenderPipelineFunctionsDescriptorable interface {
-	obj.Object
-	VertexAdditionalBinaryFunctions() []obj.Object
-	SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions []obj.Object)
-	FragmentAdditionalBinaryFunctions() []obj.Object
-	SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions []obj.Object)
-	TileAdditionalBinaryFunctions() []obj.Object
-	SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions []obj.Object)
-}
-
-var _ RenderPipelineFunctionsDescriptorable = (*RenderPipelineFunctionsDescriptor)(nil)

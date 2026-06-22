@@ -46,24 +46,24 @@ func vSAppleSubscriptionAdopt(id objc.ID) *VSAppleSubscription {
 }
 
 // Description returns the object's -description text.
-func (x *VSAppleSubscription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vas *VSAppleSubscription) Description() string {
+	return rt.Description(objref.IDOf(vas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAppleSubscription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vas *VSAppleSubscription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAppleSubscription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vas *VSAppleSubscription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAppleSubscription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vas *VSAppleSubscription) String() string {
+	return rt.Description(objref.IDOf(vas))
 }
 
 // NewVSAppleSubscriptionWithCustomerIDProductCodes creates a new VSAppleSubscription.
@@ -74,54 +74,31 @@ func NewVSAppleSubscriptionWithCustomerIDProductCodes(customerID string, product
 }
 
 // WithCustomerID sets the property and returns the receiver so calls can be chained.
-func (x *VSAppleSubscription) WithCustomerID(customerID string) *VSAppleSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
-	return x
+func (vas *VSAppleSubscription) WithCustomerID(customerID string) *VSAppleSubscription {
+	objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
+	return vas
 }
 
 // WithProductCodes sets the property and returns the receiver so calls can be chained.
-func (x *VSAppleSubscription) WithProductCodes(items ...obj.Object) *VSAppleSubscription {
+func (vas *VSAppleSubscription) WithProductCodes(items ...obj.Object) *VSAppleSubscription {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductCodes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("setProductCodes:"), _arr)
+	return vas
 }
 
 // CustomerID wraps the corresponding Objective-C method.
-func (x *VSAppleSubscription) CustomerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customerID"))
+func (vas *VSAppleSubscription) CustomerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("customerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCustomerID wraps the corresponding Objective-C method.
-func (x *VSAppleSubscription) SetCustomerID(customerID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
-}
-
 // ProductCodes wraps the corresponding Objective-C method.
 //
 // ProductCodes returns the collection as a Go slice.
-func (x *VSAppleSubscription) ProductCodes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productCodes"))
+func (vas *VSAppleSubscription) ProductCodes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("productCodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetProductCodes wraps the corresponding Objective-C method.
-func (x *VSAppleSubscription) SetProductCodes(productCodes []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductCodes:"), purego.SliceToNSArray(productCodes, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// VSAppleSubscriptionable is the interface implemented by [VSAppleSubscription], for mocking and DI.
-type VSAppleSubscriptionable interface {
-	obj.Object
-	WithCustomerID(customerID string) *VSAppleSubscription
-	WithProductCodes(items ...obj.Object) *VSAppleSubscription
-	CustomerID() string
-	SetCustomerID(customerID string)
-	ProductCodes() []string
-	SetProductCodes(productCodes []string)
-}
-
-var _ VSAppleSubscriptionable = (*VSAppleSubscription)(nil)

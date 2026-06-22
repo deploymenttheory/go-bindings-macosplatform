@@ -47,23 +47,15 @@ func recognizedPoint3DAdopt(id objc.ID) *RecognizedPoint3D {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *RecognizedPoint3D) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (rpd *RecognizedPoint3D) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
-
-// RecognizedPoint3Dable is the interface implemented by [RecognizedPoint3D], for mocking and DI.
-type RecognizedPoint3Dable interface {
-	obj.Object
-	Identifier() obj.Object
-}
-
-var _ RecognizedPoint3Dable = (*RecognizedPoint3D)(nil)
 
 // isRecognizedPoint3D marks RecognizedPoint3D — and, by embedding promotion, its
 // subclasses — as a member of the RecognizedPoint3D hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RecognizedPoint3D) isRecognizedPoint3D() {}
+func (rpd *RecognizedPoint3D) isRecognizedPoint3D() {}
 
 var _ RecognizedPoint3DProvider = (*RecognizedPoint3D)(nil)
 

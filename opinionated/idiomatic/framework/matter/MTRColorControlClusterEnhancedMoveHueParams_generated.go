@@ -44,24 +44,24 @@ func mTRColorControlClusterEnhancedMoveHueParamsAdopt(id objc.ID) *MTRColorContr
 }
 
 // Description returns the object's -description text.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) Description() string {
+	return rt.Description(objref.IDOf(mcccemhp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcccemhp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcccemhp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) String() string {
+	return rt.Description(objref.IDOf(mcccemhp))
 }
 
 // NewMTRColorControlClusterEnhancedMoveHueParams creates a new MTRColorControlClusterEnhancedMoveHueParams.
@@ -71,128 +71,73 @@ func NewMTRColorControlClusterEnhancedMoveHueParams() *MTRColorControlClusterEnh
 }
 
 // WithMoveMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) WithMoveMode(moveMode obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
-	return x
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) WithMoveMode(moveMode obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
+	return mcccemhp
 }
 
 // WithRate sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) WithRate(rate obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
-	return x
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) WithRate(rate obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("setRate:"), objref.IDOf(rate))
+	return mcccemhp
 }
 
 // WithOptionsMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
-	return x
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
+	return mcccemhp
 }
 
 // WithOptionsOverride sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-	return x
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
+	return mcccemhp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mcccemhp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveHueParams {
+	objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mcccemhp
 }
 
 // MoveMode wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) MoveMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveMode"))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) MoveMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("moveMode"))
 	return obj.Wrap(_r)
-}
-
-// SetMoveMode wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) SetMoveMode(moveMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 }
 
 // Rate wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) Rate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rate"))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) Rate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("rate"))
 	return obj.Wrap(_r)
-}
-
-// SetRate wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) SetRate(rate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
 }
 
 // OptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) OptionsMask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) SetOptionsMask(optionsMask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
 // OptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) OptionsOverride() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) SetOptionsOverride(optionsOverride obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccemhp *MTRColorControlClusterEnhancedMoveHueParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccemhp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterEnhancedMoveHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRColorControlClusterEnhancedMoveHueParamsable is the interface implemented by [MTRColorControlClusterEnhancedMoveHueParams], for mocking and DI.
-type MTRColorControlClusterEnhancedMoveHueParamsable interface {
-	obj.Object
-	WithMoveMode(moveMode obj.Object) *MTRColorControlClusterEnhancedMoveHueParams
-	WithRate(rate obj.Object) *MTRColorControlClusterEnhancedMoveHueParams
-	WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveHueParams
-	WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveHueParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterEnhancedMoveHueParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterEnhancedMoveHueParams
-	MoveMode() obj.Object
-	SetMoveMode(moveMode obj.Object)
-	Rate() obj.Object
-	SetRate(rate obj.Object)
-	OptionsMask() obj.Object
-	SetOptionsMask(optionsMask obj.Object)
-	OptionsOverride() obj.Object
-	SetOptionsOverride(optionsOverride obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRColorControlClusterEnhancedMoveHueParamsable = (*MTRColorControlClusterEnhancedMoveHueParams)(nil)

@@ -48,24 +48,24 @@ func entityIdentifierAdopt(id objc.ID) *EntityIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *EntityIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ei *EntityIdentifier) Description() string {
+	return rt.Description(objref.IDOf(ei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EntityIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ei *EntityIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EntityIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ei *EntityIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EntityIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ei *EntityIdentifier) String() string {
+	return rt.Description(objref.IDOf(ei))
 }
 
 // NewEntityIdentifierWithUUID creates an entity identifier with the given UUID.
@@ -89,56 +89,33 @@ func NewEntityIdentifierWithUUIDData(uuid obj.Object, qualifierData obj.Object) 
 	return entityIdentifierAdopt(_id)
 }
 
-// WithUuid a UUID to uniquely identify this entity.
-func (x *EntityIdentifier) WithUuid(uuid obj.Object) *EntityIdentifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
-	return x
+// WithUUID sets a UUID to uniquely identify this entity.
+func (ei *EntityIdentifier) WithUUID(uuid obj.Object) *EntityIdentifier {
+	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
+	return ei
 }
 
-// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (x *EntityIdentifier) WithQualifier(qualifier obj.Object) *EntityIdentifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
-	return x
+// WithQualifier sets an optional piece of data to distinguish entities that otherwise share the same UUID.
+func (ei *EntityIdentifier) WithQualifier(qualifier obj.Object) *EntityIdentifier {
+	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+	return ei
 }
 
-// Uuid a UUID to uniquely identify this entity.
-func (x *EntityIdentifier) Uuid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+// UUID returns a UUID to uniquely identify this entity.
+func (ei *EntityIdentifier) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// SetUuid wraps the corresponding Objective-C method.
-func (x *EntityIdentifier) SetUuid(uuid obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
-}
-
-// Qualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (x *EntityIdentifier) Qualifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("qualifier"))
+// Qualifier returns an optional piece of data to distinguish entities that otherwise share the same UUID.
+func (ei *EntityIdentifier) Qualifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("qualifier"))
 	return obj.Wrap(_r)
 }
-
-// SetQualifier wraps the corresponding Objective-C method.
-func (x *EntityIdentifier) SetQualifier(qualifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
-}
-
-// EntityIdentifierable is the interface implemented by [EntityIdentifier], for mocking and DI.
-type EntityIdentifierable interface {
-	obj.Object
-	WithUuid(uuid obj.Object) *EntityIdentifier
-	WithQualifier(qualifier obj.Object) *EntityIdentifier
-	Uuid() obj.Object
-	SetUuid(uuid obj.Object)
-	Qualifier() obj.Object
-	SetQualifier(qualifier obj.Object)
-}
-
-var _ EntityIdentifierable = (*EntityIdentifier)(nil)
 
 // isEntityIdentifier marks EntityIdentifier — and, by embedding promotion, its
 // subclasses — as a member of the EntityIdentifier hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *EntityIdentifier) isEntityIdentifier() {}
+func (ei *EntityIdentifier) isEntityIdentifier() {}
 
 var _ EntityIdentifierProvider = (*EntityIdentifier)(nil)

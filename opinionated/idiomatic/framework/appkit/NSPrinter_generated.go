@@ -47,24 +47,24 @@ func printerAdopt(id objc.ID) *Printer {
 }
 
 // Description returns the object's -description text.
-func (x *Printer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Printer) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Printer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Printer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Printer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Printer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Printer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Printer) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPrinter creates a new Printer.
@@ -74,14 +74,14 @@ func NewPrinter() *Printer {
 }
 
 // PageSizeForPaper returns the size of the page for the specified paper type.
-func (x *Printer) PageSizeForPaper(paperName obj.Object) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("pageSizeForPaper:"), objref.IDOf(paperName))
+func (p *Printer) PageSizeForPaper(paperName obj.Object) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(p), objc.RegisterName("pageSizeForPaper:"), objref.IDOf(paperName))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Printer) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (p *Printer) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,68 +89,68 @@ func (x *Printer) Name() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Printer) Type() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (p *Printer) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
 // LanguageLevel wraps the corresponding Objective-C method.
-func (x *Printer) LanguageLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("languageLevel"))
+func (p *Printer) LanguageLevel() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("languageLevel"))
 	return _r
 }
 
 // DeviceDescription wraps the corresponding Objective-C method.
-func (x *Printer) DeviceDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceDescription"))
+func (p *Printer) DeviceDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("deviceDescription"))
 	return obj.Wrap(_r)
 }
 
 // StatusForTable returns the status of the specified table.
-func (x *Printer) StatusForTable(tableName string) PrinterTableStatus {
-	_r := objc.Send[PrinterTableStatus](objref.IDOf(x), objc.RegisterName("statusForTable:"), purego.NSString(tableName))
+func (p *Printer) StatusForTable(tableName string) PrinterTableStatus {
+	_r := objc.Send[PrinterTableStatus](objref.IDOf(p), objc.RegisterName("statusForTable:"), purego.NSString(tableName))
 	return _r
 }
 
 // IsKeyInTable returns a Boolean value that indicates whether the specified key is in the specified table.
-func (x *Printer) IsKeyInTable(key string, table string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) IsKeyInTable(key string, table string) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
 // BooleanForKeyInTable returns the Boolean value associated with the specified key.
-func (x *Printer) BooleanForKeyInTable(key string, table string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("booleanForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) BooleanForKeyInTable(key string, table string) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("booleanForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
 // FloatForKeyInTable returns the floating-point value associated with the specified key.
-func (x *Printer) FloatForKeyInTable(key string, table string) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) FloatForKeyInTable(key string, table string) float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("floatForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
 // IntForKeyInTable returns the integer value associated with the specified key.
-func (x *Printer) IntForKeyInTable(key string, table string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) IntForKeyInTable(key string, table string) int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("intForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
 // RectForKeyInTable returns the rectangle associated with the specified key.
-func (x *Printer) RectForKeyInTable(key string, table string) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) RectForKeyInTable(key string, table string) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(p), objc.RegisterName("rectForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
 // SizeForKeyInTable returns the size data type associated with the specified key.
-func (x *Printer) SizeForKeyInTable(key string, table string) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) SizeForKeyInTable(key string, table string) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(p), objc.RegisterName("sizeForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return _r
 }
 
 // StringForKeyInTable returns the first occurrence of a value associated with specified key.
-func (x *Printer) StringForKeyInTable(key string, table string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) StringForKeyInTable(key string, table string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stringForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	if _r == 0 {
 		return ""
 	}
@@ -158,93 +158,64 @@ func (x *Printer) StringForKeyInTable(key string, table string) string {
 }
 
 // StringListForKeyInTable returns an array of strings, one for each occurrence, associated with specified key.
-func (x *Printer) StringListForKeyInTable(key string, table string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringListForKey:inTable:"), purego.NSString(key), purego.NSString(table))
+func (p *Printer) StringListForKeyInTable(key string, table string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stringListForKey:inTable:"), purego.NSString(key), purego.NSString(table))
 	return obj.Wrap(_r)
 }
 
 // ImageRectForPaper deprecated.
-func (x *Printer) ImageRectForPaper(paperName string) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageRectForPaper:"), purego.NSString(paperName))
+func (p *Printer) ImageRectForPaper(paperName string) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(p), objc.RegisterName("imageRectForPaper:"), purego.NSString(paperName))
 	return _r
 }
 
-// AcceptsBinary deprecated.
-func (x *Printer) AcceptsBinary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsBinary"))
+// AcceptsBinary reports whether deprecated.
+func (p *Printer) AcceptsBinary() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("acceptsBinary"))
 	return _r
 }
 
-// IsColor deprecated.
-func (x *Printer) IsColor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isColor"))
+// IsColor reports whether deprecated.
+func (p *Printer) IsColor() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isColor"))
 	return _r
 }
 
 // IsFontAvailable deprecated.
-func (x *Printer) IsFontAvailable(faceName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFontAvailable:"), purego.NSString(faceName))
+func (p *Printer) IsFontAvailable(faceName string) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFontAvailable:"), purego.NSString(faceName))
 	return _r
 }
 
-// IsOutputStackInReverseOrder deprecated.
-func (x *Printer) IsOutputStackInReverseOrder() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOutputStackInReverseOrder"))
+// IsOutputStackInReverseOrder reports whether deprecated.
+func (p *Printer) IsOutputStackInReverseOrder() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isOutputStackInReverseOrder"))
 	return _r
 }
 
-// Domain deprecated.
-func (x *Printer) Domain() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+// Domain returns deprecated.
+func (p *Printer) Domain() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("domain"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Host deprecated.
-func (x *Printer) Host() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+// Host returns deprecated.
+func (p *Printer) Host() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Note deprecated.
-func (x *Printer) Note() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("note"))
+// Note returns deprecated.
+func (p *Printer) Note() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("note"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Printerable is the interface implemented by [Printer], for mocking and DI.
-type Printerable interface {
-	obj.Object
-	PageSizeForPaper(paperName obj.Object) corefoundation.CGSize
-	Name() string
-	Type() obj.Object
-	LanguageLevel() int
-	DeviceDescription() obj.Object
-	StatusForTable(tableName string) PrinterTableStatus
-	IsKeyInTable(key string, table string) bool
-	BooleanForKeyInTable(key string, table string) bool
-	FloatForKeyInTable(key string, table string) float32
-	IntForKeyInTable(key string, table string) int
-	RectForKeyInTable(key string, table string) corefoundation.CGRect
-	SizeForKeyInTable(key string, table string) corefoundation.CGSize
-	StringForKeyInTable(key string, table string) string
-	StringListForKeyInTable(key string, table string) obj.Object
-	ImageRectForPaper(paperName string) corefoundation.CGRect
-	AcceptsBinary() bool
-	IsColor() bool
-	IsFontAvailable(faceName string) bool
-	IsOutputStackInReverseOrder() bool
-	Domain() string
-	Host() string
-	Note() string
-}
-
-var _ Printerable = (*Printer)(nil)

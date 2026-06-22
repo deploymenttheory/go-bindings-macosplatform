@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewCaptionConversionTimeRangeAdjustment() *CaptionConversionTimeRangeAdjust
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionTimeRangeAdjustment")), objc.RegisterName("new"))
 	return captionConversionTimeRangeAdjustmentAdopt(_id)
 }
-
-// CaptionConversionTimeRangeAdjustmentable is the interface implemented by [CaptionConversionTimeRangeAdjustment], for mocking and DI.
-type CaptionConversionTimeRangeAdjustmentable interface {
-	obj.Object
-}
-
-var _ CaptionConversionTimeRangeAdjustmentable = (*CaptionConversionTimeRangeAdjustment)(nil)
 
 var _ CaptionConversionAdjustmentProvider = (*CaptionConversionTimeRangeAdjustment)(nil)

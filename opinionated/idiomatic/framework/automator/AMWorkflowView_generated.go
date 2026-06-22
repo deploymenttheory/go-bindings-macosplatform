@@ -46,24 +46,24 @@ func workflowViewAdopt(id objc.ID) *WorkflowView {
 }
 
 // Description returns the object's -description text.
-func (x *WorkflowView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wv *WorkflowView) Description() string {
+	return rt.Description(objref.IDOf(wv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkflowView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wv *WorkflowView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkflowView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wv *WorkflowView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkflowView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wv *WorkflowView) String() string {
+	return rt.Description(objref.IDOf(wv))
 }
 
 // NewWorkflowView creates a new WorkflowView.
@@ -72,49 +72,26 @@ func NewWorkflowView() *WorkflowView {
 	return workflowViewAdopt(_id)
 }
 
-// WithEditable a Boolean value that indicates whether the workflow view is editable.
-func (x *WorkflowView) WithEditable(editable bool) *WorkflowView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value that indicates whether the workflow view is editable.
+func (wv *WorkflowView) WithEditable(editable bool) *WorkflowView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setEditable:"), editable)
+	return wv
 }
 
-// WithWorkflowController the view’s workflow controller.
-func (x *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
-	return x
+// WithWorkflowController sets the view’s workflow controller.
+func (wv *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
+	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
+	return wv
 }
 
 // IsEditable wraps the corresponding Objective-C method.
-func (x *WorkflowView) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (wv *WorkflowView) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// SetEditable wraps the corresponding Objective-C method.
-func (x *WorkflowView) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-}
-
 // WorkflowController wraps the corresponding Objective-C method.
-func (x *WorkflowView) WorkflowController() *WorkflowController {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workflowController"))
+func (wv *WorkflowView) WorkflowController() *WorkflowController {
+	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("workflowController"))
 	return WorkflowControllerFromID(_r)
 }
-
-// SetWorkflowController wraps the corresponding Objective-C method.
-func (x *WorkflowView) SetWorkflowController(workflowController *WorkflowController) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
-}
-
-// WorkflowViewable is the interface implemented by [WorkflowView], for mocking and DI.
-type WorkflowViewable interface {
-	obj.Object
-	WithEditable(editable bool) *WorkflowView
-	WithWorkflowController(workflowController *WorkflowController) *WorkflowView
-	IsEditable() bool
-	SetEditable(editable bool)
-	WorkflowController() *WorkflowController
-	SetWorkflowController(workflowController *WorkflowController)
-}
-
-var _ WorkflowViewable = (*WorkflowView)(nil)

@@ -35,7 +35,7 @@ func CdTextBlockWithLanguageEncoding(lang string, enc int) *CDTextBlock {
 	return CDTextBlockFromID(_r)
 }
 
-// Devices obtains a static list of devices connected to the computer. Returns all CD/DVD devices connected to the computer at the time this method is called. Since devices can come and go at any time, the output of this method is simply a snapshot of the set of devices connected.
+// Devices returns obtains a static list of devices connected to the computer. Returns all CD/DVD devices connected to the computer at the time this method is called. Since devices can come and go at any time, the output of this method is simply a snapshot of the set of devices connected.
 func Devices() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("DRDevice")), objc.RegisterName("devices"))
 	return obj.Wrap(_r)

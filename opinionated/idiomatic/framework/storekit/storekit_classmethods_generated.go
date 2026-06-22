@@ -45,7 +45,7 @@ func DefaultQueue() *PaymentQueue {
 	return PaymentQueueFromID(_r)
 }
 
-// CanMakePayments a method that indicates whether the person can make purchases.
+// CanMakePayments reports whether a method that indicates whether the person can make purchases.
 func CanMakePayments() bool {
 	_r := objc.Send[bool](objc.ID(_class("SKPaymentQueue")), objc.RegisterName("canMakePayments"))
 	return _r

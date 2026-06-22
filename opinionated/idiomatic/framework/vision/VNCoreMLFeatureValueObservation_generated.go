@@ -52,28 +52,19 @@ func NewCoreMLFeatureValueObservation() *CoreMLFeatureValueObservation {
 	return coreMLFeatureValueObservationAdopt(_id)
 }
 
-// FeatureValue the result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
-func (x *CoreMLFeatureValueObservation) FeatureValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureValue"))
+// FeatureValue returns the result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
+func (cmfvo *CoreMLFeatureValueObservation) FeatureValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cmfvo), objc.RegisterName("featureValue"))
 	return obj.Wrap(_r)
 }
 
-// FeatureName the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
-func (x *CoreMLFeatureValueObservation) FeatureName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureName"))
+// FeatureName returns the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
+func (cmfvo *CoreMLFeatureValueObservation) FeatureName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cmfvo), objc.RegisterName("featureName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CoreMLFeatureValueObservationable is the interface implemented by [CoreMLFeatureValueObservation], for mocking and DI.
-type CoreMLFeatureValueObservationable interface {
-	obj.Object
-	FeatureValue() obj.Object
-	FeatureName() string
-}
-
-var _ CoreMLFeatureValueObservationable = (*CoreMLFeatureValueObservation)(nil)
 
 var _ ObservationProvider = (*CoreMLFeatureValueObservation)(nil)

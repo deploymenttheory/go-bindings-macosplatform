@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewCNNNormalizationGammaAndBetaState() *CNNNormalizationGammaAndBetaState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNNormalizationGammaAndBetaState) WithReadCount(readCount int) *CNNNormalizationGammaAndBetaState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cngabs *CNNNormalizationGammaAndBetaState) WithReadCount(readCount int) *CNNNormalizationGammaAndBetaState {
+	objc.Send[objc.ID](objref.IDOf(cngabs), objc.RegisterName("setReadCount:"), readCount)
+	return cngabs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNormalizationGammaAndBetaState) WithLabel(label string) *CNNNormalizationGammaAndBetaState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cngabs *CNNNormalizationGammaAndBetaState) WithLabel(label string) *CNNNormalizationGammaAndBetaState {
+	objc.Send[objc.ID](objref.IDOf(cngabs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cngabs
 }
-
-// CNNNormalizationGammaAndBetaStateable is the interface implemented by [CNNNormalizationGammaAndBetaState], for mocking and DI.
-type CNNNormalizationGammaAndBetaStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNNormalizationGammaAndBetaState
-	WithLabel(label string) *CNNNormalizationGammaAndBetaState
-}
-
-var _ CNNNormalizationGammaAndBetaStateable = (*CNNNormalizationGammaAndBetaState)(nil)
 
 var _ StateProvider = (*CNNNormalizationGammaAndBetaState)(nil)

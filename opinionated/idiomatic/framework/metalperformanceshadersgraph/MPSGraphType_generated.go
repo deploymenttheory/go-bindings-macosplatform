@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,17 +45,10 @@ func graphTypeAdopt(id objc.ID) *GraphType {
 	return x
 }
 
-// GraphTypeable is the interface implemented by [GraphType], for mocking and DI.
-type GraphTypeable interface {
-	obj.Object
-}
-
-var _ GraphTypeable = (*GraphType)(nil)
-
 // isGraphType marks GraphType — and, by embedding promotion, its
 // subclasses — as a member of the GraphType hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphType) isGraphType() {}
+func (gt *GraphType) isGraphType() {}
 
 var _ GraphTypeProvider = (*GraphType)(nil)
 

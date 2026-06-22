@@ -44,24 +44,24 @@ func mTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) Description() string {
+	return rt.Description(objref.IDOf(mtndcgodp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndcgodp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndcgodp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) String() string {
+	return rt.Description(objref.IDOf(mtndcgodp))
 }
 
 // NewMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams creates a new MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams.
@@ -71,68 +71,37 @@ func NewMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams() *MTRThread
 }
 
 // WithExtendedPanID sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
-	return x
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
+	objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
+	return mtndcgodp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
+	objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtndcgodp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
+	objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtndcgodp
 }
 
 // ExtendedPanID wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ExtendedPanID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPanID"))
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ExtendedPanID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("extendedPanID"))
 	return obj.Wrap(_r)
 }
 
-// SetExtendedPanID wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) SetExtendedPanID(extendedPanID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams], for mocking and DI.
-type MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable interface {
-	obj.Object
-	WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams
-	ExtendedPanID() obj.Object
-	SetExtendedPanID(extendedPanID obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsable = (*MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams)(nil)

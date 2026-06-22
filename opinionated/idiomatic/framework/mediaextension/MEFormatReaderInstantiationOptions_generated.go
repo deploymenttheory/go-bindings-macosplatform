@@ -46,24 +46,24 @@ func formatReaderInstantiationOptionsAdopt(id objc.ID) *FormatReaderInstantiatio
 }
 
 // Description returns the object's -description text.
-func (x *FormatReaderInstantiationOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (frio *FormatReaderInstantiationOptions) Description() string {
+	return rt.Description(objref.IDOf(frio))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FormatReaderInstantiationOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (frio *FormatReaderInstantiationOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(frio), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FormatReaderInstantiationOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (frio *FormatReaderInstantiationOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(frio), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FormatReaderInstantiationOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (frio *FormatReaderInstantiationOptions) String() string {
+	return rt.Description(objref.IDOf(frio))
 }
 
 // NewFormatReaderInstantiationOptions creates a new FormatReaderInstantiationOptions.
@@ -73,15 +73,7 @@ func NewFormatReaderInstantiationOptions() *FormatReaderInstantiationOptions {
 }
 
 // AllowIncrementalFragmentParsing wraps the corresponding Objective-C method.
-func (x *FormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowIncrementalFragmentParsing"))
+func (frio *FormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() bool {
+	_r := objc.Send[bool](objref.IDOf(frio), objc.RegisterName("allowIncrementalFragmentParsing"))
 	return _r
 }
-
-// FormatReaderInstantiationOptionsable is the interface implemented by [FormatReaderInstantiationOptions], for mocking and DI.
-type FormatReaderInstantiationOptionsable interface {
-	obj.Object
-	AllowIncrementalFragmentParsing() bool
-}
-
-var _ FormatReaderInstantiationOptionsable = (*FormatReaderInstantiationOptions)(nil)

@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMetadataSalientObject() *MetadataSalientObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataSalientObject")), objc.RegisterName("new"))
 	return metadataSalientObjectAdopt(_id)
 }
-
-// MetadataSalientObjectable is the interface implemented by [MetadataSalientObject], for mocking and DI.
-type MetadataSalientObjectable interface {
-	obj.Object
-}
-
-var _ MetadataSalientObjectable = (*MetadataSalientObject)(nil)
 
 var _ MetadataObjectProvider = (*MetadataSalientObject)(nil)

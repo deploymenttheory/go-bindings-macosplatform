@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewNoiseTexture() *NoiseTexture {
 	return noiseTextureAdopt(_id)
 }
 
-// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
-func (x *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
-	return x
+// WithIsCube sets a Boolean value that indicates whether the texture is a cube textures.
+func (nt *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
+	objc.Send[objc.ID](objref.IDOf(nt), objc.RegisterName("setIsCube:"), isCube)
+	return nt
 }
 
-// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-func (x *NoiseTexture) WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
-	return x
+// WithHasAlphaValues sets hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+func (nt *NoiseTexture) WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture {
+	objc.Send[objc.ID](objref.IDOf(nt), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
+	return nt
 }
-
-// NoiseTextureable is the interface implemented by [NoiseTexture], for mocking and DI.
-type NoiseTextureable interface {
-	obj.Object
-	WithIsCube(isCube bool) *NoiseTexture
-	WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture
-}
-
-var _ NoiseTextureable = (*NoiseTexture)(nil)
 
 var _ TextureProvider = (*NoiseTexture)(nil)

@@ -46,96 +46,66 @@ func mTRContentLauncherClusterDimensionStructAdopt(id objc.ID) *MTRContentLaunch
 }
 
 // Description returns the object's -description text.
-func (x *MTRContentLauncherClusterDimensionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Description() string {
+	return rt.Description(objref.IDOf(mclcds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterDimensionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mclcds *MTRContentLauncherClusterDimensionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mclcds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterDimensionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mclcds *MTRContentLauncherClusterDimensionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mclcds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRContentLauncherClusterDimensionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mclcds *MTRContentLauncherClusterDimensionStruct) String() string {
+	return rt.Description(objref.IDOf(mclcds))
 }
 
 // WithWidth sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterDimensionStruct) WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
-	return x
+func (mclcds *MTRContentLauncherClusterDimensionStruct) WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setWidth:"), objref.IDOf(width))
+	return mclcds
 }
 
 // WithHeight sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterDimensionStruct) WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
-	return x
+func (mclcds *MTRContentLauncherClusterDimensionStruct) WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setHeight:"), objref.IDOf(height))
+	return mclcds
 }
 
 // WithMetric sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterDimensionStruct) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
-	return x
+func (mclcds *MTRContentLauncherClusterDimensionStruct) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setMetric:"), objref.IDOf(metric))
+	return mclcds
 }
 
 // Width wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterDimensionStruct) Width() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Width() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("width"))
 	return obj.Wrap(_r)
-}
-
-// SetWidth wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterDimensionStruct) SetWidth(width obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
 }
 
 // Height wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterDimensionStruct) Height() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Height() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("height"))
 	return obj.Wrap(_r)
-}
-
-// SetHeight wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterDimensionStruct) SetHeight(height obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
 }
 
 // Metric wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterDimensionStruct) Metric() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metric"))
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Metric() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("metric"))
 	return obj.Wrap(_r)
 }
-
-// SetMetric wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterDimensionStruct) SetMetric(metric obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
-}
-
-// MTRContentLauncherClusterDimensionStructable is the interface implemented by [MTRContentLauncherClusterDimensionStruct], for mocking and DI.
-type MTRContentLauncherClusterDimensionStructable interface {
-	obj.Object
-	WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct
-	WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct
-	WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct
-	Width() obj.Object
-	SetWidth(width obj.Object)
-	Height() obj.Object
-	SetHeight(height obj.Object)
-	Metric() obj.Object
-	SetMetric(metric obj.Object)
-}
-
-var _ MTRContentLauncherClusterDimensionStructable = (*MTRContentLauncherClusterDimensionStruct)(nil)
 
 // isMTRContentLauncherClusterDimensionStruct marks MTRContentLauncherClusterDimensionStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRContentLauncherClusterDimensionStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRContentLauncherClusterDimensionStruct) isMTRContentLauncherClusterDimensionStruct() {}
+func (mclcds *MTRContentLauncherClusterDimensionStruct) isMTRContentLauncherClusterDimensionStruct() {
+}
 
 var _ MTRContentLauncherClusterDimensionStructProvider = (*MTRContentLauncherClusterDimensionStruct)(nil)

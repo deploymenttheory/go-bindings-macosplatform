@@ -48,36 +48,29 @@ func directorySharingDeviceConfigurationAdopt(id objc.ID) *DirectorySharingDevic
 }
 
 // Description returns the object's -description text.
-func (x *DirectorySharingDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dsdc *DirectorySharingDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(dsdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectorySharingDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dsdc *DirectorySharingDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dsdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectorySharingDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dsdc *DirectorySharingDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dsdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DirectorySharingDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dsdc *DirectorySharingDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(dsdc))
 }
-
-// DirectorySharingDeviceConfigurationable is the interface implemented by [DirectorySharingDeviceConfiguration], for mocking and DI.
-type DirectorySharingDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ DirectorySharingDeviceConfigurationable = (*DirectorySharingDeviceConfiguration)(nil)
 
 // isDirectorySharingDeviceConfiguration marks DirectorySharingDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the DirectorySharingDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DirectorySharingDeviceConfiguration) isDirectorySharingDeviceConfiguration() {}
+func (dsdc *DirectorySharingDeviceConfiguration) isDirectorySharingDeviceConfiguration() {}
 
 var _ DirectorySharingDeviceConfigurationProvider = (*DirectorySharingDeviceConfiguration)(nil)

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func appearanceAdopt(id objc.ID) *Appearance {
 }
 
 // Description returns the object's -description text.
-func (x *Appearance) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Appearance) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Appearance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Appearance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Appearance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Appearance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Appearance) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Appearance) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAppearanceWithAppearanceNamedBundle creates an appearance object from the named appearance file located in the specified bundle.
@@ -84,12 +85,12 @@ func NewAppearanceWithCoder(coder obj.Object) *Appearance {
 // PerformAsCurrentDrawingAppearance sets the appearance to be the active drawing appearance and perform the specified block.
 //
 // PerformAsCurrentDrawingAppearance blocks until the operation completes or ctx is cancelled.
-func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) error {
+func (a *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAsCurrentDrawingAppearance:"), _block)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("performAsCurrentDrawingAppearance:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -99,30 +100,19 @@ func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) erro
 }
 
 // BestMatchFromAppearancesWithNames returns the appearance name that most closely matches the current appearance object.
-func (x *Appearance) BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestMatchFromAppearancesWithNames:"), purego.SliceToNSArray(appearances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (a *Appearance) BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bestMatchFromAppearancesWithNames:"), purego.SliceToNSArray(appearances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Appearance) Name() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (a *Appearance) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
 // AllowsVibrancy wraps the corresponding Objective-C method.
-func (x *Appearance) AllowsVibrancy() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsVibrancy"))
+func (a *Appearance) AllowsVibrancy() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("allowsVibrancy"))
 	return _r
 }
-
-// Appearanceable is the interface implemented by [Appearance], for mocking and DI.
-type Appearanceable interface {
-	obj.Object
-	PerformAsCurrentDrawingAppearance(ctx context.Context) error
-	BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object
-	Name() obj.Object
-	AllowsVibrancy() bool
-}
-
-var _ Appearanceable = (*Appearance)(nil)

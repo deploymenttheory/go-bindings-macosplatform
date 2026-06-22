@@ -46,24 +46,24 @@ func uRLCredentialAdopt(id objc.ID) *URLCredential {
 }
 
 // Description returns the object's -description text.
-func (x *URLCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *URLCredential) Description() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uc *URLCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uc *URLCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *URLCredential) String() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // NewURLCredentialWithUserPasswordPersistence initialize a NSURLCredential with a user and password
@@ -88,20 +88,20 @@ func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLCredential) WithScriptingProperties(scriptingProperties obj.Object) *URLCredential {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uc *URLCredential) WithScriptingProperties(scriptingProperties obj.Object) *URLCredential {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uc
 }
 
 // Persistence wraps the corresponding Objective-C method.
-func (x *URLCredential) Persistence() URLCredentialPersistence {
-	_r := objc.Send[URLCredentialPersistence](objref.IDOf(x), objc.RegisterName("persistence"))
+func (uc *URLCredential) Persistence() URLCredentialPersistence {
+	_r := objc.Send[URLCredentialPersistence](objref.IDOf(uc), objc.RegisterName("persistence"))
 	return _r
 }
 
 // User get the username
-func (x *URLCredential) User() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+func (uc *URLCredential) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,42 +109,28 @@ func (x *URLCredential) User() string {
 }
 
 // Password get the password This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
-func (x *URLCredential) Password() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+func (uc *URLCredential) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HasPassword find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns YES, since getting the password may fail, or the user may refuse access.
-func (x *URLCredential) HasPassword() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPassword"))
+// HasPassword reports whether find out if this credential has a password, without trying to get it If this credential's password is actually kept in an external store, the password method may return nil even if this method returns true, since getting the password may fail, or the user may refuse access.
+func (uc *URLCredential) HasPassword() bool {
+	_r := objc.Send[bool](objref.IDOf(uc), objc.RegisterName("hasPassword"))
 	return _r
 }
 
 // Identity returns the SecIdentityRef of this credential, if it was created with a certificate and identity
-func (x *URLCredential) Identity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
+func (uc *URLCredential) Identity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
 // Certificates returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
-func (x *URLCredential) Certificates() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificates"))
+func (uc *URLCredential) Certificates() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("certificates"))
 	return obj.Wrap(_r)
 }
-
-// URLCredentialable is the interface implemented by [URLCredential], for mocking and DI.
-type URLCredentialable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLCredential
-	Persistence() URLCredentialPersistence
-	User() string
-	Password() string
-	HasPassword() bool
-	Identity() obj.Object
-	Certificates() obj.Object
-}
-
-var _ URLCredentialable = (*URLCredential)(nil)

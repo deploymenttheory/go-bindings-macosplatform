@@ -44,24 +44,24 @@ func mTRChannelClusterProgramCastStructAdopt(id objc.ID) *MTRChannelClusterProgr
 }
 
 // Description returns the object's -description text.
-func (x *MTRChannelClusterProgramCastStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mccpcs *MTRChannelClusterProgramCastStruct) Description() string {
+	return rt.Description(objref.IDOf(mccpcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterProgramCastStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mccpcs *MTRChannelClusterProgramCastStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mccpcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterProgramCastStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mccpcs *MTRChannelClusterProgramCastStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mccpcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRChannelClusterProgramCastStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mccpcs *MTRChannelClusterProgramCastStruct) String() string {
+	return rt.Description(objref.IDOf(mccpcs))
 }
 
 // NewMTRChannelClusterProgramCastStruct creates a new MTRChannelClusterProgramCastStruct.
@@ -71,54 +71,31 @@ func NewMTRChannelClusterProgramCastStruct() *MTRChannelClusterProgramCastStruct
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterProgramCastStruct) WithName(name string) *MTRChannelClusterProgramCastStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mccpcs *MTRChannelClusterProgramCastStruct) WithName(name string) *MTRChannelClusterProgramCastStruct {
+	objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("setName:"), purego.NSString(name))
+	return mccpcs
 }
 
 // WithRole sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterProgramCastStruct) WithRole(role string) *MTRChannelClusterProgramCastStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), purego.NSString(role))
-	return x
+func (mccpcs *MTRChannelClusterProgramCastStruct) WithRole(role string) *MTRChannelClusterProgramCastStruct {
+	objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("setRole:"), purego.NSString(role))
+	return mccpcs
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterProgramCastStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mccpcs *MTRChannelClusterProgramCastStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterProgramCastStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Role wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterProgramCastStruct) Role() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("role"))
+func (mccpcs *MTRChannelClusterProgramCastStruct) Role() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("role"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetRole wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterProgramCastStruct) SetRole(role string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), purego.NSString(role))
-}
-
-// MTRChannelClusterProgramCastStructable is the interface implemented by [MTRChannelClusterProgramCastStruct], for mocking and DI.
-type MTRChannelClusterProgramCastStructable interface {
-	obj.Object
-	WithName(name string) *MTRChannelClusterProgramCastStruct
-	WithRole(role string) *MTRChannelClusterProgramCastStruct
-	Name() string
-	SetName(name string)
-	Role() string
-	SetRole(role string)
-}
-
-var _ MTRChannelClusterProgramCastStructable = (*MTRChannelClusterProgramCastStruct)(nil)

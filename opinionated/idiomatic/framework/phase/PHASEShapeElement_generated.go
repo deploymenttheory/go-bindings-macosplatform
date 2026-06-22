@@ -46,24 +46,24 @@ func shapeElementAdopt(id objc.ID) *ShapeElement {
 }
 
 // Description returns the object's -description text.
-func (x *ShapeElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (se *ShapeElement) Description() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShapeElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (se *ShapeElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShapeElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (se *ShapeElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShapeElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (se *ShapeElement) String() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // NewShapeElement creates a new ShapeElement.
@@ -72,29 +72,14 @@ func NewShapeElement() *ShapeElement {
 	return shapeElementAdopt(_id)
 }
 
-// WithMaterial the shape's material defines the acoustical properties of this element.
-func (x *ShapeElement) WithMaterial(material *Material) *ShapeElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
-	return x
+// WithMaterial sets the shape's material defines the acoustical properties of this element.
+func (se *ShapeElement) WithMaterial(material *Material) *ShapeElement {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setMaterial:"), objref.IDOf(material))
+	return se
 }
 
 // Material wraps the corresponding Objective-C method.
-func (x *ShapeElement) Material() *Material {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("material"))
+func (se *ShapeElement) Material() *Material {
+	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("material"))
 	return MaterialFromID(_r)
 }
-
-// SetMaterial wraps the corresponding Objective-C method.
-func (x *ShapeElement) SetMaterial(material *Material) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterial:"), objref.IDOf(material))
-}
-
-// ShapeElementable is the interface implemented by [ShapeElement], for mocking and DI.
-type ShapeElementable interface {
-	obj.Object
-	WithMaterial(material *Material) *ShapeElement
-	Material() *Material
-	SetMaterial(material *Material)
-}
-
-var _ ShapeElementable = (*ShapeElement)(nil)

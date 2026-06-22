@@ -51,24 +51,15 @@ func NewMTRDoorLockClusterDlCredential() *MTRDoorLockClusterDlCredential {
 }
 
 // WithCredentialType sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
-	return x
+func (mdlcdc *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential {
+	objc.Send[objc.ID](objref.IDOf(mdlcdc), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
+	return mdlcdc
 }
 
 // WithCredentialIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
-	return x
+func (mdlcdc *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential {
+	objc.Send[objc.ID](objref.IDOf(mdlcdc), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
+	return mdlcdc
 }
-
-// MTRDoorLockClusterDlCredentialable is the interface implemented by [MTRDoorLockClusterDlCredential], for mocking and DI.
-type MTRDoorLockClusterDlCredentialable interface {
-	obj.Object
-	WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential
-	WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential
-}
-
-var _ MTRDoorLockClusterDlCredentialable = (*MTRDoorLockClusterDlCredential)(nil)
 
 var _ MTRDoorLockClusterCredentialStructProvider = (*MTRDoorLockClusterDlCredential)(nil)

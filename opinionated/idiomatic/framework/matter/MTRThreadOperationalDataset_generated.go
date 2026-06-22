@@ -44,24 +44,24 @@ func mTRThreadOperationalDatasetAdopt(id objc.ID) *MTRThreadOperationalDataset {
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadOperationalDataset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtod *MTRThreadOperationalDataset) Description() string {
+	return rt.Description(objref.IDOf(mtod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadOperationalDataset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtod *MTRThreadOperationalDataset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadOperationalDataset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtod *MTRThreadOperationalDataset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadOperationalDataset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtod *MTRThreadOperationalDataset) String() string {
+	return rt.Description(objref.IDOf(mtod))
 }
 
 // NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID create a Thread Operational Dataset object with the individual network fields.
@@ -86,80 +86,58 @@ func NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChan
 }
 
 // WithChannel sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadOperationalDataset) WithChannel(channel uint16) *MTRThreadOperationalDataset {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+func (mtod *MTRThreadOperationalDataset) WithChannel(channel uint16) *MTRThreadOperationalDataset {
+	objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("setChannel:"), channel)
+	return mtod
 }
 
 // Data get the underlying data that represents the Thread Active Operational Dataset This can be used for the threadOperationalDataset of MTRCommissioningParameters.
-func (x *MTRThreadOperationalDataset) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (mtod *MTRThreadOperationalDataset) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// NetworkName the Thread Network name
-func (x *MTRThreadOperationalDataset) NetworkName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
+// NetworkName returns the Thread Network name
+func (mtod *MTRThreadOperationalDataset) NetworkName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ExtendedPANID the Thread Network extendended PAN ID
-func (x *MTRThreadOperationalDataset) ExtendedPANID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPANID"))
+// ExtendedPANID returns the Thread Network extendended PAN ID
+func (mtod *MTRThreadOperationalDataset) ExtendedPANID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("extendedPANID"))
 	return obj.Wrap(_r)
 }
 
-// MasterKey the 16 byte Master Key
-func (x *MTRThreadOperationalDataset) MasterKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("masterKey"))
+// MasterKey returns the 16 byte Master Key
+func (mtod *MTRThreadOperationalDataset) MasterKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("masterKey"))
 	return obj.Wrap(_r)
 }
 
-// PSKc the Thread PSKc
-func (x *MTRThreadOperationalDataset) PSKc() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PSKc"))
+// PSKc returns the Thread PSKc
+func (mtod *MTRThreadOperationalDataset) PSKc() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("PSKc"))
 	return obj.Wrap(_r)
 }
 
-// ChannelNumber the Thread network channel.  Always an unsigned 16-bit integer.
-func (x *MTRThreadOperationalDataset) ChannelNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelNumber"))
+// ChannelNumber returns the Thread network channel.  Always an unsigned 16-bit integer.
+func (mtod *MTRThreadOperationalDataset) ChannelNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("channelNumber"))
 	return obj.Wrap(_r)
 }
 
-// PanID a uint16_t stored as 2-bytes in host order representing the Thread PAN ID
-func (x *MTRThreadOperationalDataset) PanID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("panID"))
+// PanID returns a uint16_t stored as 2-bytes in host order representing the Thread PAN ID
+func (mtod *MTRThreadOperationalDataset) PanID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("panID"))
 	return obj.Wrap(_r)
 }
 
 // Channel wraps the corresponding Objective-C method.
-func (x *MTRThreadOperationalDataset) Channel() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("channel"))
+func (mtod *MTRThreadOperationalDataset) Channel() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(mtod), objc.RegisterName("channel"))
 	return _r
 }
-
-// SetChannel wraps the corresponding Objective-C method.
-func (x *MTRThreadOperationalDataset) SetChannel(channel uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-}
-
-// MTRThreadOperationalDatasetable is the interface implemented by [MTRThreadOperationalDataset], for mocking and DI.
-type MTRThreadOperationalDatasetable interface {
-	obj.Object
-	WithChannel(channel uint16) *MTRThreadOperationalDataset
-	Data() obj.Object
-	NetworkName() string
-	ExtendedPANID() obj.Object
-	MasterKey() obj.Object
-	PSKc() obj.Object
-	ChannelNumber() obj.Object
-	PanID() obj.Object
-	Channel() uint16
-	SetChannel(channel uint16)
-}
-
-var _ MTRThreadOperationalDatasetable = (*MTRThreadOperationalDataset)(nil)

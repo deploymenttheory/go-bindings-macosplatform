@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,21 @@ func NewSymbolDrawOnEffect() *SymbolDrawOnEffect {
 }
 
 // EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
-func (x *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+func (sdoe *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithByLayer"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
-func (x *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+func (sdoe *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDrawOnEffectFromID(_r)
 }
 
 // EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
-func (x *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIndividually"))
+func (sdoe *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithIndividually"))
 	return SymbolDrawOnEffectFromID(_r)
 }
-
-// SymbolDrawOnEffectable is the interface implemented by [SymbolDrawOnEffect], for mocking and DI.
-type SymbolDrawOnEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolDrawOnEffect
-	EffectWithWholeSymbol() *SymbolDrawOnEffect
-	EffectWithIndividually() *SymbolDrawOnEffect
-}
-
-var _ SymbolDrawOnEffectable = (*SymbolDrawOnEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolDrawOnEffect)(nil)

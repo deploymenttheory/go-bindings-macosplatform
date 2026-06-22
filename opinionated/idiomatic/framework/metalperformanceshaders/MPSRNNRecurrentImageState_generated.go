@@ -53,38 +53,27 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *RNNRecurrentImageState) WithReadCount(readCount int) *RNNRecurrentImageState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (rris *RNNRecurrentImageState) WithReadCount(readCount int) *RNNRecurrentImageState {
+	objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("setReadCount:"), readCount)
+	return rris
 }
 
-// WithLabel a string to help identify this object.
-func (x *RNNRecurrentImageState) WithLabel(label string) *RNNRecurrentImageState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (rris *RNNRecurrentImageState) WithLabel(label string) *RNNRecurrentImageState {
+	objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rris
 }
 
 // GetRecurrentOutputImageForLayerIndex access the stored recurrent image data.
-func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
+func (rris *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
 // GetMemoryCellImageForLayerIndex access the stored memory cell image data (if present).
-func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
+func (rris *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
-
-// RNNRecurrentImageStateable is the interface implemented by [RNNRecurrentImageState], for mocking and DI.
-type RNNRecurrentImageStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *RNNRecurrentImageState
-	WithLabel(label string) *RNNRecurrentImageState
-	GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object
-	GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object
-}
-
-var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)
 
 var _ StateProvider = (*RNNRecurrentImageState)(nil)

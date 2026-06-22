@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewBooleanResolutionResult() *BooleanResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INBooleanResolutionResult")), objc.RegisterName("new"))
 	return booleanResolutionResultAdopt(_id)
 }
-
-// BooleanResolutionResultable is the interface implemented by [BooleanResolutionResult], for mocking and DI.
-type BooleanResolutionResultable interface {
-	obj.Object
-}
-
-var _ BooleanResolutionResultable = (*BooleanResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*BooleanResolutionResult)(nil)

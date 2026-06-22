@@ -46,24 +46,24 @@ func crashDetectionEventAdopt(id objc.ID) *CrashDetectionEvent {
 }
 
 // Description returns the object's -description text.
-func (x *CrashDetectionEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cde *CrashDetectionEvent) Description() string {
+	return rt.Description(objref.IDOf(cde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CrashDetectionEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cde *CrashDetectionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CrashDetectionEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cde *CrashDetectionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CrashDetectionEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cde *CrashDetectionEvent) String() string {
+	return rt.Description(objref.IDOf(cde))
 }
 
 // NewCrashDetectionEvent creates a new CrashDetectionEvent.
@@ -72,23 +72,14 @@ func NewCrashDetectionEvent() *CrashDetectionEvent {
 	return crashDetectionEventAdopt(_id)
 }
 
-// Date date The time a crash was detected
-func (x *CrashDetectionEvent) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+// Date returns date The time a crash was detected
+func (cde *CrashDetectionEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cde), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// Response response enum value representing the emergency response to the Crash Detection event
-func (x *CrashDetectionEvent) Response() CrashDetectionEventResponse {
-	_r := objc.Send[CrashDetectionEventResponse](objref.IDOf(x), objc.RegisterName("response"))
+// Response returns response enum value representing the emergency response to the Crash Detection event
+func (cde *CrashDetectionEvent) Response() CrashDetectionEventResponse {
+	_r := objc.Send[CrashDetectionEventResponse](objref.IDOf(cde), objc.RegisterName("response"))
 	return _r
 }
-
-// CrashDetectionEventable is the interface implemented by [CrashDetectionEvent], for mocking and DI.
-type CrashDetectionEventable interface {
-	obj.Object
-	Date() obj.Object
-	Response() CrashDetectionEventResponse
-}
-
-var _ CrashDetectionEventable = (*CrashDetectionEvent)(nil)

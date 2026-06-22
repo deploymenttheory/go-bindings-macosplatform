@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewSingleDirectoryShareWithDirectory(directory *SharedDirectory) *SingleDir
 }
 
 // Directory wraps the corresponding Objective-C method.
-func (x *SingleDirectoryShare) Directory() *SharedDirectory {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directory"))
+func (sds *SingleDirectoryShare) Directory() *SharedDirectory {
+	_r := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("directory"))
 	return SharedDirectoryFromID(_r)
 }
-
-// SingleDirectoryShareable is the interface implemented by [SingleDirectoryShare], for mocking and DI.
-type SingleDirectoryShareable interface {
-	obj.Object
-	Directory() *SharedDirectory
-}
-
-var _ SingleDirectoryShareable = (*SingleDirectoryShare)(nil)
 
 var _ DirectoryShareProvider = (*SingleDirectoryShare)(nil)

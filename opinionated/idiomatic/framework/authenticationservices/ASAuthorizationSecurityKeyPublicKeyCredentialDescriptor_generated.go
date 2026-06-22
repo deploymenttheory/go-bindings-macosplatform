@@ -46,24 +46,24 @@ func authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(id objc.ID) *Aut
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Description() string {
+	return rt.Description(objref.IDOf(askpkcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(askpkcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(askpkcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) String() string {
+	return rt.Description(objref.IDOf(askpkcd))
 }
 
 // NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates the object with the credential ID and the array of transports.
@@ -73,32 +73,17 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTra
 	return authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(_id)
 }
 
-// WithTransports the array of transport types.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+// WithTransports sets the array of transport types.
+func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransports:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(askpkcd), objc.RegisterName("setTransports:"), _arr)
+	return askpkcd
 }
 
-// Transports an array indicating transports for the credential indicated by credentialID.
+// Transports returns an array indicating transports for the credential indicated by credentialID.
 //
 // Transports returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transports"))
+func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(askpkcd), objc.RegisterName("transports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetTransports wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransports:"), purego.SliceToNSArray(transports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// AuthorizationSecurityKeyPublicKeyCredentialDescriptorable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialDescriptor], for mocking and DI.
-type AuthorizationSecurityKeyPublicKeyCredentialDescriptorable interface {
-	obj.Object
-	WithTransports(items ...obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor
-	Transports() []obj.Object
-	SetTransports(transports []obj.Object)
-}
-
-var _ AuthorizationSecurityKeyPublicKeyCredentialDescriptorable = (*AuthorizationSecurityKeyPublicKeyCredentialDescriptor)(nil)

@@ -46,24 +46,24 @@ func webAppManifestAdopt(id objc.ID) *WebAppManifest {
 }
 
 // Description returns the object's -description text.
-func (x *WebAppManifest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wam *WebAppManifest) Description() string {
+	return rt.Description(objref.IDOf(wam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebAppManifest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wam *WebAppManifest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebAppManifest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wam *WebAppManifest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebAppManifest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wam *WebAppManifest) String() string {
+	return rt.Description(objref.IDOf(wam))
 }
 
 // NewWebAppManifestWithJSONDataManifestURL returns nil if manifestURL is invalid or jsonData cannot be parsed.
@@ -73,23 +73,14 @@ func NewWebAppManifestWithJSONDataManifestURL(jsonData obj.Object, manifestURL s
 	return webAppManifestAdopt(_id)
 }
 
-// JsonData wraps the corresponding Objective-C method.
-func (x *WebAppManifest) JsonData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jsonData"))
+// JSONData wraps the corresponding Objective-C method.
+func (wam *WebAppManifest) JSONData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wam), objc.RegisterName("jsonData"))
 	return obj.Wrap(_r)
 }
 
 // ManifestURL wraps the corresponding Objective-C method.
-func (x *WebAppManifest) ManifestURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manifestURL"))
+func (wam *WebAppManifest) ManifestURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wam), objc.RegisterName("manifestURL"))
 	return obj.Wrap(_r)
 }
-
-// WebAppManifestable is the interface implemented by [WebAppManifest], for mocking and DI.
-type WebAppManifestable interface {
-	obj.Object
-	JsonData() obj.Object
-	ManifestURL() obj.Object
-}
-
-var _ WebAppManifestable = (*WebAppManifest)(nil)

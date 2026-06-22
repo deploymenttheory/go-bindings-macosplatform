@@ -46,24 +46,24 @@ func postalAddressFormatterAdopt(id objc.ID) *PostalAddressFormatter {
 }
 
 // Description returns the object's -description text.
-func (x *PostalAddressFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (paf *PostalAddressFormatter) Description() string {
+	return rt.Description(objref.IDOf(paf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PostalAddressFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (paf *PostalAddressFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(paf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PostalAddressFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (paf *PostalAddressFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(paf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PostalAddressFormatter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (paf *PostalAddressFormatter) String() string {
+	return rt.Description(objref.IDOf(paf))
 }
 
 // NewPostalAddressFormatter creates a new PostalAddressFormatter.
@@ -72,15 +72,15 @@ func NewPostalAddressFormatter() *PostalAddressFormatter {
 	return postalAddressFormatterAdopt(_id)
 }
 
-// WithStyle the style to apply when formatting strings.
-func (x *PostalAddressFormatter) WithStyle(style PostalAddressFormatterStyle) *PostalAddressFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-	return x
+// WithStyle sets the style to apply when formatting strings.
+func (paf *PostalAddressFormatter) WithStyle(style PostalAddressFormatterStyle) *PostalAddressFormatter {
+	objc.Send[objc.ID](objref.IDOf(paf), objc.RegisterName("setStyle:"), style)
+	return paf
 }
 
 // StringFromPostalAddress returns a formatted postal address.
-func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAddress) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromPostalAddress:"), objref.IDOf(postalAddress))
+func (paf *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAddress) string {
+	_r := objc.Send[objc.ID](objref.IDOf(paf), objc.RegisterName("stringFromPostalAddress:"), objref.IDOf(postalAddress))
 	if _r == 0 {
 		return ""
 	}
@@ -88,30 +88,13 @@ func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAd
 }
 
 // AttributedStringFromPostalAddressWithDefaultAttributes returns a formatted postal address as an attributed string.
-func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringFromPostalAddress:withDefaultAttributes:"), objref.IDOf(postalAddress), objref.IDOf(attributes))
+func (paf *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(paf), objc.RegisterName("attributedStringFromPostalAddress:withDefaultAttributes:"), objref.IDOf(postalAddress), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
-// Style the style for a postal address formatter instance. The default value is CNPostalAddressFormatterStyleMailingAddress.
-func (x *PostalAddressFormatter) Style() PostalAddressFormatterStyle {
-	_r := objc.Send[PostalAddressFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
+// Style returns the style for a postal address formatter instance. The default value is CNPostalAddressFormatterStyleMailingAddress.
+func (paf *PostalAddressFormatter) Style() PostalAddressFormatterStyle {
+	_r := objc.Send[PostalAddressFormatterStyle](objref.IDOf(paf), objc.RegisterName("style"))
 	return _r
 }
-
-// SetStyle wraps the corresponding Objective-C method.
-func (x *PostalAddressFormatter) SetStyle(style PostalAddressFormatterStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-}
-
-// PostalAddressFormatterable is the interface implemented by [PostalAddressFormatter], for mocking and DI.
-type PostalAddressFormatterable interface {
-	obj.Object
-	WithStyle(style PostalAddressFormatterStyle) *PostalAddressFormatter
-	StringFromPostalAddress(postalAddress *PostalAddress) string
-	AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object
-	Style() PostalAddressFormatterStyle
-	SetStyle(style PostalAddressFormatterStyle)
-}
-
-var _ PostalAddressFormatterable = (*PostalAddressFormatter)(nil)

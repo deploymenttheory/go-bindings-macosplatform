@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,243 +60,147 @@ func NewNNBinaryArithmeticNodeWithLeftSourceRightSource(left *NNImageNode, right
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithPrimaryScale(primaryScale float32) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (nban *NNBinaryArithmeticNode) WithPrimaryScale(primaryScale float32) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return nban
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithSecondaryScale(secondaryScale float32) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (nban *NNBinaryArithmeticNode) WithSecondaryScale(secondaryScale float32) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return nban
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithBias(bias float32) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (nban *NNBinaryArithmeticNode) WithBias(bias float32) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setBias:"), bias)
+	return nban
 }
 
 // WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+func (nban *NNBinaryArithmeticNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return nban
 }
 
 // WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+func (nban *NNBinaryArithmeticNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return nban
 }
 
 // WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
-	return x
+func (nban *NNBinaryArithmeticNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
+	return nban
 }
 
 // WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+func (nban *NNBinaryArithmeticNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nban
 }
 
 // WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+func (nban *NNBinaryArithmeticNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nban
 }
 
 // WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+func (nban *NNBinaryArithmeticNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return nban
 }
 
 // WithMinimumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithMinimumValue(minimumValue float32) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+func (nban *NNBinaryArithmeticNode) WithMinimumValue(minimumValue float32) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return nban
 }
 
 // WithMaximumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNBinaryArithmeticNode) WithMaximumValue(maximumValue float32) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+func (nban *NNBinaryArithmeticNode) WithMaximumValue(maximumValue float32) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return nban
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNBinaryArithmeticNode) WithLabel(label string) *NNBinaryArithmeticNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nban *NNBinaryArithmeticNode) WithLabel(label string) *NNBinaryArithmeticNode {
+	objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nban
 }
 
 // PrimaryScale wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) PrimaryScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("primaryScale"))
+func (nban *NNBinaryArithmeticNode) PrimaryScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("primaryScale"))
 	return _r
-}
-
-// SetPrimaryScale wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetPrimaryScale(primaryScale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 }
 
 // SecondaryScale wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SecondaryScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("secondaryScale"))
+func (nban *NNBinaryArithmeticNode) SecondaryScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("secondaryScale"))
 	return _r
-}
-
-// SetSecondaryScale wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetSecondaryScale(secondaryScale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 }
 
 // Bias wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) Bias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+func (nban *NNBinaryArithmeticNode) Bias() float32 {
+	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("bias"))
 	return _r
-}
-
-// SetBias wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetBias(bias float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
 
 // PrimaryStrideInPixelsX wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) PrimaryStrideInPixelsX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryStrideInPixelsX"))
+func (nban *NNBinaryArithmeticNode) PrimaryStrideInPixelsX() int {
+	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("primaryStrideInPixelsX"))
 	return _r
-}
-
-// SetPrimaryStrideInPixelsX wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetPrimaryStrideInPixelsX(primaryStrideInPixelsX int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 }
 
 // PrimaryStrideInPixelsY wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) PrimaryStrideInPixelsY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryStrideInPixelsY"))
+func (nban *NNBinaryArithmeticNode) PrimaryStrideInPixelsY() int {
+	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("primaryStrideInPixelsY"))
 	return _r
-}
-
-// SetPrimaryStrideInPixelsY wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetPrimaryStrideInPixelsY(primaryStrideInPixelsY int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 }
 
 // PrimaryStrideInFeatureChannels wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) PrimaryStrideInFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("primaryStrideInFeatureChannels"))
+func (nban *NNBinaryArithmeticNode) PrimaryStrideInFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("primaryStrideInFeatureChannels"))
 	return _r
-}
-
-// SetPrimaryStrideInFeatureChannels wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 }
 
 // SecondaryStrideInPixelsX wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SecondaryStrideInPixelsX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixelsX"))
+func (nban *NNBinaryArithmeticNode) SecondaryStrideInPixelsX() int {
+	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("secondaryStrideInPixelsX"))
 	return _r
-}
-
-// SetSecondaryStrideInPixelsX wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 }
 
 // SecondaryStrideInPixelsY wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SecondaryStrideInPixelsY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInPixelsY"))
+func (nban *NNBinaryArithmeticNode) SecondaryStrideInPixelsY() int {
+	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("secondaryStrideInPixelsY"))
 	return _r
-}
-
-// SetSecondaryStrideInPixelsY wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 }
 
 // SecondaryStrideInFeatureChannels wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SecondaryStrideInFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondaryStrideInFeatureChannels"))
+func (nban *NNBinaryArithmeticNode) SecondaryStrideInFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("secondaryStrideInFeatureChannels"))
 	return _r
-}
-
-// SetSecondaryStrideInFeatureChannels wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 }
 
 // MinimumValue wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) MinimumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
+func (nban *NNBinaryArithmeticNode) MinimumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("minimumValue"))
 	return _r
-}
-
-// SetMinimumValue wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetMinimumValue(minimumValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 }
 
 // MaximumValue wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) MaximumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+func (nban *NNBinaryArithmeticNode) MaximumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("maximumValue"))
 	return _r
 }
-
-// SetMaximumValue wraps the corresponding Objective-C method.
-func (x *NNBinaryArithmeticNode) SetMaximumValue(maximumValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-}
-
-// NNBinaryArithmeticNodeable is the interface implemented by [NNBinaryArithmeticNode], for mocking and DI.
-type NNBinaryArithmeticNodeable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *NNBinaryArithmeticNode
-	WithSecondaryScale(secondaryScale float32) *NNBinaryArithmeticNode
-	WithBias(bias float32) *NNBinaryArithmeticNode
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNBinaryArithmeticNode
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNBinaryArithmeticNode
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNBinaryArithmeticNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNBinaryArithmeticNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNBinaryArithmeticNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNBinaryArithmeticNode
-	WithMinimumValue(minimumValue float32) *NNBinaryArithmeticNode
-	WithMaximumValue(maximumValue float32) *NNBinaryArithmeticNode
-	WithLabel(label string) *NNBinaryArithmeticNode
-	PrimaryScale() float32
-	SetPrimaryScale(primaryScale float32)
-	SecondaryScale() float32
-	SetSecondaryScale(secondaryScale float32)
-	Bias() float32
-	SetBias(bias float32)
-	PrimaryStrideInPixelsX() int
-	SetPrimaryStrideInPixelsX(primaryStrideInPixelsX int)
-	PrimaryStrideInPixelsY() int
-	SetPrimaryStrideInPixelsY(primaryStrideInPixelsY int)
-	PrimaryStrideInFeatureChannels() int
-	SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int)
-	SecondaryStrideInPixelsX() int
-	SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX int)
-	SecondaryStrideInPixelsY() int
-	SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY int)
-	SecondaryStrideInFeatureChannels() int
-	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int)
-	MinimumValue() float32
-	SetMinimumValue(minimumValue float32)
-	MaximumValue() float32
-	SetMaximumValue(maximumValue float32)
-}
-
-var _ NNBinaryArithmeticNodeable = (*NNBinaryArithmeticNode)(nil)
 
 // isNNBinaryArithmeticNode marks NNBinaryArithmeticNode — and, by embedding promotion, its
 // subclasses — as a member of the NNBinaryArithmeticNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNBinaryArithmeticNode) isNNBinaryArithmeticNode() {}
+func (nban *NNBinaryArithmeticNode) isNNBinaryArithmeticNode() {}
 
 var _ NNBinaryArithmeticNodeProvider = (*NNBinaryArithmeticNode)(nil)
 

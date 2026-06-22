@@ -7,7 +7,6 @@ package oslog
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewLogEntryBoundary() *LogEntryBoundary {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEntryBoundary")), objc.RegisterName("new"))
 	return logEntryBoundaryAdopt(_id)
 }
-
-// LogEntryBoundaryable is the interface implemented by [LogEntryBoundary], for mocking and DI.
-type LogEntryBoundaryable interface {
-	obj.Object
-}
-
-var _ LogEntryBoundaryable = (*LogEntryBoundary)(nil)
 
 var _ LogEntryProvider = (*LogEntryBoundary)(nil)

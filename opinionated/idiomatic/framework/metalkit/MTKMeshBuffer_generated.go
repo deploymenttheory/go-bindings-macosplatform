@@ -46,24 +46,24 @@ func meshBufferAdopt(id objc.ID) *MeshBuffer {
 }
 
 // Description returns the object's -description text.
-func (x *MeshBuffer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mb *MeshBuffer) Description() string {
+	return rt.Description(objref.IDOf(mb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshBuffer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mb *MeshBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshBuffer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mb *MeshBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MeshBuffer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mb *MeshBuffer) String() string {
+	return rt.Description(objref.IDOf(mb))
 }
 
 // NewMeshBuffer creates a new MeshBuffer.
@@ -72,30 +72,20 @@ func NewMeshBuffer() *MeshBuffer {
 	return meshBufferAdopt(_id)
 }
 
-// Length size in bytes of the buffer allocation.
-func (x *MeshBuffer) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+// Length returns size in bytes of the buffer allocation.
+func (mb *MeshBuffer) Length() int {
+	_r := objc.Send[int](objref.IDOf(mb), objc.RegisterName("length"))
 	return _r
 }
 
-// Allocator allocator object used to create this buffer. This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
-func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocator"))
+// Allocator returns allocator object used to create this buffer. This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
+func (mb *MeshBuffer) Allocator() *MeshBufferAllocator {
+	_r := objc.Send[objc.ID](objref.IDOf(mb), objc.RegisterName("allocator"))
 	return MeshBufferAllocatorFromID(_r)
 }
 
-// Offset byte offset of the data within the metal buffer.
-func (x *MeshBuffer) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+// Offset returns byte offset of the data within the metal buffer.
+func (mb *MeshBuffer) Offset() int {
+	_r := objc.Send[int](objref.IDOf(mb), objc.RegisterName("offset"))
 	return _r
 }
-
-// MeshBufferable is the interface implemented by [MeshBuffer], for mocking and DI.
-type MeshBufferable interface {
-	obj.Object
-	Length() int
-	Allocator() *MeshBufferAllocator
-	Offset() int
-}
-
-var _ MeshBufferable = (*MeshBuffer)(nil)

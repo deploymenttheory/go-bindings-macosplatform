@@ -46,24 +46,24 @@ func accessoryManagerAdopt(id objc.ID) *AccessoryManager {
 }
 
 // Description returns the object's -description text.
-func (x *AccessoryManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (am *AccessoryManager) Description() string {
+	return rt.Description(objref.IDOf(am))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessoryManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (am *AccessoryManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(am), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessoryManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (am *AccessoryManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(am), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessoryManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (am *AccessoryManager) String() string {
+	return rt.Description(objref.IDOf(am))
 }
 
 // NewAccessoryManager creates a new AccessoryManager.
@@ -71,10 +71,3 @@ func NewAccessoryManager() *AccessoryManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("EAAccessoryManager")), objc.RegisterName("new"))
 	return accessoryManagerAdopt(_id)
 }
-
-// AccessoryManagerable is the interface implemented by [AccessoryManager], for mocking and DI.
-type AccessoryManagerable interface {
-	obj.Object
-}
-
-var _ AccessoryManagerable = (*AccessoryManager)(nil)

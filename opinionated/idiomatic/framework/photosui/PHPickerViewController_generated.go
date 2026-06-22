@@ -46,24 +46,24 @@ func pickerViewControllerAdopt(id objc.ID) *PickerViewController {
 }
 
 // Description returns the object's -description text.
-func (x *PickerViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pvc *PickerViewController) Description() string {
+	return rt.Description(objref.IDOf(pvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PickerViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pvc *PickerViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PickerViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pvc *PickerViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PickerViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pvc *PickerViewController) String() string {
+	return rt.Description(objref.IDOf(pvc))
 }
 
 // NewPickerViewControllerWithConfiguration creates a new picker view controller with the configuration you specify.
@@ -74,51 +74,37 @@ func NewPickerViewControllerWithConfiguration(configuration *PickerConfiguration
 }
 
 // UpdatePickerUsingConfiguration customizes your app’s photo picker according to the given configuration.
-func (x *PickerViewController) UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
+func (pvc *PickerViewController) UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
 }
 
 // DeselectAssetsWithIdentifiers deselects assets that are in a selected state.
-func (x *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (pvc *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []string) {
+	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // MoveAssetWithIdentifierAfterAssetWithIdentifier reorders assets that are in a selected state.
-func (x *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
+func (pvc *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
+	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
 }
 
 // ScrollToInitialPosition resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
-func (x *PickerViewController) ScrollToInitialPosition() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToInitialPosition"))
+func (pvc *PickerViewController) ScrollToInitialPosition() {
+	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("scrollToInitialPosition"))
 }
 
 // ZoomIn changes the picker’s content scale by making the photo thumbnails larger in the view.
-func (x *PickerViewController) ZoomIn() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomIn"))
+func (pvc *PickerViewController) ZoomIn() {
+	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomIn"))
 }
 
 // ZoomOut changes the picker’s content scale by making the photo thumbnails smaller in the view.
-func (x *PickerViewController) ZoomOut() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomOut"))
+func (pvc *PickerViewController) ZoomOut() {
+	objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomOut"))
 }
 
-// Configuration the configuration passed in during initialization.
-func (x *PickerViewController) Configuration() *PickerConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+// Configuration returns the configuration passed in during initialization.
+func (pvc *PickerViewController) Configuration() *PickerConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("configuration"))
 	return PickerConfigurationFromID(_r)
 }
-
-// PickerViewControllerable is the interface implemented by [PickerViewController], for mocking and DI.
-type PickerViewControllerable interface {
-	obj.Object
-	UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration)
-	DeselectAssetsWithIdentifiers(identifiers []string)
-	MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string)
-	ScrollToInitialPosition()
-	ZoomIn()
-	ZoomOut()
-	Configuration() *PickerConfiguration
-}
-
-var _ PickerViewControllerable = (*PickerViewController)(nil)

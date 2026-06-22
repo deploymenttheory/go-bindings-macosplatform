@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRDevic
 // AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedV
 		_o.val = MTROperationalCredentialsClusterAttestationResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedV
 // CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpe
 		_o.val = MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpe
 // CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExp
 		_o.val = MTROperationalCredentialsClusterCSRResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExp
 // AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -150,7 +151,7 @@ func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpecte
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpecte
 // UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -175,7 +176,7 @@ func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpe
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpe
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -200,7 +201,7 @@ func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedVa
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +214,7 @@ func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedVa
 // RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -225,7 +226,7 @@ func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesE
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -236,75 +237,75 @@ func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesE
 }
 
 // ReadAttributeNOCsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNOCsWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeNOCsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFabricsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFabricsWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeFabricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSupportedFabricsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedFabricsWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeSupportedFabricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCommissionedFabricsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCommissionedFabricsWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeCommissionedFabricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTrustedRootCertificatesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTrustedRootCertificatesWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeTrustedRootCertificatesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentFabricIndexWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentFabricIndexWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeCurrentFabricIndexWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcoc *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // AttestationRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // AttestationRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -316,7 +317,7 @@ func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedV
 		_o.val = MTROperationalCredentialsClusterAttestationResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("attestationRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -329,7 +330,7 @@ func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedV
 // CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -341,7 +342,7 @@ func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpe
 		_o.val = MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("certificateChainRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -354,7 +355,7 @@ func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpe
 // CSRRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // CSRRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -366,7 +367,7 @@ func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExp
 		_o.val = MTROperationalCredentialsClusterCSRResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("CSRRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -379,7 +380,7 @@ func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExp
 // AddNOCWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // AddNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -391,7 +392,7 @@ func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpecte
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("addNOCWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -404,7 +405,7 @@ func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpecte
 // UpdateNOCWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // UpdateNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -416,7 +417,7 @@ func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpe
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("updateNOCWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -429,7 +430,7 @@ func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpe
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -441,7 +442,7 @@ func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedVa
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("updateFabricLabelWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -454,7 +455,7 @@ func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedVa
 // RemoveFabricWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // RemoveFabricWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -466,7 +467,7 @@ func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesE
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("removeFabricWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -475,38 +476,6 @@ func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesE
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterOperationalCredentialsable is the interface implemented by [MTRClusterOperationalCredentials], for mocking and DI.
-type MTRClusterOperationalCredentialsable interface {
-	obj.Object
-	AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterAttestationResponseParams, error)
-	CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error)
-	CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterCSRResponseParams, error)
-	AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	ReadAttributeNOCsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFabricsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-	AttestationRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterAttestationResponseParams, error)
-	CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error)
-	CSRRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterCSRResponseParams, error)
-	AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-}
-
-var _ MTRClusterOperationalCredentialsable = (*MTRClusterOperationalCredentials)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterOperationalCredentials)(nil)
 

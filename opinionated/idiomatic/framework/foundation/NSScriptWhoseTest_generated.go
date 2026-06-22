@@ -48,24 +48,24 @@ func scriptWhoseTestAdopt(id objc.ID) *ScriptWhoseTest {
 }
 
 // Description returns the object's -description text.
-func (x *ScriptWhoseTest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (swt *ScriptWhoseTest) Description() string {
+	return rt.Description(objref.IDOf(swt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScriptWhoseTest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (swt *ScriptWhoseTest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(swt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScriptWhoseTest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (swt *ScriptWhoseTest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(swt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScriptWhoseTest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (swt *ScriptWhoseTest) String() string {
+	return rt.Description(objref.IDOf(swt))
 }
 
 // NewScriptWhoseTestWithCoder creates a new ScriptWhoseTest.
@@ -76,29 +76,20 @@ func NewScriptWhoseTestWithCoder(inCoder *Coder) *ScriptWhoseTest {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ScriptWhoseTest) WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (swt *ScriptWhoseTest) WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest {
+	objc.Send[objc.ID](objref.IDOf(swt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return swt
 }
 
-// IsTrue returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
-func (x *ScriptWhoseTest) IsTrue() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTrue"))
+// IsTrue reports whether returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
+func (swt *ScriptWhoseTest) IsTrue() bool {
+	_r := objc.Send[bool](objref.IDOf(swt), objc.RegisterName("isTrue"))
 	return _r
 }
-
-// ScriptWhoseTestable is the interface implemented by [ScriptWhoseTest], for mocking and DI.
-type ScriptWhoseTestable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest
-	IsTrue() bool
-}
-
-var _ ScriptWhoseTestable = (*ScriptWhoseTest)(nil)
 
 // isScriptWhoseTest marks ScriptWhoseTest — and, by embedding promotion, its
 // subclasses — as a member of the ScriptWhoseTest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ScriptWhoseTest) isScriptWhoseTest() {}
+func (swt *ScriptWhoseTest) isScriptWhoseTest() {}
 
 var _ ScriptWhoseTestProvider = (*ScriptWhoseTest)(nil)

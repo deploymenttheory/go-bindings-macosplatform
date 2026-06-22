@@ -44,24 +44,24 @@ func mTRLowPowerClusterSleepParamsAdopt(id objc.ID) *MTRLowPowerClusterSleepPara
 }
 
 // Description returns the object's -description text.
-func (x *MTRLowPowerClusterSleepParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlpcsp *MTRLowPowerClusterSleepParams) Description() string {
+	return rt.Description(objref.IDOf(mlpcsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRLowPowerClusterSleepParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlpcsp *MTRLowPowerClusterSleepParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlpcsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRLowPowerClusterSleepParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlpcsp *MTRLowPowerClusterSleepParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlpcsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRLowPowerClusterSleepParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlpcsp *MTRLowPowerClusterSleepParams) String() string {
+	return rt.Description(objref.IDOf(mlpcsp))
 }
 
 // NewMTRLowPowerClusterSleepParams creates a new MTRLowPowerClusterSleepParams.
@@ -70,49 +70,26 @@ func NewMTRLowPowerClusterSleepParams() *MTRLowPowerClusterSleepParams {
 	return mTRLowPowerClusterSleepParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLowPowerClusterSleepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLowPowerClusterSleepParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlpcsp *MTRLowPowerClusterSleepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLowPowerClusterSleepParams {
+	objc.Send[objc.ID](objref.IDOf(mlpcsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mlpcsp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLowPowerClusterSleepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLowPowerClusterSleepParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlpcsp *MTRLowPowerClusterSleepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLowPowerClusterSleepParams {
+	objc.Send[objc.ID](objref.IDOf(mlpcsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mlpcsp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLowPowerClusterSleepParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlpcsp *MTRLowPowerClusterSleepParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlpcsp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRLowPowerClusterSleepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLowPowerClusterSleepParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlpcsp *MTRLowPowerClusterSleepParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlpcsp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRLowPowerClusterSleepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRLowPowerClusterSleepParamsable is the interface implemented by [MTRLowPowerClusterSleepParams], for mocking and DI.
-type MTRLowPowerClusterSleepParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLowPowerClusterSleepParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLowPowerClusterSleepParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRLowPowerClusterSleepParamsable = (*MTRLowPowerClusterSleepParams)(nil)

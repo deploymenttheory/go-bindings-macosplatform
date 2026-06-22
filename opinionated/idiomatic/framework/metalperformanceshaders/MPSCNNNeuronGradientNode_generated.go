@@ -53,26 +53,17 @@ func NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescripto
 	return cNNNeuronGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronGradientNode) WithLabel(label string) *CNNNeuronGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cngn *CNNNeuronGradientNode) WithLabel(label string) *CNNNeuronGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cngn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cngn
 }
 
-// Descriptor the neuron descriptor
-func (x *CNNNeuronGradientNode) Descriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the neuron descriptor
+func (cngn *CNNNeuronGradientNode) Descriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cngn), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)
 }
-
-// CNNNeuronGradientNodeable is the interface implemented by [CNNNeuronGradientNode], for mocking and DI.
-type CNNNeuronGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronGradientNode
-	Descriptor() obj.Object
-}
-
-var _ CNNNeuronGradientNodeable = (*CNNNeuronGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNNeuronGradientNode)(nil)
 

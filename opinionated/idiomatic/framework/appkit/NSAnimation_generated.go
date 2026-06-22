@@ -48,24 +48,24 @@ func animationAdopt(id objc.ID) *Animation {
 }
 
 // Description returns the object's -description text.
-func (x *Animation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Animation) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Animation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Animation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Animation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Animation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Animation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Animation) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAnimationWithDurationAnimationCurve returns an NSAnimation object initialized with the specified duration and animation-curve values.
@@ -82,210 +82,144 @@ func NewAnimationWithCoder(coder obj.Object) *Animation {
 	return animationAdopt(_id)
 }
 
-// WithCurrentProgress the current progress of the animation.
-func (x *Animation) WithCurrentProgress(currentProgress float32) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
-	return x
+// WithCurrentProgress sets the current progress of the animation.
+func (a *Animation) WithCurrentProgress(currentProgress float32) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setCurrentProgress:"), currentProgress)
+	return a
 }
 
-// WithDuration the duration of the animation, in seconds.
-func (x *Animation) WithDuration(duration float64) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-	return x
+// WithDuration sets the duration of the animation, in seconds.
+func (a *Animation) WithDuration(duration float64) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setDuration:"), duration)
+	return a
 }
 
-// WithAnimationBlockingMode the blocking mode of the animation.
-func (x *Animation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
-	return x
+// WithAnimationBlockingMode sets the blocking mode of the animation.
+func (a *Animation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
+	return a
 }
 
-// WithFrameRate the number of frame updates per second to generate for the animation.
-func (x *Animation) WithFrameRate(frameRate float32) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
-	return x
+// WithFrameRate sets the number of frame updates per second to generate for the animation.
+func (a *Animation) WithFrameRate(frameRate float32) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFrameRate:"), frameRate)
+	return a
 }
 
-// WithAnimationCurve the timing curve for the animation.
-func (x *Animation) WithAnimationCurve(animationCurve AnimationCurve) *Animation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
-	return x
+// WithAnimationCurve sets the timing curve for the animation.
+func (a *Animation) WithAnimationCurve(animationCurve AnimationCurve) *Animation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAnimationCurve:"), animationCurve)
+	return a
 }
 
-// WithProgressMarks an array of floating-point numbers representing current progress marks.
-func (x *Animation) WithProgressMarks(items ...obj.Object) *Animation {
+// WithProgressMarks sets an array of floating-point numbers representing current progress marks.
+func (a *Animation) WithProgressMarks(items ...obj.Object) *Animation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setProgressMarks:"), _arr)
+	return a
 }
 
 // StartAnimation starts the animation represented by the receiver.
-func (x *Animation) StartAnimation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation"))
+func (a *Animation) StartAnimation() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("startAnimation"))
 }
 
 // StopAnimation stops the animation represented by the receiver.
-func (x *Animation) StopAnimation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation"))
+func (a *Animation) StopAnimation() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopAnimation"))
 }
 
 // AddProgressMark adds the progress mark to the receiver.
-func (x *Animation) AddProgressMark(progressMark float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addProgressMark:"), progressMark)
+func (a *Animation) AddProgressMark(progressMark float32) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addProgressMark:"), progressMark)
 }
 
 // RemoveProgressMark removes progress mark from the receiver.
-func (x *Animation) RemoveProgressMark(progressMark float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeProgressMark:"), progressMark)
+func (a *Animation) RemoveProgressMark(progressMark float32) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeProgressMark:"), progressMark)
 }
 
 // StartWhenAnimationReachesProgress starts running the animation represented by the receiver when another animation reaches a specific progress mark.
-func (x *Animation) StartWhenAnimationReachesProgress(animation *Animation, startProgress float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWhenAnimation:reachesProgress:"), objref.IDOf(animation), startProgress)
+func (a *Animation) StartWhenAnimationReachesProgress(animation *Animation, startProgress float32) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("startWhenAnimation:reachesProgress:"), objref.IDOf(animation), startProgress)
 }
 
 // StopWhenAnimationReachesProgress stops running the animation represented by the receiver when another animation reaches a specific progress mark.
-func (x *Animation) StopWhenAnimationReachesProgress(animation *Animation, stopProgress float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWhenAnimation:reachesProgress:"), objref.IDOf(animation), stopProgress)
+func (a *Animation) StopWhenAnimationReachesProgress(animation *Animation, stopProgress float32) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopWhenAnimation:reachesProgress:"), objref.IDOf(animation), stopProgress)
 }
 
 // ClearStartAnimation clears linkage to another animation that causes the receiver to start.
-func (x *Animation) ClearStartAnimation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearStartAnimation"))
+func (a *Animation) ClearStartAnimation() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("clearStartAnimation"))
 }
 
 // ClearStopAnimation clears linkage to another animation that causes the receiver to stop.
-func (x *Animation) ClearStopAnimation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearStopAnimation"))
+func (a *Animation) ClearStopAnimation() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("clearStopAnimation"))
 }
 
 // IsAnimating wraps the corresponding Objective-C method.
-func (x *Animation) IsAnimating() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimating"))
+func (a *Animation) IsAnimating() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAnimating"))
 	return _r
 }
 
 // CurrentProgress wraps the corresponding Objective-C method.
-func (x *Animation) CurrentProgress() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentProgress"))
+func (a *Animation) CurrentProgress() float32 {
+	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("currentProgress"))
 	return _r
-}
-
-// SetCurrentProgress wraps the corresponding Objective-C method.
-func (x *Animation) SetCurrentProgress(currentProgress float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *Animation) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (a *Animation) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
-}
-
-// SetDuration wraps the corresponding Objective-C method.
-func (x *Animation) SetDuration(duration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
 // AnimationBlockingMode wraps the corresponding Objective-C method.
-func (x *Animation) AnimationBlockingMode() AnimationBlockingMode {
-	_r := objc.Send[AnimationBlockingMode](objref.IDOf(x), objc.RegisterName("animationBlockingMode"))
+func (a *Animation) AnimationBlockingMode() AnimationBlockingMode {
+	_r := objc.Send[AnimationBlockingMode](objref.IDOf(a), objc.RegisterName("animationBlockingMode"))
 	return _r
-}
-
-// SetAnimationBlockingMode wraps the corresponding Objective-C method.
-func (x *Animation) SetAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
 }
 
 // FrameRate wraps the corresponding Objective-C method.
-func (x *Animation) FrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("frameRate"))
+func (a *Animation) FrameRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("frameRate"))
 	return _r
-}
-
-// SetFrameRate wraps the corresponding Objective-C method.
-func (x *Animation) SetFrameRate(frameRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
 }
 
 // AnimationCurve wraps the corresponding Objective-C method.
-func (x *Animation) AnimationCurve() AnimationCurve {
-	_r := objc.Send[AnimationCurve](objref.IDOf(x), objc.RegisterName("animationCurve"))
+func (a *Animation) AnimationCurve() AnimationCurve {
+	_r := objc.Send[AnimationCurve](objref.IDOf(a), objc.RegisterName("animationCurve"))
 	return _r
 }
 
-// SetAnimationCurve wraps the corresponding Objective-C method.
-func (x *Animation) SetAnimationCurve(animationCurve AnimationCurve) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
-}
-
 // CurrentValue wraps the corresponding Objective-C method.
-func (x *Animation) CurrentValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentValue"))
+func (a *Animation) CurrentValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("currentValue"))
 	return _r
 }
 
 // ProgressMarks wraps the corresponding Objective-C method.
 //
 // ProgressMarks returns the collection as a Go slice.
-func (x *Animation) ProgressMarks() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progressMarks"))
+func (a *Animation) ProgressMarks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("progressMarks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetProgressMarks wraps the corresponding Objective-C method.
-func (x *Animation) SetProgressMarks(progressMarks []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), purego.SliceToNSArray(progressMarks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RunLoopModesForAnimating wraps the corresponding Objective-C method.
 //
 // RunLoopModesForAnimating returns the collection as a Go slice.
-func (x *Animation) RunLoopModesForAnimating() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runLoopModesForAnimating"))
+func (a *Animation) RunLoopModesForAnimating() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runLoopModesForAnimating"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Animationable is the interface implemented by [Animation], for mocking and DI.
-type Animationable interface {
-	obj.Object
-	WithCurrentProgress(currentProgress float32) *Animation
-	WithDuration(duration float64) *Animation
-	WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *Animation
-	WithFrameRate(frameRate float32) *Animation
-	WithAnimationCurve(animationCurve AnimationCurve) *Animation
-	WithProgressMarks(items ...obj.Object) *Animation
-	StartAnimation()
-	StopAnimation()
-	AddProgressMark(progressMark float32)
-	RemoveProgressMark(progressMark float32)
-	StartWhenAnimationReachesProgress(animation *Animation, startProgress float32)
-	StopWhenAnimationReachesProgress(animation *Animation, stopProgress float32)
-	ClearStartAnimation()
-	ClearStopAnimation()
-	IsAnimating() bool
-	CurrentProgress() float32
-	SetCurrentProgress(currentProgress float32)
-	Duration() float64
-	SetDuration(duration float64)
-	AnimationBlockingMode() AnimationBlockingMode
-	SetAnimationBlockingMode(animationBlockingMode AnimationBlockingMode)
-	FrameRate() float32
-	SetFrameRate(frameRate float32)
-	AnimationCurve() AnimationCurve
-	SetAnimationCurve(animationCurve AnimationCurve)
-	CurrentValue() float32
-	ProgressMarks() []obj.Object
-	SetProgressMarks(progressMarks []obj.Object)
-	RunLoopModesForAnimating() []obj.Object
-}
-
-var _ Animationable = (*Animation)(nil)
 
 // isAnimation marks Animation — and, by embedding promotion, its
 // subclasses — as a member of the Animation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Animation) isAnimation() {}
+func (a *Animation) isAnimation() {}
 
 var _ AnimationProvider = (*Animation)(nil)

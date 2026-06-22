@@ -7,7 +7,6 @@ package datadetection
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,22 @@ func NewMatchShipmentTrackingNumber() *MatchShipmentTrackingNumber {
 	return matchShipmentTrackingNumberAdopt(_id)
 }
 
-// Carrier the name of a parcel carrier.
-func (x *MatchShipmentTrackingNumber) Carrier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("carrier"))
+// Carrier returns the name of a parcel carrier.
+func (mstn *MatchShipmentTrackingNumber) Carrier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mstn), objc.RegisterName("carrier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// TrackingNumber a string that represents a carrier’s tracking identifier for a parcel.
-func (x *MatchShipmentTrackingNumber) TrackingNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackingNumber"))
+// TrackingNumber returns a string that represents a carrier’s tracking identifier for a parcel.
+func (mstn *MatchShipmentTrackingNumber) TrackingNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mstn), objc.RegisterName("trackingNumber"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MatchShipmentTrackingNumberable is the interface implemented by [MatchShipmentTrackingNumber], for mocking and DI.
-type MatchShipmentTrackingNumberable interface {
-	obj.Object
-	Carrier() string
-	TrackingNumber() string
-}
-
-var _ MatchShipmentTrackingNumberable = (*MatchShipmentTrackingNumber)(nil)
 
 var _ MatchProvider = (*MatchShipmentTrackingNumber)(nil)

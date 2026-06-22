@@ -46,24 +46,24 @@ func mTL4PipelineDataSetSerializerDescriptorAdopt(id objc.ID) *MTL4PipelineDataS
 }
 
 // Description returns the object's -description text.
-func (x *MTL4PipelineDataSetSerializerDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mpdssd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4PipelineDataSetSerializerDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpdssd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4PipelineDataSetSerializerDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpdssd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4PipelineDataSetSerializerDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) String() string {
+	return rt.Description(objref.IDOf(mpdssd))
 }
 
 // NewMTL4PipelineDataSetSerializerDescriptor creates a new MTL4PipelineDataSetSerializerDescriptor.
@@ -72,29 +72,14 @@ func NewMTL4PipelineDataSetSerializerDescriptor() *MTL4PipelineDataSetSerializer
 	return mTL4PipelineDataSetSerializerDescriptorAdopt(_id)
 }
 
-// WithConfiguration specifies the configuration of the serialization process.
-func (x *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), configuration)
-	return x
+// WithConfiguration sets specifies the configuration of the serialization process.
+func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mpdssd), objc.RegisterName("setConfiguration:"), configuration)
+	return mpdssd
 }
 
 // Configuration wraps the corresponding Objective-C method.
-func (x *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDataSetSerializerConfiguration {
-	_r := objc.Send[MTL4PipelineDataSetSerializerConfiguration](objref.IDOf(x), objc.RegisterName("configuration"))
+func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDataSetSerializerConfiguration {
+	_r := objc.Send[MTL4PipelineDataSetSerializerConfiguration](objref.IDOf(mpdssd), objc.RegisterName("configuration"))
 	return _r
 }
-
-// SetConfiguration wraps the corresponding Objective-C method.
-func (x *MTL4PipelineDataSetSerializerDescriptor) SetConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), configuration)
-}
-
-// MTL4PipelineDataSetSerializerDescriptorable is the interface implemented by [MTL4PipelineDataSetSerializerDescriptor], for mocking and DI.
-type MTL4PipelineDataSetSerializerDescriptorable interface {
-	obj.Object
-	WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor
-	Configuration() MTL4PipelineDataSetSerializerConfiguration
-	SetConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration)
-}
-
-var _ MTL4PipelineDataSetSerializerDescriptorable = (*MTL4PipelineDataSetSerializerDescriptor)(nil)

@@ -5,12 +5,12 @@
 package coremidi
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // UMPMutableFunctionBlock is an idiomatic wrapper over the Objective-C class MIDIUMPMutableFunctionBlock.
@@ -54,9 +54,9 @@ func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxS
 }
 
 // SetEnabled set whether this Function Block is enabled or disabled. If a Function Block is registered to UMP Endpoint as part of a static configuration, the state must always be enabled and may not change. If registered to a UMP Endpoint, changes to the Function Block state are propagated to the system-wide cache.
-func (x *UMPMutableFunctionBlock) SetEnabled(isEnabled bool) error {
+func (umfb *UMPMutableFunctionBlock) SetEnabled(isEnabled bool) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setEnabled:error:"), isEnabled, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("setEnabled:error:"), isEnabled, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -64,9 +64,9 @@ func (x *UMPMutableFunctionBlock) SetEnabled(isEnabled bool) error {
 }
 
 // SetName set the function block name. The Function Block name string. Updating the name of a Function Block will cause the updated name to be propagated to all local copies of the system-wide cache.
-func (x *UMPMutableFunctionBlock) SetName(name string) error {
+func (umfb *UMPMutableFunctionBlock) SetName(name string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("setName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -74,23 +74,13 @@ func (x *UMPMutableFunctionBlock) SetName(name string) error {
 }
 
 // ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint reconfigure a Function Block. If a mutable Function Block has not been registered to a CI device or was registered in a non-static Function Block configuration, the first Group can be changed if the final Group spanned by the Function Block is valid after the Function Block has been relocated. Returns YES if the first Group of the Function Block was changed.
-func (x *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint(firstGroup uint8, direction UMPFunctionBlockDirection, mIDI1Info UMPFunctionBlockMIDI1Info, uIHint UMPFunctionBlockUIHint) error {
+func (umfb *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint(firstGroup uint8, direction UMPFunctionBlockDirection, mIDI1Info UMPFunctionBlockMIDI1Info, uIHint UMPFunctionBlockUIHint) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error:"), firstGroup, direction, mIDI1Info, uIHint, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(umfb), objc.RegisterName("reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error:"), firstGroup, direction, mIDI1Info, uIHint, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// UMPMutableFunctionBlockable is the interface implemented by [UMPMutableFunctionBlock], for mocking and DI.
-type UMPMutableFunctionBlockable interface {
-	obj.Object
-	SetEnabled(isEnabled bool) error
-	SetName(name string) error
-	ReconfigureWithFirstGroupDirectionMIDI1InfoUIHint(firstGroup uint8, direction UMPFunctionBlockDirection, mIDI1Info UMPFunctionBlockMIDI1Info, uIHint UMPFunctionBlockUIHint) error
-}
-
-var _ UMPMutableFunctionBlockable = (*UMPMutableFunctionBlock)(nil)
 
 var _ UMPFunctionBlockProvider = (*UMPMutableFunctionBlock)(nil)

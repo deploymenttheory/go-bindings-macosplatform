@@ -47,44 +47,33 @@ func sampleAdopt(id objc.ID) *Sample {
 }
 
 // SampleType wraps the corresponding Objective-C method.
-func (x *Sample) SampleType() *SampleType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
+func (s *Sample) SampleType() *SampleType {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *Sample) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (s *Sample) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *Sample) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (s *Sample) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// HasUndeterminedDuration indicates whether a sample has an undetermined duration. Computed based on the endDate of a sample.
-func (x *Sample) HasUndeterminedDuration() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUndeterminedDuration"))
+// HasUndeterminedDuration reports whether a sample has an undetermined duration. Computed based on the endDate of a sample.
+func (s *Sample) HasUndeterminedDuration() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("hasUndeterminedDuration"))
 	return _r
 }
-
-// Sampleable is the interface implemented by [Sample], for mocking and DI.
-type Sampleable interface {
-	obj.Object
-	SampleType() *SampleType
-	StartDate() obj.Object
-	EndDate() obj.Object
-	HasUndeterminedDuration() bool
-}
-
-var _ Sampleable = (*Sample)(nil)
 
 // isSample marks Sample — and, by embedding promotion, its
 // subclasses — as a member of the Sample hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Sample) isSample() {}
+func (s *Sample) isSample() {}
 
 var _ SampleProvider = (*Sample)(nil)
 

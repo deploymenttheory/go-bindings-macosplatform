@@ -50,18 +50,10 @@ func NewMTRTestClusterClusterTestListInt8UReverseResponseParams() *MTRTestCluste
 	return mTRTestClusterClusterTestListInt8UReverseResponseParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcctliurrp *MTRTestClusterClusterTestListInt8UReverseResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctliurrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcctliurrp
 }
-
-// MTRTestClusterClusterTestListInt8UReverseResponseParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UReverseResponseParams], for mocking and DI.
-type MTRTestClusterClusterTestListInt8UReverseResponseParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListInt8UReverseResponseParams
-}
-
-var _ MTRTestClusterClusterTestListInt8UReverseResponseParamsable = (*MTRTestClusterClusterTestListInt8UReverseResponseParams)(nil)
 
 var _ MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider = (*MTRTestClusterClusterTestListInt8UReverseResponseParams)(nil)

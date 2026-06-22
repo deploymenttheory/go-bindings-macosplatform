@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewMetricPlayerItemSeekDidCompleteEvent() *MetricPlayerItemSeekDidCompleteE
 }
 
 // DidSeekInBuffer wraps the corresponding Objective-C method.
-func (x *MetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didSeekInBuffer"))
+func (mpisdce *MetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
+	_r := objc.Send[bool](objref.IDOf(mpisdce), objc.RegisterName("didSeekInBuffer"))
 	return _r
 }
-
-// MetricPlayerItemSeekDidCompleteEventable is the interface implemented by [MetricPlayerItemSeekDidCompleteEvent], for mocking and DI.
-type MetricPlayerItemSeekDidCompleteEventable interface {
-	obj.Object
-	DidSeekInBuffer() bool
-}
-
-var _ MetricPlayerItemSeekDidCompleteEventable = (*MetricPlayerItemSeekDidCompleteEvent)(nil)
 
 var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemSeekDidCompleteEvent)(nil)
 

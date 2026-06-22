@@ -48,82 +48,59 @@ func shapeAdopt(id objc.ID) *Shape {
 }
 
 // Description returns the object's -description text.
-func (x *Shape) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shape) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Shape) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Shape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Shape) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Shape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Shape) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shape) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
-// WithTitle the title of the shape annotation.
-func (x *Shape) WithTitle(title string) *Shape {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (s *Shape) WithTitle(title string) *Shape {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return s
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *Shape) WithSubtitle(subtitle string) *Shape {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (s *Shape) WithSubtitle(subtitle string) *Shape {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return s
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *Shape) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (s *Shape) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *Shape) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // Subtitle wraps the corresponding Objective-C method.
-func (x *Shape) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+func (s *Shape) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetSubtitle wraps the corresponding Objective-C method.
-func (x *Shape) SetSubtitle(subtitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-}
-
-// Shapeable is the interface implemented by [Shape], for mocking and DI.
-type Shapeable interface {
-	obj.Object
-	WithTitle(title string) *Shape
-	WithSubtitle(subtitle string) *Shape
-	Title() string
-	SetTitle(title string)
-	Subtitle() string
-	SetSubtitle(subtitle string)
-}
-
-var _ Shapeable = (*Shape)(nil)
 
 // isShape marks Shape — and, by embedding promotion, its
 // subclasses — as a member of the Shape hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Shape) isShape() {}
+func (s *Shape) isShape() {}
 
 var _ ShapeProvider = (*Shape)(nil)

@@ -7,7 +7,6 @@ package datadetection
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,22 @@ func NewMatchPhoneNumber() *MatchPhoneNumber {
 	return matchPhoneNumberAdopt(_id)
 }
 
-// PhoneNumber a string that represents a phone number.
-func (x *MatchPhoneNumber) PhoneNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+// PhoneNumber returns a string that represents a phone number.
+func (mpn *MatchPhoneNumber) PhoneNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Label a string that categorizes a phone number, such as Home or Work.
-func (x *MatchPhoneNumber) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a string that categorizes a phone number, such as Home or Work.
+func (mpn *MatchPhoneNumber) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MatchPhoneNumberable is the interface implemented by [MatchPhoneNumber], for mocking and DI.
-type MatchPhoneNumberable interface {
-	obj.Object
-	PhoneNumber() string
-	Label() string
-}
-
-var _ MatchPhoneNumberable = (*MatchPhoneNumber)(nil)
 
 var _ MatchProvider = (*MatchPhoneNumber)(nil)

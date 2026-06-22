@@ -46,24 +46,24 @@ func hapticParameterCurveControlPointAdopt(id objc.ID) *HapticParameterCurveCont
 }
 
 // Description returns the object's -description text.
-func (x *HapticParameterCurveControlPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hpccp *HapticParameterCurveControlPoint) Description() string {
+	return rt.Description(objref.IDOf(hpccp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HapticParameterCurveControlPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hpccp *HapticParameterCurveControlPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hpccp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HapticParameterCurveControlPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hpccp *HapticParameterCurveControlPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hpccp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HapticParameterCurveControlPoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hpccp *HapticParameterCurveControlPoint) String() string {
+	return rt.Description(objref.IDOf(hpccp))
 }
 
 // NewHapticParameterCurveControlPointWithRelativeTimeValue initialize a CHHapticParameterCurveControlPoint with a relative time and value.
@@ -74,48 +74,25 @@ func NewHapticParameterCurveControlPointWithRelativeTimeValue(time_ float64, val
 }
 
 // WithRelativeTime sets the property and returns the receiver so calls can be chained.
-func (x *HapticParameterCurveControlPoint) WithRelativeTime(relativeTime float64) *HapticParameterCurveControlPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
-	return x
+func (hpccp *HapticParameterCurveControlPoint) WithRelativeTime(relativeTime float64) *HapticParameterCurveControlPoint {
+	objc.Send[objc.ID](objref.IDOf(hpccp), objc.RegisterName("setRelativeTime:"), relativeTime)
+	return hpccp
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *HapticParameterCurveControlPoint) WithValue(value float32) *HapticParameterCurveControlPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+func (hpccp *HapticParameterCurveControlPoint) WithValue(value float32) *HapticParameterCurveControlPoint {
+	objc.Send[objc.ID](objref.IDOf(hpccp), objc.RegisterName("setValue:"), value)
+	return hpccp
 }
 
 // RelativeTime wraps the corresponding Objective-C method.
-func (x *HapticParameterCurveControlPoint) RelativeTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
+func (hpccp *HapticParameterCurveControlPoint) RelativeTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(hpccp), objc.RegisterName("relativeTime"))
 	return _r
-}
-
-// SetRelativeTime wraps the corresponding Objective-C method.
-func (x *HapticParameterCurveControlPoint) SetRelativeTime(relativeTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *HapticParameterCurveControlPoint) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+func (hpccp *HapticParameterCurveControlPoint) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(hpccp), objc.RegisterName("value"))
 	return _r
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *HapticParameterCurveControlPoint) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// HapticParameterCurveControlPointable is the interface implemented by [HapticParameterCurveControlPoint], for mocking and DI.
-type HapticParameterCurveControlPointable interface {
-	obj.Object
-	WithRelativeTime(relativeTime float64) *HapticParameterCurveControlPoint
-	WithValue(value float32) *HapticParameterCurveControlPoint
-	RelativeTime() float64
-	SetRelativeTime(relativeTime float64)
-	Value() float32
-	SetValue(value float32)
-}
-
-var _ HapticParameterCurveControlPointable = (*HapticParameterCurveControlPoint)(nil)

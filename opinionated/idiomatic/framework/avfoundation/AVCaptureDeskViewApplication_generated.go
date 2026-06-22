@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func captureDeskViewApplicationAdopt(id objc.ID) *CaptureDeskViewApplication {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureDeskViewApplication) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdva *CaptureDeskViewApplication) Description() string {
+	return rt.Description(objref.IDOf(cdva))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureDeskViewApplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdva *CaptureDeskViewApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdva), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureDeskViewApplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdva *CaptureDeskViewApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdva), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureDeskViewApplication) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdva *CaptureDeskViewApplication) String() string {
+	return rt.Description(objref.IDOf(cdva))
 }
 
 // NewCaptureDeskViewApplication creates a new CaptureDeskViewApplication.
@@ -77,14 +78,14 @@ func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
 // Present launches Desk View with no additional configuration and then performs a completion handler if you specify it.
 //
 // Present blocks until the operation completes or ctx is cancelled.
-func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
+func (cdva *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(cdva), objc.RegisterName("presentWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -96,14 +97,14 @@ func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 // PresentWithLaunchConfiguration launches Desk View with the configuration and completion handler that you specify.
 //
 // PresentWithLaunchConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error {
+func (cdva *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithLaunchConfiguration:completionHandler:"), objref.IDOf(launchConfiguration), _block)
+	objc.Send[objc.ID](objref.IDOf(cdva), objc.RegisterName("presentWithLaunchConfiguration:completionHandler:"), objref.IDOf(launchConfiguration), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -111,12 +112,3 @@ func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.
 		return ctx.Err()
 	}
 }
-
-// CaptureDeskViewApplicationable is the interface implemented by [CaptureDeskViewApplication], for mocking and DI.
-type CaptureDeskViewApplicationable interface {
-	obj.Object
-	Present(ctx context.Context) error
-	PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error
-}
-
-var _ CaptureDeskViewApplicationable = (*CaptureDeskViewApplication)(nil)

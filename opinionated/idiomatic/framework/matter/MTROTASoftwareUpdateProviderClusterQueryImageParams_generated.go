@@ -46,273 +46,152 @@ func mTROTASoftwareUpdateProviderClusterQueryImageParamsAdopt(id objc.ID) *MTROT
 }
 
 // Description returns the object's -description text.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) Description() string {
+	return rt.Description(objref.IDOf(msupcqip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msupcqip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msupcqip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) String() string {
+	return rt.Description(objref.IDOf(msupcqip))
 }
 
 // WithVendorID sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithVendorID(vendorID obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithVendorID(vendorID obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
+	return msupcqip
 }
 
 // WithProductID sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithProductID(productID obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithProductID(productID obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setProductID:"), objref.IDOf(productID))
+	return msupcqip
 }
 
 // WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return msupcqip
 }
 
 // WithHardwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithHardwareVersion(hardwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareVersion:"), objref.IDOf(hardwareVersion))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithHardwareVersion(hardwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setHardwareVersion:"), objref.IDOf(hardwareVersion))
+	return msupcqip
 }
 
 // WithLocation sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithLocation(location string) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithLocation(location string) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setLocation:"), purego.NSString(location))
+	return msupcqip
 }
 
 // WithRequestorCanConsent sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithRequestorCanConsent(requestorCanConsent obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestorCanConsent:"), objref.IDOf(requestorCanConsent))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithRequestorCanConsent(requestorCanConsent obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setRequestorCanConsent:"), objref.IDOf(requestorCanConsent))
+	return msupcqip
 }
 
 // WithMetadataForProvider sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithMetadataForProvider(metadataForProvider obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataForProvider:"), objref.IDOf(metadataForProvider))
-	return x
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithMetadataForProvider(metadataForProvider obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setMetadataForProvider:"), objref.IDOf(metadataForProvider))
+	return msupcqip
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return msupcqip
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
-}
-
-// WithVendorId sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithVendorId(vendorId obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
-	return x
-}
-
-// WithProductId sets the property and returns the receiver so calls can be chained.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithProductId(productId obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductId:"), objref.IDOf(productId))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return msupcqip
 }
 
 // VendorID wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) VendorID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
-}
-
-// SetVendorID wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetVendorID(vendorID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 }
 
 // ProductID wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProductID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
-}
-
-// SetProductID wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProductID(productID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 }
 
 // SoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SoftwareVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("softwareVersion"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) SoftwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
 
-// SetSoftwareVersion wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetSoftwareVersion(softwareVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-}
-
 // ProtocolsSupported wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProtocolsSupported() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocolsSupported"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProtocolsSupported() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("protocolsSupported"))
 	return obj.Wrap(_r)
 }
 
 // SetProtocolsSupported wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProtocolsSupported(protocolsSupported obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolsSupported:"), objref.IDOf(protocolsSupported))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProtocolsSupported(protocolsSupported obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("setProtocolsSupported:"), objref.IDOf(protocolsSupported))
 }
 
 // HardwareVersion wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) HardwareVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareVersion"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) HardwareVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("hardwareVersion"))
 	return obj.Wrap(_r)
 }
 
-// SetHardwareVersion wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetHardwareVersion(hardwareVersion obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareVersion:"), objref.IDOf(hardwareVersion))
-}
-
 // Location wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) Location() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("location"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) Location() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("location"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLocation wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetLocation(location string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
-}
-
 // RequestorCanConsent wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) RequestorCanConsent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestorCanConsent"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) RequestorCanConsent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("requestorCanConsent"))
 	return obj.Wrap(_r)
-}
-
-// SetRequestorCanConsent wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetRequestorCanConsent(requestorCanConsent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestorCanConsent:"), objref.IDOf(requestorCanConsent))
 }
 
 // MetadataForProvider wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) MetadataForProvider() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataForProvider"))
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) MetadataForProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("metadataForProvider"))
 	return obj.Wrap(_r)
 }
 
-// SetMetadataForProvider wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetMetadataForProvider(metadataForProvider obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataForProvider:"), objref.IDOf(metadataForProvider))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msupcqip), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// VendorId wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) VendorId() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorId"))
-	return obj.Wrap(_r)
-}
-
-// SetVendorId wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetVendorId(vendorId obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorId:"), objref.IDOf(vendorId))
-}
-
-// ProductId wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProductId() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productId"))
-	return obj.Wrap(_r)
-}
-
-// SetProductId wraps the corresponding Objective-C method.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProductId(productId obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductId:"), objref.IDOf(productId))
-}
-
-// MTROTASoftwareUpdateProviderClusterQueryImageParamsable is the interface implemented by [MTROTASoftwareUpdateProviderClusterQueryImageParams], for mocking and DI.
-type MTROTASoftwareUpdateProviderClusterQueryImageParamsable interface {
-	obj.Object
-	WithVendorID(vendorID obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithProductID(productID obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithHardwareVersion(hardwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithLocation(location string) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithRequestorCanConsent(requestorCanConsent obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithMetadataForProvider(metadataForProvider obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithVendorId(vendorId obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	WithProductId(productId obj.Object) *MTROTASoftwareUpdateProviderClusterQueryImageParams
-	VendorID() obj.Object
-	SetVendorID(vendorID obj.Object)
-	ProductID() obj.Object
-	SetProductID(productID obj.Object)
-	SoftwareVersion() obj.Object
-	SetSoftwareVersion(softwareVersion obj.Object)
-	ProtocolsSupported() obj.Object
-	SetProtocolsSupported(protocolsSupported obj.Object)
-	HardwareVersion() obj.Object
-	SetHardwareVersion(hardwareVersion obj.Object)
-	Location() string
-	SetLocation(location string)
-	RequestorCanConsent() obj.Object
-	SetRequestorCanConsent(requestorCanConsent obj.Object)
-	MetadataForProvider() obj.Object
-	SetMetadataForProvider(metadataForProvider obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-	VendorId() obj.Object
-	SetVendorId(vendorId obj.Object)
-	ProductId() obj.Object
-	SetProductId(productId obj.Object)
-}
-
-var _ MTROTASoftwareUpdateProviderClusterQueryImageParamsable = (*MTROTASoftwareUpdateProviderClusterQueryImageParams)(nil)
 
 // isMTROTASoftwareUpdateProviderClusterQueryImageParams marks MTROTASoftwareUpdateProviderClusterQueryImageParams — and, by embedding promotion, its
 // subclasses — as a member of the MTROTASoftwareUpdateProviderClusterQueryImageParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTROTASoftwareUpdateProviderClusterQueryImageParams) isMTROTASoftwareUpdateProviderClusterQueryImageParams() {
+func (msupcqip *MTROTASoftwareUpdateProviderClusterQueryImageParams) isMTROTASoftwareUpdateProviderClusterQueryImageParams() {
 }
 
 var _ MTROTASoftwareUpdateProviderClusterQueryImageParamsProvider = (*MTROTASoftwareUpdateProviderClusterQueryImageParams)(nil)

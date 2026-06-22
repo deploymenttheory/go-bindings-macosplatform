@@ -48,127 +48,107 @@ func syncEngineEventAdopt(id objc.ID) *SyncEngineEvent {
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (see *SyncEngineEvent) Description() string {
+	return rt.Description(objref.IDOf(see))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (see *SyncEngineEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(see), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (see *SyncEngineEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(see), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (see *SyncEngineEvent) String() string {
+	return rt.Description(objref.IDOf(see))
 }
 
-// Type the type of event.
-func (x *SyncEngineEvent) Type() SyncEngineEventType {
-	_r := objc.Send[SyncEngineEventType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of event.
+func (see *SyncEngineEvent) Type() SyncEngineEventType {
+	_r := objc.Send[SyncEngineEventType](objref.IDOf(see), objc.RegisterName("type"))
 	return _r
 }
 
-// StateUpdateEvent the event downcast to the subclass that represents an update to the sync engine's state.
-func (x *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateUpdateEvent"))
+// StateUpdateEvent returns the event downcast to the subclass that represents an update to the sync engine's state.
+func (see *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("stateUpdateEvent"))
 	return SyncEngineStateUpdateEventFromID(_r)
 }
 
-// AccountChangeEvent the event downcast to the subclass that represents a change to the device's iCloud account.
-func (x *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountChangeEvent"))
+// AccountChangeEvent returns the event downcast to the subclass that represents a change to the device's iCloud account.
+func (see *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("accountChangeEvent"))
 	return SyncEngineAccountChangeEventFromID(_r)
 }
 
-// WillFetchChangesEvent the event downcast to the subclass that represents an imminent database fetch.
-func (x *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFetchChangesEvent"))
+// WillFetchChangesEvent returns the event downcast to the subclass that represents an imminent database fetch.
+func (see *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("willFetchChangesEvent"))
 	return SyncEngineWillFetchChangesEventFromID(_r)
 }
 
-// FetchedDatabaseChangesEvent the event downcast to the subclass that represents a set of fetched database changes to process.
-func (x *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchedDatabaseChangesEvent"))
+// FetchedDatabaseChangesEvent returns the event downcast to the subclass that represents a set of fetched database changes to process.
+func (see *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("fetchedDatabaseChangesEvent"))
 	return SyncEngineFetchedDatabaseChangesEventFromID(_r)
 }
 
-// DidFetchChangesEvent the event downcast to the subclass that represents a completed database fetch.
-func (x *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFetchChangesEvent"))
+// DidFetchChangesEvent returns the event downcast to the subclass that represents a completed database fetch.
+func (see *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("didFetchChangesEvent"))
 	return SyncEngineDidFetchChangesEventFromID(_r)
 }
 
-// WillFetchRecordZoneChangesEvent the event downcast to the subclass that represents an imminent fetch of record zone changes.
-func (x *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFetchRecordZoneChangesEvent"))
+// WillFetchRecordZoneChangesEvent returns the event downcast to the subclass that represents an imminent fetch of record zone changes.
+func (see *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("willFetchRecordZoneChangesEvent"))
 	return SyncEngineWillFetchRecordZoneChangesEventFromID(_r)
 }
 
-// FetchedRecordZoneChangesEvent the event downcast to the subclass that represents a set of fetched record zone changes to process.
-func (x *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchedRecordZoneChangesEvent"))
+// FetchedRecordZoneChangesEvent returns the event downcast to the subclass that represents a set of fetched record zone changes to process.
+func (see *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("fetchedRecordZoneChangesEvent"))
 	return SyncEngineFetchedRecordZoneChangesEventFromID(_r)
 }
 
-// DidFetchRecordZoneChangesEvent the event downcast to the subclass that represents a completed record zone fetch.
-func (x *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFetchRecordZoneChangesEvent"))
+// DidFetchRecordZoneChangesEvent returns the event downcast to the subclass that represents a completed record zone fetch.
+func (see *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("didFetchRecordZoneChangesEvent"))
 	return SyncEngineDidFetchRecordZoneChangesEventFromID(_r)
 }
 
-// WillSendChangesEvent the event downcast to the subclass that represents an imminent send operation.
-func (x *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willSendChangesEvent"))
+// WillSendChangesEvent returns the event downcast to the subclass that represents an imminent send operation.
+func (see *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("willSendChangesEvent"))
 	return SyncEngineWillSendChangesEventFromID(_r)
 }
 
-// SentDatabaseChangesEvent the event downcast to the subclass that represents a sent batch of database changes.
-func (x *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentDatabaseChangesEvent"))
+// SentDatabaseChangesEvent returns the event downcast to the subclass that represents a sent batch of database changes.
+func (see *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("sentDatabaseChangesEvent"))
 	return SyncEngineSentDatabaseChangesEventFromID(_r)
 }
 
-// SentRecordZoneChangesEvent the event downcast to the subclass that represents a sent batch of record zone changes.
-func (x *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentRecordZoneChangesEvent"))
+// SentRecordZoneChangesEvent returns the event downcast to the subclass that represents a sent batch of record zone changes.
+func (see *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("sentRecordZoneChangesEvent"))
 	return SyncEngineSentRecordZoneChangesEventFromID(_r)
 }
 
-// DidSendChangesEvent the event downcast to the subclass that represents a completed send operation.
-func (x *SyncEngineEvent) DidSendChangesEvent() *SyncEngineDidSendChangesEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSendChangesEvent"))
+// DidSendChangesEvent returns the event downcast to the subclass that represents a completed send operation.
+func (see *SyncEngineEvent) DidSendChangesEvent() *SyncEngineDidSendChangesEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(see), objc.RegisterName("didSendChangesEvent"))
 	return SyncEngineDidSendChangesEventFromID(_r)
 }
-
-// SyncEngineEventable is the interface implemented by [SyncEngineEvent], for mocking and DI.
-type SyncEngineEventable interface {
-	obj.Object
-	Type() SyncEngineEventType
-	StateUpdateEvent() *SyncEngineStateUpdateEvent
-	AccountChangeEvent() *SyncEngineAccountChangeEvent
-	WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent
-	FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent
-	DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent
-	WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent
-	FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent
-	DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent
-	WillSendChangesEvent() *SyncEngineWillSendChangesEvent
-	SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent
-	SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent
-	DidSendChangesEvent() *SyncEngineDidSendChangesEvent
-}
-
-var _ SyncEngineEventable = (*SyncEngineEvent)(nil)
 
 // isSyncEngineEvent marks SyncEngineEvent — and, by embedding promotion, its
 // subclasses — as a member of the SyncEngineEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SyncEngineEvent) isSyncEngineEvent() {}
+func (see *SyncEngineEvent) isSyncEngineEvent() {}
 
 var _ SyncEngineEventProvider = (*SyncEngineEvent)(nil)

@@ -6,10 +6,10 @@ package virtualization
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,19 +55,19 @@ func NewVirtioSocketDevice() *VirtioSocketDevice {
 }
 
 // SetSocketListenerForPort configures an object to monitor the specified port for new connections.
-func (x *VirtioSocketDevice) SetSocketListenerForPort(listener *VirtioSocketListener, port uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSocketListener:forPort:"), objref.IDOf(listener), port)
+func (vsd *VirtioSocketDevice) SetSocketListenerForPort(listener *VirtioSocketListener, port uint32) {
+	objc.Send[objc.ID](objref.IDOf(vsd), objc.RegisterName("setSocketListener:forPort:"), objref.IDOf(listener), port)
 }
 
 // RemoveSocketListenerForPort removes the listener object from the specfied port.
-func (x *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSocketListenerForPort:"), port)
+func (vsd *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
+	objc.Send[objc.ID](objref.IDOf(vsd), objc.RegisterName("removeSocketListenerForPort:"), port)
 }
 
 // ConnectToPort initiates a connection to the specified port of the guest operating system.
 //
 // ConnectToPort blocks until the operation completes or ctx is cancelled.
-func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (result *VirtioSocketConnection, err error) {
+func (vsd *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (result *VirtioSocketConnection, err error) {
 	type _result struct {
 		val *VirtioSocketConnection
 		err error
@@ -79,7 +79,7 @@ func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (re
 		_o.val = VirtioSocketConnectionFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectToPort:completionHandler:"), port, _block)
+	objc.Send[objc.ID](objref.IDOf(vsd), objc.RegisterName("connectToPort:completionHandler:"), port, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,15 +88,5 @@ func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (re
 		return _zero, ctx.Err()
 	}
 }
-
-// VirtioSocketDeviceable is the interface implemented by [VirtioSocketDevice], for mocking and DI.
-type VirtioSocketDeviceable interface {
-	obj.Object
-	SetSocketListenerForPort(listener *VirtioSocketListener, port uint32)
-	RemoveSocketListenerForPort(port uint32)
-	ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error)
-}
-
-var _ VirtioSocketDeviceable = (*VirtioSocketDevice)(nil)
 
 var _ SocketDeviceProvider = (*VirtioSocketDevice)(nil)

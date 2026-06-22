@@ -46,24 +46,24 @@ func projectInfoAdopt(id objc.ID) *ProjectInfo {
 }
 
 // Description returns the object's -description text.
-func (x *ProjectInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *ProjectInfo) Description() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pi *ProjectInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pi *ProjectInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProjectInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *ProjectInfo) String() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // NewProjectInfo creates a new ProjectInfo.
@@ -72,66 +72,52 @@ func NewProjectInfo() *ProjectInfo {
 	return projectInfoAdopt(_id)
 }
 
-// CreationSource source from which the project was created.
-func (x *ProjectInfo) CreationSource() ProjectCreationSource {
-	_r := objc.Send[ProjectCreationSource](objref.IDOf(x), objc.RegisterName("creationSource"))
+// CreationSource returns source from which the project was created.
+func (pi *ProjectInfo) CreationSource() ProjectCreationSource {
+	_r := objc.Send[ProjectCreationSource](objref.IDOf(pi), objc.RegisterName("creationSource"))
 	return _r
 }
 
-// ProjectType selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
-func (x *ProjectInfo) ProjectType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectType"))
+// ProjectType returns selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
+func (pi *ProjectInfo) ProjectType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("projectType"))
 	return obj.Wrap(_r)
 }
 
-// Sections array of project sections each containing one or more PHProjectSectionContent objects.
+// Sections returns array of project sections each containing one or more PHProjectSectionContent objects.
 //
 // Sections returns the collection as a Go slice.
-func (x *ProjectInfo) Sections() []*ProjectSection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sections"))
+func (pi *ProjectInfo) Sections() []*ProjectSection {
+	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("sections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSection { return ProjectSectionFromID(_id) })
 }
 
-// BrandingEnabled the following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the source project had branding enabled.
-func (x *ProjectInfo) BrandingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("brandingEnabled"))
+// BrandingEnabled reports whether the following properties are only used when the user creates a new project from an existing Apple Print Product. true if the source project had branding enabled.
+func (pi *ProjectInfo) BrandingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("brandingEnabled"))
 	return _r
 }
 
-// PageNumbersEnabled YES if the source project had page numbers enabled.
-func (x *ProjectInfo) PageNumbersEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pageNumbersEnabled"))
+// PageNumbersEnabled reports whether the source project had page numbers enabled.
+func (pi *ProjectInfo) PageNumbersEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("pageNumbersEnabled"))
 	return _r
 }
 
-// ProductIdentifier the product identifier of the originating Apple Print Product.
-func (x *ProjectInfo) ProductIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
+// ProductIdentifier returns the product identifier of the originating Apple Print Product.
+func (pi *ProjectInfo) ProductIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ThemeIdentifier the product theme identifier of the originating Apple Print Product.
-func (x *ProjectInfo) ThemeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("themeIdentifier"))
+// ThemeIdentifier returns the product theme identifier of the originating Apple Print Product.
+func (pi *ProjectInfo) ThemeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("themeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ProjectInfoable is the interface implemented by [ProjectInfo], for mocking and DI.
-type ProjectInfoable interface {
-	obj.Object
-	CreationSource() ProjectCreationSource
-	ProjectType() obj.Object
-	Sections() []*ProjectSection
-	BrandingEnabled() bool
-	PageNumbersEnabled() bool
-	ProductIdentifier() string
-	ThemeIdentifier() string
-}
-
-var _ ProjectInfoable = (*ProjectInfo)(nil)

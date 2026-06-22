@@ -51,31 +51,21 @@ func NewMTRTestClusterClusterTestSimpleOptionalArgumentRequestParams() *MTRTestC
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mtcctsoarp *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctsoarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mtcctsoarp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcctsoarp *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctsoarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcctsoarp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtcctsoarp *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctsoarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtcctsoarp
 }
-
-// MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams], for mocking and DI.
-type MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams
-}
-
-var _ MTRTestClusterClusterTestSimpleOptionalArgumentRequestParamsable = (*MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams)(nil)
 
 var _ MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParamsProvider = (*MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams)(nil)

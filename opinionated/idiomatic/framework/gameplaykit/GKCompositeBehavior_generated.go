@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,42 +52,30 @@ func NewCompositeBehavior() *CompositeBehavior {
 }
 
 // SetWeightForBehavior sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.
-func (x *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *Behavior) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forBehavior:"), weight, objref.IDOf(behavior))
+func (cb *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *Behavior) {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWeight:forBehavior:"), weight, objref.IDOf(behavior))
 }
 
 // WeightForBehavior returns the weight for the specified individual behavior’s influence on agents.
-func (x *CompositeBehavior) WeightForBehavior(behavior *Behavior) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weightForBehavior:"), objref.IDOf(behavior))
+func (cb *CompositeBehavior) WeightForBehavior(behavior *Behavior) float32 {
+	_r := objc.Send[float32](objref.IDOf(cb), objc.RegisterName("weightForBehavior:"), objref.IDOf(behavior))
 	return _r
 }
 
 // RemoveBehavior removes the specified individual behavior from the composite behavior.
-func (x *CompositeBehavior) RemoveBehavior(behavior *Behavior) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
+func (cb *CompositeBehavior) RemoveBehavior(behavior *Behavior) {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
 }
 
 // RemoveAllBehaviors removes all individual behaviors from the composite behavior.
-func (x *CompositeBehavior) RemoveAllBehaviors() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllBehaviors"))
+func (cb *CompositeBehavior) RemoveAllBehaviors() {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeAllBehaviors"))
 }
 
-// BehaviorCount number of sub-behaviors in this behavior
-func (x *CompositeBehavior) BehaviorCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("behaviorCount"))
+// BehaviorCount returns number of sub-behaviors in this behavior
+func (cb *CompositeBehavior) BehaviorCount() int {
+	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("behaviorCount"))
 	return _r
 }
-
-// CompositeBehaviorable is the interface implemented by [CompositeBehavior], for mocking and DI.
-type CompositeBehaviorable interface {
-	obj.Object
-	SetWeightForBehavior(weight float32, behavior *Behavior)
-	WeightForBehavior(behavior *Behavior) float32
-	RemoveBehavior(behavior *Behavior)
-	RemoveAllBehaviors()
-	BehaviorCount() int
-}
-
-var _ CompositeBehaviorable = (*CompositeBehavior)(nil)
 
 var _ BehaviorProvider = (*CompositeBehavior)(nil)

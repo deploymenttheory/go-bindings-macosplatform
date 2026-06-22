@@ -44,24 +44,24 @@ func mTRDoorLockClusterLockOperationErrorEventAdopt(id objc.ID) *MTRDoorLockClus
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(mdlcloee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcloee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcloee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) String() string {
+	return rt.Description(objref.IDOf(mdlcloee))
 }
 
 // NewMTRDoorLockClusterLockOperationErrorEvent creates a new MTRDoorLockClusterLockOperationErrorEvent.
@@ -71,141 +71,84 @@ func NewMTRDoorLockClusterLockOperationErrorEvent() *MTRDoorLockClusterLockOpera
 }
 
 // WithLockOperationType sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) WithLockOperationType(lockOperationType obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLockOperationType:"), objref.IDOf(lockOperationType))
-	return x
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) WithLockOperationType(lockOperationType obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setLockOperationType:"), objref.IDOf(lockOperationType))
+	return mdlcloee
 }
 
 // WithOperationSource sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) WithOperationSource(operationSource obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
-	return x
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) WithOperationSource(operationSource obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
+	return mdlcloee
 }
 
 // WithOperationError sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) WithOperationError(operationError obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationError:"), objref.IDOf(operationError))
-	return x
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) WithOperationError(operationError obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setOperationError:"), objref.IDOf(operationError))
+	return mdlcloee
 }
 
 // WithUserIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
-	return x
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
+	return mdlcloee
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) WithFabricIndex(fabricIndex obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) WithFabricIndex(fabricIndex obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mdlcloee
 }
 
 // WithSourceNode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) WithSourceNode(sourceNode obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
-	return x
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) WithSourceNode(sourceNode obj.Object) *MTRDoorLockClusterLockOperationErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
+	return mdlcloee
 }
 
 // LockOperationType wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) LockOperationType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockOperationType"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) LockOperationType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("lockOperationType"))
 	return obj.Wrap(_r)
-}
-
-// SetLockOperationType wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetLockOperationType(lockOperationType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLockOperationType:"), objref.IDOf(lockOperationType))
 }
 
 // OperationSource wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) OperationSource() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationSource"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) OperationSource() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("operationSource"))
 	return obj.Wrap(_r)
-}
-
-// SetOperationSource wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetOperationSource(operationSource obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
 }
 
 // OperationError wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) OperationError() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationError"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) OperationError() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("operationError"))
 	return obj.Wrap(_r)
-}
-
-// SetOperationError wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetOperationError(operationError obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationError:"), objref.IDOf(operationError))
 }
 
 // UserIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) UserIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) UserIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
-}
-
-// SetUserIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetUserIndex(userIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
-}
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // SourceNode wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SourceNode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceNode"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) SourceNode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("sourceNode"))
 	return obj.Wrap(_r)
 }
 
-// SetSourceNode wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetSourceNode(sourceNode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
-}
-
 // Credentials wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) Credentials() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentials"))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) Credentials() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)
 }
 
 // SetCredentials wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterLockOperationErrorEvent) SetCredentials(credentials obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
+func (mdlcloee *MTRDoorLockClusterLockOperationErrorEvent) SetCredentials(credentials obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mdlcloee), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }
-
-// MTRDoorLockClusterLockOperationErrorEventable is the interface implemented by [MTRDoorLockClusterLockOperationErrorEvent], for mocking and DI.
-type MTRDoorLockClusterLockOperationErrorEventable interface {
-	obj.Object
-	WithLockOperationType(lockOperationType obj.Object) *MTRDoorLockClusterLockOperationErrorEvent
-	WithOperationSource(operationSource obj.Object) *MTRDoorLockClusterLockOperationErrorEvent
-	WithOperationError(operationError obj.Object) *MTRDoorLockClusterLockOperationErrorEvent
-	WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterLockOperationErrorEvent
-	WithFabricIndex(fabricIndex obj.Object) *MTRDoorLockClusterLockOperationErrorEvent
-	WithSourceNode(sourceNode obj.Object) *MTRDoorLockClusterLockOperationErrorEvent
-	LockOperationType() obj.Object
-	SetLockOperationType(lockOperationType obj.Object)
-	OperationSource() obj.Object
-	SetOperationSource(operationSource obj.Object)
-	OperationError() obj.Object
-	SetOperationError(operationError obj.Object)
-	UserIndex() obj.Object
-	SetUserIndex(userIndex obj.Object)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-	SourceNode() obj.Object
-	SetSourceNode(sourceNode obj.Object)
-	Credentials() obj.Object
-	SetCredentials(credentials obj.Object)
-}
-
-var _ MTRDoorLockClusterLockOperationErrorEventable = (*MTRDoorLockClusterLockOperationErrorEvent)(nil)

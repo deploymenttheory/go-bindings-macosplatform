@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewStringResolutionResult() *StringResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INStringResolutionResult")), objc.RegisterName("new"))
 	return stringResolutionResultAdopt(_id)
 }
-
-// StringResolutionResultable is the interface implemented by [StringResolutionResult], for mocking and DI.
-type StringResolutionResultable interface {
-	obj.Object
-}
-
-var _ StringResolutionResultable = (*StringResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*StringResolutionResult)(nil)

@@ -52,69 +52,54 @@ func NewLayerNormalizationLayer() *LayerNormalizationLayer {
 	return layerNormalizationLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *LayerNormalizationLayer) WithLabel(label string) *LayerNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (lnl *LayerNormalizationLayer) WithLabel(label string) *LayerNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return lnl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *LayerNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (lnl *LayerNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return lnl
 }
 
-// NormalizedShape the shape of the axes over which normalization occurs, (W), (H,W) or (C,H,W)
+// NormalizedShape returns the shape of the axes over which normalization occurs, (W), (H,W) or (C,H,W)
 //
 // NormalizedShape returns the collection as a Go slice.
-func (x *LayerNormalizationLayer) NormalizedShape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normalizedShape"))
+func (lnl *LayerNormalizationLayer) NormalizedShape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("normalizedShape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Beta the beta tensor
-func (x *LayerNormalizationLayer) Beta() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the beta tensor
+func (lnl *LayerNormalizationLayer) Beta() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// Gamma the gamma tensor
-func (x *LayerNormalizationLayer) Gamma() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+// Gamma returns the gamma tensor
+func (lnl *LayerNormalizationLayer) Gamma() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// BetaParameter the beta tensor parameter used for optimizer update
-func (x *LayerNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+// BetaParameter returns the beta tensor parameter used for optimizer update
+func (lnl *LayerNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// GammaParameter the gamma tensor parameter used for optimizer update
-func (x *LayerNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+// GammaParameter returns the gamma tensor parameter used for optimizer update
+func (lnl *LayerNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(lnl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// VarianceEpsilon a value used for numerical stability
-func (x *LayerNormalizationLayer) VarianceEpsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+// VarianceEpsilon returns a value used for numerical stability
+func (lnl *LayerNormalizationLayer) VarianceEpsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(lnl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }
-
-// LayerNormalizationLayerable is the interface implemented by [LayerNormalizationLayer], for mocking and DI.
-type LayerNormalizationLayerable interface {
-	obj.Object
-	WithLabel(label string) *LayerNormalizationLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer
-	NormalizedShape() []obj.Object
-	Beta() *Tensor
-	Gamma() *Tensor
-	BetaParameter() *TensorParameter
-	GammaParameter() *TensorParameter
-	VarianceEpsilon() float32
-}
-
-var _ LayerNormalizationLayerable = (*LayerNormalizationLayer)(nil)
 
 var _ LayerProvider = (*LayerNormalizationLayer)(nil)

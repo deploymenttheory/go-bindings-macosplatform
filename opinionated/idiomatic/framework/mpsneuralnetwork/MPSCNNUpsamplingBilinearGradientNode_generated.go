@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,33 +52,23 @@ func NewCNNUpsamplingBilinearGradientNodeWithSourceGradientSourceImageGradientSt
 	return cNNUpsamplingBilinearGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNUpsamplingBilinearGradientNode) WithLabel(label string) *CNNUpsamplingBilinearGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cubgn *CNNUpsamplingBilinearGradientNode) WithLabel(label string) *CNNUpsamplingBilinearGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cubgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cubgn
 }
 
 // ScaleFactorX wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingBilinearGradientNode) ScaleFactorX() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
+func (cubgn *CNNUpsamplingBilinearGradientNode) ScaleFactorX() float64 {
+	_r := objc.Send[float64](objref.IDOf(cubgn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingBilinearGradientNode) ScaleFactorY() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
+func (cubgn *CNNUpsamplingBilinearGradientNode) ScaleFactorY() float64 {
+	_r := objc.Send[float64](objref.IDOf(cubgn), objc.RegisterName("scaleFactorY"))
 	return _r
 }
-
-// CNNUpsamplingBilinearGradientNodeable is the interface implemented by [CNNUpsamplingBilinearGradientNode], for mocking and DI.
-type CNNUpsamplingBilinearGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNUpsamplingBilinearGradientNode
-	ScaleFactorX() float64
-	ScaleFactorY() float64
-}
-
-var _ CNNUpsamplingBilinearGradientNodeable = (*CNNUpsamplingBilinearGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNUpsamplingBilinearGradientNode)(nil)
 

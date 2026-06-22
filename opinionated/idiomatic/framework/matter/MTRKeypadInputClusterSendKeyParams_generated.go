@@ -44,24 +44,24 @@ func mTRKeypadInputClusterSendKeyParamsAdopt(id objc.ID) *MTRKeypadInputClusterS
 }
 
 // Description returns the object's -description text.
-func (x *MTRKeypadInputClusterSendKeyParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) Description() string {
+	return rt.Description(objref.IDOf(mkicskp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRKeypadInputClusterSendKeyParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mkicskp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRKeypadInputClusterSendKeyParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mkicskp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRKeypadInputClusterSendKeyParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) String() string {
+	return rt.Description(objref.IDOf(mkicskp))
 }
 
 // NewMTRKeypadInputClusterSendKeyParams creates a new MTRKeypadInputClusterSendKeyParams.
@@ -71,68 +71,37 @@ func NewMTRKeypadInputClusterSendKeyParams() *MTRKeypadInputClusterSendKeyParams
 }
 
 // WithKeyCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRKeypadInputClusterSendKeyParams) WithKeyCode(keyCode obj.Object) *MTRKeypadInputClusterSendKeyParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCode:"), objref.IDOf(keyCode))
-	return x
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) WithKeyCode(keyCode obj.Object) *MTRKeypadInputClusterSendKeyParams {
+	objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("setKeyCode:"), objref.IDOf(keyCode))
+	return mkicskp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRKeypadInputClusterSendKeyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRKeypadInputClusterSendKeyParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRKeypadInputClusterSendKeyParams {
+	objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mkicskp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRKeypadInputClusterSendKeyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRKeypadInputClusterSendKeyParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRKeypadInputClusterSendKeyParams {
+	objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mkicskp
 }
 
 // KeyCode wraps the corresponding Objective-C method.
-func (x *MTRKeypadInputClusterSendKeyParams) KeyCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyCode"))
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) KeyCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("keyCode"))
 	return obj.Wrap(_r)
 }
 
-// SetKeyCode wraps the corresponding Objective-C method.
-func (x *MTRKeypadInputClusterSendKeyParams) SetKeyCode(keyCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCode:"), objref.IDOf(keyCode))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRKeypadInputClusterSendKeyParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRKeypadInputClusterSendKeyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRKeypadInputClusterSendKeyParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mkicskp *MTRKeypadInputClusterSendKeyParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRKeypadInputClusterSendKeyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRKeypadInputClusterSendKeyParamsable is the interface implemented by [MTRKeypadInputClusterSendKeyParams], for mocking and DI.
-type MTRKeypadInputClusterSendKeyParamsable interface {
-	obj.Object
-	WithKeyCode(keyCode obj.Object) *MTRKeypadInputClusterSendKeyParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRKeypadInputClusterSendKeyParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRKeypadInputClusterSendKeyParams
-	KeyCode() obj.Object
-	SetKeyCode(keyCode obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRKeypadInputClusterSendKeyParamsable = (*MTRKeypadInputClusterSendKeyParams)(nil)

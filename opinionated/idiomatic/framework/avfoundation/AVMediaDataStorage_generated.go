@@ -46,24 +46,24 @@ func mediaDataStorageAdopt(id objc.ID) *MediaDataStorage {
 }
 
 // Description returns the object's -description text.
-func (x *MediaDataStorage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mds *MediaDataStorage) Description() string {
+	return rt.Description(objref.IDOf(mds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaDataStorage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mds *MediaDataStorage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaDataStorage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mds *MediaDataStorage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaDataStorage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mds *MediaDataStorage) String() string {
+	return rt.Description(objref.IDOf(mds))
 }
 
 // NewMediaDataStorageWithURLOptions creates a media data storage object associated with a file URL.
@@ -74,15 +74,7 @@ func NewMediaDataStorageWithURLOptions(uRL string, options obj.Object) *MediaDat
 }
 
 // URL returns the URL used to initialize the receiver.
-func (x *MediaDataStorage) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (mds *MediaDataStorage) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mds), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// MediaDataStorageable is the interface implemented by [MediaDataStorage], for mocking and DI.
-type MediaDataStorageable interface {
-	obj.Object
-	URL() obj.Object
-}
-
-var _ MediaDataStorageable = (*MediaDataStorage)(nil)

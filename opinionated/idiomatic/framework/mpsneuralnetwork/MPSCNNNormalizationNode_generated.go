@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,84 +52,52 @@ func NewCNNNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNNormalizatio
 	return cNNNormalizationNodeAdopt(_id)
 }
 
-// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNNormalizationNode) WithAlpha(alpha float32) *CNNNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the value of alpha.  Default is 1.0. Must be non-negative.
+func (cnn *CNNNormalizationNode) WithAlpha(alpha float32) *CNNNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cnn), objc.RegisterName("setAlpha:"), alpha)
+	return cnn
 }
 
-// WithBeta the value of beta.  Default is 5.0
-func (x *CNNNormalizationNode) WithBeta(beta float32) *CNNNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the value of beta.  Default is 5.0
+func (cnn *CNNNormalizationNode) WithBeta(beta float32) *CNNNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cnn), objc.RegisterName("setBeta:"), beta)
+	return cnn
 }
 
-// WithDelta the value of delta.  Default is 1.0
-func (x *CNNNormalizationNode) WithDelta(delta float32) *CNNNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the value of delta.  Default is 1.0
+func (cnn *CNNNormalizationNode) WithDelta(delta float32) *CNNNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cnn), objc.RegisterName("setDelta:"), delta)
+	return cnn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNormalizationNode) WithLabel(label string) *CNNNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnn *CNNNormalizationNode) WithLabel(label string) *CNNNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnn
 }
 
-// Alpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNNormalizationNode) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
+func (cnn *CNNNormalizationNode) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *CNNNormalizationNode) SetAlpha(alpha float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the value of beta.  Default is 5.0
-func (x *CNNNormalizationNode) Beta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the value of beta.  Default is 5.0
+func (cnn *CNNNormalizationNode) Beta() float32 {
+	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("beta"))
 	return _r
 }
 
-// SetBeta wraps the corresponding Objective-C method.
-func (x *CNNNormalizationNode) SetBeta(beta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// Delta the value of delta.  Default is 1.0
-func (x *CNNNormalizationNode) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+// Delta returns the value of delta.  Default is 1.0
+func (cnn *CNNNormalizationNode) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(cnn), objc.RegisterName("delta"))
 	return _r
 }
-
-// SetDelta wraps the corresponding Objective-C method.
-func (x *CNNNormalizationNode) SetDelta(delta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-}
-
-// CNNNormalizationNodeable is the interface implemented by [CNNNormalizationNode], for mocking and DI.
-type CNNNormalizationNodeable interface {
-	obj.Object
-	WithAlpha(alpha float32) *CNNNormalizationNode
-	WithBeta(beta float32) *CNNNormalizationNode
-	WithDelta(delta float32) *CNNNormalizationNode
-	WithLabel(label string) *CNNNormalizationNode
-	Alpha() float32
-	SetAlpha(alpha float32)
-	Beta() float32
-	SetBeta(beta float32)
-	Delta() float32
-	SetDelta(delta float32)
-}
-
-var _ CNNNormalizationNodeable = (*CNNNormalizationNode)(nil)
 
 // isCNNNormalizationNode marks CNNNormalizationNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNNormalizationNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNNormalizationNode) isCNNNormalizationNode() {}
+func (cnn *CNNNormalizationNode) isCNNNormalizationNode() {}
 
 var _ CNNNormalizationNodeProvider = (*CNNNormalizationNode)(nil)
 

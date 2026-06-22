@@ -46,24 +46,24 @@ func pedometerAdopt(id objc.ID) *Pedometer {
 }
 
 // Description returns the object's -description text.
-func (x *Pedometer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Pedometer) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Pedometer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Pedometer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Pedometer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Pedometer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Pedometer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Pedometer) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPedometer creates a new Pedometer.
@@ -73,14 +73,6 @@ func NewPedometer() *Pedometer {
 }
 
 // StopPedometerUpdates stops the delivery of recent pedestrian data updates to your app.
-func (x *Pedometer) StopPedometerUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPedometerUpdates"))
+func (p *Pedometer) StopPedometerUpdates() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stopPedometerUpdates"))
 }
-
-// Pedometerable is the interface implemented by [Pedometer], for mocking and DI.
-type Pedometerable interface {
-	obj.Object
-	StopPedometerUpdates()
-}
-
-var _ Pedometerable = (*Pedometer)(nil)

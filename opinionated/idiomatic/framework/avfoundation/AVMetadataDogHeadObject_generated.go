@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMetadataDogHeadObject() *MetadataDogHeadObject {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataDogHeadObject")), objc.RegisterName("new"))
 	return metadataDogHeadObjectAdopt(_id)
 }
-
-// MetadataDogHeadObjectable is the interface implemented by [MetadataDogHeadObject], for mocking and DI.
-type MetadataDogHeadObjectable interface {
-	obj.Object
-}
-
-var _ MetadataDogHeadObjectable = (*MetadataDogHeadObject)(nil)
 
 var _ MetadataObjectProvider = (*MetadataDogHeadObject)(nil)

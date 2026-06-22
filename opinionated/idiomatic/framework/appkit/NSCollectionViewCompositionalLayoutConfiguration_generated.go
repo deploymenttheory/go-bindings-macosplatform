@@ -46,24 +46,24 @@ func collectionViewCompositionalLayoutConfigurationAdopt(id objc.ID) *Collection
 }
 
 // Description returns the object's -description text.
-func (x *CollectionViewCompositionalLayoutConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) Description() string {
+	return rt.Description(objref.IDOf(cvclc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewCompositionalLayoutConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvclc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewCompositionalLayoutConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvclc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionViewCompositionalLayoutConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) String() string {
+	return rt.Description(objref.IDOf(cvclc))
 }
 
 // NewCollectionViewCompositionalLayoutConfiguration creates a new CollectionViewCompositionalLayoutConfiguration.
@@ -72,74 +72,43 @@ func NewCollectionViewCompositionalLayoutConfiguration() *CollectionViewComposit
 	return collectionViewCompositionalLayoutConfigurationAdopt(_id)
 }
 
-// WithScrollDirection the axis that the content in the collection view layout scrolls along.
-func (x *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
-	return x
+// WithScrollDirection sets the axis that the content in the collection view layout scrolls along.
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setScrollDirection:"), scrollDirection)
+	return cvclc
 }
 
-// WithInterSectionSpacing the amount of space between the sections in the layout.
-func (x *CollectionViewCompositionalLayoutConfiguration) WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
-	return x
+// WithInterSectionSpacing sets the amount of space between the sections in the layout.
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
+	return cvclc
 }
 
-// WithBoundarySupplementaryItems an array of the supplementary items that are associated with the boundary edges of the entire layout, such as global headers and footers.
-func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration {
+// WithBoundarySupplementaryItems sets an array of the supplementary items that are associated with the boundary edges of the entire layout, such as global headers and footers.
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
+	return cvclc
 }
 
 // ScrollDirection wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
-	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(x), objc.RegisterName("scrollDirection"))
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
+	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvclc), objc.RegisterName("scrollDirection"))
 	return _r
-}
-
-// SetScrollDirection wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayoutConfiguration) SetScrollDirection(scrollDirection CollectionViewScrollDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
 }
 
 // InterSectionSpacing wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interSectionSpacing"))
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(cvclc), objc.RegisterName("interSectionSpacing"))
 	return _r
-}
-
-// SetInterSectionSpacing wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacing(interSectionSpacing float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterSectionSpacing:"), interSectionSpacing)
 }
 
 // BoundarySupplementaryItems wraps the corresponding Objective-C method.
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
-func (x *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boundarySupplementaryItems"))
+func (cvclc *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(cvclc), objc.RegisterName("boundarySupplementaryItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
 		return CollectionLayoutBoundarySupplementaryItemFromID(_id)
 	})
 }
-
-// SetBoundarySupplementaryItems wraps the corresponding Objective-C method.
-func (x *CollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementaryItems(boundarySupplementaryItems []*CollectionLayoutBoundarySupplementaryItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), purego.SliceToNSArray(boundarySupplementaryItems, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) }))
-}
-
-// CollectionViewCompositionalLayoutConfigurationable is the interface implemented by [CollectionViewCompositionalLayoutConfiguration], for mocking and DI.
-type CollectionViewCompositionalLayoutConfigurationable interface {
-	obj.Object
-	WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration
-	WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration
-	WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration
-	ScrollDirection() CollectionViewScrollDirection
-	SetScrollDirection(scrollDirection CollectionViewScrollDirection)
-	InterSectionSpacing() float64
-	SetInterSectionSpacing(interSectionSpacing float64)
-	BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem
-	SetBoundarySupplementaryItems(boundarySupplementaryItems []*CollectionLayoutBoundarySupplementaryItem)
-}
-
-var _ CollectionViewCompositionalLayoutConfigurationable = (*CollectionViewCompositionalLayoutConfiguration)(nil)

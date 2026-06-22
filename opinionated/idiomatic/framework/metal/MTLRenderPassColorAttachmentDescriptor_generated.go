@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,58 @@ func NewRenderPassColorAttachmentDescriptor() *RenderPassColorAttachmentDescript
 	return renderPassColorAttachmentDescriptorAdopt(_id)
 }
 
-// WithLevel the mipmap level of the texture used for rendering to the attachment.
-func (x *RenderPassColorAttachmentDescriptor) WithLevel(level int) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets the mipmap level of the texture used for rendering to the attachment.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithLevel(level int) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setLevel:"), level)
+	return rpcad
 }
 
-// WithSlice the slice of the texture used for rendering to the attachment.
-func (x *RenderPassColorAttachmentDescriptor) WithSlice(slice int) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlice:"), slice)
-	return x
+// WithSlice sets the slice of the texture used for rendering to the attachment.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithSlice(slice int) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setSlice:"), slice)
+	return rpcad
 }
 
-// WithDepthPlane the depth plane of the texture used for rendering to the attachment.
-func (x *RenderPassColorAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthPlane:"), depthPlane)
-	return x
+// WithDepthPlane sets the depth plane of the texture used for rendering to the attachment.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setDepthPlane:"), depthPlane)
+	return rpcad
 }
 
-// WithResolveLevel the mipmap level of the texture used for the multisample resolve action.
-func (x *RenderPassColorAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveLevel:"), resolveLevel)
-	return x
+// WithResolveLevel sets the mipmap level of the texture used for the multisample resolve action.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setResolveLevel:"), resolveLevel)
+	return rpcad
 }
 
-// WithResolveSlice the slice of the texture used for the multisample resolve action.
-func (x *RenderPassColorAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveSlice:"), resolveSlice)
-	return x
+// WithResolveSlice sets the slice of the texture used for the multisample resolve action.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setResolveSlice:"), resolveSlice)
+	return rpcad
 }
 
-// WithResolveDepthPlane the depth plane of the texture used for the multisample resolve action.
-func (x *RenderPassColorAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
-	return x
+// WithResolveDepthPlane sets the depth plane of the texture used for the multisample resolve action.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
+	return rpcad
 }
 
-// WithLoadAction the action performed by this attachment at the start of a rendering pass for a render command encoder.
-func (x *RenderPassColorAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadAction:"), loadAction)
-	return x
+// WithLoadAction sets the action performed by this attachment at the start of a rendering pass for a render command encoder.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setLoadAction:"), loadAction)
+	return rpcad
 }
 
-// WithStoreAction the action performed by this attachment at the end of a rendering pass for a render command encoder.
-func (x *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAction:"), storeAction)
-	return x
+// WithStoreAction sets the action performed by this attachment at the end of a rendering pass for a render command encoder.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setStoreAction:"), storeAction)
+	return rpcad
 }
 
-// WithStoreActionOptions the options that modify the store action performed by this attachment.
-func (x *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
-	return x
+// WithStoreActionOptions sets the options that modify the store action performed by this attachment.
+func (rpcad *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpcad), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
+	return rpcad
 }
-
-// RenderPassColorAttachmentDescriptorable is the interface implemented by [RenderPassColorAttachmentDescriptor], for mocking and DI.
-type RenderPassColorAttachmentDescriptorable interface {
-	obj.Object
-	WithLevel(level int) *RenderPassColorAttachmentDescriptor
-	WithSlice(slice int) *RenderPassColorAttachmentDescriptor
-	WithDepthPlane(depthPlane int) *RenderPassColorAttachmentDescriptor
-	WithResolveLevel(resolveLevel int) *RenderPassColorAttachmentDescriptor
-	WithResolveSlice(resolveSlice int) *RenderPassColorAttachmentDescriptor
-	WithResolveDepthPlane(resolveDepthPlane int) *RenderPassColorAttachmentDescriptor
-	WithLoadAction(loadAction LoadAction) *RenderPassColorAttachmentDescriptor
-	WithStoreAction(storeAction StoreAction) *RenderPassColorAttachmentDescriptor
-	WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassColorAttachmentDescriptor
-}
-
-var _ RenderPassColorAttachmentDescriptorable = (*RenderPassColorAttachmentDescriptor)(nil)
 
 var _ RenderPassAttachmentDescriptorProvider = (*RenderPassColorAttachmentDescriptor)(nil)

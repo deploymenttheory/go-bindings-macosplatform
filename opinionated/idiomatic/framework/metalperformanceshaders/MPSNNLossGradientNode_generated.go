@@ -67,68 +67,53 @@ func NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradient
 	return nNLossGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nlgn *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nlgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nlgn
 }
 
 // NumberOfClasses wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) NumberOfClasses() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+func (nlgn *NNLossGradientNode) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(nlgn), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) ReduceAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+func (nlgn *NNLossGradientNode) ReduceAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(nlgn), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Weight wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+func (nlgn *NNLossGradientNode) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) LabelSmoothing() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+func (nlgn *NNLossGradientNode) LabelSmoothing() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+func (nlgn *NNLossGradientNode) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+func (nlgn *NNLossGradientNode) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("delta"))
 	return _r
 }
 
 // IsLabelsGradientFilter wraps the corresponding Objective-C method.
-func (x *NNLossGradientNode) IsLabelsGradientFilter() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLabelsGradientFilter"))
+func (nlgn *NNLossGradientNode) IsLabelsGradientFilter() bool {
+	_r := objc.Send[bool](objref.IDOf(nlgn), objc.RegisterName("isLabelsGradientFilter"))
 	return _r
 }
-
-// NNLossGradientNodeable is the interface implemented by [NNLossGradientNode], for mocking and DI.
-type NNLossGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNLossGradientNode
-	NumberOfClasses() int
-	ReduceAcrossBatch() bool
-	Weight() float32
-	LabelSmoothing() float32
-	Epsilon() float32
-	Delta() float32
-	IsLabelsGradientFilter() bool
-}
-
-var _ NNLossGradientNodeable = (*NNLossGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*NNLossGradientNode)(nil)
 

@@ -7,7 +7,6 @@ package oslog
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,35 +51,25 @@ func NewLogEntrySignpost() *LogEntrySignpost {
 	return logEntrySignpostAdopt(_id)
 }
 
-// SignpostIdentifier the signpost ID associated with this entry.
-func (x *LogEntrySignpost) SignpostIdentifier() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("signpostIdentifier"))
+// SignpostIdentifier returns the signpost ID associated with this entry.
+func (les *LogEntrySignpost) SignpostIdentifier() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(les), objc.RegisterName("signpostIdentifier"))
 	return _r
 }
 
-// SignpostName the signpost name associated with this entry.
-func (x *LogEntrySignpost) SignpostName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostName"))
+// SignpostName returns the signpost name associated with this entry.
+func (les *LogEntrySignpost) SignpostName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(les), objc.RegisterName("signpostName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SignpostType the signpost type associated with this entry.
-func (x *LogEntrySignpost) SignpostType() LogEntrySignpostType {
-	_r := objc.Send[LogEntrySignpostType](objref.IDOf(x), objc.RegisterName("signpostType"))
+// SignpostType returns the signpost type associated with this entry.
+func (les *LogEntrySignpost) SignpostType() LogEntrySignpostType {
+	_r := objc.Send[LogEntrySignpostType](objref.IDOf(les), objc.RegisterName("signpostType"))
 	return _r
 }
-
-// LogEntrySignpostable is the interface implemented by [LogEntrySignpost], for mocking and DI.
-type LogEntrySignpostable interface {
-	obj.Object
-	SignpostIdentifier() uint64
-	SignpostName() string
-	SignpostType() LogEntrySignpostType
-}
-
-var _ LogEntrySignpostable = (*LogEntrySignpost)(nil)
 
 var _ LogEntryProvider = (*LogEntrySignpost)(nil)

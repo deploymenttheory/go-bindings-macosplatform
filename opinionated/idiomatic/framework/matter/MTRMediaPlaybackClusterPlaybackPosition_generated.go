@@ -51,24 +51,15 @@ func NewMTRMediaPlaybackClusterPlaybackPosition() *MTRMediaPlaybackClusterPlayba
 }
 
 // WithUpdatedAt sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
-	return x
+func (mmpcpp *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
+	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
+	return mmpcpp
 }
 
 // WithPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
-	return x
+func (mmpcpp *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
+	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setPosition:"), objref.IDOf(position))
+	return mmpcpp
 }
-
-// MTRMediaPlaybackClusterPlaybackPositionable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPosition], for mocking and DI.
-type MTRMediaPlaybackClusterPlaybackPositionable interface {
-	obj.Object
-	WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition
-	WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition
-}
-
-var _ MTRMediaPlaybackClusterPlaybackPositionable = (*MTRMediaPlaybackClusterPlaybackPosition)(nil)
 
 var _ MTRMediaPlaybackClusterPlaybackPositionStructProvider = (*MTRMediaPlaybackClusterPlaybackPosition)(nil)

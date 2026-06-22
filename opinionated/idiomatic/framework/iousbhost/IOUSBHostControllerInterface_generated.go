@@ -5,13 +5,14 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostControllerInterface is an idiomatic wrapper over the Objective-C class IOUSBHostControllerInterface.
@@ -46,24 +47,24 @@ func hostControllerInterfaceAdopt(id objc.ID) *HostControllerInterface {
 }
 
 // Description returns the object's -description text.
-func (x *HostControllerInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hci *HostControllerInterface) Description() string {
+	return rt.Description(objref.IDOf(hci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HostControllerInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hci *HostControllerInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HostControllerInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hci *HostControllerInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HostControllerInterface) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hci *HostControllerInterface) String() string {
+	return rt.Description(objref.IDOf(hci))
 }
 
 // NewHostControllerInterface creates a new HostControllerInterface.
@@ -72,67 +73,47 @@ func NewHostControllerInterface() *HostControllerInterface {
 	return hostControllerInterfaceAdopt(_id)
 }
 
-// WithInterruptRateHz the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
-func (x *HostControllerInterface) WithInterruptRateHz(interruptRateHz int) *HostControllerInterface {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
-	return x
+// WithInterruptRateHz sets the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
+func (hci *HostControllerInterface) WithInterruptRateHz(interruptRateHz int) *HostControllerInterface {
+	objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
+	return hci
 }
 
 // Destroy removes underlying allocations of the IOUSBHostControllerInterface object along with user client When the IOUSBHostControllerInterface is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is freed, destroy will be called automatically. Calling destroy multiple times has no effect.
-func (x *HostControllerInterface) Destroy() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destroy"))
+func (hci *HostControllerInterface) Destroy() {
+	objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("destroy"))
 }
 
 // GetPortStateMachineForPortError wraps the corresponding Objective-C method.
-func (x *HostControllerInterface) GetPortStateMachineForPortError(port int) (result *HostCIPortStateMachine, err error) {
+func (hci *HostControllerInterface) GetPortStateMachineForPortError(port int) (result *HostCIPortStateMachine, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPortStateMachineForPort:error:"), port, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("getPortStateMachineForPort:error:"), port, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return HostCIPortStateMachineFromID(_r), nil
 }
 
-// Queue the dispatch queue for asynchronous operations.
-func (x *HostControllerInterface) Queue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+// Queue returns the dispatch queue for asynchronous operations.
+func (hci *HostControllerInterface) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
 
-// InterruptRateHz the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
-func (x *HostControllerInterface) InterruptRateHz() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("interruptRateHz"))
+// InterruptRateHz returns the interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
+func (hci *HostControllerInterface) InterruptRateHz() int {
+	_r := objc.Send[int](objref.IDOf(hci), objc.RegisterName("interruptRateHz"))
 	return _r
 }
 
-// SetInterruptRateHz wraps the corresponding Objective-C method.
-func (x *HostControllerInterface) SetInterruptRateHz(interruptRateHz int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
-}
-
 // ControllerStateMachine wraps the corresponding Objective-C method.
-func (x *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerStateMachine"))
+func (hci *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("controllerStateMachine"))
 	return HostCIControllerStateMachineFromID(_r)
 }
 
-// Uuid a UUID used to identify the host controller interface in this process and the kernel
-func (x *HostControllerInterface) Uuid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+// UUID returns a UUID used to identify the host controller interface in this process and the kernel
+func (hci *HostControllerInterface) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
-
-// HostControllerInterfaceable is the interface implemented by [HostControllerInterface], for mocking and DI.
-type HostControllerInterfaceable interface {
-	obj.Object
-	WithInterruptRateHz(interruptRateHz int) *HostControllerInterface
-	Destroy()
-	GetPortStateMachineForPortError(port int) (result *HostCIPortStateMachine, err error)
-	Queue() obj.Object
-	InterruptRateHz() int
-	SetInterruptRateHz(interruptRateHz int)
-	ControllerStateMachine() *HostCIControllerStateMachine
-	Uuid() obj.Object
-}
-
-var _ HostControllerInterfaceable = (*HostControllerInterface)(nil)

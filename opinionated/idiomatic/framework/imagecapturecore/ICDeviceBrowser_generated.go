@@ -46,24 +46,24 @@ func deviceBrowserAdopt(id objc.ID) *DeviceBrowser {
 }
 
 // Description returns the object's -description text.
-func (x *DeviceBrowser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (db *DeviceBrowser) Description() string {
+	return rt.Description(objref.IDOf(db))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeviceBrowser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (db *DeviceBrowser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(db), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeviceBrowser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (db *DeviceBrowser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(db), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DeviceBrowser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (db *DeviceBrowser) String() string {
+	return rt.Description(objref.IDOf(db))
 }
 
 // NewDeviceBrowser creates a new DeviceBrowser.
@@ -72,57 +72,38 @@ func NewDeviceBrowser() *DeviceBrowser {
 	return deviceBrowserAdopt(_id)
 }
 
-// WithBrowsedDeviceTypeMask a mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
-func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) *DeviceBrowser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
-	return x
+// WithBrowsedDeviceTypeMask sets a mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
+func (db *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) *DeviceBrowser {
+	objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
+	return db
 }
 
 // Start tells the delegate to start looking for devices.
-func (x *DeviceBrowser) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (db *DeviceBrowser) Start() {
+	objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("start"))
 }
 
 // Stop tells the delegate to stop looking for devices.
-func (x *DeviceBrowser) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (db *DeviceBrowser) Stop() {
+	objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("stop"))
 }
 
-// IsBrowsing indicates whether the device browser is browsing for devices.
-func (x *DeviceBrowser) IsBrowsing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBrowsing"))
+// IsBrowsing reports whether the device browser is browsing for devices.
+func (db *DeviceBrowser) IsBrowsing() bool {
+	_r := objc.Send[bool](objref.IDOf(db), objc.RegisterName("isBrowsing"))
 	return _r
 }
 
-// BrowsedDeviceTypeMask a mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
-func (x *DeviceBrowser) BrowsedDeviceTypeMask() DeviceTypeMask {
-	_r := objc.Send[DeviceTypeMask](objref.IDOf(x), objc.RegisterName("browsedDeviceTypeMask"))
+// BrowsedDeviceTypeMask returns a mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
+func (db *DeviceBrowser) BrowsedDeviceTypeMask() DeviceTypeMask {
+	_r := objc.Send[DeviceTypeMask](objref.IDOf(db), objc.RegisterName("browsedDeviceTypeMask"))
 	return _r
 }
 
-// SetBrowsedDeviceTypeMask wraps the corresponding Objective-C method.
-func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
-}
-
-// Devices all devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
+// Devices returns all devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
 //
 // Devices returns the collection as a Go slice.
-func (x *DeviceBrowser) Devices() []*Device {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+func (db *DeviceBrowser) Devices() []*Device {
+	_arr := objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Device { return DeviceFromID(_id) })
 }
-
-// DeviceBrowserable is the interface implemented by [DeviceBrowser], for mocking and DI.
-type DeviceBrowserable interface {
-	obj.Object
-	WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) *DeviceBrowser
-	Start()
-	Stop()
-	IsBrowsing() bool
-	BrowsedDeviceTypeMask() DeviceTypeMask
-	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask)
-	Devices() []*Device
-}
-
-var _ DeviceBrowserable = (*DeviceBrowser)(nil)

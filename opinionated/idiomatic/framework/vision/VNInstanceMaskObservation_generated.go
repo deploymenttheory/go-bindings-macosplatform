@@ -52,18 +52,10 @@ func NewInstanceMaskObservation() *InstanceMaskObservation {
 	return instanceMaskObservationAdopt(_id)
 }
 
-// AllInstances *The IndexSet that encompases all instances except the background
-func (x *InstanceMaskObservation) AllInstances() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allInstances"))
+// AllInstances returns *The IndexSet that encompases all instances except the background
+func (imo *InstanceMaskObservation) AllInstances() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(imo), objc.RegisterName("allInstances"))
 	return obj.Wrap(_r)
 }
-
-// InstanceMaskObservationable is the interface implemented by [InstanceMaskObservation], for mocking and DI.
-type InstanceMaskObservationable interface {
-	obj.Object
-	AllInstances() obj.Object
-}
-
-var _ InstanceMaskObservationable = (*InstanceMaskObservation)(nil)
 
 var _ ObservationProvider = (*InstanceMaskObservation)(nil)

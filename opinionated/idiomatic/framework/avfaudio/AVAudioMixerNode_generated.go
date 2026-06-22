@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,38 +51,22 @@ func NewAudioMixerNode() *AudioMixerNode {
 	return audioMixerNodeAdopt(_id)
 }
 
-// WithOutputVolume the mixer’s output volume.
-func (x *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
-	return x
+// WithOutputVolume sets the mixer’s output volume.
+func (amn *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNode {
+	objc.Send[objc.ID](objref.IDOf(amn), objc.RegisterName("setOutputVolume:"), outputVolume)
+	return amn
 }
 
-// OutputVolume the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
-func (x *AudioMixerNode) OutputVolume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("outputVolume"))
+// OutputVolume returns the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
+func (amn *AudioMixerNode) OutputVolume() float32 {
+	_r := objc.Send[float32](objref.IDOf(amn), objc.RegisterName("outputVolume"))
 	return _r
 }
 
-// SetOutputVolume wraps the corresponding Objective-C method.
-func (x *AudioMixerNode) SetOutputVolume(outputVolume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
-}
-
-// NextAvailableInputBus find an unused input bus. This will find and return the first input bus to which no other node is connected.
-func (x *AudioMixerNode) NextAvailableInputBus() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextAvailableInputBus"))
+// NextAvailableInputBus returns find an unused input bus. This will find and return the first input bus to which no other node is connected.
+func (amn *AudioMixerNode) NextAvailableInputBus() int {
+	_r := objc.Send[int](objref.IDOf(amn), objc.RegisterName("nextAvailableInputBus"))
 	return _r
 }
-
-// AudioMixerNodeable is the interface implemented by [AudioMixerNode], for mocking and DI.
-type AudioMixerNodeable interface {
-	obj.Object
-	WithOutputVolume(outputVolume float32) *AudioMixerNode
-	OutputVolume() float32
-	SetOutputVolume(outputVolume float32)
-	NextAvailableInputBus() int
-}
-
-var _ AudioMixerNodeable = (*AudioMixerNode)(nil)
 
 var _ AudioNodeProvider = (*AudioMixerNode)(nil)

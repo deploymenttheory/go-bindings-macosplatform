@@ -44,24 +44,24 @@ func compositionParameterViewAdopt(id objc.ID) *CompositionParameterView {
 }
 
 // Description returns the object's -description text.
-func (x *CompositionParameterView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpv *CompositionParameterView) Description() string {
+	return rt.Description(objref.IDOf(cpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionParameterView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpv *CompositionParameterView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionParameterView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpv *CompositionParameterView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CompositionParameterView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpv *CompositionParameterView) String() string {
+	return rt.Description(objref.IDOf(cpv))
 }
 
 // NewCompositionParameterView creates a new CompositionParameterView.
@@ -71,54 +71,40 @@ func NewCompositionParameterView() *CompositionParameterView {
 }
 
 // HasParameters wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) HasParameters() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasParameters"))
+func (cpv *CompositionParameterView) HasParameters() bool {
+	_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("hasParameters"))
 	return _r
 }
 
 // SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) SetBackgroundColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
+func (cpv *CompositionParameterView) SetBackgroundColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (cpv *CompositionParameterView) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
 // SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) SetDrawsBackground(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), flag)
+func (cpv *CompositionParameterView) SetDrawsBackground(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDrawsBackground:"), flag)
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+func (cpv *CompositionParameterView) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
 // SetDelegate wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+func (cpv *CompositionParameterView) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *CompositionParameterView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (cpv *CompositionParameterView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
-
-// CompositionParameterViewable is the interface implemented by [CompositionParameterView], for mocking and DI.
-type CompositionParameterViewable interface {
-	obj.Object
-	HasParameters() bool
-	SetBackgroundColor(color obj.Object)
-	BackgroundColor() obj.Object
-	SetDrawsBackground(flag bool)
-	DrawsBackground() bool
-	SetDelegate(delegate obj.Object)
-	Delegate() obj.Object
-}
-
-var _ CompositionParameterViewable = (*CompositionParameterView)(nil)

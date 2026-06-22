@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterResumedEventAdopt(id objc.ID) *MTRDeviceEne
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) Description() string {
+	return rt.Description(objref.IDOf(mdemcre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) String() string {
+	return rt.Description(objref.IDOf(mdemcre))
 }
 
 // NewMTRDeviceEnergyManagementClusterResumedEvent creates a new MTRDeviceEnergyManagementClusterResumedEvent.
@@ -71,28 +71,13 @@ func NewMTRDeviceEnergyManagementClusterResumedEvent() *MTRDeviceEnergyManagemen
 }
 
 // WithCause sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-	return x
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent {
+	objc.Send[objc.ID](objref.IDOf(mdemcre), objc.RegisterName("setCause:"), objref.IDOf(cause))
+	return mdemcre
 }
 
 // Cause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) Cause() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcre), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
-
-// SetCause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) SetCause(cause obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-}
-
-// MTRDeviceEnergyManagementClusterResumedEventable is the interface implemented by [MTRDeviceEnergyManagementClusterResumedEvent], for mocking and DI.
-type MTRDeviceEnergyManagementClusterResumedEventable interface {
-	obj.Object
-	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent
-	Cause() obj.Object
-	SetCause(cause obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterResumedEventable = (*MTRDeviceEnergyManagementClusterResumedEvent)(nil)

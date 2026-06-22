@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewMedicationDoseEventType() *MedicationDoseEventType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKMedicationDoseEventType")), objc.RegisterName("new"))
 	return medicationDoseEventTypeAdopt(_id)
 }
-
-// MedicationDoseEventTypeable is the interface implemented by [MedicationDoseEventType], for mocking and DI.
-type MedicationDoseEventTypeable interface {
-	obj.Object
-}
-
-var _ MedicationDoseEventTypeable = (*MedicationDoseEventType)(nil)
 
 var _ SampleTypeProvider = (*MedicationDoseEventType)(nil)
 

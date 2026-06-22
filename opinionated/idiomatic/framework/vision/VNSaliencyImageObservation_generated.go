@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,18 +54,10 @@ func NewSaliencyImageObservation() *SaliencyImageObservation {
 // SalientObjects wraps the corresponding Objective-C method.
 //
 // SalientObjects returns the collection as a Go slice.
-func (x *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("salientObjects"))
+func (sio *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(sio), objc.RegisterName("salientObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RectangleObservation { return RectangleObservationFromID(_id) })
 }
-
-// SaliencyImageObservationable is the interface implemented by [SaliencyImageObservation], for mocking and DI.
-type SaliencyImageObservationable interface {
-	obj.Object
-	SalientObjects() []*RectangleObservation
-}
-
-var _ SaliencyImageObservationable = (*SaliencyImageObservation)(nil)
 
 var _ PixelBufferObservationProvider = (*SaliencyImageObservation)(nil)
 

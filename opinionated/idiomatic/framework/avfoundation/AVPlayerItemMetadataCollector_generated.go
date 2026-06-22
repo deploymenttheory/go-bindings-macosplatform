@@ -53,18 +53,10 @@ func NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels(identifiers 
 	return playerItemMetadataCollectorAdopt(_id)
 }
 
-// DelegateQueue the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
-func (x *PlayerItemMetadataCollector) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+// DelegateQueue returns the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
+func (pimc *PlayerItemMetadataCollector) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pimc), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
-
-// PlayerItemMetadataCollectorable is the interface implemented by [PlayerItemMetadataCollector], for mocking and DI.
-type PlayerItemMetadataCollectorable interface {
-	obj.Object
-	DelegateQueue() obj.Object
-}
-
-var _ PlayerItemMetadataCollectorable = (*PlayerItemMetadataCollector)(nil)
 
 var _ PlayerItemMediaDataCollectorProvider = (*PlayerItemMetadataCollector)(nil)

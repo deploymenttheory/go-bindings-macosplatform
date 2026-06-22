@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func safariPageAdopt(id objc.ID) *SafariPage {
 }
 
 // Description returns the object's -description text.
-func (x *SafariPage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *SafariPage) Description() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariPage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sp *SafariPage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariPage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sp *SafariPage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariPage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *SafariPage) String() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // NewSafariPage creates a new SafariPage.
@@ -74,19 +75,19 @@ func NewSafariPage() *SafariPage {
 }
 
 // DispatchMessageToScriptWithNameUserInfo dispatches a message from the app extension to the content script injected in this page.
-func (x *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchMessageToScriptWithName:userInfo:"), purego.NSString(messageName), objref.IDOf(userInfo))
+func (sp *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("dispatchMessageToScriptWithName:userInfo:"), purego.NSString(messageName), objref.IDOf(userInfo))
 }
 
 // Reload tells Safari to reload the webpage.
-func (x *SafariPage) Reload() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reload"))
+func (sp *SafariPage) Reload() {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("reload"))
 }
 
 // GetPageProperties retrieves the properties of the webpage.
 //
 // GetPageProperties blocks until the operation completes or ctx is cancelled.
-func (x *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPageProperties, err error) {
+func (sp *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPageProperties, err error) {
 	type _result struct {
 		val *SafariPageProperties
 		err error
@@ -97,7 +98,7 @@ func (x *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPageP
 		_o.val = SafariPagePropertiesFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPagePropertiesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("getPagePropertiesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -110,7 +111,7 @@ func (x *SafariPage) GetPageProperties(ctx context.Context) (result *SafariPageP
 // GetContainingTab this calls the completion handler with the tab containing this page. This will return a non-nil tab for any pages being preloaded by Safari.
 //
 // GetContainingTab blocks until the operation completes or ctx is cancelled.
-func (x *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, err error) {
+func (sp *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, err error) {
 	type _result struct {
 		val *SafariTab
 		err error
@@ -121,7 +122,7 @@ func (x *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, e
 		_o.val = SafariTabFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getContainingTabWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("getContainingTabWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -134,7 +135,7 @@ func (x *SafariPage) GetContainingTab(ctx context.Context) (result *SafariTab, e
 // GetScreenshotOfVisibleArea gets a screenshot of the currently visible area of the page.
 //
 // GetScreenshotOfVisibleArea blocks until the operation completes or ctx is cancelled.
-func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (result obj.Object, err error) {
+func (sp *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -145,7 +146,7 @@ func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (result obj
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getScreenshotOfVisibleAreaWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("getScreenshotOfVisibleAreaWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,15 +155,3 @@ func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (result obj
 		return _zero, ctx.Err()
 	}
 }
-
-// SafariPageable is the interface implemented by [SafariPage], for mocking and DI.
-type SafariPageable interface {
-	obj.Object
-	DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo obj.Object)
-	Reload()
-	GetPageProperties(ctx context.Context) (*SafariPageProperties, error)
-	GetContainingTab(ctx context.Context) (*SafariTab, error)
-	GetScreenshotOfVisibleArea(ctx context.Context) (obj.Object, error)
-}
-
-var _ SafariPageable = (*SafariPage)(nil)

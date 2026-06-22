@@ -46,24 +46,24 @@ func tokenKeyExchangeParametersAdopt(id objc.ID) *TokenKeyExchangeParameters {
 }
 
 // Description returns the object's -description text.
-func (x *TokenKeyExchangeParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tkep *TokenKeyExchangeParameters) Description() string {
+	return rt.Description(objref.IDOf(tkep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenKeyExchangeParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tkep *TokenKeyExchangeParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tkep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenKeyExchangeParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tkep *TokenKeyExchangeParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tkep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenKeyExchangeParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tkep *TokenKeyExchangeParameters) String() string {
+	return rt.Description(objref.IDOf(tkep))
 }
 
 // NewTokenKeyExchangeParameters creates a new TokenKeyExchangeParameters.
@@ -72,23 +72,14 @@ func NewTokenKeyExchangeParameters() *TokenKeyExchangeParameters {
 	return tokenKeyExchangeParametersAdopt(_id)
 }
 
-// RequestedSize requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
-func (x *TokenKeyExchangeParameters) RequestedSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestedSize"))
+// RequestedSize returns requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
+func (tkep *TokenKeyExchangeParameters) RequestedSize() int {
+	_r := objc.Send[int](objref.IDOf(tkep), objc.RegisterName("requestedSize"))
 	return _r
 }
 
-// SharedInfo additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
-func (x *TokenKeyExchangeParameters) SharedInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedInfo"))
+// SharedInfo returns additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
+func (tkep *TokenKeyExchangeParameters) SharedInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tkep), objc.RegisterName("sharedInfo"))
 	return obj.Wrap(_r)
 }
-
-// TokenKeyExchangeParametersable is the interface implemented by [TokenKeyExchangeParameters], for mocking and DI.
-type TokenKeyExchangeParametersable interface {
-	obj.Object
-	RequestedSize() int
-	SharedInfo() obj.Object
-}
-
-var _ TokenKeyExchangeParametersable = (*TokenKeyExchangeParameters)(nil)

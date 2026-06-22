@@ -6,13 +6,14 @@ package avfoundation
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MetadataItem is an idiomatic wrapper over the Objective-C class AVMetadataItem.
@@ -51,35 +52,35 @@ func metadataItemAdopt(id objc.ID) *MetadataItem {
 }
 
 // Description returns the object's -description text.
-func (x *MetadataItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MetadataItem) Description() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mi *MetadataItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mi *MetadataItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mi *MetadataItem) String() string {
+	return rt.Description(objref.IDOf(mi))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *MetadataItem) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (mi *MetadataItem) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // ExtendedLanguageTag wraps the corresponding Objective-C method.
-func (x *MetadataItem) ExtendedLanguageTag() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLanguageTag"))
+func (mi *MetadataItem) ExtendedLanguageTag() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,14 +88,14 @@ func (x *MetadataItem) ExtendedLanguageTag() string {
 }
 
 // Locale wraps the corresponding Objective-C method.
-func (x *MetadataItem) Locale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+func (mi *MetadataItem) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
 // DataType wraps the corresponding Objective-C method.
-func (x *MetadataItem) DataType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataType"))
+func (mi *MetadataItem) DataType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dataType"))
 	if _r == 0 {
 		return ""
 	}
@@ -102,26 +103,26 @@ func (x *MetadataItem) DataType() string {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MetadataItem) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mi *MetadataItem) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // ExtraAttributes wraps the corresponding Objective-C method.
-func (x *MetadataItem) ExtraAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extraAttributes"))
+func (mi *MetadataItem) ExtraAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("extraAttributes"))
 	return obj.Wrap(_r)
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *MetadataItem) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (mi *MetadataItem) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // StringValue wraps the corresponding Objective-C method.
-func (x *MetadataItem) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (mi *MetadataItem) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
@@ -129,27 +130,27 @@ func (x *MetadataItem) StringValue() string {
 }
 
 // NumberValue wraps the corresponding Objective-C method.
-func (x *MetadataItem) NumberValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberValue"))
+func (mi *MetadataItem) NumberValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("numberValue"))
 	return obj.Wrap(_r)
 }
 
 // DateValue wraps the corresponding Objective-C method.
-func (x *MetadataItem) DateValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateValue"))
+func (mi *MetadataItem) DateValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dateValue"))
 	return obj.Wrap(_r)
 }
 
 // DataValue wraps the corresponding Objective-C method.
-func (x *MetadataItem) DataValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataValue"))
+func (mi *MetadataItem) DataValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dataValue"))
 	return obj.Wrap(_r)
 }
 
 // StatusOfValueForKeyError reports whether the value for a given key is immediately available without blocking.
-func (x *MetadataItem) StatusOfValueForKeyError(key string) (result KeyValueStatus, err error) {
+func (mi *MetadataItem) StatusOfValueForKeyError(key string) (result KeyValueStatus, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[KeyValueStatus](objref.IDOf(x), objc.RegisterName("statusOfValueForKey:error:"), purego.NSString(key), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[KeyValueStatus](objref.IDOf(mi), objc.RegisterName("statusOfValueForKey:error:"), purego.NSString(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return KeyValueStatus(0), errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -159,12 +160,12 @@ func (x *MetadataItem) StatusOfValueForKeyError(key string) (result KeyValueStat
 // LoadValuesAsynchronouslyForKeys tells the object to load the values of any of the specified keys that aren’t already loaded.
 //
 // LoadValuesAsynchronouslyForKeys blocks until the operation completes or ctx is cancelled.
-func (x *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys []string) error {
+func (mi *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys []string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadValuesAsynchronouslyForKeys:completionHandler:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("loadValuesAsynchronouslyForKeys:completionHandler:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -174,49 +175,26 @@ func (x *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, keys
 }
 
 // Key wraps the corresponding Objective-C method.
-func (x *MetadataItem) Key() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+func (mi *MetadataItem) Key() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("key"))
 	return obj.Wrap(_r)
 }
 
 // CommonKey wraps the corresponding Objective-C method.
-func (x *MetadataItem) CommonKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonKey"))
+func (mi *MetadataItem) CommonKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("commonKey"))
 	return obj.Wrap(_r)
 }
 
 // KeySpace wraps the corresponding Objective-C method.
-func (x *MetadataItem) KeySpace() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySpace"))
+func (mi *MetadataItem) KeySpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("keySpace"))
 	return obj.Wrap(_r)
 }
-
-// MetadataItemable is the interface implemented by [MetadataItem], for mocking and DI.
-type MetadataItemable interface {
-	obj.Object
-	Identifier() obj.Object
-	ExtendedLanguageTag() string
-	Locale() obj.Object
-	DataType() string
-	Value() obj.Object
-	ExtraAttributes() obj.Object
-	StartDate() obj.Object
-	StringValue() string
-	NumberValue() obj.Object
-	DateValue() obj.Object
-	DataValue() obj.Object
-	StatusOfValueForKeyError(key string) (result KeyValueStatus, err error)
-	LoadValuesAsynchronouslyForKeys(ctx context.Context, keys []string) error
-	Key() obj.Object
-	CommonKey() obj.Object
-	KeySpace() obj.Object
-}
-
-var _ MetadataItemable = (*MetadataItem)(nil)
 
 // isMetadataItem marks MetadataItem — and, by embedding promotion, its
 // subclasses — as a member of the MetadataItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetadataItem) isMetadataItem() {}
+func (mi *MetadataItem) isMetadataItem() {}
 
 var _ MetadataItemProvider = (*MetadataItem)(nil)

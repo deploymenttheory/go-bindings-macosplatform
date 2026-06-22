@@ -48,78 +48,78 @@ func certificatePanelAdopt(id objc.ID) *CertificatePanel {
 }
 
 // Description returns the object's -description text.
-func (x *CertificatePanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CertificatePanel) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CertificatePanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *CertificatePanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CertificatePanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *CertificatePanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CertificatePanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CertificatePanel) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // RunModalForTrustShowGroup displays a certificate chain in a modal panel.
-func (x *CertificatePanel) RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForTrust:showGroup:"), objref.IDOf(trust), showGroup)
+func (cp *CertificatePanel) RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int {
+	_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("runModalForTrust:showGroup:"), objref.IDOf(trust), showGroup)
 	return _r
 }
 
 // RunModalForCertificatesShowGroup displays one or more specified certificates in a modal panel.
-func (x *CertificatePanel) RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForCertificates:showGroup:"), objref.IDOf(certificates), showGroup)
+func (cp *CertificatePanel) RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int {
+	_r := objc.Send[int](objref.IDOf(cp), objc.RegisterName("runModalForCertificates:showGroup:"), objref.IDOf(certificates), showGroup)
 	return _r
 }
 
 // SetPolicies specifies one or more policies that apply to the displayed certificates.
-func (x *CertificatePanel) SetPolicies(policies obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
+func (cp *CertificatePanel) SetPolicies(policies obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificates.
-func (x *CertificatePanel) Policies() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
+func (cp *CertificatePanel) Policies() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("policies"))
 	return obj.Wrap(_r)
 }
 
 // SetDefaultButtonTitle customizes the title of the default button.
-func (x *CertificatePanel) SetDefaultButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
+func (cp *CertificatePanel) SetDefaultButtonTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 }
 
 // SetAlternateButtonTitle customizes the title of the alternate button.
-func (x *CertificatePanel) SetAlternateButtonTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
+func (cp *CertificatePanel) SetAlternateButtonTitle(title string) {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
 }
 
 // SetShowsHelp displays a Help button in the sheet or panel.
-func (x *CertificatePanel) SetShowsHelp(showsHelp bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
+func (cp *CertificatePanel) SetShowsHelp(showsHelp bool) {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsHelp:"), showsHelp)
 }
 
-// ShowsHelp indicates whether the help button is currently set to be displayed.
-func (x *CertificatePanel) ShowsHelp() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsHelp"))
+// ShowsHelp reports whether the help button is currently set to be displayed.
+func (cp *CertificatePanel) ShowsHelp() bool {
+	_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("showsHelp"))
 	return _r
 }
 
 // SetHelpAnchor sets the help anchor string for the sheet or modal panel.
-func (x *CertificatePanel) SetHelpAnchor(anchor string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
+func (cp *CertificatePanel) SetHelpAnchor(anchor string) {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
 }
 
 // HelpAnchor returns the current help anchor string for the sheet or panel.
-func (x *CertificatePanel) HelpAnchor() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+func (cp *CertificatePanel) HelpAnchor() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("helpAnchor"))
 	if _r == 0 {
 		return ""
 	}
@@ -127,32 +127,14 @@ func (x *CertificatePanel) HelpAnchor() string {
 }
 
 // CertificateView returns the certificate view for the modal panel.
-func (x *CertificatePanel) CertificateView() *CertificateView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateView"))
+func (cp *CertificatePanel) CertificateView() *CertificateView {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("certificateView"))
 	return CertificateViewFromID(_r)
 }
-
-// CertificatePanelable is the interface implemented by [CertificatePanel], for mocking and DI.
-type CertificatePanelable interface {
-	obj.Object
-	RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int
-	RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int
-	SetPolicies(policies obj.Object)
-	Policies() obj.Object
-	SetDefaultButtonTitle(title string)
-	SetAlternateButtonTitle(title string)
-	SetShowsHelp(showsHelp bool)
-	ShowsHelp() bool
-	SetHelpAnchor(anchor string)
-	HelpAnchor() string
-	CertificateView() *CertificateView
-}
-
-var _ CertificatePanelable = (*CertificatePanel)(nil)
 
 // isCertificatePanel marks CertificatePanel — and, by embedding promotion, its
 // subclasses — as a member of the CertificatePanel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CertificatePanel) isCertificatePanel() {}
+func (cp *CertificatePanel) isCertificatePanel() {}
 
 var _ CertificatePanelProvider = (*CertificatePanel)(nil)

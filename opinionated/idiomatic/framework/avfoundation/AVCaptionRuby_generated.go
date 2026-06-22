@@ -46,24 +46,24 @@ func captionRubyAdopt(id objc.ID) *CaptionRuby {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionRuby) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CaptionRuby) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionRuby) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *CaptionRuby) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionRuby) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *CaptionRuby) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionRuby) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CaptionRuby) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // NewCaptionRubyWithText creates a new CaptionRuby.
@@ -80,33 +80,23 @@ func NewCaptionRubyWithTextPositionAlignment(text string, position CaptionRubyPo
 	return captionRubyAdopt(_id)
 }
 
-// Text the ruby text
-func (x *CaptionRuby) Text() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+// Text returns the ruby text
+func (cr *CaptionRuby) Text() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Position the position of ruby text with respect to the ruby base.
-func (x *CaptionRuby) Position() CaptionRubyPosition {
-	_r := objc.Send[CaptionRubyPosition](objref.IDOf(x), objc.RegisterName("position"))
+// Position returns the position of ruby text with respect to the ruby base.
+func (cr *CaptionRuby) Position() CaptionRubyPosition {
+	_r := objc.Send[CaptionRubyPosition](objref.IDOf(cr), objc.RegisterName("position"))
 	return _r
 }
 
-// Alignment the alignment of ruby text.
-func (x *CaptionRuby) Alignment() CaptionRubyAlignment {
-	_r := objc.Send[CaptionRubyAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+// Alignment returns the alignment of ruby text.
+func (cr *CaptionRuby) Alignment() CaptionRubyAlignment {
+	_r := objc.Send[CaptionRubyAlignment](objref.IDOf(cr), objc.RegisterName("alignment"))
 	return _r
 }
-
-// CaptionRubyable is the interface implemented by [CaptionRuby], for mocking and DI.
-type CaptionRubyable interface {
-	obj.Object
-	Text() string
-	Position() CaptionRubyPosition
-	Alignment() CaptionRubyAlignment
-}
-
-var _ CaptionRubyable = (*CaptionRuby)(nil)

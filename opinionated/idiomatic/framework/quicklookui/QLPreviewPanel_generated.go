@@ -46,24 +46,24 @@ func previewPanelAdopt(id objc.ID) *PreviewPanel {
 }
 
 // Description returns the object's -description text.
-func (x *PreviewPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PreviewPanel) Description() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PreviewPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pp *PreviewPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PreviewPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pp *PreviewPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PreviewPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PreviewPanel) String() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // NewPreviewPanel creates a new PreviewPanel.
@@ -72,94 +72,64 @@ func NewPreviewPanel() *PreviewPanel {
 	return previewPanelAdopt(_id)
 }
 
-// WithCurrentPreviewItemIndex the index of the current preview item.
-func (x *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
-	return x
+// WithCurrentPreviewItemIndex sets the index of the current preview item.
+func (pp *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
+	return pp
 }
 
-// WithDisplayState the preview panel’s display state.
-func (x *PreviewPanel) WithDisplayState(displayState obj.Object) *PreviewPanel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
-	return x
+// WithDisplayState sets the preview panel’s display state.
+func (pp *PreviewPanel) WithDisplayState(displayState obj.Object) *PreviewPanel {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
+	return pp
 }
 
 // UpdateController asks the preview panel to update its current controller.
-func (x *PreviewPanel) UpdateController() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateController"))
+func (pp *PreviewPanel) UpdateController() {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateController"))
 }
 
 // ReloadData asks the preview panel to reload its data from its data source.
-func (x *PreviewPanel) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
+func (pp *PreviewPanel) ReloadData() {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("reloadData"))
 }
 
 // RefreshCurrentPreviewItem asks the preview panel to recompute the preview of the current preview item.
-func (x *PreviewPanel) RefreshCurrentPreviewItem() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refreshCurrentPreviewItem"))
+func (pp *PreviewPanel) RefreshCurrentPreviewItem() {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("refreshCurrentPreviewItem"))
 }
 
 // EnterFullScreenModeWithOptions instructs the panel to enter full screen mode.
-func (x *PreviewPanel) EnterFullScreenModeWithOptions(screen obj.Object, options obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
+func (pp *PreviewPanel) EnterFullScreenModeWithOptions(screen obj.Object, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
 	return _r
 }
 
 // ExitFullScreenModeWithOptions instructs the panel to exit full screen mode.
-func (x *PreviewPanel) ExitFullScreenModeWithOptions(options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
+func (pp *PreviewPanel) ExitFullScreenModeWithOptions(options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
 }
 
-// CurrentController the current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.
-func (x *PreviewPanel) CurrentController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentController"))
+// CurrentController returns the current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.
+func (pp *PreviewPanel) CurrentController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("currentController"))
 	return obj.Wrap(_r)
 }
 
-// CurrentPreviewItemIndex the index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
-func (x *PreviewPanel) CurrentPreviewItemIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentPreviewItemIndex"))
+// CurrentPreviewItemIndex returns the index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
+func (pp *PreviewPanel) CurrentPreviewItemIndex() int {
+	_r := objc.Send[int](objref.IDOf(pp), objc.RegisterName("currentPreviewItemIndex"))
 	return _r
 }
 
-// SetCurrentPreviewItemIndex wraps the corresponding Objective-C method.
-func (x *PreviewPanel) SetCurrentPreviewItemIndex(currentPreviewItemIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPreviewItemIndex:"), currentPreviewItemIndex)
-}
-
-// DisplayState the preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
-func (x *PreviewPanel) DisplayState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayState"))
+// DisplayState returns the preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
+func (pp *PreviewPanel) DisplayState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("displayState"))
 	return obj.Wrap(_r)
 }
 
-// SetDisplayState wraps the corresponding Objective-C method.
-func (x *PreviewPanel) SetDisplayState(displayState obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
-}
-
-// IsInFullScreenMode the property that indicates whether the panel is in full screen mode. The value is <doc://com.apple.documentation/documentation/objectivec/yes> if the panel is currently open and in full screen mode; otherwise it’s <doc://com.apple.documentation/documentation/objectivec/no>.
-func (x *PreviewPanel) IsInFullScreenMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInFullScreenMode"))
+// IsInFullScreenMode reports whether the property that indicates whether the panel is in full screen mode. The value is <doc://com.apple.documentation/documentation/objectivec/yes> if the panel is currently open and in full screen mode; otherwise it’s <doc://com.apple.documentation/documentation/objectivec/no>.
+func (pp *PreviewPanel) IsInFullScreenMode() bool {
+	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("isInFullScreenMode"))
 	return _r
 }
-
-// PreviewPanelable is the interface implemented by [PreviewPanel], for mocking and DI.
-type PreviewPanelable interface {
-	obj.Object
-	WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel
-	WithDisplayState(displayState obj.Object) *PreviewPanel
-	UpdateController()
-	ReloadData()
-	RefreshCurrentPreviewItem()
-	EnterFullScreenModeWithOptions(screen obj.Object, options obj.Object) bool
-	ExitFullScreenModeWithOptions(options obj.Object)
-	CurrentController() obj.Object
-	CurrentPreviewItemIndex() int
-	SetCurrentPreviewItemIndex(currentPreviewItemIndex int)
-	DisplayState() obj.Object
-	SetDisplayState(displayState obj.Object)
-	IsInFullScreenMode() bool
-}
-
-var _ PreviewPanelable = (*PreviewPanel)(nil)

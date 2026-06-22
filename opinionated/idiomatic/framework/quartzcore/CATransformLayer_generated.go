@@ -53,370 +53,312 @@ func NewTransformLayer() *TransformLayer {
 	return transformLayerAdopt(_id)
 }
 
-// WithBounds the layer’s bounds rectangle. Animatable.
-func (x *TransformLayer) WithBounds(bounds corefoundation.CGRect) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the layer’s bounds rectangle. Animatable.
+func (tl *TransformLayer) WithBounds(bounds corefoundation.CGRect) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBounds:"), bounds)
+	return tl
 }
 
-// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
-func (x *TransformLayer) WithPosition(position corefoundation.CGPoint) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the layer’s position in its superlayer’s coordinate space. Animatable.
+func (tl *TransformLayer) WithPosition(position corefoundation.CGPoint) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setPosition:"), position)
+	return tl
 }
 
-// WithZPosition the layer’s position on the z axis. Animatable.
-func (x *TransformLayer) WithZPosition(zPosition float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the layer’s position on the z axis. Animatable.
+func (tl *TransformLayer) WithZPosition(zPosition float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setZPosition:"), zPosition)
+	return tl
 }
 
-// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
-func (x *TransformLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (tl *TransformLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return tl
 }
 
-// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
-func (x *TransformLayer) WithAnchorPointZ(anchorPointZ float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
-	return x
+// WithAnchorPointZ sets the anchor point for the layer’s position along the z axis. Animatable.
+func (tl *TransformLayer) WithAnchorPointZ(anchorPointZ float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return tl
 }
 
-// WithFrame the layer’s frame rectangle.
-func (x *TransformLayer) WithFrame(frame corefoundation.CGRect) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the layer’s frame rectangle.
+func (tl *TransformLayer) WithFrame(frame corefoundation.CGRect) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFrame:"), frame)
+	return tl
 }
 
-// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
-func (x *TransformLayer) WithHidden(hidden bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean indicating whether the layer is displayed. Animatable.
+func (tl *TransformLayer) WithHidden(hidden bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setHidden:"), hidden)
+	return tl
 }
 
-// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-func (x *TransformLayer) WithDoubleSided(doubleSided bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
-	return x
+// WithDoubleSided sets a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (tl *TransformLayer) WithDoubleSided(doubleSided bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return tl
 }
 
-// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-func (x *TransformLayer) WithGeometryFlipped(geometryFlipped bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-	return x
+// WithGeometryFlipped sets a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (tl *TransformLayer) WithGeometryFlipped(geometryFlipped bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return tl
 }
 
-// WithSublayers an array containing the layer’s sublayers.
-func (x *TransformLayer) WithSublayers(items ...LayerProvider) *TransformLayer {
+// WithSublayers sets an array containing the layer’s sublayers.
+func (tl *TransformLayer) WithSublayers(items ...LayerProvider) *TransformLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setSublayers:"), _arr)
+	return tl
 }
 
-// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
-func (x *TransformLayer) WithMask(mask LayerProvider) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+// WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
+func (tl *TransformLayer) WithMask(mask LayerProvider) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return tl
 }
 
-// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-func (x *TransformLayer) WithMasksToBounds(masksToBounds bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
-	return x
+// WithMasksToBounds sets a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (tl *TransformLayer) WithMasksToBounds(masksToBounds bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return tl
 }
 
-// WithContents an object that provides the contents of the layer. Animatable.
-func (x *TransformLayer) WithContents(contents obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
-	return x
+// WithContents sets an object that provides the contents of the layer. Animatable.
+func (tl *TransformLayer) WithContents(contents obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return tl
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-func (x *TransformLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (tl *TransformLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsRect:"), contentsRect)
+	return tl
 }
 
-// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-func (x *TransformLayer) WithContentsGravity(contentsGravity obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
-	return x
+// WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (tl *TransformLayer) WithContentsGravity(contentsGravity obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return tl
 }
 
-// WithContentsScale the scale factor applied to the layer.
-func (x *TransformLayer) WithContentsScale(contentsScale float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
-	return x
+// WithContentsScale sets the scale factor applied to the layer.
+func (tl *TransformLayer) WithContentsScale(contentsScale float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsScale:"), contentsScale)
+	return tl
 }
 
-// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-func (x *TransformLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
-	return x
+// WithContentsCenter sets the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (tl *TransformLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return tl
 }
 
-// WithContentsFormat a hint for the desired storage format of the layer contents.
-func (x *TransformLayer) WithContentsFormat(contentsFormat obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
-	return x
+// WithContentsFormat sets a hint for the desired storage format of the layer contents.
+func (tl *TransformLayer) WithContentsFormat(contentsFormat obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return tl
 }
 
 // WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
-func (x *TransformLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
-	return x
+func (tl *TransformLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return tl
 }
 
 // WithToneMapMode sets the property and returns the receiver so calls can be chained.
-func (x *TransformLayer) WithToneMapMode(toneMapMode obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
-	return x
+func (tl *TransformLayer) WithToneMapMode(toneMapMode obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return tl
 }
 
 // WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
-func (x *TransformLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
-	return x
+func (tl *TransformLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return tl
 }
 
 // WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
-func (x *TransformLayer) WithContentsHeadroom(contentsHeadroom float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
-	return x
+func (tl *TransformLayer) WithContentsHeadroom(contentsHeadroom float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return tl
 }
 
-// WithMinificationFilter the filter used when reducing the size of the content.
-func (x *TransformLayer) WithMinificationFilter(minificationFilter obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
-	return x
+// WithMinificationFilter sets the filter used when reducing the size of the content.
+func (tl *TransformLayer) WithMinificationFilter(minificationFilter obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return tl
 }
 
-// WithMagnificationFilter the filter used when increasing the size of the content.
-func (x *TransformLayer) WithMagnificationFilter(magnificationFilter obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
-	return x
+// WithMagnificationFilter sets the filter used when increasing the size of the content.
+func (tl *TransformLayer) WithMagnificationFilter(magnificationFilter obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return tl
 }
 
-// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
-func (x *TransformLayer) WithMinificationFilterBias(minificationFilterBias float32) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
-	return x
+// WithMinificationFilterBias sets the bias factor used by the minification filter to determine the levels of detail.
+func (tl *TransformLayer) WithMinificationFilterBias(minificationFilterBias float32) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return tl
 }
 
-// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
-func (x *TransformLayer) WithOpaque(opaque bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value indicating whether the layer contains completely opaque content.
+func (tl *TransformLayer) WithOpaque(opaque bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setOpaque:"), opaque)
+	return tl
 }
 
-// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-func (x *TransformLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
-	return x
+// WithNeedsDisplayOnBoundsChange sets a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (tl *TransformLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return tl
 }
 
-// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-func (x *TransformLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
-	return x
+// WithDrawsAsynchronously sets a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (tl *TransformLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return tl
 }
 
-// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
-func (x *TransformLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
-	return x
+// WithEdgeAntialiasingMask sets a bitmask defining how the edges of the receiver are rasterized.
+func (tl *TransformLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return tl
 }
 
-// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
-func (x *TransformLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
-	return x
+// WithAllowsEdgeAntialiasing sets a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (tl *TransformLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return tl
 }
 
-// WithBackgroundColor the background color of the receiver. Animatable.
-func (x *TransformLayer) WithBackgroundColor(backgroundColor obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the receiver. Animatable.
+func (tl *TransformLayer) WithBackgroundColor(backgroundColor obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tl
 }
 
-// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
-func (x *TransformLayer) WithCornerRadius(cornerRadius float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (tl *TransformLayer) WithCornerRadius(cornerRadius float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return tl
 }
 
 // WithMaskedCorners sets the property and returns the receiver so calls can be chained.
-func (x *TransformLayer) WithMaskedCorners(maskedCorners CornerMask) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
-	return x
+func (tl *TransformLayer) WithMaskedCorners(maskedCorners CornerMask) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return tl
 }
 
 // WithCornerCurve sets the property and returns the receiver so calls can be chained.
-func (x *TransformLayer) WithCornerCurve(cornerCurve obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
-	return x
+func (tl *TransformLayer) WithCornerCurve(cornerCurve obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return tl
 }
 
-// WithBorderWidth the width of the layer’s border. Animatable.
-func (x *TransformLayer) WithBorderWidth(borderWidth float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the layer’s border. Animatable.
+func (tl *TransformLayer) WithBorderWidth(borderWidth float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return tl
 }
 
-// WithBorderColor the color of the layer’s border. Animatable.
-func (x *TransformLayer) WithBorderColor(borderColor obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the layer’s border. Animatable.
+func (tl *TransformLayer) WithBorderColor(borderColor obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return tl
 }
 
-// WithOpacity the opacity of the receiver. Animatable.
-func (x *TransformLayer) WithOpacity(opacity float32) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
-	return x
+// WithOpacity sets the opacity of the receiver. Animatable.
+func (tl *TransformLayer) WithOpacity(opacity float32) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setOpacity:"), opacity)
+	return tl
 }
 
-// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-func (x *TransformLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-	return x
+// WithAllowsGroupOpacity sets a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (tl *TransformLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return tl
 }
 
-// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
-func (x *TransformLayer) WithCompositingFilter(compositingFilter obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+// WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (tl *TransformLayer) WithCompositingFilter(compositingFilter obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return tl
 }
 
-// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-func (x *TransformLayer) WithShouldRasterize(shouldRasterize bool) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (tl *TransformLayer) WithShouldRasterize(shouldRasterize bool) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return tl
 }
 
-// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-func (x *TransformLayer) WithRasterizationScale(rasterizationScale float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
-	return x
+// WithRasterizationScale sets the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (tl *TransformLayer) WithRasterizationScale(rasterizationScale float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return tl
 }
 
-// WithShadowColor the color of the layer’s shadow. Animatable.
-func (x *TransformLayer) WithShadowColor(shadowColor obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
-	return x
+// WithShadowColor sets the color of the layer’s shadow. Animatable.
+func (tl *TransformLayer) WithShadowColor(shadowColor obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return tl
 }
 
-// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
-func (x *TransformLayer) WithShadowOpacity(shadowOpacity float32) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
-	return x
+// WithShadowOpacity sets the opacity of the layer’s shadow. Animatable.
+func (tl *TransformLayer) WithShadowOpacity(shadowOpacity float32) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return tl
 }
 
-// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
-func (x *TransformLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
-	return x
+// WithShadowOffset sets the offset (in points) of the layer’s shadow. Animatable.
+func (tl *TransformLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return tl
 }
 
-// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
-func (x *TransformLayer) WithShadowRadius(shadowRadius float64) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
-	return x
+// WithShadowRadius sets the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (tl *TransformLayer) WithShadowRadius(shadowRadius float64) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return tl
 }
 
-// WithShadowPath the shape of the layer’s shadow. Animatable.
-func (x *TransformLayer) WithShadowPath(shadowPath obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
-	return x
+// WithShadowPath sets the shape of the layer’s shadow. Animatable.
+func (tl *TransformLayer) WithShadowPath(shadowPath obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return tl
 }
 
-// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
-func (x *TransformLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+// WithAutoresizingMask sets a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (tl *TransformLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return tl
 }
 
-// WithActions a dictionary containing layer actions.
-func (x *TransformLayer) WithActions(actions obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-	return x
+// WithActions sets a dictionary containing layer actions.
+func (tl *TransformLayer) WithActions(actions obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return tl
 }
 
-// WithName the name of the receiver.
-func (x *TransformLayer) WithName(name string) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (tl *TransformLayer) WithName(name string) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setName:"), purego.NSString(name))
+	return tl
 }
 
-// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
-func (x *TransformLayer) WithStyle(style obj.Object) *TransformLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-	return x
+// WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (tl *TransformLayer) WithStyle(style obj.Object) *TransformLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return tl
 }
 
-// WithConstraints the constraints used to position current layer’s sublayers.
-func (x *TransformLayer) WithConstraints(items ...*Constraint) *TransformLayer {
+// WithConstraints sets the constraints used to position current layer’s sublayers.
+func (tl *TransformLayer) WithConstraints(items ...*Constraint) *TransformLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setConstraints:"), _arr)
+	return tl
 }
-
-// TransformLayerable is the interface implemented by [TransformLayer], for mocking and DI.
-type TransformLayerable interface {
-	obj.Object
-	WithBounds(bounds corefoundation.CGRect) *TransformLayer
-	WithPosition(position corefoundation.CGPoint) *TransformLayer
-	WithZPosition(zPosition float64) *TransformLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TransformLayer
-	WithAnchorPointZ(anchorPointZ float64) *TransformLayer
-	WithFrame(frame corefoundation.CGRect) *TransformLayer
-	WithHidden(hidden bool) *TransformLayer
-	WithDoubleSided(doubleSided bool) *TransformLayer
-	WithGeometryFlipped(geometryFlipped bool) *TransformLayer
-	WithSublayers(items ...LayerProvider) *TransformLayer
-	WithMask(mask LayerProvider) *TransformLayer
-	WithMasksToBounds(masksToBounds bool) *TransformLayer
-	WithContents(contents obj.Object) *TransformLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *TransformLayer
-	WithContentsGravity(contentsGravity obj.Object) *TransformLayer
-	WithContentsScale(contentsScale float64) *TransformLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *TransformLayer
-	WithContentsFormat(contentsFormat obj.Object) *TransformLayer
-	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TransformLayer
-	WithToneMapMode(toneMapMode obj.Object) *TransformLayer
-	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TransformLayer
-	WithContentsHeadroom(contentsHeadroom float64) *TransformLayer
-	WithMinificationFilter(minificationFilter obj.Object) *TransformLayer
-	WithMagnificationFilter(magnificationFilter obj.Object) *TransformLayer
-	WithMinificationFilterBias(minificationFilterBias float32) *TransformLayer
-	WithOpaque(opaque bool) *TransformLayer
-	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TransformLayer
-	WithDrawsAsynchronously(drawsAsynchronously bool) *TransformLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TransformLayer
-	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TransformLayer
-	WithBackgroundColor(backgroundColor obj.Object) *TransformLayer
-	WithCornerRadius(cornerRadius float64) *TransformLayer
-	WithMaskedCorners(maskedCorners CornerMask) *TransformLayer
-	WithCornerCurve(cornerCurve obj.Object) *TransformLayer
-	WithBorderWidth(borderWidth float64) *TransformLayer
-	WithBorderColor(borderColor obj.Object) *TransformLayer
-	WithOpacity(opacity float32) *TransformLayer
-	WithAllowsGroupOpacity(allowsGroupOpacity bool) *TransformLayer
-	WithCompositingFilter(compositingFilter obj.Object) *TransformLayer
-	WithShouldRasterize(shouldRasterize bool) *TransformLayer
-	WithRasterizationScale(rasterizationScale float64) *TransformLayer
-	WithShadowColor(shadowColor obj.Object) *TransformLayer
-	WithShadowOpacity(shadowOpacity float32) *TransformLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *TransformLayer
-	WithShadowRadius(shadowRadius float64) *TransformLayer
-	WithShadowPath(shadowPath obj.Object) *TransformLayer
-	WithAutoresizingMask(autoresizingMask AutoresizingMask) *TransformLayer
-	WithActions(actions obj.Object) *TransformLayer
-	WithName(name string) *TransformLayer
-	WithStyle(style obj.Object) *TransformLayer
-	WithConstraints(items ...*Constraint) *TransformLayer
-}
-
-var _ TransformLayerable = (*TransformLayer)(nil)
 
 var _ LayerProvider = (*TransformLayer)(nil)

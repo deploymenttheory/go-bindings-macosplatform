@@ -44,24 +44,24 @@ func mIDI2DeviceInfoAdopt(id objc.ID) *MIDI2DeviceInfo {
 }
 
 // Description returns the object's -description text.
-func (x *MIDI2DeviceInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdi *MIDI2DeviceInfo) Description() string {
+	return rt.Description(objref.IDOf(mdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MIDI2DeviceInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdi *MIDI2DeviceInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MIDI2DeviceInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdi *MIDI2DeviceInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MIDI2DeviceInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdi *MIDI2DeviceInfo) String() string {
+	return rt.Description(objref.IDOf(mdi))
 }
 
 // NewMIDI2DeviceInfo creates a new MIDI2DeviceInfo.
@@ -70,23 +70,14 @@ func NewMIDI2DeviceInfo() *MIDI2DeviceInfo {
 	return mIDI2DeviceInfoAdopt(_id)
 }
 
-// Family the family of models to which the device belongs, up to 14 bits.
-func (x *MIDI2DeviceInfo) Family() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("family"))
+// Family returns the family of models to which the device belongs, up to 14 bits.
+func (mdi *MIDI2DeviceInfo) Family() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(mdi), objc.RegisterName("family"))
 	return _r
 }
 
-// ModelNumber the specific model from the device manufacturer, up to 14 bits.
-func (x *MIDI2DeviceInfo) ModelNumber() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("modelNumber"))
+// ModelNumber returns the specific model from the device manufacturer, up to 14 bits.
+func (mdi *MIDI2DeviceInfo) ModelNumber() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(mdi), objc.RegisterName("modelNumber"))
 	return _r
 }
-
-// MIDI2DeviceInfoable is the interface implemented by [MIDI2DeviceInfo], for mocking and DI.
-type MIDI2DeviceInfoable interface {
-	obj.Object
-	Family() uint16
-	ModelNumber() uint16
-}
-
-var _ MIDI2DeviceInfoable = (*MIDI2DeviceInfo)(nil)

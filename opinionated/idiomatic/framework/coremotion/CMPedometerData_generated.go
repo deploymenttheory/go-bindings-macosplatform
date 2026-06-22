@@ -46,24 +46,24 @@ func pedometerDataAdopt(id objc.ID) *PedometerData {
 }
 
 // Description returns the object's -description text.
-func (x *PedometerData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PedometerData) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PedometerData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *PedometerData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PedometerData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *PedometerData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PedometerData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PedometerData) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // NewPedometerData creates a new PedometerData.
@@ -73,50 +73,37 @@ func NewPedometerData() *PedometerData {
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *PedometerData) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (pd *PedometerData) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *PedometerData) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (pd *PedometerData) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // NumberOfSteps wraps the corresponding Objective-C method.
-func (x *PedometerData) NumberOfSteps() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfSteps"))
+func (pd *PedometerData) NumberOfSteps() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("numberOfSteps"))
 	return obj.Wrap(_r)
 }
 
 // Distance wraps the corresponding Objective-C method.
-func (x *PedometerData) Distance() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distance"))
+func (pd *PedometerData) Distance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("distance"))
 	return obj.Wrap(_r)
 }
 
 // FloorsAscended wraps the corresponding Objective-C method.
-func (x *PedometerData) FloorsAscended() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorsAscended"))
+func (pd *PedometerData) FloorsAscended() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsAscended"))
 	return obj.Wrap(_r)
 }
 
 // FloorsDescended wraps the corresponding Objective-C method.
-func (x *PedometerData) FloorsDescended() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorsDescended"))
+func (pd *PedometerData) FloorsDescended() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsDescended"))
 	return obj.Wrap(_r)
 }
-
-// PedometerDataable is the interface implemented by [PedometerData], for mocking and DI.
-type PedometerDataable interface {
-	obj.Object
-	StartDate() obj.Object
-	EndDate() obj.Object
-	NumberOfSteps() obj.Object
-	Distance() obj.Object
-	FloorsAscended() obj.Object
-	FloorsDescended() obj.Object
-}
-
-var _ PedometerDataable = (*PedometerData)(nil)

@@ -46,24 +46,24 @@ func extensionPropertyStateAdopt(id objc.ID) *ExtensionPropertyState {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionPropertyState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (eps *ExtensionPropertyState) Description() string {
+	return rt.Description(objref.IDOf(eps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionPropertyState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (eps *ExtensionPropertyState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(eps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionPropertyState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (eps *ExtensionPropertyState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(eps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionPropertyState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (eps *ExtensionPropertyState) String() string {
+	return rt.Description(objref.IDOf(eps))
 }
 
 // NewExtensionPropertyStateWithValue creates a property state with a value.
@@ -80,23 +80,14 @@ func NewExtensionPropertyStateWithValueAttributes(value obj.Object, attributes o
 	return extensionPropertyStateAdopt(_id)
 }
 
-// Value the value of the property.
-func (x *ExtensionPropertyState) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the value of the property.
+func (eps *ExtensionPropertyState) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(eps), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Attributes the property attributes of the property.
-func (x *ExtensionPropertyState) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+// Attributes returns the property attributes of the property.
+func (eps *ExtensionPropertyState) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(eps), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
-
-// ExtensionPropertyStateable is the interface implemented by [ExtensionPropertyState], for mocking and DI.
-type ExtensionPropertyStateable interface {
-	obj.Object
-	Value() obj.Object
-	Attributes() obj.Object
-}
-
-var _ ExtensionPropertyStateable = (*ExtensionPropertyState)(nil)

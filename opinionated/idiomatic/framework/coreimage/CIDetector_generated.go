@@ -46,24 +46,24 @@ func detectorAdopt(id objc.ID) *Detector {
 }
 
 // Description returns the object's -description text.
-func (x *Detector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Detector) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Detector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Detector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Detector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Detector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Detector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Detector) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDetector creates a new Detector.
@@ -73,22 +73,13 @@ func NewDetector() *Detector {
 }
 
 // FeaturesInImage searches for features in an image.
-func (x *Detector) FeaturesInImage(image *Image) []*Feature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featuresInImage:"), objref.IDOf(image))
+func (d *Detector) FeaturesInImage(image *Image) []*Feature {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("featuresInImage:"), objref.IDOf(image))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Feature { return FeatureFromID(_id) })
 }
 
 // FeaturesInImageOptions searches for features in an image based on the specified image orientation.
-func (x *Detector) FeaturesInImageOptions(image *Image, options obj.Object) []*Feature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featuresInImage:options:"), objref.IDOf(image), objref.IDOf(options))
+func (d *Detector) FeaturesInImageOptions(image *Image, options obj.Object) []*Feature {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("featuresInImage:options:"), objref.IDOf(image), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Feature { return FeatureFromID(_id) })
 }
-
-// Detectorable is the interface implemented by [Detector], for mocking and DI.
-type Detectorable interface {
-	obj.Object
-	FeaturesInImage(image *Image) []*Feature
-	FeaturesInImageOptions(image *Image, options obj.Object) []*Feature
-}
-
-var _ Detectorable = (*Detector)(nil)

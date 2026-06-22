@@ -46,24 +46,24 @@ func contactFormatterAdopt(id objc.ID) *ContactFormatter {
 }
 
 // Description returns the object's -description text.
-func (x *ContactFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cf *ContactFormatter) Description() string {
+	return rt.Description(objref.IDOf(cf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cf *ContactFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cf *ContactFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactFormatter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cf *ContactFormatter) String() string {
+	return rt.Description(objref.IDOf(cf))
 }
 
 // NewContactFormatter creates a new ContactFormatter.
@@ -72,15 +72,15 @@ func NewContactFormatter() *ContactFormatter {
 	return contactFormatterAdopt(_id)
 }
 
-// WithStyle the formatting style for the contact name.
-func (x *ContactFormatter) WithStyle(style ContactFormatterStyle) *ContactFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-	return x
+// WithStyle sets the formatting style for the contact name.
+func (cf *ContactFormatter) WithStyle(style ContactFormatterStyle) *ContactFormatter {
+	objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("setStyle:"), style)
+	return cf
 }
 
 // StringFromContact formats the contact name.
-func (x *ContactFormatter) StringFromContact(contact *Contact) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromContact:"), objref.IDOf(contact))
+func (cf *ContactFormatter) StringFromContact(contact *Contact) string {
+	_r := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("stringFromContact:"), objref.IDOf(contact))
 	if _r == 0 {
 		return ""
 	}
@@ -88,30 +88,13 @@ func (x *ContactFormatter) StringFromContact(contact *Contact) string {
 }
 
 // AttributedStringFromContactDefaultAttributes formats the contact name as an attributed string.
-func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringFromContact:defaultAttributes:"), objref.IDOf(contact), objref.IDOf(attributes))
+func (cf *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("attributedStringFromContact:defaultAttributes:"), objref.IDOf(contact), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
-// Style the style for a contact formatter instance. The default value is CNContactFormatterStyleFullName.
-func (x *ContactFormatter) Style() ContactFormatterStyle {
-	_r := objc.Send[ContactFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
+// Style returns the style for a contact formatter instance. The default value is CNContactFormatterStyleFullName.
+func (cf *ContactFormatter) Style() ContactFormatterStyle {
+	_r := objc.Send[ContactFormatterStyle](objref.IDOf(cf), objc.RegisterName("style"))
 	return _r
 }
-
-// SetStyle wraps the corresponding Objective-C method.
-func (x *ContactFormatter) SetStyle(style ContactFormatterStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-}
-
-// ContactFormatterable is the interface implemented by [ContactFormatter], for mocking and DI.
-type ContactFormatterable interface {
-	obj.Object
-	WithStyle(style ContactFormatterStyle) *ContactFormatter
-	StringFromContact(contact *Contact) string
-	AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object
-	Style() ContactFormatterStyle
-	SetStyle(style ContactFormatterStyle)
-}
-
-var _ ContactFormatterable = (*ContactFormatter)(nil)

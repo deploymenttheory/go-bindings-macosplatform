@@ -46,24 +46,24 @@ func networkHostAdopt(id objc.ID) *NetworkHost {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkHost) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nh *NetworkHost) Description() string {
+	return rt.Description(objref.IDOf(nh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkHost) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nh *NetworkHost) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkHost) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nh *NetworkHost) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkHost) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nh *NetworkHost) String() string {
+	return rt.Description(objref.IDOf(nh))
 }
 
 // NewNetworkHost creates a new NetworkHost.
@@ -73,14 +73,14 @@ func NewNetworkHost() *NetworkHost {
 }
 
 // HasSameAddressAs compares this host instance with another to see if they share the same address value.
-func (x *NetworkHost) HasSameAddressAs(other *NetworkHost) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSameAddressAs:"), objref.IDOf(other))
+func (nh *NetworkHost) HasSameAddressAs(other *NetworkHost) bool {
+	_r := objc.Send[bool](objref.IDOf(nh), objc.RegisterName("hasSameAddressAs:"), objref.IDOf(other))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *NetworkHost) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (nh *NetworkHost) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,8 +88,8 @@ func (x *NetworkHost) Name() string {
 }
 
 // Address wraps the corresponding Objective-C method.
-func (x *NetworkHost) Address() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+func (nh *NetworkHost) Address() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("address"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,14 +97,14 @@ func (x *NetworkHost) Address() string {
 }
 
 // Port wraps the corresponding Objective-C method.
-func (x *NetworkHost) Port() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+func (nh *NetworkHost) Port() int {
+	_r := objc.Send[int](objref.IDOf(nh), objc.RegisterName("port"))
 	return _r
 }
 
 // NetServiceName wraps the corresponding Objective-C method.
-func (x *NetworkHost) NetServiceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("netServiceName"))
+func (nh *NetworkHost) NetServiceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("netServiceName"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,23 +112,10 @@ func (x *NetworkHost) NetServiceName() string {
 }
 
 // NetServiceDomain wraps the corresponding Objective-C method.
-func (x *NetworkHost) NetServiceDomain() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("netServiceDomain"))
+func (nh *NetworkHost) NetServiceDomain() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("netServiceDomain"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NetworkHostable is the interface implemented by [NetworkHost], for mocking and DI.
-type NetworkHostable interface {
-	obj.Object
-	HasSameAddressAs(other *NetworkHost) bool
-	Name() string
-	Address() string
-	Port() int
-	NetServiceName() string
-	NetServiceDomain() string
-}
-
-var _ NetworkHostable = (*NetworkHost)(nil)

@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,60 +51,46 @@ func NewAdamOptimizer() *AdamOptimizer {
 	return adamOptimizerAdopt(_id)
 }
 
-// WithLearningRate the learning rate.
-func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learning rate.
+func (ao *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
+	objc.Send[objc.ID](objref.IDOf(ao), objc.RegisterName("setLearningRate:"), learningRate)
+	return ao
 }
 
-// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
-func (x *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
-	return x
+// WithAppliesGradientClipping sets a Boolean value that indicates whether you apply gradient clipping.
+func (ao *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {
+	objc.Send[objc.ID](objref.IDOf(ao), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
+	return ao
 }
 
-// Beta1 coefficent used for computing running averages of gradient. The default is 0.9.
-func (x *AdamOptimizer) Beta1() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta1"))
+// Beta1 returns coefficent used for computing running averages of gradient. The default is 0.9.
+func (ao *AdamOptimizer) Beta1() float32 {
+	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("beta1"))
 	return _r
 }
 
-// Beta2 coefficent used for computing running averages of square of gradient. The default is 0.999.
-func (x *AdamOptimizer) Beta2() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta2"))
+// Beta2 returns coefficent used for computing running averages of square of gradient. The default is 0.999.
+func (ao *AdamOptimizer) Beta2() float32 {
+	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("beta2"))
 	return _r
 }
 
 // Epsilon wraps the corresponding Objective-C method.
-func (x *AdamOptimizer) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+func (ao *AdamOptimizer) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// UsesAMSGrad whether to use the AMSGrad variant of this algorithm The default is false
-func (x *AdamOptimizer) UsesAMSGrad() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesAMSGrad"))
+// UsesAMSGrad reports whether to use the AMSGrad variant of this algorithm The default is false
+func (ao *AdamOptimizer) UsesAMSGrad() bool {
+	_r := objc.Send[bool](objref.IDOf(ao), objc.RegisterName("usesAMSGrad"))
 	return _r
 }
 
-// TimeStep the current timestep used for the update. The default is 1.
-func (x *AdamOptimizer) TimeStep() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
+// TimeStep returns the current timestep used for the update. The default is 1.
+func (ao *AdamOptimizer) TimeStep() int {
+	_r := objc.Send[int](objref.IDOf(ao), objc.RegisterName("timeStep"))
 	return _r
 }
-
-// AdamOptimizerable is the interface implemented by [AdamOptimizer], for mocking and DI.
-type AdamOptimizerable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *AdamOptimizer
-	WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer
-	Beta1() float32
-	Beta2() float32
-	Epsilon() float32
-	UsesAMSGrad() bool
-	TimeStep() int
-}
-
-var _ AdamOptimizerable = (*AdamOptimizer)(nil)
 
 var _ OptimizerProvider = (*AdamOptimizer)(nil)

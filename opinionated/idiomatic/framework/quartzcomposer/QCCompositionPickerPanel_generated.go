@@ -44,24 +44,24 @@ func compositionPickerPanelAdopt(id objc.ID) *CompositionPickerPanel {
 }
 
 // Description returns the object's -description text.
-func (x *CompositionPickerPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpp *CompositionPickerPanel) Description() string {
+	return rt.Description(objref.IDOf(cpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionPickerPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpp *CompositionPickerPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionPickerPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpp *CompositionPickerPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CompositionPickerPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpp *CompositionPickerPanel) String() string {
+	return rt.Description(objref.IDOf(cpp))
 }
 
 // NewCompositionPickerPanel creates a new CompositionPickerPanel.
@@ -71,15 +71,7 @@ func NewCompositionPickerPanel() *CompositionPickerPanel {
 }
 
 // CompositionPickerView wraps the corresponding Objective-C method.
-func (x *CompositionPickerPanel) CompositionPickerView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionPickerView"))
+func (cpp *CompositionPickerPanel) CompositionPickerView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("compositionPickerView"))
 	return obj.Wrap(_r)
 }
-
-// CompositionPickerPanelable is the interface implemented by [CompositionPickerPanel], for mocking and DI.
-type CompositionPickerPanelable interface {
-	obj.Object
-	CompositionPickerView() obj.Object
-}
-
-var _ CompositionPickerPanelable = (*CompositionPickerPanel)(nil)

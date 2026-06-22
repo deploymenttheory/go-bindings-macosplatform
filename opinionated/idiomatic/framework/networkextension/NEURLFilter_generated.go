@@ -46,24 +46,24 @@ func nEURLFilterAdopt(id objc.ID) *NEURLFilter {
 }
 
 // Description returns the object's -description text.
-func (x *NEURLFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nf *NEURLFilter) Description() string {
+	return rt.Description(objref.IDOf(nf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEURLFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nf *NEURLFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEURLFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nf *NEURLFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEURLFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nf *NEURLFilter) String() string {
+	return rt.Description(objref.IDOf(nf))
 }
 
 // NewNEURLFilter creates a new NEURLFilter.
@@ -71,10 +71,3 @@ func NewNEURLFilter() *NEURLFilter {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEURLFilter")), objc.RegisterName("new"))
 	return nEURLFilterAdopt(_id)
 }
-
-// NEURLFilterable is the interface implemented by [NEURLFilter], for mocking and DI.
-type NEURLFilterable interface {
-	obj.Object
-}
-
-var _ NEURLFilterable = (*NEURLFilter)(nil)

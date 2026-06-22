@@ -48,69 +48,52 @@ func remoteCommandAdopt(id objc.ID) *RemoteCommand {
 }
 
 // Description returns the object's -description text.
-func (x *RemoteCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rc *RemoteCommand) Description() string {
+	return rt.Description(objref.IDOf(rc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RemoteCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rc *RemoteCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RemoteCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rc *RemoteCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RemoteCommand) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rc *RemoteCommand) String() string {
+	return rt.Description(objref.IDOf(rc))
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (rc *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setEnabled:"), enabled)
+	return rc
 }
 
 // RemoveTarget removes a target from the remote command object.
-func (x *RemoteCommand) RemoveTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTarget:"), objref.IDOf(target))
+func (rc *RemoteCommand) RemoveTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("removeTarget:"), objref.IDOf(target))
 }
 
 // AddTargetWithHandler adds a block to be called when an event is received.
-func (x *RemoteCommand) AddTargetWithHandler(handler func(obj.Object) int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTargetWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return handler(obj.Wrap(_b0)) }))
+func (rc *RemoteCommand) AddTargetWithHandler(handler func(obj.Object) int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("addTargetWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return handler(obj.Wrap(_b0)) }))
 	return obj.Wrap(_r)
 }
 
-// IsEnabled whether a button (for example) should be enabled and tappable for this particular command.
-func (x *RemoteCommand) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether a button (for example) should be enabled and tappable for this particular command.
+func (rc *RemoteCommand) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *RemoteCommand) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// RemoteCommandable is the interface implemented by [RemoteCommand], for mocking and DI.
-type RemoteCommandable interface {
-	obj.Object
-	WithEnabled(enabled bool) *RemoteCommand
-	RemoveTarget(target obj.Object)
-	AddTargetWithHandler(handler func(obj.Object) int) obj.Object
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ RemoteCommandable = (*RemoteCommand)(nil)
 
 // isRemoteCommand marks RemoteCommand — and, by embedding promotion, its
 // subclasses — as a member of the RemoteCommand hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RemoteCommand) isRemoteCommand() {}
+func (rc *RemoteCommand) isRemoteCommand() {}
 
 var _ RemoteCommandProvider = (*RemoteCommand)(nil)

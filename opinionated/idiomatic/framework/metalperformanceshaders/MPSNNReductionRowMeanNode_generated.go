@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionRowMeanNode() *NNReductionRowMeanNode {
 	return nNReductionRowMeanNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionRowMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrrmn *NNReductionRowMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode {
+	objc.Send[objc.ID](objref.IDOf(nrrmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrrmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionRowMeanNode) WithLabel(label string) *NNReductionRowMeanNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrrmn *NNReductionRowMeanNode) WithLabel(label string) *NNReductionRowMeanNode {
+	objc.Send[objc.ID](objref.IDOf(nrrmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrrmn
 }
-
-// NNReductionRowMeanNodeable is the interface implemented by [NNReductionRowMeanNode], for mocking and DI.
-type NNReductionRowMeanNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMeanNode
-	WithLabel(label string) *NNReductionRowMeanNode
-}
-
-var _ NNReductionRowMeanNodeable = (*NNReductionRowMeanNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionRowMeanNode)(nil)
 

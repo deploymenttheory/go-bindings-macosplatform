@@ -52,45 +52,34 @@ func NewSyncEngineSentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesE
 	return syncEngineSentRecordZoneChangesEventAdopt(_id)
 }
 
-// SavedRecords the modified records.
+// SavedRecords returns the modified records.
 //
 // SavedRecords returns the collection as a Go slice.
-func (x *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*Record {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("savedRecords"))
+func (sesrzce *SyncEngineSentRecordZoneChangesEvent) SavedRecords() []*Record {
+	_arr := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("savedRecords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
 
-// FailedRecordSaves the records that CloudKit is unable to modify.
+// FailedRecordSaves returns the records that CloudKit is unable to modify.
 //
 // FailedRecordSaves returns the collection as a Go slice.
-func (x *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*SyncEngineFailedRecordSave {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failedRecordSaves"))
+func (sesrzce *SyncEngineSentRecordZoneChangesEvent) FailedRecordSaves() []*SyncEngineFailedRecordSave {
+	_arr := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("failedRecordSaves"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFailedRecordSave { return SyncEngineFailedRecordSaveFromID(_id) })
 }
 
-// DeletedRecordIDs the unique identifiers of the deleted records.
+// DeletedRecordIDs returns the unique identifiers of the deleted records.
 //
 // DeletedRecordIDs returns the collection as a Go slice.
-func (x *SyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() []*RecordID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedRecordIDs"))
+func (sesrzce *SyncEngineSentRecordZoneChangesEvent) DeletedRecordIDs() []*RecordID {
+	_arr := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("deletedRecordIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
-// FailedRecordDeletes the unique identifiers of the records CloudKit is unable to delete, and the reasons why.
-func (x *SyncEngineSentRecordZoneChangesEvent) FailedRecordDeletes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failedRecordDeletes"))
+// FailedRecordDeletes returns the unique identifiers of the records CloudKit is unable to delete, and the reasons why.
+func (sesrzce *SyncEngineSentRecordZoneChangesEvent) FailedRecordDeletes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sesrzce), objc.RegisterName("failedRecordDeletes"))
 	return obj.Wrap(_r)
 }
-
-// SyncEngineSentRecordZoneChangesEventable is the interface implemented by [SyncEngineSentRecordZoneChangesEvent], for mocking and DI.
-type SyncEngineSentRecordZoneChangesEventable interface {
-	obj.Object
-	SavedRecords() []*Record
-	FailedRecordSaves() []*SyncEngineFailedRecordSave
-	DeletedRecordIDs() []*RecordID
-	FailedRecordDeletes() obj.Object
-}
-
-var _ SyncEngineSentRecordZoneChangesEventable = (*SyncEngineSentRecordZoneChangesEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineSentRecordZoneChangesEvent)(nil)

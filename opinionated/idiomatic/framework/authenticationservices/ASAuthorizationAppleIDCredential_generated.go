@@ -46,24 +46,24 @@ func authorizationAppleIDCredentialAdopt(id objc.ID) *AuthorizationAppleIDCreden
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationAppleIDCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aaic *AuthorizationAppleIDCredential) Description() string {
+	return rt.Description(objref.IDOf(aaic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationAppleIDCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aaic *AuthorizationAppleIDCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aaic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationAppleIDCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aaic *AuthorizationAppleIDCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aaic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationAppleIDCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aaic *AuthorizationAppleIDCredential) String() string {
+	return rt.Description(objref.IDOf(aaic))
 }
 
 // NewAuthorizationAppleIDCredential creates a new AuthorizationAppleIDCredential.
@@ -72,83 +72,67 @@ func NewAuthorizationAppleIDCredential() *AuthorizationAppleIDCredential {
 	return authorizationAppleIDCredentialAdopt(_id)
 }
 
-// User an opaque user ID associated with the AppleID used for the sign in. This identifier will be stable across the 'developer team', it can later be used as an input to
-func (x *AuthorizationAppleIDCredential) User() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+// User returns an opaque user ID associated with the AppleID used for the sign in. This identifier will be stable across the 'developer team', it can later be used as an input to
+func (aaic *AuthorizationAppleIDCredential) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// State a copy of the state value that was passed to ASAuthorizationRequest.
-func (x *AuthorizationAppleIDCredential) State() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+// State returns a copy of the state value that was passed to ASAuthorizationRequest.
+func (aaic *AuthorizationAppleIDCredential) State() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AuthorizedScopes this value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
+// AuthorizedScopes returns this value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on
 //
 // AuthorizedScopes returns the collection as a Go slice.
-func (x *AuthorizationAppleIDCredential) AuthorizedScopes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizedScopes"))
+func (aaic *AuthorizationAppleIDCredential) AuthorizedScopes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("authorizedScopes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AuthorizationCode a short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.
-func (x *AuthorizationAppleIDCredential) AuthorizationCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationCode"))
+// AuthorizationCode returns a short-lived, one-time valid token that provides proof of authorization to the server component of the app. The authorization code is bound to the specific transaction using the state attribute passed in the authorization request. The server component of the app can validate the code using Apple’s identity service endpoint provided for this purpose.
+func (aaic *AuthorizationAppleIDCredential) AuthorizationCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("authorizationCode"))
 	return obj.Wrap(_r)
 }
 
-// IdentityToken a JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app. The ID token will contain the following information: Issuer Identifier, Subject Identifier, Audience, Expiry Time and Issuance Time signed by Apple's identity service.
-func (x *AuthorizationAppleIDCredential) IdentityToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityToken"))
+// IdentityToken returns a JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app. The ID token will contain the following information: Issuer Identifier, Subject Identifier, Audience, Expiry Time and Issuance Time signed by Apple's identity service.
+func (aaic *AuthorizationAppleIDCredential) IdentityToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("identityToken"))
 	return obj.Wrap(_r)
 }
 
-// Email an optional email shared by the user.  This field is populated with a value that the user authorized.
-func (x *AuthorizationAppleIDCredential) Email() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("email"))
+// Email returns an optional email shared by the user.  This field is populated with a value that the user authorized.
+func (aaic *AuthorizationAppleIDCredential) Email() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("email"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FullName an optional full name shared by the user.  This field is populated with a value that the user authorized.
-func (x *AuthorizationAppleIDCredential) FullName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
+// FullName returns an optional full name shared by the user.  This field is populated with a value that the user authorized.
+func (aaic *AuthorizationAppleIDCredential) FullName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aaic), objc.RegisterName("fullName"))
 	return obj.Wrap(_r)
 }
 
-// RealUserStatus check this property for a hint as to whether the current user is a "real user".
-func (x *AuthorizationAppleIDCredential) RealUserStatus() UserDetectionStatus {
-	_r := objc.Send[UserDetectionStatus](objref.IDOf(x), objc.RegisterName("realUserStatus"))
+// RealUserStatus returns check this property for a hint as to whether the current user is a "real user".
+func (aaic *AuthorizationAppleIDCredential) RealUserStatus() UserDetectionStatus {
+	_r := objc.Send[UserDetectionStatus](objref.IDOf(aaic), objc.RegisterName("realUserStatus"))
 	return _r
 }
 
-// UserAgeRange check this property to determine whether the current user is a child.
-func (x *AuthorizationAppleIDCredential) UserAgeRange() UserAgeRange {
-	_r := objc.Send[UserAgeRange](objref.IDOf(x), objc.RegisterName("userAgeRange"))
+// UserAgeRange returns check this property to determine whether the current user is a child.
+func (aaic *AuthorizationAppleIDCredential) UserAgeRange() UserAgeRange {
+	_r := objc.Send[UserAgeRange](objref.IDOf(aaic), objc.RegisterName("userAgeRange"))
 	return _r
 }
-
-// AuthorizationAppleIDCredentialable is the interface implemented by [AuthorizationAppleIDCredential], for mocking and DI.
-type AuthorizationAppleIDCredentialable interface {
-	obj.Object
-	User() string
-	State() string
-	AuthorizedScopes() []obj.Object
-	AuthorizationCode() obj.Object
-	IdentityToken() obj.Object
-	Email() string
-	FullName() obj.Object
-	RealUserStatus() UserDetectionStatus
-	UserAgeRange() UserAgeRange
-}
-
-var _ AuthorizationAppleIDCredentialable = (*AuthorizationAppleIDCredential)(nil)

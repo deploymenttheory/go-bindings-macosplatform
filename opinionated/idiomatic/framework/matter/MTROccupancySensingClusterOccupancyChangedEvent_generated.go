@@ -44,24 +44,24 @@ func mTROccupancySensingClusterOccupancyChangedEventAdopt(id objc.ID) *MTROccupa
 }
 
 // Description returns the object's -description text.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(moscoce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moscoce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moscoce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) String() string {
+	return rt.Description(objref.IDOf(moscoce))
 }
 
 // NewMTROccupancySensingClusterOccupancyChangedEvent creates a new MTROccupancySensingClusterOccupancyChangedEvent.
@@ -71,28 +71,13 @@ func NewMTROccupancySensingClusterOccupancyChangedEvent() *MTROccupancySensingCl
 }
 
 // WithOccupancy sets the property and returns the receiver so calls can be chained.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
-	return x
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(moscoce), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
+	return moscoce
 }
 
 // Occupancy wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("occupancy"))
+func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moscoce), objc.RegisterName("occupancy"))
 	return obj.Wrap(_r)
 }
-
-// SetOccupancy wraps the corresponding Objective-C method.
-func (x *MTROccupancySensingClusterOccupancyChangedEvent) SetOccupancy(occupancy obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
-}
-
-// MTROccupancySensingClusterOccupancyChangedEventable is the interface implemented by [MTROccupancySensingClusterOccupancyChangedEvent], for mocking and DI.
-type MTROccupancySensingClusterOccupancyChangedEventable interface {
-	obj.Object
-	WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent
-	Occupancy() obj.Object
-	SetOccupancy(occupancy obj.Object)
-}
-
-var _ MTROccupancySensingClusterOccupancyChangedEventable = (*MTROccupancySensingClusterOccupancyChangedEvent)(nil)

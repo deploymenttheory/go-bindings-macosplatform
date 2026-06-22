@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRICDManagementClusterRegisterClientResponseParams is an idiomatic wrapper over the Objective-C class MTRICDManagementClusterRegisterClientResponseParams.
@@ -46,24 +47,24 @@ func mTRICDManagementClusterRegisterClientResponseParamsAdopt(id objc.ID) *MTRIC
 }
 
 // Description returns the object's -description text.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mmcrcrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmcrcrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmcrcrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) String() string {
+	return rt.Description(objref.IDOf(mmcrcrp))
 }
 
 // NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueError initialize an MTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueErro
 }
 
 // WithIcdCounter sets the property and returns the receiver so calls can be chained.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
-	return x
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mmcrcrp), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
+	return mmcrcrp
 }
 
 // IcdCounter wraps the corresponding Objective-C method.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icdCounter"))
+func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcrcrp), objc.RegisterName("icdCounter"))
 	return obj.Wrap(_r)
 }
-
-// SetIcdCounter wraps the corresponding Objective-C method.
-func (x *MTRICDManagementClusterRegisterClientResponseParams) SetIcdCounter(icdCounter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
-}
-
-// MTRICDManagementClusterRegisterClientResponseParamsable is the interface implemented by [MTRICDManagementClusterRegisterClientResponseParams], for mocking and DI.
-type MTRICDManagementClusterRegisterClientResponseParamsable interface {
-	obj.Object
-	WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams
-	IcdCounter() obj.Object
-	SetIcdCounter(icdCounter obj.Object)
-}
-
-var _ MTRICDManagementClusterRegisterClientResponseParamsable = (*MTRICDManagementClusterRegisterClientResponseParams)(nil)

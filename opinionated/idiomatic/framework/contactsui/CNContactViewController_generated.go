@@ -46,24 +46,24 @@ func contactViewControllerAdopt(id objc.ID) *ContactViewController {
 }
 
 // Description returns the object's -description text.
-func (x *ContactViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvc *ContactViewController) Description() string {
+	return rt.Description(objref.IDOf(cvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvc *ContactViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvc *ContactViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvc *ContactViewController) String() string {
+	return rt.Description(objref.IDOf(cvc))
 }
 
 // NewContactViewController creates a new ContactViewController.
@@ -72,29 +72,14 @@ func NewContactViewController() *ContactViewController {
 	return contactViewControllerAdopt(_id)
 }
 
-// WithContact the contact being displayed.
-func (x *ContactViewController) WithContact(contact obj.Object) *ContactViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContact:"), objref.IDOf(contact))
-	return x
+// WithContact sets the contact being displayed.
+func (cvc *ContactViewController) WithContact(contact obj.Object) *ContactViewController {
+	objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("setContact:"), objref.IDOf(contact))
+	return cvc
 }
 
 // Contact wraps the corresponding Objective-C method.
-func (x *ContactViewController) Contact() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+func (cvc *ContactViewController) Contact() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("contact"))
 	return obj.Wrap(_r)
 }
-
-// SetContact wraps the corresponding Objective-C method.
-func (x *ContactViewController) SetContact(contact obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContact:"), objref.IDOf(contact))
-}
-
-// ContactViewControllerable is the interface implemented by [ContactViewController], for mocking and DI.
-type ContactViewControllerable interface {
-	obj.Object
-	WithContact(contact obj.Object) *ContactViewController
-	Contact() obj.Object
-	SetContact(contact obj.Object)
-}
-
-var _ ContactViewControllerable = (*ContactViewController)(nil)

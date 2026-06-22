@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -58,7 +59,7 @@ func NewMTRClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *MTRDevice
 // SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
+func (mcts *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
 	type _result struct {
 		val *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
 		err error
@@ -70,7 +71,7 @@ func (x *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesExpec
 		_o.val = MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZoneWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("setTimeZoneWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,138 +82,112 @@ func (x *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesExpec
 }
 
 // ReadAttributeUTCTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeUTCTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUTCTimeWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeUTCTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeUTCTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGranularityWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeGranularityWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGranularityWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeGranularityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeGranularityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTimeSourceWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeTimeSourceWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeSourceWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeSourceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeSourceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTrustedTimeSourceWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTrustedTimeSourceWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTrustedTimeSourceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDefaultNTPWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeDefaultNTPWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultNTPWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeDefaultNTPWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeDefaultNTPWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTimeZoneWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeTimeZoneWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeZoneWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeZoneWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDSTOffsetWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDSTOffsetWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeDSTOffsetWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLocalTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeLocalTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocalTimeWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeLocalTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeLocalTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTimeZoneDatabaseWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeZoneDatabaseWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeZoneDatabaseWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNTPServerAvailableWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNTPServerAvailableWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeNTPServerAvailableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTimeZoneListMaxSizeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeZoneListMaxSizeWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeZoneListMaxSizeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeDSTOffsetListMaxSizeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSupportsDNSResolveWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportsDNSResolveWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeSupportsDNSResolveWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterTimeSynchronizationable is the interface implemented by [MTRClusterTimeSynchronization], for mocking and DI.
-type MTRClusterTimeSynchronizationable interface {
-	obj.Object
-	SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error)
-	ReadAttributeUTCTimeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGranularityWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTimeSourceWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTrustedTimeSourceWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDefaultNTPWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTimeZoneWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDSTOffsetWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLocalTimeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTimeZoneDatabaseWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNTPServerAvailableWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTimeZoneListMaxSizeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeDSTOffsetListMaxSizeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSupportsDNSResolveWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterTimeSynchronizationable = (*MTRClusterTimeSynchronization)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterTimeSynchronization)(nil)
 

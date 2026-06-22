@@ -53,61 +53,47 @@ func NewMetricPlayerItemVariantSwitchEvent() *MetricPlayerItemVariantSwitchEvent
 }
 
 // FromVariant returns the variant before the switch. If no value is available, returns nil
-func (x *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromVariant"))
+func (mpivse *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("fromVariant"))
 	return AssetVariantFromID(_r)
 }
 
 // ToVariant returns the variant after the switch.
-func (x *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toVariant"))
+func (mpivse *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("toVariant"))
 	return AssetVariantFromID(_r)
 }
 
-// LoadedTimeRanges this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges returns this property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+func (mpivse *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VideoRendition represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
-func (x *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoRendition"))
+func (mpivse *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendition {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("videoRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // AudioRendition represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
-func (x *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioRendition"))
+func (mpivse *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendition {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("audioRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // SubtitleRendition represents the currently selected audio rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
-func (x *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRendition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleRendition"))
+func (mpivse *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRendition {
+	_r := objc.Send[objc.ID](objref.IDOf(mpivse), objc.RegisterName("subtitleRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
-// DidSucceed returns if the switch did succeed.
-func (x *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didSucceed"))
+// DidSucceed reports whether returns if the switch did succeed.
+func (mpivse *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
+	_r := objc.Send[bool](objref.IDOf(mpivse), objc.RegisterName("didSucceed"))
 	return _r
 }
-
-// MetricPlayerItemVariantSwitchEventable is the interface implemented by [MetricPlayerItemVariantSwitchEvent], for mocking and DI.
-type MetricPlayerItemVariantSwitchEventable interface {
-	obj.Object
-	FromVariant() *AssetVariant
-	ToVariant() *AssetVariant
-	LoadedTimeRanges() []obj.Object
-	VideoRendition() *MetricMediaRendition
-	AudioRendition() *MetricMediaRendition
-	SubtitleRendition() *MetricMediaRendition
-	DidSucceed() bool
-}
-
-var _ MetricPlayerItemVariantSwitchEventable = (*MetricPlayerItemVariantSwitchEvent)(nil)
 
 var _ MetricEventProvider = (*MetricPlayerItemVariantSwitchEvent)(nil)

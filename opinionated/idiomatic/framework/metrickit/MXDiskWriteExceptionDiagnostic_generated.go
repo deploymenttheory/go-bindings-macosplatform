@@ -52,25 +52,16 @@ func NewDiskWriteExceptionDiagnostic() *DiskWriteExceptionDiagnostic {
 	return diskWriteExceptionDiagnosticAdopt(_id)
 }
 
-// CallStackTree the application call stack tree associated with the excessive disk writes.
-func (x *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+// CallStackTree returns the application call stack tree associated with the excessive disk writes.
+func (dwed *DiskWriteExceptionDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(dwed), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// TotalWritesCaused total disk writes caused in the scope of this disk write exception. Dimensioned as NSUnitInformationStorage.
-func (x *DiskWriteExceptionDiagnostic) TotalWritesCaused() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalWritesCaused"))
+// TotalWritesCaused returns total disk writes caused in the scope of this disk write exception. Dimensioned as NSUnitInformationStorage.
+func (dwed *DiskWriteExceptionDiagnostic) TotalWritesCaused() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dwed), objc.RegisterName("totalWritesCaused"))
 	return obj.Wrap(_r)
 }
-
-// DiskWriteExceptionDiagnosticable is the interface implemented by [DiskWriteExceptionDiagnostic], for mocking and DI.
-type DiskWriteExceptionDiagnosticable interface {
-	obj.Object
-	CallStackTree() *CallStackTree
-	TotalWritesCaused() obj.Object
-}
-
-var _ DiskWriteExceptionDiagnosticable = (*DiskWriteExceptionDiagnostic)(nil)
 
 var _ DiagnosticProvider = (*DiskWriteExceptionDiagnostic)(nil)

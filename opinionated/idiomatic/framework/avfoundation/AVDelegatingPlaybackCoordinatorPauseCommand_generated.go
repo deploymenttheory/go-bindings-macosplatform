@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewDelegatingPlaybackCoordinatorPauseCommand() *DelegatingPlaybackCoordinat
 	return delegatingPlaybackCoordinatorPauseCommandAdopt(_id)
 }
 
-// ShouldBufferInAnticipationOfPlayback indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is YES, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
-func (x *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
+// ShouldBufferInAnticipationOfPlayback reports whether indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is true, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If true, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
+func (dpcpc *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
+	_r := objc.Send[bool](objref.IDOf(dpcpc), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
 	return _r
 }
 
-// AnticipatedPlaybackRate the rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
-func (x *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
+// AnticipatedPlaybackRate returns the rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
+func (dpcpc *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(dpcpc), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
 }
-
-// DelegatingPlaybackCoordinatorPauseCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPauseCommand], for mocking and DI.
-type DelegatingPlaybackCoordinatorPauseCommandable interface {
-	obj.Object
-	ShouldBufferInAnticipationOfPlayback() bool
-	AnticipatedPlaybackRate() float32
-}
-
-var _ DelegatingPlaybackCoordinatorPauseCommandable = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)

@@ -46,24 +46,24 @@ func updateAdopt(id objc.ID) *Update {
 }
 
 // Description returns the object's -description text.
-func (x *Update) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (u *Update) Description() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Update) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (u *Update) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Update) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (u *Update) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Update) String() string {
-	return rt.Description(objref.IDOf(x))
+func (u *Update) String() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // NewUpdate creates a new Update.
@@ -73,78 +73,61 @@ func NewUpdate() *Update {
 }
 
 // AuthorizationDenied wraps the corresponding Objective-C method.
-func (x *Update) AuthorizationDenied() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDenied"))
+func (u *Update) AuthorizationDenied() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationDenied"))
 	return _r
 }
 
 // AuthorizationDeniedGlobally wraps the corresponding Objective-C method.
-func (x *Update) AuthorizationDeniedGlobally() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDeniedGlobally"))
+func (u *Update) AuthorizationDeniedGlobally() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationDeniedGlobally"))
 	return _r
 }
 
 // AuthorizationRestricted wraps the corresponding Objective-C method.
-func (x *Update) AuthorizationRestricted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRestricted"))
+func (u *Update) AuthorizationRestricted() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationRestricted"))
 	return _r
 }
 
 // IsStationary wraps the corresponding Objective-C method.
-func (x *Update) IsStationary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStationary"))
+func (u *Update) IsStationary() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isStationary"))
 	return _r
 }
 
 // Stationary wraps the corresponding Objective-C method.
-func (x *Update) Stationary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stationary"))
+func (u *Update) Stationary() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("stationary"))
 	return _r
 }
 
 // InsufficientlyInUse wraps the corresponding Objective-C method.
-func (x *Update) InsufficientlyInUse() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insufficientlyInUse"))
+func (u *Update) InsufficientlyInUse() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("insufficientlyInUse"))
 	return _r
 }
 
 // LocationUnavailable wraps the corresponding Objective-C method.
-func (x *Update) LocationUnavailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("locationUnavailable"))
+func (u *Update) LocationUnavailable() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("locationUnavailable"))
 	return _r
 }
 
 // AccuracyLimited wraps the corresponding Objective-C method.
-func (x *Update) AccuracyLimited() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accuracyLimited"))
+func (u *Update) AccuracyLimited() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("accuracyLimited"))
 	return _r
 }
 
 // ServiceSessionRequired wraps the corresponding Objective-C method.
-func (x *Update) ServiceSessionRequired() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serviceSessionRequired"))
+func (u *Update) ServiceSessionRequired() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("serviceSessionRequired"))
 	return _r
 }
 
 // AuthorizationRequestInProgress wraps the corresponding Objective-C method.
-func (x *Update) AuthorizationRequestInProgress() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRequestInProgress"))
+func (u *Update) AuthorizationRequestInProgress() bool {
+	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationRequestInProgress"))
 	return _r
 }
-
-// Updateable is the interface implemented by [Update], for mocking and DI.
-type Updateable interface {
-	obj.Object
-	AuthorizationDenied() bool
-	AuthorizationDeniedGlobally() bool
-	AuthorizationRestricted() bool
-	IsStationary() bool
-	Stationary() bool
-	InsufficientlyInUse() bool
-	LocationUnavailable() bool
-	AccuracyLimited() bool
-	ServiceSessionRequired() bool
-	AuthorizationRequestInProgress() bool
-}
-
-var _ Updateable = (*Update)(nil)

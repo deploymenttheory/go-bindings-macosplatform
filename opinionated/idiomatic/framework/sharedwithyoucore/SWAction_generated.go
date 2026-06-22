@@ -48,62 +48,51 @@ func actionAdopt(id objc.ID) *Action {
 }
 
 // Description returns the object's -description text.
-func (x *Action) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Action) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Action) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Action) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // Fulfill reports a successful execution of the action.
-func (x *Action) Fulfill() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fulfill"))
+func (a *Action) Fulfill() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fulfill"))
 }
 
 // Fail reports a failed execution of the action.
-func (x *Action) Fail() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fail"))
+func (a *Action) Fail() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fail"))
 }
 
-// Uuid wraps the corresponding Objective-C method.
-func (x *Action) Uuid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+// UUID wraps the corresponding Objective-C method.
+func (a *Action) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
 // IsComplete wraps the corresponding Objective-C method.
-func (x *Action) IsComplete() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isComplete"))
+func (a *Action) IsComplete() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isComplete"))
 	return _r
 }
-
-// Actionable is the interface implemented by [Action], for mocking and DI.
-type Actionable interface {
-	obj.Object
-	Fulfill()
-	Fail()
-	Uuid() obj.Object
-	IsComplete() bool
-}
-
-var _ Actionable = (*Action)(nil)
 
 // isAction marks Action — and, by embedding promotion, its
 // subclasses — as a member of the Action hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Action) isAction() {}
+func (a *Action) isAction() {}
 
 var _ ActionProvider = (*Action)(nil)

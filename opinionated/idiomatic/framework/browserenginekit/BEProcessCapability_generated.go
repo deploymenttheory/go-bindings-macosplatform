@@ -44,24 +44,24 @@ func processCapabilityAdopt(id objc.ID) *ProcessCapability {
 }
 
 // Description returns the object's -description text.
-func (x *ProcessCapability) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *ProcessCapability) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProcessCapability) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *ProcessCapability) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProcessCapability) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *ProcessCapability) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProcessCapability) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *ProcessCapability) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewProcessCapability creates a new ProcessCapability.
@@ -69,10 +69,3 @@ func NewProcessCapability() *ProcessCapability {
 	_id := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("new"))
 	return processCapabilityAdopt(_id)
 }
-
-// ProcessCapabilityable is the interface implemented by [ProcessCapability], for mocking and DI.
-type ProcessCapabilityable interface {
-	obj.Object
-}
-
-var _ ProcessCapabilityable = (*ProcessCapability)(nil)

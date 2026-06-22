@@ -46,24 +46,24 @@ func addPaymentPassRequestAdopt(id objc.ID) *AddPaymentPassRequest {
 }
 
 // Description returns the object's -description text.
-func (x *AddPaymentPassRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (appr *AddPaymentPassRequest) Description() string {
+	return rt.Description(objref.IDOf(appr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddPaymentPassRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (appr *AddPaymentPassRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(appr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddPaymentPassRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (appr *AddPaymentPassRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(appr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddPaymentPassRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (appr *AddPaymentPassRequest) String() string {
+	return rt.Description(objref.IDOf(appr))
 }
 
 // NewAddPaymentPassRequest creates a new AddPaymentPassRequest.
@@ -72,89 +72,50 @@ func NewAddPaymentPassRequest() *AddPaymentPassRequest {
 	return addPaymentPassRequestAdopt(_id)
 }
 
-// WithEncryptedPassData an encrypted JSON file containing the sensitive information needed to add a card to Apple Pay.
-func (x *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptedPassData:"), objref.IDOf(encryptedPassData))
-	return x
+// WithEncryptedPassData sets an encrypted JSON file containing the sensitive information needed to add a card to Apple Pay.
+func (appr *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setEncryptedPassData:"), objref.IDOf(encryptedPassData))
+	return appr
 }
 
-// WithActivationData the request’s activation data.
-func (x *AddPaymentPassRequest) WithActivationData(activationData obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivationData:"), objref.IDOf(activationData))
-	return x
+// WithActivationData sets the request’s activation data.
+func (appr *AddPaymentPassRequest) WithActivationData(activationData obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setActivationData:"), objref.IDOf(activationData))
+	return appr
 }
 
-// WithEphemeralPublicKey the ephemeral public key used by elliptic curve cryptography (ECC).
-func (x *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEphemeralPublicKey:"), objref.IDOf(ephemeralPublicKey))
-	return x
+// WithEphemeralPublicKey sets the ephemeral public key used by elliptic curve cryptography (ECC).
+func (appr *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setEphemeralPublicKey:"), objref.IDOf(ephemeralPublicKey))
+	return appr
 }
 
 // WithWrappedKey sets the property and returns the receiver so calls can be chained.
-func (x *AddPaymentPassRequest) WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
-	return x
+func (appr *AddPaymentPassRequest) WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
+	return appr
 }
 
 // EncryptedPassData wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) EncryptedPassData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encryptedPassData"))
+func (appr *AddPaymentPassRequest) EncryptedPassData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("encryptedPassData"))
 	return obj.Wrap(_r)
-}
-
-// SetEncryptedPassData wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) SetEncryptedPassData(encryptedPassData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptedPassData:"), objref.IDOf(encryptedPassData))
 }
 
 // ActivationData wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) ActivationData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activationData"))
+func (appr *AddPaymentPassRequest) ActivationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("activationData"))
 	return obj.Wrap(_r)
-}
-
-// SetActivationData wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) SetActivationData(activationData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivationData:"), objref.IDOf(activationData))
 }
 
 // EphemeralPublicKey wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) EphemeralPublicKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ephemeralPublicKey"))
+func (appr *AddPaymentPassRequest) EphemeralPublicKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("ephemeralPublicKey"))
 	return obj.Wrap(_r)
-}
-
-// SetEphemeralPublicKey wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) SetEphemeralPublicKey(ephemeralPublicKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEphemeralPublicKey:"), objref.IDOf(ephemeralPublicKey))
 }
 
 // WrappedKey wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) WrappedKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wrappedKey"))
+func (appr *AddPaymentPassRequest) WrappedKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("wrappedKey"))
 	return obj.Wrap(_r)
 }
-
-// SetWrappedKey wraps the corresponding Objective-C method.
-func (x *AddPaymentPassRequest) SetWrappedKey(wrappedKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
-}
-
-// AddPaymentPassRequestable is the interface implemented by [AddPaymentPassRequest], for mocking and DI.
-type AddPaymentPassRequestable interface {
-	obj.Object
-	WithEncryptedPassData(encryptedPassData obj.Object) *AddPaymentPassRequest
-	WithActivationData(activationData obj.Object) *AddPaymentPassRequest
-	WithEphemeralPublicKey(ephemeralPublicKey obj.Object) *AddPaymentPassRequest
-	WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest
-	EncryptedPassData() obj.Object
-	SetEncryptedPassData(encryptedPassData obj.Object)
-	ActivationData() obj.Object
-	SetActivationData(activationData obj.Object)
-	EphemeralPublicKey() obj.Object
-	SetEphemeralPublicKey(ephemeralPublicKey obj.Object)
-	WrappedKey() obj.Object
-	SetWrappedKey(wrappedKey obj.Object)
-}
-
-var _ AddPaymentPassRequestable = (*AddPaymentPassRequest)(nil)

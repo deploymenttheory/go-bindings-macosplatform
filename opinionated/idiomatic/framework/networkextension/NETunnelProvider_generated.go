@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,16 +49,16 @@ func nETunnelProviderAdopt(id objc.ID) *NETunnelProvider {
 	return x
 }
 
-// WithReasserting indicate to the system that the tunnel is being re-established.
-func (x *NETunnelProvider) WithReasserting(reasserting bool) *NETunnelProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
-	return x
+// WithReasserting sets indicate to the system that the tunnel is being re-established.
+func (ntp *NETunnelProvider) WithReasserting(reasserting bool) *NETunnelProvider {
+	objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("setReasserting:"), reasserting)
+	return ntp
 }
 
 // HandleAppMessage handle messages sent by the tunnel provider extension’s containing app.
 //
 // HandleAppMessage blocks until the operation completes or ctx is cancelled.
-func (x *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData obj.Object) (result obj.Object, err error) {
+func (ntp *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -68,7 +69,7 @@ func (x *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData obj
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleAppMessage:completionHandler:"), objref.IDOf(messageData), _block)
+	objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("handleAppMessage:completionHandler:"), objref.IDOf(messageData), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,14 +82,14 @@ func (x *NETunnelProvider) HandleAppMessage(ctx context.Context, messageData obj
 // SetTunnelNetworkSettings specify the network settings for the current tunneling session.
 //
 // SetTunnelNetworkSettings blocks until the operation completes or ctx is cancelled.
-func (x *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *NETunnelNetworkSettings) error {
+func (ntp *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *NETunnelNetworkSettings) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTunnelNetworkSettings:completionHandler:"), objref.IDOf(tunnelNetworkSettings), _block)
+	objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("setTunnelNetworkSettings:completionHandler:"), objref.IDOf(tunnelNetworkSettings), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -97,56 +98,36 @@ func (x *NETunnelProvider) SetTunnelNetworkSettings(ctx context.Context, tunnelN
 	}
 }
 
-// ProtocolConfiguration an NEVPNProtocol object containing the provider's current configuration. The value of this property may change during the lifetime of the tunnel provided by this NETunnelProvider, KVO can be used to detect when changes occur.  For different protocol types, this property will contain the corresponding subclass.   For NEVPNProtocolTypePlugin protocol type, this property will contain the NETunnelProviderProtocol subclass.  For NEVPNProtocolTypeIKEv2 protocol type, this property will contain the NEVPNProtocolIKEv2 subclass.
-func (x *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocolConfiguration"))
+// ProtocolConfiguration returns an NEVPNProtocol object containing the provider's current configuration. The value of this property may change during the lifetime of the tunnel provided by this NETunnelProvider, KVO can be used to detect when changes occur.  For different protocol types, this property will contain the corresponding subclass.   For NEVPNProtocolTypePlugin protocol type, this property will contain the NETunnelProviderProtocol subclass.  For NEVPNProtocolTypeIKEv2 protocol type, this property will contain the NEVPNProtocolIKEv2 subclass.
+func (ntp *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
+	_r := objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("protocolConfiguration"))
 	return NEVPNProtocolFromID(_r)
 }
 
-// AppRules an array of NEAppRule objects specifying which applications are currently being routed through the tunnel provided by this NETunnelProvider. If application-based routing is not enabled for the tunnel, then this property is set to nil.
+// AppRules returns an array of NEAppRule objects specifying which applications are currently being routed through the tunnel provided by this NETunnelProvider. If application-based routing is not enabled for the tunnel, then this property is set to nil.
 //
 // AppRules returns the collection as a Go slice.
-func (x *NETunnelProvider) AppRules() []*NEAppRule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appRules"))
+func (ntp *NETunnelProvider) AppRules() []*NEAppRule {
+	_arr := objc.Send[objc.ID](objref.IDOf(ntp), objc.RegisterName("appRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
-// RoutingMethod the method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
-func (x *NETunnelProvider) RoutingMethod() NETunnelProviderRoutingMethod {
-	_r := objc.Send[NETunnelProviderRoutingMethod](objref.IDOf(x), objc.RegisterName("routingMethod"))
+// RoutingMethod returns the method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
+func (ntp *NETunnelProvider) RoutingMethod() NETunnelProviderRoutingMethod {
+	_r := objc.Send[NETunnelProviderRoutingMethod](objref.IDOf(ntp), objc.RegisterName("routingMethod"))
 	return _r
 }
 
-// Reasserting a flag that indicates to the framework if this NETunnelProvider is currently re-establishing the tunnel. Setting this flag will cause the session status visible to the user to change to "Reasserting". Clearing this flag will change the user-visible status of the session back to "Connected". Setting and clearing this flag only has an effect if the session is in the "Connected" state.
-func (x *NETunnelProvider) Reasserting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reasserting"))
+// Reasserting reports whether a flag that indicates to the framework if this NETunnelProvider is currently re-establishing the tunnel. Setting this flag will cause the session status visible to the user to change to "Reasserting". Clearing this flag will change the user-visible status of the session back to "Connected". Setting and clearing this flag only has an effect if the session is in the "Connected" state.
+func (ntp *NETunnelProvider) Reasserting() bool {
+	_r := objc.Send[bool](objref.IDOf(ntp), objc.RegisterName("reasserting"))
 	return _r
 }
-
-// SetReasserting wraps the corresponding Objective-C method.
-func (x *NETunnelProvider) SetReasserting(reasserting bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
-}
-
-// NETunnelProviderable is the interface implemented by [NETunnelProvider], for mocking and DI.
-type NETunnelProviderable interface {
-	obj.Object
-	WithReasserting(reasserting bool) *NETunnelProvider
-	HandleAppMessage(ctx context.Context, messageData obj.Object) (obj.Object, error)
-	SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *NETunnelNetworkSettings) error
-	ProtocolConfiguration() *NEVPNProtocol
-	AppRules() []*NEAppRule
-	RoutingMethod() NETunnelProviderRoutingMethod
-	Reasserting() bool
-	SetReasserting(reasserting bool)
-}
-
-var _ NETunnelProviderable = (*NETunnelProvider)(nil)
 
 // isNETunnelProvider marks NETunnelProvider — and, by embedding promotion, its
 // subclasses — as a member of the NETunnelProvider hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NETunnelProvider) isNETunnelProvider() {}
+func (ntp *NETunnelProvider) isNETunnelProvider() {}
 
 var _ NETunnelProviderProvider = (*NETunnelProvider)(nil)
 

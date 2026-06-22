@@ -46,24 +46,24 @@ func lowLatencyFrameInterpolationParametersAdopt(id objc.ID) *LowLatencyFrameInt
 }
 
 // Description returns the object's -description text.
-func (x *LowLatencyFrameInterpolationParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (llfip *LowLatencyFrameInterpolationParameters) Description() string {
+	return rt.Description(objref.IDOf(llfip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LowLatencyFrameInterpolationParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (llfip *LowLatencyFrameInterpolationParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(llfip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LowLatencyFrameInterpolationParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (llfip *LowLatencyFrameInterpolationParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(llfip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LowLatencyFrameInterpolationParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (llfip *LowLatencyFrameInterpolationParameters) String() string {
+	return rt.Description(objref.IDOf(llfip))
 }
 
 // NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new low-latency frame interpolation parameters object.
@@ -73,41 +73,30 @@ func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterp
 	return lowLatencyFrameInterpolationParametersAdopt(_id)
 }
 
-// SourceFrame source frame that you provided when creating the low-latency frame interpolation parameters object.
-func (x *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+// SourceFrame returns source frame that you provided when creating the low-latency frame interpolation parameters object.
+func (llfip *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// PreviousFrame previous frame that you provided when creating the low-latency frame interpolation parameters object.
-func (x *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
+// PreviousFrame returns previous frame that you provided when creating the low-latency frame interpolation parameters object.
+func (llfip *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("previousFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// InterpolationPhase array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
+// InterpolationPhase returns array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
 //
 // InterpolationPhase returns the collection as a Go slice.
-func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpolationPhase"))
+func (llfip *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("interpolationPhase"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DestinationFrames array of destination frames that you provided when creating the low-latency frame interpolation parameters object.
+// DestinationFrames returns array of destination frames that you provided when creating the low-latency frame interpolation parameters object.
 //
 // DestinationFrames returns the collection as a Go slice.
-func (x *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrames"))
+func (llfip *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {
+	_arr := objc.Send[objc.ID](objref.IDOf(llfip), objc.RegisterName("destinationFrames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }
-
-// LowLatencyFrameInterpolationParametersable is the interface implemented by [LowLatencyFrameInterpolationParameters], for mocking and DI.
-type LowLatencyFrameInterpolationParametersable interface {
-	obj.Object
-	SourceFrame() *FrameProcessorFrame
-	PreviousFrame() *FrameProcessorFrame
-	InterpolationPhase() []obj.Object
-	DestinationFrames() []*FrameProcessorFrame
-}
-
-var _ LowLatencyFrameInterpolationParametersable = (*LowLatencyFrameInterpolationParameters)(nil)

@@ -47,24 +47,24 @@ func accessibilityElementAdopt(id objc.ID) *AccessibilityElement {
 }
 
 // Description returns the object's -description text.
-func (x *AccessibilityElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ae *AccessibilityElement) Description() string {
+	return rt.Description(objref.IDOf(ae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessibilityElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ae *AccessibilityElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessibilityElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ae *AccessibilityElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessibilityElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ae *AccessibilityElement) String() string {
+	return rt.Description(objref.IDOf(ae))
 }
 
 // NewAccessibilityElement creates a new AccessibilityElement.
@@ -74,34 +74,18 @@ func NewAccessibilityElement() *AccessibilityElement {
 }
 
 // WithAccessibilityFrameInParentSpace sets the property and returns the receiver so calls can be chained.
-func (x *AccessibilityElement) WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrameInParentSpace:"), accessibilityFrameInParentSpace)
-	return x
+func (ae *AccessibilityElement) WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setAccessibilityFrameInParentSpace:"), accessibilityFrameInParentSpace)
+	return ae
 }
 
 // AccessibilityAddChildElement wraps the corresponding Objective-C method.
-func (x *AccessibilityElement) AccessibilityAddChildElement(childElement *AccessibilityElement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityAddChildElement:"), objref.IDOf(childElement))
+func (ae *AccessibilityElement) AccessibilityAddChildElement(childElement *AccessibilityElement) {
+	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("accessibilityAddChildElement:"), objref.IDOf(childElement))
 }
 
 // AccessibilityFrameInParentSpace wraps the corresponding Objective-C method.
-func (x *AccessibilityElement) AccessibilityFrameInParentSpace() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("accessibilityFrameInParentSpace"))
+func (ae *AccessibilityElement) AccessibilityFrameInParentSpace() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ae), objc.RegisterName("accessibilityFrameInParentSpace"))
 	return _r
 }
-
-// SetAccessibilityFrameInParentSpace wraps the corresponding Objective-C method.
-func (x *AccessibilityElement) SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrameInParentSpace:"), accessibilityFrameInParentSpace)
-}
-
-// AccessibilityElementable is the interface implemented by [AccessibilityElement], for mocking and DI.
-type AccessibilityElementable interface {
-	obj.Object
-	WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement
-	AccessibilityAddChildElement(childElement *AccessibilityElement)
-	AccessibilityFrameInParentSpace() corefoundation.CGRect
-	SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect)
-}
-
-var _ AccessibilityElementable = (*AccessibilityElement)(nil)

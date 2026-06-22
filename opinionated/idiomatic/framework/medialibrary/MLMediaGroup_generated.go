@@ -46,24 +46,24 @@ func mediaGroupAdopt(id objc.ID) *MediaGroup {
 }
 
 // Description returns the object's -description text.
-func (x *MediaGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mg *MediaGroup) Description() string {
+	return rt.Description(objref.IDOf(mg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mg *MediaGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mg *MediaGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mg *MediaGroup) String() string {
+	return rt.Description(objref.IDOf(mg))
 }
 
 // NewMediaGroup creates a new MediaGroup.
@@ -73,20 +73,20 @@ func NewMediaGroup() *MediaGroup {
 }
 
 // MediaLibrary wraps the corresponding Objective-C method.
-func (x *MediaGroup) MediaLibrary() *MediaLibrary {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
+func (mg *MediaGroup) MediaLibrary() *MediaLibrary {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
 // Parent wraps the corresponding Objective-C method.
-func (x *MediaGroup) Parent() *MediaGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+func (mg *MediaGroup) Parent() *MediaGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("parent"))
 	return MediaGroupFromID(_r)
 }
 
 // MediaSourceIdentifier wraps the corresponding Objective-C method.
-func (x *MediaGroup) MediaSourceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
+func (mg *MediaGroup) MediaSourceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -94,8 +94,8 @@ func (x *MediaGroup) MediaSourceIdentifier() string {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MediaGroup) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mg *MediaGroup) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -103,8 +103,8 @@ func (x *MediaGroup) Name() string {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *MediaGroup) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (mg *MediaGroup) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,8 +112,8 @@ func (x *MediaGroup) Identifier() string {
 }
 
 // TypeIdentifier wraps the corresponding Objective-C method.
-func (x *MediaGroup) TypeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
+func (mg *MediaGroup) TypeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -121,60 +121,41 @@ func (x *MediaGroup) TypeIdentifier() string {
 }
 
 // Attributes wraps the corresponding Objective-C method.
-func (x *MediaGroup) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (mg *MediaGroup) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // ChildGroups wraps the corresponding Objective-C method.
 //
 // ChildGroups returns the collection as a Go slice.
-func (x *MediaGroup) ChildGroups() []*MediaGroup {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childGroups"))
+func (mg *MediaGroup) ChildGroups() []*MediaGroup {
+	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("childGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaGroup { return MediaGroupFromID(_id) })
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *MediaGroup) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (mg *MediaGroup) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
 // ModificationDate wraps the corresponding Objective-C method.
-func (x *MediaGroup) ModificationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+func (mg *MediaGroup) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
 // IconImage wraps the corresponding Objective-C method.
-func (x *MediaGroup) IconImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconImage"))
+func (mg *MediaGroup) IconImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("iconImage"))
 	return obj.Wrap(_r)
 }
 
 // MediaObjects wraps the corresponding Objective-C method.
 //
 // MediaObjects returns the collection as a Go slice.
-func (x *MediaGroup) MediaObjects() []*MediaObject {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjects"))
+func (mg *MediaGroup) MediaObjects() []*MediaObject {
+	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaObject { return MediaObjectFromID(_id) })
 }
-
-// MediaGroupable is the interface implemented by [MediaGroup], for mocking and DI.
-type MediaGroupable interface {
-	obj.Object
-	MediaLibrary() *MediaLibrary
-	Parent() *MediaGroup
-	MediaSourceIdentifier() string
-	Name() string
-	Identifier() string
-	TypeIdentifier() string
-	Attributes() obj.Object
-	ChildGroups() []*MediaGroup
-	URL() obj.Object
-	ModificationDate() obj.Object
-	IconImage() obj.Object
-	MediaObjects() []*MediaObject
-}
-
-var _ MediaGroupable = (*MediaGroup)(nil)

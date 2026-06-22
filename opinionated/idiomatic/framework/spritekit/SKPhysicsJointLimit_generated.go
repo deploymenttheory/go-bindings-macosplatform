@@ -7,7 +7,6 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,45 +51,28 @@ func NewPhysicsJointLimit() *PhysicsJointLimit {
 	return physicsJointLimitAdopt(_id)
 }
 
-// WithMaxLength the maximum distance allowed between the two physics bodies connected by the limit joint.
-func (x *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
-	return x
+// WithMaxLength sets the maximum distance allowed between the two physics bodies connected by the limit joint.
+func (pjl *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimit {
+	objc.Send[objc.ID](objref.IDOf(pjl), objc.RegisterName("setMaxLength:"), maxLength)
+	return pjl
 }
 
-// WithBodyA the first body connected by the joint.
-func (x *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
-	return x
+// WithBodyA sets the first body connected by the joint.
+func (pjl *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
+	objc.Send[objc.ID](objref.IDOf(pjl), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
+	return pjl
 }
 
-// WithBodyB the second body connected by the joint.
-func (x *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
-	return x
+// WithBodyB sets the second body connected by the joint.
+func (pjl *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
+	objc.Send[objc.ID](objref.IDOf(pjl), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
+	return pjl
 }
 
 // MaxLength wraps the corresponding Objective-C method.
-func (x *PhysicsJointLimit) MaxLength() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxLength"))
+func (pjl *PhysicsJointLimit) MaxLength() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjl), objc.RegisterName("maxLength"))
 	return _r
 }
-
-// SetMaxLength wraps the corresponding Objective-C method.
-func (x *PhysicsJointLimit) SetMaxLength(maxLength float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
-}
-
-// PhysicsJointLimitable is the interface implemented by [PhysicsJointLimit], for mocking and DI.
-type PhysicsJointLimitable interface {
-	obj.Object
-	WithMaxLength(maxLength float64) *PhysicsJointLimit
-	WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit
-	WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit
-	MaxLength() float64
-	SetMaxLength(maxLength float64)
-}
-
-var _ PhysicsJointLimitable = (*PhysicsJointLimit)(nil)
 
 var _ PhysicsJointProvider = (*PhysicsJointLimit)(nil)

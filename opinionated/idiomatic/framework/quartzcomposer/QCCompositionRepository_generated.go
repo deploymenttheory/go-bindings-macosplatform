@@ -44,24 +44,24 @@ func compositionRepositoryAdopt(id objc.ID) *CompositionRepository {
 }
 
 // Description returns the object's -description text.
-func (x *CompositionRepository) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CompositionRepository) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompositionRepository) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *CompositionRepository) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompositionRepository) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *CompositionRepository) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CompositionRepository) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CompositionRepository) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // NewCompositionRepository creates a new CompositionRepository.
@@ -71,29 +71,19 @@ func NewCompositionRepository() *CompositionRepository {
 }
 
 // CompositionWithIdentifier wraps the corresponding Objective-C method.
-func (x *CompositionRepository) CompositionWithIdentifier(identifier string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
+func (cr *CompositionRepository) CompositionWithIdentifier(identifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
 // CompositionsWithProtocolsAndAttributes wraps the corresponding Objective-C method.
-func (x *CompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
+func (cr *CompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
 // AllCompositions wraps the corresponding Objective-C method.
-func (x *CompositionRepository) AllCompositions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCompositions"))
+func (cr *CompositionRepository) AllCompositions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("allCompositions"))
 	return obj.Wrap(_r)
 }
-
-// CompositionRepositoryable is the interface implemented by [CompositionRepository], for mocking and DI.
-type CompositionRepositoryable interface {
-	obj.Object
-	CompositionWithIdentifier(identifier string) obj.Object
-	CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object
-	AllCompositions() obj.Object
-}
-
-var _ CompositionRepositoryable = (*CompositionRepository)(nil)

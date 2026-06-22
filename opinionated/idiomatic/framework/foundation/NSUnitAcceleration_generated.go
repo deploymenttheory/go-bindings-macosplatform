@@ -53,18 +53,10 @@ func NewUnitAcceleration() *UnitAcceleration {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitAcceleration) WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ua *UnitAcceleration) WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ua
 }
-
-// UnitAccelerationable is the interface implemented by [UnitAcceleration], for mocking and DI.
-type UnitAccelerationable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration
-}
-
-var _ UnitAccelerationable = (*UnitAcceleration)(nil)
 
 var _ DimensionProvider = (*UnitAcceleration)(nil)
 

@@ -46,24 +46,24 @@ func playerItemErrorLogEventAdopt(id objc.ID) *PlayerItemErrorLogEvent {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemErrorLogEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (piele *PlayerItemErrorLogEvent) Description() string {
+	return rt.Description(objref.IDOf(piele))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemErrorLogEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (piele *PlayerItemErrorLogEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(piele), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemErrorLogEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (piele *PlayerItemErrorLogEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(piele), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemErrorLogEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (piele *PlayerItemErrorLogEvent) String() string {
+	return rt.Description(objref.IDOf(piele))
 }
 
 // NewPlayerItemErrorLogEvent creates a new PlayerItemErrorLogEvent.
@@ -72,80 +72,65 @@ func NewPlayerItemErrorLogEvent() *PlayerItemErrorLogEvent {
 	return playerItemErrorLogEventAdopt(_id)
 }
 
-// Date the date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
-func (x *PlayerItemErrorLogEvent) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+// Date returns the date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// URI the URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
-func (x *PlayerItemErrorLogEvent) URI() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URI"))
+// URI returns the URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) URI() string {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("URI"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ServerAddress the IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
-func (x *PlayerItemErrorLogEvent) ServerAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverAddress"))
+// ServerAddress returns the IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) ServerAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("serverAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PlaybackSessionID a GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
-func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackSessionID"))
+// PlaybackSessionID returns a GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) PlaybackSessionID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("playbackSessionID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ErrorStatusCode a unique error code identifier. Corresponds to "status". This property is not observable.
-func (x *PlayerItemErrorLogEvent) ErrorStatusCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("errorStatusCode"))
+// ErrorStatusCode returns a unique error code identifier. Corresponds to "status". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) ErrorStatusCode() int {
+	_r := objc.Send[int](objref.IDOf(piele), objc.RegisterName("errorStatusCode"))
 	return _r
 }
 
-// ErrorDomain the domain of the error. Corresponds to "domain". This property is not observable.
-func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorDomain"))
+// ErrorDomain returns the domain of the error. Corresponds to "domain". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) ErrorDomain() string {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("errorDomain"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ErrorComment a description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
-func (x *PlayerItemErrorLogEvent) ErrorComment() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorComment"))
+// ErrorComment returns a description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
+func (piele *PlayerItemErrorLogEvent) ErrorComment() string {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("errorComment"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AllHTTPResponseHeaderFields the HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
-func (x *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHTTPResponseHeaderFields"))
+// AllHTTPResponseHeaderFields returns the HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
+func (piele *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("allHTTPResponseHeaderFields"))
 	return obj.Wrap(_r)
 }
-
-// PlayerItemErrorLogEventable is the interface implemented by [PlayerItemErrorLogEvent], for mocking and DI.
-type PlayerItemErrorLogEventable interface {
-	obj.Object
-	Date() obj.Object
-	URI() string
-	ServerAddress() string
-	PlaybackSessionID() string
-	ErrorStatusCode() int
-	ErrorDomain() string
-	ErrorComment() string
-	AllHTTPResponseHeaderFields() obj.Object
-}
-
-var _ PlayerItemErrorLogEventable = (*PlayerItemErrorLogEvent)(nil)

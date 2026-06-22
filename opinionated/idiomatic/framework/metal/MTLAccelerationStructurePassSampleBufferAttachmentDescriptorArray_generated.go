@@ -44,24 +44,24 @@ func accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(aspsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aspsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aspsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(aspsbada))
 }
 
 // NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray creates a new AccelerationStructurePassSampleBufferAttachmentDescriptorArray.
@@ -71,21 +71,12 @@ func NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray() *Accele
 }
 
 // ObjectAtIndexedSubscript wraps the corresponding Objective-C method.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aspsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript wraps the corresponding Objective-C method.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(aspsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [AccelerationStructurePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
-type AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable = (*AccelerationStructurePassSampleBufferAttachmentDescriptorArray)(nil)

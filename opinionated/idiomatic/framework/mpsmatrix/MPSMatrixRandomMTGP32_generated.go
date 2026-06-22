@@ -7,7 +7,6 @@ package mpsmatrix
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,25 +49,16 @@ func NewMatrixRandomMTGP32() *MatrixRandomMTGP32 {
 	return matrixRandomMTGP32Adopt(_id)
 }
 
-// WithBatchStart the starting index in the destination batch.
-func (x *MatrixRandomMTGP32) WithBatchStart(batchStart int) *MatrixRandomMTGP32 {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the starting index in the destination batch.
+func (mrm *MatrixRandomMTGP32) WithBatchStart(batchStart int) *MatrixRandomMTGP32 {
+	objc.Send[objc.ID](objref.IDOf(mrm), objc.RegisterName("setBatchStart:"), batchStart)
+	return mrm
 }
 
-// WithBatchSize the size of the batch to process.
-func (x *MatrixRandomMTGP32) WithBatchSize(batchSize int) *MatrixRandomMTGP32 {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the size of the batch to process.
+func (mrm *MatrixRandomMTGP32) WithBatchSize(batchSize int) *MatrixRandomMTGP32 {
+	objc.Send[objc.ID](objref.IDOf(mrm), objc.RegisterName("setBatchSize:"), batchSize)
+	return mrm
 }
-
-// MatrixRandomMTGP32able is the interface implemented by [MatrixRandomMTGP32], for mocking and DI.
-type MatrixRandomMTGP32able interface {
-	obj.Object
-	WithBatchStart(batchStart int) *MatrixRandomMTGP32
-	WithBatchSize(batchSize int) *MatrixRandomMTGP32
-}
-
-var _ MatrixRandomMTGP32able = (*MatrixRandomMTGP32)(nil)
 
 var _ MatrixRandomProvider = (*MatrixRandomMTGP32)(nil)

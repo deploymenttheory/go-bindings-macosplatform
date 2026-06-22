@@ -46,24 +46,24 @@ func resourceStatePassDescriptorAdopt(id objc.ID) *ResourceStatePassDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ResourceStatePassDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rspd *ResourceStatePassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rspd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ResourceStatePassDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rspd *ResourceStatePassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rspd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ResourceStatePassDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rspd *ResourceStatePassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rspd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ResourceStatePassDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rspd *ResourceStatePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(rspd))
 }
 
 // NewResourceStatePassDescriptor creates a new ResourceStatePassDescriptor.
@@ -73,15 +73,7 @@ func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
 }
 
 // SampleBufferAttachments wraps the corresponding Objective-C method.
-func (x *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+func (rspd *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(rspd), objc.RegisterName("sampleBufferAttachments"))
 	return ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
-
-// ResourceStatePassDescriptorable is the interface implemented by [ResourceStatePassDescriptor], for mocking and DI.
-type ResourceStatePassDescriptorable interface {
-	obj.Object
-	SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray
-}
-
-var _ ResourceStatePassDescriptorable = (*ResourceStatePassDescriptor)(nil)

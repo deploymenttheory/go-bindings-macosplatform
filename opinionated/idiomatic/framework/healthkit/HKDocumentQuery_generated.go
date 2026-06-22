@@ -52,34 +52,24 @@ func NewDocumentQuery() *DocumentQuery {
 	return documentQueryAdopt(_id)
 }
 
-// Limit the maximum number of documents the receiver will return upon completion.
-func (x *DocumentQuery) Limit() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("limit"))
+// Limit returns the maximum number of documents the receiver will return upon completion.
+func (dq *DocumentQuery) Limit() int {
+	_r := objc.Send[int](objref.IDOf(dq), objc.RegisterName("limit"))
 	return _r
 }
 
-// SortDescriptors an array of NSSortDescriptors.
+// SortDescriptors returns an array of NSSortDescriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
-func (x *DocumentQuery) SortDescriptors() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+func (dq *DocumentQuery) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(dq), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IncludeDocumentData the XML content for documents may be large.  This property can be used to control whether the query returns the XML content for each record.
-func (x *DocumentQuery) IncludeDocumentData() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeDocumentData"))
+// IncludeDocumentData reports whether the XML content for documents may be large. This property can be used to control whether the query returns the XML content for each record.
+func (dq *DocumentQuery) IncludeDocumentData() bool {
+	_r := objc.Send[bool](objref.IDOf(dq), objc.RegisterName("includeDocumentData"))
 	return _r
 }
-
-// DocumentQueryable is the interface implemented by [DocumentQuery], for mocking and DI.
-type DocumentQueryable interface {
-	obj.Object
-	Limit() int
-	SortDescriptors() []obj.Object
-	IncludeDocumentData() bool
-}
-
-var _ DocumentQueryable = (*DocumentQuery)(nil)
 
 var _ QueryProvider = (*DocumentQuery)(nil)

@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewSyncEnginePendingZoneSaveWithZone(zone *RecordZone) *SyncEnginePendingZo
 }
 
 // Zone wraps the corresponding Objective-C method.
-func (x *SyncEnginePendingZoneSave) Zone() *RecordZone {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zone"))
+func (sepzs *SyncEnginePendingZoneSave) Zone() *RecordZone {
+	_r := objc.Send[objc.ID](objref.IDOf(sepzs), objc.RegisterName("zone"))
 	return RecordZoneFromID(_r)
 }
-
-// SyncEnginePendingZoneSaveable is the interface implemented by [SyncEnginePendingZoneSave], for mocking and DI.
-type SyncEnginePendingZoneSaveable interface {
-	obj.Object
-	Zone() *RecordZone
-}
-
-var _ SyncEnginePendingZoneSaveable = (*SyncEnginePendingZoneSave)(nil)
 
 var _ SyncEnginePendingDatabaseChangeProvider = (*SyncEnginePendingZoneSave)(nil)

@@ -7,7 +7,6 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,85 +51,52 @@ func NewPhysicsJointSliding() *PhysicsJointSliding {
 	return physicsJointSlidingAdopt(_id)
 }
 
-// WithShouldEnableLimits a Boolean value that indicates whether the sliding joint is restricted so that the objects may only slide a finite distance from the initial anchor point.
-func (x *PhysicsJointSliding) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
-	return x
+// WithShouldEnableLimits sets a Boolean value that indicates whether the sliding joint is restricted so that the objects may only slide a finite distance from the initial anchor point.
+func (pjs *PhysicsJointSliding) WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding {
+	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
+	return pjs
 }
 
-// WithLowerDistanceLimit the smallest distance allowed for the sliding joint.
-func (x *PhysicsJointSliding) WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerDistanceLimit:"), lowerDistanceLimit)
-	return x
+// WithLowerDistanceLimit sets the smallest distance allowed for the sliding joint.
+func (pjs *PhysicsJointSliding) WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding {
+	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setLowerDistanceLimit:"), lowerDistanceLimit)
+	return pjs
 }
 
-// WithUpperDistanceLimit the largest distance allowed for the sliding joint.
-func (x *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperDistanceLimit:"), upperDistanceLimit)
-	return x
+// WithUpperDistanceLimit sets the largest distance allowed for the sliding joint.
+func (pjs *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding {
+	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setUpperDistanceLimit:"), upperDistanceLimit)
+	return pjs
 }
 
-// WithBodyA the first body connected by the joint.
-func (x *PhysicsJointSliding) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSliding {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
-	return x
+// WithBodyA sets the first body connected by the joint.
+func (pjs *PhysicsJointSliding) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSliding {
+	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
+	return pjs
 }
 
-// WithBodyB the second body connected by the joint.
-func (x *PhysicsJointSliding) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSliding {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
-	return x
+// WithBodyB sets the second body connected by the joint.
+func (pjs *PhysicsJointSliding) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSliding {
+	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
+	return pjs
 }
 
 // ShouldEnableLimits wraps the corresponding Objective-C method.
-func (x *PhysicsJointSliding) ShouldEnableLimits() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEnableLimits"))
+func (pjs *PhysicsJointSliding) ShouldEnableLimits() bool {
+	_r := objc.Send[bool](objref.IDOf(pjs), objc.RegisterName("shouldEnableLimits"))
 	return _r
-}
-
-// SetShouldEnableLimits wraps the corresponding Objective-C method.
-func (x *PhysicsJointSliding) SetShouldEnableLimits(shouldEnableLimits bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableLimits:"), shouldEnableLimits)
 }
 
 // LowerDistanceLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointSliding) LowerDistanceLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerDistanceLimit"))
+func (pjs *PhysicsJointSliding) LowerDistanceLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("lowerDistanceLimit"))
 	return _r
-}
-
-// SetLowerDistanceLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointSliding) SetLowerDistanceLimit(lowerDistanceLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerDistanceLimit:"), lowerDistanceLimit)
 }
 
 // UpperDistanceLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointSliding) UpperDistanceLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperDistanceLimit"))
+func (pjs *PhysicsJointSliding) UpperDistanceLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("upperDistanceLimit"))
 	return _r
 }
-
-// SetUpperDistanceLimit wraps the corresponding Objective-C method.
-func (x *PhysicsJointSliding) SetUpperDistanceLimit(upperDistanceLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperDistanceLimit:"), upperDistanceLimit)
-}
-
-// PhysicsJointSlidingable is the interface implemented by [PhysicsJointSliding], for mocking and DI.
-type PhysicsJointSlidingable interface {
-	obj.Object
-	WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding
-	WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding
-	WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding
-	WithBodyA(bodyA *PhysicsBody) *PhysicsJointSliding
-	WithBodyB(bodyB *PhysicsBody) *PhysicsJointSliding
-	ShouldEnableLimits() bool
-	SetShouldEnableLimits(shouldEnableLimits bool)
-	LowerDistanceLimit() float64
-	SetLowerDistanceLimit(lowerDistanceLimit float64)
-	UpperDistanceLimit() float64
-	SetUpperDistanceLimit(upperDistanceLimit float64)
-}
-
-var _ PhysicsJointSlidingable = (*PhysicsJointSliding)(nil)
 
 var _ PhysicsJointProvider = (*PhysicsJointSliding)(nil)

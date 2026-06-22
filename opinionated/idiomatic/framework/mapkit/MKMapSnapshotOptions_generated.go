@@ -47,24 +47,24 @@ func mapSnapshotOptionsAdopt(id objc.ID) *MapSnapshotOptions {
 }
 
 // Description returns the object's -description text.
-func (x *MapSnapshotOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mso *MapSnapshotOptions) Description() string {
+	return rt.Description(objref.IDOf(mso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapSnapshotOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mso *MapSnapshotOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapSnapshotOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mso *MapSnapshotOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapSnapshotOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mso *MapSnapshotOptions) String() string {
+	return rt.Description(objref.IDOf(mso))
 }
 
 // NewMapSnapshotOptions creates a new MapSnapshotOptions.
@@ -74,168 +74,97 @@ func NewMapSnapshotOptions() *MapSnapshotOptions {
 }
 
 // WithPreferredConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
-	return x
+func (mso *MapSnapshotOptions) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
+	return mso
 }
 
 // WithCamera sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithCamera(camera *MapCamera) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
-	return x
+func (mso *MapSnapshotOptions) WithCamera(camera *MapCamera) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	return mso
 }
 
 // WithMapType sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithMapType(mapType MapType) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapType:"), mapType)
-	return x
+func (mso *MapSnapshotOptions) WithMapType(mapType MapType) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setMapType:"), mapType)
+	return mso
 }
 
 // WithPointOfInterestFilter sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+func (mso *MapSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return mso
 }
 
 // WithShowsPointsOfInterest sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
-	return x
+func (mso *MapSnapshotOptions) WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
+	return mso
 }
 
 // WithShowsBuildings sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithShowsBuildings(showsBuildings bool) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBuildings:"), showsBuildings)
-	return x
+func (mso *MapSnapshotOptions) WithShowsBuildings(showsBuildings bool) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setShowsBuildings:"), showsBuildings)
+	return mso
 }
 
 // WithSize sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithSize(size corefoundation.CGSize) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+func (mso *MapSnapshotOptions) WithSize(size corefoundation.CGSize) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setSize:"), size)
+	return mso
 }
 
 // WithAppearance sets the property and returns the receiver so calls can be chained.
-func (x *MapSnapshotOptions) WithAppearance(appearance obj.Object) *MapSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
-	return x
+func (mso *MapSnapshotOptions) WithAppearance(appearance obj.Object) *MapSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
+	return mso
 }
 
 // PreferredConfiguration wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) PreferredConfiguration() *MapConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredConfiguration"))
+func (mso *MapSnapshotOptions) PreferredConfiguration() *MapConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("preferredConfiguration"))
 	return MapConfigurationFromID(_r)
 }
 
-// SetPreferredConfiguration wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetPreferredConfiguration(preferredConfiguration *MapConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
-}
-
 // Camera wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) Camera() *MapCamera {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("camera"))
+func (mso *MapSnapshotOptions) Camera() *MapCamera {
+	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("camera"))
 	return MapCameraFromID(_r)
 }
 
-// SetCamera wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetCamera(camera *MapCamera) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
-}
-
 // MapType wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) MapType() MapType {
-	_r := objc.Send[MapType](objref.IDOf(x), objc.RegisterName("mapType"))
+func (mso *MapSnapshotOptions) MapType() MapType {
+	_r := objc.Send[MapType](objref.IDOf(mso), objc.RegisterName("mapType"))
 	return _r
-}
-
-// SetMapType wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetMapType(mapType MapType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapType:"), mapType)
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (mso *MapSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
 // ShowsPointsOfInterest wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) ShowsPointsOfInterest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPointsOfInterest"))
+func (mso *MapSnapshotOptions) ShowsPointsOfInterest() bool {
+	_r := objc.Send[bool](objref.IDOf(mso), objc.RegisterName("showsPointsOfInterest"))
 	return _r
-}
-
-// SetShowsPointsOfInterest wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetShowsPointsOfInterest(showsPointsOfInterest bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
 }
 
 // ShowsBuildings wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) ShowsBuildings() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsBuildings"))
+func (mso *MapSnapshotOptions) ShowsBuildings() bool {
+	_r := objc.Send[bool](objref.IDOf(mso), objc.RegisterName("showsBuildings"))
 	return _r
-}
-
-// SetShowsBuildings wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetShowsBuildings(showsBuildings bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBuildings:"), showsBuildings)
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (mso *MapSnapshotOptions) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(mso), objc.RegisterName("size"))
 	return _r
 }
 
-// SetSize wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-}
-
 // Appearance wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) Appearance() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
+func (mso *MapSnapshotOptions) Appearance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("appearance"))
 	return obj.Wrap(_r)
 }
-
-// SetAppearance wraps the corresponding Objective-C method.
-func (x *MapSnapshotOptions) SetAppearance(appearance obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
-}
-
-// MapSnapshotOptionsable is the interface implemented by [MapSnapshotOptions], for mocking and DI.
-type MapSnapshotOptionsable interface {
-	obj.Object
-	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapSnapshotOptions
-	WithCamera(camera *MapCamera) *MapSnapshotOptions
-	WithMapType(mapType MapType) *MapSnapshotOptions
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions
-	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapSnapshotOptions
-	WithShowsBuildings(showsBuildings bool) *MapSnapshotOptions
-	WithSize(size corefoundation.CGSize) *MapSnapshotOptions
-	WithAppearance(appearance obj.Object) *MapSnapshotOptions
-	PreferredConfiguration() *MapConfiguration
-	SetPreferredConfiguration(preferredConfiguration *MapConfiguration)
-	Camera() *MapCamera
-	SetCamera(camera *MapCamera)
-	MapType() MapType
-	SetMapType(mapType MapType)
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-	ShowsPointsOfInterest() bool
-	SetShowsPointsOfInterest(showsPointsOfInterest bool)
-	ShowsBuildings() bool
-	SetShowsBuildings(showsBuildings bool)
-	Size() corefoundation.CGSize
-	SetSize(size corefoundation.CGSize)
-	Appearance() obj.Object
-	SetAppearance(appearance obj.Object)
-}
-
-var _ MapSnapshotOptionsable = (*MapSnapshotOptions)(nil)

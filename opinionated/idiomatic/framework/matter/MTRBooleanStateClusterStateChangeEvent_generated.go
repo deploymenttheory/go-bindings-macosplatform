@@ -44,24 +44,24 @@ func mTRBooleanStateClusterStateChangeEventAdopt(id objc.ID) *MTRBooleanStateClu
 }
 
 // Description returns the object's -description text.
-func (x *MTRBooleanStateClusterStateChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(mbscsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBooleanStateClusterStateChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbscsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBooleanStateClusterStateChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbscsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBooleanStateClusterStateChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) String() string {
+	return rt.Description(objref.IDOf(mbscsce))
 }
 
 // NewMTRBooleanStateClusterStateChangeEvent creates a new MTRBooleanStateClusterStateChangeEvent.
@@ -71,28 +71,13 @@ func NewMTRBooleanStateClusterStateChangeEvent() *MTRBooleanStateClusterStateCha
 }
 
 // WithStateValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
-	return x
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent {
+	objc.Send[objc.ID](objref.IDOf(mbscsce), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
+	return mbscsce
 }
 
 // StateValue wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateClusterStateChangeEvent) StateValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateValue"))
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) StateValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbscsce), objc.RegisterName("stateValue"))
 	return obj.Wrap(_r)
 }
-
-// SetStateValue wraps the corresponding Objective-C method.
-func (x *MTRBooleanStateClusterStateChangeEvent) SetStateValue(stateValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
-}
-
-// MTRBooleanStateClusterStateChangeEventable is the interface implemented by [MTRBooleanStateClusterStateChangeEvent], for mocking and DI.
-type MTRBooleanStateClusterStateChangeEventable interface {
-	obj.Object
-	WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent
-	StateValue() obj.Object
-	SetStateValue(stateValue obj.Object)
-}
-
-var _ MTRBooleanStateClusterStateChangeEventable = (*MTRBooleanStateClusterStateChangeEvent)(nil)

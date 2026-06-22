@@ -48,43 +48,35 @@ func classDescriptionAdopt(id objc.ID) *ClassDescription {
 }
 
 // Description returns the object's -description text.
-func (x *ClassDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *ClassDescription) Description() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClassDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cd *ClassDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClassDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cd *ClassDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ClassDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *ClassDescription) String() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cd *ClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cd
 }
-
-// ClassDescriptionable is the interface implemented by [ClassDescription], for mocking and DI.
-type ClassDescriptionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription
-}
-
-var _ ClassDescriptionable = (*ClassDescription)(nil)
 
 // isClassDescription marks ClassDescription — and, by embedding promotion, its
 // subclasses — as a member of the ClassDescription hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ClassDescription) isClassDescription() {}
+func (cd *ClassDescription) isClassDescription() {}
 
 var _ ClassDescriptionProvider = (*ClassDescription)(nil)

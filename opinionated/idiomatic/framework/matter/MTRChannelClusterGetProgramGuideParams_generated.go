@@ -44,24 +44,24 @@ func mTRChannelClusterGetProgramGuideParamsAdopt(id objc.ID) *MTRChannelClusterG
 }
 
 // Description returns the object's -description text.
-func (x *MTRChannelClusterGetProgramGuideParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) Description() string {
+	return rt.Description(objref.IDOf(mccgpgp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterGetProgramGuideParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mccgpgp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterGetProgramGuideParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mccgpgp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRChannelClusterGetProgramGuideParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) String() string {
+	return rt.Description(objref.IDOf(mccgpgp))
 }
 
 // NewMTRChannelClusterGetProgramGuideParams creates a new MTRChannelClusterGetProgramGuideParams.
@@ -71,161 +71,96 @@ func NewMTRChannelClusterGetProgramGuideParams() *MTRChannelClusterGetProgramGui
 }
 
 // WithStartTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterGetProgramGuideParams) WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
-	return x
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
+	return mccgpgp
 }
 
 // WithEndTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
-	return x
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
+	return mccgpgp
 }
 
 // WithPageToken sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
-	return x
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
+	return mccgpgp
 }
 
 // WithRecordingFlag sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterGetProgramGuideParams) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
-	return x
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
+	return mccgpgp
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterGetProgramGuideParams) WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-	return x
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setData:"), objref.IDOf(data))
+	return mccgpgp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRChannelClusterGetProgramGuideParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mccgpgp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mccgpgp
 }
 
 // StartTime wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) StartTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
-}
-
-// SetStartTime wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetStartTime(startTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
 // EndTime wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) EndTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTime"))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) EndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("endTime"))
 	return obj.Wrap(_r)
 }
 
-// SetEndTime wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetEndTime(endTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
-}
-
 // ChannelList wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) ChannelList() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelList"))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) ChannelList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("channelList"))
 	return obj.Wrap(_r)
 }
 
 // SetChannelList wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelList:"), objref.IDOf(channelList))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setChannelList:"), objref.IDOf(channelList))
 }
 
 // PageToken wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageToken"))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("pageToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
 }
 
-// SetPageToken wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetPageToken(pageToken *MTRChannelClusterPageTokenStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
-}
-
 // RecordingFlag wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) RecordingFlag() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordingFlag"))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) RecordingFlag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("recordingFlag"))
 	return obj.Wrap(_r)
-}
-
-// SetRecordingFlag wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetRecordingFlag(recordingFlag obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// SetData wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetData(data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterGetProgramGuideParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRChannelClusterGetProgramGuideParamsable is the interface implemented by [MTRChannelClusterGetProgramGuideParams], for mocking and DI.
-type MTRChannelClusterGetProgramGuideParamsable interface {
-	obj.Object
-	WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams
-	WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams
-	WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams
-	WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams
-	WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterGetProgramGuideParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterGetProgramGuideParams
-	StartTime() obj.Object
-	SetStartTime(startTime obj.Object)
-	EndTime() obj.Object
-	SetEndTime(endTime obj.Object)
-	ChannelList() obj.Object
-	SetChannelList(channelList obj.Object)
-	PageToken() *MTRChannelClusterPageTokenStruct
-	SetPageToken(pageToken *MTRChannelClusterPageTokenStruct)
-	RecordingFlag() obj.Object
-	SetRecordingFlag(recordingFlag obj.Object)
-	Data() obj.Object
-	SetData(data obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRChannelClusterGetProgramGuideParamsable = (*MTRChannelClusterGetProgramGuideParams)(nil)

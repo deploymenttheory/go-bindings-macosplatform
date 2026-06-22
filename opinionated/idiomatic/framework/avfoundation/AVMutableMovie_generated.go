@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -12,7 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MutableMovie is an idiomatic wrapper over the Objective-C class AVMutableMovie.
@@ -83,145 +84,83 @@ func NewMutableMovieWithSettingsFromMovieOptionsError(movie *Movie, options obj.
 	return mutableMovieAdopt(_id), nil
 }
 
-// WithPreferredRate the asset’s rate preference for playing its media.
-func (x *MutableMovie) WithPreferredRate(preferredRate float32) *MutableMovie {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredRate:"), preferredRate)
-	return x
+// WithPreferredRate sets the asset’s rate preference for playing its media.
+func (mm *MutableMovie) WithPreferredRate(preferredRate float32) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setPreferredRate:"), preferredRate)
+	return mm
 }
 
-// WithPreferredVolume the asset’s volume preference for playing its audible media.
-func (x *MutableMovie) WithPreferredVolume(preferredVolume float32) *MutableMovie {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
-	return x
+// WithPreferredVolume sets the asset’s volume preference for playing its audible media.
+func (mm *MutableMovie) WithPreferredVolume(preferredVolume float32) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setPreferredVolume:"), preferredVolume)
+	return mm
 }
 
-// WithPreferredTransform the asset’s transform preference to apply to its visual content during presentation or processing.
-func (x *MutableMovie) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovie {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
-	return x
+// WithPreferredTransform sets the asset’s transform preference to apply to its visual content during presentation or processing.
+func (mm *MutableMovie) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setPreferredTransform:"), preferredTransform)
+	return mm
 }
 
-// WithTimescale the time scale of the movie.
-func (x *MutableMovie) WithTimescale(timescale int32) *MutableMovie {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimescale:"), timescale)
-	return x
+// WithTimescale sets the time scale of the movie.
+func (mm *MutableMovie) WithTimescale(timescale int32) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setTimescale:"), timescale)
+	return mm
 }
 
-// WithModified a Boolean value that indicates whether the movie is in a modified state.
-func (x *MutableMovie) WithModified(modified bool) *MutableMovie {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModified:"), modified)
-	return x
+// WithModified sets a Boolean value that indicates whether the movie is in a modified state.
+func (mm *MutableMovie) WithModified(modified bool) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setModified:"), modified)
+	return mm
 }
 
-// WithDefaultMediaDataStorage the default storage container for media data that you add to a movie.
-func (x *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultMediaDataStorage:"), objref.IDOf(defaultMediaDataStorage))
-	return x
+// WithDefaultMediaDataStorage sets the default storage container for media data that you add to a movie.
+func (mm *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setDefaultMediaDataStorage:"), objref.IDOf(defaultMediaDataStorage))
+	return mm
 }
 
-// WithMetadata an array of metadata items for all metadata identifiers for which a value is available.
-func (x *MutableMovie) WithMetadata(items ...MetadataItemProvider) *MutableMovie {
+// WithMetadata sets an array of metadata items for all metadata identifiers for which a value is available.
+func (mm *MutableMovie) WithMetadata(items ...MetadataItemProvider) *MutableMovie {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setMetadata:"), _arr)
+	return mm
 }
 
-// SetPreferredRate wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetPreferredRate(preferredRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredRate:"), preferredRate)
-}
-
-// SetPreferredVolume wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetPreferredVolume(preferredVolume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVolume:"), preferredVolume)
-}
-
-// SetPreferredTransform wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTransform:"), preferredTransform)
-}
-
-// Timescale for file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
-func (x *MutableMovie) Timescale() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("timescale"))
+// Timescale returns for file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
+func (mm *MutableMovie) Timescale() int32 {
+	_r := objc.Send[int32](objref.IDOf(mm), objc.RegisterName("timescale"))
 	return _r
 }
 
-// SetTimescale wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetTimescale(timescale int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimescale:"), timescale)
-}
-
-// IsModified whether a movie has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
-func (x *MutableMovie) IsModified() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isModified"))
+// IsModified reports whether a movie has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
+func (mm *MutableMovie) IsModified() bool {
+	_r := objc.Send[bool](objref.IDOf(mm), objc.RegisterName("isModified"))
 	return _r
-}
-
-// SetModified wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetModified(modified bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModified:"), modified)
-}
-
-// SetDefaultMediaDataStorage wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultMediaDataStorage:"), objref.IDOf(defaultMediaDataStorage))
 }
 
 // MutableTrackCompatibleWithTrack provides a reference to a track from a mutable movie into which you can insert any time range.
-func (x *MutableMovie) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableMovieTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
+func (mm *MutableMovie) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableMovieTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
 	return MutableMovieTrackFromID(_r)
 }
 
 // AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions adds an empty track to the target movie.
-func (x *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType obj.Object, track *AssetTrack, options obj.Object) *MutableMovieTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMutableTrackWithMediaType:copySettingsFromTrack:options:"), objref.IDOf(mediaType), objref.IDOf(track), objref.IDOf(options))
+func (mm *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType obj.Object, track *AssetTrack, options obj.Object) *MutableMovieTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("addMutableTrackWithMediaType:copySettingsFromTrack:options:"), objref.IDOf(mediaType), objref.IDOf(track), objref.IDOf(options))
 	return MutableMovieTrackFromID(_r)
 }
 
 // AddMutableTracksCopyingSettingsFromTracksOptions adds one or more empty tracks to the target movie and copies the track settings from the source tracks.
-func (x *MutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks []*AssetTrack, options obj.Object) []*MutableMovieTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMutableTracksCopyingSettingsFromTracks:options:"), purego.SliceToNSArray(existingTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+func (mm *MutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks []*AssetTrack, options obj.Object) []*MutableMovieTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("addMutableTracksCopyingSettingsFromTracks:options:"), purego.SliceToNSArray(existingTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MutableMovieTrack { return MutableMovieTrackFromID(_id) })
 }
 
 // RemoveTrack removes the specified track from the target movie.
-func (x *MutableMovie) RemoveTrack(track *MovieTrack) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrack:"), objref.IDOf(track))
+func (mm *MutableMovie) RemoveTrack(track *MovieTrack) {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("removeTrack:"), objref.IDOf(track))
 }
-
-// SetMetadata wraps the corresponding Objective-C method.
-func (x *MutableMovie) SetMetadata(metadata []*MetadataItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableMovieable is the interface implemented by [MutableMovie], for mocking and DI.
-type MutableMovieable interface {
-	obj.Object
-	WithPreferredRate(preferredRate float32) *MutableMovie
-	WithPreferredVolume(preferredVolume float32) *MutableMovie
-	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovie
-	WithTimescale(timescale int32) *MutableMovie
-	WithModified(modified bool) *MutableMovie
-	WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie
-	WithMetadata(items ...MetadataItemProvider) *MutableMovie
-	SetPreferredRate(preferredRate float32)
-	SetPreferredVolume(preferredVolume float32)
-	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
-	Timescale() int32
-	SetTimescale(timescale int32)
-	IsModified() bool
-	SetModified(modified bool)
-	SetDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage)
-	MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableMovieTrack
-	AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType obj.Object, track *AssetTrack, options obj.Object) *MutableMovieTrack
-	AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks []*AssetTrack, options obj.Object) []*MutableMovieTrack
-	RemoveTrack(track *MovieTrack)
-	SetMetadata(metadata []*MetadataItem)
-}
-
-var _ MutableMovieable = (*MutableMovie)(nil)
 
 var _ MovieProvider = (*MutableMovie)(nil)
 

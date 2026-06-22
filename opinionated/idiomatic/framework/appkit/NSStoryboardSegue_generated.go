@@ -46,24 +46,24 @@ func storyboardSegueAdopt(id objc.ID) *StoryboardSegue {
 }
 
 // Description returns the object's -description text.
-func (x *StoryboardSegue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *StoryboardSegue) Description() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StoryboardSegue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ss *StoryboardSegue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StoryboardSegue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ss *StoryboardSegue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StoryboardSegue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ss *StoryboardSegue) String() string {
+	return rt.Description(objref.IDOf(ss))
 }
 
 // NewStoryboardSegueWithIdentifierSourceDestination the designated initializer for a storyboard segue.
@@ -74,35 +74,24 @@ func NewStoryboardSegueWithIdentifierSourceDestination(identifier obj.Object, so
 }
 
 // Perform performs a visual transition from one controller to another.
-func (x *StoryboardSegue) Perform() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perform"))
+func (ss *StoryboardSegue) Perform() {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("perform"))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *StoryboardSegue) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (ss *StoryboardSegue) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // SourceController wraps the corresponding Objective-C method.
-func (x *StoryboardSegue) SourceController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceController"))
+func (ss *StoryboardSegue) SourceController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("sourceController"))
 	return obj.Wrap(_r)
 }
 
 // DestinationController wraps the corresponding Objective-C method.
-func (x *StoryboardSegue) DestinationController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationController"))
+func (ss *StoryboardSegue) DestinationController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("destinationController"))
 	return obj.Wrap(_r)
 }
-
-// StoryboardSegueable is the interface implemented by [StoryboardSegue], for mocking and DI.
-type StoryboardSegueable interface {
-	obj.Object
-	Perform()
-	Identifier() obj.Object
-	SourceController() obj.Object
-	DestinationController() obj.Object
-}
-
-var _ StoryboardSegueable = (*StoryboardSegue)(nil)

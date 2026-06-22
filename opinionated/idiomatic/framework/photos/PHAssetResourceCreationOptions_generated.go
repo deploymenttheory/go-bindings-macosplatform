@@ -46,24 +46,24 @@ func assetResourceCreationOptionsAdopt(id objc.ID) *AssetResourceCreationOptions
 }
 
 // Description returns the object's -description text.
-func (x *AssetResourceCreationOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (arco *AssetResourceCreationOptions) Description() string {
+	return rt.Description(objref.IDOf(arco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetResourceCreationOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (arco *AssetResourceCreationOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(arco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetResourceCreationOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (arco *AssetResourceCreationOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(arco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetResourceCreationOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (arco *AssetResourceCreationOptions) String() string {
+	return rt.Description(objref.IDOf(arco))
 }
 
 // NewAssetResourceCreationOptions creates a new AssetResourceCreationOptions.
@@ -72,95 +72,56 @@ func NewAssetResourceCreationOptions() *AssetResourceCreationOptions {
 	return assetResourceCreationOptionsAdopt(_id)
 }
 
-// WithOriginalFilename the filename for the asset resource being created.
-func (x *AssetResourceCreationOptions) WithOriginalFilename(originalFilename string) *AssetResourceCreationOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalFilename:"), purego.NSString(originalFilename))
-	return x
+// WithOriginalFilename sets the filename for the asset resource being created.
+func (arco *AssetResourceCreationOptions) WithOriginalFilename(originalFilename string) *AssetResourceCreationOptions {
+	objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("setOriginalFilename:"), purego.NSString(originalFilename))
+	return arco
 }
 
-// WithContentType the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
-func (x *AssetResourceCreationOptions) WithContentType(contentType obj.Object) *AssetResourceCreationOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
-	return x
+// WithContentType sets the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
+func (arco *AssetResourceCreationOptions) WithContentType(contentType obj.Object) *AssetResourceCreationOptions {
+	objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
+	return arco
 }
 
-// WithUniformTypeIdentifier the uniform type identifier for the resource.
-func (x *AssetResourceCreationOptions) WithUniformTypeIdentifier(uniformTypeIdentifier string) *AssetResourceCreationOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniformTypeIdentifier:"), purego.NSString(uniformTypeIdentifier))
-	return x
+// WithUniformTypeIdentifier sets the uniform type identifier for the resource.
+func (arco *AssetResourceCreationOptions) WithUniformTypeIdentifier(uniformTypeIdentifier string) *AssetResourceCreationOptions {
+	objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("setUniformTypeIdentifier:"), purego.NSString(uniformTypeIdentifier))
+	return arco
 }
 
-// WithShouldMoveFile a Boolean value that determines whether Photos moves or duplicates files when creating an asset resource.
-func (x *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool) *AssetResourceCreationOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMoveFile:"), shouldMoveFile)
-	return x
+// WithShouldMoveFile sets a Boolean value that determines whether Photos moves or duplicates files when creating an asset resource.
+func (arco *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool) *AssetResourceCreationOptions {
+	objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("setShouldMoveFile:"), shouldMoveFile)
+	return arco
 }
 
 // OriginalFilename wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) OriginalFilename() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFilename"))
+func (arco *AssetResourceCreationOptions) OriginalFilename() string {
+	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("originalFilename"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetOriginalFilename wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) SetOriginalFilename(originalFilename string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalFilename:"), purego.NSString(originalFilename))
-}
-
-// ContentType the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
-func (x *AssetResourceCreationOptions) ContentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+// ContentType returns the type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
+func (arco *AssetResourceCreationOptions) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
-// SetContentType wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) SetContentType(contentType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
-}
-
 // UniformTypeIdentifier wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) UniformTypeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
+func (arco *AssetResourceCreationOptions) UniformTypeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetUniformTypeIdentifier wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) SetUniformTypeIdentifier(uniformTypeIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniformTypeIdentifier:"), purego.NSString(uniformTypeIdentifier))
-}
-
 // ShouldMoveFile wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) ShouldMoveFile() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMoveFile"))
+func (arco *AssetResourceCreationOptions) ShouldMoveFile() bool {
+	_r := objc.Send[bool](objref.IDOf(arco), objc.RegisterName("shouldMoveFile"))
 	return _r
 }
-
-// SetShouldMoveFile wraps the corresponding Objective-C method.
-func (x *AssetResourceCreationOptions) SetShouldMoveFile(shouldMoveFile bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMoveFile:"), shouldMoveFile)
-}
-
-// AssetResourceCreationOptionsable is the interface implemented by [AssetResourceCreationOptions], for mocking and DI.
-type AssetResourceCreationOptionsable interface {
-	obj.Object
-	WithOriginalFilename(originalFilename string) *AssetResourceCreationOptions
-	WithContentType(contentType obj.Object) *AssetResourceCreationOptions
-	WithUniformTypeIdentifier(uniformTypeIdentifier string) *AssetResourceCreationOptions
-	WithShouldMoveFile(shouldMoveFile bool) *AssetResourceCreationOptions
-	OriginalFilename() string
-	SetOriginalFilename(originalFilename string)
-	ContentType() obj.Object
-	SetContentType(contentType obj.Object)
-	UniformTypeIdentifier() string
-	SetUniformTypeIdentifier(uniformTypeIdentifier string)
-	ShouldMoveFile() bool
-	SetShouldMoveFile(shouldMoveFile bool)
-}
-
-var _ AssetResourceCreationOptionsable = (*AssetResourceCreationOptions)(nil)

@@ -46,24 +46,24 @@ func managedValueAdopt(id objc.ID) *ManagedValue {
 }
 
 // Description returns the object's -description text.
-func (x *ManagedValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mv *ManagedValue) Description() string {
+	return rt.Description(objref.IDOf(mv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ManagedValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mv *ManagedValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ManagedValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mv *ManagedValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ManagedValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mv *ManagedValue) String() string {
+	return rt.Description(objref.IDOf(mv))
 }
 
 // NewManagedValueWithValue initializes a managed value with the specified JavaScript value.
@@ -74,15 +74,7 @@ func NewManagedValueWithValue(value *Value) *ManagedValue {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *ManagedValue) Value() *Value {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mv *ManagedValue) Value() *Value {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("value"))
 	return ValueFromID(_r)
 }
-
-// ManagedValueable is the interface implemented by [ManagedValue], for mocking and DI.
-type ManagedValueable interface {
-	obj.Object
-	Value() *Value
-}
-
-var _ ManagedValueable = (*ManagedValue)(nil)

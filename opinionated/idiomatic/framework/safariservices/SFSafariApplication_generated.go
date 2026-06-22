@@ -46,24 +46,24 @@ func safariApplicationAdopt(id objc.ID) *SafariApplication {
 }
 
 // Description returns the object's -description text.
-func (x *SafariApplication) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SafariApplication) Description() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariApplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sa *SafariApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariApplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sa *SafariApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariApplication) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SafariApplication) String() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // NewSafariApplication creates a new SafariApplication.
@@ -71,10 +71,3 @@ func NewSafariApplication() *SafariApplication {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("new"))
 	return safariApplicationAdopt(_id)
 }
-
-// SafariApplicationable is the interface implemented by [SafariApplication], for mocking and DI.
-type SafariApplicationable interface {
-	obj.Object
-}
-
-var _ SafariApplicationable = (*SafariApplication)(nil)

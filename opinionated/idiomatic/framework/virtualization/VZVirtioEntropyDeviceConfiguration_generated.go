@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewVirtioEntropyDeviceConfiguration() *VirtioEntropyDeviceConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioEntropyDeviceConfiguration")), objc.RegisterName("new"))
 	return virtioEntropyDeviceConfigurationAdopt(_id)
 }
-
-// VirtioEntropyDeviceConfigurationable is the interface implemented by [VirtioEntropyDeviceConfiguration], for mocking and DI.
-type VirtioEntropyDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ VirtioEntropyDeviceConfigurationable = (*VirtioEntropyDeviceConfiguration)(nil)
 
 var _ EntropyDeviceConfigurationProvider = (*VirtioEntropyDeviceConfiguration)(nil)

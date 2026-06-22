@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,46 +51,34 @@ func NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow(orient u
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMOverflowEvent) WithReturnValue(returnValue bool) *DOMOverflowEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
-	return x
+func (doe *DOMOverflowEvent) WithReturnValue(returnValue bool) *DOMOverflowEvent {
+	objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("setReturnValue:"), returnValue)
+	return doe
 }
 
 // WithCancelBubble sets the property and returns the receiver so calls can be chained.
-func (x *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-	return x
+func (doe *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEvent {
+	objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return doe
 }
 
 // Orient wraps the corresponding Objective-C method.
-func (x *DOMOverflowEvent) Orient() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("orient"))
+func (doe *DOMOverflowEvent) Orient() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(doe), objc.RegisterName("orient"))
 	return _r
 }
 
 // HorizontalOverflow wraps the corresponding Objective-C method.
-func (x *DOMOverflowEvent) HorizontalOverflow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("horizontalOverflow"))
+func (doe *DOMOverflowEvent) HorizontalOverflow() bool {
+	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("horizontalOverflow"))
 	return _r
 }
 
 // VerticalOverflow wraps the corresponding Objective-C method.
-func (x *DOMOverflowEvent) VerticalOverflow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verticalOverflow"))
+func (doe *DOMOverflowEvent) VerticalOverflow() bool {
+	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("verticalOverflow"))
 	return _r
 }
-
-// DOMOverflowEventable is the interface implemented by [DOMOverflowEvent], for mocking and DI.
-type DOMOverflowEventable interface {
-	obj.Object
-	WithReturnValue(returnValue bool) *DOMOverflowEvent
-	WithCancelBubble(cancelBubble bool) *DOMOverflowEvent
-	Orient() uint16
-	HorizontalOverflow() bool
-	VerticalOverflow() bool
-}
-
-var _ DOMOverflowEventable = (*DOMOverflowEvent)(nil)
 
 var _ DOMEventProvider = (*DOMOverflowEvent)(nil)
 

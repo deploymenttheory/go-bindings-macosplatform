@@ -46,24 +46,24 @@ func fetchResultAdopt(id objc.ID) *FetchResult {
 }
 
 // Description returns the object's -description text.
-func (x *FetchResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fr *FetchResult) Description() string {
+	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fr *FetchResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fr *FetchResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FetchResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fr *FetchResult) String() string {
+	return rt.Description(objref.IDOf(fr))
 }
 
 // NewFetchResult creates a new FetchResult.
@@ -73,22 +73,13 @@ func NewFetchResult() *FetchResult {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *FetchResult) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (fr *FetchResult) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // CurrentHistoryToken wraps the corresponding Objective-C method.
-func (x *FetchResult) CurrentHistoryToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentHistoryToken"))
+func (fr *FetchResult) CurrentHistoryToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("currentHistoryToken"))
 	return obj.Wrap(_r)
 }
-
-// FetchResultable is the interface implemented by [FetchResult], for mocking and DI.
-type FetchResultable interface {
-	obj.Object
-	Value() obj.Object
-	CurrentHistoryToken() obj.Object
-}
-
-var _ FetchResultable = (*FetchResult)(nil)

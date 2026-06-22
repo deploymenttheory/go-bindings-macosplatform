@@ -51,19 +51,11 @@ func NewCNNGroupNormalizationGradientNodeWithSourceGradientSourceImageGradientSt
 	return cNNGroupNormalizationGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNGroupNormalizationGradientNode) WithLabel(label string) *CNNGroupNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cgngn *CNNGroupNormalizationGradientNode) WithLabel(label string) *CNNGroupNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cgngn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cgngn
 }
-
-// CNNGroupNormalizationGradientNodeable is the interface implemented by [CNNGroupNormalizationGradientNode], for mocking and DI.
-type CNNGroupNormalizationGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNGroupNormalizationGradientNode
-}
-
-var _ CNNGroupNormalizationGradientNodeable = (*CNNGroupNormalizationGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNGroupNormalizationGradientNode)(nil)
 

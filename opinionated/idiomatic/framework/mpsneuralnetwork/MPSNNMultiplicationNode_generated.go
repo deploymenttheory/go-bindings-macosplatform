@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,95 +52,76 @@ func NewNNMultiplicationNode() *NNMultiplicationNode {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (nmn *NNMultiplicationNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return nmn
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (nmn *NNMultiplicationNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return nmn
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithBias(bias float32) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (nmn *NNMultiplicationNode) WithBias(bias float32) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setBias:"), bias)
+	return nmn
 }
 
 // WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+func (nmn *NNMultiplicationNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return nmn
 }
 
 // WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+func (nmn *NNMultiplicationNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return nmn
 }
 
 // WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
-	return x
+func (nmn *NNMultiplicationNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
+	return nmn
 }
 
 // WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+func (nmn *NNMultiplicationNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nmn
 }
 
 // WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+func (nmn *NNMultiplicationNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nmn
 }
 
 // WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+func (nmn *NNMultiplicationNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return nmn
 }
 
 // WithMinimumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithMinimumValue(minimumValue float32) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+func (nmn *NNMultiplicationNode) WithMinimumValue(minimumValue float32) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return nmn
 }
 
 // WithMaximumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNMultiplicationNode) WithMaximumValue(maximumValue float32) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+func (nmn *NNMultiplicationNode) WithMaximumValue(maximumValue float32) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return nmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNMultiplicationNode) WithLabel(label string) *NNMultiplicationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nmn *NNMultiplicationNode) WithLabel(label string) *NNMultiplicationNode {
+	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nmn
 }
-
-// NNMultiplicationNodeable is the interface implemented by [NNMultiplicationNode], for mocking and DI.
-type NNMultiplicationNodeable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *NNMultiplicationNode
-	WithSecondaryScale(secondaryScale float32) *NNMultiplicationNode
-	WithBias(bias float32) *NNMultiplicationNode
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNMultiplicationNode
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNMultiplicationNode
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNMultiplicationNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationNode
-	WithMinimumValue(minimumValue float32) *NNMultiplicationNode
-	WithMaximumValue(maximumValue float32) *NNMultiplicationNode
-	WithLabel(label string) *NNMultiplicationNode
-}
-
-var _ NNMultiplicationNodeable = (*NNMultiplicationNode)(nil)
 
 var _ NNBinaryArithmeticNodeProvider = (*NNMultiplicationNode)(nil)
 

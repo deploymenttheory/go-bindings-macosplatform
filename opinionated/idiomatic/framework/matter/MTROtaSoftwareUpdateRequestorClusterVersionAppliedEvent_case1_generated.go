@@ -51,24 +51,15 @@ func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwar
 }
 
 // WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+func (mosurcvae *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcvae), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return mosurcvae
 }
 
 // WithProductID sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
-	return x
+func (mosurcvae *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcvae), objc.RegisterName("setProductID:"), objref.IDOf(productID))
+	return mosurcvae
 }
-
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
-	obj.Object
-	WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
-	WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
-}
-
-var _ MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)
 
 var _ MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)

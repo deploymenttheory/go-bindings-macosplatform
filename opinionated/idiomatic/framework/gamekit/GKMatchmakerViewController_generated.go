@@ -46,24 +46,24 @@ func matchmakerViewControllerAdopt(id objc.ID) *MatchmakerViewController {
 }
 
 // Description returns the object's -description text.
-func (x *MatchmakerViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mvc *MatchmakerViewController) Description() string {
+	return rt.Description(objref.IDOf(mvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchmakerViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mvc *MatchmakerViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchmakerViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mvc *MatchmakerViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatchmakerViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mvc *MatchmakerViewController) String() string {
+	return rt.Description(objref.IDOf(mvc))
 }
 
 // NewMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players.
@@ -80,117 +80,74 @@ func NewMatchmakerViewControllerWithInvite(invite *Invite) *MatchmakerViewContro
 	return matchmakerViewControllerAdopt(_id)
 }
 
-// WithHosted a Boolean value that indicates whether the match is hosted or peer-to-peer.
-func (x *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHosted:"), hosted)
-	return x
+// WithHosted sets a Boolean value that indicates whether the match is hosted or peer-to-peer.
+func (mvc *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHosted:"), hosted)
+	return mvc
 }
 
-// WithMatchmakingMode the mode that a multiplayer game uses to find players.
-func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
-	return x
+// WithMatchmakingMode sets the mode that a multiplayer game uses to find players.
+func (mvc *MatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *MatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
+	return mvc
 }
 
-// WithCanStartWithMinimumPlayers a Boolean value that indicates whether your game can start after a minimum number of players join a match.
-func (x *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
-	return x
+// WithCanStartWithMinimumPlayers sets a Boolean value that indicates whether your game can start after a minimum number of players join a match.
+func (mvc *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
+	return mvc
 }
 
-// WithDefaultInvitationMessage the default invitation message sent to a player.
-func (x *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
-	return x
+// WithDefaultInvitationMessage sets the default invitation message sent to a player.
+func (mvc *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
+	return mvc
 }
 
 // AddPlayersToMatch invites additional players to join an existing match.
-func (x *MatchmakerViewController) AddPlayersToMatch(match *Match) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPlayersToMatch:"), objref.IDOf(match))
+func (mvc *MatchmakerViewController) AddPlayersToMatch(match *Match) {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("addPlayersToMatch:"), objref.IDOf(match))
 }
 
 // SetHostedPlayerDidConnect updates the connection status of a player in a hosted game.
-func (x *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, connected bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
+func (mvc *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, connected bool) {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
 }
 
 // MatchRequest wraps the corresponding Objective-C method.
-func (x *MatchmakerViewController) MatchRequest() *MatchRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchRequest"))
+func (mvc *MatchmakerViewController) MatchRequest() *MatchRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("matchRequest"))
 	return MatchRequestFromID(_r)
 }
 
-// IsHosted set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
-func (x *MatchmakerViewController) IsHosted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHosted"))
+// IsHosted reports whether set to true to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
+func (mvc *MatchmakerViewController) IsHosted() bool {
+	_r := objc.Send[bool](objref.IDOf(mvc), objc.RegisterName("isHosted"))
 	return _r
 }
 
-// SetHosted wraps the corresponding Objective-C method.
-func (x *MatchmakerViewController) SetHosted(hosted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHosted:"), hosted)
-}
-
-// MatchmakingMode this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
-func (x *MatchmakerViewController) MatchmakingMode() MatchmakingMode {
-	_r := objc.Send[MatchmakingMode](objref.IDOf(x), objc.RegisterName("matchmakingMode"))
+// MatchmakingMode returns this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
+func (mvc *MatchmakerViewController) MatchmakingMode() MatchmakingMode {
+	_r := objc.Send[MatchmakingMode](objref.IDOf(mvc), objc.RegisterName("matchmakingMode"))
 	return _r
 }
 
-// SetMatchmakingMode wraps the corresponding Objective-C method.
-func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode MatchmakingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
-}
-
-// CanStartWithMinimumPlayers a BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is NO, and the multiplayer match can only proceed after all players are connected. If the value is set to YES, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
-func (x *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStartWithMinimumPlayers"))
+// CanStartWithMinimumPlayers reports whether a BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is false, and the multiplayer match can only proceed after all players are connected. If the value is set to true, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
+func (mvc *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
+	_r := objc.Send[bool](objref.IDOf(mvc), objc.RegisterName("canStartWithMinimumPlayers"))
 	return _r
 }
 
-// SetCanStartWithMinimumPlayers wraps the corresponding Objective-C method.
-func (x *MatchmakerViewController) SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
-}
-
-// DefaultInvitationMessage deprecated, set the message on the match request instead
-func (x *MatchmakerViewController) DefaultInvitationMessage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultInvitationMessage"))
+// DefaultInvitationMessage returns deprecated, set the message on the match request instead
+func (mvc *MatchmakerViewController) DefaultInvitationMessage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("defaultInvitationMessage"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDefaultInvitationMessage wraps the corresponding Objective-C method.
-func (x *MatchmakerViewController) SetDefaultInvitationMessage(defaultInvitationMessage string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
-}
-
 // SetHostedPlayerConnected updates a player’s status on the view to show that the player has connected or disconnected from your server.
-func (x *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostedPlayer:connected:"), purego.NSString(playerID), connected)
+func (mvc *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:connected:"), purego.NSString(playerID), connected)
 }
-
-// MatchmakerViewControllerable is the interface implemented by [MatchmakerViewController], for mocking and DI.
-type MatchmakerViewControllerable interface {
-	obj.Object
-	WithHosted(hosted bool) *MatchmakerViewController
-	WithMatchmakingMode(matchmakingMode MatchmakingMode) *MatchmakerViewController
-	WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController
-	WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController
-	AddPlayersToMatch(match *Match)
-	SetHostedPlayerDidConnect(player *Player, connected bool)
-	MatchRequest() *MatchRequest
-	IsHosted() bool
-	SetHosted(hosted bool)
-	MatchmakingMode() MatchmakingMode
-	SetMatchmakingMode(matchmakingMode MatchmakingMode)
-	CanStartWithMinimumPlayers() bool
-	SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool)
-	DefaultInvitationMessage() string
-	SetDefaultInvitationMessage(defaultInvitationMessage string)
-	SetHostedPlayerConnected(playerID string, connected bool)
-}
-
-var _ MatchmakerViewControllerable = (*MatchmakerViewController)(nil)

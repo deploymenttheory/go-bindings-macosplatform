@@ -53,18 +53,10 @@ func NewUnitElectricCharge() *UnitElectricCharge {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitElectricCharge) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCharge {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uec *UnitElectricCharge) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCharge {
+	objc.Send[objc.ID](objref.IDOf(uec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uec
 }
-
-// UnitElectricChargeable is the interface implemented by [UnitElectricCharge], for mocking and DI.
-type UnitElectricChargeable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCharge
-}
-
-var _ UnitElectricChargeable = (*UnitElectricCharge)(nil)
 
 var _ DimensionProvider = (*UnitElectricCharge)(nil)
 

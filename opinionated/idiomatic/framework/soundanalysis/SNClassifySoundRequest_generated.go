@@ -5,13 +5,14 @@
 package soundanalysis
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ClassifySoundRequest is an idiomatic wrapper over the Objective-C class SNClassifySoundRequest.
@@ -48,24 +49,24 @@ func classifySoundRequestAdopt(id objc.ID) *ClassifySoundRequest {
 }
 
 // Description returns the object's -description text.
-func (x *ClassifySoundRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (csr *ClassifySoundRequest) Description() string {
+	return rt.Description(objref.IDOf(csr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClassifySoundRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (csr *ClassifySoundRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(csr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClassifySoundRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (csr *ClassifySoundRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(csr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ClassifySoundRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (csr *ClassifySoundRequest) String() string {
+	return rt.Description(objref.IDOf(csr))
 }
 
 // NewClassifySoundRequestWithMLModelError creates a request that uses a custom sound classification model.
@@ -90,45 +91,28 @@ func NewClassifySoundRequestWithClassifierIdentifierError(classifierIdentifier o
 	return classifySoundRequestAdopt(_id), nil
 }
 
-// WithOverlapFactor the amount of overlap between successive analysis windows when the model operates on a fixed-size audio block.
-func (x *ClassifySoundRequest) WithOverlapFactor(overlapFactor float64) *ClassifySoundRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlapFactor:"), overlapFactor)
-	return x
+// WithOverlapFactor sets the amount of overlap between successive analysis windows when the model operates on a fixed-size audio block.
+func (csr *ClassifySoundRequest) WithOverlapFactor(overlapFactor float64) *ClassifySoundRequest {
+	objc.Send[objc.ID](objref.IDOf(csr), objc.RegisterName("setOverlapFactor:"), overlapFactor)
+	return csr
 }
 
-// OverlapFactor the overlap factor of the windows of audio data provided to the classifier, if the model operates on fixed audio block sizes. When performing audio analysis on fixed audio block sizes, it is common for the analysis windows to overlap by some factor. Without overlapping the analysis windows (when the overlap factor is 0.0), a sound might be split across two analysis windows, which could negatively affect classification performance. Overlapping the analysis windows by 50% ensures each sound will fall near the center of at least one analysis window. The supported range is [0.0, 1.0), and the default value is 0.5. Increasing the overlap factor increases computational complexity, so values greater than 0.5 should be used with care.
-func (x *ClassifySoundRequest) OverlapFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("overlapFactor"))
+// OverlapFactor returns the overlap factor of the windows of audio data provided to the classifier, if the model operates on fixed audio block sizes. When performing audio analysis on fixed audio block sizes, it is common for the analysis windows to overlap by some factor. Without overlapping the analysis windows (when the overlap factor is 0.0), a sound might be split across two analysis windows, which could negatively affect classification performance. Overlapping the analysis windows by 50% ensures each sound will fall near the center of at least one analysis window. The supported range is [0.0, 1.0), and the default value is 0.5. Increasing the overlap factor increases computational complexity, so values greater than 0.5 should be used with care.
+func (csr *ClassifySoundRequest) OverlapFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(csr), objc.RegisterName("overlapFactor"))
 	return _r
 }
 
-// SetOverlapFactor wraps the corresponding Objective-C method.
-func (x *ClassifySoundRequest) SetOverlapFactor(overlapFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlapFactor:"), overlapFactor)
-}
-
-// WindowDurationConstraint the constraints governing permitted analysis window durations. The analysis window duration is controlled using the `windowDuration` property. If an analysis window duration is selected which does not meet the necessary constraints, it will automatically be adjusted to meet these constraints (see `windowDuration` for more information regarding how this adjustment will be applied).
-func (x *ClassifySoundRequest) WindowDurationConstraint() *TimeDurationConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowDurationConstraint"))
+// WindowDurationConstraint returns the constraints governing permitted analysis window durations. The analysis window duration is controlled using the `windowDuration` property. If an analysis window duration is selected which does not meet the necessary constraints, it will automatically be adjusted to meet these constraints (see `windowDuration` for more information regarding how this adjustment will be applied).
+func (csr *ClassifySoundRequest) WindowDurationConstraint() *TimeDurationConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(csr), objc.RegisterName("windowDurationConstraint"))
 	return TimeDurationConstraintFromID(_r)
 }
 
-// KnownClassifications lists all labels that can be produced by this request. - Returns: An array of strings containing all sound identifiers which can be produced by this request.
+// KnownClassifications returns lists all labels that can be produced by this request. - Returns: An array of strings containing all sound identifiers which can be produced by this request.
 //
 // KnownClassifications returns the collection as a Go slice.
-func (x *ClassifySoundRequest) KnownClassifications() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("knownClassifications"))
+func (csr *ClassifySoundRequest) KnownClassifications() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(csr), objc.RegisterName("knownClassifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// ClassifySoundRequestable is the interface implemented by [ClassifySoundRequest], for mocking and DI.
-type ClassifySoundRequestable interface {
-	obj.Object
-	WithOverlapFactor(overlapFactor float64) *ClassifySoundRequest
-	OverlapFactor() float64
-	SetOverlapFactor(overlapFactor float64)
-	WindowDurationConstraint() *TimeDurationConstraint
-	KnownClassifications() []string
-}
-
-var _ ClassifySoundRequestable = (*ClassifySoundRequest)(nil)

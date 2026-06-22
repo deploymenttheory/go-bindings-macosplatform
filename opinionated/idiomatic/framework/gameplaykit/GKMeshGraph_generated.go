@@ -52,78 +52,56 @@ func NewMeshGraph() *MeshGraph {
 	return meshGraphAdopt(_id)
 }
 
-// WithTriangulationMode a set of options for how to place graph nodes when triangulating the graph.
-func (x *MeshGraph) WithTriangulationMode(triangulationMode MeshGraphTriangulationMode) *MeshGraph {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangulationMode:"), triangulationMode)
-	return x
+// WithTriangulationMode sets a set of options for how to place graph nodes when triangulating the graph.
+func (mg *MeshGraph) WithTriangulationMode(triangulationMode MeshGraphTriangulationMode) *MeshGraph {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("setTriangulationMode:"), triangulationMode)
+	return mg
 }
 
 // AddObstacles adds new obstacles to the graph.
-func (x *MeshGraph) AddObstacles(obstacles []*PolygonObstacle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
+func (mg *MeshGraph) AddObstacles(obstacles []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveObstacles removes the specified obstacle from the graph.
-func (x *MeshGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
+func (mg *MeshGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ConnectNodeUsingObstacles adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
-func (x *MeshGraph) ConnectNodeUsingObstacles(node obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
+func (mg *MeshGraph) ConnectNodeUsingObstacles(node obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
 }
 
 // Triangulate creates or updates the graph with a network of nodes that describes the open space around its obstacles.
-func (x *MeshGraph) Triangulate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triangulate"))
+func (mg *MeshGraph) Triangulate() {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("triangulate"))
 }
 
-// Obstacles array of the extruded obstacles currently represented by this graph
+// Obstacles returns array of the extruded obstacles currently represented by this graph
 //
 // Obstacles returns the collection as a Go slice.
-func (x *MeshGraph) Obstacles() []*PolygonObstacle {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("obstacles"))
+func (mg *MeshGraph) Obstacles() []*PolygonObstacle {
+	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("obstacles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
 }
 
-// BufferRadius the distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
-func (x *MeshGraph) BufferRadius() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bufferRadius"))
+// BufferRadius returns the distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
+func (mg *MeshGraph) BufferRadius() float32 {
+	_r := objc.Send[float32](objref.IDOf(mg), objc.RegisterName("bufferRadius"))
 	return _r
 }
 
 // TriangulationMode specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator
-func (x *MeshGraph) TriangulationMode() MeshGraphTriangulationMode {
-	_r := objc.Send[MeshGraphTriangulationMode](objref.IDOf(x), objc.RegisterName("triangulationMode"))
+func (mg *MeshGraph) TriangulationMode() MeshGraphTriangulationMode {
+	_r := objc.Send[MeshGraphTriangulationMode](objref.IDOf(mg), objc.RegisterName("triangulationMode"))
 	return _r
 }
 
-// SetTriangulationMode wraps the corresponding Objective-C method.
-func (x *MeshGraph) SetTriangulationMode(triangulationMode MeshGraphTriangulationMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangulationMode:"), triangulationMode)
-}
-
-// TriangleCount the number of triangles currently in this mesh graph
-func (x *MeshGraph) TriangleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
+// TriangleCount returns the number of triangles currently in this mesh graph
+func (mg *MeshGraph) TriangleCount() int {
+	_r := objc.Send[int](objref.IDOf(mg), objc.RegisterName("triangleCount"))
 	return _r
 }
-
-// MeshGraphable is the interface implemented by [MeshGraph], for mocking and DI.
-type MeshGraphable interface {
-	obj.Object
-	WithTriangulationMode(triangulationMode MeshGraphTriangulationMode) *MeshGraph
-	AddObstacles(obstacles []*PolygonObstacle)
-	RemoveObstacles(obstacles []*PolygonObstacle)
-	ConnectNodeUsingObstacles(node obj.Object)
-	Triangulate()
-	Obstacles() []*PolygonObstacle
-	BufferRadius() float32
-	TriangulationMode() MeshGraphTriangulationMode
-	SetTriangulationMode(triangulationMode MeshGraphTriangulationMode)
-	TriangleCount() int
-}
-
-var _ MeshGraphable = (*MeshGraph)(nil)
 
 var _ GraphProvider = (*MeshGraph)(nil)

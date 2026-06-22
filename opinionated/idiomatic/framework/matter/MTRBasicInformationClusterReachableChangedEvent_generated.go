@@ -46,57 +46,42 @@ func mTRBasicInformationClusterReachableChangedEventAdopt(id objc.ID) *MTRBasicI
 }
 
 // Description returns the object's -description text.
-func (x *MTRBasicInformationClusterReachableChangedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(mbicrce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBasicInformationClusterReachableChangedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbicrce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBasicInformationClusterReachableChangedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbicrce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBasicInformationClusterReachableChangedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) String() string {
+	return rt.Description(objref.IDOf(mbicrce))
 }
 
 // WithReachableNewValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicInformationClusterReachableChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
-	return x
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicInformationClusterReachableChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mbicrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
+	return mbicrce
 }
 
 // ReachableNewValue wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reachableNewValue"))
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbicrce), objc.RegisterName("reachableNewValue"))
 	return obj.Wrap(_r)
 }
-
-// SetReachableNewValue wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterReachableChangedEvent) SetReachableNewValue(reachableNewValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
-}
-
-// MTRBasicInformationClusterReachableChangedEventable is the interface implemented by [MTRBasicInformationClusterReachableChangedEvent], for mocking and DI.
-type MTRBasicInformationClusterReachableChangedEventable interface {
-	obj.Object
-	WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicInformationClusterReachableChangedEvent
-	ReachableNewValue() obj.Object
-	SetReachableNewValue(reachableNewValue obj.Object)
-}
-
-var _ MTRBasicInformationClusterReachableChangedEventable = (*MTRBasicInformationClusterReachableChangedEvent)(nil)
 
 // isMTRBasicInformationClusterReachableChangedEvent marks MTRBasicInformationClusterReachableChangedEvent — and, by embedding promotion, its
 // subclasses — as a member of the MTRBasicInformationClusterReachableChangedEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBasicInformationClusterReachableChangedEvent) isMTRBasicInformationClusterReachableChangedEvent() {
+func (mbicrce *MTRBasicInformationClusterReachableChangedEvent) isMTRBasicInformationClusterReachableChangedEvent() {
 }
 
 var _ MTRBasicInformationClusterReachableChangedEventProvider = (*MTRBasicInformationClusterReachableChangedEvent)(nil)

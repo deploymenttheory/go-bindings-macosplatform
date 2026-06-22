@@ -5,13 +5,14 @@
 package syncservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ISyncSessionDriver is an idiomatic wrapper over the Objective-C class ISyncSessionDriver.
@@ -46,24 +47,24 @@ func iSyncSessionDriverAdopt(id objc.ID) *ISyncSessionDriver {
 }
 
 // Description returns the object's -description text.
-func (x *ISyncSessionDriver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (issd *ISyncSessionDriver) Description() string {
+	return rt.Description(objref.IDOf(issd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ISyncSessionDriver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (issd *ISyncSessionDriver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(issd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ISyncSessionDriver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (issd *ISyncSessionDriver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(issd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ISyncSessionDriver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (issd *ISyncSessionDriver) String() string {
+	return rt.Description(objref.IDOf(issd))
 }
 
 // NewISyncSessionDriver creates a new ISyncSessionDriver.
@@ -73,17 +74,17 @@ func NewISyncSessionDriver() *ISyncSessionDriver {
 }
 
 // Sync wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) Sync() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sync"))
+func (issd *ISyncSessionDriver) Sync() bool {
+	_r := objc.Send[bool](objref.IDOf(issd), objc.RegisterName("sync"))
 	return _r
 }
 
 // StartAsynchronousSync wraps the corresponding Objective-C method.
 //
 // StartAsynchronousSync returns an error if the operation did not succeed.
-func (x *ISyncSessionDriver) StartAsynchronousSync() error {
+func (issd *ISyncSessionDriver) StartAsynchronousSync() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("startAsynchronousSync:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(issd), objc.RegisterName("startAsynchronousSync:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -91,56 +92,40 @@ func (x *ISyncSessionDriver) StartAsynchronousSync() error {
 }
 
 // SetDelegate wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+func (issd *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (issd *ISyncSessionDriver) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // SetHandlesSyncAlerts wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) SetHandlesSyncAlerts(yesOrNo bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandlesSyncAlerts:"), yesOrNo)
+func (issd *ISyncSessionDriver) SetHandlesSyncAlerts(yesOrNo bool) {
+	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("setHandlesSyncAlerts:"), yesOrNo)
 }
 
 // HandlesSyncAlerts wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) HandlesSyncAlerts() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handlesSyncAlerts"))
+func (issd *ISyncSessionDriver) HandlesSyncAlerts() bool {
+	_r := objc.Send[bool](objref.IDOf(issd), objc.RegisterName("handlesSyncAlerts"))
 	return _r
 }
 
 // Client wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) Client() *ISyncClient {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
+func (issd *ISyncSessionDriver) Client() *ISyncClient {
+	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("client"))
 	return ISyncClientFromID(_r)
 }
 
 // Session wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) Session() *ISyncSession {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+func (issd *ISyncSessionDriver) Session() *ISyncSession {
+	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("session"))
 	return ISyncSessionFromID(_r)
 }
 
 // FinishSyncing wraps the corresponding Objective-C method.
-func (x *ISyncSessionDriver) FinishSyncing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSyncing"))
+func (issd *ISyncSessionDriver) FinishSyncing() {
+	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("finishSyncing"))
 }
-
-// ISyncSessionDriverable is the interface implemented by [ISyncSessionDriver], for mocking and DI.
-type ISyncSessionDriverable interface {
-	obj.Object
-	Sync() bool
-	StartAsynchronousSync() error
-	SetDelegate(delegate obj.Object)
-	Delegate() obj.Object
-	SetHandlesSyncAlerts(yesOrNo bool)
-	HandlesSyncAlerts() bool
-	Client() *ISyncClient
-	Session() *ISyncSession
-	FinishSyncing()
-}
-
-var _ ISyncSessionDriverable = (*ISyncSessionDriver)(nil)

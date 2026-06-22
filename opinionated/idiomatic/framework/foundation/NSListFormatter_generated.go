@@ -53,26 +53,26 @@ func NewListFormatter() *ListFormatter {
 }
 
 // WithLocale sets the property and returns the receiver so calls can be chained.
-func (x *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+func (lf *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return lf
 }
 
 // WithItemFormatter sets the property and returns the receiver so calls can be chained.
-func (x *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
-	return x
+func (lf *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
+	return lf
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ListFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (lf *ListFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return lf
 }
 
 // StringFromItems wraps the corresponding Objective-C method.
-func (x *ListFormatter) StringFromItems(items obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromItems:"), objref.IDOf(items))
+func (lf *ListFormatter) StringFromItems(items obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("stringFromItems:"), objref.IDOf(items))
 	if _r == 0 {
 		return ""
 	}
@@ -80,40 +80,15 @@ func (x *ListFormatter) StringFromItems(items obj.Object) string {
 }
 
 // Locale wraps the corresponding Objective-C method.
-func (x *ListFormatter) Locale() *Locale {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+func (lf *ListFormatter) Locale() *Locale {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// SetLocale wraps the corresponding Objective-C method.
-func (x *ListFormatter) SetLocale(locale *Locale) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-}
-
 // ItemFormatter wraps the corresponding Objective-C method.
-func (x *ListFormatter) ItemFormatter() *Formatter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemFormatter"))
+func (lf *ListFormatter) ItemFormatter() *Formatter {
+	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("itemFormatter"))
 	return FormatterFromID(_r)
 }
-
-// SetItemFormatter wraps the corresponding Objective-C method.
-func (x *ListFormatter) SetItemFormatter(itemFormatter *Formatter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
-}
-
-// ListFormatterable is the interface implemented by [ListFormatter], for mocking and DI.
-type ListFormatterable interface {
-	obj.Object
-	WithLocale(locale *Locale) *ListFormatter
-	WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter
-	WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter
-	StringFromItems(items obj.Object) string
-	Locale() *Locale
-	SetLocale(locale *Locale)
-	ItemFormatter() *Formatter
-	SetItemFormatter(itemFormatter *Formatter)
-}
-
-var _ ListFormatterable = (*ListFormatter)(nil)
 
 var _ FormatterProvider = (*ListFormatter)(nil)

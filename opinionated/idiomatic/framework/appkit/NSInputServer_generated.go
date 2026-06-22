@@ -44,24 +44,24 @@ func inputServerAdopt(id objc.ID) *InputServer {
 }
 
 // Description returns the object's -description text.
-func (x *InputServer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (is *InputServer) Description() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InputServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (is *InputServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InputServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (is *InputServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InputServer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (is *InputServer) String() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // NewInputServerWithDelegateName creates a new InputServer.
@@ -70,10 +70,3 @@ func NewInputServerWithDelegateName(delegate obj.Object, name string) *InputServ
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:name:"), objref.IDOf(delegate), purego.NSString(name))
 	return inputServerAdopt(_id)
 }
-
-// InputServerable is the interface implemented by [InputServer], for mocking and DI.
-type InputServerable interface {
-	obj.Object
-}
-
-var _ InputServerable = (*InputServer)(nil)

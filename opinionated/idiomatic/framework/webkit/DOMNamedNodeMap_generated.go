@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,81 +50,64 @@ func NewDOMNamedNodeMap() *DOMNamedNodeMap {
 }
 
 // GetNamedItem wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) GetNamedItem(name string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNamedItem:"), purego.NSString(name))
+func (dnnm *DOMNamedNodeMap) GetNamedItem(name string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("getNamedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // SetNamedItem wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) SetNamedItem(node *DOMNode) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamedItem:"), objref.IDOf(node))
+func (dnnm *DOMNamedNodeMap) SetNamedItem(node *DOMNode) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("setNamedItem:"), objref.IDOf(node))
 	return DOMNodeFromID(_r)
 }
 
 // RemoveNamedItem wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) RemoveNamedItem(name string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamedItem:"), purego.NSString(name))
+func (dnnm *DOMNamedNodeMap) RemoveNamedItem(name string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("removeNamedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) Item(index int) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dnnm *DOMNamedNodeMap) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // GetNamedItemNSLocalName wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) GetNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
+func (dnnm *DOMNamedNodeMap) GetNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("getNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeFromID(_r)
 }
 
 // SetNamedItemNS wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) SetNamedItemNS(node *DOMNode) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamedItemNS:"), objref.IDOf(node))
+func (dnnm *DOMNamedNodeMap) SetNamedItemNS(node *DOMNode) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("setNamedItemNS:"), objref.IDOf(node))
 	return DOMNodeFromID(_r)
 }
 
 // RemoveNamedItemNSLocalName wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) RemoveNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
+func (dnnm *DOMNamedNodeMap) RemoveNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("removeNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dnnm *DOMNamedNodeMap) Length() int {
+	_r := objc.Send[int](objref.IDOf(dnnm), objc.RegisterName("length"))
 	return _r
 }
 
 // GetNamedItemNS wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) GetNamedItemNS(namespaceURI string, localName string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
+func (dnnm *DOMNamedNodeMap) GetNamedItemNS(namespaceURI string, localName string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("getNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeFromID(_r)
 }
 
 // RemoveNamedItemNS wraps the corresponding Objective-C method.
-func (x *DOMNamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
+func (dnnm *DOMNamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("removeNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeFromID(_r)
 }
-
-// DOMNamedNodeMapable is the interface implemented by [DOMNamedNodeMap], for mocking and DI.
-type DOMNamedNodeMapable interface {
-	obj.Object
-	GetNamedItem(name string) *DOMNode
-	SetNamedItem(node *DOMNode) *DOMNode
-	RemoveNamedItem(name string) *DOMNode
-	Item(index int) *DOMNode
-	GetNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode
-	SetNamedItemNS(node *DOMNode) *DOMNode
-	RemoveNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode
-	Length() int
-	GetNamedItemNS(namespaceURI string, localName string) *DOMNode
-	RemoveNamedItemNS(namespaceURI string, localName string) *DOMNode
-}
-
-var _ DOMNamedNodeMapable = (*DOMNamedNodeMap)(nil)
 
 var _ DOMObjectProvider = (*DOMNamedNodeMap)(nil)
 

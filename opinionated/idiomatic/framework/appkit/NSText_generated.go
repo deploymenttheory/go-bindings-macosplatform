@@ -62,914 +62,683 @@ func NewTextWithCoder(coder obj.Object) *Text {
 	return textAdopt(_id)
 }
 
-// WithString the characters of the receiver’s text.
-func (x *Text) WithString(string_ string) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
-	return x
+// WithString sets the characters of the receiver’s text.
+func (t *Text) WithString(string_ string) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(string_))
+	return t
 }
 
-// WithEditable a Boolean that controls whether the receiver allows the user to edit its text.
-func (x *Text) WithEditable(editable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean that controls whether the receiver allows the user to edit its text.
+func (t *Text) WithEditable(editable bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEditable:"), editable)
+	return t
 }
 
-// WithSelectable a Boolean that controls whether the receiver allows the user to select its text.
-func (x *Text) WithSelectable(selectable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean that controls whether the receiver allows the user to select its text.
+func (t *Text) WithSelectable(selectable bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectable:"), selectable)
+	return t
 }
 
-// WithRichText a Boolean that controls whether the receiver allows the user to apply attributes to specific ranges of the text.
-func (x *Text) WithRichText(richText bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRichText:"), richText)
-	return x
+// WithRichText sets a Boolean that controls whether the receiver allows the user to apply attributes to specific ranges of the text.
+func (t *Text) WithRichText(richText bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRichText:"), richText)
+	return t
 }
 
-// WithImportsGraphics a Boolean that controls whether the receiver allows the user to import files by dragging.
-func (x *Text) WithImportsGraphics(importsGraphics bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean that controls whether the receiver allows the user to import files by dragging.
+func (t *Text) WithImportsGraphics(importsGraphics bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return t
 }
 
-// WithFieldEditor a Boolean that controls whether the receiver interprets Tab, Shift-Tab, and Return (Enter) as cues to end editing and possibly to change the first responder.
-func (x *Text) WithFieldEditor(fieldEditor bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldEditor:"), fieldEditor)
-	return x
+// WithFieldEditor sets a Boolean that controls whether the receiver interprets Tab, Shift-Tab, and Return (Enter) as cues to end editing and possibly to change the first responder.
+func (t *Text) WithFieldEditor(fieldEditor bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFieldEditor:"), fieldEditor)
+	return t
 }
 
-// WithUsesFontPanel a Boolean that controls whether the receiver uses the Font panel and Font menu.
-func (x *Text) WithUsesFontPanel(usesFontPanel bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
-	return x
+// WithUsesFontPanel sets a Boolean that controls whether the receiver uses the Font panel and Font menu.
+func (t *Text) WithUsesFontPanel(usesFontPanel bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
+	return t
 }
 
-// WithDrawsBackground a Boolean that controls whether the receiver draws its background.
-func (x *Text) WithDrawsBackground(drawsBackground bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean that controls whether the receiver draws its background.
+func (t *Text) WithDrawsBackground(drawsBackground bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return t
 }
 
-// WithBackgroundColor the receiver’s background color to a given color.
-func (x *Text) WithBackgroundColor(backgroundColor *Color) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the receiver’s background color to a given color.
+func (t *Text) WithBackgroundColor(backgroundColor *Color) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return t
 }
 
-// WithSelectedRange the receiver’s characters within aRange.
-func (x *Text) WithSelectedRange(selectedRange foundation.NSRange) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedRange:"), selectedRange)
-	return x
+// WithSelectedRange sets the receiver’s characters within aRange.
+func (t *Text) WithSelectedRange(selectedRange foundation.NSRange) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectedRange:"), selectedRange)
+	return t
 }
 
-// WithFont the font of all the receiver’s text.
-func (x *Text) WithFont(font *Font) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font of all the receiver’s text.
+func (t *Text) WithFont(font *Font) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return t
 }
 
-// WithTextColor the text color of all characters in the receiver.
-func (x *Text) WithTextColor(textColor *Color) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the text color of all characters in the receiver.
+func (t *Text) WithTextColor(textColor *Color) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return t
 }
 
-// WithAlignment the alignment of all the receiver’s text.
-func (x *Text) WithAlignment(alignment TextAlignment) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of all the receiver’s text.
+func (t *Text) WithAlignment(alignment TextAlignment) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlignment:"), alignment)
+	return t
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *Text) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (t *Text) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return t
 }
 
-// WithMaxSize the receiver’s maximum size.
-func (x *Text) WithMaxSize(maxSize corefoundation.CGSize) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
-	return x
+// WithMaxSize sets the receiver’s maximum size.
+func (t *Text) WithMaxSize(maxSize corefoundation.CGSize) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMaxSize:"), maxSize)
+	return t
 }
 
-// WithMinSize the receiver’s minimum size.
-func (x *Text) WithMinSize(minSize corefoundation.CGSize) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
-	return x
+// WithMinSize sets the receiver’s minimum size.
+func (t *Text) WithMinSize(minSize corefoundation.CGSize) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMinSize:"), minSize)
+	return t
 }
 
-// WithHorizontallyResizable a Boolean that controls whether the receiver changes its width to fit the width of its text.
-func (x *Text) WithHorizontallyResizable(horizontallyResizable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
-	return x
+// WithHorizontallyResizable sets a Boolean that controls whether the receiver changes its width to fit the width of its text.
+func (t *Text) WithHorizontallyResizable(horizontallyResizable bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
+	return t
 }
 
-// WithVerticallyResizable a Boolean that controls whether the receiver changes its height to fit the height of its text.
-func (x *Text) WithVerticallyResizable(verticallyResizable bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
-	return x
+// WithVerticallyResizable sets a Boolean that controls whether the receiver changes its height to fit the height of its text.
+func (t *Text) WithVerticallyResizable(verticallyResizable bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
+	return t
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithSubviews(items ...ViewProvider) *Text {
+func (t *Text) WithSubviews(items ...ViewProvider) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubviews:"), _arr)
+	return t
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithHidden(hidden bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (t *Text) WithHidden(hidden bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHidden:"), hidden)
+	return t
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (t *Text) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return t
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithAutoresizesSubviews(autoresizesSubviews bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (t *Text) WithAutoresizesSubviews(autoresizesSubviews bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return t
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (t *Text) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return t
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Text) WithFrame(frame corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (t *Text) WithFrame(frame corefoundation.CGRect) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrame:"), frame)
+	return t
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithFrameRotation(frameRotation float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (t *Text) WithFrameRotation(frameRotation float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return t
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithFrameCenterRotation(frameCenterRotation float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (t *Text) WithFrameCenterRotation(frameCenterRotation float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return t
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithBoundsRotation(boundsRotation float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (t *Text) WithBoundsRotation(boundsRotation float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return t
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Text) WithBounds(bounds corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (t *Text) WithBounds(bounds corefoundation.CGRect) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBounds:"), bounds)
+	return t
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithCanDrawConcurrently(canDrawConcurrently bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (t *Text) WithCanDrawConcurrently(canDrawConcurrently bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return t
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Text) WithNeedsDisplay(needsDisplay bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (t *Text) WithNeedsDisplay(needsDisplay bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return t
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (t *Text) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return t
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithWantsRestingTouches(wantsRestingTouches bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (t *Text) WithWantsRestingTouches(wantsRestingTouches bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return t
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (t *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return t
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (t *Text) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return t
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithWantsLayer(wantsLayer bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (t *Text) WithWantsLayer(wantsLayer bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return t
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithLayer(layer obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (t *Text) WithLayer(layer obj.Object) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return t
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (t *Text) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return t
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithNeedsLayout(needsLayout bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (t *Text) WithNeedsLayout(needsLayout bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return t
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithAlphaValue(alphaValue float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (t *Text) WithAlphaValue(alphaValue float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return t
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (t *Text) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return t
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithBackgroundFilters(items ...obj.Object) *Text {
+func (t *Text) WithBackgroundFilters(items ...obj.Object) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return t
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithCompositingFilter(compositingFilter obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (t *Text) WithCompositingFilter(compositingFilter obj.Object) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return t
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithContentFilters(items ...obj.Object) *Text {
+func (t *Text) WithContentFilters(items ...obj.Object) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setContentFilters:"), _arr)
+	return t
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithShadow(shadow *Shadow) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (t *Text) WithShadow(shadow *Shadow) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return t
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithClipsToBounds(clipsToBounds bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (t *Text) WithClipsToBounds(clipsToBounds bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return t
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (t *Text) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return t
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithToolTip(toolTip string) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (t *Text) WithToolTip(toolTip string) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return t
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (t *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return t
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (t *Text) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return t
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (t *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return t
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithFocusRingType(focusRingType FocusRingType) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (t *Text) WithFocusRingType(focusRingType FocusRingType) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return t
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithGestureRecognizers(items ...GestureRecognizerProvider) *Text {
+func (t *Text) WithGestureRecognizers(items ...GestureRecognizerProvider) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return t
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (t *Text) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return t
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (t *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return t
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (t *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return t
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (t *Text) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return t
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (t *Text) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return t
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (t *Text) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return t
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (t *Text) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return t
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (t *Text) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return t
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (t *Text) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return t
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (t *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return t
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (t *Text) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return t
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (t *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return t
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Text) WithMenu(menu *Menu) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (t *Text) WithMenu(menu *Menu) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return t
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Text) WithUserActivity(userActivity obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (t *Text) WithUserActivity(userActivity obj.Object) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return t
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Text) WithTouchBar(touchBar *TouchBar) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (t *Text) WithTouchBar(touchBar *TouchBar) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return t
 }
 
 // ReplaceCharactersInRangeWithString replaces the characters in the given range with those in the given string.
-func (x *Text) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(string_))
+func (t *Text) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(string_))
 }
 
 // ReplaceCharactersInRangeWithRTF replaces the characters in the given range with RTF text interpreted from the given RTF data.
-func (x *Text) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceCharactersInRange:withRTF:"), range_, objref.IDOf(rtfData))
+func (t *Text) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTF:"), range_, objref.IDOf(rtfData))
 }
 
 // ReplaceCharactersInRangeWithRTFD replaces the characters in the given range with RTFD text interpreted from the given RTFD data.
-func (x *Text) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceCharactersInRange:withRTFD:"), range_, objref.IDOf(rtfdData))
+func (t *Text) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTFD:"), range_, objref.IDOf(rtfdData))
 }
 
 // RTFFromRange returns an NSData object that contains an RTF stream corresponding to the characters and attributes within aRange, omitting any attachment characters and attributes.
-func (x *Text) RTFFromRange(range_ foundation.NSRange) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("RTFFromRange:"), range_)
+func (t *Text) RTFFromRange(range_ foundation.NSRange) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFFromRange:"), range_)
 	return obj.Wrap(_r)
 }
 
 // RTFDFromRange returns an NSData object that contains an RTFD stream corresponding to the characters and attributes within aRange.
-func (x *Text) RTFDFromRange(range_ foundation.NSRange) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("RTFDFromRange:"), range_)
+func (t *Text) RTFDFromRange(range_ foundation.NSRange) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFDFromRange:"), range_)
 	return obj.Wrap(_r)
 }
 
 // WriteRTFDToFileAtomically writes the receiver’s text as RTF with attachments to a file or directory at path.
-func (x *Text) WriteRTFDToFileAtomically(path string, flag bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeRTFDToFile:atomically:"), purego.NSString(path), flag)
+func (t *Text) WriteRTFDToFileAtomically(path string, flag bool) bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeRTFDToFile:atomically:"), purego.NSString(path), flag)
 	return _r
 }
 
 // ReadRTFDFromFile attempts to read the RTFD file at the specified path.
-func (x *Text) ReadRTFDFromFile(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("readRTFDFromFile:"), purego.NSString(path))
+func (t *Text) ReadRTFDFromFile(path string) bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("readRTFDFromFile:"), purego.NSString(path))
 	return _r
 }
 
 // ScrollRangeToVisible scrolls the receiver in its enclosing scroll view so the first characters of aRange are visible.
-func (x *Text) ScrollRangeToVisible(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollRangeToVisible:"), range_)
+func (t *Text) ScrollRangeToVisible(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("scrollRangeToVisible:"), range_)
 }
 
 // SetTextColorRange sets the text color of characters within the specified range to the specified color.
-func (x *Text) SetTextColorRange(color *Color, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:range:"), objref.IDOf(color), range_)
+func (t *Text) SetTextColorRange(color *Color, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:range:"), objref.IDOf(color), range_)
 }
 
 // SetFontRange sets the font of characters within aRange to aFont.
-func (x *Text) SetFontRange(font *Font, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:range:"), objref.IDOf(font), range_)
+func (t *Text) SetFontRange(font *Font, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:range:"), objref.IDOf(font), range_)
 }
 
 // SizeToFit resizes the receiver to fit its text.
-func (x *Text) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
+func (t *Text) SizeToFit() {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("sizeToFit"))
 }
 
 // Copy this action method copies the selected text onto the general pasteboard, in as many formats as the receiver supports.
-func (x *Text) Copy(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copy:"), objref.IDOf(sender))
+func (t *Text) Copy(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copy:"), objref.IDOf(sender))
 }
 
 // CopyFont this action method copies the font information for the first character of the selection (or for the insertion point) onto the font pasteboard, as NSFontPboardType.
-func (x *Text) CopyFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyFont:"), objref.IDOf(sender))
+func (t *Text) CopyFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyFont:"), objref.IDOf(sender))
 }
 
 // CopyRuler this action method copies the paragraph style information for first selected paragraph onto the ruler pasteboard, as NSRulerPboardType, and expands the selection to paragraph boundaries.
-func (x *Text) CopyRuler(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyRuler:"), objref.IDOf(sender))
+func (t *Text) CopyRuler(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyRuler:"), objref.IDOf(sender))
 }
 
 // Cut this action method deletes the selected text and places it onto the general pasteboard, in as many formats as the receiver supports.
-func (x *Text) Cut(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cut:"), objref.IDOf(sender))
+func (t *Text) Cut(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cut:"), objref.IDOf(sender))
 }
 
 // Delete this action method deletes the selected text.
-func (x *Text) Delete(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delete:"), objref.IDOf(sender))
+func (t *Text) Delete(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("delete:"), objref.IDOf(sender))
 }
 
 // Paste this action method pastes text from the general pasteboard at the insertion point or over the selection.
-func (x *Text) Paste(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paste:"), objref.IDOf(sender))
+func (t *Text) Paste(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("paste:"), objref.IDOf(sender))
 }
 
 // PasteFont this action method pastes font information from the font pasteboard onto the selected text or insertion point of a rich text object, or over all text of a plain text object.
-func (x *Text) PasteFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
+func (t *Text) PasteFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
 }
 
 // PasteRuler this action method pastes paragraph style information from the ruler pasteboard onto the selected paragraphs of a rich text object.
-func (x *Text) PasteRuler(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pasteRuler:"), objref.IDOf(sender))
+func (t *Text) PasteRuler(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteRuler:"), objref.IDOf(sender))
 }
 
 // SelectAll this action method selects all of the receiver’s text.
-func (x *Text) SelectAll(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectAll:"), objref.IDOf(sender))
+func (t *Text) SelectAll(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 }
 
 // ChangeFont this action method changes the font of the selection for a rich text object, or of all text for a plain text object.
-func (x *Text) ChangeFont(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeFont:"), objref.IDOf(sender))
+func (t *Text) ChangeFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("changeFont:"), objref.IDOf(sender))
 }
 
 // AlignLeft this action method applies left alignment to selected paragraphs (or all text if the receiver is a plain text object).
-func (x *Text) AlignLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
+func (t *Text) AlignLeft(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
 }
 
 // AlignRight this action method applies right alignment to selected paragraphs (or all text if the receiver is a plain text object).
-func (x *Text) AlignRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignRight:"), objref.IDOf(sender))
+func (t *Text) AlignRight(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignRight:"), objref.IDOf(sender))
 }
 
 // AlignCenter this action method applies center alignment to selected paragraphs (or all text if the receiver is a plain text object).
-func (x *Text) AlignCenter(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
+func (t *Text) AlignCenter(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
 }
 
 // Subscript this action method applies a subscript attribute to selected text (or all text if the receiver is a plain text object), lowering its baseline offset by a predefined amount.
-func (x *Text) Subscript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscript:"), objref.IDOf(sender))
+func (t *Text) Subscript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subscript:"), objref.IDOf(sender))
 }
 
 // Superscript this action method applies a superscript attribute to selected text (or all text if the receiver is a plain text object), raising its baseline offset by a predefined amount.
-func (x *Text) Superscript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superscript:"), objref.IDOf(sender))
+func (t *Text) Superscript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("superscript:"), objref.IDOf(sender))
 }
 
 // Underline adds the underline attribute to the selected text attributes if absent; removes the attribute if present.
-func (x *Text) Underline(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underline:"), objref.IDOf(sender))
+func (t *Text) Underline(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("underline:"), objref.IDOf(sender))
 }
 
 // Unscript this action method removes any superscripting or subscripting from selected text (or all text if the receiver is a plain text object).
-func (x *Text) Unscript(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unscript:"), objref.IDOf(sender))
+func (t *Text) Unscript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("unscript:"), objref.IDOf(sender))
 }
 
 // ShowGuessPanel this action method opens the Spelling panel, allowing the user to make a correction during spell checking.
-func (x *Text) ShowGuessPanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
+func (t *Text) ShowGuessPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 }
 
 // CheckSpelling this action method searches for a misspelled word in the receiver’s text.
-func (x *Text) CheckSpelling(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
+func (t *Text) CheckSpelling(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 }
 
 // ToggleRuler this action method shows or hides the ruler, if the receiver is enclosed in a scroll view.
-func (x *Text) ToggleRuler(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
-}
-
-// SetString wraps the corresponding Objective-C method.
-func (x *Text) SetString(string_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
+func (t *Text) ToggleRuler(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
 }
 
 // IsEditable wraps the corresponding Objective-C method.
-func (x *Text) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (t *Text) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isEditable"))
 	return _r
-}
-
-// SetEditable wraps the corresponding Objective-C method.
-func (x *Text) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
 // IsSelectable wraps the corresponding Objective-C method.
-func (x *Text) IsSelectable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectable"))
+func (t *Text) IsSelectable() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSelectable"))
 	return _r
-}
-
-// SetSelectable wraps the corresponding Objective-C method.
-func (x *Text) SetSelectable(selectable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 }
 
 // IsRichText wraps the corresponding Objective-C method.
-func (x *Text) IsRichText() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRichText"))
+func (t *Text) IsRichText() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRichText"))
 	return _r
-}
-
-// SetRichText wraps the corresponding Objective-C method.
-func (x *Text) SetRichText(richText bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRichText:"), richText)
 }
 
 // ImportsGraphics wraps the corresponding Objective-C method.
-func (x *Text) ImportsGraphics() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("importsGraphics"))
+func (t *Text) ImportsGraphics() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("importsGraphics"))
 	return _r
-}
-
-// SetImportsGraphics wraps the corresponding Objective-C method.
-func (x *Text) SetImportsGraphics(importsGraphics bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 }
 
 // IsFieldEditor wraps the corresponding Objective-C method.
-func (x *Text) IsFieldEditor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFieldEditor"))
+func (t *Text) IsFieldEditor() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFieldEditor"))
 	return _r
-}
-
-// SetFieldEditor wraps the corresponding Objective-C method.
-func (x *Text) SetFieldEditor(fieldEditor bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldEditor:"), fieldEditor)
 }
 
 // UsesFontPanel wraps the corresponding Objective-C method.
-func (x *Text) UsesFontPanel() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesFontPanel"))
+func (t *Text) UsesFontPanel() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("usesFontPanel"))
 	return _r
-}
-
-// SetUsesFontPanel wraps the corresponding Objective-C method.
-func (x *Text) SetUsesFontPanel(usesFontPanel bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontPanel:"), usesFontPanel)
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
-func (x *Text) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+func (t *Text) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
-// SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *Text) SetDrawsBackground(drawsBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *Text) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (t *Text) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *Text) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // IsRulerVisible wraps the corresponding Objective-C method.
-func (x *Text) IsRulerVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRulerVisible"))
+func (t *Text) IsRulerVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRulerVisible"))
 	return _r
 }
 
 // SelectedRange wraps the corresponding Objective-C method.
-func (x *Text) SelectedRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("selectedRange"))
+func (t *Text) SelectedRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("selectedRange"))
 	return _r
-}
-
-// SetSelectedRange wraps the corresponding Objective-C method.
-func (x *Text) SetSelectedRange(selectedRange foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedRange:"), selectedRange)
 }
 
 // Font wraps the corresponding Objective-C method.
-func (x *Text) Font() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+func (t *Text) Font() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
-// SetFont wraps the corresponding Objective-C method.
-func (x *Text) SetFont(font *Font) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-}
-
 // TextColor wraps the corresponding Objective-C method.
-func (x *Text) TextColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
+func (t *Text) TextColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// SetTextColor wraps the corresponding Objective-C method.
-func (x *Text) SetTextColor(textColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-}
-
 // Alignment wraps the corresponding Objective-C method.
-func (x *Text) Alignment() TextAlignment {
-	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+func (t *Text) Alignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(t), objc.RegisterName("alignment"))
 	return _r
-}
-
-// SetAlignment wraps the corresponding Objective-C method.
-func (x *Text) SetAlignment(alignment TextAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 }
 
 // BaseWritingDirection wraps the corresponding Objective-C method.
-func (x *Text) BaseWritingDirection() WritingDirection {
-	_r := objc.Send[WritingDirection](objref.IDOf(x), objc.RegisterName("baseWritingDirection"))
+func (t *Text) BaseWritingDirection() WritingDirection {
+	_r := objc.Send[WritingDirection](objref.IDOf(t), objc.RegisterName("baseWritingDirection"))
 	return _r
-}
-
-// SetBaseWritingDirection wraps the corresponding Objective-C method.
-func (x *Text) SetBaseWritingDirection(baseWritingDirection WritingDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 }
 
 // MaxSize wraps the corresponding Objective-C method.
-func (x *Text) MaxSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maxSize"))
+func (t *Text) MaxSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("maxSize"))
 	return _r
-}
-
-// SetMaxSize wraps the corresponding Objective-C method.
-func (x *Text) SetMaxSize(maxSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
 }
 
 // MinSize wraps the corresponding Objective-C method.
-func (x *Text) MinSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minSize"))
+func (t *Text) MinSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("minSize"))
 	return _r
-}
-
-// SetMinSize wraps the corresponding Objective-C method.
-func (x *Text) SetMinSize(minSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
 }
 
 // IsHorizontallyResizable wraps the corresponding Objective-C method.
-func (x *Text) IsHorizontallyResizable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHorizontallyResizable"))
+func (t *Text) IsHorizontallyResizable() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isHorizontallyResizable"))
 	return _r
-}
-
-// SetHorizontallyResizable wraps the corresponding Objective-C method.
-func (x *Text) SetHorizontallyResizable(horizontallyResizable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontallyResizable:"), horizontallyResizable)
 }
 
 // IsVerticallyResizable wraps the corresponding Objective-C method.
-func (x *Text) IsVerticallyResizable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVerticallyResizable"))
+func (t *Text) IsVerticallyResizable() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isVerticallyResizable"))
 	return _r
 }
-
-// SetVerticallyResizable wraps the corresponding Objective-C method.
-func (x *Text) SetVerticallyResizable(verticallyResizable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticallyResizable:"), verticallyResizable)
-}
-
-// Textable is the interface implemented by [Text], for mocking and DI.
-type Textable interface {
-	obj.Object
-	WithString(string_ string) *Text
-	WithEditable(editable bool) *Text
-	WithSelectable(selectable bool) *Text
-	WithRichText(richText bool) *Text
-	WithImportsGraphics(importsGraphics bool) *Text
-	WithFieldEditor(fieldEditor bool) *Text
-	WithUsesFontPanel(usesFontPanel bool) *Text
-	WithDrawsBackground(drawsBackground bool) *Text
-	WithBackgroundColor(backgroundColor *Color) *Text
-	WithSelectedRange(selectedRange foundation.NSRange) *Text
-	WithFont(font *Font) *Text
-	WithTextColor(textColor *Color) *Text
-	WithAlignment(alignment TextAlignment) *Text
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Text
-	WithMaxSize(maxSize corefoundation.CGSize) *Text
-	WithMinSize(minSize corefoundation.CGSize) *Text
-	WithHorizontallyResizable(horizontallyResizable bool) *Text
-	WithVerticallyResizable(verticallyResizable bool) *Text
-	WithSubviews(items ...ViewProvider) *Text
-	WithHidden(hidden bool) *Text
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Text
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Text
-	WithFrame(frame corefoundation.CGRect) *Text
-	WithFrameRotation(frameRotation float64) *Text
-	WithFrameCenterRotation(frameCenterRotation float64) *Text
-	WithBoundsRotation(boundsRotation float64) *Text
-	WithBounds(bounds corefoundation.CGRect) *Text
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Text
-	WithNeedsDisplay(needsDisplay bool) *Text
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text
-	WithWantsRestingTouches(wantsRestingTouches bool) *Text
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Text
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Text
-	WithWantsLayer(wantsLayer bool) *Text
-	WithLayer(layer obj.Object) *Text
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text
-	WithNeedsLayout(needsLayout bool) *Text
-	WithAlphaValue(alphaValue float64) *Text
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text
-	WithBackgroundFilters(items ...obj.Object) *Text
-	WithCompositingFilter(compositingFilter obj.Object) *Text
-	WithContentFilters(items ...obj.Object) *Text
-	WithShadow(shadow *Shadow) *Text
-	WithClipsToBounds(clipsToBounds bool) *Text
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text
-	WithToolTip(toolTip string) *Text
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Text
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text
-	WithNextKeyView(nextKeyView ViewProvider) *Text
-	WithFocusRingType(focusRingType FocusRingType) *Text
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Text
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Text
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text
-	WithNextResponder(nextResponder ResponderProvider) *Text
-	WithMenu(menu *Menu) *Text
-	WithUserActivity(userActivity obj.Object) *Text
-	WithTouchBar(touchBar *TouchBar) *Text
-	ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string)
-	ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData obj.Object)
-	ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData obj.Object)
-	RTFFromRange(range_ foundation.NSRange) obj.Object
-	RTFDFromRange(range_ foundation.NSRange) obj.Object
-	WriteRTFDToFileAtomically(path string, flag bool) bool
-	ReadRTFDFromFile(path string) bool
-	ScrollRangeToVisible(range_ foundation.NSRange)
-	SetTextColorRange(color *Color, range_ foundation.NSRange)
-	SetFontRange(font *Font, range_ foundation.NSRange)
-	SizeToFit()
-	Copy(sender obj.Object)
-	CopyFont(sender obj.Object)
-	CopyRuler(sender obj.Object)
-	Cut(sender obj.Object)
-	Delete(sender obj.Object)
-	Paste(sender obj.Object)
-	PasteFont(sender obj.Object)
-	PasteRuler(sender obj.Object)
-	SelectAll(sender obj.Object)
-	ChangeFont(sender obj.Object)
-	AlignLeft(sender obj.Object)
-	AlignRight(sender obj.Object)
-	AlignCenter(sender obj.Object)
-	Subscript(sender obj.Object)
-	Superscript(sender obj.Object)
-	Underline(sender obj.Object)
-	Unscript(sender obj.Object)
-	ShowGuessPanel(sender obj.Object)
-	CheckSpelling(sender obj.Object)
-	ToggleRuler(sender obj.Object)
-	SetString(string_ string)
-	IsEditable() bool
-	SetEditable(editable bool)
-	IsSelectable() bool
-	SetSelectable(selectable bool)
-	IsRichText() bool
-	SetRichText(richText bool)
-	ImportsGraphics() bool
-	SetImportsGraphics(importsGraphics bool)
-	IsFieldEditor() bool
-	SetFieldEditor(fieldEditor bool)
-	UsesFontPanel() bool
-	SetUsesFontPanel(usesFontPanel bool)
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	IsRulerVisible() bool
-	SelectedRange() foundation.NSRange
-	SetSelectedRange(selectedRange foundation.NSRange)
-	Font() *Font
-	SetFont(font *Font)
-	TextColor() *Color
-	SetTextColor(textColor *Color)
-	Alignment() TextAlignment
-	SetAlignment(alignment TextAlignment)
-	BaseWritingDirection() WritingDirection
-	SetBaseWritingDirection(baseWritingDirection WritingDirection)
-	MaxSize() corefoundation.CGSize
-	SetMaxSize(maxSize corefoundation.CGSize)
-	MinSize() corefoundation.CGSize
-	SetMinSize(minSize corefoundation.CGSize)
-	IsHorizontallyResizable() bool
-	SetHorizontallyResizable(horizontallyResizable bool)
-	IsVerticallyResizable() bool
-	SetVerticallyResizable(verticallyResizable bool)
-}
-
-var _ Textable = (*Text)(nil)
 
 // isText marks Text — and, by embedding promotion, its
 // subclasses — as a member of the Text hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Text) isText() {}
+func (t *Text) isText() {}
 
 var _ TextProvider = (*Text)(nil)
 

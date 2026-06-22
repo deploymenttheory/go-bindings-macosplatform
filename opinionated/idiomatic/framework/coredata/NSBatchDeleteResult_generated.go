@@ -53,24 +53,15 @@ func NewBatchDeleteResult() *BatchDeleteResult {
 }
 
 // Result wraps the corresponding Objective-C method.
-func (x *BatchDeleteResult) Result() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+func (bdr *BatchDeleteResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *BatchDeleteResult) ResultType() BatchDeleteRequestResultType {
-	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (bdr *BatchDeleteResult) ResultType() BatchDeleteRequestResultType {
+	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(bdr), objc.RegisterName("resultType"))
 	return _r
 }
-
-// BatchDeleteResultable is the interface implemented by [BatchDeleteResult], for mocking and DI.
-type BatchDeleteResultable interface {
-	obj.Object
-	Result() obj.Object
-	ResultType() BatchDeleteRequestResultType
-}
-
-var _ BatchDeleteResultable = (*BatchDeleteResult)(nil)
 
 var _ PersistentStoreResultProvider = (*BatchDeleteResult)(nil)

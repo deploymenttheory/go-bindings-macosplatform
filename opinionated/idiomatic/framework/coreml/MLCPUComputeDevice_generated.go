@@ -46,24 +46,24 @@ func cPUComputeDeviceAdopt(id objc.ID) *CPUComputeDevice {
 }
 
 // Description returns the object's -description text.
-func (x *CPUComputeDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ccd *CPUComputeDevice) Description() string {
+	return rt.Description(objref.IDOf(ccd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CPUComputeDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ccd *CPUComputeDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ccd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CPUComputeDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ccd *CPUComputeDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ccd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CPUComputeDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ccd *CPUComputeDevice) String() string {
+	return rt.Description(objref.IDOf(ccd))
 }
 
 // NewCPUComputeDevice creates a new CPUComputeDevice.
@@ -71,10 +71,3 @@ func NewCPUComputeDevice() *CPUComputeDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCPUComputeDevice")), objc.RegisterName("new"))
 	return cPUComputeDeviceAdopt(_id)
 }
-
-// CPUComputeDeviceable is the interface implemented by [CPUComputeDevice], for mocking and DI.
-type CPUComputeDeviceable interface {
-	obj.Object
-}
-
-var _ CPUComputeDeviceable = (*CPUComputeDevice)(nil)

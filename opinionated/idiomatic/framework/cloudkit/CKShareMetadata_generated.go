@@ -46,24 +46,24 @@ func shareMetadataAdopt(id objc.ID) *ShareMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *ShareMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sm *ShareMetadata) Description() string {
+	return rt.Description(objref.IDOf(sm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sm *ShareMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sm *ShareMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sm *ShareMetadata) String() string {
+	return rt.Description(objref.IDOf(sm))
 }
 
 // NewShareMetadata creates a new ShareMetadata.
@@ -72,75 +72,59 @@ func NewShareMetadata() *ShareMetadata {
 	return shareMetadataAdopt(_id)
 }
 
-// ContainerIdentifier the ID of the share's container.
-func (x *ShareMetadata) ContainerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+// ContainerIdentifier returns the ID of the share's container.
+func (sm *ShareMetadata) ContainerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Share the share that owns the metadata.
-func (x *ShareMetadata) Share() *Share {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
+// Share returns the share that owns the metadata.
+func (sm *ShareMetadata) Share() *Share {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("share"))
 	return ShareFromID(_r)
 }
 
-// HierarchicalRootRecordID the record ID of the shared hierarchy's root record. CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property is `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
-func (x *ShareMetadata) HierarchicalRootRecordID() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hierarchicalRootRecordID"))
+// HierarchicalRootRecordID returns the record ID of the shared hierarchy's root record. CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property is `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
+func (sm *ShareMetadata) HierarchicalRootRecordID() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("hierarchicalRootRecordID"))
 	return RecordIDFromID(_r)
 }
 
-// ParticipantRole the share's participant role for the user who retrieves the metadata.
-func (x *ShareMetadata) ParticipantRole() ShareParticipantRole {
-	_r := objc.Send[ShareParticipantRole](objref.IDOf(x), objc.RegisterName("participantRole"))
+// ParticipantRole returns the share's participant role for the user who retrieves the metadata.
+func (sm *ShareMetadata) ParticipantRole() ShareParticipantRole {
+	_r := objc.Send[ShareParticipantRole](objref.IDOf(sm), objc.RegisterName("participantRole"))
 	return _r
 }
 
-// ParticipantStatus the share's participation status for the user who retrieves the metadata.
-func (x *ShareMetadata) ParticipantStatus() ShareParticipantAcceptanceStatus {
-	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(x), objc.RegisterName("participantStatus"))
+// ParticipantStatus returns the share's participation status for the user who retrieves the metadata.
+func (sm *ShareMetadata) ParticipantStatus() ShareParticipantAcceptanceStatus {
+	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(sm), objc.RegisterName("participantStatus"))
 	return _r
 }
 
-// ParticipantPermission the share's permissions for the user who retrieves the metadata.
-func (x *ShareMetadata) ParticipantPermission() ShareParticipantPermission {
-	_r := objc.Send[ShareParticipantPermission](objref.IDOf(x), objc.RegisterName("participantPermission"))
+// ParticipantPermission returns the share's permissions for the user who retrieves the metadata.
+func (sm *ShareMetadata) ParticipantPermission() ShareParticipantPermission {
+	_r := objc.Send[ShareParticipantPermission](objref.IDOf(sm), objc.RegisterName("participantPermission"))
 	return _r
 }
 
-// OwnerIdentity the identity of the share's owner.
-func (x *ShareMetadata) OwnerIdentity() *UserIdentity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerIdentity"))
+// OwnerIdentity returns the identity of the share's owner.
+func (sm *ShareMetadata) OwnerIdentity() *UserIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("ownerIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// RootRecord the share's root record. This property contains the root record of the shared record hierarchy if you set the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ property of the operation that fetches the metadata to <doc://com.apple.documentation/documentation/swift/true>. You can specify which fields CloudKit returns by setting the same operation's “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ property. The operation ignores the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ and “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ properties when fetching a shared record zone's metadata because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
-func (x *ShareMetadata) RootRecord() *Record {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootRecord"))
+// RootRecord returns the share's root record. This property contains the root record of the shared record hierarchy if you set the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ property of the operation that fetches the metadata to <doc://com.apple.documentation/documentation/swift/true>. You can specify which fields CloudKit returns by setting the same operation's “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ property. The operation ignores the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ and “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ properties when fetching a shared record zone's metadata because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
+func (sm *ShareMetadata) RootRecord() *Record {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("rootRecord"))
 	return RecordFromID(_r)
 }
 
-// RootRecordID the record ID of the share's root record.
-func (x *ShareMetadata) RootRecordID() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootRecordID"))
+// RootRecordID returns the record ID of the share's root record.
+func (sm *ShareMetadata) RootRecordID() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("rootRecordID"))
 	return RecordIDFromID(_r)
 }
-
-// ShareMetadataable is the interface implemented by [ShareMetadata], for mocking and DI.
-type ShareMetadataable interface {
-	obj.Object
-	ContainerIdentifier() string
-	Share() *Share
-	HierarchicalRootRecordID() *RecordID
-	ParticipantRole() ShareParticipantRole
-	ParticipantStatus() ShareParticipantAcceptanceStatus
-	ParticipantPermission() ShareParticipantPermission
-	OwnerIdentity() *UserIdentity
-	RootRecord() *Record
-	RootRecordID() *RecordID
-}
-
-var _ ShareMetadataable = (*ShareMetadata)(nil)

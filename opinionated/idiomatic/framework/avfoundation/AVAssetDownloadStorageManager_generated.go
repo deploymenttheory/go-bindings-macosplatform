@@ -46,24 +46,24 @@ func assetDownloadStorageManagerAdopt(id objc.ID) *AssetDownloadStorageManager {
 }
 
 // Description returns the object's -description text.
-func (x *AssetDownloadStorageManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (adsm *AssetDownloadStorageManager) Description() string {
+	return rt.Description(objref.IDOf(adsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetDownloadStorageManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (adsm *AssetDownloadStorageManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(adsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetDownloadStorageManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (adsm *AssetDownloadStorageManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(adsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetDownloadStorageManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (adsm *AssetDownloadStorageManager) String() string {
+	return rt.Description(objref.IDOf(adsm))
 }
 
 // NewAssetDownloadStorageManager creates a new AssetDownloadStorageManager.
@@ -73,21 +73,12 @@ func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
 }
 
 // SetStorageManagementPolicyForURL sets a storage policy for the downloaded asset.
-func (x *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageManagementPolicy:forURL:"), objref.IDOf(storageManagementPolicy), rt.FileURL(downloadStorageURL))
+func (adsm *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string) {
+	objc.Send[objc.ID](objref.IDOf(adsm), objc.RegisterName("setStorageManagementPolicy:forURL:"), objref.IDOf(storageManagementPolicy), rt.FileURL(downloadStorageURL))
 }
 
 // StorageManagementPolicyForURL returns the storage management policy for a downloaded asset.
-func (x *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storageManagementPolicyForURL:"), rt.FileURL(downloadStorageURL))
+func (adsm *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
+	_r := objc.Send[objc.ID](objref.IDOf(adsm), objc.RegisterName("storageManagementPolicyForURL:"), rt.FileURL(downloadStorageURL))
 	return AssetDownloadStorageManagementPolicyFromID(_r)
 }
-
-// AssetDownloadStorageManagerable is the interface implemented by [AssetDownloadStorageManager], for mocking and DI.
-type AssetDownloadStorageManagerable interface {
-	obj.Object
-	SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string)
-	StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy
-}
-
-var _ AssetDownloadStorageManagerable = (*AssetDownloadStorageManager)(nil)

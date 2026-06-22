@@ -46,24 +46,24 @@ func visitAdopt(id objc.ID) *Visit {
 }
 
 // Description returns the object's -description text.
-func (x *Visit) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Visit) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Visit) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *Visit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Visit) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *Visit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Visit) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Visit) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewVisit creates a new Visit.
@@ -73,22 +73,13 @@ func NewVisit() *Visit {
 }
 
 // ArrivalDate wraps the corresponding Objective-C method.
-func (x *Visit) ArrivalDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalDate"))
+func (v_ *Visit) ArrivalDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("arrivalDate"))
 	return obj.Wrap(_r)
 }
 
 // DepartureDate wraps the corresponding Objective-C method.
-func (x *Visit) DepartureDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureDate"))
+func (v_ *Visit) DepartureDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("departureDate"))
 	return obj.Wrap(_r)
 }
-
-// Visitable is the interface implemented by [Visit], for mocking and DI.
-type Visitable interface {
-	obj.Object
-	ArrivalDate() obj.Object
-	DepartureDate() obj.Object
-}
-
-var _ Visitable = (*Visit)(nil)

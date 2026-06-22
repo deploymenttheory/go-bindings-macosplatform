@@ -44,24 +44,24 @@ func mTRAccessGrantAdopt(id objc.ID) *MTRAccessGrant {
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessGrant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mag *MTRAccessGrant) Description() string {
+	return rt.Description(objref.IDOf(mag))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessGrant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mag *MTRAccessGrant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mag), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessGrant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mag *MTRAccessGrant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mag), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessGrant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mag *MTRAccessGrant) String() string {
+	return rt.Description(objref.IDOf(mag))
 }
 
 // NewMTRAccessGrant creates a new MTRAccessGrant.
@@ -70,30 +70,20 @@ func NewMTRAccessGrant() *MTRAccessGrant {
 	return mTRAccessGrantAdopt(_id)
 }
 
-// SubjectID the matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
-func (x *MTRAccessGrant) SubjectID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subjectID"))
+// SubjectID returns the matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
+func (mag *MTRAccessGrant) SubjectID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mag), objc.RegisterName("subjectID"))
 	return obj.Wrap(_r)
 }
 
-// GrantedPrivilege the privilege that has been granted
-func (x *MTRAccessGrant) GrantedPrivilege() MTRAccessControlEntryPrivilege {
-	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(x), objc.RegisterName("grantedPrivilege"))
+// GrantedPrivilege returns the privilege that has been granted
+func (mag *MTRAccessGrant) GrantedPrivilege() MTRAccessControlEntryPrivilege {
+	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(mag), objc.RegisterName("grantedPrivilege"))
 	return _r
 }
 
-// AuthenticationMode the type of authentication mode the access grant is for. MTRAccessControlEntryAuthModeCASE for unicast messages and MTRAccessControlEntryAuthModeGroup for groupcast ones.
-func (x *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
-	_r := objc.Send[MTRAccessControlEntryAuthMode](objref.IDOf(x), objc.RegisterName("authenticationMode"))
+// AuthenticationMode returns the type of authentication mode the access grant is for. MTRAccessControlEntryAuthModeCASE for unicast messages and MTRAccessControlEntryAuthModeGroup for groupcast ones.
+func (mag *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
+	_r := objc.Send[MTRAccessControlEntryAuthMode](objref.IDOf(mag), objc.RegisterName("authenticationMode"))
 	return _r
 }
-
-// MTRAccessGrantable is the interface implemented by [MTRAccessGrant], for mocking and DI.
-type MTRAccessGrantable interface {
-	obj.Object
-	SubjectID() obj.Object
-	GrantedPrivilege() MTRAccessControlEntryPrivilege
-	AuthenticationMode() MTRAccessControlEntryAuthMode
-}
-
-var _ MTRAccessGrantable = (*MTRAccessGrant)(nil)

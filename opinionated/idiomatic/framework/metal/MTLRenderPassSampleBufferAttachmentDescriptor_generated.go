@@ -46,24 +46,24 @@ func renderPassSampleBufferAttachmentDescriptorAdopt(id objc.ID) *RenderPassSamp
 }
 
 // Description returns the object's -description text.
-func (x *RenderPassSampleBufferAttachmentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rpsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPassSampleBufferAttachmentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(rpsbad))
 }
 
 // NewRenderPassSampleBufferAttachmentDescriptor creates a new RenderPassSampleBufferAttachmentDescriptor.
@@ -72,89 +72,50 @@ func NewRenderPassSampleBufferAttachmentDescriptor() *RenderPassSampleBufferAtta
 	return renderPassSampleBufferAttachmentDescriptorAdopt(_id)
 }
 
-// WithStartOfVertexSampleIndex the index the Metal device object should use to store GPU counters when starting the render pass’s vertex stage.
-func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfVertexSampleIndex(startOfVertexSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfVertexSampleIndex:"), startOfVertexSampleIndex)
-	return x
+// WithStartOfVertexSampleIndex sets the index the Metal device object should use to store GPU counters when starting the render pass’s vertex stage.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) WithStartOfVertexSampleIndex(startOfVertexSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsbad), objc.RegisterName("setStartOfVertexSampleIndex:"), startOfVertexSampleIndex)
+	return rpsbad
 }
 
-// WithEndOfVertexSampleIndex the index the Metal device object should use to store GPU counters when ending the render pass’s vertex stage.
-func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfVertexSampleIndex(endOfVertexSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfVertexSampleIndex:"), endOfVertexSampleIndex)
-	return x
+// WithEndOfVertexSampleIndex sets the index the Metal device object should use to store GPU counters when ending the render pass’s vertex stage.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) WithEndOfVertexSampleIndex(endOfVertexSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsbad), objc.RegisterName("setEndOfVertexSampleIndex:"), endOfVertexSampleIndex)
+	return rpsbad
 }
 
-// WithStartOfFragmentSampleIndex the index the Metal device object should use to store GPU counters when starting the render pass’s fragment stage.
-func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfFragmentSampleIndex(startOfFragmentSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfFragmentSampleIndex:"), startOfFragmentSampleIndex)
-	return x
+// WithStartOfFragmentSampleIndex sets the index the Metal device object should use to store GPU counters when starting the render pass’s fragment stage.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) WithStartOfFragmentSampleIndex(startOfFragmentSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsbad), objc.RegisterName("setStartOfFragmentSampleIndex:"), startOfFragmentSampleIndex)
+	return rpsbad
 }
 
-// WithEndOfFragmentSampleIndex the index the Metal device object should use to store GPU counters when ending the render pass’s fragment stage.
-func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfFragmentSampleIndex(endOfFragmentSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfFragmentSampleIndex:"), endOfFragmentSampleIndex)
-	return x
+// WithEndOfFragmentSampleIndex sets the index the Metal device object should use to store GPU counters when ending the render pass’s fragment stage.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) WithEndOfFragmentSampleIndex(endOfFragmentSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsbad), objc.RegisterName("setEndOfFragmentSampleIndex:"), endOfFragmentSampleIndex)
+	return rpsbad
 }
 
-// StartOfVertexSampleIndex the sample index to use to store the sample taken at the start of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
-func (x *RenderPassSampleBufferAttachmentDescriptor) StartOfVertexSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOfVertexSampleIndex"))
+// StartOfVertexSampleIndex returns the sample index to use to store the sample taken at the start of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) StartOfVertexSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("startOfVertexSampleIndex"))
 	return _r
 }
 
-// SetStartOfVertexSampleIndex wraps the corresponding Objective-C method.
-func (x *RenderPassSampleBufferAttachmentDescriptor) SetStartOfVertexSampleIndex(startOfVertexSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfVertexSampleIndex:"), startOfVertexSampleIndex)
-}
-
-// EndOfVertexSampleIndex the sample index to use to store the sample taken at the end of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
-func (x *RenderPassSampleBufferAttachmentDescriptor) EndOfVertexSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOfVertexSampleIndex"))
+// EndOfVertexSampleIndex returns the sample index to use to store the sample taken at the end of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) EndOfVertexSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("endOfVertexSampleIndex"))
 	return _r
 }
 
-// SetEndOfVertexSampleIndex wraps the corresponding Objective-C method.
-func (x *RenderPassSampleBufferAttachmentDescriptor) SetEndOfVertexSampleIndex(endOfVertexSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfVertexSampleIndex:"), endOfVertexSampleIndex)
-}
-
-// StartOfFragmentSampleIndex the sample index to use to store the sample taken at the start of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
-func (x *RenderPassSampleBufferAttachmentDescriptor) StartOfFragmentSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOfFragmentSampleIndex"))
+// StartOfFragmentSampleIndex returns the sample index to use to store the sample taken at the start of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) StartOfFragmentSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("startOfFragmentSampleIndex"))
 	return _r
 }
 
-// SetStartOfFragmentSampleIndex wraps the corresponding Objective-C method.
-func (x *RenderPassSampleBufferAttachmentDescriptor) SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfFragmentSampleIndex:"), startOfFragmentSampleIndex)
-}
-
-// EndOfFragmentSampleIndex the sample index to use to store the sample taken at the end of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
-func (x *RenderPassSampleBufferAttachmentDescriptor) EndOfFragmentSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOfFragmentSampleIndex"))
+// EndOfFragmentSampleIndex returns the sample index to use to store the sample taken at the end of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+func (rpsbad *RenderPassSampleBufferAttachmentDescriptor) EndOfFragmentSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(rpsbad), objc.RegisterName("endOfFragmentSampleIndex"))
 	return _r
 }
-
-// SetEndOfFragmentSampleIndex wraps the corresponding Objective-C method.
-func (x *RenderPassSampleBufferAttachmentDescriptor) SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfFragmentSampleIndex:"), endOfFragmentSampleIndex)
-}
-
-// RenderPassSampleBufferAttachmentDescriptorable is the interface implemented by [RenderPassSampleBufferAttachmentDescriptor], for mocking and DI.
-type RenderPassSampleBufferAttachmentDescriptorable interface {
-	obj.Object
-	WithStartOfVertexSampleIndex(startOfVertexSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor
-	WithEndOfVertexSampleIndex(endOfVertexSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor
-	WithStartOfFragmentSampleIndex(startOfFragmentSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor
-	WithEndOfFragmentSampleIndex(endOfFragmentSampleIndex int) *RenderPassSampleBufferAttachmentDescriptor
-	StartOfVertexSampleIndex() int
-	SetStartOfVertexSampleIndex(startOfVertexSampleIndex int)
-	EndOfVertexSampleIndex() int
-	SetEndOfVertexSampleIndex(endOfVertexSampleIndex int)
-	StartOfFragmentSampleIndex() int
-	SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex int)
-	EndOfFragmentSampleIndex() int
-	SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex int)
-}
-
-var _ RenderPassSampleBufferAttachmentDescriptorable = (*RenderPassSampleBufferAttachmentDescriptor)(nil)

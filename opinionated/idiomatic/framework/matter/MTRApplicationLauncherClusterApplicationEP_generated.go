@@ -51,24 +51,15 @@ func NewMTRApplicationLauncherClusterApplicationEP() *MTRApplicationLauncherClus
 }
 
 // WithApplication sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplicationEP) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
-	return x
+func (malcae *MTRApplicationLauncherClusterApplicationEP) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP {
+	objc.Send[objc.ID](objref.IDOf(malcae), objc.RegisterName("setApplication:"), objref.IDOf(application))
+	return malcae
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (malcae *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP {
+	objc.Send[objc.ID](objref.IDOf(malcae), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return malcae
 }
-
-// MTRApplicationLauncherClusterApplicationEPable is the interface implemented by [MTRApplicationLauncherClusterApplicationEP], for mocking and DI.
-type MTRApplicationLauncherClusterApplicationEPable interface {
-	obj.Object
-	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP
-	WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP
-}
-
-var _ MTRApplicationLauncherClusterApplicationEPable = (*MTRApplicationLauncherClusterApplicationEP)(nil)
 
 var _ MTRApplicationLauncherClusterApplicationEPStructProvider = (*MTRApplicationLauncherClusterApplicationEP)(nil)

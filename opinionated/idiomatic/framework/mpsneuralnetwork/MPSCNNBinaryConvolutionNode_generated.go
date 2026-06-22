@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,38 +45,28 @@ func cNNBinaryConvolutionNodeAdopt(id objc.ID) *CNNBinaryConvolutionNode {
 	return x
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNBinaryConvolutionNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (cbcn *CNNBinaryConvolutionNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(cbcn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return cbcn
 }
 
-// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNBinaryConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
-	return x
+// WithAccumulatorPrecision sets set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (cbcn *CNNBinaryConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(cbcn), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return cbcn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbcn *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(cbcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbcn
 }
-
-// CNNBinaryConvolutionNodeable is the interface implemented by [CNNBinaryConvolutionNode], for mocking and DI.
-type CNNBinaryConvolutionNodeable interface {
-	obj.Object
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryConvolutionNode
-	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode
-	WithLabel(label string) *CNNBinaryConvolutionNode
-}
-
-var _ CNNBinaryConvolutionNodeable = (*CNNBinaryConvolutionNode)(nil)
 
 // isCNNBinaryConvolutionNode marks CNNBinaryConvolutionNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNBinaryConvolutionNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNBinaryConvolutionNode) isCNNBinaryConvolutionNode() {}
+func (cbcn *CNNBinaryConvolutionNode) isCNNBinaryConvolutionNode() {}
 
 var _ CNNBinaryConvolutionNodeProvider = (*CNNBinaryConvolutionNode)(nil)
 

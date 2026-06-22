@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewSyncEngineDidSendChangesEvent() *SyncEngineDidSendChangesEvent {
 }
 
 // Context wraps the corresponding Objective-C method.
-func (x *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+func (sedsce *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext {
+	_r := objc.Send[objc.ID](objref.IDOf(sedsce), objc.RegisterName("context"))
 	return SyncEngineSendChangesContextFromID(_r)
 }
-
-// SyncEngineDidSendChangesEventable is the interface implemented by [SyncEngineDidSendChangesEvent], for mocking and DI.
-type SyncEngineDidSendChangesEventable interface {
-	obj.Object
-	Context() *SyncEngineSendChangesContext
-}
-
-var _ SyncEngineDidSendChangesEventable = (*SyncEngineDidSendChangesEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineDidSendChangesEvent)(nil)

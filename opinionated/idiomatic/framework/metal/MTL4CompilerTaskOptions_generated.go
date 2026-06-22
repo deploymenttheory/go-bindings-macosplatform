@@ -46,24 +46,24 @@ func mTL4CompilerTaskOptionsAdopt(id objc.ID) *MTL4CompilerTaskOptions {
 }
 
 // Description returns the object's -description text.
-func (x *MTL4CompilerTaskOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcto *MTL4CompilerTaskOptions) Description() string {
+	return rt.Description(objref.IDOf(mcto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4CompilerTaskOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcto *MTL4CompilerTaskOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4CompilerTaskOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcto *MTL4CompilerTaskOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4CompilerTaskOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcto *MTL4CompilerTaskOptions) String() string {
+	return rt.Description(objref.IDOf(mcto))
 }
 
 // NewMTL4CompilerTaskOptions creates a new MTL4CompilerTaskOptions.
@@ -73,21 +73,12 @@ func NewMTL4CompilerTaskOptions() *MTL4CompilerTaskOptions {
 }
 
 // LookupArchives wraps the corresponding Objective-C method.
-func (x *MTL4CompilerTaskOptions) LookupArchives() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lookupArchives"))
+func (mcto *MTL4CompilerTaskOptions) LookupArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcto), objc.RegisterName("lookupArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetLookupArchives wraps the corresponding Objective-C method.
-func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLookupArchives:"), purego.SliceToNSArray(lookupArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mcto *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcto), objc.RegisterName("setLookupArchives:"), purego.SliceToNSArray(lookupArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// MTL4CompilerTaskOptionsable is the interface implemented by [MTL4CompilerTaskOptions], for mocking and DI.
-type MTL4CompilerTaskOptionsable interface {
-	obj.Object
-	LookupArchives() []obj.Object
-	SetLookupArchives(lookupArchives []obj.Object)
-}
-
-var _ MTL4CompilerTaskOptionsable = (*MTL4CompilerTaskOptions)(nil)

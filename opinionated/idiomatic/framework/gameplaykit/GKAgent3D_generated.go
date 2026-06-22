@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,53 @@ func NewAgent3D() *Agent3D {
 	return agent3DAdopt(_id)
 }
 
-// WithRightHanded should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
-func (x *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightHanded:"), rightHanded)
-	return x
+// WithRightHanded sets should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
+func (ad *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRightHanded:"), rightHanded)
+	return ad
 }
 
-// WithBehavior a weighted collection of goals that influence the agent’s movement.
-func (x *Agent3D) WithBehavior(behavior BehaviorProvider) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
-	return x
+// WithBehavior sets a weighted collection of goals that influence the agent’s movement.
+func (ad *Agent3D) WithBehavior(behavior BehaviorProvider) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
+	return ad
 }
 
-// WithMass the resistance of the agent to changes in speed or direction.
-func (x *Agent3D) WithMass(mass float32) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
-	return x
+// WithMass sets the resistance of the agent to changes in speed or direction.
+func (ad *Agent3D) WithMass(mass float32) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setMass:"), mass)
+	return ad
 }
 
-// WithRadius the agent’s radius.
-func (x *Agent3D) WithRadius(radius float32) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the agent’s radius.
+func (ad *Agent3D) WithRadius(radius float32) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRadius:"), radius)
+	return ad
 }
 
-// WithSpeed the agent’s current forward speed, in units per second.
-func (x *Agent3D) WithSpeed(speed float32) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets the agent’s current forward speed, in units per second.
+func (ad *Agent3D) WithSpeed(speed float32) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setSpeed:"), speed)
+	return ad
 }
 
-// WithMaxAcceleration the upper limit to changes in the agent’s speed or direction.
-func (x *Agent3D) WithMaxAcceleration(maxAcceleration float32) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
-	return x
+// WithMaxAcceleration sets the upper limit to changes in the agent’s speed or direction.
+func (ad *Agent3D) WithMaxAcceleration(maxAcceleration float32) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
+	return ad
 }
 
-// WithMaxSpeed the agent’s maximum forward speed, in units per second.
-func (x *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
-	return x
+// WithMaxSpeed sets the agent’s maximum forward speed, in units per second.
+func (ad *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setMaxSpeed:"), maxSpeed)
+	return ad
 }
 
-// RightHanded should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
-func (x *Agent3D) RightHanded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rightHanded"))
+// RightHanded reports whether should this vehicle operate in a right-handed coordinate system? false means it will be left-handed
+func (ad *Agent3D) RightHanded() bool {
+	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("rightHanded"))
 	return _r
 }
-
-// SetRightHanded wraps the corresponding Objective-C method.
-func (x *Agent3D) SetRightHanded(rightHanded bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightHanded:"), rightHanded)
-}
-
-// Agent3Dable is the interface implemented by [Agent3D], for mocking and DI.
-type Agent3Dable interface {
-	obj.Object
-	WithRightHanded(rightHanded bool) *Agent3D
-	WithBehavior(behavior BehaviorProvider) *Agent3D
-	WithMass(mass float32) *Agent3D
-	WithRadius(radius float32) *Agent3D
-	WithSpeed(speed float32) *Agent3D
-	WithMaxAcceleration(maxAcceleration float32) *Agent3D
-	WithMaxSpeed(maxSpeed float32) *Agent3D
-	RightHanded() bool
-	SetRightHanded(rightHanded bool)
-}
-
-var _ Agent3Dable = (*Agent3D)(nil)
 
 var _ AgentProvider = (*Agent3D)(nil)
 

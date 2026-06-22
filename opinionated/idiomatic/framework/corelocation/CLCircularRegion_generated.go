@@ -7,7 +7,6 @@ package corelocation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewCircularRegion() *CircularRegion {
 	return circularRegionAdopt(_id)
 }
 
-// WithNotifyOnEntry a Boolean indicating that notifications are generated upon entry into the region.
-func (x *CircularRegion) WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
-	return x
+// WithNotifyOnEntry sets a Boolean indicating that notifications are generated upon entry into the region.
+func (cr *CircularRegion) WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
+	return cr
 }
 
-// WithNotifyOnExit a Boolean indicating that notifications are generated upon exit from the region.
-func (x *CircularRegion) WithNotifyOnExit(notifyOnExit bool) *CircularRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
-	return x
+// WithNotifyOnExit sets a Boolean indicating that notifications are generated upon exit from the region.
+func (cr *CircularRegion) WithNotifyOnExit(notifyOnExit bool) *CircularRegion {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
+	return cr
 }
-
-// CircularRegionable is the interface implemented by [CircularRegion], for mocking and DI.
-type CircularRegionable interface {
-	obj.Object
-	WithNotifyOnEntry(notifyOnEntry bool) *CircularRegion
-	WithNotifyOnExit(notifyOnExit bool) *CircularRegion
-}
-
-var _ CircularRegionable = (*CircularRegion)(nil)
 
 var _ RegionProvider = (*CircularRegion)(nil)

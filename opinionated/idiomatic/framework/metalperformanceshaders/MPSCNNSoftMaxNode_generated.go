@@ -53,18 +53,10 @@ func NewCNNSoftMaxNodeWithSource(sourceNode obj.Object) *CNNSoftMaxNode {
 	return cNNSoftMaxNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNSoftMaxNode) WithLabel(label string) *CNNSoftMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (csmn *CNNSoftMaxNode) WithLabel(label string) *CNNSoftMaxNode {
+	objc.Send[objc.ID](objref.IDOf(csmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return csmn
 }
-
-// CNNSoftMaxNodeable is the interface implemented by [CNNSoftMaxNode], for mocking and DI.
-type CNNSoftMaxNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNSoftMaxNode
-}
-
-var _ CNNSoftMaxNodeable = (*CNNSoftMaxNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNSoftMaxNode)(nil)

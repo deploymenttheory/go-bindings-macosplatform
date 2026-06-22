@@ -52,50 +52,22 @@ func NewMutableAudioMixInputParameters() *MutableAudioMixInputParameters {
 	return mutableAudioMixInputParametersAdopt(_id)
 }
 
-// WithTrackID the identifier of the audio track to which the parameters should be applied.
-func (x *MutableAudioMixInputParameters) WithTrackID(trackID int32) *MutableAudioMixInputParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
-	return x
+// WithTrackID sets the identifier of the audio track to which the parameters should be applied.
+func (mamip *MutableAudioMixInputParameters) WithTrackID(trackID int32) *MutableAudioMixInputParameters {
+	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setTrackID:"), trackID)
+	return mamip
 }
 
-// WithAudioTimePitchAlgorithm the processing algorithm used to manage audio pitch for scaled audio edits.
-func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
-	return x
+// WithAudioTimePitchAlgorithm sets the processing algorithm used to manage audio pitch for scaled audio edits.
+func (mamip *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters {
+	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
+	return mamip
 }
 
-// WithAudioTapProcessor the audio processing tap associated with the track.
-func (x *MutableAudioMixInputParameters) WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
-	return x
+// WithAudioTapProcessor sets the audio processing tap associated with the track.
+func (mamip *MutableAudioMixInputParameters) WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters {
+	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
+	return mamip
 }
-
-// SetTrackID wraps the corresponding Objective-C method.
-func (x *MutableAudioMixInputParameters) SetTrackID(trackID int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
-}
-
-// SetAudioTimePitchAlgorithm wraps the corresponding Objective-C method.
-func (x *MutableAudioMixInputParameters) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
-}
-
-// SetAudioTapProcessor wraps the corresponding Objective-C method.
-func (x *MutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
-}
-
-// MutableAudioMixInputParametersable is the interface implemented by [MutableAudioMixInputParameters], for mocking and DI.
-type MutableAudioMixInputParametersable interface {
-	obj.Object
-	WithTrackID(trackID int32) *MutableAudioMixInputParameters
-	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters
-	WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters
-	SetTrackID(trackID int32)
-	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object)
-	SetAudioTapProcessor(audioTapProcessor obj.Object)
-}
-
-var _ MutableAudioMixInputParametersable = (*MutableAudioMixInputParameters)(nil)
 
 var _ AudioMixInputParametersProvider = (*MutableAudioMixInputParameters)(nil)

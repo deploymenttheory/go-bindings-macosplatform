@@ -46,24 +46,24 @@ func gPUComputeDeviceAdopt(id objc.ID) *GPUComputeDevice {
 }
 
 // Description returns the object's -description text.
-func (x *GPUComputeDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gcd *GPUComputeDevice) Description() string {
+	return rt.Description(objref.IDOf(gcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GPUComputeDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gcd *GPUComputeDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GPUComputeDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gcd *GPUComputeDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GPUComputeDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gcd *GPUComputeDevice) String() string {
+	return rt.Description(objref.IDOf(gcd))
 }
 
 // NewGPUComputeDevice creates a new GPUComputeDevice.
@@ -71,10 +71,3 @@ func NewGPUComputeDevice() *GPUComputeDevice {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLGPUComputeDevice")), objc.RegisterName("new"))
 	return gPUComputeDeviceAdopt(_id)
 }
-
-// GPUComputeDeviceable is the interface implemented by [GPUComputeDevice], for mocking and DI.
-type GPUComputeDeviceable interface {
-	obj.Object
-}
-
-var _ GPUComputeDeviceable = (*GPUComputeDevice)(nil)

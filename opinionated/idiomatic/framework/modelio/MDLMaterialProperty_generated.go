@@ -46,24 +46,24 @@ func materialPropertyAdopt(id objc.ID) *MaterialProperty {
 }
 
 // Description returns the object's -description text.
-func (x *MaterialProperty) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MaterialProperty) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MaterialProperty) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MaterialProperty) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MaterialProperty) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MaterialProperty) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MaterialProperty) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MaterialProperty) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMaterialPropertyWithNameSemantic initializes a material property without a value.
@@ -108,201 +108,121 @@ func NewMaterialPropertyWithNameSemanticColor(name string, semantic MaterialSema
 	return materialPropertyAdopt(_id)
 }
 
-// WithSemantic the semantic meaning for the material property’s value.
-func (x *MaterialProperty) WithSemantic(semantic MaterialSemantic) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSemantic:"), semantic)
-	return x
+// WithSemantic sets the semantic meaning for the material property’s value.
+func (mp *MaterialProperty) WithSemantic(semantic MaterialSemantic) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setSemantic:"), semantic)
+	return mp
 }
 
-// WithType the data type stored in the material property’s value.
-func (x *MaterialProperty) WithType(type_ MaterialPropertyType) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the data type stored in the material property’s value.
+func (mp *MaterialProperty) WithType(type_ MaterialPropertyType) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setType:"), type_)
+	return mp
 }
 
-// WithName a descriptive name for the material property.
-func (x *MaterialProperty) WithName(name string) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a descriptive name for the material property.
+func (mp *MaterialProperty) WithName(name string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setName:"), purego.NSString(name))
+	return mp
 }
 
-// WithStringValue the string value for the material.
-func (x *MaterialProperty) WithStringValue(stringValue string) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the string value for the material.
+func (mp *MaterialProperty) WithStringValue(stringValue string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return mp
 }
 
-// WithURLValue the URL value for the material property—typically, the URL to a texture image.
-func (x *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLValue:"), rt.FileURL(uRLValue))
-	return x
+// WithURLValue sets the URL value for the material property—typically, the URL to a texture image.
+func (mp *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setURLValue:"), rt.FileURL(uRLValue))
+	return mp
 }
 
-// WithTextureSamplerValue a texture sampler object that provides the texture image value for the material property.
-func (x *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureSamplerValue:"), objref.IDOf(textureSamplerValue))
-	return x
+// WithTextureSamplerValue sets a texture sampler object that provides the texture image value for the material property.
+func (mp *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setTextureSamplerValue:"), objref.IDOf(textureSamplerValue))
+	return mp
 }
 
-// WithColor the color value for the material property.
-func (x *MaterialProperty) WithColor(color obj.Object) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets the color value for the material property.
+func (mp *MaterialProperty) WithColor(color obj.Object) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return mp
 }
 
-// WithFloatValue the scalar floating-point value for the material property.
-func (x *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the scalar floating-point value for the material property.
+func (mp *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setFloatValue:"), floatValue)
+	return mp
 }
 
 // WithLuminance sets the property and returns the receiver so calls can be chained.
-func (x *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminance:"), luminance)
-	return x
+func (mp *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setLuminance:"), luminance)
+	return mp
 }
 
 // SetProperties sets the material property’s attributes to those of the specified material property.
-func (x *MaterialProperty) SetProperties(property *MaterialProperty) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(property))
+func (mp *MaterialProperty) SetProperties(property *MaterialProperty) {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setProperties:"), objref.IDOf(property))
 }
 
 // Semantic wraps the corresponding Objective-C method.
-func (x *MaterialProperty) Semantic() MaterialSemantic {
-	_r := objc.Send[MaterialSemantic](objref.IDOf(x), objc.RegisterName("semantic"))
+func (mp *MaterialProperty) Semantic() MaterialSemantic {
+	_r := objc.Send[MaterialSemantic](objref.IDOf(mp), objc.RegisterName("semantic"))
 	return _r
-}
-
-// SetSemantic wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetSemantic(semantic MaterialSemantic) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSemantic:"), semantic)
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *MaterialProperty) Type() MaterialPropertyType {
-	_r := objc.Send[MaterialPropertyType](objref.IDOf(x), objc.RegisterName("type"))
+func (mp *MaterialProperty) Type() MaterialPropertyType {
+	_r := objc.Send[MaterialPropertyType](objref.IDOf(mp), objc.RegisterName("type"))
 	return _r
-}
-
-// SetType wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetType(type_ MaterialPropertyType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MaterialProperty) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mp *MaterialProperty) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // StringValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (mp *MaterialProperty) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetStringValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetStringValue(stringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-}
-
 // URLValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) URLValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLValue"))
+func (mp *MaterialProperty) URLValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("URLValue"))
 	return obj.Wrap(_r)
-}
-
-// SetURLValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetURLValue(uRLValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLValue:"), rt.FileURL(uRLValue))
 }
 
 // TextureSamplerValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) TextureSamplerValue() *TextureSampler {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureSamplerValue"))
+func (mp *MaterialProperty) TextureSamplerValue() *TextureSampler {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("textureSamplerValue"))
 	return TextureSamplerFromID(_r)
 }
 
-// SetTextureSamplerValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetTextureSamplerValue(textureSamplerValue *TextureSampler) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureSamplerValue:"), objref.IDOf(textureSamplerValue))
-}
-
 // Color wraps the corresponding Objective-C method.
-func (x *MaterialProperty) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (mp *MaterialProperty) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// SetColor wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-}
-
 // FloatValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) FloatValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+func (mp *MaterialProperty) FloatValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("floatValue"))
 	return _r
-}
-
-// SetFloatValue wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetFloatValue(floatValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }
 
 // Luminance wraps the corresponding Objective-C method.
-func (x *MaterialProperty) Luminance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("luminance"))
+func (mp *MaterialProperty) Luminance() float32 {
+	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("luminance"))
 	return _r
 }
-
-// SetLuminance wraps the corresponding Objective-C method.
-func (x *MaterialProperty) SetLuminance(luminance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLuminance:"), luminance)
-}
-
-// MaterialPropertyable is the interface implemented by [MaterialProperty], for mocking and DI.
-type MaterialPropertyable interface {
-	obj.Object
-	WithSemantic(semantic MaterialSemantic) *MaterialProperty
-	WithType(type_ MaterialPropertyType) *MaterialProperty
-	WithName(name string) *MaterialProperty
-	WithStringValue(stringValue string) *MaterialProperty
-	WithURLValue(uRLValue string) *MaterialProperty
-	WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty
-	WithColor(color obj.Object) *MaterialProperty
-	WithFloatValue(floatValue float32) *MaterialProperty
-	WithLuminance(luminance float32) *MaterialProperty
-	SetProperties(property *MaterialProperty)
-	Semantic() MaterialSemantic
-	SetSemantic(semantic MaterialSemantic)
-	Type() MaterialPropertyType
-	SetType(type_ MaterialPropertyType)
-	Name() string
-	SetName(name string)
-	StringValue() string
-	SetStringValue(stringValue string)
-	URLValue() obj.Object
-	SetURLValue(uRLValue string)
-	TextureSamplerValue() *TextureSampler
-	SetTextureSamplerValue(textureSamplerValue *TextureSampler)
-	Color() obj.Object
-	SetColor(color obj.Object)
-	FloatValue() float32
-	SetFloatValue(floatValue float32)
-	Luminance() float32
-	SetLuminance(luminance float32)
-}
-
-var _ MaterialPropertyable = (*MaterialProperty)(nil)

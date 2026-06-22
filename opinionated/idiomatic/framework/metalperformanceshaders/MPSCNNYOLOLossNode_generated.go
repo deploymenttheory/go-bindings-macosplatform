@@ -53,25 +53,16 @@ func NewCNNYOLOLossNodeWithSourceLossDescriptor(source obj.Object, descriptor ob
 	return cNNYOLOLossNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNYOLOLossNode) WithLabel(label string) *CNNYOLOLossNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cln *CNNYOLOLossNode) WithLabel(label string) *CNNYOLOLossNode {
+	objc.Send[objc.ID](objref.IDOf(cln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cln
 }
 
 // InputLabels get the input node for labes and weights, for example to set the handle
-func (x *CNNYOLOLossNode) InputLabels() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputLabels"))
+func (cln *CNNYOLOLossNode) InputLabels() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cln), objc.RegisterName("inputLabels"))
 	return obj.Wrap(_r)
 }
-
-// CNNYOLOLossNodeable is the interface implemented by [CNNYOLOLossNode], for mocking and DI.
-type CNNYOLOLossNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNYOLOLossNode
-	InputLabels() obj.Object
-}
-
-var _ CNNYOLOLossNodeable = (*CNNYOLOLossNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNYOLOLossNode)(nil)

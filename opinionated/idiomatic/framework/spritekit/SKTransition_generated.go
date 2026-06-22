@@ -46,24 +46,24 @@ func transitionAdopt(id objc.ID) *Transition {
 }
 
 // Description returns the object's -description text.
-func (x *Transition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transition) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Transition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Transition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Transition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Transition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Transition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transition) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTransition creates a new Transition.
@@ -72,49 +72,26 @@ func NewTransition() *Transition {
 	return transitionAdopt(_id)
 }
 
-// WithPausesIncomingScene a Boolean value that determines whether the incoming scene is paused during the transition.
-func (x *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
-	return x
+// WithPausesIncomingScene sets a Boolean value that determines whether the incoming scene is paused during the transition.
+func (t *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
+	return t
 }
 
-// WithPausesOutgoingScene a Boolean value that determines whether the outgoing scene is paused during the transition.
-func (x *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
-	return x
+// WithPausesOutgoingScene sets a Boolean value that determines whether the outgoing scene is paused during the transition.
+func (t *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
+	return t
 }
 
-// PausesIncomingScene pause the incoming Scene during the transition, defaults to YES.
-func (x *Transition) PausesIncomingScene() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesIncomingScene"))
+// PausesIncomingScene reports whether pause the incoming Scene during the transition, defaults to true.
+func (t *Transition) PausesIncomingScene() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("pausesIncomingScene"))
 	return _r
 }
 
-// SetPausesIncomingScene wraps the corresponding Objective-C method.
-func (x *Transition) SetPausesIncomingScene(pausesIncomingScene bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
-}
-
-// PausesOutgoingScene pause the outgoing Scene during the transition, defaults to YES.
-func (x *Transition) PausesOutgoingScene() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesOutgoingScene"))
+// PausesOutgoingScene reports whether pause the outgoing Scene during the transition, defaults to true.
+func (t *Transition) PausesOutgoingScene() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("pausesOutgoingScene"))
 	return _r
 }
-
-// SetPausesOutgoingScene wraps the corresponding Objective-C method.
-func (x *Transition) SetPausesOutgoingScene(pausesOutgoingScene bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
-}
-
-// Transitionable is the interface implemented by [Transition], for mocking and DI.
-type Transitionable interface {
-	obj.Object
-	WithPausesIncomingScene(pausesIncomingScene bool) *Transition
-	WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition
-	PausesIncomingScene() bool
-	SetPausesIncomingScene(pausesIncomingScene bool)
-	PausesOutgoingScene() bool
-	SetPausesOutgoingScene(pausesOutgoingScene bool)
-}
-
-var _ Transitionable = (*Transition)(nil)

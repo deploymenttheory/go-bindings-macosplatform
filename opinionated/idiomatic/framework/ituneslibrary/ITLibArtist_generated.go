@@ -46,24 +46,24 @@ func libArtistAdopt(id objc.ID) *LibArtist {
 }
 
 // Description returns the object's -description text.
-func (x *LibArtist) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (la *LibArtist) Description() string {
+	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LibArtist) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (la *LibArtist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LibArtist) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (la *LibArtist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LibArtist) String() string {
-	return rt.Description(objref.IDOf(x))
+func (la *LibArtist) String() string {
+	return rt.Description(objref.IDOf(la))
 }
 
 // NewLibArtist creates a new LibArtist.
@@ -72,36 +72,26 @@ func NewLibArtist() *LibArtist {
 	return libArtistAdopt(_id)
 }
 
-// Name the name of this artist.
-func (x *LibArtist) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of this artist.
+func (la *LibArtist) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SortName the name of this artist that should be used for sorting purposes.
-func (x *LibArtist) SortName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortName"))
+// SortName returns the name of this artist that should be used for sorting purposes.
+func (la *LibArtist) SortName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("sortName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PersistentID the unique identifier of this artist.
-func (x *LibArtist) PersistentID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
+// PersistentID returns the unique identifier of this artist.
+func (la *LibArtist) PersistentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("persistentID"))
 	return obj.Wrap(_r)
 }
-
-// LibArtistable is the interface implemented by [LibArtist], for mocking and DI.
-type LibArtistable interface {
-	obj.Object
-	Name() string
-	SortName() string
-	PersistentID() obj.Object
-}
-
-var _ LibArtistable = (*LibArtist)(nil)

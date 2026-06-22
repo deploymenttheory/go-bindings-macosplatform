@@ -5,13 +5,14 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // View is an idiomatic wrapper over the Objective-C class NSView.
@@ -64,1432 +65,1267 @@ func NewViewWithCoder(coder obj.Object) *View {
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *View) WithSubviews(items ...ViewProvider) *View {
+func (v_ *View) WithSubviews(items ...ViewProvider) *View {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setSubviews:"), _arr)
+	return v_
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *View) WithHidden(hidden bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (v_ *View) WithHidden(hidden bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setHidden:"), hidden)
+	return v_
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *View) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (v_ *View) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return v_
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *View) WithAutoresizesSubviews(autoresizesSubviews bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (v_ *View) WithAutoresizesSubviews(autoresizesSubviews bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return v_
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *View) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (v_ *View) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return v_
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *View) WithFrame(frame corefoundation.CGRect) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (v_ *View) WithFrame(frame corefoundation.CGRect) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrame:"), frame)
+	return v_
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *View) WithFrameRotation(frameRotation float64) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (v_ *View) WithFrameRotation(frameRotation float64) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return v_
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *View) WithFrameCenterRotation(frameCenterRotation float64) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (v_ *View) WithFrameCenterRotation(frameCenterRotation float64) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return v_
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *View) WithBoundsRotation(boundsRotation float64) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (v_ *View) WithBoundsRotation(boundsRotation float64) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return v_
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *View) WithBounds(bounds corefoundation.CGRect) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (v_ *View) WithBounds(bounds corefoundation.CGRect) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBounds:"), bounds)
+	return v_
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *View) WithCanDrawConcurrently(canDrawConcurrently bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (v_ *View) WithCanDrawConcurrently(canDrawConcurrently bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return v_
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *View) WithNeedsDisplay(needsDisplay bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (v_ *View) WithNeedsDisplay(needsDisplay bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return v_
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *View) WithAcceptsTouchEvents(acceptsTouchEvents bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (v_ *View) WithAcceptsTouchEvents(acceptsTouchEvents bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return v_
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *View) WithWantsRestingTouches(wantsRestingTouches bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (v_ *View) WithWantsRestingTouches(wantsRestingTouches bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return v_
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *View) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (v_ *View) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return v_
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *View) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (v_ *View) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return v_
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *View) WithWantsLayer(wantsLayer bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (v_ *View) WithWantsLayer(wantsLayer bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return v_
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *View) WithLayer(layer obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (v_ *View) WithLayer(layer obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return v_
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *View) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (v_ *View) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return v_
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *View) WithNeedsLayout(needsLayout bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (v_ *View) WithNeedsLayout(needsLayout bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return v_
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *View) WithAlphaValue(alphaValue float64) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (v_ *View) WithAlphaValue(alphaValue float64) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return v_
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *View) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (v_ *View) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return v_
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *View) WithBackgroundFilters(items ...obj.Object) *View {
+func (v_ *View) WithBackgroundFilters(items ...obj.Object) *View {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return v_
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *View) WithCompositingFilter(compositingFilter obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (v_ *View) WithCompositingFilter(compositingFilter obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return v_
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *View) WithContentFilters(items ...obj.Object) *View {
+func (v_ *View) WithContentFilters(items ...obj.Object) *View {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setContentFilters:"), _arr)
+	return v_
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *View) WithShadow(shadow *Shadow) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (v_ *View) WithShadow(shadow *Shadow) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return v_
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *View) WithClipsToBounds(clipsToBounds bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (v_ *View) WithClipsToBounds(clipsToBounds bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return v_
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *View) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (v_ *View) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return v_
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *View) WithToolTip(toolTip string) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (v_ *View) WithToolTip(toolTip string) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return v_
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *View) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (v_ *View) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return v_
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *View) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (v_ *View) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return v_
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *View) WithNextKeyView(nextKeyView ViewProvider) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (v_ *View) WithNextKeyView(nextKeyView ViewProvider) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return v_
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *View) WithFocusRingType(focusRingType FocusRingType) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (v_ *View) WithFocusRingType(focusRingType FocusRingType) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return v_
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *View) WithGestureRecognizers(items ...GestureRecognizerProvider) *View {
+func (v_ *View) WithGestureRecognizers(items ...GestureRecognizerProvider) *View {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return v_
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *View) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (v_ *View) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return v_
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *View) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (v_ *View) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return v_
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *View) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (v_ *View) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return v_
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *View) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (v_ *View) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return v_
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *View) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (v_ *View) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return v_
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *View) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (v_ *View) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return v_
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *View) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (v_ *View) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return v_
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *View) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (v_ *View) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return v_
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *View) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (v_ *View) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return v_
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *View) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (v_ *View) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return v_
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *View) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (v_ *View) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return v_
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *View) WithNextResponder(nextResponder ResponderProvider) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (v_ *View) WithNextResponder(nextResponder ResponderProvider) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return v_
 }
 
-// WithMenu returns the responder’s menu.
-func (x *View) WithMenu(menu *Menu) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (v_ *View) WithMenu(menu *Menu) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return v_
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *View) WithUserActivity(userActivity obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (v_ *View) WithUserActivity(userActivity obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return v_
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *View) WithTouchBar(touchBar *TouchBar) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (v_ *View) WithTouchBar(touchBar *TouchBar) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return v_
 }
 
 // IsDescendantOf wraps the corresponding Objective-C method.
-func (x *View) IsDescendantOf(view *View) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDescendantOf:"), objref.IDOf(view))
+func (v_ *View) IsDescendantOf(view *View) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isDescendantOf:"), objref.IDOf(view))
 	return _r
 }
 
 // AncestorSharedWithView wraps the corresponding Objective-C method.
-func (x *View) AncestorSharedWithView(view *View) *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ancestorSharedWithView:"), objref.IDOf(view))
+func (v_ *View) AncestorSharedWithView(view *View) *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("ancestorSharedWithView:"), objref.IDOf(view))
 	return ViewFromID(_r)
 }
 
 // NeedsToDrawRect wraps the corresponding Objective-C method.
-func (x *View) NeedsToDrawRect(rect corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsToDrawRect:"), rect)
+func (v_ *View) NeedsToDrawRect(rect corefoundation.CGRect) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("needsToDrawRect:"), rect)
 	return _r
 }
 
 // ViewDidHide wraps the corresponding Objective-C method.
-func (x *View) ViewDidHide() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidHide"))
+func (v_ *View) ViewDidHide() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidHide"))
 }
 
 // ViewDidUnhide wraps the corresponding Objective-C method.
-func (x *View) ViewDidUnhide() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidUnhide"))
+func (v_ *View) ViewDidUnhide() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidUnhide"))
 }
 
 // AddSubview wraps the corresponding Objective-C method.
-func (x *View) AddSubview(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubview:"), objref.IDOf(view))
+func (v_ *View) AddSubview(view *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addSubview:"), objref.IDOf(view))
 }
 
 // AddSubviewPositionedRelativeTo wraps the corresponding Objective-C method.
-func (x *View) AddSubviewPositionedRelativeTo(view *View, place WindowOrderingMode, otherView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubview:positioned:relativeTo:"), objref.IDOf(view), place, objref.IDOf(otherView))
+func (v_ *View) AddSubviewPositionedRelativeTo(view *View, place WindowOrderingMode, otherView *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addSubview:positioned:relativeTo:"), objref.IDOf(view), place, objref.IDOf(otherView))
 }
 
 // ViewWillMoveToWindow wraps the corresponding Objective-C method.
-func (x *View) ViewWillMoveToWindow(newWindow *Window) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillMoveToWindow:"), objref.IDOf(newWindow))
+func (v_ *View) ViewWillMoveToWindow(newWindow *Window) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillMoveToWindow:"), objref.IDOf(newWindow))
 }
 
 // ViewDidMoveToWindow wraps the corresponding Objective-C method.
-func (x *View) ViewDidMoveToWindow() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidMoveToWindow"))
+func (v_ *View) ViewDidMoveToWindow() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidMoveToWindow"))
 }
 
 // ViewWillMoveToSuperview wraps the corresponding Objective-C method.
-func (x *View) ViewWillMoveToSuperview(newSuperview *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillMoveToSuperview:"), objref.IDOf(newSuperview))
+func (v_ *View) ViewWillMoveToSuperview(newSuperview *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillMoveToSuperview:"), objref.IDOf(newSuperview))
 }
 
 // ViewDidMoveToSuperview wraps the corresponding Objective-C method.
-func (x *View) ViewDidMoveToSuperview() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidMoveToSuperview"))
+func (v_ *View) ViewDidMoveToSuperview() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidMoveToSuperview"))
 }
 
 // DidAddSubview wraps the corresponding Objective-C method.
-func (x *View) DidAddSubview(subview *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAddSubview:"), objref.IDOf(subview))
+func (v_ *View) DidAddSubview(subview *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("didAddSubview:"), objref.IDOf(subview))
 }
 
 // WillRemoveSubview wraps the corresponding Objective-C method.
-func (x *View) WillRemoveSubview(subview *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willRemoveSubview:"), objref.IDOf(subview))
+func (v_ *View) WillRemoveSubview(subview *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("willRemoveSubview:"), objref.IDOf(subview))
 }
 
 // RemoveFromSuperview wraps the corresponding Objective-C method.
-func (x *View) RemoveFromSuperview() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromSuperview"))
+func (v_ *View) RemoveFromSuperview() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeFromSuperview"))
 }
 
 // ReplaceSubviewWith wraps the corresponding Objective-C method.
-func (x *View) ReplaceSubviewWith(oldView *View, newView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceSubview:with:"), objref.IDOf(oldView), objref.IDOf(newView))
+func (v_ *View) ReplaceSubviewWith(oldView *View, newView *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("replaceSubview:with:"), objref.IDOf(oldView), objref.IDOf(newView))
 }
 
 // RemoveFromSuperviewWithoutNeedingDisplay wraps the corresponding Objective-C method.
-func (x *View) RemoveFromSuperviewWithoutNeedingDisplay() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromSuperviewWithoutNeedingDisplay"))
+func (v_ *View) RemoveFromSuperviewWithoutNeedingDisplay() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeFromSuperviewWithoutNeedingDisplay"))
 }
 
 // ViewDidChangeBackingProperties wraps the corresponding Objective-C method.
-func (x *View) ViewDidChangeBackingProperties() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidChangeBackingProperties"))
+func (v_ *View) ViewDidChangeBackingProperties() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidChangeBackingProperties"))
 }
 
 // ResizeSubviewsWithOldSize wraps the corresponding Objective-C method.
-func (x *View) ResizeSubviewsWithOldSize(oldSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeSubviewsWithOldSize:"), oldSize)
+func (v_ *View) ResizeSubviewsWithOldSize(oldSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resizeSubviewsWithOldSize:"), oldSize)
 }
 
 // ResizeWithOldSuperviewSize wraps the corresponding Objective-C method.
-func (x *View) ResizeWithOldSuperviewSize(oldSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resizeWithOldSuperviewSize:"), oldSize)
+func (v_ *View) ResizeWithOldSuperviewSize(oldSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resizeWithOldSuperviewSize:"), oldSize)
 }
 
 // SetFrameOrigin wraps the corresponding Objective-C method.
-func (x *View) SetFrameOrigin(newOrigin corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameOrigin:"), newOrigin)
+func (v_ *View) SetFrameOrigin(newOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameOrigin:"), newOrigin)
 }
 
 // SetFrameSize wraps the corresponding Objective-C method.
-func (x *View) SetFrameSize(newSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameSize:"), newSize)
+func (v_ *View) SetFrameSize(newSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameSize:"), newSize)
 }
 
 // SetBoundsOrigin wraps the corresponding Objective-C method.
-func (x *View) SetBoundsOrigin(newOrigin corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsOrigin:"), newOrigin)
+func (v_ *View) SetBoundsOrigin(newOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBoundsOrigin:"), newOrigin)
 }
 
 // SetBoundsSize wraps the corresponding Objective-C method.
-func (x *View) SetBoundsSize(newSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsSize:"), newSize)
+func (v_ *View) SetBoundsSize(newSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBoundsSize:"), newSize)
 }
 
 // TranslateOriginToPoint wraps the corresponding Objective-C method.
-func (x *View) TranslateOriginToPoint(translation corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translateOriginToPoint:"), translation)
+func (v_ *View) TranslateOriginToPoint(translation corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("translateOriginToPoint:"), translation)
 }
 
 // ScaleUnitSquareToSize wraps the corresponding Objective-C method.
-func (x *View) ScaleUnitSquareToSize(newUnitSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scaleUnitSquareToSize:"), newUnitSize)
+func (v_ *View) ScaleUnitSquareToSize(newUnitSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scaleUnitSquareToSize:"), newUnitSize)
 }
 
 // RotateByAngle wraps the corresponding Objective-C method.
-func (x *View) RotateByAngle(angle float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateByAngle:"), angle)
+func (v_ *View) RotateByAngle(angle float64) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rotateByAngle:"), angle)
 }
 
 // ConvertPointFromView wraps the corresponding Objective-C method.
-func (x *View) ConvertPointFromView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:fromView:"), point, objref.IDOf(view))
+func (v_ *View) ConvertPointFromView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:fromView:"), point, objref.IDOf(view))
 	return _r
 }
 
 // ConvertPointToView wraps the corresponding Objective-C method.
-func (x *View) ConvertPointToView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPoint:toView:"), point, objref.IDOf(view))
+func (v_ *View) ConvertPointToView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPoint:toView:"), point, objref.IDOf(view))
 	return _r
 }
 
 // ConvertSizeFromView wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeFromView(size corefoundation.CGSize, view *View) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSize:fromView:"), size, objref.IDOf(view))
+func (v_ *View) ConvertSizeFromView(size corefoundation.CGSize, view *View) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSize:fromView:"), size, objref.IDOf(view))
 	return _r
 }
 
 // ConvertSizeToView wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeToView(size corefoundation.CGSize, view *View) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSize:toView:"), size, objref.IDOf(view))
+func (v_ *View) ConvertSizeToView(size corefoundation.CGSize, view *View) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSize:toView:"), size, objref.IDOf(view))
 	return _r
 }
 
 // ConvertRectFromView wraps the corresponding Objective-C method.
-func (x *View) ConvertRectFromView(rect corefoundation.CGRect, view *View) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRect:fromView:"), rect, objref.IDOf(view))
+func (v_ *View) ConvertRectFromView(rect corefoundation.CGRect, view *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRect:fromView:"), rect, objref.IDOf(view))
 	return _r
 }
 
 // ConvertRectToView wraps the corresponding Objective-C method.
-func (x *View) ConvertRectToView(rect corefoundation.CGRect, view *View) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRect:toView:"), rect, objref.IDOf(view))
+func (v_ *View) ConvertRectToView(rect corefoundation.CGRect, view *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRect:toView:"), rect, objref.IDOf(view))
 	return _r
 }
 
 // CenterScanRect wraps the corresponding Objective-C method.
-func (x *View) CenterScanRect(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("centerScanRect:"), rect)
+func (v_ *View) CenterScanRect(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("centerScanRect:"), rect)
 	return _r
 }
 
 // ConvertPointToBacking wraps the corresponding Objective-C method.
-func (x *View) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToBacking:"), point)
+func (v_ *View) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPointToBacking:"), point)
 	return _r
 }
 
 // ConvertPointFromBacking wraps the corresponding Objective-C method.
-func (x *View) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromBacking:"), point)
+func (v_ *View) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPointFromBacking:"), point)
 	return _r
 }
 
 // ConvertSizeToBacking wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeToBacking(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSizeToBacking:"), size)
+func (v_ *View) ConvertSizeToBacking(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSizeToBacking:"), size)
 	return _r
 }
 
 // ConvertSizeFromBacking wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeFromBacking(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSizeFromBacking:"), size)
+func (v_ *View) ConvertSizeFromBacking(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSizeFromBacking:"), size)
 	return _r
 }
 
 // ConvertRectToBacking wraps the corresponding Objective-C method.
-func (x *View) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectToBacking:"), rect)
+func (v_ *View) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRectToBacking:"), rect)
 	return _r
 }
 
 // ConvertRectFromBacking wraps the corresponding Objective-C method.
-func (x *View) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectFromBacking:"), rect)
+func (v_ *View) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRectFromBacking:"), rect)
 	return _r
 }
 
 // ConvertPointToLayer wraps the corresponding Objective-C method.
-func (x *View) ConvertPointToLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToLayer:"), point)
+func (v_ *View) ConvertPointToLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPointToLayer:"), point)
 	return _r
 }
 
 // ConvertPointFromLayer wraps the corresponding Objective-C method.
-func (x *View) ConvertPointFromLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromLayer:"), point)
+func (v_ *View) ConvertPointFromLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPointFromLayer:"), point)
 	return _r
 }
 
 // ConvertSizeToLayer wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeToLayer(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSizeToLayer:"), size)
+func (v_ *View) ConvertSizeToLayer(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSizeToLayer:"), size)
 	return _r
 }
 
 // ConvertSizeFromLayer wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeFromLayer(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSizeFromLayer:"), size)
+func (v_ *View) ConvertSizeFromLayer(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSizeFromLayer:"), size)
 	return _r
 }
 
 // ConvertRectToLayer wraps the corresponding Objective-C method.
-func (x *View) ConvertRectToLayer(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectToLayer:"), rect)
+func (v_ *View) ConvertRectToLayer(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRectToLayer:"), rect)
 	return _r
 }
 
 // ConvertRectFromLayer wraps the corresponding Objective-C method.
-func (x *View) ConvertRectFromLayer(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectFromLayer:"), rect)
+func (v_ *View) ConvertRectFromLayer(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRectFromLayer:"), rect)
 	return _r
 }
 
 // SetNeedsDisplayInRect wraps the corresponding Objective-C method.
-func (x *View) SetNeedsDisplayInRect(invalidRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayInRect:"), invalidRect)
+func (v_ *View) SetNeedsDisplayInRect(invalidRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNeedsDisplayInRect:"), invalidRect)
 }
 
 // LockFocus wraps the corresponding Objective-C method.
-func (x *View) LockFocus() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockFocus"))
+func (v_ *View) LockFocus() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("lockFocus"))
 }
 
 // UnlockFocus wraps the corresponding Objective-C method.
-func (x *View) UnlockFocus() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlockFocus"))
+func (v_ *View) UnlockFocus() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unlockFocus"))
 }
 
 // LockFocusIfCanDraw wraps the corresponding Objective-C method.
-func (x *View) LockFocusIfCanDraw() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockFocusIfCanDraw"))
+func (v_ *View) LockFocusIfCanDraw() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("lockFocusIfCanDraw"))
 	return _r
 }
 
 // LockFocusIfCanDrawInContext wraps the corresponding Objective-C method.
-func (x *View) LockFocusIfCanDrawInContext(context_ *GraphicsContext) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockFocusIfCanDrawInContext:"), objref.IDOf(context_))
+func (v_ *View) LockFocusIfCanDrawInContext(context_ *GraphicsContext) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("lockFocusIfCanDrawInContext:"), objref.IDOf(context_))
 	return _r
 }
 
 // Display wraps the corresponding Objective-C method.
-func (x *View) Display() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("display"))
+func (v_ *View) Display() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("display"))
 }
 
 // DisplayIfNeeded wraps the corresponding Objective-C method.
-func (x *View) DisplayIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayIfNeeded"))
+func (v_ *View) DisplayIfNeeded() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeeded"))
 }
 
 // DisplayIfNeededIgnoringOpacity wraps the corresponding Objective-C method.
-func (x *View) DisplayIfNeededIgnoringOpacity() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayIfNeededIgnoringOpacity"))
+func (v_ *View) DisplayIfNeededIgnoringOpacity() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeededIgnoringOpacity"))
 }
 
 // DisplayRect wraps the corresponding Objective-C method.
-func (x *View) DisplayRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayRect:"), rect)
+func (v_ *View) DisplayRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayRect:"), rect)
 }
 
 // DisplayIfNeededInRect wraps the corresponding Objective-C method.
-func (x *View) DisplayIfNeededInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayIfNeededInRect:"), rect)
+func (v_ *View) DisplayIfNeededInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeededInRect:"), rect)
 }
 
 // DisplayRectIgnoringOpacity wraps the corresponding Objective-C method.
-func (x *View) DisplayRectIgnoringOpacity(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayRectIgnoringOpacity:"), rect)
+func (v_ *View) DisplayRectIgnoringOpacity(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayRectIgnoringOpacity:"), rect)
 }
 
 // DisplayIfNeededInRectIgnoringOpacity wraps the corresponding Objective-C method.
-func (x *View) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayIfNeededInRectIgnoringOpacity:"), rect)
+func (v_ *View) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeededInRectIgnoringOpacity:"), rect)
 }
 
 // DrawRect overridden by subclasses to draw the view’s image within the specified rectangle.
-func (x *View) DrawRect(dirtyRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawRect:"), dirtyRect)
+func (v_ *View) DrawRect(dirtyRect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawRect:"), dirtyRect)
 }
 
 // DisplayRectIgnoringOpacityInContext wraps the corresponding Objective-C method.
-func (x *View) DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect, context_ *GraphicsContext) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayRectIgnoringOpacity:inContext:"), rect, objref.IDOf(context_))
+func (v_ *View) DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect, context_ *GraphicsContext) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayRectIgnoringOpacity:inContext:"), rect, objref.IDOf(context_))
 }
 
 // BitmapImageRepForCachingDisplayInRect wraps the corresponding Objective-C method.
-func (x *View) BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect) *BitmapImageRep {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitmapImageRepForCachingDisplayInRect:"), rect)
+func (v_ *View) BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect) *BitmapImageRep {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("bitmapImageRepForCachingDisplayInRect:"), rect)
 	return BitmapImageRepFromID(_r)
 }
 
 // CacheDisplayInRectToBitmapImageRep wraps the corresponding Objective-C method.
-func (x *View) CacheDisplayInRectToBitmapImageRep(rect corefoundation.CGRect, bitmapImageRep *BitmapImageRep) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cacheDisplayInRect:toBitmapImageRep:"), rect, objref.IDOf(bitmapImageRep))
+func (v_ *View) CacheDisplayInRectToBitmapImageRep(rect corefoundation.CGRect, bitmapImageRep *BitmapImageRep) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("cacheDisplayInRect:toBitmapImageRep:"), rect, objref.IDOf(bitmapImageRep))
 }
 
 // ViewWillDraw wraps the corresponding Objective-C method.
-func (x *View) ViewWillDraw() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillDraw"))
+func (v_ *View) ViewWillDraw() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillDraw"))
 }
 
 // ScrollPoint wraps the corresponding Objective-C method.
-func (x *View) ScrollPoint(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollPoint:"), point)
+func (v_ *View) ScrollPoint(point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollPoint:"), point)
 }
 
 // ScrollRectToVisible wraps the corresponding Objective-C method.
-func (x *View) ScrollRectToVisible(rect corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scrollRectToVisible:"), rect)
+func (v_ *View) ScrollRectToVisible(rect corefoundation.CGRect) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("scrollRectToVisible:"), rect)
 	return _r
 }
 
 // Autoscroll wraps the corresponding Objective-C method.
-func (x *View) Autoscroll(event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoscroll:"), objref.IDOf(event))
+func (v_ *View) Autoscroll(event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("autoscroll:"), objref.IDOf(event))
 	return _r
 }
 
 // AdjustScroll wraps the corresponding Objective-C method.
-func (x *View) AdjustScroll(newVisible corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("adjustScroll:"), newVisible)
+func (v_ *View) AdjustScroll(newVisible corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("adjustScroll:"), newVisible)
 	return _r
 }
 
 // ScrollRectBy wraps the corresponding Objective-C method.
-func (x *View) ScrollRectBy(rect corefoundation.CGRect, delta corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollRect:by:"), rect, delta)
+func (v_ *View) ScrollRectBy(rect corefoundation.CGRect, delta corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollRect:by:"), rect, delta)
 }
 
 // TranslateRectsNeedingDisplayInRectBy wraps the corresponding Objective-C method.
-func (x *View) TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CGRect, delta corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translateRectsNeedingDisplayInRect:by:"), clipRect, delta)
+func (v_ *View) TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CGRect, delta corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("translateRectsNeedingDisplayInRect:by:"), clipRect, delta)
 }
 
 // HitTest wraps the corresponding Objective-C method.
-func (x *View) HitTest(point corefoundation.CGPoint) *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hitTest:"), point)
+func (v_ *View) HitTest(point corefoundation.CGPoint) *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("hitTest:"), point)
 	return ViewFromID(_r)
 }
 
 // MouseInRect wraps the corresponding Objective-C method.
-func (x *View) MouseInRect(point corefoundation.CGPoint, rect corefoundation.CGRect) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mouse:inRect:"), point, rect)
+func (v_ *View) MouseInRect(point corefoundation.CGPoint, rect corefoundation.CGRect) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("mouse:inRect:"), point, rect)
 	return _r
 }
 
 // ViewWithTag wraps the corresponding Objective-C method.
-func (x *View) ViewWithTag(tag int) *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWithTag:"), tag)
+func (v_ *View) ViewWithTag(tag int) *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWithTag:"), tag)
 	return ViewFromID(_r)
 }
 
 // AcceptsFirstMouse wraps the corresponding Objective-C method.
-func (x *View) AcceptsFirstMouse(event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsFirstMouse:"), objref.IDOf(event))
+func (v_ *View) AcceptsFirstMouse(event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("acceptsFirstMouse:"), objref.IDOf(event))
 	return _r
 }
 
 // ShouldDelayWindowOrderingForEvent wraps the corresponding Objective-C method.
-func (x *View) ShouldDelayWindowOrderingForEvent(event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldDelayWindowOrderingForEvent:"), objref.IDOf(event))
+func (v_ *View) ShouldDelayWindowOrderingForEvent(event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("shouldDelayWindowOrderingForEvent:"), objref.IDOf(event))
 	return _r
 }
 
 // MakeBackingLayer wraps the corresponding Objective-C method.
-func (x *View) MakeBackingLayer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeBackingLayer"))
+func (v_ *View) MakeBackingLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("makeBackingLayer"))
 	return obj.Wrap(_r)
 }
 
 // UpdateLayer updates the view’s content by modifying its underlying layer.
-func (x *View) UpdateLayer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateLayer"))
+func (v_ *View) UpdateLayer() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateLayer"))
 }
 
 // LayoutSubtreeIfNeeded wraps the corresponding Objective-C method.
-func (x *View) LayoutSubtreeIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutSubtreeIfNeeded"))
+func (v_ *View) LayoutSubtreeIfNeeded() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layoutSubtreeIfNeeded"))
 }
 
 // Layout wraps the corresponding Objective-C method.
-func (x *View) Layout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layout"))
+func (v_ *View) Layout() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layout"))
 }
 
 // MenuForEvent overridden by subclasses to return a context-sensitive pop-up menu for a given mouse-down event.
-func (x *View) MenuForEvent(event *Event) *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuForEvent:"), objref.IDOf(event))
+func (v_ *View) MenuForEvent(event *Event) *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("menuForEvent:"), objref.IDOf(event))
 	return MenuFromID(_r)
 }
 
 // WillOpenMenuWithEvent a contextual menu is being opened from the receiving view. The view should update any visual state in response — such as making a selection. \param menu The contextual menu that is being opened on the view \param event The event that caused the menu to open.
-func (x *View) WillOpenMenuWithEvent(menu *Menu, event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willOpenMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
+func (v_ *View) WillOpenMenuWithEvent(menu *Menu, event *Event) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("willOpenMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
 }
 
 // DidCloseMenuWithEvent a contextual menu shown from the receiving view has been closed. This is only called if the menu had been opened and the view previously received \c -willOpenMenu:withEvent:. The view should update any visual state in response — such as removing a temporary selection. \param menu The contextual menu that was open on the view \param event The event that caused the menu to close. This may be nil if there is no specific event that triggered the closing.
-func (x *View) DidCloseMenuWithEvent(menu *Menu, event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didCloseMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
+func (v_ *View) DidCloseMenuWithEvent(menu *Menu, event *Event) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("didCloseMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
 }
 
 // RemoveToolTip wraps the corresponding Objective-C method.
-func (x *View) RemoveToolTip(tag int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeToolTip:"), tag)
+func (v_ *View) RemoveToolTip(tag int) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeToolTip:"), tag)
 }
 
 // RemoveAllToolTips wraps the corresponding Objective-C method.
-func (x *View) RemoveAllToolTips() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllToolTips"))
+func (v_ *View) RemoveAllToolTips() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeAllToolTips"))
 }
 
 // ViewWillStartLiveResize wraps the corresponding Objective-C method.
-func (x *View) ViewWillStartLiveResize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewWillStartLiveResize"))
+func (v_ *View) ViewWillStartLiveResize() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillStartLiveResize"))
 }
 
 // ViewDidEndLiveResize wraps the corresponding Objective-C method.
-func (x *View) ViewDidEndLiveResize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidEndLiveResize"))
+func (v_ *View) ViewDidEndLiveResize() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidEndLiveResize"))
 }
 
 // RectForSmartMagnificationAtPointInRect wraps the corresponding Objective-C method.
-func (x *View) RectForSmartMagnificationAtPointInRect(location corefoundation.CGPoint, visibleRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForSmartMagnificationAtPoint:inRect:"), location, visibleRect)
+func (v_ *View) RectForSmartMagnificationAtPointInRect(location corefoundation.CGPoint, visibleRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectForSmartMagnificationAtPoint:inRect:"), location, visibleRect)
 	return _r
 }
 
 // PrepareForReuse restores the view to an initial state so that it can be reused.
-func (x *View) PrepareForReuse() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForReuse"))
+func (v_ *View) PrepareForReuse() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("prepareForReuse"))
 }
 
 // PrepareContentInRect wraps the corresponding Objective-C method.
-func (x *View) PrepareContentInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareContentInRect:"), rect)
+func (v_ *View) PrepareContentInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("prepareContentInRect:"), rect)
 }
 
 // ViewDidChangeEffectiveAppearance override point for reacting to the effective appearance of the receiver changing. At this point `effectiveAppearance` property reflects the new appearance.
-func (x *View) ViewDidChangeEffectiveAppearance() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewDidChangeEffectiveAppearance"))
+func (v_ *View) ViewDidChangeEffectiveAppearance() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidChangeEffectiveAppearance"))
 }
 
 // Window wraps the corresponding Objective-C method.
-func (x *View) Window() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))
+func (v_ *View) Window() *Window {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("window"))
 	return WindowFromID(_r)
 }
 
 // Superview wraps the corresponding Objective-C method.
-func (x *View) Superview() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superview"))
+func (v_ *View) Superview() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("superview"))
 	return ViewFromID(_r)
 }
 
 // Subviews wraps the corresponding Objective-C method.
 //
 // Subviews returns the collection as a Go slice.
-func (x *View) Subviews() []*View {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subviews"))
+func (v_ *View) Subviews() []*View {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("subviews"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// SetSubviews wraps the corresponding Objective-C method.
-func (x *View) SetSubviews(subviews []*View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), purego.SliceToNSArray(subviews, func(_v *View) objc.ID { return objref.IDOf(_v) }))
-}
-
 // OpaqueAncestor wraps the corresponding Objective-C method.
-func (x *View) OpaqueAncestor() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opaqueAncestor"))
+func (v_ *View) OpaqueAncestor() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("opaqueAncestor"))
 	return ViewFromID(_r)
 }
 
 // IsHidden wraps the corresponding Objective-C method.
-func (x *View) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+func (v_ *View) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// SetHidden wraps the corresponding Objective-C method.
-func (x *View) SetHidden(hidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-}
-
 // IsHiddenOrHasHiddenAncestor wraps the corresponding Objective-C method.
-func (x *View) IsHiddenOrHasHiddenAncestor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHiddenOrHasHiddenAncestor"))
+func (v_ *View) IsHiddenOrHasHiddenAncestor() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isHiddenOrHasHiddenAncestor"))
 	return _r
 }
 
 // WantsDefaultClipping wraps the corresponding Objective-C method.
-func (x *View) WantsDefaultClipping() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsDefaultClipping"))
+func (v_ *View) WantsDefaultClipping() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("wantsDefaultClipping"))
 	return _r
 }
 
 // PostsFrameChangedNotifications wraps the corresponding Objective-C method.
-func (x *View) PostsFrameChangedNotifications() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("postsFrameChangedNotifications"))
+func (v_ *View) PostsFrameChangedNotifications() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("postsFrameChangedNotifications"))
 	return _r
-}
-
-// SetPostsFrameChangedNotifications wraps the corresponding Objective-C method.
-func (x *View) SetPostsFrameChangedNotifications(postsFrameChangedNotifications bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 }
 
 // AutoresizesSubviews wraps the corresponding Objective-C method.
-func (x *View) AutoresizesSubviews() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoresizesSubviews"))
+func (v_ *View) AutoresizesSubviews() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("autoresizesSubviews"))
 	return _r
-}
-
-// SetAutoresizesSubviews wraps the corresponding Objective-C method.
-func (x *View) SetAutoresizesSubviews(autoresizesSubviews bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 }
 
 // AutoresizingMask wraps the corresponding Objective-C method.
-func (x *View) AutoresizingMask() AutoresizingMaskOptions {
-	_r := objc.Send[AutoresizingMaskOptions](objref.IDOf(x), objc.RegisterName("autoresizingMask"))
+func (v_ *View) AutoresizingMask() AutoresizingMaskOptions {
+	_r := objc.Send[AutoresizingMaskOptions](objref.IDOf(v_), objc.RegisterName("autoresizingMask"))
 	return _r
-}
-
-// SetAutoresizingMask wraps the corresponding Objective-C method.
-func (x *View) SetAutoresizingMask(autoresizingMask AutoresizingMaskOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 }
 
 // Frame wraps the corresponding Objective-C method.
-func (x *View) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+func (v_ *View) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("frame"))
 	return _r
-}
-
-// SetFrame wraps the corresponding Objective-C method.
-func (x *View) SetFrame(frame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 }
 
 // FrameRotation wraps the corresponding Objective-C method.
-func (x *View) FrameRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frameRotation"))
+func (v_ *View) FrameRotation() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("frameRotation"))
 	return _r
-}
-
-// SetFrameRotation wraps the corresponding Objective-C method.
-func (x *View) SetFrameRotation(frameRotation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 }
 
 // FrameCenterRotation wraps the corresponding Objective-C method.
-func (x *View) FrameCenterRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frameCenterRotation"))
+func (v_ *View) FrameCenterRotation() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("frameCenterRotation"))
 	return _r
-}
-
-// SetFrameCenterRotation wraps the corresponding Objective-C method.
-func (x *View) SetFrameCenterRotation(frameCenterRotation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 }
 
 // BoundsRotation wraps the corresponding Objective-C method.
-func (x *View) BoundsRotation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("boundsRotation"))
+func (v_ *View) BoundsRotation() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("boundsRotation"))
 	return _r
-}
-
-// SetBoundsRotation wraps the corresponding Objective-C method.
-func (x *View) SetBoundsRotation(boundsRotation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 }
 
 // Bounds wraps the corresponding Objective-C method.
-func (x *View) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+func (v_ *View) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("bounds"))
 	return _r
 }
 
-// SetBounds wraps the corresponding Objective-C method.
-func (x *View) SetBounds(bounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-}
-
 // IsFlipped wraps the corresponding Objective-C method.
-func (x *View) IsFlipped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlipped"))
+func (v_ *View) IsFlipped() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isFlipped"))
 	return _r
 }
 
 // IsRotatedFromBase wraps the corresponding Objective-C method.
-func (x *View) IsRotatedFromBase() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRotatedFromBase"))
+func (v_ *View) IsRotatedFromBase() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isRotatedFromBase"))
 	return _r
 }
 
 // IsRotatedOrScaledFromBase wraps the corresponding Objective-C method.
-func (x *View) IsRotatedOrScaledFromBase() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRotatedOrScaledFromBase"))
+func (v_ *View) IsRotatedOrScaledFromBase() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isRotatedOrScaledFromBase"))
 	return _r
 }
 
 // IsOpaque wraps the corresponding Objective-C method.
-func (x *View) IsOpaque() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpaque"))
+func (v_ *View) IsOpaque() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isOpaque"))
 	return _r
 }
 
 // CanDrawConcurrently wraps the corresponding Objective-C method.
-func (x *View) CanDrawConcurrently() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDrawConcurrently"))
+func (v_ *View) CanDrawConcurrently() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("canDrawConcurrently"))
 	return _r
 }
 
-// SetCanDrawConcurrently wraps the corresponding Objective-C method.
-func (x *View) SetCanDrawConcurrently(canDrawConcurrently bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-}
-
 // CanDraw wraps the corresponding Objective-C method.
-func (x *View) CanDraw() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDraw"))
+func (v_ *View) CanDraw() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("canDraw"))
 	return _r
 }
 
 // NeedsDisplay wraps the corresponding Objective-C method.
-func (x *View) NeedsDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsDisplay"))
+func (v_ *View) NeedsDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("needsDisplay"))
 	return _r
 }
 
-// SetNeedsDisplay wraps the corresponding Objective-C method.
-func (x *View) SetNeedsDisplay(needsDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-}
-
-// VisibleRect the portion of the view that isn’t clipped by its superviews. Visibility, as reflected by this property, doesn’t account for whether other view or window objects overlap the current view or whether the current view is installed in a window at all. This value of this property is `NSZeroRect` if the current view is effectively hidden. During a printing operation, the visible rectangle is further clipped to the page being imaged.
-func (x *View) VisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("visibleRect"))
+// VisibleRect returns the portion of the view that isn’t clipped by its superviews. Visibility, as reflected by this property, doesn’t account for whether other view or window objects overlap the current view or whether the current view is installed in a window at all. This value of this property is `NSZeroRect` if the current view is effectively hidden. During a printing operation, the visible rectangle is further clipped to the page being imaged.
+func (v_ *View) VisibleRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("visibleRect"))
 	return _r
 }
 
 // Tag wraps the corresponding Objective-C method.
-func (x *View) Tag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tag"))
+func (v_ *View) Tag() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("tag"))
 	return _r
 }
 
 // NeedsPanelToBecomeKey wraps the corresponding Objective-C method.
-func (x *View) NeedsPanelToBecomeKey() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsPanelToBecomeKey"))
+func (v_ *View) NeedsPanelToBecomeKey() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("needsPanelToBecomeKey"))
 	return _r
 }
 
 // MouseDownCanMoveWindow wraps the corresponding Objective-C method.
-func (x *View) MouseDownCanMoveWindow() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mouseDownCanMoveWindow"))
+func (v_ *View) MouseDownCanMoveWindow() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("mouseDownCanMoveWindow"))
 	return _r
 }
 
 // AcceptsTouchEvents wraps the corresponding Objective-C method.
-func (x *View) AcceptsTouchEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsTouchEvents"))
+func (v_ *View) AcceptsTouchEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("acceptsTouchEvents"))
 	return _r
-}
-
-// SetAcceptsTouchEvents wraps the corresponding Objective-C method.
-func (x *View) SetAcceptsTouchEvents(acceptsTouchEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 }
 
 // WantsRestingTouches wraps the corresponding Objective-C method.
-func (x *View) WantsRestingTouches() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsRestingTouches"))
+func (v_ *View) WantsRestingTouches() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("wantsRestingTouches"))
 	return _r
-}
-
-// SetWantsRestingTouches wraps the corresponding Objective-C method.
-func (x *View) SetWantsRestingTouches(wantsRestingTouches bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 }
 
 // LayerContentsRedrawPolicy wraps the corresponding Objective-C method.
-func (x *View) LayerContentsRedrawPolicy() ViewLayerContentsRedrawPolicy {
-	_r := objc.Send[ViewLayerContentsRedrawPolicy](objref.IDOf(x), objc.RegisterName("layerContentsRedrawPolicy"))
+func (v_ *View) LayerContentsRedrawPolicy() ViewLayerContentsRedrawPolicy {
+	_r := objc.Send[ViewLayerContentsRedrawPolicy](objref.IDOf(v_), objc.RegisterName("layerContentsRedrawPolicy"))
 	return _r
-}
-
-// SetLayerContentsRedrawPolicy wraps the corresponding Objective-C method.
-func (x *View) SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 }
 
 // LayerContentsPlacement wraps the corresponding Objective-C method.
-func (x *View) LayerContentsPlacement() ViewLayerContentsPlacement {
-	_r := objc.Send[ViewLayerContentsPlacement](objref.IDOf(x), objc.RegisterName("layerContentsPlacement"))
+func (v_ *View) LayerContentsPlacement() ViewLayerContentsPlacement {
+	_r := objc.Send[ViewLayerContentsPlacement](objref.IDOf(v_), objc.RegisterName("layerContentsPlacement"))
 	return _r
-}
-
-// SetLayerContentsPlacement wraps the corresponding Objective-C method.
-func (x *View) SetLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 }
 
 // WantsLayer wraps the corresponding Objective-C method.
-func (x *View) WantsLayer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsLayer"))
+func (v_ *View) WantsLayer() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("wantsLayer"))
 	return _r
 }
 
-// SetWantsLayer wraps the corresponding Objective-C method.
-func (x *View) SetWantsLayer(wantsLayer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-}
-
 // Layer wraps the corresponding Objective-C method.
-func (x *View) Layer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layer"))
+func (v_ *View) Layer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layer"))
 	return obj.Wrap(_r)
 }
 
-// SetLayer wraps the corresponding Objective-C method.
-func (x *View) SetLayer(layer obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-}
-
 // WantsUpdateLayer wraps the corresponding Objective-C method.
-func (x *View) WantsUpdateLayer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsUpdateLayer"))
+func (v_ *View) WantsUpdateLayer() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("wantsUpdateLayer"))
 	return _r
 }
 
 // CanDrawSubviewsIntoLayer wraps the corresponding Objective-C method.
-func (x *View) CanDrawSubviewsIntoLayer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDrawSubviewsIntoLayer"))
+func (v_ *View) CanDrawSubviewsIntoLayer() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("canDrawSubviewsIntoLayer"))
 	return _r
-}
-
-// SetCanDrawSubviewsIntoLayer wraps the corresponding Objective-C method.
-func (x *View) SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 }
 
 // NeedsLayout wraps the corresponding Objective-C method.
-func (x *View) NeedsLayout() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsLayout"))
+func (v_ *View) NeedsLayout() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("needsLayout"))
 	return _r
-}
-
-// SetNeedsLayout wraps the corresponding Objective-C method.
-func (x *View) SetNeedsLayout(needsLayout bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 }
 
 // AlphaValue wraps the corresponding Objective-C method.
-func (x *View) AlphaValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alphaValue"))
+func (v_ *View) AlphaValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("alphaValue"))
 	return _r
-}
-
-// SetAlphaValue wraps the corresponding Objective-C method.
-func (x *View) SetAlphaValue(alphaValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 }
 
 // LayerUsesCoreImageFilters wraps the corresponding Objective-C method.
-func (x *View) LayerUsesCoreImageFilters() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("layerUsesCoreImageFilters"))
+func (v_ *View) LayerUsesCoreImageFilters() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("layerUsesCoreImageFilters"))
 	return _r
-}
-
-// SetLayerUsesCoreImageFilters wraps the corresponding Objective-C method.
-func (x *View) SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 }
 
 // BackgroundFilters wraps the corresponding Objective-C method.
 //
 // BackgroundFilters returns the collection as a Go slice.
-func (x *View) BackgroundFilters() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundFilters"))
+func (v_ *View) BackgroundFilters() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("backgroundFilters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBackgroundFilters wraps the corresponding Objective-C method.
-func (x *View) SetBackgroundFilters(backgroundFilters []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), purego.SliceToNSArray(backgroundFilters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // CompositingFilter wraps the corresponding Objective-C method.
-func (x *View) CompositingFilter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositingFilter"))
+func (v_ *View) CompositingFilter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("compositingFilter"))
 	return obj.Wrap(_r)
-}
-
-// SetCompositingFilter wraps the corresponding Objective-C method.
-func (x *View) SetCompositingFilter(compositingFilter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 }
 
 // ContentFilters wraps the corresponding Objective-C method.
 //
 // ContentFilters returns the collection as a Go slice.
-func (x *View) ContentFilters() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentFilters"))
+func (v_ *View) ContentFilters() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("contentFilters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetContentFilters wraps the corresponding Objective-C method.
-func (x *View) SetContentFilters(contentFilters []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), purego.SliceToNSArray(contentFilters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Shadow wraps the corresponding Objective-C method.
-func (x *View) Shadow() *Shadow {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shadow"))
+func (v_ *View) Shadow() *Shadow {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("shadow"))
 	return ShadowFromID(_r)
 }
 
-// SetShadow wraps the corresponding Objective-C method.
-func (x *View) SetShadow(shadow *Shadow) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-}
-
 // ClipsToBounds wraps the corresponding Objective-C method.
-func (x *View) ClipsToBounds() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("clipsToBounds"))
+func (v_ *View) ClipsToBounds() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("clipsToBounds"))
 	return _r
-}
-
-// SetClipsToBounds wraps the corresponding Objective-C method.
-func (x *View) SetClipsToBounds(clipsToBounds bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 }
 
 // PostsBoundsChangedNotifications wraps the corresponding Objective-C method.
-func (x *View) PostsBoundsChangedNotifications() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("postsBoundsChangedNotifications"))
+func (v_ *View) PostsBoundsChangedNotifications() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("postsBoundsChangedNotifications"))
 	return _r
 }
 
-// SetPostsBoundsChangedNotifications wraps the corresponding Objective-C method.
-func (x *View) SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-}
-
-// EnclosingScrollView the nearest ancestor scroll view that contains the current view as part of its document view. - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
-func (x *View) EnclosingScrollView() *ScrollView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enclosingScrollView"))
+// EnclosingScrollView returns the nearest ancestor scroll view that contains the current view as part of its document view. - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
+func (v_ *View) EnclosingScrollView() *ScrollView {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("enclosingScrollView"))
 	return ScrollViewFromID(_r)
 }
 
 // ToolTip wraps the corresponding Objective-C method.
-func (x *View) ToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+func (v_ *View) ToolTip() string {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetToolTip wraps the corresponding Objective-C method.
-func (x *View) SetToolTip(toolTip string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-}
-
 // InLiveResize wraps the corresponding Objective-C method.
-func (x *View) InLiveResize() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inLiveResize"))
+func (v_ *View) InLiveResize() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("inLiveResize"))
 	return _r
 }
 
 // PreservesContentDuringLiveResize wraps the corresponding Objective-C method.
-func (x *View) PreservesContentDuringLiveResize() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesContentDuringLiveResize"))
+func (v_ *View) PreservesContentDuringLiveResize() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("preservesContentDuringLiveResize"))
 	return _r
 }
 
 // RectPreservedDuringLiveResize wraps the corresponding Objective-C method.
-func (x *View) RectPreservedDuringLiveResize() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectPreservedDuringLiveResize"))
+func (v_ *View) RectPreservedDuringLiveResize() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectPreservedDuringLiveResize"))
 	return _r
 }
 
 // InputContext wraps the corresponding Objective-C method.
-func (x *View) InputContext() *TextInputContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputContext"))
+func (v_ *View) InputContext() *TextInputContext {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("inputContext"))
 	return TextInputContextFromID(_r)
 }
 
 // UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
-func (x *View) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
-	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("userInterfaceLayoutDirection"))
+func (v_ *View) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(v_), objc.RegisterName("userInterfaceLayoutDirection"))
 	return _r
-}
-
-// SetUserInterfaceLayoutDirection wraps the corresponding Objective-C method.
-func (x *View) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 }
 
 // PreparedContentRect wraps the corresponding Objective-C method.
-func (x *View) PreparedContentRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("preparedContentRect"))
+func (v_ *View) PreparedContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("preparedContentRect"))
 	return _r
 }
 
-// SetPreparedContentRect wraps the corresponding Objective-C method.
-func (x *View) SetPreparedContentRect(preparedContentRect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-}
-
 // AllowsVibrancy wraps the corresponding Objective-C method.
-func (x *View) AllowsVibrancy() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsVibrancy"))
+func (v_ *View) AllowsVibrancy() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("allowsVibrancy"))
 	return _r
 }
 
 // SetKeyboardFocusRingNeedsDisplayInRect wraps the corresponding Objective-C method.
-func (x *View) SetKeyboardFocusRingNeedsDisplayInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardFocusRingNeedsDisplayInRect:"), rect)
+func (v_ *View) SetKeyboardFocusRingNeedsDisplayInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setKeyboardFocusRingNeedsDisplayInRect:"), rect)
 }
 
 // DrawFocusRingMask wraps the corresponding Objective-C method.
-func (x *View) DrawFocusRingMask() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawFocusRingMask"))
+func (v_ *View) DrawFocusRingMask() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawFocusRingMask"))
 }
 
 // NoteFocusRingMaskChanged wraps the corresponding Objective-C method.
-func (x *View) NoteFocusRingMaskChanged() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteFocusRingMaskChanged"))
+func (v_ *View) NoteFocusRingMaskChanged() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("noteFocusRingMaskChanged"))
 }
 
 // NextKeyView wraps the corresponding Objective-C method.
-func (x *View) NextKeyView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextKeyView"))
+func (v_ *View) NextKeyView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nextKeyView"))
 	return ViewFromID(_r)
 }
 
-// SetNextKeyView wraps the corresponding Objective-C method.
-func (x *View) SetNextKeyView(nextKeyView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-}
-
 // PreviousKeyView wraps the corresponding Objective-C method.
-func (x *View) PreviousKeyView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousKeyView"))
+func (v_ *View) PreviousKeyView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("previousKeyView"))
 	return ViewFromID(_r)
 }
 
 // NextValidKeyView wraps the corresponding Objective-C method.
-func (x *View) NextValidKeyView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextValidKeyView"))
+func (v_ *View) NextValidKeyView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nextValidKeyView"))
 	return ViewFromID(_r)
 }
 
 // PreviousValidKeyView wraps the corresponding Objective-C method.
-func (x *View) PreviousValidKeyView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousValidKeyView"))
+func (v_ *View) PreviousValidKeyView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("previousValidKeyView"))
 	return ViewFromID(_r)
 }
 
 // CanBecomeKeyView wraps the corresponding Objective-C method.
-func (x *View) CanBecomeKeyView() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBecomeKeyView"))
+func (v_ *View) CanBecomeKeyView() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("canBecomeKeyView"))
 	return _r
 }
 
 // FocusRingType wraps the corresponding Objective-C method.
-func (x *View) FocusRingType() FocusRingType {
-	_r := objc.Send[FocusRingType](objref.IDOf(x), objc.RegisterName("focusRingType"))
+func (v_ *View) FocusRingType() FocusRingType {
+	_r := objc.Send[FocusRingType](objref.IDOf(v_), objc.RegisterName("focusRingType"))
 	return _r
 }
 
-// SetFocusRingType wraps the corresponding Objective-C method.
-func (x *View) SetFocusRingType(focusRingType FocusRingType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-}
-
 // FocusRingMaskBounds wraps the corresponding Objective-C method.
-func (x *View) FocusRingMaskBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("focusRingMaskBounds"))
+func (v_ *View) FocusRingMaskBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("focusRingMaskBounds"))
 	return _r
 }
 
 // WriteEPSInsideRectToPasteboard wraps the corresponding Objective-C method.
-func (x *View) WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeEPSInsideRect:toPasteboard:"), rect, objref.IDOf(pasteboard))
+func (v_ *View) WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("writeEPSInsideRect:toPasteboard:"), rect, objref.IDOf(pasteboard))
 }
 
 // DataWithEPSInsideRect wraps the corresponding Objective-C method.
-func (x *View) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataWithEPSInsideRect:"), rect)
+func (v_ *View) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("dataWithEPSInsideRect:"), rect)
 	return obj.Wrap(_r)
 }
 
 // WritePDFInsideRectToPasteboard wraps the corresponding Objective-C method.
-func (x *View) WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writePDFInsideRect:toPasteboard:"), rect, objref.IDOf(pasteboard))
+func (v_ *View) WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("writePDFInsideRect:toPasteboard:"), rect, objref.IDOf(pasteboard))
 }
 
 // DataWithPDFInsideRect wraps the corresponding Objective-C method.
-func (x *View) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataWithPDFInsideRect:"), rect)
+func (v_ *View) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("dataWithPDFInsideRect:"), rect)
 	return obj.Wrap(_r)
 }
 
 // Print wraps the corresponding Objective-C method.
-func (x *View) Print(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("print:"), objref.IDOf(sender))
+func (v_ *View) Print(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("print:"), objref.IDOf(sender))
 }
 
 // AdjustPageWidthNewLeftRightLimit wraps the corresponding Objective-C method.
-func (x *View) AdjustPageWidthNewLeftRightLimit(oldLeft float64, oldRight float64, rightLimit float64) (newRight float64) {
+func (v_ *View) AdjustPageWidthNewLeftRightLimit(oldLeft float64, oldRight float64, rightLimit float64) (newRight float64) {
 	var _out0 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustPageWidthNew:left:right:limit:"), unsafe.Pointer(&_out0), oldLeft, oldRight, rightLimit)
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("adjustPageWidthNew:left:right:limit:"), unsafe.Pointer(&_out0), oldLeft, oldRight, rightLimit)
 	return _out0
 }
 
 // AdjustPageHeightNewTopBottomLimit wraps the corresponding Objective-C method.
-func (x *View) AdjustPageHeightNewTopBottomLimit(oldTop float64, oldBottom float64, bottomLimit float64) (newBottom float64) {
+func (v_ *View) AdjustPageHeightNewTopBottomLimit(oldTop float64, oldBottom float64, bottomLimit float64) (newBottom float64) {
 	var _out0 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustPageHeightNew:top:bottom:limit:"), unsafe.Pointer(&_out0), oldTop, oldBottom, bottomLimit)
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("adjustPageHeightNew:top:bottom:limit:"), unsafe.Pointer(&_out0), oldTop, oldBottom, bottomLimit)
 	return _out0
 }
 
 // RectForPage wraps the corresponding Objective-C method.
-func (x *View) RectForPage(page int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForPage:"), page)
+func (v_ *View) RectForPage(page int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectForPage:"), page)
 	return _r
 }
 
 // LocationOfPrintRect wraps the corresponding Objective-C method.
-func (x *View) LocationOfPrintRect(rect corefoundation.CGRect) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationOfPrintRect:"), rect)
+func (v_ *View) LocationOfPrintRect(rect corefoundation.CGRect) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("locationOfPrintRect:"), rect)
 	return _r
 }
 
 // DrawPageBorderWithSize wraps the corresponding Objective-C method.
-func (x *View) DrawPageBorderWithSize(borderSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPageBorderWithSize:"), borderSize)
+func (v_ *View) DrawPageBorderWithSize(borderSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPageBorderWithSize:"), borderSize)
 }
 
 // DrawSheetBorderWithSize * This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. **
-func (x *View) DrawSheetBorderWithSize(borderSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawSheetBorderWithSize:"), borderSize)
+func (v_ *View) DrawSheetBorderWithSize(borderSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawSheetBorderWithSize:"), borderSize)
 }
 
 // BeginDocument wraps the corresponding Objective-C method.
-func (x *View) BeginDocument() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginDocument"))
+func (v_ *View) BeginDocument() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("beginDocument"))
 }
 
 // EndDocument wraps the corresponding Objective-C method.
-func (x *View) EndDocument() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDocument"))
+func (v_ *View) EndDocument() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("endDocument"))
 }
 
 // BeginPageInRectAtPlacement wraps the corresponding Objective-C method.
-func (x *View) BeginPageInRectAtPlacement(rect corefoundation.CGRect, location corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginPageInRect:atPlacement:"), rect, location)
+func (v_ *View) BeginPageInRectAtPlacement(rect corefoundation.CGRect, location corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("beginPageInRect:atPlacement:"), rect, location)
 }
 
 // EndPage wraps the corresponding Objective-C method.
-func (x *View) EndPage() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endPage"))
+func (v_ *View) EndPage() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("endPage"))
 }
 
 // HeightAdjustLimit wraps the corresponding Objective-C method.
-func (x *View) HeightAdjustLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("heightAdjustLimit"))
+func (v_ *View) HeightAdjustLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("heightAdjustLimit"))
 	return _r
 }
 
 // WidthAdjustLimit wraps the corresponding Objective-C method.
-func (x *View) WidthAdjustLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("widthAdjustLimit"))
+func (v_ *View) WidthAdjustLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("widthAdjustLimit"))
 	return _r
 }
 
 // PageHeader wraps the corresponding Objective-C method.
-func (x *View) PageHeader() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageHeader"))
+func (v_ *View) PageHeader() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pageHeader"))
 	return obj.Wrap(_r)
 }
 
 // PageFooter wraps the corresponding Objective-C method.
-func (x *View) PageFooter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageFooter"))
+func (v_ *View) PageFooter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pageFooter"))
 	return obj.Wrap(_r)
 }
 
 // PrintJobTitle wraps the corresponding Objective-C method.
-func (x *View) PrintJobTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printJobTitle"))
+func (v_ *View) PrintJobTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("printJobTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -1497,1061 +1333,623 @@ func (x *View) PrintJobTitle() string {
 }
 
 // RegisterForDraggedTypes wraps the corresponding Objective-C method.
-func (x *View) RegisterForDraggedTypes(newTypes []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (v_ *View) RegisterForDraggedTypes(newTypes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // UnregisterDraggedTypes wraps the corresponding Objective-C method.
-func (x *View) UnregisterDraggedTypes() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterDraggedTypes"))
+func (v_ *View) UnregisterDraggedTypes() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unregisterDraggedTypes"))
 }
 
 // RegisteredDraggedTypes wraps the corresponding Objective-C method.
 //
 // RegisteredDraggedTypes returns the collection as a Go slice.
-func (x *View) RegisteredDraggedTypes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registeredDraggedTypes"))
+func (v_ *View) RegisteredDraggedTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("registeredDraggedTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // EnterFullScreenModeWithOptions wraps the corresponding Objective-C method.
-func (x *View) EnterFullScreenModeWithOptions(screen *Screen, options obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
+func (v_ *View) EnterFullScreenModeWithOptions(screen *Screen, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("enterFullScreenMode:withOptions:"), objref.IDOf(screen), objref.IDOf(options))
 	return _r
 }
 
 // ExitFullScreenModeWithOptions wraps the corresponding Objective-C method.
-func (x *View) ExitFullScreenModeWithOptions(options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
+func (v_ *View) ExitFullScreenModeWithOptions(options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
 }
 
 // IsInFullScreenMode wraps the corresponding Objective-C method.
-func (x *View) IsInFullScreenMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInFullScreenMode"))
+func (v_ *View) IsInFullScreenMode() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isInFullScreenMode"))
 	return _r
 }
 
 // ShowDefinitionForAttributedStringAtPoint wraps the corresponding Objective-C method.
-func (x *View) ShowDefinitionForAttributedStringAtPoint(attrString obj.Object, textBaselineOrigin corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showDefinitionForAttributedString:atPoint:"), objref.IDOf(attrString), textBaselineOrigin)
+func (v_ *View) ShowDefinitionForAttributedStringAtPoint(attrString obj.Object, textBaselineOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("showDefinitionForAttributedString:atPoint:"), objref.IDOf(attrString), textBaselineOrigin)
 }
 
 // IsDrawingFindIndicator wraps the corresponding Objective-C method.
-func (x *View) IsDrawingFindIndicator() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDrawingFindIndicator"))
+func (v_ *View) IsDrawingFindIndicator() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isDrawingFindIndicator"))
 	return _r
 }
 
 // AddGestureRecognizer wraps the corresponding Objective-C method.
-func (x *View) AddGestureRecognizer(gestureRecognizer *GestureRecognizer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGestureRecognizer:"), objref.IDOf(gestureRecognizer))
+func (v_ *View) AddGestureRecognizer(gestureRecognizer *GestureRecognizer) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addGestureRecognizer:"), objref.IDOf(gestureRecognizer))
 }
 
 // RemoveGestureRecognizer wraps the corresponding Objective-C method.
-func (x *View) RemoveGestureRecognizer(gestureRecognizer *GestureRecognizer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGestureRecognizer:"), objref.IDOf(gestureRecognizer))
+func (v_ *View) RemoveGestureRecognizer(gestureRecognizer *GestureRecognizer) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeGestureRecognizer:"), objref.IDOf(gestureRecognizer))
 }
 
 // GestureRecognizers wraps the corresponding Objective-C method.
 //
 // GestureRecognizers returns the collection as a Go slice.
-func (x *View) GestureRecognizers() []*GestureRecognizer {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gestureRecognizers"))
+func (v_ *View) GestureRecognizers() []*GestureRecognizer {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("gestureRecognizers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GestureRecognizer { return GestureRecognizerFromID(_id) })
 }
 
-// SetGestureRecognizers wraps the corresponding Objective-C method.
-func (x *View) SetGestureRecognizers(gestureRecognizers []*GestureRecognizer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), purego.SliceToNSArray(gestureRecognizers, func(_v *GestureRecognizer) objc.ID { return objref.IDOf(_v) }))
-}
-
 // AllowedTouchTypes wraps the corresponding Objective-C method.
-func (x *View) AllowedTouchTypes() TouchTypeMask {
-	_r := objc.Send[TouchTypeMask](objref.IDOf(x), objc.RegisterName("allowedTouchTypes"))
+func (v_ *View) AllowedTouchTypes() TouchTypeMask {
+	_r := objc.Send[TouchTypeMask](objref.IDOf(v_), objc.RegisterName("allowedTouchTypes"))
 	return _r
 }
 
-// SetAllowedTouchTypes wraps the corresponding Objective-C method.
-func (x *View) SetAllowedTouchTypes(allowedTouchTypes TouchTypeMask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-}
-
 // SafeAreaInsets wraps the corresponding Objective-C method.
-func (x *View) SafeAreaInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("safeAreaInsets"))
+func (v_ *View) SafeAreaInsets() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("safeAreaInsets"))
 	return _r
 }
 
 // AdditionalSafeAreaInsets wraps the corresponding Objective-C method.
-func (x *View) AdditionalSafeAreaInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("additionalSafeAreaInsets"))
+func (v_ *View) AdditionalSafeAreaInsets() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("additionalSafeAreaInsets"))
 	return _r
 }
 
-// SetAdditionalSafeAreaInsets wraps the corresponding Objective-C method.
-func (x *View) SetAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-}
-
 // SafeAreaLayoutGuide wraps the corresponding Objective-C method.
-func (x *View) SafeAreaLayoutGuide() *LayoutGuide {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("safeAreaLayoutGuide"))
+func (v_ *View) SafeAreaLayoutGuide() *LayoutGuide {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("safeAreaLayoutGuide"))
 	return LayoutGuideFromID(_r)
 }
 
 // SafeAreaRect wraps the corresponding Objective-C method.
-func (x *View) SafeAreaRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("safeAreaRect"))
+func (v_ *View) SafeAreaRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("safeAreaRect"))
 	return _r
 }
 
 // LayoutMarginsGuide wraps the corresponding Objective-C method.
-func (x *View) LayoutMarginsGuide() *LayoutGuide {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutMarginsGuide"))
+func (v_ *View) LayoutMarginsGuide() *LayoutGuide {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layoutMarginsGuide"))
 	return LayoutGuideFromID(_r)
 }
 
-// PrefersCompactControlSizeMetrics when this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
-func (x *View) PrefersCompactControlSizeMetrics() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersCompactControlSizeMetrics"))
+// PrefersCompactControlSizeMetrics reports whether when this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+func (v_ *View) PrefersCompactControlSizeMetrics() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("prefersCompactControlSizeMetrics"))
 	return _r
 }
 
-// SetPrefersCompactControlSizeMetrics when this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
-func (x *View) SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-}
-
 // AddTrackingArea wraps the corresponding Objective-C method.
-func (x *View) AddTrackingArea(trackingArea *TrackingArea) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTrackingArea:"), objref.IDOf(trackingArea))
+func (v_ *View) AddTrackingArea(trackingArea *TrackingArea) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addTrackingArea:"), objref.IDOf(trackingArea))
 }
 
 // RemoveTrackingArea wraps the corresponding Objective-C method.
-func (x *View) RemoveTrackingArea(trackingArea *TrackingArea) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrackingArea:"), objref.IDOf(trackingArea))
+func (v_ *View) RemoveTrackingArea(trackingArea *TrackingArea) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeTrackingArea:"), objref.IDOf(trackingArea))
 }
 
 // UpdateTrackingAreas wraps the corresponding Objective-C method.
-func (x *View) UpdateTrackingAreas() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateTrackingAreas"))
+func (v_ *View) UpdateTrackingAreas() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateTrackingAreas"))
 }
 
 // AddCursorRectCursor wraps the corresponding Objective-C method.
-func (x *View) AddCursorRectCursor(rect corefoundation.CGRect, object *Cursor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCursorRect:cursor:"), rect, objref.IDOf(object))
+func (v_ *View) AddCursorRectCursor(rect corefoundation.CGRect, object *Cursor) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addCursorRect:cursor:"), rect, objref.IDOf(object))
 }
 
 // RemoveCursorRectCursor wraps the corresponding Objective-C method.
-func (x *View) RemoveCursorRectCursor(rect corefoundation.CGRect, object *Cursor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCursorRect:cursor:"), rect, objref.IDOf(object))
+func (v_ *View) RemoveCursorRectCursor(rect corefoundation.CGRect, object *Cursor) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeCursorRect:cursor:"), rect, objref.IDOf(object))
 }
 
 // DiscardCursorRects wraps the corresponding Objective-C method.
-func (x *View) DiscardCursorRects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardCursorRects"))
+func (v_ *View) DiscardCursorRects() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("discardCursorRects"))
 }
 
 // ResetCursorRects wraps the corresponding Objective-C method.
-func (x *View) ResetCursorRects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetCursorRects"))
+func (v_ *View) ResetCursorRects() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resetCursorRects"))
 }
 
 // RemoveTrackingRect wraps the corresponding Objective-C method.
-func (x *View) RemoveTrackingRect(tag int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrackingRect:"), tag)
+func (v_ *View) RemoveTrackingRect(tag int) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeTrackingRect:"), tag)
 }
 
 // TrackingAreas wraps the corresponding Objective-C method.
 //
 // TrackingAreas returns the collection as a Go slice.
-func (x *View) TrackingAreas() []*TrackingArea {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackingAreas"))
+func (v_ *View) TrackingAreas() []*TrackingArea {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("trackingAreas"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TrackingArea { return TrackingAreaFromID(_id) })
 }
 
 // DragImageAtOffsetEventPasteboardSourceSlideBack wraps the corresponding Objective-C method.
-func (x *View) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, viewLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:"), objref.IDOf(image), viewLocation, initialOffset, objref.IDOf(event), objref.IDOf(pboard), objref.IDOf(sourceObj), slideFlag)
+func (v_ *View) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, viewLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:"), objref.IDOf(image), viewLocation, initialOffset, objref.IDOf(event), objref.IDOf(pboard), objref.IDOf(sourceObj), slideFlag)
 }
 
 // DragFileFromRectSlideBackEvent wraps the corresponding Objective-C method.
-func (x *View) DragFileFromRectSlideBackEvent(filename string, rect corefoundation.CGRect, flag bool, event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("dragFile:fromRect:slideBack:event:"), purego.NSString(filename), rect, flag, objref.IDOf(event))
+func (v_ *View) DragFileFromRectSlideBackEvent(filename string, rect corefoundation.CGRect, flag bool, event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("dragFile:fromRect:slideBack:event:"), purego.NSString(filename), rect, flag, objref.IDOf(event))
 	return _r
 }
 
 // DragPromisedFilesOfTypesFromRectSourceSlideBackEvent wraps the corresponding Objective-C method.
-func (x *View) DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray []string, rect corefoundation.CGRect, sourceObject obj.Object, flag bool, event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("dragPromisedFilesOfTypes:fromRect:source:slideBack:event:"), purego.SliceToNSArray(typeArray, func(_v string) objc.ID { return purego.NSString(_v) }), rect, objref.IDOf(sourceObject), flag, objref.IDOf(event))
+func (v_ *View) DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray []string, rect corefoundation.CGRect, sourceObject obj.Object, flag bool, event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("dragPromisedFilesOfTypes:fromRect:source:slideBack:event:"), purego.SliceToNSArray(typeArray, func(_v string) objc.ID { return purego.NSString(_v) }), rect, objref.IDOf(sourceObject), flag, objref.IDOf(event))
 	return _r
 }
 
 // ConvertPointToBase wraps the corresponding Objective-C method.
-func (x *View) ConvertPointToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToBase:"), point)
+func (v_ *View) ConvertPointToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPointToBase:"), point)
 	return _r
 }
 
 // ConvertPointFromBase wraps the corresponding Objective-C method.
-func (x *View) ConvertPointFromBase(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromBase:"), point)
+func (v_ *View) ConvertPointFromBase(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("convertPointFromBase:"), point)
 	return _r
 }
 
 // ConvertSizeToBase wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeToBase(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSizeToBase:"), size)
+func (v_ *View) ConvertSizeToBase(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSizeToBase:"), size)
 	return _r
 }
 
 // ConvertSizeFromBase wraps the corresponding Objective-C method.
-func (x *View) ConvertSizeFromBase(size corefoundation.CGSize) corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("convertSizeFromBase:"), size)
+func (v_ *View) ConvertSizeFromBase(size corefoundation.CGSize) corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("convertSizeFromBase:"), size)
 	return _r
 }
 
 // ConvertRectToBase wraps the corresponding Objective-C method.
-func (x *View) ConvertRectToBase(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectToBase:"), rect)
+func (v_ *View) ConvertRectToBase(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRectToBase:"), rect)
 	return _r
 }
 
 // ConvertRectFromBase wraps the corresponding Objective-C method.
-func (x *View) ConvertRectFromBase(rect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("convertRectFromBase:"), rect)
+func (v_ *View) ConvertRectFromBase(rect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("convertRectFromBase:"), rect)
 	return _r
 }
 
 // ShouldDrawColor wraps the corresponding Objective-C method.
-func (x *View) ShouldDrawColor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldDrawColor"))
+func (v_ *View) ShouldDrawColor() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("shouldDrawColor"))
 	return _r
 }
 
 // GState wraps the corresponding Objective-C method.
-func (x *View) GState() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gState"))
+func (v_ *View) GState() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("gState"))
 	return _r
 }
 
 // AllocateGState wraps the corresponding Objective-C method.
-func (x *View) AllocateGState() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocateGState"))
+func (v_ *View) AllocateGState() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("allocateGState"))
 }
 
 // ReleaseGState wraps the corresponding Objective-C method.
-func (x *View) ReleaseGState() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseGState"))
+func (v_ *View) ReleaseGState() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("releaseGState"))
 }
 
 // SetUpGState wraps the corresponding Objective-C method.
-func (x *View) SetUpGState() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpGState"))
+func (v_ *View) SetUpGState() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setUpGState"))
 }
 
 // RenewGState wraps the corresponding Objective-C method.
-func (x *View) RenewGState() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renewGState"))
+func (v_ *View) RenewGState() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("renewGState"))
 }
 
 // WritingToolsCoordinator wraps the corresponding Objective-C method.
-func (x *View) WritingToolsCoordinator() *WritingToolsCoordinator {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writingToolsCoordinator"))
+func (v_ *View) WritingToolsCoordinator() *WritingToolsCoordinator {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("writingToolsCoordinator"))
 	return WritingToolsCoordinatorFromID(_r)
 }
 
-// SetWritingToolsCoordinator wraps the corresponding Objective-C method.
-func (x *View) SetWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-}
-
 // EnclosingMenuItem wraps the corresponding Objective-C method.
-func (x *View) EnclosingMenuItem() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enclosingMenuItem"))
+func (v_ *View) EnclosingMenuItem() *MenuItem {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("enclosingMenuItem"))
 	return MenuItemFromID(_r)
 }
 
 // CandidateListTouchBarItem wraps the corresponding Objective-C method.
-func (x *View) CandidateListTouchBarItem() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateListTouchBarItem"))
+func (v_ *View) CandidateListTouchBarItem() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("candidateListTouchBarItem"))
 	return obj.Wrap(_r)
 }
 
 // ReflectScrolledClipView wraps the corresponding Objective-C method.
-func (x *View) ReflectScrolledClipView(clipView *ClipView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reflectScrolledClipView:"), objref.IDOf(clipView))
+func (v_ *View) ReflectScrolledClipView(clipView *ClipView) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("reflectScrolledClipView:"), objref.IDOf(clipView))
 }
 
 // ScrollClipViewToPoint wraps the corresponding Objective-C method.
-func (x *View) ScrollClipViewToPoint(clipView *ClipView, point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollClipView:toPoint:"), objref.IDOf(clipView), point)
+func (v_ *View) ScrollClipViewToPoint(clipView *ClipView, point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollClipView:toPoint:"), objref.IDOf(clipView), point)
 }
 
 // AddConstraint wraps the corresponding Objective-C method.
-func (x *View) AddConstraint(constraint *LayoutConstraint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConstraint:"), objref.IDOf(constraint))
+func (v_ *View) AddConstraint(constraint *LayoutConstraint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addConstraint:"), objref.IDOf(constraint))
 }
 
 // AddConstraints wraps the corresponding Objective-C method.
-func (x *View) AddConstraints(constraints []*LayoutConstraint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
+func (v_ *View) AddConstraints(constraints []*LayoutConstraint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveConstraint wraps the corresponding Objective-C method.
-func (x *View) RemoveConstraint(constraint *LayoutConstraint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConstraint:"), objref.IDOf(constraint))
+func (v_ *View) RemoveConstraint(constraint *LayoutConstraint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeConstraint:"), objref.IDOf(constraint))
 }
 
 // RemoveConstraints wraps the corresponding Objective-C method.
-func (x *View) RemoveConstraints(constraints []*LayoutConstraint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
+func (v_ *View) RemoveConstraints(constraints []*LayoutConstraint) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }
 
 // LeadingAnchor wraps the corresponding Objective-C method.
-func (x *View) LeadingAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leadingAnchor"))
+func (v_ *View) LeadingAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("leadingAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // TrailingAnchor wraps the corresponding Objective-C method.
-func (x *View) TrailingAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trailingAnchor"))
+func (v_ *View) TrailingAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("trailingAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // LeftAnchor wraps the corresponding Objective-C method.
-func (x *View) LeftAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftAnchor"))
+func (v_ *View) LeftAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("leftAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // RightAnchor wraps the corresponding Objective-C method.
-func (x *View) RightAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightAnchor"))
+func (v_ *View) RightAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rightAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // TopAnchor wraps the corresponding Objective-C method.
-func (x *View) TopAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topAnchor"))
+func (v_ *View) TopAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("topAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // BottomAnchor wraps the corresponding Objective-C method.
-func (x *View) BottomAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottomAnchor"))
+func (v_ *View) BottomAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("bottomAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // WidthAnchor wraps the corresponding Objective-C method.
-func (x *View) WidthAnchor() *LayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widthAnchor"))
+func (v_ *View) WidthAnchor() *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("widthAnchor"))
 	return LayoutDimensionFromID(_r)
 }
 
 // HeightAnchor wraps the corresponding Objective-C method.
-func (x *View) HeightAnchor() *LayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heightAnchor"))
+func (v_ *View) HeightAnchor() *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("heightAnchor"))
 	return LayoutDimensionFromID(_r)
 }
 
 // CenterXAnchor wraps the corresponding Objective-C method.
-func (x *View) CenterXAnchor() *LayoutXAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centerXAnchor"))
+func (v_ *View) CenterXAnchor() *LayoutXAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("centerXAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
 // CenterYAnchor wraps the corresponding Objective-C method.
-func (x *View) CenterYAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("centerYAnchor"))
+func (v_ *View) CenterYAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("centerYAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // FirstBaselineAnchor wraps the corresponding Objective-C method.
-func (x *View) FirstBaselineAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstBaselineAnchor"))
+func (v_ *View) FirstBaselineAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("firstBaselineAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // LastBaselineAnchor wraps the corresponding Objective-C method.
-func (x *View) LastBaselineAnchor() *LayoutYAxisAnchor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastBaselineAnchor"))
+func (v_ *View) LastBaselineAnchor() *LayoutYAxisAnchor {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("lastBaselineAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
 // Constraints wraps the corresponding Objective-C method.
 //
 // Constraints returns the collection as a Go slice.
-func (x *View) Constraints() []*LayoutConstraint {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraints"))
+func (v_ *View) Constraints() []*LayoutConstraint {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("constraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
 // UpdateConstraintsForSubtreeIfNeeded wraps the corresponding Objective-C method.
-func (x *View) UpdateConstraintsForSubtreeIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateConstraintsForSubtreeIfNeeded"))
+func (v_ *View) UpdateConstraintsForSubtreeIfNeeded() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateConstraintsForSubtreeIfNeeded"))
 }
 
 // UpdateConstraints wraps the corresponding Objective-C method.
-func (x *View) UpdateConstraints() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateConstraints"))
+func (v_ *View) UpdateConstraints() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateConstraints"))
 }
 
 // NeedsUpdateConstraints wraps the corresponding Objective-C method.
-func (x *View) NeedsUpdateConstraints() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsUpdateConstraints"))
+func (v_ *View) NeedsUpdateConstraints() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("needsUpdateConstraints"))
 	return _r
-}
-
-// SetNeedsUpdateConstraints wraps the corresponding Objective-C method.
-func (x *View) SetNeedsUpdateConstraints(needsUpdateConstraints bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 }
 
 // TranslatesAutoresizingMaskIntoConstraints wraps the corresponding Objective-C method.
-func (x *View) TranslatesAutoresizingMaskIntoConstraints() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("translatesAutoresizingMaskIntoConstraints"))
+func (v_ *View) TranslatesAutoresizingMaskIntoConstraints() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("translatesAutoresizingMaskIntoConstraints"))
 	return _r
 }
 
-// SetTranslatesAutoresizingMaskIntoConstraints wraps the corresponding Objective-C method.
-func (x *View) SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-}
-
 // AlignmentRectForFrame wraps the corresponding Objective-C method.
-func (x *View) AlignmentRectForFrame(frame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("alignmentRectForFrame:"), frame)
+func (v_ *View) AlignmentRectForFrame(frame corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("alignmentRectForFrame:"), frame)
 	return _r
 }
 
 // FrameForAlignmentRect wraps the corresponding Objective-C method.
-func (x *View) FrameForAlignmentRect(alignmentRect corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameForAlignmentRect:"), alignmentRect)
+func (v_ *View) FrameForAlignmentRect(alignmentRect corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("frameForAlignmentRect:"), alignmentRect)
 	return _r
 }
 
 // InvalidateIntrinsicContentSize wraps the corresponding Objective-C method.
-func (x *View) InvalidateIntrinsicContentSize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateIntrinsicContentSize"))
+func (v_ *View) InvalidateIntrinsicContentSize() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("invalidateIntrinsicContentSize"))
 }
 
 // ContentHuggingPriorityForOrientation wraps the corresponding Objective-C method.
-func (x *View) ContentHuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contentHuggingPriorityForOrientation:"), orientation)
+func (v_ *View) ContentHuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
+	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("contentHuggingPriorityForOrientation:"), orientation)
 	return _r
 }
 
 // SetContentHuggingPriorityForOrientation wraps the corresponding Objective-C method.
-func (x *View) SetContentHuggingPriorityForOrientation(priority float32, orientation LayoutConstraintOrientation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentHuggingPriority:forOrientation:"), priority, orientation)
+func (v_ *View) SetContentHuggingPriorityForOrientation(priority float32, orientation LayoutConstraintOrientation) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setContentHuggingPriority:forOrientation:"), priority, orientation)
 }
 
 // ContentCompressionResistancePriorityForOrientation wraps the corresponding Objective-C method.
-func (x *View) ContentCompressionResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("contentCompressionResistancePriorityForOrientation:"), orientation)
+func (v_ *View) ContentCompressionResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
+	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("contentCompressionResistancePriorityForOrientation:"), orientation)
 	return _r
 }
 
 // SetContentCompressionResistancePriorityForOrientation wraps the corresponding Objective-C method.
-func (x *View) SetContentCompressionResistancePriorityForOrientation(priority float32, orientation LayoutConstraintOrientation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentCompressionResistancePriority:forOrientation:"), priority, orientation)
+func (v_ *View) SetContentCompressionResistancePriorityForOrientation(priority float32, orientation LayoutConstraintOrientation) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setContentCompressionResistancePriority:forOrientation:"), priority, orientation)
 }
 
 // AlignmentRectInsets wraps the corresponding Objective-C method.
-func (x *View) AlignmentRectInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("alignmentRectInsets"))
+func (v_ *View) AlignmentRectInsets() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("alignmentRectInsets"))
 	return _r
 }
 
 // FirstBaselineOffsetFromTop wraps the corresponding Objective-C method.
-func (x *View) FirstBaselineOffsetFromTop() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("firstBaselineOffsetFromTop"))
+func (v_ *View) FirstBaselineOffsetFromTop() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("firstBaselineOffsetFromTop"))
 	return _r
 }
 
 // LastBaselineOffsetFromBottom wraps the corresponding Objective-C method.
-func (x *View) LastBaselineOffsetFromBottom() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lastBaselineOffsetFromBottom"))
+func (v_ *View) LastBaselineOffsetFromBottom() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("lastBaselineOffsetFromBottom"))
 	return _r
 }
 
 // BaselineOffsetFromBottom wraps the corresponding Objective-C method.
-func (x *View) BaselineOffsetFromBottom() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("baselineOffsetFromBottom"))
+func (v_ *View) BaselineOffsetFromBottom() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("baselineOffsetFromBottom"))
 	return _r
 }
 
 // IntrinsicContentSize wraps the corresponding Objective-C method.
-func (x *View) IntrinsicContentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("intrinsicContentSize"))
+func (v_ *View) IntrinsicContentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("intrinsicContentSize"))
 	return _r
 }
 
 // IsHorizontalContentSizeConstraintActive wraps the corresponding Objective-C method.
-func (x *View) IsHorizontalContentSizeConstraintActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHorizontalContentSizeConstraintActive"))
+func (v_ *View) IsHorizontalContentSizeConstraintActive() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isHorizontalContentSizeConstraintActive"))
 	return _r
-}
-
-// SetHorizontalContentSizeConstraintActive wraps the corresponding Objective-C method.
-func (x *View) SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 }
 
 // IsVerticalContentSizeConstraintActive wraps the corresponding Objective-C method.
-func (x *View) IsVerticalContentSizeConstraintActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVerticalContentSizeConstraintActive"))
+func (v_ *View) IsVerticalContentSizeConstraintActive() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isVerticalContentSizeConstraintActive"))
 	return _r
 }
 
-// SetVerticalContentSizeConstraintActive wraps the corresponding Objective-C method.
-func (x *View) SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-}
-
 // FittingSize wraps the corresponding Objective-C method.
-func (x *View) FittingSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("fittingSize"))
+func (v_ *View) FittingSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("fittingSize"))
 	return _r
 }
 
 // ConstraintsAffectingLayoutForOrientation wraps the corresponding Objective-C method.
-func (x *View) ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintsAffectingLayoutForOrientation:"), orientation)
+func (v_ *View) ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("constraintsAffectingLayoutForOrientation:"), orientation)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
 // ExerciseAmbiguityInLayout wraps the corresponding Objective-C method.
-func (x *View) ExerciseAmbiguityInLayout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exerciseAmbiguityInLayout"))
+func (v_ *View) ExerciseAmbiguityInLayout() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("exerciseAmbiguityInLayout"))
 }
 
 // HasAmbiguousLayout wraps the corresponding Objective-C method.
-func (x *View) HasAmbiguousLayout() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAmbiguousLayout"))
+func (v_ *View) HasAmbiguousLayout() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("hasAmbiguousLayout"))
 	return _r
 }
 
 // AddLayoutGuide wraps the corresponding Objective-C method.
-func (x *View) AddLayoutGuide(guide *LayoutGuide) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addLayoutGuide:"), objref.IDOf(guide))
+func (v_ *View) AddLayoutGuide(guide *LayoutGuide) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addLayoutGuide:"), objref.IDOf(guide))
 }
 
 // RemoveLayoutGuide wraps the corresponding Objective-C method.
-func (x *View) RemoveLayoutGuide(guide *LayoutGuide) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLayoutGuide:"), objref.IDOf(guide))
+func (v_ *View) RemoveLayoutGuide(guide *LayoutGuide) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeLayoutGuide:"), objref.IDOf(guide))
 }
 
 // LayoutGuides wraps the corresponding Objective-C method.
 //
 // LayoutGuides returns the collection as a Go slice.
-func (x *View) LayoutGuides() []*LayoutGuide {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutGuides"))
+func (v_ *View) LayoutGuides() []*LayoutGuide {
+	_arr := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layoutGuides"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutGuide { return LayoutGuideFromID(_id) })
 }
 
 // LayoutGuideForLayoutRegion wraps the corresponding Objective-C method.
-func (x *View) LayoutGuideForLayoutRegion(layoutRegion *ViewLayoutRegion) *LayoutGuide {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutGuideForLayoutRegion:"), objref.IDOf(layoutRegion))
+func (v_ *View) LayoutGuideForLayoutRegion(layoutRegion *ViewLayoutRegion) *LayoutGuide {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layoutGuideForLayoutRegion:"), objref.IDOf(layoutRegion))
 	return LayoutGuideFromID(_r)
 }
 
 // EdgeInsetsForLayoutRegion wraps the corresponding Objective-C method.
-func (x *View) EdgeInsetsForLayoutRegion(layoutRegion *ViewLayoutRegion) foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("edgeInsetsForLayoutRegion:"), objref.IDOf(layoutRegion))
+func (v_ *View) EdgeInsetsForLayoutRegion(layoutRegion *ViewLayoutRegion) foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("edgeInsetsForLayoutRegion:"), objref.IDOf(layoutRegion))
 	return _r
 }
 
 // RectForLayoutRegion wraps the corresponding Objective-C method.
-func (x *View) RectForLayoutRegion(layoutRegion *ViewLayoutRegion) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForLayoutRegion:"), objref.IDOf(layoutRegion))
+func (v_ *View) RectForLayoutRegion(layoutRegion *ViewLayoutRegion) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectForLayoutRegion:"), objref.IDOf(layoutRegion))
 	return _r
 }
 
 // RulerViewShouldMoveMarker wraps the corresponding Objective-C method.
-func (x *View) RulerViewShouldMoveMarker(ruler *RulerView, marker *RulerMarker) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rulerView:shouldMoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
+func (v_ *View) RulerViewShouldMoveMarker(ruler *RulerView, marker *RulerMarker) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("rulerView:shouldMoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 	return _r
 }
 
 // RulerViewWillMoveMarkerToLocation wraps the corresponding Objective-C method.
-func (x *View) RulerViewWillMoveMarkerToLocation(ruler *RulerView, marker *RulerMarker, location float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rulerView:willMoveMarker:toLocation:"), objref.IDOf(ruler), objref.IDOf(marker), location)
+func (v_ *View) RulerViewWillMoveMarkerToLocation(ruler *RulerView, marker *RulerMarker, location float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("rulerView:willMoveMarker:toLocation:"), objref.IDOf(ruler), objref.IDOf(marker), location)
 	return _r
 }
 
 // RulerViewDidMoveMarker wraps the corresponding Objective-C method.
-func (x *View) RulerViewDidMoveMarker(ruler *RulerView, marker *RulerMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerView:didMoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
+func (v_ *View) RulerViewDidMoveMarker(ruler *RulerView, marker *RulerMarker) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:didMoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 }
 
 // RulerViewShouldRemoveMarker wraps the corresponding Objective-C method.
-func (x *View) RulerViewShouldRemoveMarker(ruler *RulerView, marker *RulerMarker) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rulerView:shouldRemoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
+func (v_ *View) RulerViewShouldRemoveMarker(ruler *RulerView, marker *RulerMarker) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("rulerView:shouldRemoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 	return _r
 }
 
 // RulerViewDidRemoveMarker wraps the corresponding Objective-C method.
-func (x *View) RulerViewDidRemoveMarker(ruler *RulerView, marker *RulerMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerView:didRemoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
+func (v_ *View) RulerViewDidRemoveMarker(ruler *RulerView, marker *RulerMarker) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:didRemoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 }
 
 // RulerViewShouldAddMarker wraps the corresponding Objective-C method.
-func (x *View) RulerViewShouldAddMarker(ruler *RulerView, marker *RulerMarker) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rulerView:shouldAddMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
+func (v_ *View) RulerViewShouldAddMarker(ruler *RulerView, marker *RulerMarker) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("rulerView:shouldAddMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 	return _r
 }
 
 // RulerViewWillAddMarkerAtLocation wraps the corresponding Objective-C method.
-func (x *View) RulerViewWillAddMarkerAtLocation(ruler *RulerView, marker *RulerMarker, location float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rulerView:willAddMarker:atLocation:"), objref.IDOf(ruler), objref.IDOf(marker), location)
+func (v_ *View) RulerViewWillAddMarkerAtLocation(ruler *RulerView, marker *RulerMarker, location float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("rulerView:willAddMarker:atLocation:"), objref.IDOf(ruler), objref.IDOf(marker), location)
 	return _r
 }
 
 // RulerViewDidAddMarker wraps the corresponding Objective-C method.
-func (x *View) RulerViewDidAddMarker(ruler *RulerView, marker *RulerMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerView:didAddMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
+func (v_ *View) RulerViewDidAddMarker(ruler *RulerView, marker *RulerMarker) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:didAddMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 }
 
 // RulerViewHandleMouseDown wraps the corresponding Objective-C method.
-func (x *View) RulerViewHandleMouseDown(ruler *RulerView, event *Event) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerView:handleMouseDown:"), objref.IDOf(ruler), objref.IDOf(event))
+func (v_ *View) RulerViewHandleMouseDown(ruler *RulerView, event *Event) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:handleMouseDown:"), objref.IDOf(ruler), objref.IDOf(event))
 }
 
 // RulerViewWillSetClientView wraps the corresponding Objective-C method.
-func (x *View) RulerViewWillSetClientView(ruler *RulerView, newClient *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rulerView:willSetClientView:"), objref.IDOf(ruler), objref.IDOf(newClient))
+func (v_ *View) RulerViewWillSetClientView(ruler *RulerView, newClient *View) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:willSetClientView:"), objref.IDOf(ruler), objref.IDOf(newClient))
 }
 
 // RulerViewLocationForPoint wraps the corresponding Objective-C method.
-func (x *View) RulerViewLocationForPoint(ruler *RulerView, point corefoundation.CGPoint) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rulerView:locationForPoint:"), objref.IDOf(ruler), point)
+func (v_ *View) RulerViewLocationForPoint(ruler *RulerView, point corefoundation.CGPoint) float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("rulerView:locationForPoint:"), objref.IDOf(ruler), point)
 	return _r
 }
 
 // RulerViewPointForLocation wraps the corresponding Objective-C method.
-func (x *View) RulerViewPointForLocation(ruler *RulerView, point float64) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("rulerView:pointForLocation:"), objref.IDOf(ruler), point)
+func (v_ *View) RulerViewPointForLocation(ruler *RulerView, point float64) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("rulerView:pointForLocation:"), objref.IDOf(ruler), point)
 	return _r
 }
 
 // WantsBestResolutionOpenGLSurface wraps the corresponding Objective-C method.
-func (x *View) WantsBestResolutionOpenGLSurface() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsBestResolutionOpenGLSurface"))
+func (v_ *View) WantsBestResolutionOpenGLSurface() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("wantsBestResolutionOpenGLSurface"))
 	return _r
-}
-
-// SetWantsBestResolutionOpenGLSurface wraps the corresponding Objective-C method.
-func (x *View) SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 }
 
 // WantsExtendedDynamicRangeOpenGLSurface wraps the corresponding Objective-C method.
-func (x *View) WantsExtendedDynamicRangeOpenGLSurface() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsExtendedDynamicRangeOpenGLSurface"))
+func (v_ *View) WantsExtendedDynamicRangeOpenGLSurface() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("wantsExtendedDynamicRangeOpenGLSurface"))
 	return _r
 }
 
-// SetWantsExtendedDynamicRangeOpenGLSurface wraps the corresponding Objective-C method.
-func (x *View) SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-}
-
 // PressureConfiguration wraps the corresponding Objective-C method.
-func (x *View) PressureConfiguration() *PressureConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressureConfiguration"))
+func (v_ *View) PressureConfiguration() *PressureConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pressureConfiguration"))
 	return PressureConfigurationFromID(_r)
 }
-
-// SetPressureConfiguration wraps the corresponding Objective-C method.
-func (x *View) SetPressureConfiguration(pressureConfiguration *PressureConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-}
-
-// Viewable is the interface implemented by [View], for mocking and DI.
-type Viewable interface {
-	obj.Object
-	WithSubviews(items ...ViewProvider) *View
-	WithHidden(hidden bool) *View
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *View
-	WithAutoresizesSubviews(autoresizesSubviews bool) *View
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *View
-	WithFrame(frame corefoundation.CGRect) *View
-	WithFrameRotation(frameRotation float64) *View
-	WithFrameCenterRotation(frameCenterRotation float64) *View
-	WithBoundsRotation(boundsRotation float64) *View
-	WithBounds(bounds corefoundation.CGRect) *View
-	WithCanDrawConcurrently(canDrawConcurrently bool) *View
-	WithNeedsDisplay(needsDisplay bool) *View
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *View
-	WithWantsRestingTouches(wantsRestingTouches bool) *View
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *View
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *View
-	WithWantsLayer(wantsLayer bool) *View
-	WithLayer(layer obj.Object) *View
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *View
-	WithNeedsLayout(needsLayout bool) *View
-	WithAlphaValue(alphaValue float64) *View
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *View
-	WithBackgroundFilters(items ...obj.Object) *View
-	WithCompositingFilter(compositingFilter obj.Object) *View
-	WithContentFilters(items ...obj.Object) *View
-	WithShadow(shadow *Shadow) *View
-	WithClipsToBounds(clipsToBounds bool) *View
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *View
-	WithToolTip(toolTip string) *View
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *View
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *View
-	WithNextKeyView(nextKeyView ViewProvider) *View
-	WithFocusRingType(focusRingType FocusRingType) *View
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *View
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *View
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *View
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *View
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *View
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *View
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *View
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *View
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *View
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *View
-	WithNextResponder(nextResponder ResponderProvider) *View
-	WithMenu(menu *Menu) *View
-	WithUserActivity(userActivity obj.Object) *View
-	WithTouchBar(touchBar *TouchBar) *View
-	IsDescendantOf(view *View) bool
-	AncestorSharedWithView(view *View) *View
-	NeedsToDrawRect(rect corefoundation.CGRect) bool
-	ViewDidHide()
-	ViewDidUnhide()
-	AddSubview(view *View)
-	AddSubviewPositionedRelativeTo(view *View, place WindowOrderingMode, otherView *View)
-	ViewWillMoveToWindow(newWindow *Window)
-	ViewDidMoveToWindow()
-	ViewWillMoveToSuperview(newSuperview *View)
-	ViewDidMoveToSuperview()
-	DidAddSubview(subview *View)
-	WillRemoveSubview(subview *View)
-	RemoveFromSuperview()
-	ReplaceSubviewWith(oldView *View, newView *View)
-	RemoveFromSuperviewWithoutNeedingDisplay()
-	ViewDidChangeBackingProperties()
-	ResizeSubviewsWithOldSize(oldSize corefoundation.CGSize)
-	ResizeWithOldSuperviewSize(oldSize corefoundation.CGSize)
-	SetFrameOrigin(newOrigin corefoundation.CGPoint)
-	SetFrameSize(newSize corefoundation.CGSize)
-	SetBoundsOrigin(newOrigin corefoundation.CGPoint)
-	SetBoundsSize(newSize corefoundation.CGSize)
-	TranslateOriginToPoint(translation corefoundation.CGPoint)
-	ScaleUnitSquareToSize(newUnitSize corefoundation.CGSize)
-	RotateByAngle(angle float64)
-	ConvertPointFromView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint
-	ConvertPointToView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint
-	ConvertSizeFromView(size corefoundation.CGSize, view *View) corefoundation.CGSize
-	ConvertSizeToView(size corefoundation.CGSize, view *View) corefoundation.CGSize
-	ConvertRectFromView(rect corefoundation.CGRect, view *View) corefoundation.CGRect
-	ConvertRectToView(rect corefoundation.CGRect, view *View) corefoundation.CGRect
-	CenterScanRect(rect corefoundation.CGRect) corefoundation.CGRect
-	ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertSizeToBacking(size corefoundation.CGSize) corefoundation.CGSize
-	ConvertSizeFromBacking(size corefoundation.CGSize) corefoundation.CGSize
-	ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect
-	ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect
-	ConvertPointToLayer(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertPointFromLayer(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertSizeToLayer(size corefoundation.CGSize) corefoundation.CGSize
-	ConvertSizeFromLayer(size corefoundation.CGSize) corefoundation.CGSize
-	ConvertRectToLayer(rect corefoundation.CGRect) corefoundation.CGRect
-	ConvertRectFromLayer(rect corefoundation.CGRect) corefoundation.CGRect
-	SetNeedsDisplayInRect(invalidRect corefoundation.CGRect)
-	LockFocus()
-	UnlockFocus()
-	LockFocusIfCanDraw() bool
-	LockFocusIfCanDrawInContext(context_ *GraphicsContext) bool
-	Display()
-	DisplayIfNeeded()
-	DisplayIfNeededIgnoringOpacity()
-	DisplayRect(rect corefoundation.CGRect)
-	DisplayIfNeededInRect(rect corefoundation.CGRect)
-	DisplayRectIgnoringOpacity(rect corefoundation.CGRect)
-	DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect)
-	DrawRect(dirtyRect corefoundation.CGRect)
-	DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect, context_ *GraphicsContext)
-	BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect) *BitmapImageRep
-	CacheDisplayInRectToBitmapImageRep(rect corefoundation.CGRect, bitmapImageRep *BitmapImageRep)
-	ViewWillDraw()
-	ScrollPoint(point corefoundation.CGPoint)
-	ScrollRectToVisible(rect corefoundation.CGRect) bool
-	Autoscroll(event *Event) bool
-	AdjustScroll(newVisible corefoundation.CGRect) corefoundation.CGRect
-	ScrollRectBy(rect corefoundation.CGRect, delta corefoundation.CGSize)
-	TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CGRect, delta corefoundation.CGSize)
-	HitTest(point corefoundation.CGPoint) *View
-	MouseInRect(point corefoundation.CGPoint, rect corefoundation.CGRect) bool
-	ViewWithTag(tag int) *View
-	AcceptsFirstMouse(event *Event) bool
-	ShouldDelayWindowOrderingForEvent(event *Event) bool
-	MakeBackingLayer() obj.Object
-	UpdateLayer()
-	LayoutSubtreeIfNeeded()
-	Layout()
-	MenuForEvent(event *Event) *Menu
-	WillOpenMenuWithEvent(menu *Menu, event *Event)
-	DidCloseMenuWithEvent(menu *Menu, event *Event)
-	RemoveToolTip(tag int)
-	RemoveAllToolTips()
-	ViewWillStartLiveResize()
-	ViewDidEndLiveResize()
-	RectForSmartMagnificationAtPointInRect(location corefoundation.CGPoint, visibleRect corefoundation.CGRect) corefoundation.CGRect
-	PrepareForReuse()
-	PrepareContentInRect(rect corefoundation.CGRect)
-	ViewDidChangeEffectiveAppearance()
-	Window() *Window
-	Superview() *View
-	Subviews() []*View
-	SetSubviews(subviews []*View)
-	OpaqueAncestor() *View
-	IsHidden() bool
-	SetHidden(hidden bool)
-	IsHiddenOrHasHiddenAncestor() bool
-	WantsDefaultClipping() bool
-	PostsFrameChangedNotifications() bool
-	SetPostsFrameChangedNotifications(postsFrameChangedNotifications bool)
-	AutoresizesSubviews() bool
-	SetAutoresizesSubviews(autoresizesSubviews bool)
-	AutoresizingMask() AutoresizingMaskOptions
-	SetAutoresizingMask(autoresizingMask AutoresizingMaskOptions)
-	Frame() corefoundation.CGRect
-	SetFrame(frame corefoundation.CGRect)
-	FrameRotation() float64
-	SetFrameRotation(frameRotation float64)
-	FrameCenterRotation() float64
-	SetFrameCenterRotation(frameCenterRotation float64)
-	BoundsRotation() float64
-	SetBoundsRotation(boundsRotation float64)
-	Bounds() corefoundation.CGRect
-	SetBounds(bounds corefoundation.CGRect)
-	IsFlipped() bool
-	IsRotatedFromBase() bool
-	IsRotatedOrScaledFromBase() bool
-	IsOpaque() bool
-	CanDrawConcurrently() bool
-	SetCanDrawConcurrently(canDrawConcurrently bool)
-	CanDraw() bool
-	NeedsDisplay() bool
-	SetNeedsDisplay(needsDisplay bool)
-	VisibleRect() corefoundation.CGRect
-	Tag() int
-	NeedsPanelToBecomeKey() bool
-	MouseDownCanMoveWindow() bool
-	AcceptsTouchEvents() bool
-	SetAcceptsTouchEvents(acceptsTouchEvents bool)
-	WantsRestingTouches() bool
-	SetWantsRestingTouches(wantsRestingTouches bool)
-	LayerContentsRedrawPolicy() ViewLayerContentsRedrawPolicy
-	SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy)
-	LayerContentsPlacement() ViewLayerContentsPlacement
-	SetLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement)
-	WantsLayer() bool
-	SetWantsLayer(wantsLayer bool)
-	Layer() obj.Object
-	SetLayer(layer obj.Object)
-	WantsUpdateLayer() bool
-	CanDrawSubviewsIntoLayer() bool
-	SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool)
-	NeedsLayout() bool
-	SetNeedsLayout(needsLayout bool)
-	AlphaValue() float64
-	SetAlphaValue(alphaValue float64)
-	LayerUsesCoreImageFilters() bool
-	SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool)
-	BackgroundFilters() []obj.Object
-	SetBackgroundFilters(backgroundFilters []obj.Object)
-	CompositingFilter() obj.Object
-	SetCompositingFilter(compositingFilter obj.Object)
-	ContentFilters() []obj.Object
-	SetContentFilters(contentFilters []obj.Object)
-	Shadow() *Shadow
-	SetShadow(shadow *Shadow)
-	ClipsToBounds() bool
-	SetClipsToBounds(clipsToBounds bool)
-	PostsBoundsChangedNotifications() bool
-	SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool)
-	EnclosingScrollView() *ScrollView
-	ToolTip() string
-	SetToolTip(toolTip string)
-	InLiveResize() bool
-	PreservesContentDuringLiveResize() bool
-	RectPreservedDuringLiveResize() corefoundation.CGRect
-	InputContext() *TextInputContext
-	UserInterfaceLayoutDirection() UserInterfaceLayoutDirection
-	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection)
-	PreparedContentRect() corefoundation.CGRect
-	SetPreparedContentRect(preparedContentRect corefoundation.CGRect)
-	AllowsVibrancy() bool
-	SetKeyboardFocusRingNeedsDisplayInRect(rect corefoundation.CGRect)
-	DrawFocusRingMask()
-	NoteFocusRingMaskChanged()
-	NextKeyView() *View
-	SetNextKeyView(nextKeyView *View)
-	PreviousKeyView() *View
-	NextValidKeyView() *View
-	PreviousValidKeyView() *View
-	CanBecomeKeyView() bool
-	FocusRingType() FocusRingType
-	SetFocusRingType(focusRingType FocusRingType)
-	FocusRingMaskBounds() corefoundation.CGRect
-	WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard)
-	DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object
-	WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard)
-	DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object
-	Print(sender obj.Object)
-	AdjustPageWidthNewLeftRightLimit(oldLeft float64, oldRight float64, rightLimit float64) (newRight float64)
-	AdjustPageHeightNewTopBottomLimit(oldTop float64, oldBottom float64, bottomLimit float64) (newBottom float64)
-	RectForPage(page int) corefoundation.CGRect
-	LocationOfPrintRect(rect corefoundation.CGRect) corefoundation.CGPoint
-	DrawPageBorderWithSize(borderSize corefoundation.CGSize)
-	DrawSheetBorderWithSize(borderSize corefoundation.CGSize)
-	BeginDocument()
-	EndDocument()
-	BeginPageInRectAtPlacement(rect corefoundation.CGRect, location corefoundation.CGPoint)
-	EndPage()
-	HeightAdjustLimit() float64
-	WidthAdjustLimit() float64
-	PageHeader() obj.Object
-	PageFooter() obj.Object
-	PrintJobTitle() string
-	RegisterForDraggedTypes(newTypes []obj.Object)
-	UnregisterDraggedTypes()
-	RegisteredDraggedTypes() []obj.Object
-	EnterFullScreenModeWithOptions(screen *Screen, options obj.Object) bool
-	ExitFullScreenModeWithOptions(options obj.Object)
-	IsInFullScreenMode() bool
-	ShowDefinitionForAttributedStringAtPoint(attrString obj.Object, textBaselineOrigin corefoundation.CGPoint)
-	IsDrawingFindIndicator() bool
-	AddGestureRecognizer(gestureRecognizer *GestureRecognizer)
-	RemoveGestureRecognizer(gestureRecognizer *GestureRecognizer)
-	GestureRecognizers() []*GestureRecognizer
-	SetGestureRecognizers(gestureRecognizers []*GestureRecognizer)
-	AllowedTouchTypes() TouchTypeMask
-	SetAllowedTouchTypes(allowedTouchTypes TouchTypeMask)
-	SafeAreaInsets() foundation.NSEdgeInsets
-	AdditionalSafeAreaInsets() foundation.NSEdgeInsets
-	SetAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets)
-	SafeAreaLayoutGuide() *LayoutGuide
-	SafeAreaRect() corefoundation.CGRect
-	LayoutMarginsGuide() *LayoutGuide
-	PrefersCompactControlSizeMetrics() bool
-	SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool)
-	AddTrackingArea(trackingArea *TrackingArea)
-	RemoveTrackingArea(trackingArea *TrackingArea)
-	UpdateTrackingAreas()
-	AddCursorRectCursor(rect corefoundation.CGRect, object *Cursor)
-	RemoveCursorRectCursor(rect corefoundation.CGRect, object *Cursor)
-	DiscardCursorRects()
-	ResetCursorRects()
-	RemoveTrackingRect(tag int)
-	TrackingAreas() []*TrackingArea
-	DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, viewLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool)
-	DragFileFromRectSlideBackEvent(filename string, rect corefoundation.CGRect, flag bool, event *Event) bool
-	DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray []string, rect corefoundation.CGRect, sourceObject obj.Object, flag bool, event *Event) bool
-	ConvertPointToBase(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertPointFromBase(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertSizeToBase(size corefoundation.CGSize) corefoundation.CGSize
-	ConvertSizeFromBase(size corefoundation.CGSize) corefoundation.CGSize
-	ConvertRectToBase(rect corefoundation.CGRect) corefoundation.CGRect
-	ConvertRectFromBase(rect corefoundation.CGRect) corefoundation.CGRect
-	ShouldDrawColor() bool
-	GState() int
-	AllocateGState()
-	ReleaseGState()
-	SetUpGState()
-	RenewGState()
-	WritingToolsCoordinator() *WritingToolsCoordinator
-	SetWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator)
-	EnclosingMenuItem() *MenuItem
-	CandidateListTouchBarItem() obj.Object
-	ReflectScrolledClipView(clipView *ClipView)
-	ScrollClipViewToPoint(clipView *ClipView, point corefoundation.CGPoint)
-	AddConstraint(constraint *LayoutConstraint)
-	AddConstraints(constraints []*LayoutConstraint)
-	RemoveConstraint(constraint *LayoutConstraint)
-	RemoveConstraints(constraints []*LayoutConstraint)
-	LeadingAnchor() *LayoutXAxisAnchor
-	TrailingAnchor() *LayoutXAxisAnchor
-	LeftAnchor() *LayoutXAxisAnchor
-	RightAnchor() *LayoutXAxisAnchor
-	TopAnchor() *LayoutYAxisAnchor
-	BottomAnchor() *LayoutYAxisAnchor
-	WidthAnchor() *LayoutDimension
-	HeightAnchor() *LayoutDimension
-	CenterXAnchor() *LayoutXAxisAnchor
-	CenterYAnchor() *LayoutYAxisAnchor
-	FirstBaselineAnchor() *LayoutYAxisAnchor
-	LastBaselineAnchor() *LayoutYAxisAnchor
-	Constraints() []*LayoutConstraint
-	UpdateConstraintsForSubtreeIfNeeded()
-	UpdateConstraints()
-	NeedsUpdateConstraints() bool
-	SetNeedsUpdateConstraints(needsUpdateConstraints bool)
-	TranslatesAutoresizingMaskIntoConstraints() bool
-	SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool)
-	AlignmentRectForFrame(frame corefoundation.CGRect) corefoundation.CGRect
-	FrameForAlignmentRect(alignmentRect corefoundation.CGRect) corefoundation.CGRect
-	InvalidateIntrinsicContentSize()
-	ContentHuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32
-	SetContentHuggingPriorityForOrientation(priority float32, orientation LayoutConstraintOrientation)
-	ContentCompressionResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32
-	SetContentCompressionResistancePriorityForOrientation(priority float32, orientation LayoutConstraintOrientation)
-	AlignmentRectInsets() foundation.NSEdgeInsets
-	FirstBaselineOffsetFromTop() float64
-	LastBaselineOffsetFromBottom() float64
-	BaselineOffsetFromBottom() float64
-	IntrinsicContentSize() corefoundation.CGSize
-	IsHorizontalContentSizeConstraintActive() bool
-	SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool)
-	IsVerticalContentSizeConstraintActive() bool
-	SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool)
-	FittingSize() corefoundation.CGSize
-	ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint
-	ExerciseAmbiguityInLayout()
-	HasAmbiguousLayout() bool
-	AddLayoutGuide(guide *LayoutGuide)
-	RemoveLayoutGuide(guide *LayoutGuide)
-	LayoutGuides() []*LayoutGuide
-	LayoutGuideForLayoutRegion(layoutRegion *ViewLayoutRegion) *LayoutGuide
-	EdgeInsetsForLayoutRegion(layoutRegion *ViewLayoutRegion) foundation.NSEdgeInsets
-	RectForLayoutRegion(layoutRegion *ViewLayoutRegion) corefoundation.CGRect
-	RulerViewShouldMoveMarker(ruler *RulerView, marker *RulerMarker) bool
-	RulerViewWillMoveMarkerToLocation(ruler *RulerView, marker *RulerMarker, location float64) float64
-	RulerViewDidMoveMarker(ruler *RulerView, marker *RulerMarker)
-	RulerViewShouldRemoveMarker(ruler *RulerView, marker *RulerMarker) bool
-	RulerViewDidRemoveMarker(ruler *RulerView, marker *RulerMarker)
-	RulerViewShouldAddMarker(ruler *RulerView, marker *RulerMarker) bool
-	RulerViewWillAddMarkerAtLocation(ruler *RulerView, marker *RulerMarker, location float64) float64
-	RulerViewDidAddMarker(ruler *RulerView, marker *RulerMarker)
-	RulerViewHandleMouseDown(ruler *RulerView, event *Event)
-	RulerViewWillSetClientView(ruler *RulerView, newClient *View)
-	RulerViewLocationForPoint(ruler *RulerView, point corefoundation.CGPoint) float64
-	RulerViewPointForLocation(ruler *RulerView, point float64) corefoundation.CGPoint
-	WantsBestResolutionOpenGLSurface() bool
-	SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool)
-	WantsExtendedDynamicRangeOpenGLSurface() bool
-	SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool)
-	PressureConfiguration() *PressureConfiguration
-	SetPressureConfiguration(pressureConfiguration *PressureConfiguration)
-}
-
-var _ Viewable = (*View)(nil)
 
 // isView marks View — and, by embedding promotion, its
 // subclasses — as a member of the View hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *View) isView() {}
+func (v_ *View) isView() {}
 
 var _ ViewProvider = (*View)(nil)
 

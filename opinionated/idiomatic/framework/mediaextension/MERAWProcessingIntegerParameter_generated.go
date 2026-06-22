@@ -5,11 +5,11 @@
 package mediaextension
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RAWProcessingIntegerParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingIntegerParameter.
@@ -79,68 +79,48 @@ func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMi
 	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingIntegerParameter) WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-	return x
+// WithCurrentValue sets get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+func (rpip *RAWProcessingIntegerParameter) WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter {
+	objc.Send[objc.ID](objref.IDOf(rpip), objc.RegisterName("setCurrentValue:"), currentValue)
+	return rpip
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingIntegerParameter) WithEnabled(enabled bool) *RAWProcessingIntegerParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rpip *RAWProcessingIntegerParameter) WithEnabled(enabled bool) *RAWProcessingIntegerParameter {
+	objc.Send[objc.ID](objref.IDOf(rpip), objc.RegisterName("setEnabled:"), enabled)
+	return rpip
 }
 
 // HasNeutralValue return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
-func (x *RAWProcessingIntegerParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
+func (rpip *RAWProcessingIntegerParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rpip), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // HasCameraValue return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
-func (x *RAWProcessingIntegerParameter) HasCameraValue() (ok bool, outCameraValue int64) {
+func (rpip *RAWProcessingIntegerParameter) HasCameraValue() (ok bool, outCameraValue int64) {
 	var _out0 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rpip), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
-// MaximumValue the maximum value for this parameter.
-func (x *RAWProcessingIntegerParameter) MaximumValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumValue"))
+// MaximumValue returns the maximum value for this parameter.
+func (rpip *RAWProcessingIntegerParameter) MaximumValue() int {
+	_r := objc.Send[int](objref.IDOf(rpip), objc.RegisterName("maximumValue"))
 	return _r
 }
 
-// MinimumValue the minimum value for this parameter.
-func (x *RAWProcessingIntegerParameter) MinimumValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumValue"))
+// MinimumValue returns the minimum value for this parameter.
+func (rpip *RAWProcessingIntegerParameter) MinimumValue() int {
+	_r := objc.Send[int](objref.IDOf(rpip), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingIntegerParameter) CurrentValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentValue"))
+func (rpip *RAWProcessingIntegerParameter) CurrentValue() int {
+	_r := objc.Send[int](objref.IDOf(rpip), objc.RegisterName("currentValue"))
 	return _r
 }
-
-// SetCurrentValue wraps the corresponding Objective-C method.
-func (x *RAWProcessingIntegerParameter) SetCurrentValue(currentValue int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-}
-
-// RAWProcessingIntegerParameterable is the interface implemented by [RAWProcessingIntegerParameter], for mocking and DI.
-type RAWProcessingIntegerParameterable interface {
-	obj.Object
-	WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter
-	WithEnabled(enabled bool) *RAWProcessingIntegerParameter
-	HasNeutralValue() (ok bool, outNeutralValue int64)
-	HasCameraValue() (ok bool, outCameraValue int64)
-	MaximumValue() int
-	MinimumValue() int
-	CurrentValue() int
-	SetCurrentValue(currentValue int)
-}
-
-var _ RAWProcessingIntegerParameterable = (*RAWProcessingIntegerParameter)(nil)
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingIntegerParameter)(nil)

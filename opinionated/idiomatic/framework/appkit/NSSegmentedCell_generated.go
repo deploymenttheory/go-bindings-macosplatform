@@ -53,351 +53,351 @@ func NewSegmentedCell() *SegmentedCell {
 	return segmentedCellAdopt(_id)
 }
 
-// WithSegmentCount the number of segments in the segmented control.
-func (x *SegmentedCell) WithSegmentCount(segmentCount int) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
-	return x
+// WithSegmentCount sets the number of segments in the segmented control.
+func (sc *SegmentedCell) WithSegmentCount(segmentCount int) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentCount:"), segmentCount)
+	return sc
 }
 
-// WithSelectedSegment the index of the selected segment of the control, or -1 if no segment is selected.
-func (x *SegmentedCell) WithSelectedSegment(selectedSegment int) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedSegment:"), selectedSegment)
-	return x
+// WithSelectedSegment sets the index of the selected segment of the control, or -1 if no segment is selected.
+func (sc *SegmentedCell) WithSelectedSegment(selectedSegment int) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectedSegment:"), selectedSegment)
+	return sc
 }
 
-// WithTrackingMode the tracking mode used for the segments of the control.
-func (x *SegmentedCell) WithTrackingMode(trackingMode SegmentSwitchTracking) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingMode:"), trackingMode)
-	return x
+// WithTrackingMode sets the tracking mode used for the segments of the control.
+func (sc *SegmentedCell) WithTrackingMode(trackingMode SegmentSwitchTracking) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTrackingMode:"), trackingMode)
+	return sc
 }
 
-// WithSegmentStyle the visual style used to display the segmented control.
-func (x *SegmentedCell) WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentStyle:"), segmentStyle)
-	return x
+// WithSegmentStyle sets the visual style used to display the segmented control.
+func (sc *SegmentedCell) WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentStyle:"), segmentStyle)
+	return sc
 }
 
-// WithControlView the view associated with the cell.
-func (x *SegmentedCell) WithControlView(controlView ViewProvider) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (sc *SegmentedCell) WithControlView(controlView ViewProvider) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return sc
 }
 
-// WithType the type of the cell.
-func (x *SegmentedCell) WithType(type_ CellType) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (sc *SegmentedCell) WithType(type_ CellType) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setType:"), type_)
+	return sc
 }
 
-// WithState the cell’s current state.
-func (x *SegmentedCell) WithState(state int) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (sc *SegmentedCell) WithState(state int) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setState:"), state)
+	return sc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *SegmentedCell) WithTarget(target obj.Object) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (sc *SegmentedCell) WithTarget(target obj.Object) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return sc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *SegmentedCell) WithTag(tag int) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (sc *SegmentedCell) WithTag(tag int) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:"), tag)
+	return sc
 }
 
-// WithTitle the cell’s title text.
-func (x *SegmentedCell) WithTitle(title string) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (sc *SegmentedCell) WithTitle(title string) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return sc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *SegmentedCell) WithEnabled(enabled bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (sc *SegmentedCell) WithEnabled(enabled bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:"), enabled)
+	return sc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *SegmentedCell) WithContinuous(continuous bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (sc *SegmentedCell) WithContinuous(continuous bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContinuous:"), continuous)
+	return sc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *SegmentedCell) WithEditable(editable bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (sc *SegmentedCell) WithEditable(editable bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEditable:"), editable)
+	return sc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *SegmentedCell) WithSelectable(selectable bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (sc *SegmentedCell) WithSelectable(selectable bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectable:"), selectable)
+	return sc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *SegmentedCell) WithBordered(bordered bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (sc *SegmentedCell) WithBordered(bordered bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBordered:"), bordered)
+	return sc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *SegmentedCell) WithBezeled(bezeled bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (sc *SegmentedCell) WithBezeled(bezeled bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBezeled:"), bezeled)
+	return sc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *SegmentedCell) WithScrollable(scrollable bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (sc *SegmentedCell) WithScrollable(scrollable bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScrollable:"), scrollable)
+	return sc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *SegmentedCell) WithHighlighted(highlighted bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (sc *SegmentedCell) WithHighlighted(highlighted bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHighlighted:"), highlighted)
+	return sc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *SegmentedCell) WithAlignment(alignment TextAlignment) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (sc *SegmentedCell) WithAlignment(alignment TextAlignment) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:"), alignment)
+	return sc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *SegmentedCell) WithWraps(wraps bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (sc *SegmentedCell) WithWraps(wraps bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWraps:"), wraps)
+	return sc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *SegmentedCell) WithFont(font *Font) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (sc *SegmentedCell) WithFont(font *Font) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return sc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *SegmentedCell) WithFormatter(formatter obj.Object) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (sc *SegmentedCell) WithFormatter(formatter obj.Object) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return sc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *SegmentedCell) WithObjectValue(objectValue obj.Object) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (sc *SegmentedCell) WithObjectValue(objectValue obj.Object) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return sc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *SegmentedCell) WithStringValue(stringValue string) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (sc *SegmentedCell) WithStringValue(stringValue string) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return sc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *SegmentedCell) WithIntValue(intValue int) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (sc *SegmentedCell) WithIntValue(intValue int) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntValue:"), intValue)
+	return sc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *SegmentedCell) WithFloatValue(floatValue float32) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (sc *SegmentedCell) WithFloatValue(floatValue float32) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFloatValue:"), floatValue)
+	return sc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *SegmentedCell) WithDoubleValue(doubleValue float64) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (sc *SegmentedCell) WithDoubleValue(doubleValue float64) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return sc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *SegmentedCell) WithIntegerValue(integerValue int) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (sc *SegmentedCell) WithIntegerValue(integerValue int) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return sc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *SegmentedCell) WithImage(image *Image) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (sc *SegmentedCell) WithImage(image *Image) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return sc
 }
 
-// WithControlSize the size of the cell.
-func (x *SegmentedCell) WithControlSize(controlSize ControlSize) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (sc *SegmentedCell) WithControlSize(controlSize ControlSize) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlSize:"), controlSize)
+	return sc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *SegmentedCell) WithRepresentedObject(representedObject obj.Object) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (sc *SegmentedCell) WithRepresentedObject(representedObject obj.Object) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return sc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *SegmentedCell) WithMenu(menu *Menu) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (sc *SegmentedCell) WithMenu(menu *Menu) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return sc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *SegmentedCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (sc *SegmentedCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return sc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *SegmentedCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (sc *SegmentedCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return sc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *SegmentedCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (sc *SegmentedCell) WithLineBreakMode(lineBreakMode LineBreakMode) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return sc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *SegmentedCell) WithAllowsUndo(allowsUndo bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (sc *SegmentedCell) WithAllowsUndo(allowsUndo bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return sc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *SegmentedCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (sc *SegmentedCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return sc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *SegmentedCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (sc *SegmentedCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return sc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *SegmentedCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (sc *SegmentedCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return sc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *SegmentedCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (sc *SegmentedCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return sc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *SegmentedCell) WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (sc *SegmentedCell) WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return sc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *SegmentedCell) WithFocusRingType(focusRingType FocusRingType) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (sc *SegmentedCell) WithFocusRingType(focusRingType FocusRingType) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return sc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *SegmentedCell) WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (sc *SegmentedCell) WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return sc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *SegmentedCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (sc *SegmentedCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return sc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *SegmentedCell) WithImportsGraphics(importsGraphics bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (sc *SegmentedCell) WithImportsGraphics(importsGraphics bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return sc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *SegmentedCell) WithAllowsMixedState(allowsMixedState bool) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (sc *SegmentedCell) WithAllowsMixedState(allowsMixedState bool) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return sc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *SegmentedCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (sc *SegmentedCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return sc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *SegmentedCell) WithControlTint(controlTint ControlTint) *SegmentedCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (sc *SegmentedCell) WithControlTint(controlTint ControlTint) *SegmentedCell {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlTint:"), controlTint)
+	return sc
 }
 
 // SelectSegmentWithTag selects the segment with the specified tag.
-func (x *SegmentedCell) SelectSegmentWithTag(tag int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectSegmentWithTag:"), tag)
+func (sc *SegmentedCell) SelectSegmentWithTag(tag int) bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("selectSegmentWithTag:"), tag)
 	return _r
 }
 
 // MakeNextSegmentKey selects the next segment.
-func (x *SegmentedCell) MakeNextSegmentKey() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeNextSegmentKey"))
+func (sc *SegmentedCell) MakeNextSegmentKey() {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("makeNextSegmentKey"))
 }
 
 // MakePreviousSegmentKey selects the previous segment.
-func (x *SegmentedCell) MakePreviousSegmentKey() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makePreviousSegmentKey"))
+func (sc *SegmentedCell) MakePreviousSegmentKey() {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("makePreviousSegmentKey"))
 }
 
 // SetWidthForSegment sets the width of the specified segment.
-func (x *SegmentedCell) SetWidthForSegment(width float64, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:forSegment:"), width, segment)
+func (sc *SegmentedCell) SetWidthForSegment(width float64, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWidth:forSegment:"), width, segment)
 }
 
 // WidthForSegment returns the width of the specified segment.
-func (x *SegmentedCell) WidthForSegment(segment int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("widthForSegment:"), segment)
+func (sc *SegmentedCell) WidthForSegment(segment int) float64 {
+	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("widthForSegment:"), segment)
 	return _r
 }
 
 // SetImageForSegment sets the image for the specified segment.
-func (x *SegmentedCell) SetImageForSegment(image *Image, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
+func (sc *SegmentedCell) SetImageForSegment(image *Image, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
 }
 
 // ImageForSegment returns the image associated with the specified segment.
-func (x *SegmentedCell) ImageForSegment(segment int) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageForSegment:"), segment)
+func (sc *SegmentedCell) ImageForSegment(segment int) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("imageForSegment:"), segment)
 	return ImageFromID(_r)
 }
 
 // SetImageScalingForSegment sets the image scaling mode for the specified segment.
-func (x *SegmentedCell) SetImageScalingForSegment(scaling ImageScaling, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
+func (sc *SegmentedCell) SetImageScalingForSegment(scaling ImageScaling, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
 }
 
 // ImageScalingForSegment returns the image scaling mode associated with the specified segment.
-func (x *SegmentedCell) ImageScalingForSegment(segment int) ImageScaling {
-	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScalingForSegment:"), segment)
+func (sc *SegmentedCell) ImageScalingForSegment(segment int) ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(sc), objc.RegisterName("imageScalingForSegment:"), segment)
 	return _r
 }
 
 // SetLabelForSegment sets the label for the specified segment.
-func (x *SegmentedCell) SetLabelForSegment(label string, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
+func (sc *SegmentedCell) SetLabelForSegment(label string, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
 }
 
 // LabelForSegment returns the label of the specified segment.
-func (x *SegmentedCell) LabelForSegment(segment int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForSegment:"), segment)
+func (sc *SegmentedCell) LabelForSegment(segment int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("labelForSegment:"), segment)
 	if _r == 0 {
 		return ""
 	}
@@ -405,46 +405,46 @@ func (x *SegmentedCell) LabelForSegment(segment int) string {
 }
 
 // SetSelectedForSegment sets the selection state of the specified segment.
-func (x *SegmentedCell) SetSelectedForSegment(selected bool, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:forSegment:"), selected, segment)
+func (sc *SegmentedCell) SetSelectedForSegment(selected bool, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelected:forSegment:"), selected, segment)
 }
 
 // IsSelectedForSegment returns a Boolean value indicating whether the specified segment is selected,
-func (x *SegmentedCell) IsSelectedForSegment(segment int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectedForSegment:"), segment)
+func (sc *SegmentedCell) IsSelectedForSegment(segment int) bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isSelectedForSegment:"), segment)
 	return _r
 }
 
 // SetEnabledForSegment sets the enabled state of the specified segment
-func (x *SegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
+func (sc *SegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
 }
 
 // IsEnabledForSegment returns a Boolean value indicating whether the specified segment is enabled.
-func (x *SegmentedCell) IsEnabledForSegment(segment int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabledForSegment:"), segment)
+func (sc *SegmentedCell) IsEnabledForSegment(segment int) bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isEnabledForSegment:"), segment)
 	return _r
 }
 
 // SetMenuForSegment sets the menu for the specified segment.
-func (x *SegmentedCell) SetMenuForSegment(menu *Menu, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
+func (sc *SegmentedCell) SetMenuForSegment(menu *Menu, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
 }
 
 // MenuForSegment returns the menu for the specified segment.
-func (x *SegmentedCell) MenuForSegment(segment int) *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuForSegment:"), segment)
+func (sc *SegmentedCell) MenuForSegment(segment int) *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("menuForSegment:"), segment)
 	return MenuFromID(_r)
 }
 
 // SetToolTipForSegment sets the tooltip for the specified segment.
-func (x *SegmentedCell) SetToolTipForSegment(toolTip string, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
+func (sc *SegmentedCell) SetToolTipForSegment(toolTip string, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
 }
 
 // ToolTipForSegment returns the tooltip of the specified segment.
-func (x *SegmentedCell) ToolTipForSegment(segment int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTipForSegment:"), segment)
+func (sc *SegmentedCell) ToolTipForSegment(segment int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("toolTipForSegment:"), segment)
 	if _r == 0 {
 		return ""
 	}
@@ -452,156 +452,50 @@ func (x *SegmentedCell) ToolTipForSegment(segment int) string {
 }
 
 // SetTagForSegment sets the tag for the specified segment.
-func (x *SegmentedCell) SetTagForSegment(tag int, segment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:forSegment:"), tag, segment)
+func (sc *SegmentedCell) SetTagForSegment(tag int, segment int) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:forSegment:"), tag, segment)
 }
 
 // TagForSegment returns the tag of the specified segment.
-func (x *SegmentedCell) TagForSegment(segment int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tagForSegment:"), segment)
+func (sc *SegmentedCell) TagForSegment(segment int) int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("tagForSegment:"), segment)
 	return _r
 }
 
 // DrawSegmentInFrameWithView draws the image and label of the segment in the specified view.
-func (x *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawSegment:inFrame:withView:"), segment, frame, objref.IDOf(controlView))
+func (sc *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawSegment:inFrame:withView:"), segment, frame, objref.IDOf(controlView))
 }
 
 // SegmentCount wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentCount"))
+func (sc *SegmentedCell) SegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("segmentCount"))
 	return _r
-}
-
-// SetSegmentCount wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SetSegmentCount(segmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
 }
 
 // SelectedSegment wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SelectedSegment() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedSegment"))
+func (sc *SegmentedCell) SelectedSegment() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("selectedSegment"))
 	return _r
-}
-
-// SetSelectedSegment wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SetSelectedSegment(selectedSegment int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedSegment:"), selectedSegment)
 }
 
 // TrackingMode wraps the corresponding Objective-C method.
-func (x *SegmentedCell) TrackingMode() SegmentSwitchTracking {
-	_r := objc.Send[SegmentSwitchTracking](objref.IDOf(x), objc.RegisterName("trackingMode"))
+func (sc *SegmentedCell) TrackingMode() SegmentSwitchTracking {
+	_r := objc.Send[SegmentSwitchTracking](objref.IDOf(sc), objc.RegisterName("trackingMode"))
 	return _r
-}
-
-// SetTrackingMode wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SetTrackingMode(trackingMode SegmentSwitchTracking) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingMode:"), trackingMode)
 }
 
 // SegmentStyle wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SegmentStyle() SegmentStyle {
-	_r := objc.Send[SegmentStyle](objref.IDOf(x), objc.RegisterName("segmentStyle"))
+func (sc *SegmentedCell) SegmentStyle() SegmentStyle {
+	_r := objc.Send[SegmentStyle](objref.IDOf(sc), objc.RegisterName("segmentStyle"))
 	return _r
-}
-
-// SetSegmentStyle wraps the corresponding Objective-C method.
-func (x *SegmentedCell) SetSegmentStyle(segmentStyle SegmentStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentStyle:"), segmentStyle)
 }
 
 // InteriorBackgroundStyleForSegment returns the interior background style for the specified segment.
-func (x *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) BackgroundStyle {
-	_r := objc.Send[BackgroundStyle](objref.IDOf(x), objc.RegisterName("interiorBackgroundStyleForSegment:"), segment)
+func (sc *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) BackgroundStyle {
+	_r := objc.Send[BackgroundStyle](objref.IDOf(sc), objc.RegisterName("interiorBackgroundStyleForSegment:"), segment)
 	return _r
 }
-
-// SegmentedCellable is the interface implemented by [SegmentedCell], for mocking and DI.
-type SegmentedCellable interface {
-	obj.Object
-	WithSegmentCount(segmentCount int) *SegmentedCell
-	WithSelectedSegment(selectedSegment int) *SegmentedCell
-	WithTrackingMode(trackingMode SegmentSwitchTracking) *SegmentedCell
-	WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedCell
-	WithControlView(controlView ViewProvider) *SegmentedCell
-	WithType(type_ CellType) *SegmentedCell
-	WithState(state int) *SegmentedCell
-	WithTarget(target obj.Object) *SegmentedCell
-	WithTag(tag int) *SegmentedCell
-	WithTitle(title string) *SegmentedCell
-	WithEnabled(enabled bool) *SegmentedCell
-	WithContinuous(continuous bool) *SegmentedCell
-	WithEditable(editable bool) *SegmentedCell
-	WithSelectable(selectable bool) *SegmentedCell
-	WithBordered(bordered bool) *SegmentedCell
-	WithBezeled(bezeled bool) *SegmentedCell
-	WithScrollable(scrollable bool) *SegmentedCell
-	WithHighlighted(highlighted bool) *SegmentedCell
-	WithAlignment(alignment TextAlignment) *SegmentedCell
-	WithWraps(wraps bool) *SegmentedCell
-	WithFont(font *Font) *SegmentedCell
-	WithFormatter(formatter obj.Object) *SegmentedCell
-	WithObjectValue(objectValue obj.Object) *SegmentedCell
-	WithStringValue(stringValue string) *SegmentedCell
-	WithIntValue(intValue int) *SegmentedCell
-	WithFloatValue(floatValue float32) *SegmentedCell
-	WithDoubleValue(doubleValue float64) *SegmentedCell
-	WithIntegerValue(integerValue int) *SegmentedCell
-	WithImage(image *Image) *SegmentedCell
-	WithControlSize(controlSize ControlSize) *SegmentedCell
-	WithRepresentedObject(representedObject obj.Object) *SegmentedCell
-	WithMenu(menu *Menu) *SegmentedCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *SegmentedCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *SegmentedCell
-	WithAllowsUndo(allowsUndo bool) *SegmentedCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell
-	WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell
-	WithFocusRingType(focusRingType FocusRingType) *SegmentedCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell
-	WithImportsGraphics(importsGraphics bool) *SegmentedCell
-	WithAllowsMixedState(allowsMixedState bool) *SegmentedCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *SegmentedCell
-	WithControlTint(controlTint ControlTint) *SegmentedCell
-	SelectSegmentWithTag(tag int) bool
-	MakeNextSegmentKey()
-	MakePreviousSegmentKey()
-	SetWidthForSegment(width float64, segment int)
-	WidthForSegment(segment int) float64
-	SetImageForSegment(image *Image, segment int)
-	ImageForSegment(segment int) *Image
-	SetImageScalingForSegment(scaling ImageScaling, segment int)
-	ImageScalingForSegment(segment int) ImageScaling
-	SetLabelForSegment(label string, segment int)
-	LabelForSegment(segment int) string
-	SetSelectedForSegment(selected bool, segment int)
-	IsSelectedForSegment(segment int) bool
-	SetEnabledForSegment(enabled bool, segment int)
-	IsEnabledForSegment(segment int) bool
-	SetMenuForSegment(menu *Menu, segment int)
-	MenuForSegment(segment int) *Menu
-	SetToolTipForSegment(toolTip string, segment int)
-	ToolTipForSegment(segment int) string
-	SetTagForSegment(tag int, segment int)
-	TagForSegment(segment int) int
-	DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *View)
-	SegmentCount() int
-	SetSegmentCount(segmentCount int)
-	SelectedSegment() int
-	SetSelectedSegment(selectedSegment int)
-	TrackingMode() SegmentSwitchTracking
-	SetTrackingMode(trackingMode SegmentSwitchTracking)
-	SegmentStyle() SegmentStyle
-	SetSegmentStyle(segmentStyle SegmentStyle)
-	InteriorBackgroundStyleForSegment(segment int) BackgroundStyle
-}
-
-var _ SegmentedCellable = (*SegmentedCell)(nil)
 
 var _ ActionCellProvider = (*SegmentedCell)(nil)
 

@@ -46,24 +46,24 @@ func extensionStreamCustomClockConfigurationAdopt(id objc.ID) *ExtensionStreamCu
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionStreamCustomClockConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esccc *ExtensionStreamCustomClockConfiguration) Description() string {
+	return rt.Description(objref.IDOf(esccc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionStreamCustomClockConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esccc *ExtensionStreamCustomClockConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esccc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionStreamCustomClockConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esccc *ExtensionStreamCustomClockConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esccc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionStreamCustomClockConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esccc *ExtensionStreamCustomClockConfiguration) String() string {
+	return rt.Description(objref.IDOf(esccc))
 }
 
 // NewExtensionStreamCustomClockConfiguration creates a new ExtensionStreamCustomClockConfiguration.
@@ -72,40 +72,29 @@ func NewExtensionStreamCustomClockConfiguration() *ExtensionStreamCustomClockCon
 	return extensionStreamCustomClockConfigurationAdopt(_id)
 }
 
-// ClockName the name of the clock.
-func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clockName"))
+// ClockName returns the name of the clock.
+func (esccc *ExtensionStreamCustomClockConfiguration) ClockName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(esccc), objc.RegisterName("clockName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SourceIdentifier the identifier of the entity driving the clock. An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
-func (x *ExtensionStreamCustomClockConfiguration) SourceIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifier"))
+// SourceIdentifier returns the identifier of the entity driving the clock. An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
+func (esccc *ExtensionStreamCustomClockConfiguration) SourceIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esccc), objc.RegisterName("sourceIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfEventsForRateSmoothing the number of events to use for rate smoothing; will be > 0.
-func (x *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("numberOfEventsForRateSmoothing"))
+// NumberOfEventsForRateSmoothing returns the number of events to use for rate smoothing; will be > 0.
+func (esccc *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(esccc), objc.RegisterName("numberOfEventsForRateSmoothing"))
 	return _r
 }
 
-// NumberOfAveragesForRateSmoothing the number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
-func (x *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("numberOfAveragesForRateSmoothing"))
+// NumberOfAveragesForRateSmoothing returns the number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
+func (esccc *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(esccc), objc.RegisterName("numberOfAveragesForRateSmoothing"))
 	return _r
 }
-
-// ExtensionStreamCustomClockConfigurationable is the interface implemented by [ExtensionStreamCustomClockConfiguration], for mocking and DI.
-type ExtensionStreamCustomClockConfigurationable interface {
-	obj.Object
-	ClockName() string
-	SourceIdentifier() obj.Object
-	NumberOfEventsForRateSmoothing() uint32
-	NumberOfAveragesForRateSmoothing() uint32
-}
-
-var _ ExtensionStreamCustomClockConfigurationable = (*ExtensionStreamCustomClockConfiguration)(nil)

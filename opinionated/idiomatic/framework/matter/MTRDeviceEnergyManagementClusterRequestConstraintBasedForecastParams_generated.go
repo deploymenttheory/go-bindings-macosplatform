@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsAdopt(i
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Description() string {
+	return rt.Description(objref.IDOf(mdemcrcbfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcrcbfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcrcbfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) String() string {
+	return rt.Description(objref.IDOf(mdemcrcbfp))
 }
 
 // NewMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams creates a new MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams.
@@ -71,81 +71,48 @@ func NewMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams() *
 }
 
 // WithCause sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-	return x
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
+	objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("setCause:"), objref.IDOf(cause))
+	return mdemcrcbfp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
+	objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdemcrcbfp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
+	objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdemcrcbfp
 }
 
 // Constraints wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Constraints() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraints"))
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Constraints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("constraints"))
 	return obj.Wrap(_r)
 }
 
 // SetConstraints wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetConstraints(constraints obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetConstraints(constraints obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 }
 
 // Cause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Cause() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
-// SetCause wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetCause(cause obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams], for mocking and DI.
-type MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable interface {
-	obj.Object
-	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
-	Constraints() obj.Object
-	SetConstraints(constraints obj.Object)
-	Cause() obj.Object
-	SetCause(cause obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable = (*MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams)(nil)

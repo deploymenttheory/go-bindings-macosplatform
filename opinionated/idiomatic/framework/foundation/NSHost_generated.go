@@ -46,24 +46,24 @@ func hostAdopt(id objc.ID) *Host {
 }
 
 // Description returns the object's -description text.
-func (x *Host) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Host) Description() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Host) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (h *Host) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Host) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (h *Host) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Host) String() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Host) String() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // NewHost creates a new Host.
@@ -73,20 +73,20 @@ func NewHost() *Host {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Host) WithScriptingProperties(scriptingProperties obj.Object) *Host {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (h *Host) WithScriptingProperties(scriptingProperties obj.Object) *Host {
+	objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return h
 }
 
 // IsEqualToHost wraps the corresponding Objective-C method.
-func (x *Host) IsEqualToHost(aHost *Host) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToHost:"), objref.IDOf(aHost))
+func (h *Host) IsEqualToHost(aHost *Host) bool {
+	_r := objc.Send[bool](objref.IDOf(h), objc.RegisterName("isEqualToHost:"), objref.IDOf(aHost))
 	return _r
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Host) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (h *Host) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -96,14 +96,14 @@ func (x *Host) Name() string {
 // Names wraps the corresponding Objective-C method.
 //
 // Names returns the collection as a Go slice.
-func (x *Host) Names() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("names"))
+func (h *Host) Names() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("names"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Address wraps the corresponding Objective-C method.
-func (x *Host) Address() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+func (h *Host) Address() string {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("address"))
 	if _r == 0 {
 		return ""
 	}
@@ -113,30 +113,16 @@ func (x *Host) Address() string {
 // Addresses wraps the corresponding Objective-C method.
 //
 // Addresses returns the collection as a Go slice.
-func (x *Host) Addresses() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
+func (h *Host) Addresses() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocalizedName wraps the corresponding Objective-C method.
-func (x *Host) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+func (h *Host) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Hostable is the interface implemented by [Host], for mocking and DI.
-type Hostable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Host
-	IsEqualToHost(aHost *Host) bool
-	Name() string
-	Names() []string
-	Address() string
-	Addresses() []string
-	LocalizedName() string
-}
-
-var _ Hostable = (*Host)(nil)

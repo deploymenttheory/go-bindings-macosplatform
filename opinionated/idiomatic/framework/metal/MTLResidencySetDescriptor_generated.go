@@ -46,24 +46,24 @@ func residencySetDescriptorAdopt(id objc.ID) *ResidencySetDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ResidencySetDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rsd *ResidencySetDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ResidencySetDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rsd *ResidencySetDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ResidencySetDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rsd *ResidencySetDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ResidencySetDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rsd *ResidencySetDescriptor) String() string {
+	return rt.Description(objref.IDOf(rsd))
 }
 
 // NewResidencySetDescriptor creates a new ResidencySetDescriptor.
@@ -72,45 +72,23 @@ func NewResidencySetDescriptor() *ResidencySetDescriptor {
 	return residencySetDescriptorAdopt(_id)
 }
 
-// WithLabel an optional name that can help you identify a residency set you create with the descriptor.
-func (x *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets an optional name that can help you identify a residency set you create with the descriptor.
+func (rsd *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rsd
 }
 
-// WithInitialCapacity the number of allocations a new residency set can store without reallocating memory.
-func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity int) *ResidencySetDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialCapacity:"), initialCapacity)
-	return x
+// WithInitialCapacity sets the number of allocations a new residency set can store without reallocating memory.
+func (rsd *ResidencySetDescriptor) WithInitialCapacity(initialCapacity int) *ResidencySetDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rsd), objc.RegisterName("setInitialCapacity:"), initialCapacity)
+	return rsd
 }
 
-// Label an optional label for the MTLResidencySet.
-func (x *ResidencySetDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns an optional label for the MTLResidencySet.
+func (rsd *ResidencySetDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rsd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *ResidencySetDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// SetInitialCapacity wraps the corresponding Objective-C method.
-func (x *ResidencySetDescriptor) SetInitialCapacity(initialCapacity int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialCapacity:"), initialCapacity)
-}
-
-// ResidencySetDescriptorable is the interface implemented by [ResidencySetDescriptor], for mocking and DI.
-type ResidencySetDescriptorable interface {
-	obj.Object
-	WithLabel(label string) *ResidencySetDescriptor
-	WithInitialCapacity(initialCapacity int) *ResidencySetDescriptor
-	Label() string
-	SetLabel(label string)
-	SetInitialCapacity(initialCapacity int)
-}
-
-var _ ResidencySetDescriptorable = (*ResidencySetDescriptor)(nil)

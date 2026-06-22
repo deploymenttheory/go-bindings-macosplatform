@@ -46,24 +46,24 @@ func lSTMDescriptorAdopt(id objc.ID) *LSTMDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *LSTMDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ld *LSTMDescriptor) Description() string {
+	return rt.Description(objref.IDOf(ld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LSTMDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ld *LSTMDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LSTMDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ld *LSTMDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LSTMDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ld *LSTMDescriptor) String() string {
+	return rt.Description(objref.IDOf(ld))
 }
 
 // NewLSTMDescriptor creates a new LSTMDescriptor.
@@ -72,72 +72,56 @@ func NewLSTMDescriptor() *LSTMDescriptor {
 	return lSTMDescriptorAdopt(_id)
 }
 
-// InputSize the number of expected feature channels in the input
-func (x *LSTMDescriptor) InputSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputSize"))
+// InputSize returns the number of expected feature channels in the input
+func (ld *LSTMDescriptor) InputSize() int {
+	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("inputSize"))
 	return _r
 }
 
-// HiddenSize the number of feature channels in the hidden state
-func (x *LSTMDescriptor) HiddenSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hiddenSize"))
+// HiddenSize returns the number of feature channels in the hidden state
+func (ld *LSTMDescriptor) HiddenSize() int {
+	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("hiddenSize"))
 	return _r
 }
 
-// LayerCount the number of recurrent layers.  Default is 1.
-func (x *LSTMDescriptor) LayerCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
+// LayerCount returns the number of recurrent layers.  Default is 1.
+func (ld *LSTMDescriptor) LayerCount() int {
+	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("layerCount"))
 	return _r
 }
 
-// UsesBiases if NO, the layer does not use bias terms.  Default is YES.
-func (x *LSTMDescriptor) UsesBiases() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesBiases"))
+// UsesBiases reports whether if false, the layer does not use bias terms. Default is true.
+func (ld *LSTMDescriptor) UsesBiases() bool {
+	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("usesBiases"))
 	return _r
 }
 
-// BatchFirst LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
-func (x *LSTMDescriptor) BatchFirst() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("batchFirst"))
+// BatchFirst reports whether LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is true.
+func (ld *LSTMDescriptor) BatchFirst() bool {
+	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("batchFirst"))
 	return _r
 }
 
-// IsBidirectional if YES, becomes a bidirectional LSTM.  Default is NO.
-func (x *LSTMDescriptor) IsBidirectional() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBidirectional"))
+// IsBidirectional reports whether if true, becomes a bidirectional LSTM. Default is false.
+func (ld *LSTMDescriptor) IsBidirectional() bool {
+	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("isBidirectional"))
 	return _r
 }
 
-// ReturnsSequences if YES return output for all sequences else return output only for the last sequences. Default: YES
-func (x *LSTMDescriptor) ReturnsSequences() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsSequences"))
+// ReturnsSequences reports whether if true return output for all sequences else return output only for the last sequences. Default: true
+func (ld *LSTMDescriptor) ReturnsSequences() bool {
+	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("returnsSequences"))
 	return _r
 }
 
-// Dropout if non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
-func (x *LSTMDescriptor) Dropout() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("dropout"))
+// Dropout returns if non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
+func (ld *LSTMDescriptor) Dropout() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("dropout"))
 	return _r
 }
 
-// ResultMode MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
-func (x *LSTMDescriptor) ResultMode() LSTMResultMode {
-	_r := objc.Send[LSTMResultMode](objref.IDOf(x), objc.RegisterName("resultMode"))
+// ResultMode returns MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
+func (ld *LSTMDescriptor) ResultMode() LSTMResultMode {
+	_r := objc.Send[LSTMResultMode](objref.IDOf(ld), objc.RegisterName("resultMode"))
 	return _r
 }
-
-// LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
-type LSTMDescriptorable interface {
-	obj.Object
-	InputSize() int
-	HiddenSize() int
-	LayerCount() int
-	UsesBiases() bool
-	BatchFirst() bool
-	IsBidirectional() bool
-	ReturnsSequences() bool
-	Dropout() float32
-	ResultMode() LSTMResultMode
-}
-
-var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRBaseClusterApplicationLauncherWithDeviceEndpointQueue(device *MTRBase
 // LaunchAppWithParamsCompletion command LaunchApp Upon receipt of this command, the server SHALL launch the application with optional data.
 //
 // LaunchAppWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) LaunchAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParamsCompletion(ctx co
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchAppWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("launchAppWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParamsCompletion(ctx co
 // LaunchAppWithCompletion wraps the corresponding Objective-C method.
 //
 // LaunchAppWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) LaunchAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithCompletion(ctx context.
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchAppWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("launchAppWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithCompletion(ctx context.
 // StopAppWithParamsCompletion command StopApp Upon receipt of this command, the server SHALL stop the application if it is running.
 //
 // StopAppWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) StopAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithParamsCompletion(ctx cont
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAppWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("stopAppWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithParamsCompletion(ctx cont
 // StopAppWithCompletion wraps the corresponding Objective-C method.
 //
 // StopAppWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) StopAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -150,7 +151,7 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithCompletion(ctx context.Co
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAppWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("stopAppWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithCompletion(ctx context.Co
 // HideAppWithParamsCompletion command HideApp Upon receipt of this command, the server SHALL hide the application.
 //
 // HideAppWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) HideAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -175,7 +176,7 @@ func (x *MTRBaseClusterApplicationLauncher) HideAppWithParamsCompletion(ctx cont
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideAppWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("hideAppWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRBaseClusterApplicationLauncher) HideAppWithParamsCompletion(ctx cont
 // HideAppWithCompletion wraps the corresponding Objective-C method.
 //
 // HideAppWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) HideAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -200,7 +201,7 @@ func (x *MTRBaseClusterApplicationLauncher) HideAppWithCompletion(ctx context.Co
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideAppWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("hideAppWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +214,7 @@ func (x *MTRBaseClusterApplicationLauncher) HideAppWithCompletion(ctx context.Co
 // ReadAttributeCatalogListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCatalogListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -225,7 +226,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogListWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCatalogListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeCatalogListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -238,7 +239,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogListWithCompleti
 // SubscribeAttributeCatalogListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCatalogListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -250,7 +251,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCatalogListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeCatalogListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -263,7 +264,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithPar
 // ReadAttributeCurrentAppWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentAppWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterApplicationEPStruct, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterApplicationEPStruct, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterApplicationEPStruct
 		err error
@@ -275,7 +276,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentAppWithCompletio
 		_o.val = MTRApplicationLauncherClusterApplicationEPStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentAppWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeCurrentAppWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -288,7 +289,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentAppWithCompletio
 // SubscribeAttributeCurrentAppWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentAppWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRApplicationLauncherClusterApplicationEPStruct, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRApplicationLauncherClusterApplicationEPStruct, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterApplicationEPStruct
 		err error
@@ -300,7 +301,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithPara
 		_o.val = MTRApplicationLauncherClusterApplicationEPStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentAppWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeCurrentAppWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +314,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithPara
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -325,7 +326,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -338,7 +339,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandListWit
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,7 +351,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -363,7 +364,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandLi
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -375,7 +376,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,7 +389,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandListWith
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -400,7 +401,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -413,7 +414,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandLis
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -425,7 +426,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeListWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -438,7 +439,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeListWithComple
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -450,7 +451,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -463,7 +464,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithP
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -475,7 +476,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMapWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -488,7 +489,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMapWithCompletio
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -500,7 +501,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -513,7 +514,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithPara
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -525,7 +526,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevisionWithComp
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -538,7 +539,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevisionWithComp
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,7 +551,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,7 +564,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWit
 // LaunchAppWithParams wraps the corresponding Objective-C method.
 //
 // LaunchAppWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) LaunchAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -575,7 +576,7 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParams(ctx context.Cont
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchAppWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("launchAppWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -588,7 +589,7 @@ func (x *MTRBaseClusterApplicationLauncher) LaunchAppWithParams(ctx context.Cont
 // StopAppWithParams wraps the corresponding Objective-C method.
 //
 // StopAppWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) StopAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -600,7 +601,7 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithParams(ctx context.Contex
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAppWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("stopAppWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -613,7 +614,7 @@ func (x *MTRBaseClusterApplicationLauncher) StopAppWithParams(ctx context.Contex
 // HideAppWithParams wraps the corresponding Objective-C method.
 //
 // HideAppWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) HideAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterLauncherResponseParams
 		err error
@@ -625,7 +626,7 @@ func (x *MTRBaseClusterApplicationLauncher) HideAppWithParams(ctx context.Contex
 		_o.val = MTRApplicationLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideAppWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("hideAppWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -638,7 +639,7 @@ func (x *MTRBaseClusterApplicationLauncher) HideAppWithParams(ctx context.Contex
 // ReadAttributeCatalogList wraps the corresponding Objective-C method.
 //
 // ReadAttributeCatalogList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogList(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -650,7 +651,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogList(ctx context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCatalogListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeCatalogListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -663,7 +664,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogList(ctx context
 // SubscribeAttributeCatalogListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCatalogListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -675,7 +676,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCatalogListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeCatalogListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -688,7 +689,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWithMin
 // ReadAttributeCurrentApp wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentApp blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentApp(ctx context.Context) (result *MTRApplicationLauncherClusterApplicationEP, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentApp(ctx context.Context) (result *MTRApplicationLauncherClusterApplicationEP, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterApplicationEP
 		err error
@@ -700,7 +701,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentApp(ctx context.
 		_o.val = MTRApplicationLauncherClusterApplicationEPFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentAppWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeCurrentAppWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -713,7 +714,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentApp(ctx context.
 // SubscribeAttributeCurrentAppWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentAppWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRApplicationLauncherClusterApplicationEP, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRApplicationLauncherClusterApplicationEP, err error) {
 	type _result struct {
 		val *MTRApplicationLauncherClusterApplicationEP
 		err error
@@ -725,7 +726,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithMinI
 		_o.val = MTRApplicationLauncherClusterApplicationEPFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentAppWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeCurrentAppWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -738,7 +739,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWithMinI
 // ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -750,7 +751,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandList(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -763,7 +764,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandList(ct
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -775,7 +776,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -788,7 +789,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedCommandLi
 // ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -800,7 +801,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandList(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +814,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandList(ctx
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -825,7 +826,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -838,7 +839,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedCommandLis
 // ReadAttributeAttributeList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -850,7 +851,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeList(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -863,7 +864,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeList(ctx conte
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -875,7 +876,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -888,7 +889,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListWithM
 // ReadAttributeFeatureMap wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -900,7 +901,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMap(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -913,7 +914,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMap(ctx context.
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,7 +926,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -938,7 +939,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWithMinI
 // ReadAttributeClusterRevision wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -950,7 +951,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevision(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -963,7 +964,7 @@ func (x *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevision(ctx con
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -975,7 +976,7 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcal), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -984,50 +985,6 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWit
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterApplicationLauncherable is the interface implemented by [MTRBaseClusterApplicationLauncher], for mocking and DI.
-type MTRBaseClusterApplicationLauncherable interface {
-	obj.Object
-	LaunchAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	LaunchAppWithCompletion(ctx context.Context) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	StopAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	StopAppWithCompletion(ctx context.Context) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	HideAppWithParamsCompletion(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	HideAppWithCompletion(ctx context.Context) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	ReadAttributeCatalogListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCatalogListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentAppWithCompletion(ctx context.Context) (*MTRApplicationLauncherClusterApplicationEPStruct, error)
-	SubscribeAttributeCurrentAppWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRApplicationLauncherClusterApplicationEPStruct, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	LaunchAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterLaunchAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	StopAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	HideAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (*MTRApplicationLauncherClusterLauncherResponseParams, error)
-	ReadAttributeCatalogList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCatalogListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentApp(ctx context.Context) (*MTRApplicationLauncherClusterApplicationEP, error)
-	SubscribeAttributeCurrentAppWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRApplicationLauncherClusterApplicationEP, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterApplicationLauncherable = (*MTRBaseClusterApplicationLauncher)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterApplicationLauncher)(nil)
 

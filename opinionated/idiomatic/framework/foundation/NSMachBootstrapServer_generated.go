@@ -53,24 +53,15 @@ func NewMachBootstrapServer() *MachBootstrapServer {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MachBootstrapServer) WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mbs *MachBootstrapServer) WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer {
+	objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mbs
 }
 
 // ServicePortWithName looks up and returns the port for the vended service that is registered under the specified name.
-func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicePortWithName:"), purego.NSString(name))
+func (mbs *MachBootstrapServer) ServicePortWithName(name string) *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("servicePortWithName:"), purego.NSString(name))
 	return PortFromID(_r)
 }
-
-// MachBootstrapServerable is the interface implemented by [MachBootstrapServer], for mocking and DI.
-type MachBootstrapServerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer
-	ServicePortWithName(name string) *Port
-}
-
-var _ MachBootstrapServerable = (*MachBootstrapServer)(nil)
 
 var _ PortNameServerProvider = (*MachBootstrapServer)(nil)

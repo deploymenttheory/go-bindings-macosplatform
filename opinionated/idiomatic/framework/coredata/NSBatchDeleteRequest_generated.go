@@ -60,46 +60,29 @@ func NewBatchDeleteRequestWithObjectIDs(objects []*ManagedObjectID) *BatchDelete
 	return batchDeleteRequestAdopt(_id)
 }
 
-// WithResultType the type of result the request provides when it executes.
-func (x *BatchDeleteRequest) WithResultType(resultType BatchDeleteRequestResultType) *BatchDeleteRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-	return x
+// WithResultType sets the type of result the request provides when it executes.
+func (bdr *BatchDeleteRequest) WithResultType(resultType BatchDeleteRequestResultType) *BatchDeleteRequest {
+	objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("setResultType:"), resultType)
+	return bdr
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (bdr *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("setAffectedStores:"), _arr)
+	return bdr
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *BatchDeleteRequest) ResultType() BatchDeleteRequestResultType {
-	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (bdr *BatchDeleteRequest) ResultType() BatchDeleteRequestResultType {
+	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(bdr), objc.RegisterName("resultType"))
 	return _r
 }
 
-// SetResultType wraps the corresponding Objective-C method.
-func (x *BatchDeleteRequest) SetResultType(resultType BatchDeleteRequestResultType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-}
-
 // FetchRequest wraps the corresponding Objective-C method.
-func (x *BatchDeleteRequest) FetchRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+func (bdr *BatchDeleteRequest) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
-
-// BatchDeleteRequestable is the interface implemented by [BatchDeleteRequest], for mocking and DI.
-type BatchDeleteRequestable interface {
-	obj.Object
-	WithResultType(resultType BatchDeleteRequestResultType) *BatchDeleteRequest
-	WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest
-	ResultType() BatchDeleteRequestResultType
-	SetResultType(resultType BatchDeleteRequestResultType)
-	FetchRequest() obj.Object
-}
-
-var _ BatchDeleteRequestable = (*BatchDeleteRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*BatchDeleteRequest)(nil)

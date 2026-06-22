@@ -52,25 +52,16 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 	return assetResourceRenewalRequestAdopt(_id)
 }
 
-// WithResponse the URL response for the loading request.
-func (x *AssetResourceRenewalRequest) WithResponse(response obj.Object) *AssetResourceRenewalRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponse:"), objref.IDOf(response))
-	return x
+// WithResponse sets the URL response for the loading request.
+func (arrr *AssetResourceRenewalRequest) WithResponse(response obj.Object) *AssetResourceRenewalRequest {
+	objc.Send[objc.ID](objref.IDOf(arrr), objc.RegisterName("setResponse:"), objref.IDOf(response))
+	return arrr
 }
 
-// WithRedirect an URL request instance if the loading request was redirected.
-func (x *AssetResourceRenewalRequest) WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
-	return x
+// WithRedirect sets an URL request instance if the loading request was redirected.
+func (arrr *AssetResourceRenewalRequest) WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest {
+	objc.Send[objc.ID](objref.IDOf(arrr), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
+	return arrr
 }
-
-// AssetResourceRenewalRequestable is the interface implemented by [AssetResourceRenewalRequest], for mocking and DI.
-type AssetResourceRenewalRequestable interface {
-	obj.Object
-	WithResponse(response obj.Object) *AssetResourceRenewalRequest
-	WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest
-}
-
-var _ AssetResourceRenewalRequestable = (*AssetResourceRenewalRequest)(nil)
 
 var _ AssetResourceLoadingRequestProvider = (*AssetResourceRenewalRequest)(nil)

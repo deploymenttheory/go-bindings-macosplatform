@@ -46,24 +46,24 @@ func audioEnvironmentDistanceAttenuationParametersAdopt(id objc.ID) *AudioEnviro
 }
 
 // Description returns the object's -description text.
-func (x *AudioEnvironmentDistanceAttenuationParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) Description() string {
+	return rt.Description(objref.IDOf(aedap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioEnvironmentDistanceAttenuationParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aedap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioEnvironmentDistanceAttenuationParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aedap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioEnvironmentDistanceAttenuationParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) String() string {
+	return rt.Description(objref.IDOf(aedap))
 }
 
 // NewAudioEnvironmentDistanceAttenuationParameters creates a new AudioEnvironmentDistanceAttenuationParameters.
@@ -72,89 +72,50 @@ func NewAudioEnvironmentDistanceAttenuationParameters() *AudioEnvironmentDistanc
 	return audioEnvironmentDistanceAttenuationParametersAdopt(_id)
 }
 
-// WithDistanceAttenuationModel the distance attenuation model that describes the drop-off in gain as the source moves away from the listener.
-func (x *AudioEnvironmentDistanceAttenuationParameters) WithDistanceAttenuationModel(distanceAttenuationModel AudioEnvironmentDistanceAttenuationModel) *AudioEnvironmentDistanceAttenuationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistanceAttenuationModel:"), distanceAttenuationModel)
-	return x
+// WithDistanceAttenuationModel sets the distance attenuation model that describes the drop-off in gain as the source moves away from the listener.
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) WithDistanceAttenuationModel(distanceAttenuationModel AudioEnvironmentDistanceAttenuationModel) *AudioEnvironmentDistanceAttenuationParameters {
+	objc.Send[objc.ID](objref.IDOf(aedap), objc.RegisterName("setDistanceAttenuationModel:"), distanceAttenuationModel)
+	return aedap
 }
 
-// WithReferenceDistance the minimum distance at which the node applies attenuation, in meters.
-func (x *AudioEnvironmentDistanceAttenuationParameters) WithReferenceDistance(referenceDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceDistance:"), referenceDistance)
-	return x
+// WithReferenceDistance sets the minimum distance at which the node applies attenuation, in meters.
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) WithReferenceDistance(referenceDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
+	objc.Send[objc.ID](objref.IDOf(aedap), objc.RegisterName("setReferenceDistance:"), referenceDistance)
+	return aedap
 }
 
-// WithMaximumDistance the distance beyond which the node applies no further attenuation, in meters.
-func (x *AudioEnvironmentDistanceAttenuationParameters) WithMaximumDistance(maximumDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDistance:"), maximumDistance)
-	return x
+// WithMaximumDistance sets the distance beyond which the node applies no further attenuation, in meters.
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) WithMaximumDistance(maximumDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
+	objc.Send[objc.ID](objref.IDOf(aedap), objc.RegisterName("setMaximumDistance:"), maximumDistance)
+	return aedap
 }
 
-// WithRolloffFactor a factor that determines the attenuation curve.
-func (x *AudioEnvironmentDistanceAttenuationParameters) WithRolloffFactor(rolloffFactor float32) *AudioEnvironmentDistanceAttenuationParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
-	return x
+// WithRolloffFactor sets a factor that determines the attenuation curve.
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) WithRolloffFactor(rolloffFactor float32) *AudioEnvironmentDistanceAttenuationParameters {
+	objc.Send[objc.ID](objref.IDOf(aedap), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
+	return aedap
 }
 
-// DistanceAttenuationModel type of distance attenuation model Default:    AVAudioEnvironmentDistanceAttenuationModelInverse
-func (x *AudioEnvironmentDistanceAttenuationParameters) DistanceAttenuationModel() AudioEnvironmentDistanceAttenuationModel {
-	_r := objc.Send[AudioEnvironmentDistanceAttenuationModel](objref.IDOf(x), objc.RegisterName("distanceAttenuationModel"))
+// DistanceAttenuationModel returns type of distance attenuation model Default:    AVAudioEnvironmentDistanceAttenuationModelInverse
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) DistanceAttenuationModel() AudioEnvironmentDistanceAttenuationModel {
+	_r := objc.Send[AudioEnvironmentDistanceAttenuationModel](objref.IDOf(aedap), objc.RegisterName("distanceAttenuationModel"))
 	return _r
 }
 
-// SetDistanceAttenuationModel wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentDistanceAttenuationParameters) SetDistanceAttenuationModel(distanceAttenuationModel AudioEnvironmentDistanceAttenuationModel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistanceAttenuationModel:"), distanceAttenuationModel)
-}
-
-// ReferenceDistance the minimum distance at which attenuation is applied Default:    1.0 meter Models:     AVAudioEnvironmentDistanceAttenuationModelInverse, AVAudioEnvironmentDistanceAttenuationModelLinear
-func (x *AudioEnvironmentDistanceAttenuationParameters) ReferenceDistance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("referenceDistance"))
+// ReferenceDistance returns the minimum distance at which attenuation is applied Default:    1.0 meter Models:     AVAudioEnvironmentDistanceAttenuationModelInverse, AVAudioEnvironmentDistanceAttenuationModelLinear
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) ReferenceDistance() float32 {
+	_r := objc.Send[float32](objref.IDOf(aedap), objc.RegisterName("referenceDistance"))
 	return _r
 }
 
-// SetReferenceDistance wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentDistanceAttenuationParameters) SetReferenceDistance(referenceDistance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceDistance:"), referenceDistance)
-}
-
-// MaximumDistance the distance beyond which no further attenuation is applied Default:    100000.0 meters Models:     AVAudioEnvironmentDistanceAttenuationModelLinear
-func (x *AudioEnvironmentDistanceAttenuationParameters) MaximumDistance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumDistance"))
+// MaximumDistance returns the distance beyond which no further attenuation is applied Default:    100000.0 meters Models:     AVAudioEnvironmentDistanceAttenuationModelLinear
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) MaximumDistance() float32 {
+	_r := objc.Send[float32](objref.IDOf(aedap), objc.RegisterName("maximumDistance"))
 	return _r
-}
-
-// SetMaximumDistance wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentDistanceAttenuationParameters) SetMaximumDistance(maximumDistance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDistance:"), maximumDistance)
 }
 
 // RolloffFactor determines the attenuation curve A higher value results in a steeper attenuation curve. The rolloff factor should be a value greater than 0. Default:    1.0 Models:     AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModelLinear
-func (x *AudioEnvironmentDistanceAttenuationParameters) RolloffFactor() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rolloffFactor"))
+func (aedap *AudioEnvironmentDistanceAttenuationParameters) RolloffFactor() float32 {
+	_r := objc.Send[float32](objref.IDOf(aedap), objc.RegisterName("rolloffFactor"))
 	return _r
 }
-
-// SetRolloffFactor wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentDistanceAttenuationParameters) SetRolloffFactor(rolloffFactor float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloffFactor:"), rolloffFactor)
-}
-
-// AudioEnvironmentDistanceAttenuationParametersable is the interface implemented by [AudioEnvironmentDistanceAttenuationParameters], for mocking and DI.
-type AudioEnvironmentDistanceAttenuationParametersable interface {
-	obj.Object
-	WithDistanceAttenuationModel(distanceAttenuationModel AudioEnvironmentDistanceAttenuationModel) *AudioEnvironmentDistanceAttenuationParameters
-	WithReferenceDistance(referenceDistance float32) *AudioEnvironmentDistanceAttenuationParameters
-	WithMaximumDistance(maximumDistance float32) *AudioEnvironmentDistanceAttenuationParameters
-	WithRolloffFactor(rolloffFactor float32) *AudioEnvironmentDistanceAttenuationParameters
-	DistanceAttenuationModel() AudioEnvironmentDistanceAttenuationModel
-	SetDistanceAttenuationModel(distanceAttenuationModel AudioEnvironmentDistanceAttenuationModel)
-	ReferenceDistance() float32
-	SetReferenceDistance(referenceDistance float32)
-	MaximumDistance() float32
-	SetMaximumDistance(maximumDistance float32)
-	RolloffFactor() float32
-	SetRolloffFactor(rolloffFactor float32)
-}
-
-var _ AudioEnvironmentDistanceAttenuationParametersable = (*AudioEnvironmentDistanceAttenuationParameters)(nil)

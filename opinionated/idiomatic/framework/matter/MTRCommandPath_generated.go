@@ -51,17 +51,9 @@ func NewMTRCommandPath() *MTRCommandPath {
 }
 
 // Command wraps the corresponding Objective-C method.
-func (x *MTRCommandPath) Command() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("command"))
+func (mcp *MTRCommandPath) Command() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("command"))
 	return obj.Wrap(_r)
 }
-
-// MTRCommandPathable is the interface implemented by [MTRCommandPath], for mocking and DI.
-type MTRCommandPathable interface {
-	obj.Object
-	Command() obj.Object
-}
-
-var _ MTRCommandPathable = (*MTRCommandPath)(nil)
 
 var _ MTRClusterPathProvider = (*MTRCommandPath)(nil)

@@ -46,24 +46,24 @@ func contactAdopt(id objc.ID) *Contact {
 }
 
 // Description returns the object's -description text.
-func (x *Contact) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Contact) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Contact) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Contact) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Contact) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Contact) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Contact) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Contact) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewContact creates a new Contact.
@@ -72,115 +72,68 @@ func NewContact() *Contact {
 	return contactAdopt(_id)
 }
 
-// WithName the contact’s first and last name, or nil if the contact’s name is not needed for the transaction.
-func (x *Contact) WithName(name obj.Object) *Contact {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets the contact’s first and last name, or nil if the contact’s name is not needed for the transaction.
+func (c *Contact) WithName(name obj.Object) *Contact {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), objref.IDOf(name))
+	return c
 }
 
-// WithPostalAddress the contact’s full postal address.
-func (x *Contact) WithPostalAddress(postalAddress obj.Object) *Contact {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalAddress:"), objref.IDOf(postalAddress))
-	return x
+// WithPostalAddress sets the contact’s full postal address.
+func (c *Contact) WithPostalAddress(postalAddress obj.Object) *Contact {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostalAddress:"), objref.IDOf(postalAddress))
+	return c
 }
 
-// WithPhoneNumber the contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.
-func (x *Contact) WithPhoneNumber(phoneNumber obj.Object) *Contact {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), objref.IDOf(phoneNumber))
-	return x
+// WithPhoneNumber sets the contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.
+func (c *Contact) WithPhoneNumber(phoneNumber obj.Object) *Contact {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPhoneNumber:"), objref.IDOf(phoneNumber))
+	return c
 }
 
-// WithEmailAddress the contact’s email address, or nil if the contact’s email is not needed for the transaction.
-func (x *Contact) WithEmailAddress(emailAddress string) *Contact {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
-	return x
+// WithEmailAddress sets the contact’s email address, or nil if the contact’s email is not needed for the transaction.
+func (c *Contact) WithEmailAddress(emailAddress string) *Contact {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
+	return c
 }
 
-// WithSupplementarySubLocality the contact’s sublocality, or nil if the sublocality is not needed for the transaction.
-func (x *Contact) WithSupplementarySubLocality(supplementarySubLocality string) *Contact {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementarySubLocality:"), purego.NSString(supplementarySubLocality))
-	return x
+// WithSupplementarySubLocality sets the contact’s sublocality, or nil if the sublocality is not needed for the transaction.
+func (c *Contact) WithSupplementarySubLocality(supplementarySubLocality string) *Contact {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSupplementarySubLocality:"), purego.NSString(supplementarySubLocality))
+	return c
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Contact) Name() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (c *Contact) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	return obj.Wrap(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *Contact) SetName(name obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 }
 
 // PostalAddress wraps the corresponding Objective-C method.
-func (x *Contact) PostalAddress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalAddress"))
+func (c *Contact) PostalAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("postalAddress"))
 	return obj.Wrap(_r)
-}
-
-// SetPostalAddress wraps the corresponding Objective-C method.
-func (x *Contact) SetPostalAddress(postalAddress obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostalAddress:"), objref.IDOf(postalAddress))
 }
 
 // PhoneNumber wraps the corresponding Objective-C method.
-func (x *Contact) PhoneNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+func (c *Contact) PhoneNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneNumber"))
 	return obj.Wrap(_r)
 }
 
-// SetPhoneNumber wraps the corresponding Objective-C method.
-func (x *Contact) SetPhoneNumber(phoneNumber obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), objref.IDOf(phoneNumber))
-}
-
 // EmailAddress wraps the corresponding Objective-C method.
-func (x *Contact) EmailAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+func (c *Contact) EmailAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetEmailAddress wraps the corresponding Objective-C method.
-func (x *Contact) SetEmailAddress(emailAddress string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 }
 
 // SupplementarySubLocality wraps the corresponding Objective-C method.
-func (x *Contact) SupplementarySubLocality() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementarySubLocality"))
+func (c *Contact) SupplementarySubLocality() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("supplementarySubLocality"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetSupplementarySubLocality wraps the corresponding Objective-C method.
-func (x *Contact) SetSupplementarySubLocality(supplementarySubLocality string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementarySubLocality:"), purego.NSString(supplementarySubLocality))
-}
-
-// Contactable is the interface implemented by [Contact], for mocking and DI.
-type Contactable interface {
-	obj.Object
-	WithName(name obj.Object) *Contact
-	WithPostalAddress(postalAddress obj.Object) *Contact
-	WithPhoneNumber(phoneNumber obj.Object) *Contact
-	WithEmailAddress(emailAddress string) *Contact
-	WithSupplementarySubLocality(supplementarySubLocality string) *Contact
-	Name() obj.Object
-	SetName(name obj.Object)
-	PostalAddress() obj.Object
-	SetPostalAddress(postalAddress obj.Object)
-	PhoneNumber() obj.Object
-	SetPhoneNumber(phoneNumber obj.Object)
-	EmailAddress() string
-	SetEmailAddress(emailAddress string)
-	SupplementarySubLocality() string
-	SetSupplementarySubLocality(supplementarySubLocality string)
-}
-
-var _ Contactable = (*Contact)(nil)

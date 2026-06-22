@@ -46,24 +46,24 @@ func wKNavigationResponseAdopt(id objc.ID) *WKNavigationResponse {
 }
 
 // Description returns the object's -description text.
-func (x *WKNavigationResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wnr *WKNavigationResponse) Description() string {
+	return rt.Description(objref.IDOf(wnr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKNavigationResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wnr *WKNavigationResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wnr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKNavigationResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wnr *WKNavigationResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wnr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKNavigationResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wnr *WKNavigationResponse) String() string {
+	return rt.Description(objref.IDOf(wnr))
 }
 
 // NewWKNavigationResponse creates a new WKNavigationResponse.
@@ -72,30 +72,20 @@ func NewWKNavigationResponse() *WKNavigationResponse {
 	return wKNavigationResponseAdopt(_id)
 }
 
-// IsForMainFrame a Boolean value indicating whether the frame being navigated is the main frame.
-func (x *WKNavigationResponse) IsForMainFrame() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForMainFrame"))
+// IsForMainFrame reports whether the frame being navigated is the main frame.
+func (wnr *WKNavigationResponse) IsForMainFrame() bool {
+	_r := objc.Send[bool](objref.IDOf(wnr), objc.RegisterName("isForMainFrame"))
 	return _r
 }
 
-// Response the frame's response.
-func (x *WKNavigationResponse) Response() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
+// Response returns the frame's response.
+func (wnr *WKNavigationResponse) Response() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wnr), objc.RegisterName("response"))
 	return obj.Wrap(_r)
 }
 
-// CanShowMIMEType a Boolean value indicating whether WebKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
-func (x *WKNavigationResponse) CanShowMIMEType() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canShowMIMEType"))
+// CanShowMIMEType reports whether webKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
+func (wnr *WKNavigationResponse) CanShowMIMEType() bool {
+	_r := objc.Send[bool](objref.IDOf(wnr), objc.RegisterName("canShowMIMEType"))
 	return _r
 }
-
-// WKNavigationResponseable is the interface implemented by [WKNavigationResponse], for mocking and DI.
-type WKNavigationResponseable interface {
-	obj.Object
-	IsForMainFrame() bool
-	Response() obj.Object
-	CanShowMIMEType() bool
-}
-
-var _ WKNavigationResponseable = (*WKNavigationResponse)(nil)

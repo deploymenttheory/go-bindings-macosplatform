@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,222 +50,166 @@ func NewDOMHTMLParamElement() *DOMHTMLParamElement {
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithName(name string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (dpe *DOMHTMLParamElement) WithName(name string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setName:"), purego.NSString(name))
+	return dpe
 }
 
 // WithType sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithType(type_ string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
-	return x
+func (dpe *DOMHTMLParamElement) WithType(type_ string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setType:"), purego.NSString(type_))
+	return dpe
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithValue(value string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (dpe *DOMHTMLParamElement) WithValue(value string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setValue:"), purego.NSString(value))
+	return dpe
 }
 
 // WithValueType sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithValueType(valueType string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueType:"), purego.NSString(valueType))
-	return x
+func (dpe *DOMHTMLParamElement) WithValueType(valueType string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setValueType:"), purego.NSString(valueType))
+	return dpe
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithTitle(title string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dpe *DOMHTMLParamElement) WithTitle(title string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dpe
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithLang(lang string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dpe *DOMHTMLParamElement) WithLang(lang string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dpe
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithDir(dir string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dpe *DOMHTMLParamElement) WithDir(dir string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dpe
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithTabIndex(tabIndex int) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dpe *DOMHTMLParamElement) WithTabIndex(tabIndex int) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dpe
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithAccessKey(accessKey string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dpe *DOMHTMLParamElement) WithAccessKey(accessKey string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dpe
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithInnerText(innerText string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dpe *DOMHTMLParamElement) WithInnerText(innerText string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dpe
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithOuterText(outerText string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dpe *DOMHTMLParamElement) WithOuterText(outerText string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dpe
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithContentEditable(contentEditable string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dpe *DOMHTMLParamElement) WithContentEditable(contentEditable string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dpe
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithIdName(idName string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dpe *DOMHTMLParamElement) WithIDName(idName string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dpe
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithScrollLeft(scrollLeft int) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dpe *DOMHTMLParamElement) WithScrollLeft(scrollLeft int) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dpe
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithScrollTop(scrollTop int) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dpe *DOMHTMLParamElement) WithScrollTop(scrollTop int) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dpe
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithInnerHTML(innerHTML string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dpe *DOMHTMLParamElement) WithInnerHTML(innerHTML string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dpe
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithOuterHTML(outerHTML string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dpe *DOMHTMLParamElement) WithOuterHTML(outerHTML string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dpe
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithClassName(className string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dpe *DOMHTMLParamElement) WithClassName(className string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dpe
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithNodeValue(nodeValue string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dpe *DOMHTMLParamElement) WithNodeValue(nodeValue string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dpe
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithPrefix(prefix string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dpe *DOMHTMLParamElement) WithPrefix(prefix string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dpe
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLParamElement) WithTextContent(textContent string) *DOMHTMLParamElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dpe *DOMHTMLParamElement) WithTextContent(textContent string) *DOMHTMLParamElement {
+	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dpe
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (dpe *DOMHTMLParamElement) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (dpe *DOMHTMLParamElement) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetType wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) SetType(type_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (dpe *DOMHTMLParamElement) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
 // ValueType wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) ValueType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueType"))
+func (dpe *DOMHTMLParamElement) ValueType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("valueType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetValueType wraps the corresponding Objective-C method.
-func (x *DOMHTMLParamElement) SetValueType(valueType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueType:"), purego.NSString(valueType))
-}
-
-// DOMHTMLParamElementable is the interface implemented by [DOMHTMLParamElement], for mocking and DI.
-type DOMHTMLParamElementable interface {
-	obj.Object
-	WithName(name string) *DOMHTMLParamElement
-	WithType(type_ string) *DOMHTMLParamElement
-	WithValue(value string) *DOMHTMLParamElement
-	WithValueType(valueType string) *DOMHTMLParamElement
-	WithTitle(title string) *DOMHTMLParamElement
-	WithLang(lang string) *DOMHTMLParamElement
-	WithDir(dir string) *DOMHTMLParamElement
-	WithTabIndex(tabIndex int) *DOMHTMLParamElement
-	WithAccessKey(accessKey string) *DOMHTMLParamElement
-	WithInnerText(innerText string) *DOMHTMLParamElement
-	WithOuterText(outerText string) *DOMHTMLParamElement
-	WithContentEditable(contentEditable string) *DOMHTMLParamElement
-	WithIdName(idName string) *DOMHTMLParamElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLParamElement
-	WithScrollTop(scrollTop int) *DOMHTMLParamElement
-	WithInnerHTML(innerHTML string) *DOMHTMLParamElement
-	WithOuterHTML(outerHTML string) *DOMHTMLParamElement
-	WithClassName(className string) *DOMHTMLParamElement
-	WithNodeValue(nodeValue string) *DOMHTMLParamElement
-	WithPrefix(prefix string) *DOMHTMLParamElement
-	WithTextContent(textContent string) *DOMHTMLParamElement
-	Name() string
-	SetName(name string)
-	Type() string
-	SetType(type_ string)
-	Value() string
-	SetValue(value string)
-	ValueType() string
-	SetValueType(valueType string)
-}
-
-var _ DOMHTMLParamElementable = (*DOMHTMLParamElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLParamElement)(nil)
 

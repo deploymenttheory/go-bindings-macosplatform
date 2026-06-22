@@ -46,24 +46,24 @@ func authorizationAppleIDButtonAdopt(id objc.ID) *AuthorizationAppleIDButton {
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationAppleIDButton) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aaib *AuthorizationAppleIDButton) Description() string {
+	return rt.Description(objref.IDOf(aaib))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationAppleIDButton) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aaib *AuthorizationAppleIDButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aaib), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationAppleIDButton) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aaib *AuthorizationAppleIDButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aaib), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationAppleIDButton) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aaib *AuthorizationAppleIDButton) String() string {
+	return rt.Description(objref.IDOf(aaib))
 }
 
 // NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new Sign In with Apple authorization button with the given type and style.
@@ -73,29 +73,14 @@ func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButton
 	return authorizationAppleIDButtonAdopt(_id)
 }
 
-// WithCornerRadius the radius, in points, for the rounded corners on the Apple ID sign-in button.
-func (x *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius, in points, for the rounded corners on the Apple ID sign-in button.
+func (aaib *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {
+	objc.Send[objc.ID](objref.IDOf(aaib), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return aaib
 }
 
 // CornerRadius wraps the corresponding Objective-C method.
-func (x *AuthorizationAppleIDButton) CornerRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+func (aaib *AuthorizationAppleIDButton) CornerRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(aaib), objc.RegisterName("cornerRadius"))
 	return _r
 }
-
-// SetCornerRadius wraps the corresponding Objective-C method.
-func (x *AuthorizationAppleIDButton) SetCornerRadius(cornerRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-}
-
-// AuthorizationAppleIDButtonable is the interface implemented by [AuthorizationAppleIDButton], for mocking and DI.
-type AuthorizationAppleIDButtonable interface {
-	obj.Object
-	WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton
-	CornerRadius() float64
-	SetCornerRadius(cornerRadius float64)
-}
-
-var _ AuthorizationAppleIDButtonable = (*AuthorizationAppleIDButton)(nil)

@@ -46,24 +46,24 @@ func functionStitchingAttributeAlwaysInlineAdopt(id objc.ID) *FunctionStitchingA
 }
 
 // Description returns the object's -description text.
-func (x *FunctionStitchingAttributeAlwaysInline) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fsaai *FunctionStitchingAttributeAlwaysInline) Description() string {
+	return rt.Description(objref.IDOf(fsaai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FunctionStitchingAttributeAlwaysInline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fsaai *FunctionStitchingAttributeAlwaysInline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fsaai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FunctionStitchingAttributeAlwaysInline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fsaai *FunctionStitchingAttributeAlwaysInline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fsaai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FunctionStitchingAttributeAlwaysInline) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fsaai *FunctionStitchingAttributeAlwaysInline) String() string {
+	return rt.Description(objref.IDOf(fsaai))
 }
 
 // NewFunctionStitchingAttributeAlwaysInline creates a new FunctionStitchingAttributeAlwaysInline.
@@ -71,10 +71,3 @@ func NewFunctionStitchingAttributeAlwaysInline() *FunctionStitchingAttributeAlwa
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingAttributeAlwaysInline")), objc.RegisterName("new"))
 	return functionStitchingAttributeAlwaysInlineAdopt(_id)
 }
-
-// FunctionStitchingAttributeAlwaysInlineable is the interface implemented by [FunctionStitchingAttributeAlwaysInline], for mocking and DI.
-type FunctionStitchingAttributeAlwaysInlineable interface {
-	obj.Object
-}
-
-var _ FunctionStitchingAttributeAlwaysInlineable = (*FunctionStitchingAttributeAlwaysInline)(nil)

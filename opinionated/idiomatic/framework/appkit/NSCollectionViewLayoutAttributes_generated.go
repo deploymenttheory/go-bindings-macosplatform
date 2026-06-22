@@ -47,24 +47,24 @@ func collectionViewLayoutAttributesAdopt(id objc.ID) *CollectionViewLayoutAttrib
 }
 
 // Description returns the object's -description text.
-func (x *CollectionViewLayoutAttributes) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvla *CollectionViewLayoutAttributes) Description() string {
+	return rt.Description(objref.IDOf(cvla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewLayoutAttributes) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvla *CollectionViewLayoutAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewLayoutAttributes) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvla *CollectionViewLayoutAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionViewLayoutAttributes) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvla *CollectionViewLayoutAttributes) String() string {
+	return rt.Description(objref.IDOf(cvla))
 }
 
 // NewCollectionViewLayoutAttributes creates a new CollectionViewLayoutAttributes.
@@ -73,146 +73,89 @@ func NewCollectionViewLayoutAttributes() *CollectionViewLayoutAttributes {
 	return collectionViewLayoutAttributesAdopt(_id)
 }
 
-// WithFrame the frame rectangle of the element.
-func (x *CollectionViewLayoutAttributes) WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the frame rectangle of the element.
+func (cvla *CollectionViewLayoutAttributes) WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setFrame:"), frame)
+	return cvla
 }
 
-// WithSize the size of the element.
-func (x *CollectionViewLayoutAttributes) WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the element.
+func (cvla *CollectionViewLayoutAttributes) WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setSize:"), size)
+	return cvla
 }
 
-// WithAlpha the transparency of the element.
-func (x *CollectionViewLayoutAttributes) WithAlpha(alpha float64) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency of the element.
+func (cvla *CollectionViewLayoutAttributes) WithAlpha(alpha float64) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setAlpha:"), alpha)
+	return cvla
 }
 
-// WithZIndex the element’s position on the z axis.
-func (x *CollectionViewLayoutAttributes) WithZIndex(zIndex int) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
-	return x
+// WithZIndex sets the element’s position on the z axis.
+func (cvla *CollectionViewLayoutAttributes) WithZIndex(zIndex int) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setZIndex:"), zIndex)
+	return cvla
 }
 
-// WithHidden a Boolean value indicating whether the element is hidden.
-func (x *CollectionViewLayoutAttributes) WithHidden(hidden bool) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether the element is hidden.
+func (cvla *CollectionViewLayoutAttributes) WithHidden(hidden bool) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setHidden:"), hidden)
+	return cvla
 }
 
-// WithIndexPath the index path of the element.
-func (x *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
-	return x
+// WithIndexPath sets the index path of the element.
+func (cvla *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
+	return cvla
 }
 
 // Frame wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+func (cvla *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cvla), objc.RegisterName("frame"))
 	return _r
-}
-
-// SetFrame wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) SetFrame(frame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (cvla *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvla), objc.RegisterName("size"))
 	return _r
-}
-
-// SetSize wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) SetSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
 // Alpha wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+func (cvla *CollectionViewLayoutAttributes) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(cvla), objc.RegisterName("alpha"))
 	return _r
-}
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // ZIndex wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+func (cvla *CollectionViewLayoutAttributes) ZIndex() int {
+	_r := objc.Send[int](objref.IDOf(cvla), objc.RegisterName("zIndex"))
 	return _r
-}
-
-// SetZIndex wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) SetZIndex(zIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 }
 
 // IsHidden wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+func (cvla *CollectionViewLayoutAttributes) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(cvla), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// SetHidden wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) SetHidden(hidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-}
-
 // IndexPath wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) IndexPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPath"))
+func (cvla *CollectionViewLayoutAttributes) IndexPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("indexPath"))
 	return obj.Wrap(_r)
 }
 
-// SetIndexPath wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) SetIndexPath(indexPath obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
-}
-
 // RepresentedElementCategory wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
-	_r := objc.Send[CollectionElementCategory](objref.IDOf(x), objc.RegisterName("representedElementCategory"))
+func (cvla *CollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
+	_r := objc.Send[CollectionElementCategory](objref.IDOf(cvla), objc.RegisterName("representedElementCategory"))
 	return _r
 }
 
 // RepresentedElementKind wraps the corresponding Objective-C method.
-func (x *CollectionViewLayoutAttributes) RepresentedElementKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedElementKind"))
+func (cvla *CollectionViewLayoutAttributes) RepresentedElementKind() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("representedElementKind"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CollectionViewLayoutAttributesable is the interface implemented by [CollectionViewLayoutAttributes], for mocking and DI.
-type CollectionViewLayoutAttributesable interface {
-	obj.Object
-	WithFrame(frame corefoundation.CGRect) *CollectionViewLayoutAttributes
-	WithSize(size corefoundation.CGSize) *CollectionViewLayoutAttributes
-	WithAlpha(alpha float64) *CollectionViewLayoutAttributes
-	WithZIndex(zIndex int) *CollectionViewLayoutAttributes
-	WithHidden(hidden bool) *CollectionViewLayoutAttributes
-	WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes
-	Frame() corefoundation.CGRect
-	SetFrame(frame corefoundation.CGRect)
-	Size() corefoundation.CGSize
-	SetSize(size corefoundation.CGSize)
-	Alpha() float64
-	SetAlpha(alpha float64)
-	ZIndex() int
-	SetZIndex(zIndex int)
-	IsHidden() bool
-	SetHidden(hidden bool)
-	IndexPath() obj.Object
-	SetIndexPath(indexPath obj.Object)
-	RepresentedElementCategory() CollectionElementCategory
-	RepresentedElementKind() string
-}
-
-var _ CollectionViewLayoutAttributesable = (*CollectionViewLayoutAttributes)(nil)

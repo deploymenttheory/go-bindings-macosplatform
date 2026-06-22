@@ -47,24 +47,24 @@ func captionRendererAdopt(id objc.ID) *CaptionRenderer {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionRenderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CaptionRenderer) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionRenderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *CaptionRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionRenderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *CaptionRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionRenderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *CaptionRenderer) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // NewCaptionRenderer creates a new CaptionRenderer.
@@ -73,52 +73,29 @@ func NewCaptionRenderer() *CaptionRenderer {
 	return captionRendererAdopt(_id)
 }
 
-// WithCaptions the captions to render.
-func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
+// WithCaptions sets the captions to render.
+func (cr *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v CaptionProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setCaptions:"), _arr)
+	return cr
 }
 
-// WithBounds the drawing bounds of caption scenes.
-func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the drawing bounds of caption scenes.
+func (cr *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setBounds:"), bounds)
+	return cr
 }
 
-// Captions a NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+// Captions returns a NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.
 //
 // Captions returns the collection as a Go slice.
-func (x *CaptionRenderer) Captions() []*Caption {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captions"))
+func (cr *CaptionRenderer) Captions() []*Caption {
+	_arr := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("captions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// SetCaptions wraps the corresponding Objective-C method.
-func (x *CaptionRenderer) SetCaptions(captions []*Caption) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptions:"), purego.SliceToNSArray(captions, func(_v *Caption) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Bounds a CGRect holding bounds for the drawing of caption scene(s). This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
-func (x *CaptionRenderer) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+// Bounds returns a CGRect holding bounds for the drawing of caption scene(s). This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
+func (cr *CaptionRenderer) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cr), objc.RegisterName("bounds"))
 	return _r
 }
-
-// SetBounds wraps the corresponding Objective-C method.
-func (x *CaptionRenderer) SetBounds(bounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-}
-
-// CaptionRendererable is the interface implemented by [CaptionRenderer], for mocking and DI.
-type CaptionRendererable interface {
-	obj.Object
-	WithCaptions(items ...CaptionProvider) *CaptionRenderer
-	WithBounds(bounds corefoundation.CGRect) *CaptionRenderer
-	Captions() []*Caption
-	SetCaptions(captions []*Caption)
-	Bounds() corefoundation.CGRect
-	SetBounds(bounds corefoundation.CGRect)
-}
-
-var _ CaptionRendererable = (*CaptionRenderer)(nil)

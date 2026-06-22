@@ -61,24 +61,15 @@ func NewMachPortWithMachPortOptions(machPort uint32, f MachPortOptions) *MachPor
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MachPort) WithScriptingProperties(scriptingProperties obj.Object) *MachPort {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mp *MachPort) WithScriptingProperties(scriptingProperties obj.Object) *MachPort {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mp
 }
 
 // MachPort wraps the corresponding Objective-C method.
-func (x *MachPort) MachPort() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("machPort"))
+func (mp *MachPort) MachPort() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(mp), objc.RegisterName("machPort"))
 	return _r
 }
-
-// MachPortable is the interface implemented by [MachPort], for mocking and DI.
-type MachPortable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MachPort
-	MachPort() uint32
-}
-
-var _ MachPortable = (*MachPort)(nil)
 
 var _ PortProvider = (*MachPort)(nil)

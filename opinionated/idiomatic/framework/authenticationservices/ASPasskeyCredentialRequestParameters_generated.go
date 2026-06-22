@@ -46,24 +46,24 @@ func passkeyCredentialRequestParametersAdopt(id objc.ID) *PasskeyCredentialReque
 }
 
 // Description returns the object's -description text.
-func (x *PasskeyCredentialRequestParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pcrp *PasskeyCredentialRequestParameters) Description() string {
+	return rt.Description(objref.IDOf(pcrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasskeyCredentialRequestParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pcrp *PasskeyCredentialRequestParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pcrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasskeyCredentialRequestParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pcrp *PasskeyCredentialRequestParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pcrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasskeyCredentialRequestParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pcrp *PasskeyCredentialRequestParameters) String() string {
+	return rt.Description(objref.IDOf(pcrp))
 }
 
 // NewPasskeyCredentialRequestParameters creates a new PasskeyCredentialRequestParameters.
@@ -72,49 +72,37 @@ func NewPasskeyCredentialRequestParameters() *PasskeyCredentialRequestParameters
 	return passkeyCredentialRequestParametersAdopt(_id)
 }
 
-// RelyingPartyIdentifier the relying party identifier for this request.
-func (x *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+// RelyingPartyIdentifier returns the relying party identifier for this request.
+func (pcrp *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ClientDataHash hash of client data for credential provider to sign as part of the operation.
-func (x *PasskeyCredentialRequestParameters) ClientDataHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDataHash"))
+// ClientDataHash returns hash of client data for credential provider to sign as part of the operation.
+func (pcrp *PasskeyCredentialRequestParameters) ClientDataHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("clientDataHash"))
 	return obj.Wrap(_r)
 }
 
-// UserVerificationPreference a preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
-func (x *PasskeyCredentialRequestParameters) UserVerificationPreference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userVerificationPreference"))
+// UserVerificationPreference returns a preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+func (pcrp *PasskeyCredentialRequestParameters) UserVerificationPreference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("userVerificationPreference"))
 	return obj.Wrap(_r)
 }
 
-// AllowedCredentials a list of allowed credential IDs for this request. An empty list means all credentials are allowed.
+// AllowedCredentials returns a list of allowed credential IDs for this request. An empty list means all credentials are allowed.
 //
 // AllowedCredentials returns the collection as a Go slice.
-func (x *PasskeyCredentialRequestParameters) AllowedCredentials() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedCredentials"))
+func (pcrp *PasskeyCredentialRequestParameters) AllowedCredentials() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("allowedCredentials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ExtensionInput inputs for WebAuthn extensions used for passkey assertion.
-func (x *PasskeyCredentialRequestParameters) ExtensionInput() *PasskeyAssertionCredentialExtensionInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionInput"))
+// ExtensionInput returns inputs for WebAuthn extensions used for passkey assertion.
+func (pcrp *PasskeyCredentialRequestParameters) ExtensionInput() *PasskeyAssertionCredentialExtensionInput {
+	_r := objc.Send[objc.ID](objref.IDOf(pcrp), objc.RegisterName("extensionInput"))
 	return PasskeyAssertionCredentialExtensionInputFromID(_r)
 }
-
-// PasskeyCredentialRequestParametersable is the interface implemented by [PasskeyCredentialRequestParameters], for mocking and DI.
-type PasskeyCredentialRequestParametersable interface {
-	obj.Object
-	RelyingPartyIdentifier() string
-	ClientDataHash() obj.Object
-	UserVerificationPreference() obj.Object
-	AllowedCredentials() []obj.Object
-	ExtensionInput() *PasskeyAssertionCredentialExtensionInput
-}
-
-var _ PasskeyCredentialRequestParametersable = (*PasskeyCredentialRequestParameters)(nil)

@@ -47,24 +47,24 @@ func lookAroundSnapshotOptionsAdopt(id objc.ID) *LookAroundSnapshotOptions {
 }
 
 // Description returns the object's -description text.
-func (x *LookAroundSnapshotOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (laso *LookAroundSnapshotOptions) Description() string {
+	return rt.Description(objref.IDOf(laso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LookAroundSnapshotOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (laso *LookAroundSnapshotOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(laso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LookAroundSnapshotOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (laso *LookAroundSnapshotOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(laso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LookAroundSnapshotOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (laso *LookAroundSnapshotOptions) String() string {
+	return rt.Description(objref.IDOf(laso))
 }
 
 // NewLookAroundSnapshotOptions creates a new LookAroundSnapshotOptions.
@@ -74,48 +74,25 @@ func NewLookAroundSnapshotOptions() *LookAroundSnapshotOptions {
 }
 
 // WithPointOfInterestFilter sets the property and returns the receiver so calls can be chained.
-func (x *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+func (laso *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return laso
 }
 
 // WithSize sets the property and returns the receiver so calls can be chained.
-func (x *LookAroundSnapshotOptions) WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+func (laso *LookAroundSnapshotOptions) WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions {
+	objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("setSize:"), size)
+	return laso
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *LookAroundSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (laso *LookAroundSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *LookAroundSnapshotOptions) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
 // Size wraps the corresponding Objective-C method.
-func (x *LookAroundSnapshotOptions) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (laso *LookAroundSnapshotOptions) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(laso), objc.RegisterName("size"))
 	return _r
 }
-
-// SetSize wraps the corresponding Objective-C method.
-func (x *LookAroundSnapshotOptions) SetSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-}
-
-// LookAroundSnapshotOptionsable is the interface implemented by [LookAroundSnapshotOptions], for mocking and DI.
-type LookAroundSnapshotOptionsable interface {
-	obj.Object
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions
-	WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-	Size() corefoundation.CGSize
-	SetSize(size corefoundation.CGSize)
-}
-
-var _ LookAroundSnapshotOptionsable = (*LookAroundSnapshotOptions)(nil)

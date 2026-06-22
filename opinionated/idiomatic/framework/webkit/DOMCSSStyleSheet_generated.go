@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,72 +50,56 @@ func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
 }
 
 // WithDisabled sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
-	return x
+func (dss *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
+	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("setDisabled:"), disabled)
+	return dss
 }
 
 // InsertRuleIndex wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) InsertRuleIndex(rule string, index int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
+func (dss *DOMCSSStyleSheet) InsertRuleIndex(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
 // DeleteRule wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) DeleteRule(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRule:"), index)
+func (dss *DOMCSSStyleSheet) DeleteRule(index int) {
+	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("deleteRule:"), index)
 }
 
 // AddRuleStyleIndex wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("addRule:style:index:"), purego.NSString(selector), purego.NSString(style), index)
+func (dss *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index int) int {
+	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("addRule:style:index:"), purego.NSString(selector), purego.NSString(style), index)
 	return _r
 }
 
 // RemoveRule wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) RemoveRule(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRule:"), index)
+func (dss *DOMCSSStyleSheet) RemoveRule(index int) {
+	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("removeRule:"), index)
 }
 
 // OwnerRule wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerRule"))
+func (dss *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("ownerRule"))
 	return DOMCSSRuleFromID(_r)
 }
 
-// CssRules wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) CssRules() *DOMCSSRuleList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssRules"))
+// CSSRules wraps the corresponding Objective-C method.
+func (dss *DOMCSSStyleSheet) CSSRules() *DOMCSSRuleList {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
 // Rules wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+func (dss *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("rules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
 // InsertRule wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleSheet) InsertRule(rule string, index int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
+func (dss *DOMCSSStyleSheet) InsertRule(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r
 }
-
-// DOMCSSStyleSheetable is the interface implemented by [DOMCSSStyleSheet], for mocking and DI.
-type DOMCSSStyleSheetable interface {
-	obj.Object
-	WithDisabled(disabled bool) *DOMCSSStyleSheet
-	InsertRuleIndex(rule string, index int) int
-	DeleteRule(index int)
-	AddRuleStyleIndex(selector string, style string, index int) int
-	RemoveRule(index int)
-	OwnerRule() *DOMCSSRule
-	CssRules() *DOMCSSRuleList
-	Rules() *DOMCSSRuleList
-	InsertRule(rule string, index int) int
-}
-
-var _ DOMCSSStyleSheetable = (*DOMCSSStyleSheet)(nil)
 
 var _ DOMStyleSheetProvider = (*DOMCSSStyleSheet)(nil)
 

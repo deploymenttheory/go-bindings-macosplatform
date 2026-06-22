@@ -7,7 +7,6 @@ package pencilkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,17 +60,9 @@ func NewToolPickerEraserItemWithEraserTypeWidth(eraserType EraserType, width flo
 }
 
 // EraserTool wraps the corresponding Objective-C method.
-func (x *ToolPickerEraserItem) EraserTool() *EraserTool {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraserTool"))
+func (tpei *ToolPickerEraserItem) EraserTool() *EraserTool {
+	_r := objc.Send[objc.ID](objref.IDOf(tpei), objc.RegisterName("eraserTool"))
 	return EraserToolFromID(_r)
 }
-
-// ToolPickerEraserItemable is the interface implemented by [ToolPickerEraserItem], for mocking and DI.
-type ToolPickerEraserItemable interface {
-	obj.Object
-	EraserTool() *EraserTool
-}
-
-var _ ToolPickerEraserItemable = (*ToolPickerEraserItem)(nil)
 
 var _ ToolPickerItemProvider = (*ToolPickerEraserItem)(nil)

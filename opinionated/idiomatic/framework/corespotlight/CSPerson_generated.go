@@ -46,24 +46,24 @@ func personAdopt(id objc.ID) *Person {
 }
 
 // Description returns the object's -description text.
-func (x *Person) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Person) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Person) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Person) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Person) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Person) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Person) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Person) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPersonWithDisplayNameHandlesHandleIdentifier returns a new CSPerson object initialized with the specified display name and contact attributes.
@@ -73,15 +73,15 @@ func NewPersonWithDisplayNameHandlesHandleIdentifier(displayName string, handles
 	return personAdopt(_id)
 }
 
-// WithContactIdentifier the identifier for the contact associated with the person.
-func (x *Person) WithContactIdentifier(contactIdentifier string) *Person {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
-	return x
+// WithContactIdentifier sets the identifier for the contact associated with the person.
+func (p *Person) WithContactIdentifier(contactIdentifier string) *Person {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
+	return p
 }
 
 // DisplayName wraps the corresponding Objective-C method.
-func (x *Person) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+func (p *Person) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,14 +91,14 @@ func (x *Person) DisplayName() string {
 // Handles wraps the corresponding Objective-C method.
 //
 // Handles returns the collection as a Go slice.
-func (x *Person) Handles() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handles"))
+func (p *Person) Handles() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("handles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // HandleIdentifier wraps the corresponding Objective-C method.
-func (x *Person) HandleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleIdentifier"))
+func (p *Person) HandleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("handleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -106,28 +106,10 @@ func (x *Person) HandleIdentifier() string {
 }
 
 // ContactIdentifier wraps the corresponding Objective-C method.
-func (x *Person) ContactIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifier"))
+func (p *Person) ContactIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetContactIdentifier wraps the corresponding Objective-C method.
-func (x *Person) SetContactIdentifier(contactIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
-}
-
-// Personable is the interface implemented by [Person], for mocking and DI.
-type Personable interface {
-	obj.Object
-	WithContactIdentifier(contactIdentifier string) *Person
-	DisplayName() string
-	Handles() []string
-	HandleIdentifier() string
-	ContactIdentifier() string
-	SetContactIdentifier(contactIdentifier string)
-}
-
-var _ Personable = (*Person)(nil)

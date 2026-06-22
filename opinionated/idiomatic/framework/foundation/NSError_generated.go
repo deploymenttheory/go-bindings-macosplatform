@@ -46,24 +46,24 @@ func errorAdopt(id objc.ID) *Error {
 }
 
 // Description returns the object's -description text.
-func (x *Error) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Error) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Error) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Error) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Error) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Error) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Error) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Error) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewErrorWithDomainCodeUserInfo returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
@@ -74,32 +74,32 @@ func NewErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Error) WithScriptingProperties(scriptingProperties obj.Object) *Error {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (e *Error) WithScriptingProperties(scriptingProperties obj.Object) *Error {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return e
 }
 
 // Domain wraps the corresponding Objective-C method.
-func (x *Error) Domain() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+func (e *Error) Domain() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("domain"))
 	return StringFromID(_r)
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *Error) Code() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("code"))
+func (e *Error) Code() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("code"))
 	return _r
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *Error) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (e *Error) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedDescription wraps the corresponding Objective-C method.
-func (x *Error) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+func (e *Error) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,8 +107,8 @@ func (x *Error) LocalizedDescription() string {
 }
 
 // LocalizedFailureReason wraps the corresponding Objective-C method.
-func (x *Error) LocalizedFailureReason() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedFailureReason"))
+func (e *Error) LocalizedFailureReason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedFailureReason"))
 	if _r == 0 {
 		return ""
 	}
@@ -116,8 +116,8 @@ func (x *Error) LocalizedFailureReason() string {
 }
 
 // LocalizedRecoverySuggestion wraps the corresponding Objective-C method.
-func (x *Error) LocalizedRecoverySuggestion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRecoverySuggestion"))
+func (e *Error) LocalizedRecoverySuggestion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedRecoverySuggestion"))
 	if _r == 0 {
 		return ""
 	}
@@ -127,20 +127,20 @@ func (x *Error) LocalizedRecoverySuggestion() string {
 // LocalizedRecoveryOptions wraps the corresponding Objective-C method.
 //
 // LocalizedRecoveryOptions returns the collection as a Go slice.
-func (x *Error) LocalizedRecoveryOptions() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRecoveryOptions"))
+func (e *Error) LocalizedRecoveryOptions() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedRecoveryOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // RecoveryAttempter wraps the corresponding Objective-C method.
-func (x *Error) RecoveryAttempter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recoveryAttempter"))
+func (e *Error) RecoveryAttempter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("recoveryAttempter"))
 	return obj.Wrap(_r)
 }
 
 // HelpAnchor wraps the corresponding Objective-C method.
-func (x *Error) HelpAnchor() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+func (e *Error) HelpAnchor() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("helpAnchor"))
 	if _r == 0 {
 		return ""
 	}
@@ -148,25 +148,7 @@ func (x *Error) HelpAnchor() string {
 }
 
 // UnderlyingErrors wraps the corresponding Objective-C method.
-func (x *Error) UnderlyingErrors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underlyingErrors"))
+func (e *Error) UnderlyingErrors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("underlyingErrors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Errorable is the interface implemented by [Error], for mocking and DI.
-type Errorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Error
-	Domain() *String
-	Code() int
-	UserInfo() obj.Object
-	LocalizedDescription() string
-	LocalizedFailureReason() string
-	LocalizedRecoverySuggestion() string
-	LocalizedRecoveryOptions() []string
-	RecoveryAttempter() obj.Object
-	HelpAnchor() string
-	UnderlyingErrors() []obj.Object
-}
-
-var _ Errorable = (*Error)(nil)

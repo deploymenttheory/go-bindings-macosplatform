@@ -44,24 +44,24 @@ func developerToolAdopt(id objc.ID) *DeveloperTool {
 }
 
 // Description returns the object's -description text.
-func (x *DeveloperTool) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DeveloperTool) Description() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeveloperTool) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dt *DeveloperTool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeveloperTool) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dt *DeveloperTool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DeveloperTool) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DeveloperTool) String() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // NewDeveloperTool creates a new DeveloperTool.
@@ -71,21 +71,12 @@ func NewDeveloperTool() *DeveloperTool {
 }
 
 // RequestDeveloperToolAccessWithCompletionHandler checks whether developer tool privileges are already available and if not populates an entry in Settings for user approval. This method does not show any UI to the user or guide them towards Settings for approval, if necessary. - Parameter handler: A block called asynchronously with whether the privilege is available. > New info > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift > func requestAccess() async -> Bool > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
-func (x *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDeveloperToolAccessWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
+func (dt *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("requestDeveloperToolAccessWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// AuthorizationStatus the current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
-func (x *DeveloperTool) AuthorizationStatus() DeveloperToolStatus {
-	_r := objc.Send[DeveloperToolStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+// AuthorizationStatus returns the current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
+func (dt *DeveloperTool) AuthorizationStatus() DeveloperToolStatus {
+	_r := objc.Send[DeveloperToolStatus](objref.IDOf(dt), objc.RegisterName("authorizationStatus"))
 	return _r
 }
-
-// DeveloperToolable is the interface implemented by [DeveloperTool], for mocking and DI.
-type DeveloperToolable interface {
-	obj.Object
-	RequestDeveloperToolAccessWithCompletionHandler(handler func(bool))
-	AuthorizationStatus() DeveloperToolStatus
-}
-
-var _ DeveloperToolable = (*DeveloperTool)(nil)

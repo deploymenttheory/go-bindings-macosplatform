@@ -46,24 +46,24 @@ func callRecordFilterAdopt(id objc.ID) *CallRecordFilter {
 }
 
 // Description returns the object's -description text.
-func (x *CallRecordFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (crf *CallRecordFilter) Description() string {
+	return rt.Description(objref.IDOf(crf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CallRecordFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (crf *CallRecordFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(crf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CallRecordFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (crf *CallRecordFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(crf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CallRecordFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (crf *CallRecordFilter) String() string {
+	return rt.Description(objref.IDOf(crf))
 }
 
 // NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a filtered call record with the details about a call.
@@ -76,29 +76,19 @@ func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants []*
 // Participants wraps the corresponding Objective-C method.
 //
 // Participants returns the collection as a Go slice.
-func (x *CallRecordFilter) Participants() []*Person {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participants"))
+func (crf *CallRecordFilter) Participants() []*Person {
+	_arr := objc.Send[objc.ID](objref.IDOf(crf), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // CallTypes wraps the corresponding Objective-C method.
-func (x *CallRecordFilter) CallTypes() CallRecordTypeOptions {
-	_r := objc.Send[CallRecordTypeOptions](objref.IDOf(x), objc.RegisterName("callTypes"))
+func (crf *CallRecordFilter) CallTypes() CallRecordTypeOptions {
+	_r := objc.Send[CallRecordTypeOptions](objref.IDOf(crf), objc.RegisterName("callTypes"))
 	return _r
 }
 
 // CallCapability wraps the corresponding Objective-C method.
-func (x *CallRecordFilter) CallCapability() CallCapability {
-	_r := objc.Send[CallCapability](objref.IDOf(x), objc.RegisterName("callCapability"))
+func (crf *CallRecordFilter) CallCapability() CallCapability {
+	_r := objc.Send[CallCapability](objref.IDOf(crf), objc.RegisterName("callCapability"))
 	return _r
 }
-
-// CallRecordFilterable is the interface implemented by [CallRecordFilter], for mocking and DI.
-type CallRecordFilterable interface {
-	obj.Object
-	Participants() []*Person
-	CallTypes() CallRecordTypeOptions
-	CallCapability() CallCapability
-}
-
-var _ CallRecordFilterable = (*CallRecordFilter)(nil)

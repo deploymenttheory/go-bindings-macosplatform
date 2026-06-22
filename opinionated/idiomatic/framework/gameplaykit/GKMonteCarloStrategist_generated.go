@@ -46,24 +46,24 @@ func monteCarloStrategistAdopt(id objc.ID) *MonteCarloStrategist {
 }
 
 // Description returns the object's -description text.
-func (x *MonteCarloStrategist) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcs *MonteCarloStrategist) Description() string {
+	return rt.Description(objref.IDOf(mcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MonteCarloStrategist) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcs *MonteCarloStrategist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MonteCarloStrategist) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcs *MonteCarloStrategist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MonteCarloStrategist) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcs *MonteCarloStrategist) String() string {
+	return rt.Description(objref.IDOf(mcs))
 }
 
 // NewMonteCarloStrategist creates a new MonteCarloStrategist.
@@ -72,49 +72,26 @@ func NewMonteCarloStrategist() *MonteCarloStrategist {
 	return monteCarloStrategistAdopt(_id)
 }
 
-// WithBudget the maximum number of game model states the strategist will examine when searching for a move.
-func (x *MonteCarloStrategist) WithBudget(budget int) *MonteCarloStrategist {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBudget:"), budget)
-	return x
+// WithBudget sets the maximum number of game model states the strategist will examine when searching for a move.
+func (mcs *MonteCarloStrategist) WithBudget(budget int) *MonteCarloStrategist {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setBudget:"), budget)
+	return mcs
 }
 
-// WithExplorationParameter a value that influences whether the strategist searches more broadly or more deeply for winning game model states.
-func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter int) *MonteCarloStrategist {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplorationParameter:"), explorationParameter)
-	return x
+// WithExplorationParameter sets a value that influences whether the strategist searches more broadly or more deeply for winning game model states.
+func (mcs *MonteCarloStrategist) WithExplorationParameter(explorationParameter int) *MonteCarloStrategist {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setExplorationParameter:"), explorationParameter)
+	return mcs
 }
 
-// Budget the maximum number of samples that will be processed when searching for a move.
-func (x *MonteCarloStrategist) Budget() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("budget"))
+// Budget returns the maximum number of samples that will be processed when searching for a move.
+func (mcs *MonteCarloStrategist) Budget() int {
+	_r := objc.Send[int](objref.IDOf(mcs), objc.RegisterName("budget"))
 	return _r
 }
 
-// SetBudget wraps the corresponding Objective-C method.
-func (x *MonteCarloStrategist) SetBudget(budget int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBudget:"), budget)
-}
-
-// ExplorationParameter a weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
-func (x *MonteCarloStrategist) ExplorationParameter() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("explorationParameter"))
+// ExplorationParameter returns a weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
+func (mcs *MonteCarloStrategist) ExplorationParameter() int {
+	_r := objc.Send[int](objref.IDOf(mcs), objc.RegisterName("explorationParameter"))
 	return _r
 }
-
-// SetExplorationParameter wraps the corresponding Objective-C method.
-func (x *MonteCarloStrategist) SetExplorationParameter(explorationParameter int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplorationParameter:"), explorationParameter)
-}
-
-// MonteCarloStrategistable is the interface implemented by [MonteCarloStrategist], for mocking and DI.
-type MonteCarloStrategistable interface {
-	obj.Object
-	WithBudget(budget int) *MonteCarloStrategist
-	WithExplorationParameter(explorationParameter int) *MonteCarloStrategist
-	Budget() int
-	SetBudget(budget int)
-	ExplorationParameter() int
-	SetExplorationParameter(explorationParameter int)
-}
-
-var _ MonteCarloStrategistable = (*MonteCarloStrategist)(nil)

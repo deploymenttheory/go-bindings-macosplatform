@@ -44,24 +44,24 @@ func commandBufferAdopt(id objc.ID) *CommandBuffer {
 }
 
 // Description returns the object's -description text.
-func (x *CommandBuffer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cb *CommandBuffer) Description() string {
+	return rt.Description(objref.IDOf(cb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CommandBuffer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cb *CommandBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CommandBuffer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cb *CommandBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CommandBuffer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cb *CommandBuffer) String() string {
+	return rt.Description(objref.IDOf(cb))
 }
 
 // NewCommandBuffer creates a new CommandBuffer.
@@ -70,41 +70,24 @@ func NewCommandBuffer() *CommandBuffer {
 	return commandBufferAdopt(_id)
 }
 
-// WithPredicate a GPU predicate object. Default: nil.
-func (x *CommandBuffer) WithPredicate(predicate obj.Object) *CommandBuffer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
-	return x
+// WithPredicate sets a GPU predicate object. Default: nil.
+func (cb *CommandBuffer) WithPredicate(predicate obj.Object) *CommandBuffer {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+	return cb
 }
 
 // CommitAndContinue commit work encoded so far and continue with a new underlying command buffer This method commits the underlying root MTLCommandBuffer, and makes a new one on the same command queue. The MPS heap is moved forward to the new command buffer such that temporary objects used by the previous command buffer can be still be used with the new one. This provides a way to move work already encoded into consideration by the Metal back end sooner. For large workloads, e.g. a neural networking graph periodically calling -commitAndContinue may allow you to improve CPU / GPU parallelism without the substantial memory increases associated with double buffering. It will also help decrease overall latency. Any Metal schedule or completion callbacks previously attached to this object will remain attached to the old command buffer and will fire as expected as the old command buffer is scheduled and completes. If your application is relying on such callbacks to coordinate retain / release of important objects that are needed for work encoded after -commitAndContinue, your application should retain these objects before calling commitAndContinue, and attach new release callbacks to this object with a new completion handler so that they persist through the lifetime of the new underlying command buffer. You may do this, for example by adding the objects to a mutable array before calling -commitAndContinue, then release the mutable array in a new completion callback added after -commitAndContinue. Because -commitAndContinue commits the old command buffer then switches to a new one, some aspects of command buffer completion may surprise unwary developers. For example, -waitUntilCompleted called immediately after -commitAndContinue asks Metal to wait for the new command buffer to finish, not the old one. Since the new command buffer presumably hasn't been committed yet, it is formally a deadlock, resources may leak and Metal may complain. Your application should ether call -commit before -waitUntilCompleted, or capture the -rootCommandBuffer from before the call to -commitAndContinue and wait on that.  Similarly, your application should be sure to use the appropriate command buffer when querying the [MTLCommandBuffer status] property. If the underlying MTLCommandBuffer also implements -commitAndContinue, then the message will be forwarded to that object instead. In this way, underlying predicate objects and other state will be preserved.
-func (x *CommandBuffer) CommitAndContinue() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commitAndContinue"))
+func (cb *CommandBuffer) CommitAndContinue() {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("commitAndContinue"))
 }
 
 // PrefetchHeapForWorkloadSize prefetch heap into the MPS command buffer heap cache. If there is not sufficient free storage in the MPS heap for the command buffer for allocations of total size size, pre-warm the MPS heap with a new MTLHeap allocation of sufficient size.  If this size turns out to be too small MPS may ask for more heaps later to cover additional allocations. If heapProvider is not nil, the heapProvider will be used.
-func (x *CommandBuffer) PrefetchHeapForWorkloadSize(size int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prefetchHeapForWorkloadSize:"), size)
+func (cb *CommandBuffer) PrefetchHeapForWorkloadSize(size int) {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("prefetchHeapForWorkloadSize:"), size)
 }
 
-// Predicate a GPU predicate object. Default: nil.
-func (x *CommandBuffer) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+// Predicate returns a GPU predicate object. Default: nil.
+func (cb *CommandBuffer) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
-
-// SetPredicate wraps the corresponding Objective-C method.
-func (x *CommandBuffer) SetPredicate(predicate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
-}
-
-// CommandBufferable is the interface implemented by [CommandBuffer], for mocking and DI.
-type CommandBufferable interface {
-	obj.Object
-	WithPredicate(predicate obj.Object) *CommandBuffer
-	CommitAndContinue()
-	PrefetchHeapForWorkloadSize(size int)
-	Predicate() obj.Object
-	SetPredicate(predicate obj.Object)
-}
-
-var _ CommandBufferable = (*CommandBuffer)(nil)

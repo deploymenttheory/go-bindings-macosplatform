@@ -5,13 +5,14 @@
 package automator
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Workspace is an idiomatic wrapper over the Objective-C class AMWorkspace.
@@ -48,24 +49,24 @@ func workspaceAdopt(id objc.ID) *Workspace {
 }
 
 // Description returns the object's -description text.
-func (x *Workspace) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (w *Workspace) Description() string {
+	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Workspace) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (w *Workspace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Workspace) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (w *Workspace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Workspace) String() string {
-	return rt.Description(objref.IDOf(x))
+func (w *Workspace) String() string {
+	return rt.Description(objref.IDOf(w))
 }
 
 // NewWorkspace creates a new Workspace.
@@ -75,19 +76,11 @@ func NewWorkspace() *Workspace {
 }
 
 // RunWorkflowAtPathWithInputError loads and runs the specified workflow file.
-func (x *Workspace) RunWorkflowAtPathWithInputError(path string, input obj.Object) (result obj.Object, err error) {
+func (w *Workspace) RunWorkflowAtPathWithInputError(path string, input obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWorkflowAtPath:withInput:error:"), purego.NSString(path), objref.IDOf(input), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("runWorkflowAtPath:withInput:error:"), purego.NSString(path), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
-
-// Workspaceable is the interface implemented by [Workspace], for mocking and DI.
-type Workspaceable interface {
-	obj.Object
-	RunWorkflowAtPathWithInputError(path string, input obj.Object) (result obj.Object, err error)
-}
-
-var _ Workspaceable = (*Workspace)(nil)

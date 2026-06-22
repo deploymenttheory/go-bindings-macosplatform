@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewURLResolutionResult() *URLResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INURLResolutionResult")), objc.RegisterName("new"))
 	return uRLResolutionResultAdopt(_id)
 }
-
-// URLResolutionResultable is the interface implemented by [URLResolutionResult], for mocking and DI.
-type URLResolutionResultable interface {
-	obj.Object
-}
-
-var _ URLResolutionResultable = (*URLResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*URLResolutionResult)(nil)

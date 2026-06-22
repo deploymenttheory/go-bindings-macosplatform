@@ -46,24 +46,24 @@ func layerAdopt(id objc.ID) *Layer {
 }
 
 // Description returns the object's -description text.
-func (x *Layer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Layer) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Layer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Layer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Layer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Layer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Layer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Layer) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // NewLayer creates a new Layer.
@@ -72,29 +72,14 @@ func NewLayer() *Layer {
 	return layerAdopt(_id)
 }
 
-// WithScene the scene to be displayed in the layer.
-func (x *Layer) WithScene(scene *Scene) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-	return x
+// WithScene sets the scene to be displayed in the layer.
+func (l *Layer) WithScene(scene *Scene) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	return l
 }
 
 // Scene wraps the corresponding Objective-C method.
-func (x *Layer) Scene() *Scene {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+func (l *Layer) Scene() *Scene {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
-
-// SetScene wraps the corresponding Objective-C method.
-func (x *Layer) SetScene(scene *Scene) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-}
-
-// Layerable is the interface implemented by [Layer], for mocking and DI.
-type Layerable interface {
-	obj.Object
-	WithScene(scene *Scene) *Layer
-	Scene() *Scene
-	SetScene(scene *Scene)
-}
-
-var _ Layerable = (*Layer)(nil)

@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AttributedString is an idiomatic wrapper over the Objective-C class NSAttributedString.
@@ -50,24 +51,24 @@ func attributedStringAdopt(id objc.ID) *AttributedString {
 }
 
 // Description returns the object's -description text.
-func (x *AttributedString) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AttributedString) Description() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttributedString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (as *AttributedString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttributedString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (as *AttributedString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttributedString) String() string {
-	return rt.Description(objref.IDOf(x))
+func (as *AttributedString) String() string {
+	return rt.Description(objref.IDOf(as))
 }
 
 // NewAttributedStringWithString creates a new AttributedString.
@@ -153,43 +154,32 @@ func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *Attribut
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (as *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return as
 }
 
 // IsEqualToAttributedString returns a Boolean value that indicates whether the attributed string is equal to the specified string.
-func (x *AttributedString) IsEqualToAttributedString(other *AttributedString) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToAttributedString:"), objref.IDOf(other))
+func (as *AttributedString) IsEqualToAttributedString(other *AttributedString) bool {
+	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isEqualToAttributedString:"), objref.IDOf(other))
 	return _r
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *AttributedString) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (as *AttributedString) Length() int {
+	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("length"))
 	return _r
 }
 
-// AttributedStringByInflectingString if the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
-func (x *AttributedString) AttributedStringByInflectingString() *AttributedString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringByInflectingString"))
+// AttributedStringByInflectingString returns if the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
+func (as *AttributedString) AttributedStringByInflectingString() *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("attributedStringByInflectingString"))
 	return AttributedStringFromID(_r)
 }
-
-// AttributedStringable is the interface implemented by [AttributedString], for mocking and DI.
-type AttributedStringable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AttributedString
-	IsEqualToAttributedString(other *AttributedString) bool
-	Length() int
-	AttributedStringByInflectingString() *AttributedString
-}
-
-var _ AttributedStringable = (*AttributedString)(nil)
 
 // isAttributedString marks AttributedString — and, by embedding promotion, its
 // subclasses — as a member of the AttributedString hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AttributedString) isAttributedString() {}
+func (as *AttributedString) isAttributedString() {}
 
 var _ AttributedStringProvider = (*AttributedString)(nil)

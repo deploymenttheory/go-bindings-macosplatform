@@ -44,24 +44,24 @@ func objectCollectionAdopt(id objc.ID) *ObjectCollection {
 }
 
 // Description returns the object's -description text.
-func (x *ObjectCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (oc *ObjectCollection) Description() string {
+	return rt.Description(objref.IDOf(oc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (oc *ObjectCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(oc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (oc *ObjectCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(oc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ObjectCollection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (oc *ObjectCollection) String() string {
+	return rt.Description(objref.IDOf(oc))
 }
 
 // NewObjectCollectionWithSections creates a new ObjectCollection.
@@ -79,44 +79,27 @@ func NewObjectCollectionWithItems(items []obj.Object) *ObjectCollection {
 }
 
 // WithUsesIndexedCollation sets the property and returns the receiver so calls can be chained.
-func (x *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
-	return x
+func (oc *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection {
+	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
+	return oc
 }
 
 // Sections wraps the corresponding Objective-C method.
 //
 // Sections returns the collection as a Go slice.
-func (x *ObjectCollection) Sections() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sections"))
+func (oc *ObjectCollection) Sections() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("sections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AllItems wraps the corresponding Objective-C method.
-func (x *ObjectCollection) AllItems() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allItems"))
+func (oc *ObjectCollection) AllItems() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("allItems"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // UsesIndexedCollation wraps the corresponding Objective-C method.
-func (x *ObjectCollection) UsesIndexedCollation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesIndexedCollation"))
+func (oc *ObjectCollection) UsesIndexedCollation() bool {
+	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("usesIndexedCollation"))
 	return _r
 }
-
-// SetUsesIndexedCollation wraps the corresponding Objective-C method.
-func (x *ObjectCollection) SetUsesIndexedCollation(usesIndexedCollation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
-}
-
-// ObjectCollectionable is the interface implemented by [ObjectCollection], for mocking and DI.
-type ObjectCollectionable interface {
-	obj.Object
-	WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection
-	Sections() []obj.Object
-	AllItems() []obj.Object
-	UsesIndexedCollation() bool
-	SetUsesIndexedCollation(usesIndexedCollation bool)
-}
-
-var _ ObjectCollectionable = (*ObjectCollection)(nil)

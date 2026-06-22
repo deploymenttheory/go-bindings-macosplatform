@@ -46,24 +46,24 @@ func passwordCredentialIdentityAdopt(id objc.ID) *PasswordCredentialIdentity {
 }
 
 // Description returns the object's -description text.
-func (x *PasswordCredentialIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pci *PasswordCredentialIdentity) Description() string {
+	return rt.Description(objref.IDOf(pci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasswordCredentialIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pci *PasswordCredentialIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasswordCredentialIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pci *PasswordCredentialIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasswordCredentialIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pci *PasswordCredentialIdentity) String() string {
+	return rt.Description(objref.IDOf(pci))
 }
 
 // NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier initializes a password credential identity.
@@ -73,21 +73,21 @@ func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serv
 	return passwordCredentialIdentityAdopt(_id)
 }
 
-// WithRank an indicator that enables you to prioritze credential identities relative to each other.
-func (x *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdentity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
-	return x
+// WithRank sets an indicator that enables you to prioritze credential identities relative to each other.
+func (pci *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdentity {
+	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setRank:"), rank)
+	return pci
 }
 
 // ServiceIdentifier get the service identifier.
-func (x *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceIdentifier"))
+func (pci *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("serviceIdentifier"))
 	return CredentialServiceIdentifierFromID(_r)
 }
 
 // User get the user.
-func (x *PasswordCredentialIdentity) User() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+func (pci *PasswordCredentialIdentity) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
 	}
@@ -95,8 +95,8 @@ func (x *PasswordCredentialIdentity) User() string {
 }
 
 // RecordIdentifier get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
-func (x *PasswordCredentialIdentity) RecordIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
+func (pci *PasswordCredentialIdentity) RecordIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -104,25 +104,7 @@ func (x *PasswordCredentialIdentity) RecordIdentifier() string {
 }
 
 // Rank get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
-func (x *PasswordCredentialIdentity) Rank() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+func (pci *PasswordCredentialIdentity) Rank() int {
+	_r := objc.Send[int](objref.IDOf(pci), objc.RegisterName("rank"))
 	return _r
 }
-
-// SetRank wraps the corresponding Objective-C method.
-func (x *PasswordCredentialIdentity) SetRank(rank int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
-}
-
-// PasswordCredentialIdentityable is the interface implemented by [PasswordCredentialIdentity], for mocking and DI.
-type PasswordCredentialIdentityable interface {
-	obj.Object
-	WithRank(rank int) *PasswordCredentialIdentity
-	ServiceIdentifier() *CredentialServiceIdentifier
-	User() string
-	RecordIdentifier() string
-	Rank() int
-	SetRank(rank int)
-}
-
-var _ PasswordCredentialIdentityable = (*PasswordCredentialIdentity)(nil)

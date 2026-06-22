@@ -44,24 +44,24 @@ func extensionManagerAdopt(id objc.ID) *ExtensionManager {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (em *ExtensionManager) Description() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (em *ExtensionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(em), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (em *ExtensionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(em), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (em *ExtensionManager) String() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // NewExtensionManager creates a new ExtensionManager.
@@ -69,10 +69,3 @@ func NewExtensionManager() *ExtensionManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEExtensionManager")), objc.RegisterName("new"))
 	return extensionManagerAdopt(_id)
 }
-
-// ExtensionManagerable is the interface implemented by [ExtensionManager], for mocking and DI.
-type ExtensionManagerable interface {
-	obj.Object
-}
-
-var _ ExtensionManagerable = (*ExtensionManager)(nil)

@@ -46,24 +46,24 @@ func authorizationPasswordProviderAdopt(id objc.ID) *AuthorizationPasswordProvid
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPasswordProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (app *AuthorizationPasswordProvider) Description() string {
+	return rt.Description(objref.IDOf(app))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPasswordProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (app *AuthorizationPasswordProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(app), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPasswordProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (app *AuthorizationPasswordProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(app), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPasswordProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (app *AuthorizationPasswordProvider) String() string {
+	return rt.Description(objref.IDOf(app))
 }
 
 // NewAuthorizationPasswordProvider creates a new AuthorizationPasswordProvider.
@@ -73,15 +73,7 @@ func NewAuthorizationPasswordProvider() *AuthorizationPasswordProvider {
 }
 
 // CreateRequest creates a new password authorization request.
-func (x *AuthorizationPasswordProvider) CreateRequest() *AuthorizationPasswordRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
+func (app *AuthorizationPasswordProvider) CreateRequest() *AuthorizationPasswordRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(app), objc.RegisterName("createRequest"))
 	return AuthorizationPasswordRequestFromID(_r)
 }
-
-// AuthorizationPasswordProviderable is the interface implemented by [AuthorizationPasswordProvider], for mocking and DI.
-type AuthorizationPasswordProviderable interface {
-	obj.Object
-	CreateRequest() *AuthorizationPasswordRequest
-}
-
-var _ AuthorizationPasswordProviderable = (*AuthorizationPasswordProvider)(nil)

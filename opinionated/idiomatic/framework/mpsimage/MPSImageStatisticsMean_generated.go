@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,45 +51,28 @@ func NewImageStatisticsMean() *ImageStatisticsMean {
 	return imageStatisticsMeanAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
-func (x *ImageStatisticsMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
+func (ism *ImageStatisticsMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean {
+	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return ism
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageStatisticsMean) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ism *ImageStatisticsMean) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean {
+	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("setOffset:"), offset)
+	return ism
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageStatisticsMean) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ism *ImageStatisticsMean) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean {
+	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("setClipRect:"), clipRect)
+	return ism
 }
 
-// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
-func (x *ImageStatisticsMean) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
+func (ism *ImageStatisticsMean) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(ism), objc.RegisterName("clipRectSource"))
 	return _r
 }
-
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *ImageStatisticsMean) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// ImageStatisticsMeanable is the interface implemented by [ImageStatisticsMean], for mocking and DI.
-type ImageStatisticsMeanable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean
-	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean
-	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-}
-
-var _ ImageStatisticsMeanable = (*ImageStatisticsMean)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageStatisticsMean)(nil)

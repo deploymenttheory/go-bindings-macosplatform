@@ -44,24 +44,24 @@ func iSyncRecordSnapshotAdopt(id objc.ID) *ISyncRecordSnapshot {
 }
 
 // Description returns the object's -description text.
-func (x *ISyncRecordSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (isrs *ISyncRecordSnapshot) Description() string {
+	return rt.Description(objref.IDOf(isrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ISyncRecordSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (isrs *ISyncRecordSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(isrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ISyncRecordSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (isrs *ISyncRecordSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(isrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ISyncRecordSnapshot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (isrs *ISyncRecordSnapshot) String() string {
+	return rt.Description(objref.IDOf(isrs))
 }
 
 // NewISyncRecordSnapshot creates a new ISyncRecordSnapshot.
@@ -71,36 +71,25 @@ func NewISyncRecordSnapshot() *ISyncRecordSnapshot {
 }
 
 // RecordsWithIdentifiers wraps the corresponding Objective-C method.
-func (x *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsWithIdentifiers:"), objref.IDOf(recordIds))
+func (isrs *ISyncRecordSnapshot) RecordsWithIdentifiers(recordIds obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordsWithIdentifiers:"), objref.IDOf(recordIds))
 	return obj.Wrap(_r)
 }
 
 // TargetIdentifiersForRelationshipNameWithSourceIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetIdentifiersForRelationshipName:withSourceIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
+func (isrs *ISyncRecordSnapshot) TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("targetIdentifiersForRelationshipName:withSourceIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
 	return obj.Wrap(_r)
 }
 
 // SourceIdentifiersForRelationshipNameWithTargetIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifiersForRelationshipName:withTargetIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
+func (isrs *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("sourceIdentifiersForRelationshipName:withTargetIdentifier:"), purego.NSString(relationshipName), purego.NSString(sourceId))
 	return obj.Wrap(_r)
 }
 
 // RecordsWithMatchingAttributes wraps the corresponding Objective-C method.
-func (x *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsWithMatchingAttributes:"), objref.IDOf(attributes))
+func (isrs *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordsWithMatchingAttributes:"), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
-
-// ISyncRecordSnapshotable is the interface implemented by [ISyncRecordSnapshot], for mocking and DI.
-type ISyncRecordSnapshotable interface {
-	obj.Object
-	RecordsWithIdentifiers(recordIds obj.Object) obj.Object
-	TargetIdentifiersForRelationshipNameWithSourceIdentifier(relationshipName string, sourceId string) obj.Object
-	SourceIdentifiersForRelationshipNameWithTargetIdentifier(relationshipName string, sourceId string) obj.Object
-	RecordsWithMatchingAttributes(attributes obj.Object) obj.Object
-}
-
-var _ ISyncRecordSnapshotable = (*ISyncRecordSnapshot)(nil)

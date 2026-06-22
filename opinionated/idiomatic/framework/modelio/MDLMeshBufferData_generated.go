@@ -46,24 +46,24 @@ func meshBufferDataAdopt(id objc.ID) *MeshBufferData {
 }
 
 // Description returns the object's -description text.
-func (x *MeshBufferData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbd *MeshBufferData) Description() string {
+	return rt.Description(objref.IDOf(mbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshBufferData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbd *MeshBufferData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshBufferData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbd *MeshBufferData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MeshBufferData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbd *MeshBufferData) String() string {
+	return rt.Description(objref.IDOf(mbd))
 }
 
 // NewMeshBufferDataWithTypeLength initializes a buffer of the specified length.
@@ -81,15 +81,7 @@ func NewMeshBufferDataWithTypeData(type_ MeshBufferType, data obj.Object) *MeshB
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *MeshBufferData) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (mbd *MeshBufferData) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// MeshBufferDataable is the interface implemented by [MeshBufferData], for mocking and DI.
-type MeshBufferDataable interface {
-	obj.Object
-	Data() obj.Object
-}
-
-var _ MeshBufferDataable = (*MeshBufferData)(nil)

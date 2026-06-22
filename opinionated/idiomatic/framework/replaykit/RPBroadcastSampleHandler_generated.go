@@ -53,46 +53,33 @@ func NewBroadcastSampleHandler() *BroadcastSampleHandler {
 }
 
 // BroadcastStartedWithSetupInfo perform any required actions after starting a live broadcast.
-func (x *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastStartedWithSetupInfo:"), objref.IDOf(setupInfo))
+func (bsh *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastStartedWithSetupInfo:"), objref.IDOf(setupInfo))
 }
 
 // BroadcastPaused perform any required actions after a live broadcast is paused.
-func (x *BroadcastSampleHandler) BroadcastPaused() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastPaused"))
+func (bsh *BroadcastSampleHandler) BroadcastPaused() {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastPaused"))
 }
 
 // BroadcastResumed perform any required actions after a live broadcast is resumed.
-func (x *BroadcastSampleHandler) BroadcastResumed() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastResumed"))
+func (bsh *BroadcastSampleHandler) BroadcastResumed() {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastResumed"))
 }
 
 // BroadcastFinished perform any required actions after a live broadcast is finished.
-func (x *BroadcastSampleHandler) BroadcastFinished() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastFinished"))
+func (bsh *BroadcastSampleHandler) BroadcastFinished() {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastFinished"))
 }
 
 // BroadcastAnnotatedWithApplicationInfo perform any required actions after starting a live broadcast.
-func (x *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastAnnotatedWithApplicationInfo:"), objref.IDOf(applicationInfo))
+func (bsh *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastAnnotatedWithApplicationInfo:"), objref.IDOf(applicationInfo))
 }
 
 // ProcessSampleBufferWithType processes video and audio data as it becomes available during a live broadcast.
-func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processSampleBuffer:withType:"), objref.IDOf(sampleBuffer), sampleBufferType)
+func (bsh *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType) {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("processSampleBuffer:withType:"), objref.IDOf(sampleBuffer), sampleBufferType)
 }
-
-// BroadcastSampleHandlerable is the interface implemented by [BroadcastSampleHandler], for mocking and DI.
-type BroadcastSampleHandlerable interface {
-	obj.Object
-	BroadcastStartedWithSetupInfo(setupInfo obj.Object)
-	BroadcastPaused()
-	BroadcastResumed()
-	BroadcastFinished()
-	BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object)
-	ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType)
-}
-
-var _ BroadcastSampleHandlerable = (*BroadcastSampleHandler)(nil)
 
 var _ BroadcastHandlerProvider = (*BroadcastSampleHandler)(nil)

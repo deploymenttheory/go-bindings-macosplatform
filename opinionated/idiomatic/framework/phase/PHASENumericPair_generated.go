@@ -46,24 +46,24 @@ func numericPairAdopt(id objc.ID) *NumericPair {
 }
 
 // Description returns the object's -description text.
-func (x *NumericPair) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NumericPair) Description() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NumericPair) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (np *NumericPair) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NumericPair) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (np *NumericPair) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NumericPair) String() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NumericPair) String() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // NewNumericPairWithFirstValueSecondValue creates a pair of numbers with the given values.
@@ -73,49 +73,26 @@ func NewNumericPairWithFirstValueSecondValue(first float64, second float64) *Num
 	return numericPairAdopt(_id)
 }
 
-// WithFirst the first value in the pair.
-func (x *NumericPair) WithFirst(first float64) *NumericPair {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirst:"), first)
-	return x
+// WithFirst sets the first value in the pair.
+func (np *NumericPair) WithFirst(first float64) *NumericPair {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("setFirst:"), first)
+	return np
 }
 
-// WithSecond the second value in the pair.
-func (x *NumericPair) WithSecond(second float64) *NumericPair {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecond:"), second)
-	return x
+// WithSecond sets the second value in the pair.
+func (np *NumericPair) WithSecond(second float64) *NumericPair {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("setSecond:"), second)
+	return np
 }
 
-// First the first value in the numeric pair. The default value is 0.0.
-func (x *NumericPair) First() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("first"))
+// First returns the first value in the numeric pair. The default value is 0.0.
+func (np *NumericPair) First() float64 {
+	_r := objc.Send[float64](objref.IDOf(np), objc.RegisterName("first"))
 	return _r
 }
 
-// SetFirst wraps the corresponding Objective-C method.
-func (x *NumericPair) SetFirst(first float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirst:"), first)
-}
-
-// Second the second value in the numeric pair. The default value is 0.0.
-func (x *NumericPair) Second() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("second"))
+// Second returns the second value in the numeric pair. The default value is 0.0.
+func (np *NumericPair) Second() float64 {
+	_r := objc.Send[float64](objref.IDOf(np), objc.RegisterName("second"))
 	return _r
 }
-
-// SetSecond wraps the corresponding Objective-C method.
-func (x *NumericPair) SetSecond(second float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecond:"), second)
-}
-
-// NumericPairable is the interface implemented by [NumericPair], for mocking and DI.
-type NumericPairable interface {
-	obj.Object
-	WithFirst(first float64) *NumericPair
-	WithSecond(second float64) *NumericPair
-	First() float64
-	SetFirst(first float64)
-	Second() float64
-	SetSecond(second float64)
-}
-
-var _ NumericPairable = (*NumericPair)(nil)

@@ -52,52 +52,34 @@ func NewDeferredPaymentSummaryItem() *DeferredPaymentSummaryItem {
 	return deferredPaymentSummaryItemAdopt(_id)
 }
 
-// WithDeferredDate the date, in the future, of the payment.
-func (x *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate obj.Object) *DeferredPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredDate:"), objref.IDOf(deferredDate))
-	return x
+// WithDeferredDate sets the date, in the future, of the payment.
+func (dpsi *DeferredPaymentSummaryItem) WithDeferredDate(deferredDate obj.Object) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setDeferredDate:"), objref.IDOf(deferredDate))
+	return dpsi
 }
 
-// WithLabel a short, localized description of the item.
-func (x *DeferredPaymentSummaryItem) WithLabel(label string) *DeferredPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a short, localized description of the item.
+func (dpsi *DeferredPaymentSummaryItem) WithLabel(label string) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return dpsi
 }
 
-// WithAmount the summary item’s amount.
-func (x *DeferredPaymentSummaryItem) WithAmount(amount obj.Object) *DeferredPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-	return x
+// WithAmount sets the summary item’s amount.
+func (dpsi *DeferredPaymentSummaryItem) WithAmount(amount obj.Object) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
+	return dpsi
 }
 
-// WithType the summary item’s type that indicates whether the amount is final.
-func (x *DeferredPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *DeferredPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the summary item’s type that indicates whether the amount is final.
+func (dpsi *DeferredPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *DeferredPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("setType:"), type_)
+	return dpsi
 }
 
 // DeferredDate wraps the corresponding Objective-C method.
-func (x *DeferredPaymentSummaryItem) DeferredDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredDate"))
+func (dpsi *DeferredPaymentSummaryItem) DeferredDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("deferredDate"))
 	return obj.Wrap(_r)
 }
-
-// SetDeferredDate wraps the corresponding Objective-C method.
-func (x *DeferredPaymentSummaryItem) SetDeferredDate(deferredDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredDate:"), objref.IDOf(deferredDate))
-}
-
-// DeferredPaymentSummaryItemable is the interface implemented by [DeferredPaymentSummaryItem], for mocking and DI.
-type DeferredPaymentSummaryItemable interface {
-	obj.Object
-	WithDeferredDate(deferredDate obj.Object) *DeferredPaymentSummaryItem
-	WithLabel(label string) *DeferredPaymentSummaryItem
-	WithAmount(amount obj.Object) *DeferredPaymentSummaryItem
-	WithType(type_ PaymentSummaryItemType) *DeferredPaymentSummaryItem
-	DeferredDate() obj.Object
-	SetDeferredDate(deferredDate obj.Object)
-}
-
-var _ DeferredPaymentSummaryItemable = (*DeferredPaymentSummaryItem)(nil)
 
 var _ PaymentSummaryItemProvider = (*DeferredPaymentSummaryItem)(nil)

@@ -46,24 +46,24 @@ func trackAdopt(id objc.ID) *Track {
 }
 
 // Description returns the object's -description text.
-func (x *Track) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Track) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Track) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Track) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Track) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Track) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Track) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Track) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTrackWithProducer initializes a DRTrack with the producer
@@ -74,62 +74,47 @@ func NewTrackWithProducer(producer obj.Object) *Track {
 }
 
 // Properties returns the properties dictionary of the track.
-func (x *Track) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (t *Track) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // SetProperties sets the properties dictionary of the track
-func (x *Track) SetProperties(properties obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+func (t *Track) SetProperties(properties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setProperties:"), objref.IDOf(properties))
 }
 
 // TestProductionSpeedForInterval tests the production speed for a specified interval. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
-func (x *Track) TestProductionSpeedForInterval(interval float64) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("testProductionSpeedForInterval:"), interval)
+func (t *Track) TestProductionSpeedForInterval(interval float64) float32 {
+	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("testProductionSpeedForInterval:"), interval)
 	return _r
 }
 
 // TestProductionSpeedForLength tests the production speed for a specified byte count. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
-func (x *Track) TestProductionSpeedForLength(length uint32) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("testProductionSpeedForLength:"), length)
+func (t *Track) TestProductionSpeedForLength(length uint32) float32 {
+	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("testProductionSpeedForLength:"), length)
 	return _r
 }
 
-// EstimateLength asks the track producer for a size estimate. This method calls the track producer to ask it to estimate the size needed for its data. For some types of track, this call may be very expensive. For example, a DRFilesystemTrack may need to iterate folders on disk to provide an accurate estimate, which (if a large number of files and folders are involved) can cause this call to take 30 seconds or more. Since your main thread should not be allowed to block for this long, you may wish to call this function on a separate thread.
-func (x *Track) EstimateLength() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("estimateLength"))
+// EstimateLength returns asks the track producer for a size estimate. This method calls the track producer to ask it to estimate the size needed for its data. For some types of track, this call may be very expensive. For example, a DRFilesystemTrack may need to iterate folders on disk to provide an accurate estimate, which (if a large number of files and folders are involved) can cause this call to take 30 seconds or more. Since your main thread should not be allowed to block for this long, you may wish to call this function on a separate thread.
+func (t *Track) EstimateLength() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(t), objc.RegisterName("estimateLength"))
 	return _r
 }
 
 // Length returns the length of the track data. The length returned does not include the length of the pregap. Only the length of the track data itself is returned.
-func (x *Track) Length() *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("length"))
+func (t *Track) Length() *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("length"))
 	return MSFFromID(_r)
 }
 
 // PreGap returns the length of the pre gap. This is a simple wrapper to obtain the
-func (x *Track) PreGap() *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preGap"))
+func (t *Track) PreGap() *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("preGap"))
 	return MSFFromID(_r)
 }
 
 // SetPreGap sets the length of the pre gap. This is a simple wrapper to set the
-func (x *Track) SetPreGap(preGap *MSF) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGap:"), objref.IDOf(preGap))
+func (t *Track) SetPreGap(preGap *MSF) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreGap:"), objref.IDOf(preGap))
 }
-
-// Trackable is the interface implemented by [Track], for mocking and DI.
-type Trackable interface {
-	obj.Object
-	Properties() obj.Object
-	SetProperties(properties obj.Object)
-	TestProductionSpeedForInterval(interval float64) float32
-	TestProductionSpeedForLength(length uint32) float32
-	EstimateLength() uint64
-	Length() *MSF
-	PreGap() *MSF
-	SetPreGap(preGap *MSF)
-}
-
-var _ Trackable = (*Track)(nil)

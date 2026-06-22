@@ -46,24 +46,24 @@ func imageSizeAdopt(id objc.ID) *ImageSize {
 }
 
 // Description returns the object's -description text.
-func (x *ImageSize) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (is *ImageSize) Description() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageSize) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (is *ImageSize) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageSize) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (is *ImageSize) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageSize) String() string {
-	return rt.Description(objref.IDOf(x))
+func (is *ImageSize) String() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // NewImageSize creates a new ImageSize.
@@ -73,22 +73,13 @@ func NewImageSize() *ImageSize {
 }
 
 // PixelsWide wraps the corresponding Objective-C method.
-func (x *ImageSize) PixelsWide() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsWide"))
+func (is *ImageSize) PixelsWide() int {
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
 // PixelsHigh wraps the corresponding Objective-C method.
-func (x *ImageSize) PixelsHigh() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
+func (is *ImageSize) PixelsHigh() int {
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("pixelsHigh"))
 	return _r
 }
-
-// ImageSizeable is the interface implemented by [ImageSize], for mocking and DI.
-type ImageSizeable interface {
-	obj.Object
-	PixelsWide() int
-	PixelsHigh() int
-}
-
-var _ ImageSizeable = (*ImageSize)(nil)

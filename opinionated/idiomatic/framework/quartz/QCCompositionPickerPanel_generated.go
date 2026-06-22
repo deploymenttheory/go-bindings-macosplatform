@@ -46,24 +46,24 @@ func qCCompositionPickerPanelAdopt(id objc.ID) *QCCompositionPickerPanel {
 }
 
 // Description returns the object's -description text.
-func (x *QCCompositionPickerPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qcpp *QCCompositionPickerPanel) Description() string {
+	return rt.Description(objref.IDOf(qcpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCCompositionPickerPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qcpp *QCCompositionPickerPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qcpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCCompositionPickerPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qcpp *QCCompositionPickerPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qcpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCCompositionPickerPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qcpp *QCCompositionPickerPanel) String() string {
+	return rt.Description(objref.IDOf(qcpp))
 }
 
 // NewQCCompositionPickerPanel creates a new QCCompositionPickerPanel.
@@ -73,15 +73,7 @@ func NewQCCompositionPickerPanel() *QCCompositionPickerPanel {
 }
 
 // CompositionPickerView returns the composition picker view used by the panel so that it can be configured.
-func (x *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionPickerView"))
+func (qcpp *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
+	_r := objc.Send[objc.ID](objref.IDOf(qcpp), objc.RegisterName("compositionPickerView"))
 	return QCCompositionPickerViewFromID(_r)
 }
-
-// QCCompositionPickerPanelable is the interface implemented by [QCCompositionPickerPanel], for mocking and DI.
-type QCCompositionPickerPanelable interface {
-	obj.Object
-	CompositionPickerView() *QCCompositionPickerView
-}
-
-var _ QCCompositionPickerPanelable = (*QCCompositionPickerPanel)(nil)

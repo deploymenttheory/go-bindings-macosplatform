@@ -53,11 +53,4 @@ func NewCompactTLVRecordWithTagValue(tag uint8, value obj.Object) *CompactTLVRec
 	return compactTLVRecordAdopt(_id)
 }
 
-// CompactTLVRecordable is the interface implemented by [CompactTLVRecord], for mocking and DI.
-type CompactTLVRecordable interface {
-	obj.Object
-}
-
-var _ CompactTLVRecordable = (*CompactTLVRecord)(nil)
-
 var _ TLVRecordProvider = (*CompactTLVRecord)(nil)

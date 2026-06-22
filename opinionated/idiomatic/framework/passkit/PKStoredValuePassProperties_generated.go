@@ -48,66 +48,55 @@ func storedValuePassPropertiesAdopt(id objc.ID) *StoredValuePassProperties {
 }
 
 // Description returns the object's -description text.
-func (x *StoredValuePassProperties) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (svpp *StoredValuePassProperties) Description() string {
+	return rt.Description(objref.IDOf(svpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StoredValuePassProperties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (svpp *StoredValuePassProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(svpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StoredValuePassProperties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (svpp *StoredValuePassProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(svpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StoredValuePassProperties) String() string {
-	return rt.Description(objref.IDOf(x))
+func (svpp *StoredValuePassProperties) String() string {
+	return rt.Description(objref.IDOf(svpp))
 }
 
 // IsBlacklisted wraps the corresponding Objective-C method.
-func (x *StoredValuePassProperties) IsBlacklisted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlacklisted"))
+func (svpp *StoredValuePassProperties) IsBlacklisted() bool {
+	_r := objc.Send[bool](objref.IDOf(svpp), objc.RegisterName("isBlacklisted"))
 	return _r
 }
 
 // IsBlocked wraps the corresponding Objective-C method.
-func (x *StoredValuePassProperties) IsBlocked() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlocked"))
+func (svpp *StoredValuePassProperties) IsBlocked() bool {
+	_r := objc.Send[bool](objref.IDOf(svpp), objc.RegisterName("isBlocked"))
 	return _r
 }
 
 // ExpirationDate wraps the corresponding Objective-C method.
-func (x *StoredValuePassProperties) ExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+func (svpp *StoredValuePassProperties) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(svpp), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
 // Balances wraps the corresponding Objective-C method.
 //
 // Balances returns the collection as a Go slice.
-func (x *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("balances"))
+func (svpp *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
+	_arr := objc.Send[objc.ID](objref.IDOf(svpp), objc.RegisterName("balances"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StoredValuePassBalance { return StoredValuePassBalanceFromID(_id) })
 }
-
-// StoredValuePassPropertiesable is the interface implemented by [StoredValuePassProperties], for mocking and DI.
-type StoredValuePassPropertiesable interface {
-	obj.Object
-	IsBlacklisted() bool
-	IsBlocked() bool
-	ExpirationDate() obj.Object
-	Balances() []*StoredValuePassBalance
-}
-
-var _ StoredValuePassPropertiesable = (*StoredValuePassProperties)(nil)
 
 // isStoredValuePassProperties marks StoredValuePassProperties — and, by embedding promotion, its
 // subclasses — as a member of the StoredValuePassProperties hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *StoredValuePassProperties) isStoredValuePassProperties() {}
+func (svpp *StoredValuePassProperties) isStoredValuePassProperties() {}
 
 var _ StoredValuePassPropertiesProvider = (*StoredValuePassProperties)(nil)

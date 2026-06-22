@@ -53,37 +53,22 @@ func NewAudioUnitTimeEffectWithAudioComponentDescription(audioComponentDescripti
 	return audioUnitTimeEffectAdopt(_id)
 }
 
-// WithBypass the bypass state of the audio unit.
-func (x *AudioUnitTimeEffect) WithBypass(bypass bool) *AudioUnitTimeEffect {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-	return x
+// WithBypass sets the bypass state of the audio unit.
+func (aute *AudioUnitTimeEffect) WithBypass(bypass bool) *AudioUnitTimeEffect {
+	objc.Send[objc.ID](objref.IDOf(aute), objc.RegisterName("setBypass:"), bypass)
+	return aute
 }
 
 // Bypass wraps the corresponding Objective-C method.
-func (x *AudioUnitTimeEffect) Bypass() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
+func (aute *AudioUnitTimeEffect) Bypass() bool {
+	_r := objc.Send[bool](objref.IDOf(aute), objc.RegisterName("bypass"))
 	return _r
 }
-
-// SetBypass wraps the corresponding Objective-C method.
-func (x *AudioUnitTimeEffect) SetBypass(bypass bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
-}
-
-// AudioUnitTimeEffectable is the interface implemented by [AudioUnitTimeEffect], for mocking and DI.
-type AudioUnitTimeEffectable interface {
-	obj.Object
-	WithBypass(bypass bool) *AudioUnitTimeEffect
-	Bypass() bool
-	SetBypass(bypass bool)
-}
-
-var _ AudioUnitTimeEffectable = (*AudioUnitTimeEffect)(nil)
 
 // isAudioUnitTimeEffect marks AudioUnitTimeEffect — and, by embedding promotion, its
 // subclasses — as a member of the AudioUnitTimeEffect hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioUnitTimeEffect) isAudioUnitTimeEffect() {}
+func (aute *AudioUnitTimeEffect) isAudioUnitTimeEffect() {}
 
 var _ AudioUnitTimeEffectProvider = (*AudioUnitTimeEffect)(nil)
 

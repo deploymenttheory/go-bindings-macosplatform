@@ -48,24 +48,24 @@ func selectionAdopt(id objc.ID) *Selection {
 }
 
 // Description returns the object's -description text.
-func (x *Selection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Selection) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Selection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Selection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Selection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Selection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Selection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Selection) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSelectionWithDocument returns an empty PDFSelection object.
@@ -76,96 +76,76 @@ func NewSelectionWithDocument(document *Document) *Selection {
 }
 
 // BoundsForPage returns the bounds of the selection on the specified page.
-func (x *Selection) BoundsForPage(page *Page) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundsForPage:"), objref.IDOf(page))
+func (s *Selection) BoundsForPage(page *Page) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("boundsForPage:"), objref.IDOf(page))
 	return _r
 }
 
 // NumberOfTextRangesOnPage wraps the corresponding Objective-C method.
-func (x *Selection) NumberOfTextRangesOnPage(page *Page) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTextRangesOnPage:"), objref.IDOf(page))
+func (s *Selection) NumberOfTextRangesOnPage(page *Page) int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("numberOfTextRangesOnPage:"), objref.IDOf(page))
 	return _r
 }
 
 // RangeAtIndexOnPage wraps the corresponding Objective-C method.
-func (x *Selection) RangeAtIndexOnPage(index int, page *Page) foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("rangeAtIndex:onPage:"), index, objref.IDOf(page))
+func (s *Selection) RangeAtIndexOnPage(index int, page *Page) foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(s), objc.RegisterName("rangeAtIndex:onPage:"), index, objref.IDOf(page))
 	return _r
 }
 
 // SelectionsByLine returns an array of selections, one for each line of text covered by the receiver.
 //
 // SelectionsByLine returns the collection as a Go slice.
-func (x *Selection) SelectionsByLine() []*Selection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionsByLine"))
+func (s *Selection) SelectionsByLine() []*Selection {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("selectionsByLine"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Selection { return SelectionFromID(_id) })
 }
 
 // AddSelection adds the specified selection to the receiving selection.
-func (x *Selection) AddSelection(selection *Selection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSelection:"), objref.IDOf(selection))
+func (s *Selection) AddSelection(selection *Selection) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addSelection:"), objref.IDOf(selection))
 }
 
 // AddSelections adds the specified array of selections to the receiving selection.
-func (x *Selection) AddSelections(selections []*Selection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSelections:"), purego.SliceToNSArray(selections, func(_v *Selection) objc.ID { return objref.IDOf(_v) }))
+func (s *Selection) AddSelections(selections []*Selection) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addSelections:"), purego.SliceToNSArray(selections, func(_v *Selection) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ExtendSelectionAtEnd extends the selection from its end toward the end of the document.
-func (x *Selection) ExtendSelectionAtEnd(succeed int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionAtEnd:"), succeed)
+func (s *Selection) ExtendSelectionAtEnd(succeed int) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("extendSelectionAtEnd:"), succeed)
 }
 
 // ExtendSelectionAtStart extends the selection from its start toward the beginning of the document.
-func (x *Selection) ExtendSelectionAtStart(precede int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionAtStart:"), precede)
+func (s *Selection) ExtendSelectionAtStart(precede int) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("extendSelectionAtStart:"), precede)
 }
 
 // ExtendSelectionForLineBoundaries wraps the corresponding Objective-C method.
-func (x *Selection) ExtendSelectionForLineBoundaries() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionForLineBoundaries"))
+func (s *Selection) ExtendSelectionForLineBoundaries() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("extendSelectionForLineBoundaries"))
 }
 
 // DrawForPageActive calls drawForPage:withBox:active: with a default value for box parameter.
-func (x *Selection) DrawForPageActive(page *Page, active bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawForPage:active:"), objref.IDOf(page), active)
+func (s *Selection) DrawForPageActive(page *Page, active bool) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawForPage:active:"), objref.IDOf(page), active)
 }
 
 // DrawForPageWithBoxActive draws the selection relative to the origin of the specified box in page space.
-func (x *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawForPage:withBox:active:"), objref.IDOf(page), box, active)
+func (s *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawForPage:withBox:active:"), objref.IDOf(page), box, active)
 }
 
 // Pages wraps the corresponding Objective-C method.
 //
 // Pages returns the collection as a Go slice.
-func (x *Selection) Pages() []*Page {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pages"))
+func (s *Selection) Pages() []*Page {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("pages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
 // AttributedString wraps the corresponding Objective-C method.
-func (x *Selection) AttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+func (s *Selection) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
-
-// Selectionable is the interface implemented by [Selection], for mocking and DI.
-type Selectionable interface {
-	obj.Object
-	BoundsForPage(page *Page) corefoundation.CGRect
-	NumberOfTextRangesOnPage(page *Page) int
-	RangeAtIndexOnPage(index int, page *Page) foundation.NSRange
-	SelectionsByLine() []*Selection
-	AddSelection(selection *Selection)
-	AddSelections(selections []*Selection)
-	ExtendSelectionAtEnd(succeed int)
-	ExtendSelectionAtStart(precede int)
-	ExtendSelectionForLineBoundaries()
-	DrawForPageActive(page *Page, active bool)
-	DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool)
-	Pages() []*Page
-	AttributedString() obj.Object
-}
-
-var _ Selectionable = (*Selection)(nil)

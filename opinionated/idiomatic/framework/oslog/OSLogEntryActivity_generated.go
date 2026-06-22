@@ -7,7 +7,6 @@ package oslog
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewLogEntryActivity() *LogEntryActivity {
 	return logEntryActivityAdopt(_id)
 }
 
-// ParentActivityIdentifier this parent activity's activity ID.
-func (x *LogEntryActivity) ParentActivityIdentifier() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("parentActivityIdentifier"))
+// ParentActivityIdentifier returns this parent activity's activity ID.
+func (lea *LogEntryActivity) ParentActivityIdentifier() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(lea), objc.RegisterName("parentActivityIdentifier"))
 	return _r
 }
-
-// LogEntryActivityable is the interface implemented by [LogEntryActivity], for mocking and DI.
-type LogEntryActivityable interface {
-	obj.Object
-	ParentActivityIdentifier() uint64
-}
-
-var _ LogEntryActivityable = (*LogEntryActivity)(nil)
 
 var _ LogEntryProvider = (*LogEntryActivity)(nil)

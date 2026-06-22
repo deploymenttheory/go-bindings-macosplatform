@@ -52,32 +52,22 @@ func NewSoundAsset() *SoundAsset {
 	return soundAssetAdopt(_id)
 }
 
-// Url the URL of the sound asset, if applicable.
-func (x *SoundAsset) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL of the sound asset, if applicable.
+func (sa *SoundAsset) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Data the buffer for the sound asset, if applicable.
-func (x *SoundAsset) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the buffer for the sound asset, if applicable.
+func (sa *SoundAsset) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// Type the sound asset type.
-func (x *SoundAsset) Type() AssetType {
-	_r := objc.Send[AssetType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the sound asset type.
+func (sa *SoundAsset) Type() AssetType {
+	_r := objc.Send[AssetType](objref.IDOf(sa), objc.RegisterName("type"))
 	return _r
 }
-
-// SoundAssetable is the interface implemented by [SoundAsset], for mocking and DI.
-type SoundAssetable interface {
-	obj.Object
-	Url() obj.Object
-	Data() obj.Object
-	Type() AssetType
-}
-
-var _ SoundAssetable = (*SoundAsset)(nil)
 
 var _ AssetProvider = (*SoundAsset)(nil)

@@ -52,62 +52,48 @@ func NewSmartCardUserInteractionForSecurePINVerification() *SmartCardUserInterac
 	return smartCardUserInteractionForSecurePINVerificationAdopt(_id)
 }
 
-// WithPINCompletion the conditions under which PIN entry should be considered complete.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
-	return x
+// WithPINCompletion sets the conditions under which PIN entry should be considered complete.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setPINCompletion:"), pINCompletion)
+	return scuifspv
 }
 
-// WithPINMessageIndices a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+// WithPINMessageIndices sets a list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINVerification {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setPINMessageIndices:"), _arr)
+	return scuifspv
 }
 
-// WithLocale the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+// WithLocale sets the locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return scuifspv
 }
 
-// WithResultSW the SW1-SW2 status bytes.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
-	return x
+// WithResultSW sets the SW1-SW2 status bytes.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setResultSW:"), resultSW)
+	return scuifspv
 }
 
-// WithResultData the returned data without SW1-SW2 bytes, if any.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
-	return x
+// WithResultData sets the returned data without SW1-SW2 bytes, if any.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
+	return scuifspv
 }
 
-// WithInitialTimeout the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
-	return x
+// WithInitialTimeout sets the timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setInitialTimeout:"), initialTimeout)
+	return scuifspv
 }
 
-// WithInteractionTimeout the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
-	return x
+// WithInteractionTimeout sets the timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
+func (scuifspv *SmartCardUserInteractionForSecurePINVerification) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
+	objc.Send[objc.ID](objref.IDOf(scuifspv), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
+	return scuifspv
 }
-
-// SmartCardUserInteractionForSecurePINVerificationable is the interface implemented by [SmartCardUserInteractionForSecurePINVerification], for mocking and DI.
-type SmartCardUserInteractionForSecurePINVerificationable interface {
-	obj.Object
-	WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification
-	WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINVerification
-	WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINVerification
-	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification
-	WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINVerification
-	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification
-	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification
-}
-
-var _ SmartCardUserInteractionForSecurePINVerificationable = (*SmartCardUserInteractionForSecurePINVerification)(nil)
 
 var _ SmartCardUserInteractionForPINOperationProvider = (*SmartCardUserInteractionForSecurePINVerification)(nil)
 

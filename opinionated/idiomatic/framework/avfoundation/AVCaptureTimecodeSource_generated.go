@@ -44,24 +44,24 @@ func captureTimecodeSourceAdopt(id objc.ID) *CaptureTimecodeSource {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureTimecodeSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cts *CaptureTimecodeSource) Description() string {
+	return rt.Description(objref.IDOf(cts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureTimecodeSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cts *CaptureTimecodeSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureTimecodeSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cts *CaptureTimecodeSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureTimecodeSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cts *CaptureTimecodeSource) String() string {
+	return rt.Description(objref.IDOf(cts))
 }
 
 // NewCaptureTimecodeSource creates a new CaptureTimecodeSource.
@@ -70,33 +70,23 @@ func NewCaptureTimecodeSource() *CaptureTimecodeSource {
 	return captureTimecodeSourceAdopt(_id)
 }
 
-// DisplayName the name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
-func (x *CaptureTimecodeSource) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns the name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
+func (cts *CaptureTimecodeSource) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Type the type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
-func (x *CaptureTimecodeSource) Type() CaptureTimecodeSourceType {
-	_r := objc.Send[CaptureTimecodeSourceType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
+func (cts *CaptureTimecodeSource) Type() CaptureTimecodeSourceType {
+	_r := objc.Send[CaptureTimecodeSourceType](objref.IDOf(cts), objc.RegisterName("type"))
 	return _r
 }
 
-// Uuid a unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
-func (x *CaptureTimecodeSource) Uuid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+// UUID returns a unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
+func (cts *CaptureTimecodeSource) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
-
-// CaptureTimecodeSourceable is the interface implemented by [CaptureTimecodeSource], for mocking and DI.
-type CaptureTimecodeSourceable interface {
-	obj.Object
-	DisplayName() string
-	Type() CaptureTimecodeSourceType
-	Uuid() obj.Object
-}
-
-var _ CaptureTimecodeSourceable = (*CaptureTimecodeSource)(nil)

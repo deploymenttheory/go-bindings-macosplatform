@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SupportedLocales all locales supported by existing tables.
+// SupportedLocales returns all locales supported by existing tables.
 func SupportedLocales() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("supportedLocales"))
 	return obj.Wrap(_r)
@@ -29,7 +29,7 @@ func TablesForLocale(locale obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// LanguageAgnosticTables all tables that are not specific to any language.
+// LanguageAgnosticTables returns all tables that are not specific to any language.
 func LanguageAgnosticTables() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("languageAgnosticTables"))
 	return obj.Wrap(_r)

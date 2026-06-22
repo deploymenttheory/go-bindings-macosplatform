@@ -46,24 +46,24 @@ func adaptiveImageGlyphAdopt(id objc.ID) *AdaptiveImageGlyph {
 }
 
 // Description returns the object's -description text.
-func (x *AdaptiveImageGlyph) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aig *AdaptiveImageGlyph) Description() string {
+	return rt.Description(objref.IDOf(aig))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AdaptiveImageGlyph) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aig *AdaptiveImageGlyph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aig), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AdaptiveImageGlyph) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aig *AdaptiveImageGlyph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aig), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AdaptiveImageGlyph) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aig *AdaptiveImageGlyph) String() string {
+	return rt.Description(objref.IDOf(aig))
 }
 
 // NewAdaptiveImageGlyphWithImageContent create an adaptive image glyph from the previously saved data.
@@ -81,14 +81,14 @@ func NewAdaptiveImageGlyphWithCoder(coder obj.Object) *AdaptiveImageGlyph {
 }
 
 // ImageContent wraps the corresponding Objective-C method.
-func (x *AdaptiveImageGlyph) ImageContent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageContent"))
+func (aig *AdaptiveImageGlyph) ImageContent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("imageContent"))
 	return obj.Wrap(_r)
 }
 
 // ContentIdentifier wraps the corresponding Objective-C method.
-func (x *AdaptiveImageGlyph) ContentIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentIdentifier"))
+func (aig *AdaptiveImageGlyph) ContentIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -96,20 +96,10 @@ func (x *AdaptiveImageGlyph) ContentIdentifier() string {
 }
 
 // ContentDescription wraps the corresponding Objective-C method.
-func (x *AdaptiveImageGlyph) ContentDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentDescription"))
+func (aig *AdaptiveImageGlyph) ContentDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("contentDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AdaptiveImageGlyphable is the interface implemented by [AdaptiveImageGlyph], for mocking and DI.
-type AdaptiveImageGlyphable interface {
-	obj.Object
-	ImageContent() obj.Object
-	ContentIdentifier() string
-	ContentDescription() string
-}
-
-var _ AdaptiveImageGlyphable = (*AdaptiveImageGlyph)(nil)

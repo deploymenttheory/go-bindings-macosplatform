@@ -5,13 +5,14 @@
 package cryptotokenkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // TokenConfiguration is an idiomatic wrapper over the Objective-C class TKTokenConfiguration.
@@ -48,24 +49,24 @@ func tokenConfigurationAdopt(id objc.ID) *TokenConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *TokenConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tc *TokenConfiguration) Description() string {
+	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tc *TokenConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tc *TokenConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tc *TokenConfiguration) String() string {
+	return rt.Description(objref.IDOf(tc))
 }
 
 // NewTokenConfiguration creates a new TokenConfiguration.
@@ -74,23 +75,23 @@ func NewTokenConfiguration() *TokenConfiguration {
 	return tokenConfigurationAdopt(_id)
 }
 
-// WithConfigurationData additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
-func (x *TokenConfiguration) WithConfigurationData(configurationData obj.Object) *TokenConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationData:"), objref.IDOf(configurationData))
-	return x
+// WithConfigurationData sets additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
+func (tc *TokenConfiguration) WithConfigurationData(configurationData obj.Object) *TokenConfiguration {
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setConfigurationData:"), objref.IDOf(configurationData))
+	return tc
 }
 
-// WithKeychainItems all keychain items of this token.
-func (x *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration {
+// WithKeychainItems sets all keychain items of this token.
+func (tc *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v TokenKeychainItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeychainItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setKeychainItems:"), _arr)
+	return tc
 }
 
 // KeyForObjectIDError returns keychain item key with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such key exists.
-func (x *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error) {
+func (tc *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -98,57 +99,31 @@ func (x *TokenConfiguration) KeyForObjectIDError(objectID obj.Object) (result *T
 }
 
 // CertificateForObjectIDError returns certificate with specified objectID.  Fills error with TKTokenErrorCodeObjectNotFound if no such certificate exists.
-func (x *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
+func (tc *TokenConfiguration) CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return TokenKeychainCertificateFromID(_r), nil
 }
 
-// InstanceID unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
-func (x *TokenConfiguration) InstanceID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceID"))
+// InstanceID returns unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
+func (tc *TokenConfiguration) InstanceID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("instanceID"))
 	return obj.Wrap(_r)
 }
 
-// ConfigurationData additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
-func (x *TokenConfiguration) ConfigurationData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationData"))
+// ConfigurationData returns additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
+func (tc *TokenConfiguration) ConfigurationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("configurationData"))
 	return obj.Wrap(_r)
 }
 
-// SetConfigurationData wraps the corresponding Objective-C method.
-func (x *TokenConfiguration) SetConfigurationData(configurationData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationData:"), objref.IDOf(configurationData))
-}
-
-// KeychainItems all keychain items of this token.
+// KeychainItems returns all keychain items of this token.
 //
 // KeychainItems returns the collection as a Go slice.
-func (x *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychainItems"))
+func (tc *TokenConfiguration) KeychainItems() []*TokenKeychainItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("keychainItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TokenKeychainItem { return TokenKeychainItemFromID(_id) })
 }
-
-// SetKeychainItems wraps the corresponding Objective-C method.
-func (x *TokenConfiguration) SetKeychainItems(keychainItems []*TokenKeychainItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeychainItems:"), purego.SliceToNSArray(keychainItems, func(_v *TokenKeychainItem) objc.ID { return objref.IDOf(_v) }))
-}
-
-// TokenConfigurationable is the interface implemented by [TokenConfiguration], for mocking and DI.
-type TokenConfigurationable interface {
-	obj.Object
-	WithConfigurationData(configurationData obj.Object) *TokenConfiguration
-	WithKeychainItems(items ...TokenKeychainItemProvider) *TokenConfiguration
-	KeyForObjectIDError(objectID obj.Object) (result *TokenKeychainKey, err error)
-	CertificateForObjectIDError(objectID obj.Object) (result *TokenKeychainCertificate, err error)
-	InstanceID() obj.Object
-	ConfigurationData() obj.Object
-	SetConfigurationData(configurationData obj.Object)
-	KeychainItems() []*TokenKeychainItem
-	SetKeychainItems(keychainItems []*TokenKeychainItem)
-}
-
-var _ TokenConfigurationable = (*TokenConfiguration)(nil)

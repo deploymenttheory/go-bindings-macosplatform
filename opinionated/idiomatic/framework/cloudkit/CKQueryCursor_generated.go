@@ -46,24 +46,24 @@ func queryCursorAdopt(id objc.ID) *QueryCursor {
 }
 
 // Description returns the object's -description text.
-func (x *QueryCursor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qc *QueryCursor) Description() string {
+	return rt.Description(objref.IDOf(qc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QueryCursor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qc *QueryCursor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QueryCursor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qc *QueryCursor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QueryCursor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qc *QueryCursor) String() string {
+	return rt.Description(objref.IDOf(qc))
 }
 
 // NewQueryCursor creates a new QueryCursor.
@@ -71,10 +71,3 @@ func NewQueryCursor() *QueryCursor {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKQueryCursor")), objc.RegisterName("new"))
 	return queryCursorAdopt(_id)
 }
-
-// QueryCursorable is the interface implemented by [QueryCursor], for mocking and DI.
-type QueryCursorable interface {
-	obj.Object
-}
-
-var _ QueryCursorable = (*QueryCursor)(nil)

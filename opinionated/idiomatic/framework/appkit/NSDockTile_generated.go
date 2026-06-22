@@ -47,24 +47,24 @@ func dockTileAdopt(id objc.ID) *DockTile {
 }
 
 // Description returns the object's -description text.
-func (x *DockTile) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DockTile) Description() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DockTile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dt *DockTile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DockTile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dt *DockTile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DockTile) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dt *DockTile) String() string {
+	return rt.Description(objref.IDOf(dt))
 }
 
 // NewDockTile creates a new DockTile.
@@ -73,92 +73,58 @@ func NewDockTile() *DockTile {
 	return dockTileAdopt(_id)
 }
 
-// WithContentView the view to use for drawing the dock tile contents.
-func (x *DockTile) WithContentView(contentView ViewProvider) *DockTile {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-	return x
+// WithContentView sets the view to use for drawing the dock tile contents.
+func (dt *DockTile) WithContentView(contentView ViewProvider) *DockTile {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
+	return dt
 }
 
-// WithShowsApplicationBadge a Boolean showing whether the tile is badged with the application’s icon
-func (x *DockTile) WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsApplicationBadge:"), showsApplicationBadge)
-	return x
+// WithShowsApplicationBadge sets a Boolean showing whether the tile is badged with the application’s icon
+func (dt *DockTile) WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setShowsApplicationBadge:"), showsApplicationBadge)
+	return dt
 }
 
-// WithBadgeLabel the string to be displayed in the tile’s badging area.
-func (x *DockTile) WithBadgeLabel(badgeLabel string) *DockTile {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeLabel:"), purego.NSString(badgeLabel))
-	return x
+// WithBadgeLabel sets the string to be displayed in the tile’s badging area.
+func (dt *DockTile) WithBadgeLabel(badgeLabel string) *DockTile {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setBadgeLabel:"), purego.NSString(badgeLabel))
+	return dt
 }
 
 // Display redraws the dock tile’s content.
-func (x *DockTile) Display() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("display"))
+func (dt *DockTile) Display() {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("display"))
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *DockTile) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (dt *DockTile) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(dt), objc.RegisterName("size"))
 	return _r
 }
 
 // ContentView wraps the corresponding Objective-C method.
-func (x *DockTile) ContentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+func (dt *DockTile) ContentView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
-// SetContentView wraps the corresponding Objective-C method.
-func (x *DockTile) SetContentView(contentView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
-}
-
 // ShowsApplicationBadge wraps the corresponding Objective-C method.
-func (x *DockTile) ShowsApplicationBadge() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsApplicationBadge"))
+func (dt *DockTile) ShowsApplicationBadge() bool {
+	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("showsApplicationBadge"))
 	return _r
 }
 
-// SetShowsApplicationBadge wraps the corresponding Objective-C method.
-func (x *DockTile) SetShowsApplicationBadge(showsApplicationBadge bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsApplicationBadge:"), showsApplicationBadge)
-}
-
 // BadgeLabel wraps the corresponding Objective-C method.
-func (x *DockTile) BadgeLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badgeLabel"))
+func (dt *DockTile) BadgeLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("badgeLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetBadgeLabel wraps the corresponding Objective-C method.
-func (x *DockTile) SetBadgeLabel(badgeLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeLabel:"), purego.NSString(badgeLabel))
-}
-
 // Owner wraps the corresponding Objective-C method.
-func (x *DockTile) Owner() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owner"))
+func (dt *DockTile) Owner() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("owner"))
 	return obj.Wrap(_r)
 }
-
-// DockTileable is the interface implemented by [DockTile], for mocking and DI.
-type DockTileable interface {
-	obj.Object
-	WithContentView(contentView ViewProvider) *DockTile
-	WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile
-	WithBadgeLabel(badgeLabel string) *DockTile
-	Display()
-	Size() corefoundation.CGSize
-	ContentView() *View
-	SetContentView(contentView *View)
-	ShowsApplicationBadge() bool
-	SetShowsApplicationBadge(showsApplicationBadge bool)
-	BadgeLabel() string
-	SetBadgeLabel(badgeLabel string)
-	Owner() obj.Object
-}
-
-var _ DockTileable = (*DockTile)(nil)

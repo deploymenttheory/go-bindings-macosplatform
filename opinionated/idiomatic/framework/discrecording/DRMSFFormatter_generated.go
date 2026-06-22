@@ -46,24 +46,24 @@ func mSFFormatterAdopt(id objc.ID) *MSFFormatter {
 }
 
 // Description returns the object's -description text.
-func (x *MSFFormatter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mf *MSFFormatter) Description() string {
+	return rt.Description(objref.IDOf(mf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MSFFormatter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mf *MSFFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MSFFormatter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mf *MSFFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MSFFormatter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mf *MSFFormatter) String() string {
+	return rt.Description(objref.IDOf(mf))
 }
 
 // NewMSFFormatterWithFormat initializes the formatter with the format string
@@ -74,8 +74,8 @@ func NewMSFFormatterWithFormat(format string) *MSFFormatter {
 }
 
 // Format returns the format string to the caller
-func (x *MSFFormatter) Format() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+func (mf *MSFFormatter) Format() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("format"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,15 +83,6 @@ func (x *MSFFormatter) Format() string {
 }
 
 // SetFormat sets the format string of the receiver The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. for example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value
-func (x *MSFFormatter) SetFormat(format string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), purego.NSString(format))
+func (mf *MSFFormatter) SetFormat(format string) {
+	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setFormat:"), purego.NSString(format))
 }
-
-// MSFFormatterable is the interface implemented by [MSFFormatter], for mocking and DI.
-type MSFFormatterable interface {
-	obj.Object
-	Format() string
-	SetFormat(format string)
-}
-
-var _ MSFFormatterable = (*MSFFormatter)(nil)

@@ -48,24 +48,24 @@ func randomSourceAdopt(id objc.ID) *RandomSource {
 }
 
 // Description returns the object's -description text.
-func (x *RandomSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RandomSource) Description() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RandomSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rs *RandomSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RandomSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rs *RandomSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RandomSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RandomSource) String() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // NewRandomSourceWithCoder deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
@@ -76,22 +76,14 @@ func NewRandomSourceWithCoder(aDecoder obj.Object) *RandomSource {
 }
 
 // ArrayByShufflingObjectsInArray returns an array whose contents are the same as those of the specified array, but in a random order determined by the random source.
-func (x *RandomSource) ArrayByShufflingObjectsInArray(array obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByShufflingObjectsInArray:"), objref.IDOf(array))
+func (rs *RandomSource) ArrayByShufflingObjectsInArray(array obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("arrayByShufflingObjectsInArray:"), objref.IDOf(array))
 	return obj.Wrap(_r)
 }
-
-// RandomSourceable is the interface implemented by [RandomSource], for mocking and DI.
-type RandomSourceable interface {
-	obj.Object
-	ArrayByShufflingObjectsInArray(array obj.Object) obj.Object
-}
-
-var _ RandomSourceable = (*RandomSource)(nil)
 
 // isRandomSource marks RandomSource — and, by embedding promotion, its
 // subclasses — as a member of the RandomSource hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RandomSource) isRandomSource() {}
+func (rs *RandomSource) isRandomSource() {}
 
 var _ RandomSourceProvider = (*RandomSource)(nil)

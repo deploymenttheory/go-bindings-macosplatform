@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Request is an idiomatic wrapper over the Objective-C class VNRequest.
@@ -50,122 +51,88 @@ func requestAdopt(id objc.ID) *Request {
 }
 
 // Description returns the object's -description text.
-func (x *Request) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Request) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Request) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Request) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Request) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Request) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Request) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Request) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *Request) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *Request {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (r *Request) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *Request {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return r
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *Request) WithUsesCPUOnly(usesCPUOnly bool) *Request {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (r *Request) WithUsesCPUOnly(usesCPUOnly bool) *Request {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return r
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *Request) WithRevision(revision int) *Request {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (r *Request) WithRevision(revision int) *Request {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setRevision:"), revision)
+	return r
 }
 
 // Cancel cancels the request before it can finish executing.
-func (x *Request) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (r *Request) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("cancel"))
 }
 
-// PreferBackgroundProcessing a hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
-func (x *Request) PreferBackgroundProcessing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preferBackgroundProcessing"))
+// PreferBackgroundProcessing reports whether a hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+func (r *Request) PreferBackgroundProcessing() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("preferBackgroundProcessing"))
 	return _r
 }
 
-// SetPreferBackgroundProcessing wraps the corresponding Objective-C method.
-func (x *Request) SetPreferBackgroundProcessing(preferBackgroundProcessing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-}
-
-// UsesCPUOnly this property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
-func (x *Request) UsesCPUOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesCPUOnly"))
+// UsesCPUOnly reports whether this property, if set to true, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is false, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+func (r *Request) UsesCPUOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("usesCPUOnly"))
 	return _r
 }
 
-// SetUsesCPUOnly wraps the corresponding Objective-C method.
-func (x *Request) SetUsesCPUOnly(usesCPUOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-}
-
-// Results the collection of VNObservations generated by the processing of the request. The only valid time to access this property is after the request has been processed by a request handler.  If the request failed, this property will be nil; otherwise, it will be an array of zero or more VNObservation subclasses specific to the VNRequest subclass.
+// Results returns the collection of VNObservations generated by the processing of the request. The only valid time to access this property is after the request has been processed by a request handler.  If the request failed, this property will be nil; otherwise, it will be an array of zero or more VNObservation subclasses specific to the VNRequest subclass.
 //
 // Results returns the collection as a Go slice.
-func (x *Request) Results() []*Observation {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("results"))
+func (r *Request) Results() []*Observation {
+	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("results"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Observation { return ObservationFromID(_id) })
 }
 
-// Revision the specific algorithm or implementation revision that is to be used to perform the request.
-func (x *Request) Revision() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("revision"))
+// Revision returns the specific algorithm or implementation revision that is to be used to perform the request.
+func (r *Request) Revision() int {
+	_r := objc.Send[int](objref.IDOf(r), objc.RegisterName("revision"))
 	return _r
 }
 
-// SetRevision wraps the corresponding Objective-C method.
-func (x *Request) SetRevision(revision int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-}
-
 // SupportedComputeStageDevicesAndReturnError the collection of compute devices per stage that a request supports.
-func (x *Request) SupportedComputeStageDevicesAndReturnError() (result obj.Object, err error) {
+func (r *Request) SupportedComputeStageDevicesAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedComputeStageDevicesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("supportedComputeStageDevicesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// Requestable is the interface implemented by [Request], for mocking and DI.
-type Requestable interface {
-	obj.Object
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *Request
-	WithUsesCPUOnly(usesCPUOnly bool) *Request
-	WithRevision(revision int) *Request
-	Cancel()
-	PreferBackgroundProcessing() bool
-	SetPreferBackgroundProcessing(preferBackgroundProcessing bool)
-	UsesCPUOnly() bool
-	SetUsesCPUOnly(usesCPUOnly bool)
-	Results() []*Observation
-	Revision() int
-	SetRevision(revision int)
-	SupportedComputeStageDevicesAndReturnError() (result obj.Object, err error)
-}
-
-var _ Requestable = (*Request)(nil)
-
 // isRequest marks Request — and, by embedding promotion, its
 // subclasses — as a member of the Request hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Request) isRequest() {}
+func (r *Request) isRequest() {}
 
 var _ RequestProvider = (*Request)(nil)

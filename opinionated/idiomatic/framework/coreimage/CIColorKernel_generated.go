@@ -48,23 +48,15 @@ func colorKernelAdopt(id objc.ID) *ColorKernel {
 }
 
 // ApplyWithExtentArguments creates a new image using the kernel and specified arguments.
-func (x *ColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args []obj.Object) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithExtent:arguments:"), extent, purego.SliceToNSArray(args, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ck *ColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args []obj.Object) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(ck), objc.RegisterName("applyWithExtent:arguments:"), extent, purego.SliceToNSArray(args, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ImageFromID(_r)
 }
-
-// ColorKernelable is the interface implemented by [ColorKernel], for mocking and DI.
-type ColorKernelable interface {
-	obj.Object
-	ApplyWithExtentArguments(extent corefoundation.CGRect, args []obj.Object) *Image
-}
-
-var _ ColorKernelable = (*ColorKernel)(nil)
 
 // isColorKernel marks ColorKernel — and, by embedding promotion, its
 // subclasses — as a member of the ColorKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ColorKernel) isColorKernel() {}
+func (ck *ColorKernel) isColorKernel() {}
 
 var _ ColorKernelProvider = (*ColorKernel)(nil)
 

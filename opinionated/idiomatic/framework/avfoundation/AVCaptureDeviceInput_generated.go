@@ -5,12 +5,12 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // CaptureDeviceInput is an idiomatic wrapper over the Objective-C class AVCaptureDeviceInput.
@@ -59,173 +59,117 @@ func NewCaptureDeviceInputWithDeviceError(device *CaptureDevice) (result *Captur
 	return captureDeviceInputAdopt(_id), nil
 }
 
-// WithMultichannelAudioMode the multichannel audio mode to apply when recording audio.
-func (x *CaptureDeviceInput) WithMultichannelAudioMode(multichannelAudioMode CaptureMultichannelAudioMode) *CaptureDeviceInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultichannelAudioMode:"), multichannelAudioMode)
-	return x
+// WithMultichannelAudioMode sets the multichannel audio mode to apply when recording audio.
+func (cdi *CaptureDeviceInput) WithMultichannelAudioMode(multichannelAudioMode CaptureMultichannelAudioMode) *CaptureDeviceInput {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("setMultichannelAudioMode:"), multichannelAudioMode)
+	return cdi
 }
 
-// WithWindNoiseRemovalEnabled specifies whether or not wind noise is removed during audio capture. Wind noise removal is available when the AVCaptureDeviceInput multichannelAudioMode property is set to any value other than AVCaptureMultichannelAudioModeNone.
-func (x *CaptureDeviceInput) WithWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) *CaptureDeviceInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindNoiseRemovalEnabled:"), windNoiseRemovalEnabled)
-	return x
+// WithWindNoiseRemovalEnabled sets specifies whether or not wind noise is removed during audio capture. Wind noise removal is available when the AVCaptureDeviceInput multichannelAudioMode property is set to any value other than AVCaptureMultichannelAudioModeNone.
+func (cdi *CaptureDeviceInput) WithWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) *CaptureDeviceInput {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("setWindNoiseRemovalEnabled:"), windNoiseRemovalEnabled)
+	return cdi
 }
 
-// WithAudioZoomEnabled whether or not audio zoom is enabled.
-func (x *CaptureDeviceInput) WithAudioZoomEnabled(audioZoomEnabled bool) *CaptureDeviceInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioZoomEnabled:"), audioZoomEnabled)
-	return x
+// WithAudioZoomEnabled sets whether or not audio zoom is enabled.
+func (cdi *CaptureDeviceInput) WithAudioZoomEnabled(audioZoomEnabled bool) *CaptureDeviceInput {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("setAudioZoomEnabled:"), audioZoomEnabled)
+	return cdi
 }
 
-// WithCinematicVideoCaptureEnabled a BOOL value specifying whether the Cinematic Video effect is being applied to any movie file output, video data output, metadata output, or video preview layer added to the capture session.
-func (x *CaptureDeviceInput) WithCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) *CaptureDeviceInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCinematicVideoCaptureEnabled:"), cinematicVideoCaptureEnabled)
-	return x
+// WithCinematicVideoCaptureEnabled sets a BOOL value specifying whether the Cinematic Video effect is being applied to any movie file output, video data output, metadata output, or video preview layer added to the capture session.
+func (cdi *CaptureDeviceInput) WithCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) *CaptureDeviceInput {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("setCinematicVideoCaptureEnabled:"), cinematicVideoCaptureEnabled)
+	return cdi
 }
 
-// WithSimulatedAperture shallow depth of field simulated aperture.
-func (x *CaptureDeviceInput) WithSimulatedAperture(simulatedAperture float32) *CaptureDeviceInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatedAperture:"), simulatedAperture)
-	return x
+// WithSimulatedAperture sets shallow depth of field simulated aperture.
+func (cdi *CaptureDeviceInput) WithSimulatedAperture(simulatedAperture float32) *CaptureDeviceInput {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("setSimulatedAperture:"), simulatedAperture)
+	return cdi
 }
 
 // UnfollowExternalSyncDevice discontinues external sync.
-func (x *CaptureDeviceInput) UnfollowExternalSyncDevice() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unfollowExternalSyncDevice"))
+func (cdi *CaptureDeviceInput) UnfollowExternalSyncDevice() {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("unfollowExternalSyncDevice"))
 }
 
 // IsMultichannelAudioModeSupported a Boolean value that indicates whether the input supports the specified multichannel audio mode.
-func (x *CaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode CaptureMultichannelAudioMode) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultichannelAudioModeSupported:"), multichannelAudioMode)
+func (cdi *CaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode CaptureMultichannelAudioMode) bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isMultichannelAudioModeSupported:"), multichannelAudioMode)
 	return _r
 }
 
-// Device the device from which the receiver provides data. The value of this property is the AVCaptureDevice instance that was used to create the receiver.
-func (x *CaptureDeviceInput) Device() *CaptureDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+// Device returns the device from which the receiver provides data. The value of this property is the AVCaptureDevice instance that was used to create the receiver.
+func (cdi *CaptureDeviceInput) Device() *CaptureDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("device"))
 	return CaptureDeviceFromID(_r)
 }
 
-// IsLockedVideoFrameDurationSupported indicates whether the device input supports locked frame durations. See “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ for more information on video frame duration locking.
-func (x *CaptureDeviceInput) IsLockedVideoFrameDurationSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLockedVideoFrameDurationSupported"))
+// IsLockedVideoFrameDurationSupported reports whether the device input supports locked frame durations. See “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ for more information on video frame duration locking.
+func (cdi *CaptureDeviceInput) IsLockedVideoFrameDurationSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isLockedVideoFrameDurationSupported"))
 	return _r
 }
 
-// IsExternalSyncSupported indicates whether the device input supports being configured to follow an external sync device. See “AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:“ for more information on external sync.
-func (x *CaptureDeviceInput) IsExternalSyncSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExternalSyncSupported"))
+// IsExternalSyncSupported reports whether the device input supports being configured to follow an external sync device. See “AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:“ for more information on external sync.
+func (cdi *CaptureDeviceInput) IsExternalSyncSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isExternalSyncSupported"))
 	return _r
 }
 
-// ExternalSyncDevice the external sync device currently being followed by this input. This readonly property returns the “AVExternalSyncDevice“ instance you provided in “followExternalSyncDevice:videoFrameDuration:delegate:“. This property returns `nil` when an external sync device is disconnected or fails to calibrate.
-func (x *CaptureDeviceInput) ExternalSyncDevice() *ExternalSyncDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("externalSyncDevice"))
+// ExternalSyncDevice returns the external sync device currently being followed by this input. This readonly property returns the “AVExternalSyncDevice“ instance you provided in “followExternalSyncDevice:videoFrameDuration:delegate:“. This property returns `nil` when an external sync device is disconnected or fails to calibrate.
+func (cdi *CaptureDeviceInput) ExternalSyncDevice() *ExternalSyncDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("externalSyncDevice"))
 	return ExternalSyncDeviceFromID(_r)
 }
 
 // MultichannelAudioMode indicates the multichannel audio mode to apply when recording audio. This property only takes effect when audio is being routed through the built-in microphone, and is ignored if an external microphone is in use. The default value is “AVCaptureMultichannelAudioModeNone“, in which case the default single channel audio recording is used. In an “AVCaptureMultiCamSession“, when audio mode is set to any value other than “AVCaptureMultichannelAudioModeNone“, only one “sourceDevicePosition“ is allowed for audio ports.
-func (x *CaptureDeviceInput) MultichannelAudioMode() CaptureMultichannelAudioMode {
-	_r := objc.Send[CaptureMultichannelAudioMode](objref.IDOf(x), objc.RegisterName("multichannelAudioMode"))
+func (cdi *CaptureDeviceInput) MultichannelAudioMode() CaptureMultichannelAudioMode {
+	_r := objc.Send[CaptureMultichannelAudioMode](objref.IDOf(cdi), objc.RegisterName("multichannelAudioMode"))
 	return _r
 }
 
-// SetMultichannelAudioMode wraps the corresponding Objective-C method.
-func (x *CaptureDeviceInput) SetMultichannelAudioMode(multichannelAudioMode CaptureMultichannelAudioMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultichannelAudioMode:"), multichannelAudioMode)
-}
-
-// IsWindNoiseRemovalSupported returns whether or not the device supports wind noise removal during audio capture. YES if the device supports wind noise removal, NO otherwise.
-func (x *CaptureDeviceInput) IsWindNoiseRemovalSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWindNoiseRemovalSupported"))
+// IsWindNoiseRemovalSupported reports whether the device supports wind noise removal during audio capture. true if the device supports wind noise removal.
+func (cdi *CaptureDeviceInput) IsWindNoiseRemovalSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isWindNoiseRemovalSupported"))
 	return _r
 }
 
-// IsWindNoiseRemovalEnabled specifies whether or not wind noise is removed during audio capture. Wind noise removal is available when the AVCaptureDeviceInput multichannelAudioMode property is set to any value other than AVCaptureMultichannelAudioModeNone.
-func (x *CaptureDeviceInput) IsWindNoiseRemovalEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWindNoiseRemovalEnabled"))
+// IsWindNoiseRemovalEnabled reports whether or not wind noise is removed during audio capture. Wind noise removal is available when the AVCaptureDeviceInput multichannelAudioMode property is set to any value other than AVCaptureMultichannelAudioModeNone.
+func (cdi *CaptureDeviceInput) IsWindNoiseRemovalEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isWindNoiseRemovalEnabled"))
 	return _r
 }
 
-// SetWindNoiseRemovalEnabled wraps the corresponding Objective-C method.
-func (x *CaptureDeviceInput) SetWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindNoiseRemovalEnabled:"), windNoiseRemovalEnabled)
-}
-
-// IsAudioZoomSupported whether or not audio zoom is supported. This property returns `true` if the device supports audio zoom.
-func (x *CaptureDeviceInput) IsAudioZoomSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAudioZoomSupported"))
+// IsAudioZoomSupported reports whether audio zoom is supported. This property returns `true` if the device supports audio zoom.
+func (cdi *CaptureDeviceInput) IsAudioZoomSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isAudioZoomSupported"))
 	return _r
 }
 
-// IsAudioZoomEnabled whether or not audio zoom is enabled. Setting this property to `true` throws an exception if “isAudioZoomSupported“ is `false`. Default is `true` when supported. When enabled, the sound field narrows or expands to match the field of view of the video device's zoom factor. Set this property to `false` if you want to capture the full sound field regardless of video zoom. This property only takes effect when added to a session with a video device, and “AVCaptureMultichannelAudioMode“ is set to any value other than “AVCaptureMultichannelAudioModeNone“. When using multiple cameras in “AVCaptureMultiCamSession“, audio zoom is determined by the zoom factor of the preferred camera. The preferred camera is selected to match the mic position, either front or back. If more than one camera is available in that position, the camera with the widest field of view is chosen with virtual cameras preferred over single camera ones. If no camera is found to match the mic position, audio zoom is unavailable.
-func (x *CaptureDeviceInput) IsAudioZoomEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAudioZoomEnabled"))
+// IsAudioZoomEnabled reports whether audio zoom is enabled. Setting this property to `true` throws an exception if “isAudioZoomSupported“ is `false`. Default is `true` when supported. When enabled, the sound field narrows or expands to match the field of view of the video device's zoom factor. Set this property to `false` if you want to capture the full sound field regardless of video zoom. This property only takes effect when added to a session with a video device, and “AVCaptureMultichannelAudioMode“ is set to any value other than “AVCaptureMultichannelAudioModeNone“. When using multiple cameras in “AVCaptureMultiCamSession“, audio zoom is determined by the zoom factor of the preferred camera. The preferred camera is selected to match the mic position, either front or back. If more than one camera is available in that position, the camera with the widest field of view is chosen with virtual cameras preferred over single camera ones. If no camera is found to match the mic position, audio zoom is unavailable.
+func (cdi *CaptureDeviceInput) IsAudioZoomEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isAudioZoomEnabled"))
 	return _r
 }
 
-// SetAudioZoomEnabled wraps the corresponding Objective-C method.
-func (x *CaptureDeviceInput) SetAudioZoomEnabled(audioZoomEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioZoomEnabled:"), audioZoomEnabled)
-}
-
-// IsCinematicVideoCaptureSupported a BOOL value specifying whether Cinematic Video capture is supported. With Cinematic Video capture, you get a simulated depth-of-field effect that keeps your subjects (people, pets, and more) in sharp focus while applying a pleasing blur to the background (or foreground). Depending on the focus mode (see “AVCaptureCinematicVideoFocusMode“ for detail), the camera either uses machine learning to automatically detect and focus on subjects in the scene, or it fixes focus on a subject until it exits the scene. Cinematic Videos can be played back and edited using the Cinematic framework. You can adjust the video's simulated aperture before starting a recording using the “simulatedAperture“ property. With Cinematic Video specific focus methods on “AVCaptureDevice“, you can dynamically control focus transitions. Movie files captured with Cinematic Video enabled can be played back and edited with the [Cinematic framework] (https://developer.apple.com/documentation/cinematic/playing-and-editing-cinematic-mode-video?language=objc). This property returns `true` if the session's current configuration allows Cinematic Video capture. When switching cameras or formats, this property may change. When this property changes from `true` to `false`, “cinematicVideoCaptureEnabled“ also reverts to `false`. If you've previously opted in for Cinematic Video capture and then change configuration, you may need to set “cinematicVideoCaptureEnabled“ to `true` again. This property is key-value observable. - Note: “AVCaptureDepthDataOutput“ is not supported when “cinematicVideoCaptureEnabled“ is set to `true`. Running an “AVCaptureSession“ with both of these features throws an `NSInvalidArgumentException`.
-func (x *CaptureDeviceInput) IsCinematicVideoCaptureSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCinematicVideoCaptureSupported"))
+// IsCinematicVideoCaptureSupported reports whether a BOOL value specifying whether Cinematic Video capture is supported. With Cinematic Video capture, you get a simulated depth-of-field effect that keeps your subjects (people, pets, and more) in sharp focus while applying a pleasing blur to the background (or foreground). Depending on the focus mode (see “AVCaptureCinematicVideoFocusMode“ for detail), the camera either uses machine learning to automatically detect and focus on subjects in the scene, or it fixes focus on a subject until it exits the scene. Cinematic Videos can be played back and edited using the Cinematic framework. You can adjust the video's simulated aperture before starting a recording using the “simulatedAperture“ property. With Cinematic Video specific focus methods on “AVCaptureDevice“, you can dynamically control focus transitions. Movie files captured with Cinematic Video enabled can be played back and edited with the [Cinematic framework] (https://developer.apple.com/documentation/cinematic/playing-and-editing-cinematic-mode-video?language=objc). This property returns `true` if the session's current configuration allows Cinematic Video capture. When switching cameras or formats, this property may change. When this property changes from `true` to `false`, “cinematicVideoCaptureEnabled“ also reverts to `false`. If you've previously opted in for Cinematic Video capture and then change configuration, you may need to set “cinematicVideoCaptureEnabled“ to `true` again. This property is key-value observable. - Note: “AVCaptureDepthDataOutput“ is not supported when “cinematicVideoCaptureEnabled“ is set to `true`. Running an “AVCaptureSession“ with both of these features throws an `NSInvalidArgumentException`.
+func (cdi *CaptureDeviceInput) IsCinematicVideoCaptureSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isCinematicVideoCaptureSupported"))
 	return _r
 }
 
-// IsCinematicVideoCaptureEnabled a BOOL value specifying whether the Cinematic Video effect is being applied to any movie file output, video data output, metadata output, or video preview layer added to the capture session. Default is `false`. Set to `true` to enable support for Cinematic Video capture. When you set this property to `true`, your input's associated “AVCaptureDevice/focusMode“ changes to “AVCaptureFocusModeContinuousAutoFocus“. While Cinematic Video capture is enabled, you are not permitted to change your device's focus mode, and any attempt to do so results in an `NSInvalidArgumentException`. You may only set this property to `true` if “cinematicVideoCaptureSupported“ is `true`. - Note: Enabling Cinematic Video capture requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture Cinematic Video, you should set this property to `true` before calling “AVCaptureSession/startRunning“ or within “AVCaptureSession/beginConfiguration“ and “AVCaptureSession/commitConfiguration“ while running.
-func (x *CaptureDeviceInput) IsCinematicVideoCaptureEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCinematicVideoCaptureEnabled"))
+// IsCinematicVideoCaptureEnabled reports whether a BOOL value specifying whether the Cinematic Video effect is being applied to any movie file output, video data output, metadata output, or video preview layer added to the capture session. Default is `false`. Set to `true` to enable support for Cinematic Video capture. When you set this property to `true`, your input's associated “AVCaptureDevice/focusMode“ changes to “AVCaptureFocusModeContinuousAutoFocus“. While Cinematic Video capture is enabled, you are not permitted to change your device's focus mode, and any attempt to do so results in an `NSInvalidArgumentException`. You may only set this property to `true` if “cinematicVideoCaptureSupported“ is `true`. - Note: Enabling Cinematic Video capture requires a lengthy reconfiguration of the capture render pipeline, so if you intend to capture Cinematic Video, you should set this property to `true` before calling “AVCaptureSession/startRunning“ or within “AVCaptureSession/beginConfiguration“ and “AVCaptureSession/commitConfiguration“ while running.
+func (cdi *CaptureDeviceInput) IsCinematicVideoCaptureEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isCinematicVideoCaptureEnabled"))
 	return _r
 }
 
-// SetCinematicVideoCaptureEnabled wraps the corresponding Objective-C method.
-func (x *CaptureDeviceInput) SetCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCinematicVideoCaptureEnabled:"), cinematicVideoCaptureEnabled)
-}
-
-// SimulatedAperture shallow depth of field simulated aperture. When capturing a Cinematic Video, use this property to control the amount of blur in the simulated depth of field effect. This property only takes effect when “cinematicVideoCaptureEnabled“ is set to `true`. - Important: Setting this property to a value less than the “AVCaptureDevice/activeFormat/minSimulatedAperture“ or greater than the “AVCaptureDevice/activeFormat/maxSimulatedAperture“ throws an `NSRangeException`. you may only set this property if “AVCaptureDevice/activeFormat/minSimulatedAperture“ returns a non-zero value, otherwise an `NSInvalidArgumentException` is thrown. You must set this property before starting a Cinematic Video capture. If you attempt to set it while a recording is in progress, an `NSInvalidArgumentException` is thrown. This property is initialized to the associated “AVCaptureDevice/activeFormat/defaultSimulatedAperture“. This property is key-value observable.
-func (x *CaptureDeviceInput) SimulatedAperture() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("simulatedAperture"))
+// SimulatedAperture returns shallow depth of field simulated aperture. When capturing a Cinematic Video, use this property to control the amount of blur in the simulated depth of field effect. This property only takes effect when “cinematicVideoCaptureEnabled“ is set to `true`. - Important: Setting this property to a value less than the “AVCaptureDevice/activeFormat/minSimulatedAperture“ or greater than the “AVCaptureDevice/activeFormat/maxSimulatedAperture“ throws an `NSRangeException`. you may only set this property if “AVCaptureDevice/activeFormat/minSimulatedAperture“ returns a non-zero value, otherwise an `NSInvalidArgumentException` is thrown. You must set this property before starting a Cinematic Video capture. If you attempt to set it while a recording is in progress, an `NSInvalidArgumentException` is thrown. This property is initialized to the associated “AVCaptureDevice/activeFormat/defaultSimulatedAperture“. This property is key-value observable.
+func (cdi *CaptureDeviceInput) SimulatedAperture() float32 {
+	_r := objc.Send[float32](objref.IDOf(cdi), objc.RegisterName("simulatedAperture"))
 	return _r
 }
-
-// SetSimulatedAperture wraps the corresponding Objective-C method.
-func (x *CaptureDeviceInput) SetSimulatedAperture(simulatedAperture float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSimulatedAperture:"), simulatedAperture)
-}
-
-// CaptureDeviceInputable is the interface implemented by [CaptureDeviceInput], for mocking and DI.
-type CaptureDeviceInputable interface {
-	obj.Object
-	WithMultichannelAudioMode(multichannelAudioMode CaptureMultichannelAudioMode) *CaptureDeviceInput
-	WithWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) *CaptureDeviceInput
-	WithAudioZoomEnabled(audioZoomEnabled bool) *CaptureDeviceInput
-	WithCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) *CaptureDeviceInput
-	WithSimulatedAperture(simulatedAperture float32) *CaptureDeviceInput
-	UnfollowExternalSyncDevice()
-	IsMultichannelAudioModeSupported(multichannelAudioMode CaptureMultichannelAudioMode) bool
-	Device() *CaptureDevice
-	IsLockedVideoFrameDurationSupported() bool
-	IsExternalSyncSupported() bool
-	ExternalSyncDevice() *ExternalSyncDevice
-	MultichannelAudioMode() CaptureMultichannelAudioMode
-	SetMultichannelAudioMode(multichannelAudioMode CaptureMultichannelAudioMode)
-	IsWindNoiseRemovalSupported() bool
-	IsWindNoiseRemovalEnabled() bool
-	SetWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool)
-	IsAudioZoomSupported() bool
-	IsAudioZoomEnabled() bool
-	SetAudioZoomEnabled(audioZoomEnabled bool)
-	IsCinematicVideoCaptureSupported() bool
-	IsCinematicVideoCaptureEnabled() bool
-	SetCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool)
-	SimulatedAperture() float32
-	SetSimulatedAperture(simulatedAperture float32)
-}
-
-var _ CaptureDeviceInputable = (*CaptureDeviceInput)(nil)
 
 var _ CaptureInputProvider = (*CaptureDeviceInput)(nil)

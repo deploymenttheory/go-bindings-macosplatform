@@ -53,49 +53,31 @@ func NewDistributedNotificationCenter() *DistributedNotificationCenter {
 }
 
 // WithSuspended sets the property and returns the receiver so calls can be chained.
-func (x *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
-	return x
+func (dnc *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setSuspended:"), suspended)
+	return dnc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dnc *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dnc
 }
 
 // PostNotificationNameObjectUserInfoDeliverImmediately wraps the corresponding Objective-C method.
-func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
+func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
+	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
 }
 
 // PostNotificationNameObjectUserInfoOptions wraps the corresponding Objective-C method.
-func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
+func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
+	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
 }
 
 // Suspended wraps the corresponding Objective-C method.
-func (x *DistributedNotificationCenter) Suspended() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suspended"))
+func (dnc *DistributedNotificationCenter) Suspended() bool {
+	_r := objc.Send[bool](objref.IDOf(dnc), objc.RegisterName("suspended"))
 	return _r
 }
-
-// SetSuspended wraps the corresponding Objective-C method.
-func (x *DistributedNotificationCenter) SetSuspended(suspended bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
-}
-
-// DistributedNotificationCenterable is the interface implemented by [DistributedNotificationCenter], for mocking and DI.
-type DistributedNotificationCenterable interface {
-	obj.Object
-	WithSuspended(suspended bool) *DistributedNotificationCenter
-	WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter
-	PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool)
-	PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions)
-	Suspended() bool
-	SetSuspended(suspended bool)
-}
-
-var _ DistributedNotificationCenterable = (*DistributedNotificationCenter)(nil)
 
 var _ NotificationCenterProvider = (*DistributedNotificationCenter)(nil)

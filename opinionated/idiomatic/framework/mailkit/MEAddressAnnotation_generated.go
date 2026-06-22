@@ -46,24 +46,24 @@ func addressAnnotationAdopt(id objc.ID) *AddressAnnotation {
 }
 
 // Description returns the object's -description text.
-func (x *AddressAnnotation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aa *AddressAnnotation) Description() string {
+	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddressAnnotation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aa *AddressAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddressAnnotation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aa *AddressAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddressAnnotation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aa *AddressAnnotation) String() string {
+	return rt.Description(objref.IDOf(aa))
 }
 
 // NewAddressAnnotation creates a new AddressAnnotation.
@@ -71,10 +71,3 @@ func NewAddressAnnotation() *AddressAnnotation {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEAddressAnnotation")), objc.RegisterName("new"))
 	return addressAnnotationAdopt(_id)
 }
-
-// AddressAnnotationable is the interface implemented by [AddressAnnotation], for mocking and DI.
-type AddressAnnotationable interface {
-	obj.Object
-}
-
-var _ AddressAnnotationable = (*AddressAnnotation)(nil)

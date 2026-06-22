@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -55,64 +56,64 @@ func NewURLSessionWebSocketTask() *URLSessionWebSocketTask {
 }
 
 // WithMaximumMessageSize sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumMessageSize:"), maximumMessageSize)
-	return x
+func (uswst *URLSessionWebSocketTask) WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setMaximumMessageSize:"), maximumMessageSize)
+	return uswst
 }
 
 // WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
-	return x
+func (uswst *URLSessionWebSocketTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
+	return uswst
 }
 
 // WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
-	return x
+func (uswst *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
+	return uswst
 }
 
 // WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
-	return x
+func (uswst *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
+	return uswst
 }
 
 // WithTaskDescription sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithTaskDescription(taskDescription StringProvider) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
-	return x
+func (uswst *URLSessionWebSocketTask) WithTaskDescription(taskDescription StringProvider) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
+	return uswst
 }
 
 // WithPriority sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithPriority(priority float32) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+func (uswst *URLSessionWebSocketTask) WithPriority(priority float32) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setPriority:"), priority)
+	return uswst
 }
 
 // WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
-	return x
+func (uswst *URLSessionWebSocketTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return uswst
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionWebSocketTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uswst *URLSessionWebSocketTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uswst
 }
 
 // SendMessage sends a WebSocket message, receiving the result in a completion handler.
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *URLSessionWebSocketMessage) error {
+func (uswst *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *URLSessionWebSocketMessage) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMessage:completionHandler:"), objref.IDOf(message), _block)
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("sendMessage:completionHandler:"), objref.IDOf(message), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -124,7 +125,7 @@ func (x *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *URLS
 // ReceiveMessage reads a WebSocket message once all the frames of the message are available.
 //
 // ReceiveMessage blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (result *URLSessionWebSocketMessage, err error) {
+func (uswst *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (result *URLSessionWebSocketMessage, err error) {
 	type _result struct {
 		val *URLSessionWebSocketMessage
 		err error
@@ -136,7 +137,7 @@ func (x *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (result *U
 		_o.val = URLSessionWebSocketMessageFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receiveMessageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("receiveMessageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -149,14 +150,14 @@ func (x *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (result *U
 // SendPingWithPongReceiveHandler wraps the corresponding Objective-C method.
 //
 // SendPingWithPongReceiveHandler blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Context) error {
+func (uswst *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPingWithPongReceiveHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("sendPingWithPongReceiveHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -166,54 +167,26 @@ func (x *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Con
 }
 
 // CancelWithCloseCodeReason wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode URLSessionWebSocketCloseCode, reason *Data) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelWithCloseCode:reason:"), closeCode, objref.IDOf(reason))
+func (uswst *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode URLSessionWebSocketCloseCode, reason *Data) {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("cancelWithCloseCode:reason:"), closeCode, objref.IDOf(reason))
 }
 
 // MaximumMessageSize wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketTask) MaximumMessageSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumMessageSize"))
+func (uswst *URLSessionWebSocketTask) MaximumMessageSize() int {
+	_r := objc.Send[int](objref.IDOf(uswst), objc.RegisterName("maximumMessageSize"))
 	return _r
 }
 
-// SetMaximumMessageSize wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketTask) SetMaximumMessageSize(maximumMessageSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumMessageSize:"), maximumMessageSize)
-}
-
 // CloseCode wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketTask) CloseCode() URLSessionWebSocketCloseCode {
-	_r := objc.Send[URLSessionWebSocketCloseCode](objref.IDOf(x), objc.RegisterName("closeCode"))
+func (uswst *URLSessionWebSocketTask) CloseCode() URLSessionWebSocketCloseCode {
+	_r := objc.Send[URLSessionWebSocketCloseCode](objref.IDOf(uswst), objc.RegisterName("closeCode"))
 	return _r
 }
 
 // CloseReason wraps the corresponding Objective-C method.
-func (x *URLSessionWebSocketTask) CloseReason() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeReason"))
+func (uswst *URLSessionWebSocketTask) CloseReason() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("closeReason"))
 	return DataFromID(_r)
 }
-
-// URLSessionWebSocketTaskable is the interface implemented by [URLSessionWebSocketTask], for mocking and DI.
-type URLSessionWebSocketTaskable interface {
-	obj.Object
-	WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask
-	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask
-	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionWebSocketTask
-	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionWebSocketTask
-	WithTaskDescription(taskDescription StringProvider) *URLSessionWebSocketTask
-	WithPriority(priority float32) *URLSessionWebSocketTask
-	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionWebSocketTask
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketTask
-	SendMessage(ctx context.Context, message *URLSessionWebSocketMessage) error
-	ReceiveMessage(ctx context.Context) (*URLSessionWebSocketMessage, error)
-	SendPingWithPongReceiveHandler(ctx context.Context) error
-	CancelWithCloseCodeReason(closeCode URLSessionWebSocketCloseCode, reason *Data)
-	MaximumMessageSize() int
-	SetMaximumMessageSize(maximumMessageSize int)
-	CloseCode() URLSessionWebSocketCloseCode
-	CloseReason() *Data
-}
-
-var _ URLSessionWebSocketTaskable = (*URLSessionWebSocketTask)(nil)
 
 var _ URLSessionTaskProvider = (*URLSessionWebSocketTask)(nil)

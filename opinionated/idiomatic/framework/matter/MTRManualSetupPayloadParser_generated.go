@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRManualSetupPayloadParser is an idiomatic wrapper over the Objective-C class MTRManualSetupPayloadParser.
@@ -46,24 +47,24 @@ func mTRManualSetupPayloadParserAdopt(id objc.ID) *MTRManualSetupPayloadParser {
 }
 
 // Description returns the object's -description text.
-func (x *MTRManualSetupPayloadParser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmspp *MTRManualSetupPayloadParser) Description() string {
+	return rt.Description(objref.IDOf(mmspp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRManualSetupPayloadParser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmspp *MTRManualSetupPayloadParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmspp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRManualSetupPayloadParser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmspp *MTRManualSetupPayloadParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmspp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRManualSetupPayloadParser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmspp *MTRManualSetupPayloadParser) String() string {
+	return rt.Description(objref.IDOf(mmspp))
 }
 
 // NewMTRManualSetupPayloadParserWithDecimalStringRepresentation creates a new MTRManualSetupPayloadParser.
@@ -74,19 +75,11 @@ func NewMTRManualSetupPayloadParserWithDecimalStringRepresentation(decimalString
 }
 
 // PopulatePayload wraps the corresponding Objective-C method.
-func (x *MTRManualSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
+func (mmspp *MTRManualSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(mmspp), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return MTRSetupPayloadFromID(_r), nil
 }
-
-// MTRManualSetupPayloadParserable is the interface implemented by [MTRManualSetupPayloadParser], for mocking and DI.
-type MTRManualSetupPayloadParserable interface {
-	obj.Object
-	PopulatePayload() (result *MTRSetupPayload, err error)
-}
-
-var _ MTRManualSetupPayloadParserable = (*MTRManualSetupPayloadParser)(nil)

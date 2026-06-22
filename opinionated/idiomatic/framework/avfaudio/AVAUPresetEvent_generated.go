@@ -53,58 +53,34 @@ func NewAUPresetEventWithScopeElementDictionary(scope int, element int, presetDi
 	return aUPresetEventAdopt(_id)
 }
 
-// WithScope the audio unit scope.
-func (x *AUPresetEvent) WithScope(scope int) *AUPresetEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
-	return x
+// WithScope sets the audio unit scope.
+func (ape *AUPresetEvent) WithScope(scope int) *AUPresetEvent {
+	objc.Send[objc.ID](objref.IDOf(ape), objc.RegisterName("setScope:"), scope)
+	return ape
 }
 
-// WithElement the element index in the scope.
-func (x *AUPresetEvent) WithElement(element int) *AUPresetEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
-	return x
+// WithElement sets the element index in the scope.
+func (ape *AUPresetEvent) WithElement(element int) *AUPresetEvent {
+	objc.Send[objc.ID](objref.IDOf(ape), objc.RegisterName("setElement:"), element)
+	return ape
 }
 
 // Scope wraps the corresponding Objective-C method.
-func (x *AUPresetEvent) Scope() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scope"))
+func (ape *AUPresetEvent) Scope() int {
+	_r := objc.Send[int](objref.IDOf(ape), objc.RegisterName("scope"))
 	return _r
-}
-
-// SetScope wraps the corresponding Objective-C method.
-func (x *AUPresetEvent) SetScope(scope int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 }
 
 // Element wraps the corresponding Objective-C method.
-func (x *AUPresetEvent) Element() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("element"))
+func (ape *AUPresetEvent) Element() int {
+	_r := objc.Send[int](objref.IDOf(ape), objc.RegisterName("element"))
 	return _r
 }
 
-// SetElement wraps the corresponding Objective-C method.
-func (x *AUPresetEvent) SetElement(element int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
-}
-
 // PresetDictionary wraps the corresponding Objective-C method.
-func (x *AUPresetEvent) PresetDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetDictionary"))
+func (ape *AUPresetEvent) PresetDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ape), objc.RegisterName("presetDictionary"))
 	return obj.Wrap(_r)
 }
-
-// AUPresetEventable is the interface implemented by [AUPresetEvent], for mocking and DI.
-type AUPresetEventable interface {
-	obj.Object
-	WithScope(scope int) *AUPresetEvent
-	WithElement(element int) *AUPresetEvent
-	Scope() int
-	SetScope(scope int)
-	Element() int
-	SetElement(element int)
-	PresetDictionary() obj.Object
-}
-
-var _ AUPresetEventable = (*AUPresetEvent)(nil)
 
 var _ MusicEventProvider = (*AUPresetEvent)(nil)

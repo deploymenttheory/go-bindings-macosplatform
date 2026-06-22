@@ -46,24 +46,24 @@ func authorizationAdopt(id objc.ID) *Authorization {
 }
 
 // Description returns the object's -description text.
-func (x *Authorization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Authorization) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Authorization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Authorization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Authorization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Authorization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Authorization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Authorization) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAuthorization creates a new Authorization.
@@ -73,21 +73,12 @@ func NewAuthorization() *Authorization {
 }
 
 // AuthorizationRef returns the authorization reference for this object.
-func (x *Authorization) AuthorizationRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationRef"))
+func (a *Authorization) AuthorizationRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("authorizationRef"))
 	return obj.Wrap(_r)
 }
 
 // InvalidateCredentials prevents any rights that were obtained by this object from being preserved.
-func (x *Authorization) InvalidateCredentials() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateCredentials"))
+func (a *Authorization) InvalidateCredentials() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("invalidateCredentials"))
 }
-
-// Authorizationable is the interface implemented by [Authorization], for mocking and DI.
-type Authorizationable interface {
-	obj.Object
-	AuthorizationRef() obj.Object
-	InvalidateCredentials()
-}
-
-var _ Authorizationable = (*Authorization)(nil)

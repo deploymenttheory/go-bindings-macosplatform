@@ -55,14 +55,14 @@ func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, stat
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *HTTPURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (hr *HTTPURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse {
+	objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return hr
 }
 
 // ValueForHTTPHeaderField returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive.
-func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
+func (hr *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
 	if _r == 0 {
 		return ""
 	}
@@ -70,26 +70,15 @@ func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
 }
 
 // StatusCode returns the HTTP status code of the receiver.
-func (x *HTTPURLResponse) StatusCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("statusCode"))
+func (hr *HTTPURLResponse) StatusCode() int {
+	_r := objc.Send[int](objref.IDOf(hr), objc.RegisterName("statusCode"))
 	return _r
 }
 
 // AllHeaderFields returns a dictionary containing all the HTTP header fields of the receiver. By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients.
-func (x *HTTPURLResponse) AllHeaderFields() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHeaderFields"))
+func (hr *HTTPURLResponse) AllHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("allHeaderFields"))
 	return obj.Wrap(_r)
 }
-
-// HTTPURLResponseable is the interface implemented by [HTTPURLResponse], for mocking and DI.
-type HTTPURLResponseable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse
-	ValueForHTTPHeaderField(field string) string
-	StatusCode() int
-	AllHeaderFields() obj.Object
-}
-
-var _ HTTPURLResponseable = (*HTTPURLResponse)(nil)
 
 var _ URLResponseProvider = (*HTTPURLResponse)(nil)

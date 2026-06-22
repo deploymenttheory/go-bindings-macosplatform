@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +50,16 @@ func NewDOMXPathExpression() *DOMXPathExpression {
 }
 
 // EvaluateTypeInResult wraps the corresponding Objective-C method.
-func (x *DOMXPathExpression) EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate:type:inResult:"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
+func (dpe *DOMXPathExpression) EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("evaluate:type:inResult:"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
 	return DOMXPathResultFromID(_r)
 }
 
 // Evaluate wraps the corresponding Objective-C method.
-func (x *DOMXPathExpression) Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate:::"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
+func (dpe *DOMXPathExpression) Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
+	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("evaluate:::"), objref.IDOf(contextNode), type_, objref.IDOf(inResult))
 	return DOMXPathResultFromID(_r)
 }
-
-// DOMXPathExpressionable is the interface implemented by [DOMXPathExpression], for mocking and DI.
-type DOMXPathExpressionable interface {
-	obj.Object
-	EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult
-	Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult
-}
-
-var _ DOMXPathExpressionable = (*DOMXPathExpression)(nil)
 
 var _ DOMObjectProvider = (*DOMXPathExpression)(nil)
 

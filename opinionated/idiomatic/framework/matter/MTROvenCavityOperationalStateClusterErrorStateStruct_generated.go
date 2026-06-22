@@ -44,24 +44,24 @@ func mTROvenCavityOperationalStateClusterErrorStateStructAdopt(id objc.ID) *MTRO
 }
 
 // Description returns the object's -description text.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) Description() string {
+	return rt.Description(objref.IDOf(mocoscess))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mocoscess), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mocoscess), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) String() string {
+	return rt.Description(objref.IDOf(mocoscess))
 }
 
 // NewMTROvenCavityOperationalStateClusterErrorStateStruct creates a new MTROvenCavityOperationalStateClusterErrorStateStruct.
@@ -71,74 +71,43 @@ func NewMTROvenCavityOperationalStateClusterErrorStateStruct() *MTROvenCavityOpe
 }
 
 // WithErrorStateID sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateID(errorStateID obj.Object) *MTROvenCavityOperationalStateClusterErrorStateStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
-	return x
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateID(errorStateID obj.Object) *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
+	return mocoscess
 }
 
 // WithErrorStateLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateLabel(errorStateLabel string) *MTROvenCavityOperationalStateClusterErrorStateStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateLabel:"), purego.NSString(errorStateLabel))
-	return x
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateLabel(errorStateLabel string) *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("setErrorStateLabel:"), purego.NSString(errorStateLabel))
+	return mocoscess
 }
 
 // WithErrorStateDetails sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateDetails(errorStateDetails string) *MTROvenCavityOperationalStateClusterErrorStateStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateDetails:"), purego.NSString(errorStateDetails))
-	return x
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) WithErrorStateDetails(errorStateDetails string) *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("setErrorStateDetails:"), purego.NSString(errorStateDetails))
+	return mocoscess
 }
 
 // ErrorStateID wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorStateID"))
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("errorStateID"))
 	return obj.Wrap(_r)
 }
 
-// SetErrorStateID wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) SetErrorStateID(errorStateID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
-}
-
 // ErrorStateLabel wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorStateLabel"))
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("errorStateLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetErrorStateLabel wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) SetErrorStateLabel(errorStateLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateLabel:"), purego.NSString(errorStateLabel))
 }
 
 // ErrorStateDetails wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorStateDetails"))
+func (mocoscess *MTROvenCavityOperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mocoscess), objc.RegisterName("errorStateDetails"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetErrorStateDetails wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) SetErrorStateDetails(errorStateDetails string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorStateDetails:"), purego.NSString(errorStateDetails))
-}
-
-// MTROvenCavityOperationalStateClusterErrorStateStructable is the interface implemented by [MTROvenCavityOperationalStateClusterErrorStateStruct], for mocking and DI.
-type MTROvenCavityOperationalStateClusterErrorStateStructable interface {
-	obj.Object
-	WithErrorStateID(errorStateID obj.Object) *MTROvenCavityOperationalStateClusterErrorStateStruct
-	WithErrorStateLabel(errorStateLabel string) *MTROvenCavityOperationalStateClusterErrorStateStruct
-	WithErrorStateDetails(errorStateDetails string) *MTROvenCavityOperationalStateClusterErrorStateStruct
-	ErrorStateID() obj.Object
-	SetErrorStateID(errorStateID obj.Object)
-	ErrorStateLabel() string
-	SetErrorStateLabel(errorStateLabel string)
-	ErrorStateDetails() string
-	SetErrorStateDetails(errorStateDetails string)
-}
-
-var _ MTROvenCavityOperationalStateClusterErrorStateStructable = (*MTROvenCavityOperationalStateClusterErrorStateStruct)(nil)

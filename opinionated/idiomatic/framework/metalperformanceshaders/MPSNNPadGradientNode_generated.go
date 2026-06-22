@@ -51,19 +51,11 @@ func NewNNPadGradientNodeWithSourceGradientSourceImageGradientState(sourceGradie
 	return nNPadGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNPadGradientNode) WithLabel(label string) *NNPadGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (npgn *NNPadGradientNode) WithLabel(label string) *NNPadGradientNode {
+	objc.Send[objc.ID](objref.IDOf(npgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return npgn
 }
-
-// NNPadGradientNodeable is the interface implemented by [NNPadGradientNode], for mocking and DI.
-type NNPadGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNPadGradientNode
-}
-
-var _ NNPadGradientNodeable = (*NNPadGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*NNPadGradientNode)(nil)
 

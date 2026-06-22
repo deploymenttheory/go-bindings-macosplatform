@@ -53,18 +53,10 @@ func NewRecordedRotationRateData() *RecordedRotationRateData {
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *RecordedRotationRateData) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (rrrd *RecordedRotationRateData) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rrrd), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
-
-// RecordedRotationRateDataable is the interface implemented by [RecordedRotationRateData], for mocking and DI.
-type RecordedRotationRateDataable interface {
-	obj.Object
-	StartDate() obj.Object
-}
-
-var _ RecordedRotationRateDataable = (*RecordedRotationRateData)(nil)
 
 var _ RotationRateDataProvider = (*RecordedRotationRateData)(nil)
 

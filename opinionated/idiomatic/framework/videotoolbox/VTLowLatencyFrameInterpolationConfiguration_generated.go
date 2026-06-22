@@ -46,24 +46,24 @@ func lowLatencyFrameInterpolationConfigurationAdopt(id objc.ID) *LowLatencyFrame
 }
 
 // Description returns the object's -description text.
-func (x *LowLatencyFrameInterpolationConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (llfic *LowLatencyFrameInterpolationConfiguration) Description() string {
+	return rt.Description(objref.IDOf(llfic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LowLatencyFrameInterpolationConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (llfic *LowLatencyFrameInterpolationConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(llfic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LowLatencyFrameInterpolationConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (llfic *LowLatencyFrameInterpolationConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(llfic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LowLatencyFrameInterpolationConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (llfic *LowLatencyFrameInterpolationConfiguration) String() string {
+	return rt.Description(objref.IDOf(llfic))
 }
 
 // NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames creates a new low-latency frame interpolation configuration for frame-rate conversion.
@@ -80,60 +80,46 @@ func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatia
 	return lowLatencyFrameInterpolationConfigurationAdopt(_id)
 }
 
-// FrameWidth width of source frames in pixels.
-func (x *LowLatencyFrameInterpolationConfiguration) FrameWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
+// FrameWidth returns width of source frames in pixels.
+func (llfic *LowLatencyFrameInterpolationConfiguration) FrameWidth() int {
+	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// FrameHeight height of source frames in pixels.
-func (x *LowLatencyFrameInterpolationConfiguration) FrameHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
+// FrameHeight returns height of source frames in pixels.
+func (llfic *LowLatencyFrameInterpolationConfiguration) FrameHeight() int {
+	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// SpatialScaleFactor configured spatial scale factor as an integer.
-func (x *LowLatencyFrameInterpolationConfiguration) SpatialScaleFactor() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("spatialScaleFactor"))
+// SpatialScaleFactor returns configured spatial scale factor as an integer.
+func (llfic *LowLatencyFrameInterpolationConfiguration) SpatialScaleFactor() int {
+	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("spatialScaleFactor"))
 	return _r
 }
 
-// NumberOfInterpolatedFrames number of uniformly spaced frames for which you configured the processor.
-func (x *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfInterpolatedFrames"))
+// NumberOfInterpolatedFrames returns number of uniformly spaced frames for which you configured the processor.
+func (llfic *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames() int {
+	_r := objc.Send[int](objref.IDOf(llfic), objc.RegisterName("numberOfInterpolatedFrames"))
 	return _r
 }
 
-// FrameSupportedPixelFormats available supported pixel formats for current configuration.
+// FrameSupportedPixelFormats returns available supported pixel formats for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
-func (x *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameSupportedPixelFormats"))
+func (llfic *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(llfic), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (x *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+// SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (llfic *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(llfic), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (x *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
+// DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (llfic *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(llfic), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
-
-// LowLatencyFrameInterpolationConfigurationable is the interface implemented by [LowLatencyFrameInterpolationConfiguration], for mocking and DI.
-type LowLatencyFrameInterpolationConfigurationable interface {
-	obj.Object
-	FrameWidth() int
-	FrameHeight() int
-	SpatialScaleFactor() int
-	NumberOfInterpolatedFrames() int
-	FrameSupportedPixelFormats() []obj.Object
-	SourcePixelBufferAttributes() obj.Object
-	DestinationPixelBufferAttributes() obj.Object
-}
-
-var _ LowLatencyFrameInterpolationConfigurationable = (*LowLatencyFrameInterpolationConfiguration)(nil)

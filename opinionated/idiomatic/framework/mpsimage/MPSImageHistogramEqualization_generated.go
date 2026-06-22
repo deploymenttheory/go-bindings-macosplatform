@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewImageHistogramEqualization() *ImageHistogramEqualization {
 	return imageHistogramEqualizationAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ihe *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
+	objc.Send[objc.ID](objref.IDOf(ihe), objc.RegisterName("setOffset:"), offset)
+	return ihe
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ihe *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
+	objc.Send[objc.ID](objref.IDOf(ihe), objc.RegisterName("setClipRect:"), clipRect)
+	return ihe
 }
-
-// ImageHistogramEqualizationable is the interface implemented by [ImageHistogramEqualization], for mocking and DI.
-type ImageHistogramEqualizationable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization
-	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization
-}
-
-var _ ImageHistogramEqualizationable = (*ImageHistogramEqualization)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageHistogramEqualization)(nil)

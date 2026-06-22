@@ -51,24 +51,15 @@ func NewMTRModeSelectClusterSemanticTag() *MTRModeSelectClusterSemanticTag {
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mmscst *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag {
+	objc.Send[objc.ID](objref.IDOf(mmscst), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mmscst
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRModeSelectClusterSemanticTag) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mmscst *MTRModeSelectClusterSemanticTag) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag {
+	objc.Send[objc.ID](objref.IDOf(mmscst), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mmscst
 }
-
-// MTRModeSelectClusterSemanticTagable is the interface implemented by [MTRModeSelectClusterSemanticTag], for mocking and DI.
-type MTRModeSelectClusterSemanticTagable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag
-	WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag
-}
-
-var _ MTRModeSelectClusterSemanticTagable = (*MTRModeSelectClusterSemanticTag)(nil)
 
 var _ MTRModeSelectClusterSemanticTagStructProvider = (*MTRModeSelectClusterSemanticTag)(nil)

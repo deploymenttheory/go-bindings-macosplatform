@@ -46,24 +46,24 @@ func libAlbumAdopt(id objc.ID) *LibAlbum {
 }
 
 // Description returns the object's -description text.
-func (x *LibAlbum) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (la *LibAlbum) Description() string {
+	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LibAlbum) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (la *LibAlbum) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LibAlbum) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (la *LibAlbum) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LibAlbum) String() string {
-	return rt.Description(objref.IDOf(x))
+func (la *LibAlbum) String() string {
+	return rt.Description(objref.IDOf(la))
 }
 
 // NewLibAlbum creates a new LibAlbum.
@@ -72,105 +72,86 @@ func NewLibAlbum() *LibAlbum {
 	return libAlbumAdopt(_id)
 }
 
-// Title the name of this album.
-func (x *LibAlbum) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns the name of this album.
+func (la *LibAlbum) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SortTitle the name of this that should be used for sorting purposes.
-func (x *LibAlbum) SortTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortTitle"))
+// SortTitle returns the name of this that should be used for sorting purposes.
+func (la *LibAlbum) SortTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("sortTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsCompilation whether this album is a compilation.
-func (x *LibAlbum) IsCompilation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompilation"))
+// IsCompilation reports whether this album is a compilation.
+func (la *LibAlbum) IsCompilation() bool {
+	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isCompilation"))
 	return _r
 }
 
-// DiscCount the number of discs in this album.
-func (x *LibAlbum) DiscCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("discCount"))
+// DiscCount returns the number of discs in this album.
+func (la *LibAlbum) DiscCount() int {
+	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("discCount"))
 	return _r
 }
 
-// DiscNumber the index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
-func (x *LibAlbum) DiscNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("discNumber"))
+// DiscNumber returns the index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
+func (la *LibAlbum) DiscNumber() int {
+	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("discNumber"))
 	return _r
 }
 
-// Rating the rating of this track's album.
-func (x *LibAlbum) Rating() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rating"))
+// Rating returns the rating of this track's album.
+func (la *LibAlbum) Rating() int {
+	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("rating"))
 	return _r
 }
 
-// IsRatingComputed the rating of this track's album.
-func (x *LibAlbum) IsRatingComputed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRatingComputed"))
+// IsRatingComputed reports whether the rating of this track's album.
+func (la *LibAlbum) IsRatingComputed() bool {
+	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isRatingComputed"))
 	return _r
 }
 
-// IsGapless whether this track's album is gapless.
-func (x *LibAlbum) IsGapless() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGapless"))
+// IsGapless reports whether this track's album is gapless.
+func (la *LibAlbum) IsGapless() bool {
+	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("isGapless"))
 	return _r
 }
 
-// TrackCount number of tracks in this album.
-func (x *LibAlbum) TrackCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trackCount"))
+// TrackCount returns number of tracks in this album.
+func (la *LibAlbum) TrackCount() int {
+	_r := objc.Send[int](objref.IDOf(la), objc.RegisterName("trackCount"))
 	return _r
 }
 
-// AlbumArtist the artist associated with this album.
-func (x *LibAlbum) AlbumArtist() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("albumArtist"))
+// AlbumArtist returns the artist associated with this album.
+func (la *LibAlbum) AlbumArtist() string {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("albumArtist"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SortAlbumArtist the artist associated with this album. This field should be used when sorting.
-func (x *LibAlbum) SortAlbumArtist() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortAlbumArtist"))
+// SortAlbumArtist returns the artist associated with this album. This field should be used when sorting.
+func (la *LibAlbum) SortAlbumArtist() string {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("sortAlbumArtist"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PersistentID the unique identifier of this album.
-func (x *LibAlbum) PersistentID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
+// PersistentID returns the unique identifier of this album.
+func (la *LibAlbum) PersistentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("persistentID"))
 	return obj.Wrap(_r)
 }
-
-// LibAlbumable is the interface implemented by [LibAlbum], for mocking and DI.
-type LibAlbumable interface {
-	obj.Object
-	Title() string
-	SortTitle() string
-	IsCompilation() bool
-	DiscCount() int
-	DiscNumber() int
-	Rating() int
-	IsRatingComputed() bool
-	IsGapless() bool
-	TrackCount() int
-	AlbumArtist() string
-	SortAlbumArtist() string
-	PersistentID() obj.Object
-}
-
-var _ LibAlbumable = (*LibAlbum)(nil)

@@ -52,41 +52,25 @@ func NewSkipIntervalCommand() *SkipIntervalCommand {
 	return skipIntervalCommandAdopt(_id)
 }
 
-// WithPreferredIntervals the available skip intervals, in seconds, for a media item.
-func (x *SkipIntervalCommand) WithPreferredIntervals(items ...obj.Object) *SkipIntervalCommand {
+// WithPreferredIntervals sets the available skip intervals, in seconds, for a media item.
+func (sic *SkipIntervalCommand) WithPreferredIntervals(items ...obj.Object) *SkipIntervalCommand {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredIntervals:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sic), objc.RegisterName("setPreferredIntervals:"), _arr)
+	return sic
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (sic *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
+	objc.Send[objc.ID](objref.IDOf(sic), objc.RegisterName("setEnabled:"), enabled)
+	return sic
 }
 
 // PreferredIntervals wraps the corresponding Objective-C method.
 //
 // PreferredIntervals returns the collection as a Go slice.
-func (x *SkipIntervalCommand) PreferredIntervals() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredIntervals"))
+func (sic *SkipIntervalCommand) PreferredIntervals() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sic), objc.RegisterName("preferredIntervals"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetPreferredIntervals wraps the corresponding Objective-C method.
-func (x *SkipIntervalCommand) SetPreferredIntervals(preferredIntervals []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredIntervals:"), purego.SliceToNSArray(preferredIntervals, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SkipIntervalCommandable is the interface implemented by [SkipIntervalCommand], for mocking and DI.
-type SkipIntervalCommandable interface {
-	obj.Object
-	WithPreferredIntervals(items ...obj.Object) *SkipIntervalCommand
-	WithEnabled(enabled bool) *SkipIntervalCommand
-	PreferredIntervals() []obj.Object
-	SetPreferredIntervals(preferredIntervals []obj.Object)
-}
-
-var _ SkipIntervalCommandable = (*SkipIntervalCommand)(nil)
 
 var _ RemoteCommandProvider = (*SkipIntervalCommand)(nil)

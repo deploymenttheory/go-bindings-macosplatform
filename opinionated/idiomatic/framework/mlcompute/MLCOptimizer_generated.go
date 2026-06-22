@@ -48,132 +48,101 @@ func optimizerAdopt(id objc.ID) *Optimizer {
 }
 
 // Description returns the object's -description text.
-func (x *Optimizer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Optimizer) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Optimizer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Optimizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Optimizer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Optimizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Optimizer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Optimizer) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
-// WithLearningRate the learning rate.
-func (x *Optimizer) WithLearningRate(learningRate float32) *Optimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learning rate.
+func (o *Optimizer) WithLearningRate(learningRate float32) *Optimizer {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setLearningRate:"), learningRate)
+	return o
 }
 
-// WithAppliesGradientClipping a Boolean value that indicates whether you apply gradient clipping.
-func (x *Optimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *Optimizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
-	return x
+// WithAppliesGradientClipping sets a Boolean value that indicates whether you apply gradient clipping.
+func (o *Optimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *Optimizer {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
+	return o
 }
 
-// LearningRate the learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
-func (x *Optimizer) LearningRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("learningRate"))
+// LearningRate returns the learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+func (o *Optimizer) LearningRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("learningRate"))
 	return _r
 }
 
-// SetLearningRate wraps the corresponding Objective-C method.
-func (x *Optimizer) SetLearningRate(learningRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-}
-
-// GradientRescale the rescale value applied to gradients during optimizer update
-func (x *Optimizer) GradientRescale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientRescale"))
+// GradientRescale returns the rescale value applied to gradients during optimizer update
+func (o *Optimizer) GradientRescale() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
-// AppliesGradientClipping whether gradient clipping should be applied or not.
-func (x *Optimizer) AppliesGradientClipping() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesGradientClipping"))
+// AppliesGradientClipping reports whether gradient clipping should be applied or not.
+func (o *Optimizer) AppliesGradientClipping() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("appliesGradientClipping"))
 	return _r
 }
 
-// SetAppliesGradientClipping wraps the corresponding Objective-C method.
-func (x *Optimizer) SetAppliesGradientClipping(appliesGradientClipping bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
-}
-
-// GradientClipMax the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
-func (x *Optimizer) GradientClipMax() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMax"))
+// GradientClipMax returns the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
+func (o *Optimizer) GradientClipMax() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
-// GradientClipMin the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
-func (x *Optimizer) GradientClipMin() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMin"))
+// GradientClipMin returns the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
+func (o *Optimizer) GradientClipMin() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
-// RegularizationScale the regularization scale.
-func (x *Optimizer) RegularizationScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("regularizationScale"))
+// RegularizationScale returns the regularization scale.
+func (o *Optimizer) RegularizationScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("regularizationScale"))
 	return _r
 }
 
-// RegularizationType the regularization type.
-func (x *Optimizer) RegularizationType() RegularizationType {
-	_r := objc.Send[RegularizationType](objref.IDOf(x), objc.RegisterName("regularizationType"))
+// RegularizationType returns the regularization type.
+func (o *Optimizer) RegularizationType() RegularizationType {
+	_r := objc.Send[RegularizationType](objref.IDOf(o), objc.RegisterName("regularizationType"))
 	return _r
 }
 
-// GradientClippingType the type of clipping applied to gradient
-func (x *Optimizer) GradientClippingType() GradientClippingType {
-	_r := objc.Send[GradientClippingType](objref.IDOf(x), objc.RegisterName("gradientClippingType"))
+// GradientClippingType returns the type of clipping applied to gradient
+func (o *Optimizer) GradientClippingType() GradientClippingType {
+	_r := objc.Send[GradientClippingType](objref.IDOf(o), objc.RegisterName("gradientClippingType"))
 	return _r
 }
 
-// MaximumClippingNorm the maximum clipping value
-func (x *Optimizer) MaximumClippingNorm() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumClippingNorm"))
+// MaximumClippingNorm returns the maximum clipping value
+func (o *Optimizer) MaximumClippingNorm() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("maximumClippingNorm"))
 	return _r
 }
 
-// CustomGlobalNorm used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
-func (x *Optimizer) CustomGlobalNorm() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("customGlobalNorm"))
+// CustomGlobalNorm returns used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
+func (o *Optimizer) CustomGlobalNorm() float32 {
+	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("customGlobalNorm"))
 	return _r
 }
-
-// Optimizerable is the interface implemented by [Optimizer], for mocking and DI.
-type Optimizerable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *Optimizer
-	WithAppliesGradientClipping(appliesGradientClipping bool) *Optimizer
-	LearningRate() float32
-	SetLearningRate(learningRate float32)
-	GradientRescale() float32
-	AppliesGradientClipping() bool
-	SetAppliesGradientClipping(appliesGradientClipping bool)
-	GradientClipMax() float32
-	GradientClipMin() float32
-	RegularizationScale() float32
-	RegularizationType() RegularizationType
-	GradientClippingType() GradientClippingType
-	MaximumClippingNorm() float32
-	CustomGlobalNorm() float32
-}
-
-var _ Optimizerable = (*Optimizer)(nil)
 
 // isOptimizer marks Optimizer — and, by embedding promotion, its
 // subclasses — as a member of the Optimizer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Optimizer) isOptimizer() {}
+func (o *Optimizer) isOptimizer() {}
 
 var _ OptimizerProvider = (*Optimizer)(nil)

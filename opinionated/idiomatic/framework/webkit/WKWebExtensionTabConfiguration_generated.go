@@ -44,24 +44,24 @@ func wKWebExtensionTabConfigurationAdopt(id objc.ID) *WKWebExtensionTabConfigura
 }
 
 // Description returns the object's -description text.
-func (x *WKWebExtensionTabConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwetc *WKWebExtensionTabConfiguration) Description() string {
+	return rt.Description(objref.IDOf(wwetc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWebExtensionTabConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwetc *WKWebExtensionTabConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwetc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWebExtensionTabConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwetc *WKWebExtensionTabConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwetc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWebExtensionTabConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwetc *WKWebExtensionTabConfiguration) String() string {
+	return rt.Description(objref.IDOf(wwetc))
 }
 
 // NewWKWebExtensionTabConfiguration creates a new WKWebExtensionTabConfiguration.
@@ -71,57 +71,43 @@ func NewWKWebExtensionTabConfiguration() *WKWebExtensionTabConfiguration {
 }
 
 // Index indicates the position where the tab should be opened within the window.
-func (x *WKWebExtensionTabConfiguration) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+func (wwetc *WKWebExtensionTabConfiguration) Index() int {
+	_r := objc.Send[int](objref.IDOf(wwetc), objc.RegisterName("index"))
 	return _r
 }
 
-// Url indicates the initial URL for the tab. If this property is `nil`, the app's default "start page" should appear in the tab.
-func (x *WKWebExtensionTabConfiguration) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL indicates the initial URL for the tab. If this property is `nil`, the app's default "start page" should appear in the tab.
+func (wwetc *WKWebExtensionTabConfiguration) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwetc), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// ShouldBeActive indicates whether the tab should be the active tab. If this property is `YES`, the tab should be made active in the window, ensuring it is the frontmost tab. Being active implies the tab is also selected. If this property is `NO`, the tab shouldn't affect the currently active tab.
-func (x *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeActive"))
+// ShouldBeActive reports whether the tab should be the active tab. If this property is `YES`, the tab should be made active in the window, ensuring it is the frontmost tab. Being active implies the tab is also selected. If this property is `NO`, the tab shouldn't affect the currently active tab.
+func (wwetc *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
+	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBeActive"))
 	return _r
 }
 
-// ShouldAddToSelection indicates whether the tab should be added to the current tab selection. If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
-func (x *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAddToSelection"))
+// ShouldAddToSelection reports whether the tab should be added to the current tab selection. If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
+func (wwetc *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldAddToSelection"))
 	return _r
 }
 
-// ShouldBePinned indicates whether the tab should be pinned.
-func (x *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBePinned"))
+// ShouldBePinned reports whether the tab should be pinned.
+func (wwetc *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
+	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBePinned"))
 	return _r
 }
 
-// ShouldBeMuted indicates whether the tab should be muted.
-func (x *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeMuted"))
+// ShouldBeMuted reports whether the tab should be muted.
+func (wwetc *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldBeMuted"))
 	return _r
 }
 
-// ShouldReaderModeBeActive indicates whether reader mode in the tab should be active.
-func (x *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReaderModeBeActive"))
+// ShouldReaderModeBeActive reports whether reader mode in the tab should be active.
+func (wwetc *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
+	_r := objc.Send[bool](objref.IDOf(wwetc), objc.RegisterName("shouldReaderModeBeActive"))
 	return _r
 }
-
-// WKWebExtensionTabConfigurationable is the interface implemented by [WKWebExtensionTabConfiguration], for mocking and DI.
-type WKWebExtensionTabConfigurationable interface {
-	obj.Object
-	Index() int
-	Url() obj.Object
-	ShouldBeActive() bool
-	ShouldAddToSelection() bool
-	ShouldBePinned() bool
-	ShouldBeMuted() bool
-	ShouldReaderModeBeActive() bool
-}
-
-var _ WKWebExtensionTabConfigurationable = (*WKWebExtensionTabConfiguration)(nil)

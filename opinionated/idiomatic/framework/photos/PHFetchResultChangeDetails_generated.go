@@ -46,24 +46,24 @@ func fetchResultChangeDetailsAdopt(id objc.ID) *FetchResultChangeDetails {
 }
 
 // Description returns the object's -description text.
-func (x *FetchResultChangeDetails) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (frcd *FetchResultChangeDetails) Description() string {
+	return rt.Description(objref.IDOf(frcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchResultChangeDetails) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (frcd *FetchResultChangeDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(frcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchResultChangeDetails) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (frcd *FetchResultChangeDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(frcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FetchResultChangeDetails) String() string {
-	return rt.Description(objref.IDOf(x))
+func (frcd *FetchResultChangeDetails) String() string {
+	return rt.Description(objref.IDOf(frcd))
 }
 
 // NewFetchResultChangeDetails creates a new FetchResultChangeDetails.
@@ -73,84 +73,66 @@ func NewFetchResultChangeDetails() *FetchResultChangeDetails {
 }
 
 // EnumerateMovesWith runs the specified block for each case where an object has moved from one index to another in the fetch result.
-func (x *FetchResultChangeDetails) EnumerateMovesWith(handler func(int, int)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateMovesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { handler(_b0, _b1) }))
+func (frcd *FetchResultChangeDetails) EnumerateMovesWith(handler func(int, int)) {
+	objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("enumerateMovesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { handler(_b0, _b1) }))
 }
 
 // FetchResultBeforeChanges wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) FetchResultBeforeChanges() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchResultBeforeChanges"))
+func (frcd *FetchResultChangeDetails) FetchResultBeforeChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("fetchResultBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
 // FetchResultAfterChanges wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) FetchResultAfterChanges() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchResultAfterChanges"))
+func (frcd *FetchResultChangeDetails) FetchResultAfterChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("fetchResultAfterChanges"))
 	return obj.Wrap(_r)
 }
 
 // HasIncrementalChanges wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) HasIncrementalChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasIncrementalChanges"))
+func (frcd *FetchResultChangeDetails) HasIncrementalChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(frcd), objc.RegisterName("hasIncrementalChanges"))
 	return _r
 }
 
 // RemovedIndexes wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) RemovedIndexes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedIndexes"))
+func (frcd *FetchResultChangeDetails) RemovedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("removedIndexes"))
 	return obj.Wrap(_r)
 }
 
 // RemovedObjects wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) RemovedObjects() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedObjects"))
+func (frcd *FetchResultChangeDetails) RemovedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("removedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // InsertedIndexes wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) InsertedIndexes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedIndexes"))
+func (frcd *FetchResultChangeDetails) InsertedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("insertedIndexes"))
 	return obj.Wrap(_r)
 }
 
 // InsertedObjects wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) InsertedObjects() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedObjects"))
+func (frcd *FetchResultChangeDetails) InsertedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("insertedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ChangedIndexes wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) ChangedIndexes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedIndexes"))
+func (frcd *FetchResultChangeDetails) ChangedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("changedIndexes"))
 	return obj.Wrap(_r)
 }
 
 // ChangedObjects wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) ChangedObjects() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedObjects"))
+func (frcd *FetchResultChangeDetails) ChangedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("changedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HasMoves wraps the corresponding Objective-C method.
-func (x *FetchResultChangeDetails) HasMoves() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMoves"))
+func (frcd *FetchResultChangeDetails) HasMoves() bool {
+	_r := objc.Send[bool](objref.IDOf(frcd), objc.RegisterName("hasMoves"))
 	return _r
 }
-
-// FetchResultChangeDetailsable is the interface implemented by [FetchResultChangeDetails], for mocking and DI.
-type FetchResultChangeDetailsable interface {
-	obj.Object
-	EnumerateMovesWith(handler func(int, int))
-	FetchResultBeforeChanges() obj.Object
-	FetchResultAfterChanges() obj.Object
-	HasIncrementalChanges() bool
-	RemovedIndexes() obj.Object
-	RemovedObjects() []obj.Object
-	InsertedIndexes() obj.Object
-	InsertedObjects() []obj.Object
-	ChangedIndexes() obj.Object
-	ChangedObjects() []obj.Object
-	HasMoves() bool
-}
-
-var _ FetchResultChangeDetailsable = (*FetchResultChangeDetails)(nil)

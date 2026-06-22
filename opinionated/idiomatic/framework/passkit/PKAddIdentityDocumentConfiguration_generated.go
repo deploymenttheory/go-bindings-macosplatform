@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
 	return addIdentityDocumentConfigurationAdopt(_id)
 }
 
-// WithIssuerIdentifier an opaque value for the configuration.
-func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
-	return x
+// WithIssuerIdentifier sets an opaque value for the configuration.
+func (aidc *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
+	objc.Send[objc.ID](objref.IDOf(aidc), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
+	return aidc
 }
 
-// WithLocalizedDescription the configuration’s localized description.
-func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
-	return x
+// WithLocalizedDescription sets the configuration’s localized description.
+func (aidc *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
+	objc.Send[objc.ID](objref.IDOf(aidc), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return aidc
 }
 
 // Metadata wraps the corresponding Objective-C method.
-func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+func (aidc *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(aidc), objc.RegisterName("metadata"))
 	return IdentityDocumentMetadataFromID(_r)
 }
-
-// AddIdentityDocumentConfigurationable is the interface implemented by [AddIdentityDocumentConfiguration], for mocking and DI.
-type AddIdentityDocumentConfigurationable interface {
-	obj.Object
-	WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration
-	WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration
-	Metadata() *IdentityDocumentMetadata
-}
-
-var _ AddIdentityDocumentConfigurationable = (*AddIdentityDocumentConfiguration)(nil)
 
 var _ AddSecureElementPassConfigurationProvider = (*AddIdentityDocumentConfiguration)(nil)

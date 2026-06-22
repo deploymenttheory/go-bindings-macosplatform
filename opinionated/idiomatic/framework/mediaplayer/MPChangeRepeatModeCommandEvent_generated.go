@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewChangeRepeatModeCommandEvent() *ChangeRepeatModeCommandEvent {
 	return changeRepeatModeCommandEventAdopt(_id)
 }
 
-// RepeatType the desired repeat type to use when fulfilling the request.
-func (x *ChangeRepeatModeCommandEvent) RepeatType() RepeatType {
-	_r := objc.Send[RepeatType](objref.IDOf(x), objc.RegisterName("repeatType"))
+// RepeatType returns the desired repeat type to use when fulfilling the request.
+func (crmce *ChangeRepeatModeCommandEvent) RepeatType() RepeatType {
+	_r := objc.Send[RepeatType](objref.IDOf(crmce), objc.RegisterName("repeatType"))
 	return _r
 }
 
-// PreservesRepeatMode whether or not the selection should be preserved between playback sessions
-func (x *ChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesRepeatMode"))
+// PreservesRepeatMode reports whether the selection should be preserved between playback sessions
+func (crmce *ChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
+	_r := objc.Send[bool](objref.IDOf(crmce), objc.RegisterName("preservesRepeatMode"))
 	return _r
 }
-
-// ChangeRepeatModeCommandEventable is the interface implemented by [ChangeRepeatModeCommandEvent], for mocking and DI.
-type ChangeRepeatModeCommandEventable interface {
-	obj.Object
-	RepeatType() RepeatType
-	PreservesRepeatMode() bool
-}
-
-var _ ChangeRepeatModeCommandEventable = (*ChangeRepeatModeCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*ChangeRepeatModeCommandEvent)(nil)

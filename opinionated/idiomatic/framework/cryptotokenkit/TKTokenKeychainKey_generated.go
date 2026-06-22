@@ -53,208 +53,127 @@ func NewTokenKeychainKeyWithCertificateObjectID(certificateRef obj.Object, objec
 	return tokenKeychainKeyAdopt(_id)
 }
 
-// WithKeyType the type of the key. Currently, only kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom are supported values.
-func (x *TokenKeychainKey) WithKeyType(keyType string) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyType:"), purego.NSString(keyType))
-	return x
+// WithKeyType sets the type of the key. Currently, only kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom are supported values.
+func (tkk *TokenKeychainKey) WithKeyType(keyType string) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setKeyType:"), purego.NSString(keyType))
+	return tkk
 }
 
-// WithApplicationTag the private tag data.
-func (x *TokenKeychainKey) WithApplicationTag(applicationTag obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationTag:"), objref.IDOf(applicationTag))
-	return x
+// WithApplicationTag sets the private tag data.
+func (tkk *TokenKeychainKey) WithApplicationTag(applicationTag obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setApplicationTag:"), objref.IDOf(applicationTag))
+	return tkk
 }
 
-// WithKeySizeInBits indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
-func (x *TokenKeychainKey) WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySizeInBits:"), keySizeInBits)
-	return x
+// WithKeySizeInBits sets indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
+func (tkk *TokenKeychainKey) WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setKeySizeInBits:"), keySizeInBits)
+	return tkk
 }
 
-// WithPublicKeyData the public key data.
-func (x *TokenKeychainKey) WithPublicKeyData(publicKeyData obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyData:"), objref.IDOf(publicKeyData))
-	return x
+// WithPublicKeyData sets the public key data.
+func (tkk *TokenKeychainKey) WithPublicKeyData(publicKeyData obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setPublicKeyData:"), objref.IDOf(publicKeyData))
+	return tkk
 }
 
-// WithPublicKeyHash the SHA1 hash of the raw public key.
-func (x *TokenKeychainKey) WithPublicKeyHash(publicKeyHash obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyHash:"), objref.IDOf(publicKeyHash))
-	return x
+// WithPublicKeyHash sets the SHA1 hash of the raw public key.
+func (tkk *TokenKeychainKey) WithPublicKeyHash(publicKeyHash obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setPublicKeyHash:"), objref.IDOf(publicKeyHash))
+	return tkk
 }
 
-// WithCanDecrypt whether the key can be used to decrypt data.
-func (x *TokenKeychainKey) WithCanDecrypt(canDecrypt bool) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDecrypt:"), canDecrypt)
-	return x
+// WithCanDecrypt sets whether the key can be used to decrypt data.
+func (tkk *TokenKeychainKey) WithCanDecrypt(canDecrypt bool) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setCanDecrypt:"), canDecrypt)
+	return tkk
 }
 
-// WithCanSign whether the key can be used to sign data.
-func (x *TokenKeychainKey) WithCanSign(canSign bool) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSign:"), canSign)
-	return x
+// WithCanSign sets whether the key can be used to sign data.
+func (tkk *TokenKeychainKey) WithCanSign(canSign bool) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setCanSign:"), canSign)
+	return tkk
 }
 
-// WithCanPerformKeyExchange whether the key can be used to perform Diffie-Hellman style cryptographic key exchange.
-func (x *TokenKeychainKey) WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPerformKeyExchange:"), canPerformKeyExchange)
-	return x
+// WithCanPerformKeyExchange sets whether the key can be used to perform Diffie-Hellman style cryptographic key exchange.
+func (tkk *TokenKeychainKey) WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setCanPerformKeyExchange:"), canPerformKeyExchange)
+	return tkk
 }
 
-// WithSuitableForLogin whether the key can be used for system login.
-func (x *TokenKeychainKey) WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuitableForLogin:"), suitableForLogin)
-	return x
+// WithSuitableForLogin sets whether the key can be used for system login.
+func (tkk *TokenKeychainKey) WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setSuitableForLogin:"), suitableForLogin)
+	return tkk
 }
 
-// WithLabel the user-visible label for the keychain item.
-func (x *TokenKeychainKey) WithLabel(label string) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the user-visible label for the keychain item.
+func (tkk *TokenKeychainKey) WithLabel(label string) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return tkk
 }
 
-// WithConstraints access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
-func (x *TokenKeychainKey) WithConstraints(constraints obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
-	return x
+// WithConstraints sets access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
+func (tkk *TokenKeychainKey) WithConstraints(constraints obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
+	return tkk
 }
 
-// KeyType type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
-func (x *TokenKeychainKey) KeyType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyType"))
+// KeyType returns type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
+func (tkk *TokenKeychainKey) KeyType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("keyType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetKeyType wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetKeyType(keyType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyType:"), purego.NSString(keyType))
-}
-
 // ApplicationTag represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
-func (x *TokenKeychainKey) ApplicationTag() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationTag"))
+func (tkk *TokenKeychainKey) ApplicationTag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("applicationTag"))
 	return obj.Wrap(_r)
-}
-
-// SetApplicationTag wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetApplicationTag(applicationTag obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationTag:"), objref.IDOf(applicationTag))
 }
 
 // KeySizeInBits indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
-func (x *TokenKeychainKey) KeySizeInBits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keySizeInBits"))
+func (tkk *TokenKeychainKey) KeySizeInBits() int {
+	_r := objc.Send[int](objref.IDOf(tkk), objc.RegisterName("keySizeInBits"))
 	return _r
-}
-
-// SetKeySizeInBits wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetKeySizeInBits(keySizeInBits int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySizeInBits:"), keySizeInBits)
 }
 
 // PublicKeyData contains raw public key data for this private key.
-func (x *TokenKeychainKey) PublicKeyData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyData"))
+func (tkk *TokenKeychainKey) PublicKeyData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("publicKeyData"))
 	return obj.Wrap(_r)
 }
 
-// SetPublicKeyData wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetPublicKeyData(publicKeyData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyData:"), objref.IDOf(publicKeyData))
-}
-
-// PublicKeyHash SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
-func (x *TokenKeychainKey) PublicKeyHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyHash"))
+// PublicKeyHash returns SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
+func (tkk *TokenKeychainKey) PublicKeyHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("publicKeyHash"))
 	return obj.Wrap(_r)
 }
 
-// SetPublicKeyHash wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetPublicKeyHash(publicKeyHash obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyHash:"), objref.IDOf(publicKeyHash))
-}
-
-// CanDecrypt indicates whether this key can be used to decrypt data.  The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
-func (x *TokenKeychainKey) CanDecrypt() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDecrypt"))
+// CanDecrypt reports whether this key can be used to decrypt data. The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
+func (tkk *TokenKeychainKey) CanDecrypt() bool {
+	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("canDecrypt"))
 	return _r
 }
 
-// SetCanDecrypt wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetCanDecrypt(canDecrypt bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDecrypt:"), canDecrypt)
-}
-
-// CanSign indicates whether this key can be used to create a digital signature.  The property is an equivalent to kSecAttrCanSign in SecItem.h
-func (x *TokenKeychainKey) CanSign() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSign"))
+// CanSign reports whether this key can be used to create a digital signature. The property is an equivalent to kSecAttrCanSign in SecItem.h
+func (tkk *TokenKeychainKey) CanSign() bool {
+	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("canSign"))
 	return _r
 }
 
-// SetCanSign wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetCanSign(canSign bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSign:"), canSign)
-}
-
-// CanPerformKeyExchange indicates whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
-func (x *TokenKeychainKey) CanPerformKeyExchange() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformKeyExchange"))
+// CanPerformKeyExchange reports whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
+func (tkk *TokenKeychainKey) CanPerformKeyExchange() bool {
+	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("canPerformKeyExchange"))
 	return _r
 }
 
-// SetCanPerformKeyExchange wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetCanPerformKeyExchange(canPerformKeyExchange bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPerformKeyExchange:"), canPerformKeyExchange)
-}
-
-// IsSuitableForLogin indicates whether this key can be used for login in to the system.
-func (x *TokenKeychainKey) IsSuitableForLogin() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSuitableForLogin"))
+// IsSuitableForLogin reports whether this key can be used for login in to the system.
+func (tkk *TokenKeychainKey) IsSuitableForLogin() bool {
+	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("isSuitableForLogin"))
 	return _r
 }
-
-// SetSuitableForLogin wraps the corresponding Objective-C method.
-func (x *TokenKeychainKey) SetSuitableForLogin(suitableForLogin bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuitableForLogin:"), suitableForLogin)
-}
-
-// TokenKeychainKeyable is the interface implemented by [TokenKeychainKey], for mocking and DI.
-type TokenKeychainKeyable interface {
-	obj.Object
-	WithKeyType(keyType string) *TokenKeychainKey
-	WithApplicationTag(applicationTag obj.Object) *TokenKeychainKey
-	WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey
-	WithPublicKeyData(publicKeyData obj.Object) *TokenKeychainKey
-	WithPublicKeyHash(publicKeyHash obj.Object) *TokenKeychainKey
-	WithCanDecrypt(canDecrypt bool) *TokenKeychainKey
-	WithCanSign(canSign bool) *TokenKeychainKey
-	WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey
-	WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey
-	WithLabel(label string) *TokenKeychainKey
-	WithConstraints(constraints obj.Object) *TokenKeychainKey
-	KeyType() string
-	SetKeyType(keyType string)
-	ApplicationTag() obj.Object
-	SetApplicationTag(applicationTag obj.Object)
-	KeySizeInBits() int
-	SetKeySizeInBits(keySizeInBits int)
-	PublicKeyData() obj.Object
-	SetPublicKeyData(publicKeyData obj.Object)
-	PublicKeyHash() obj.Object
-	SetPublicKeyHash(publicKeyHash obj.Object)
-	CanDecrypt() bool
-	SetCanDecrypt(canDecrypt bool)
-	CanSign() bool
-	SetCanSign(canSign bool)
-	CanPerformKeyExchange() bool
-	SetCanPerformKeyExchange(canPerformKeyExchange bool)
-	IsSuitableForLogin() bool
-	SetSuitableForLogin(suitableForLogin bool)
-}
-
-var _ TokenKeychainKeyable = (*TokenKeychainKey)(nil)
 
 var _ TokenKeychainItemProvider = (*TokenKeychainKey)(nil)

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func colorSamplerAdopt(id objc.ID) *ColorSampler {
 }
 
 // Description returns the object's -description text.
-func (x *ColorSampler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ColorSampler) Description() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ColorSampler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cs *ColorSampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ColorSampler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cs *ColorSampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ColorSampler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ColorSampler) String() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // NewColorSampler creates a new ColorSampler.
@@ -76,7 +77,7 @@ func NewColorSampler() *ColorSampler {
 // ShowSamplerWithSelectionHandler displays the system color-sampling interface asynchronously and reports the selected color back to your app.
 //
 // ShowSamplerWithSelectionHandler blocks until the operation completes or ctx is cancelled.
-func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (result *Color, err error) {
+func (cs *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (result *Color, err error) {
 	type _result struct {
 		val *Color
 		err error
@@ -87,7 +88,7 @@ func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (res
 		_o.val = ColorFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showSamplerWithSelectionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("showSamplerWithSelectionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -96,11 +97,3 @@ func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (res
 		return _zero, ctx.Err()
 	}
 }
-
-// ColorSamplerable is the interface implemented by [ColorSampler], for mocking and DI.
-type ColorSamplerable interface {
-	obj.Object
-	ShowSamplerWithSelectionHandler(ctx context.Context) (*Color, error)
-}
-
-var _ ColorSamplerable = (*ColorSampler)(nil)

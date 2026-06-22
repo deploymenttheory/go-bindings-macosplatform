@@ -46,24 +46,24 @@ func virtualConferenceURLDescriptorAdopt(id objc.ID) *VirtualConferenceURLDescri
 }
 
 // Description returns the object's -description text.
-func (x *VirtualConferenceURLDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcud *VirtualConferenceURLDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vcud))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualConferenceURLDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcud *VirtualConferenceURLDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcud), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualConferenceURLDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcud *VirtualConferenceURLDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcud), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualConferenceURLDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcud *VirtualConferenceURLDescriptor) String() string {
+	return rt.Description(objref.IDOf(vcud))
 }
 
 // NewVirtualConferenceURLDescriptorWithTitleURL creates a URL descriptor with the given title and URL.
@@ -74,8 +74,8 @@ func NewVirtualConferenceURLDescriptorWithTitleURL(title string, uRL string) *Vi
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *VirtualConferenceURLDescriptor) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (vcud *VirtualConferenceURLDescriptor) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vcud), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,16 +83,7 @@ func (x *VirtualConferenceURLDescriptor) Title() string {
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *VirtualConferenceURLDescriptor) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (vcud *VirtualConferenceURLDescriptor) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vcud), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// VirtualConferenceURLDescriptorable is the interface implemented by [VirtualConferenceURLDescriptor], for mocking and DI.
-type VirtualConferenceURLDescriptorable interface {
-	obj.Object
-	Title() string
-	URL() obj.Object
-}
-
-var _ VirtualConferenceURLDescriptorable = (*VirtualConferenceURLDescriptor)(nil)

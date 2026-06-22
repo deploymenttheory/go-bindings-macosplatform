@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(id objc.ID)
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) Description() string {
+	return rt.Description(objref.IDOf(apkclbri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkclbri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkclbri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) String() string {
+	return rt.Description(objref.IDOf(apkclbri))
 }
 
 // NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement creates a new AuthorizationPublicKeyCredentialLargeBlobRegistrationInput.
@@ -74,28 +74,13 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportReq
 }
 
 // WithSupportRequirement sets the property and returns the receiver so calls can be chained.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRequirement:"), supportRequirement)
-	return x
+func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	objc.Send[objc.ID](objref.IDOf(apkclbri), objc.RegisterName("setSupportRequirement:"), supportRequirement)
+	return apkclbri
 }
 
 // SupportRequirement wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
-	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobSupportRequirement](objref.IDOf(x), objc.RegisterName("supportRequirement"))
+func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
+	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobSupportRequirement](objref.IDOf(apkclbri), objc.RegisterName("supportRequirement"))
 	return _r
 }
-
-// SetSupportRequirement wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SetSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRequirement:"), supportRequirement)
-}
-
-// AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobRegistrationInput], for mocking and DI.
-type AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable interface {
-	obj.Object
-	WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
-	SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement
-	SetSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement)
-}
-
-var _ AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable = (*AuthorizationPublicKeyCredentialLargeBlobRegistrationInput)(nil)

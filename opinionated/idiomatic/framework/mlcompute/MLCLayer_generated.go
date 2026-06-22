@@ -48,93 +48,68 @@ func layerAdopt(id objc.ID) *Layer {
 }
 
 // Description returns the object's -description text.
-func (x *Layer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Layer) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Layer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Layer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Layer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Layer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Layer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Layer) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *Layer) WithLabel(label string) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (l *Layer) WithLabel(label string) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return l
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (l *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return l
 }
 
-// LayerID the layer ID A unique number to identify each layer.  Assigned when the layer is created.
-func (x *Layer) LayerID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerID"))
+// LayerID returns the layer ID A unique number to identify each layer.  Assigned when the layer is created.
+func (l *Layer) LayerID() int {
+	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("layerID"))
 	return _r
 }
 
-// Label a string to help identify this object.
-func (x *Layer) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns a string to help identify this object.
+func (l *Layer) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *Layer) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// IsDebuggingEnabled a flag to identify if we want to debug this layer when executing a graph that includes this layer If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
-func (x *Layer) IsDebuggingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDebuggingEnabled"))
+// IsDebuggingEnabled reports whether a flag to identify if we want to debug this layer when executing a graph that includes this layer If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is false. If isDebuggingEnabled is set to true, make sure to set options to enable debugging when compiling the graph. Otherwise this property may be ignored.
+func (l *Layer) IsDebuggingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isDebuggingEnabled"))
 	return _r
 }
 
-// SetIsDebuggingEnabled wraps the corresponding Objective-C method.
-func (x *Layer) SetIsDebuggingEnabled(isDebuggingEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-}
-
-// DeviceType the device type where this layer will be executed Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
-func (x *Layer) DeviceType() DeviceType {
-	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("deviceType"))
+// DeviceType returns the device type where this layer will be executed Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
+func (l *Layer) DeviceType() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(l), objc.RegisterName("deviceType"))
 	return _r
 }
-
-// Layerable is the interface implemented by [Layer], for mocking and DI.
-type Layerable interface {
-	obj.Object
-	WithLabel(label string) *Layer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer
-	LayerID() int
-	Label() string
-	SetLabel(label string)
-	IsDebuggingEnabled() bool
-	SetIsDebuggingEnabled(isDebuggingEnabled bool)
-	DeviceType() DeviceType
-}
-
-var _ Layerable = (*Layer)(nil)
 
 // isLayer marks Layer — and, by embedding promotion, its
 // subclasses — as a member of the Layer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Layer) isLayer() {}
+func (l *Layer) isLayer() {}
 
 var _ LayerProvider = (*Layer)(nil)

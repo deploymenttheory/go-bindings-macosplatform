@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,72 +51,41 @@ func NewAudioInputNode() *AudioInputNode {
 	return audioInputNodeAdopt(_id)
 }
 
-// WithVoiceProcessingBypassed a Boolean that indicates whether the node bypasses all microphone uplink processing of the voice-processing unit.
-func (x *AudioInputNode) WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
-	return x
+// WithVoiceProcessingBypassed sets a Boolean that indicates whether the node bypasses all microphone uplink processing of the voice-processing unit.
+func (ain *AudioInputNode) WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode {
+	objc.Send[objc.ID](objref.IDOf(ain), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
+	return ain
 }
 
-// WithVoiceProcessingAGCEnabled a Boolean that indicates whether automatic gain control on the processed microphone uplink signal is active.
-func (x *AudioInputNode) WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
-	return x
+// WithVoiceProcessingAGCEnabled sets a Boolean that indicates whether automatic gain control on the processed microphone uplink signal is active.
+func (ain *AudioInputNode) WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode {
+	objc.Send[objc.ID](objref.IDOf(ain), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
+	return ain
 }
 
-// WithVoiceProcessingInputMuted a Boolean that indicates whether the input of the voice processing unit is in a muted state.
-func (x *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
-	return x
+// WithVoiceProcessingInputMuted sets a Boolean that indicates whether the input of the voice processing unit is in a muted state.
+func (ain *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode {
+	objc.Send[objc.ID](objref.IDOf(ain), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
+	return ain
 }
 
-// IsVoiceProcessingBypassed bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
-func (x *AudioInputNode) IsVoiceProcessingBypassed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingBypassed"))
+// IsVoiceProcessingBypassed reports whether bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
+func (ain *AudioInputNode) IsVoiceProcessingBypassed() bool {
+	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingBypassed"))
 	return _r
 }
 
-// SetVoiceProcessingBypassed wraps the corresponding Objective-C method.
-func (x *AudioInputNode) SetVoiceProcessingBypassed(voiceProcessingBypassed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
-}
-
-// IsVoiceProcessingAGCEnabled enable automatic gain control on the processed microphone uplink. signal. Enabled by default. Querying this property when voice processing is disabled will return false.
-func (x *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingAGCEnabled"))
+// IsVoiceProcessingAGCEnabled reports whether enable automatic gain control on the processed microphone uplink. signal. Enabled by default. Querying this property when voice processing is disabled will return false.
+func (ain *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingAGCEnabled"))
 	return _r
 }
 
-// SetVoiceProcessingAGCEnabled wraps the corresponding Objective-C method.
-func (x *AudioInputNode) SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
-}
-
-// IsVoiceProcessingInputMuted mutes the input of the voice processing unit. Querying this property when voice processing is disabled will return false.
-func (x *AudioInputNode) IsVoiceProcessingInputMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingInputMuted"))
+// IsVoiceProcessingInputMuted reports whether mutes the input of the voice processing unit. Querying this property when voice processing is disabled will return false.
+func (ain *AudioInputNode) IsVoiceProcessingInputMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("isVoiceProcessingInputMuted"))
 	return _r
 }
-
-// SetVoiceProcessingInputMuted wraps the corresponding Objective-C method.
-func (x *AudioInputNode) SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
-}
-
-// AudioInputNodeable is the interface implemented by [AudioInputNode], for mocking and DI.
-type AudioInputNodeable interface {
-	obj.Object
-	WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode
-	WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode
-	WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode
-	IsVoiceProcessingBypassed() bool
-	SetVoiceProcessingBypassed(voiceProcessingBypassed bool)
-	IsVoiceProcessingAGCEnabled() bool
-	SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool)
-	IsVoiceProcessingInputMuted() bool
-	SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool)
-}
-
-var _ AudioInputNodeable = (*AudioInputNode)(nil)
 
 var _ AudioIONodeProvider = (*AudioInputNode)(nil)
 

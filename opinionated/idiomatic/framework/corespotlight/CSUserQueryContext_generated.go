@@ -52,141 +52,90 @@ func NewUserQueryContext() *UserQueryContext {
 	return userQueryContextAdopt(_id)
 }
 
-// WithEnableRankedResults a Boolean value that indicates whether the query sorts results by their relevance.
-func (x *UserQueryContext) WithEnableRankedResults(enableRankedResults bool) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRankedResults:"), enableRankedResults)
-	return x
+// WithEnableRankedResults sets a Boolean value that indicates whether the query sorts results by their relevance.
+func (uqc *UserQueryContext) WithEnableRankedResults(enableRankedResults bool) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setEnableRankedResults:"), enableRankedResults)
+	return uqc
 }
 
-// WithDisableSemanticSearch a Boolean value that indicates whether to exclude semantic-based search results from the output.
-func (x *UserQueryContext) WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableSemanticSearch:"), disableSemanticSearch)
-	return x
+// WithDisableSemanticSearch sets a Boolean value that indicates whether to exclude semantic-based search results from the output.
+func (uqc *UserQueryContext) WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setDisableSemanticSearch:"), disableSemanticSearch)
+	return uqc
 }
 
-// WithMaxResultCount the maximum number of search results for the query to return.
-func (x *UserQueryContext) WithMaxResultCount(maxResultCount int) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxResultCount:"), maxResultCount)
-	return x
+// WithMaxResultCount sets the maximum number of search results for the query to return.
+func (uqc *UserQueryContext) WithMaxResultCount(maxResultCount int) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setMaxResultCount:"), maxResultCount)
+	return uqc
 }
 
-// WithMaxSuggestionCount the maximum number of suggested text completions for the query to return.
-func (x *UserQueryContext) WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSuggestionCount:"), maxSuggestionCount)
-	return x
+// WithMaxSuggestionCount sets the maximum number of suggested text completions for the query to return.
+func (uqc *UserQueryContext) WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setMaxSuggestionCount:"), maxSuggestionCount)
+	return uqc
 }
 
-// WithMaxRankedResultCount the maximum number of ranked results to return during the query.
-func (x *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRankedResultCount:"), maxRankedResultCount)
-	return x
+// WithMaxRankedResultCount sets the maximum number of ranked results to return during the query.
+func (uqc *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setMaxRankedResultCount:"), maxRankedResultCount)
+	return uqc
 }
 
-// WithFetchAttributes the attributes the system fetches for the searchable items.
-func (x *UserQueryContext) WithFetchAttributes(items ...obj.Object) *UserQueryContext {
+// WithFetchAttributes sets the attributes the system fetches for the searchable items.
+func (uqc *UserQueryContext) WithFetchAttributes(items ...obj.Object) *UserQueryContext {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAttributes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setFetchAttributes:"), _arr)
+	return uqc
 }
 
-// WithFilterQueries the query string used to filter the results.
-func (x *UserQueryContext) WithFilterQueries(items ...obj.Object) *UserQueryContext {
+// WithFilterQueries sets the query string used to filter the results.
+func (uqc *UserQueryContext) WithFilterQueries(items ...obj.Object) *UserQueryContext {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterQueries:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setFilterQueries:"), _arr)
+	return uqc
 }
 
-// WithKeyboardLanguage the language used for the query.
-func (x *UserQueryContext) WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
-	return x
+// WithKeyboardLanguage sets the language used for the query.
+func (uqc *UserQueryContext) WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
+	return uqc
 }
 
-// WithSourceOptions the query source options to allow or deny Mail messages in the search.
-func (x *UserQueryContext) WithSourceOptions(sourceOptions SearchQuerySourceOptions) *UserQueryContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOptions:"), sourceOptions)
-	return x
+// WithSourceOptions sets the query source options to allow or deny Mail messages in the search.
+func (uqc *UserQueryContext) WithSourceOptions(sourceOptions SearchQuerySourceOptions) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(uqc), objc.RegisterName("setSourceOptions:"), sourceOptions)
+	return uqc
 }
 
 // EnableRankedResults wraps the corresponding Objective-C method.
-func (x *UserQueryContext) EnableRankedResults() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableRankedResults"))
+func (uqc *UserQueryContext) EnableRankedResults() bool {
+	_r := objc.Send[bool](objref.IDOf(uqc), objc.RegisterName("enableRankedResults"))
 	return _r
-}
-
-// SetEnableRankedResults wraps the corresponding Objective-C method.
-func (x *UserQueryContext) SetEnableRankedResults(enableRankedResults bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRankedResults:"), enableRankedResults)
 }
 
 // DisableSemanticSearch wraps the corresponding Objective-C method.
-func (x *UserQueryContext) DisableSemanticSearch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableSemanticSearch"))
+func (uqc *UserQueryContext) DisableSemanticSearch() bool {
+	_r := objc.Send[bool](objref.IDOf(uqc), objc.RegisterName("disableSemanticSearch"))
 	return _r
-}
-
-// SetDisableSemanticSearch wraps the corresponding Objective-C method.
-func (x *UserQueryContext) SetDisableSemanticSearch(disableSemanticSearch bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableSemanticSearch:"), disableSemanticSearch)
 }
 
 // MaxResultCount wraps the corresponding Objective-C method.
-func (x *UserQueryContext) MaxResultCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxResultCount"))
+func (uqc *UserQueryContext) MaxResultCount() int {
+	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxResultCount"))
 	return _r
-}
-
-// SetMaxResultCount wraps the corresponding Objective-C method.
-func (x *UserQueryContext) SetMaxResultCount(maxResultCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxResultCount:"), maxResultCount)
 }
 
 // MaxSuggestionCount wraps the corresponding Objective-C method.
-func (x *UserQueryContext) MaxSuggestionCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSuggestionCount"))
+func (uqc *UserQueryContext) MaxSuggestionCount() int {
+	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxSuggestionCount"))
 	return _r
-}
-
-// SetMaxSuggestionCount wraps the corresponding Objective-C method.
-func (x *UserQueryContext) SetMaxSuggestionCount(maxSuggestionCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSuggestionCount:"), maxSuggestionCount)
 }
 
 // MaxRankedResultCount wraps the corresponding Objective-C method.
-func (x *UserQueryContext) MaxRankedResultCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxRankedResultCount"))
+func (uqc *UserQueryContext) MaxRankedResultCount() int {
+	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxRankedResultCount"))
 	return _r
 }
-
-// SetMaxRankedResultCount wraps the corresponding Objective-C method.
-func (x *UserQueryContext) SetMaxRankedResultCount(maxRankedResultCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRankedResultCount:"), maxRankedResultCount)
-}
-
-// UserQueryContextable is the interface implemented by [UserQueryContext], for mocking and DI.
-type UserQueryContextable interface {
-	obj.Object
-	WithEnableRankedResults(enableRankedResults bool) *UserQueryContext
-	WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext
-	WithMaxResultCount(maxResultCount int) *UserQueryContext
-	WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext
-	WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext
-	WithFetchAttributes(items ...obj.Object) *UserQueryContext
-	WithFilterQueries(items ...obj.Object) *UserQueryContext
-	WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext
-	WithSourceOptions(sourceOptions SearchQuerySourceOptions) *UserQueryContext
-	EnableRankedResults() bool
-	SetEnableRankedResults(enableRankedResults bool)
-	DisableSemanticSearch() bool
-	SetDisableSemanticSearch(disableSemanticSearch bool)
-	MaxResultCount() int
-	SetMaxResultCount(maxResultCount int)
-	MaxSuggestionCount() int
-	SetMaxSuggestionCount(maxSuggestionCount int)
-	MaxRankedResultCount() int
-	SetMaxRankedResultCount(maxRankedResultCount int)
-}
-
-var _ UserQueryContextable = (*UserQueryContext)(nil)
 
 var _ SearchQueryContextProvider = (*UserQueryContext)(nil)

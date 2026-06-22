@@ -46,24 +46,24 @@ func userIdentityLookupInfoAdopt(id objc.ID) *UserIdentityLookupInfo {
 }
 
 // Description returns the object's -description text.
-func (x *UserIdentityLookupInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uili *UserIdentityLookupInfo) Description() string {
+	return rt.Description(objref.IDOf(uili))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserIdentityLookupInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uili *UserIdentityLookupInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uili), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserIdentityLookupInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uili *UserIdentityLookupInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uili), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserIdentityLookupInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uili *UserIdentityLookupInfo) String() string {
+	return rt.Description(objref.IDOf(uili))
 }
 
 // NewUserIdentityLookupInfoWithEmailAddress creates a lookup info for the specified email address. - Parameters: - emailAddress: The email address for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
@@ -87,36 +87,26 @@ func NewUserIdentityLookupInfoWithUserRecordID(userRecordID *RecordID) *UserIden
 	return userIdentityLookupInfoAdopt(_id)
 }
 
-// EmailAddress the user's email address.
-func (x *UserIdentityLookupInfo) EmailAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+// EmailAddress returns the user's email address.
+func (uili *UserIdentityLookupInfo) EmailAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uili), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PhoneNumber the user's phone number.
-func (x *UserIdentityLookupInfo) PhoneNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+// PhoneNumber returns the user's phone number.
+func (uili *UserIdentityLookupInfo) PhoneNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uili), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UserRecordID the ID of the user record. Use this value to retrieve the user record for the user identity. The user record doesn't contain any personal information about the user, by default. You can add data to the user record, but you shouldn't add anything sensitive.
-func (x *UserIdentityLookupInfo) UserRecordID() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userRecordID"))
+// UserRecordID returns the ID of the user record. Use this value to retrieve the user record for the user identity. The user record doesn't contain any personal information about the user, by default. You can add data to the user record, but you shouldn't add anything sensitive.
+func (uili *UserIdentityLookupInfo) UserRecordID() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(uili), objc.RegisterName("userRecordID"))
 	return RecordIDFromID(_r)
 }
-
-// UserIdentityLookupInfoable is the interface implemented by [UserIdentityLookupInfo], for mocking and DI.
-type UserIdentityLookupInfoable interface {
-	obj.Object
-	EmailAddress() string
-	PhoneNumber() string
-	UserRecordID() *RecordID
-}
-
-var _ UserIdentityLookupInfoable = (*UserIdentityLookupInfo)(nil)

@@ -48,39 +48,39 @@ func taskAdopt(id objc.ID) *Task {
 }
 
 // Description returns the object's -description text.
-func (x *Task) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Task) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Task) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Task) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Task) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Task) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Task) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Task) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // Resume begins or resumes a machine learning task.
-func (x *Task) Resume() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
+func (t *Task) Resume() {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("resume"))
 }
 
 // Cancel cancels a machine learning task before it completes.
-func (x *Task) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (t *Task) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cancel"))
 }
 
 // TaskIdentifier wraps the corresponding Objective-C method.
-func (x *Task) TaskIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskIdentifier"))
+func (t *Task) TaskIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("taskIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,25 +88,14 @@ func (x *Task) TaskIdentifier() string {
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *Task) State() TaskState {
-	_r := objc.Send[TaskState](objref.IDOf(x), objc.RegisterName("state"))
+func (t *Task) State() TaskState {
+	_r := objc.Send[TaskState](objref.IDOf(t), objc.RegisterName("state"))
 	return _r
 }
-
-// Taskable is the interface implemented by [Task], for mocking and DI.
-type Taskable interface {
-	obj.Object
-	Resume()
-	Cancel()
-	TaskIdentifier() string
-	State() TaskState
-}
-
-var _ Taskable = (*Task)(nil)
 
 // isTask marks Task — and, by embedding promotion, its
 // subclasses — as a member of the Task hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Task) isTask() {}
+func (t *Task) isTask() {}
 
 var _ TaskProvider = (*Task)(nil)

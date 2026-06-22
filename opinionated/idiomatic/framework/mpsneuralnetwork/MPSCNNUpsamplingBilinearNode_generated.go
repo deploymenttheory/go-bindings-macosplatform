@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,39 +59,28 @@ func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactor
 	return cNNUpsamplingBilinearNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNUpsamplingBilinearNode) WithLabel(label string) *CNNUpsamplingBilinearNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cubn *CNNUpsamplingBilinearNode) WithLabel(label string) *CNNUpsamplingBilinearNode {
+	objc.Send[objc.ID](objref.IDOf(cubn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cubn
 }
 
 // ScaleFactorX wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
+func (cubn *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
+	_r := objc.Send[float64](objref.IDOf(cubn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingBilinearNode) ScaleFactorY() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
+func (cubn *CNNUpsamplingBilinearNode) ScaleFactorY() float64 {
+	_r := objc.Send[float64](objref.IDOf(cubn), objc.RegisterName("scaleFactorY"))
 	return _r
 }
 
 // AlignCorners wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingBilinearNode) AlignCorners() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignCorners"))
+func (cubn *CNNUpsamplingBilinearNode) AlignCorners() bool {
+	_r := objc.Send[bool](objref.IDOf(cubn), objc.RegisterName("alignCorners"))
 	return _r
 }
-
-// CNNUpsamplingBilinearNodeable is the interface implemented by [CNNUpsamplingBilinearNode], for mocking and DI.
-type CNNUpsamplingBilinearNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNUpsamplingBilinearNode
-	ScaleFactorX() float64
-	ScaleFactorY() float64
-	AlignCorners() bool
-}
-
-var _ CNNUpsamplingBilinearNodeable = (*CNNUpsamplingBilinearNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNUpsamplingBilinearNode)(nil)

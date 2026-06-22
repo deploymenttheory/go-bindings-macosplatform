@@ -46,24 +46,24 @@ func captureDeviceDiscoverySessionAdopt(id objc.ID) *CaptureDeviceDiscoverySessi
 }
 
 // Description returns the object's -description text.
-func (x *CaptureDeviceDiscoverySession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdds *CaptureDeviceDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(cdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureDeviceDiscoverySession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdds *CaptureDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureDeviceDiscoverySession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdds *CaptureDeviceDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureDeviceDiscoverySession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdds *CaptureDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(cdds))
 }
 
 // NewCaptureDeviceDiscoverySession creates a new CaptureDeviceDiscoverySession.
@@ -72,18 +72,10 @@ func NewCaptureDeviceDiscoverySession() *CaptureDeviceDiscoverySession {
 	return captureDeviceDiscoverySessionAdopt(_id)
 }
 
-// Devices the list of devices that comply to the search criteria specified on the discovery session. The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
+// Devices returns the list of devices that comply to the search criteria specified on the discovery session. The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
 //
 // Devices returns the collection as a Go slice.
-func (x *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+func (cdds *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdds), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
-
-// CaptureDeviceDiscoverySessionable is the interface implemented by [CaptureDeviceDiscoverySession], for mocking and DI.
-type CaptureDeviceDiscoverySessionable interface {
-	obj.Object
-	Devices() []*CaptureDevice
-}
-
-var _ CaptureDeviceDiscoverySessionable = (*CaptureDeviceDiscoverySession)(nil)

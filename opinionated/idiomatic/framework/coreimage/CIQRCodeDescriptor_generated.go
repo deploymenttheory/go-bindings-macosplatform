@@ -53,39 +53,28 @@ func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(
 	return qRCodeDescriptorAdopt(_id)
 }
 
-// ErrorCorrectedPayload the error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
-func (x *QRCodeDescriptor) ErrorCorrectedPayload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+// ErrorCorrectedPayload returns the error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
+func (qcd *QRCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qcd), objc.RegisterName("errorCorrectedPayload"))
 	return obj.Wrap(_r)
 }
 
-// SymbolVersion the version of the QR code which corresponds to the size of the QR code symbol. ISO/IEC 18004 defines versions from 1 to 40, where a higher symbol version indicates a larger data-carrying capacity. This field is required in order to properly interpret the error corrected payload.
-func (x *QRCodeDescriptor) SymbolVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("symbolVersion"))
+// SymbolVersion returns the version of the QR code which corresponds to the size of the QR code symbol. ISO/IEC 18004 defines versions from 1 to 40, where a higher symbol version indicates a larger data-carrying capacity. This field is required in order to properly interpret the error corrected payload.
+func (qcd *QRCodeDescriptor) SymbolVersion() int {
+	_r := objc.Send[int](objref.IDOf(qcd), objc.RegisterName("symbolVersion"))
 	return _r
 }
 
-// MaskPattern the data mask pattern for the QR code symbol. QR Codes support eight data mask patterns, which are used to avoid large black or large white areas inside the symbol body. Valid values range from 0 to 7.
-func (x *QRCodeDescriptor) MaskPattern() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("maskPattern"))
+// MaskPattern returns the data mask pattern for the QR code symbol. QR Codes support eight data mask patterns, which are used to avoid large black or large white areas inside the symbol body. Valid values range from 0 to 7.
+func (qcd *QRCodeDescriptor) MaskPattern() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(qcd), objc.RegisterName("maskPattern"))
 	return _r
 }
 
-// ErrorCorrectionLevel the error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
-func (x *QRCodeDescriptor) ErrorCorrectionLevel() QRCodeErrorCorrectionLevel {
-	_r := objc.Send[QRCodeErrorCorrectionLevel](objref.IDOf(x), objc.RegisterName("errorCorrectionLevel"))
+// ErrorCorrectionLevel returns the error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
+func (qcd *QRCodeDescriptor) ErrorCorrectionLevel() QRCodeErrorCorrectionLevel {
+	_r := objc.Send[QRCodeErrorCorrectionLevel](objref.IDOf(qcd), objc.RegisterName("errorCorrectionLevel"))
 	return _r
 }
-
-// QRCodeDescriptorable is the interface implemented by [QRCodeDescriptor], for mocking and DI.
-type QRCodeDescriptorable interface {
-	obj.Object
-	ErrorCorrectedPayload() obj.Object
-	SymbolVersion() int
-	MaskPattern() uint8
-	ErrorCorrectionLevel() QRCodeErrorCorrectionLevel
-}
-
-var _ QRCodeDescriptorable = (*QRCodeDescriptor)(nil)
 
 var _ BarcodeDescriptorProvider = (*QRCodeDescriptor)(nil)

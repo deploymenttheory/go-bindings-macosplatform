@@ -82,67 +82,54 @@ func NewMutableDictionaryWithContentsOfURL(url string) *MutableDictionary {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableDictionary) WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (md *MutableDictionary) WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return md
 }
 
 // RemoveObjectForKey removes a given key and its associated value from the dictionary.
-func (x *MutableDictionary) RemoveObjectForKey(aKey obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), objref.IDOf(aKey))
+func (md *MutableDictionary) RemoveObjectForKey(aKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("removeObjectForKey:"), objref.IDOf(aKey))
 }
 
 // AddEntriesFromDictionary adds to the receiving dictionary the entries from another dictionary.
-func (x *MutableDictionary) AddEntriesFromDictionary(otherDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntriesFromDictionary:"), objref.IDOf(otherDictionary))
+func (md *MutableDictionary) AddEntriesFromDictionary(otherDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("addEntriesFromDictionary:"), objref.IDOf(otherDictionary))
 }
 
 // RemoveAllObjects empties the dictionary of its entries.
-func (x *MutableDictionary) RemoveAllObjects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
+func (md *MutableDictionary) RemoveAllObjects() {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("removeAllObjects"))
 }
 
 // RemoveObjectsForKeys removes from the dictionary entries specified by elements in a given array.
-func (x *MutableDictionary) RemoveObjectsForKeys(keyArray []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsForKeys:"), purego.SliceToNSArray(keyArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (md *MutableDictionary) RemoveObjectsForKeys(keyArray []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("removeObjectsForKeys:"), purego.SliceToNSArray(keyArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetDictionary sets the contents of the receiving dictionary to entries in a given dictionary.
-func (x *MutableDictionary) SetDictionary(otherDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDictionary:"), objref.IDOf(otherDictionary))
+func (md *MutableDictionary) SetDictionary(otherDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setDictionary:"), objref.IDOf(otherDictionary))
 }
 
 // Set stores value under key (an object) and returns the receiver so calls can
 // be chained.
-func (x *MutableDictionary) Set(key, value obj.Object) *MutableDictionary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
-	return x
+func (md *MutableDictionary) Set(key, value obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
+	return md
 }
 
 // SetString stores value under the given string key and returns the receiver so
 // calls can be chained.
-func (x *MutableDictionary) SetString(key string, value obj.Object) *MutableDictionary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
-	return x
+func (md *MutableDictionary) SetString(key string, value obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
+	return md
 }
 
 // Get returns the value stored under the given string key, or nil when there is
 // none.
-func (x *MutableDictionary) Get(key string) obj.Object {
-	return obj.Wrap(objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(key)))
+func (md *MutableDictionary) Get(key string) obj.Object {
+	return obj.Wrap(objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("objectForKey:"), purego.NSString(key)))
 }
-
-// MutableDictionaryable is the interface implemented by [MutableDictionary], for mocking and DI.
-type MutableDictionaryable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary
-	RemoveObjectForKey(aKey obj.Object)
-	AddEntriesFromDictionary(otherDictionary obj.Object)
-	RemoveAllObjects()
-	RemoveObjectsForKeys(keyArray []obj.Object)
-	SetDictionary(otherDictionary obj.Object)
-}
-
-var _ MutableDictionaryable = (*MutableDictionary)(nil)
 
 var _ DictionaryProvider = (*MutableDictionary)(nil)

@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // XMLNode is an idiomatic wrapper over the Objective-C class NSXMLNode.
@@ -50,24 +51,24 @@ func xMLNodeAdopt(id objc.ID) *XMLNode {
 }
 
 // Description returns the object's -description text.
-func (x *XMLNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (xn *XMLNode) Description() string {
+	return rt.Description(objref.IDOf(xn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *XMLNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (xn *XMLNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(xn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *XMLNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (xn *XMLNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(xn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *XMLNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (xn *XMLNode) String() string {
+	return rt.Description(objref.IDOf(xn))
 }
 
 // NewXMLNodeWithKind invokes
@@ -84,55 +85,55 @@ func NewXMLNodeWithKindOptions(kind XMLNodeKind, options XMLNodeOptions) *XMLNod
 	return xMLNodeAdopt(_id)
 }
 
-// WithName sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
-func (x *XMLNode) WithName(name StringProvider) *XMLNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+func (xn *XMLNode) WithName(name StringProvider) *XMLNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setName:"), objref.IDOf(name))
+	return xn
 }
 
-// WithObjectValue sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
-func (x *XMLNode) WithObjectValue(objectValue obj.Object) *XMLNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+func (xn *XMLNode) WithObjectValue(objectValue obj.Object) *XMLNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return xn
 }
 
-// WithStringValue sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
-func (x *XMLNode) WithStringValue(stringValue StringProvider) *XMLNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
-	return x
+// WithStringValue sets sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+func (xn *XMLNode) WithStringValue(stringValue StringProvider) *XMLNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
+	return xn
 }
 
-// WithURI set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-func (x *XMLNode) WithURI(uRI StringProvider) *XMLNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uRI))
-	return x
+// WithURI sets set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+func (xn *XMLNode) WithURI(uRI StringProvider) *XMLNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setURI:"), objref.IDOf(uRI))
+	return xn
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *XMLNode) WithScriptingProperties(scriptingProperties obj.Object) *XMLNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (xn *XMLNode) WithScriptingProperties(scriptingProperties obj.Object) *XMLNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return xn
 }
 
 // SetStringValueResolvingEntities sets the content as with
-func (x *XMLNode) SetStringValueResolvingEntities(string_ string, resolve bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:resolvingEntities:"), purego.NSString(string_), resolve)
+func (xn *XMLNode) SetStringValueResolvingEntities(string_ string, resolve bool) {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setStringValue:resolvingEntities:"), purego.NSString(string_), resolve)
 }
 
 // ChildAtIndex returns the child node at a particular index.
-func (x *XMLNode) ChildAtIndex(index int) *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childAtIndex:"), index)
+func (xn *XMLNode) ChildAtIndex(index int) *XMLNode {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("childAtIndex:"), index)
 	return XMLNodeFromID(_r)
 }
 
 // Detach detaches this node from its parent.
-func (x *XMLNode) Detach() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detach"))
+func (xn *XMLNode) Detach() {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("detach"))
 }
 
 // XMLStringWithOptions the representation of this node as it would appear in an XML document, with various output options available.
-func (x *XMLNode) XMLStringWithOptions(options XMLNodeOptions) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("XMLStringWithOptions:"), options)
+func (xn *XMLNode) XMLStringWithOptions(options XMLNodeOptions) string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("XMLStringWithOptions:"), options)
 	if _r == 0 {
 		return ""
 	}
@@ -140,8 +141,8 @@ func (x *XMLNode) XMLStringWithOptions(options XMLNodeOptions) string {
 }
 
 // CanonicalXMLStringPreservingComments w3 canonical form (http://www.w3.org/TR/xml-c14n). The input option NSXMLNodePreserveWhitespace should be set for true canonical form.
-func (x *XMLNode) CanonicalXMLStringPreservingComments(comments bool) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("canonicalXMLStringPreservingComments:"), comments)
+func (xn *XMLNode) CanonicalXMLStringPreservingComments(comments bool) string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("canonicalXMLStringPreservingComments:"), comments)
 	if _r == 0 {
 		return ""
 	}
@@ -149,9 +150,9 @@ func (x *XMLNode) CanonicalXMLStringPreservingComments(comments bool) string {
 }
 
 // NodesForXPathError returns the nodes resulting from applying an XPath to this node using the node as the context item ("."). normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model.
-func (x *XMLNode) NodesForXPathError(xpath string) (result []*XMLNode, err error) {
+func (xn *XMLNode) NodesForXPathError(xpath string) (result []*XMLNode, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodesForXPath:error:"), purego.NSString(xpath), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("nodesForXPath:error:"), purego.NSString(xpath), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -159,9 +160,9 @@ func (x *XMLNode) NodesForXPathError(xpath string) (result []*XMLNode, err error
 }
 
 // ObjectsForXQueryConstantsError returns the objects resulting from applying an XQuery to this node using the node as the context item ("."). Constants are a name-value dictionary for constants declared "external" in the query. normalizeAdjacentTextNodesPreservingCDATA:NO should be called if there are adjacent text nodes since they are not allowed under the XPath/XQuery Data Model.
-func (x *XMLNode) ObjectsForXQueryConstantsError(xquery string, constants obj.Object) (result obj.Object, err error) {
+func (xn *XMLNode) ObjectsForXQueryConstantsError(xquery string, constants obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsForXQuery:constants:error:"), purego.NSString(xquery), objref.IDOf(constants), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("objectsForXQuery:constants:error:"), purego.NSString(xquery), objref.IDOf(constants), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -169,9 +170,9 @@ func (x *XMLNode) ObjectsForXQueryConstantsError(xquery string, constants obj.Ob
 }
 
 // ObjectsForXQueryError wraps the corresponding Objective-C method.
-func (x *XMLNode) ObjectsForXQueryError(xquery string) (result obj.Object, err error) {
+func (xn *XMLNode) ObjectsForXQueryError(xquery string) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsForXQuery:error:"), purego.NSString(xquery), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("objectsForXQuery:error:"), purego.NSString(xquery), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -179,115 +180,100 @@ func (x *XMLNode) ObjectsForXQueryError(xquery string) (result obj.Object, err e
 }
 
 // Kind returns an element, attribute, entity, or notation DTD node based on the full XML string.
-func (x *XMLNode) Kind() XMLNodeKind {
-	_r := objc.Send[XMLNodeKind](objref.IDOf(x), objc.RegisterName("kind"))
+func (xn *XMLNode) Kind() XMLNodeKind {
+	_r := objc.Send[XMLNodeKind](objref.IDOf(xn), objc.RegisterName("kind"))
 	return _r
 }
 
 // Name sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
-func (x *XMLNode) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (xn *XMLNode) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *XMLNode) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // ObjectValue sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
-func (x *XMLNode) ObjectValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectValue"))
+func (xn *XMLNode) ObjectValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("objectValue"))
 	return obj.Wrap(_r)
 }
 
-// SetObjectValue wraps the corresponding Objective-C method.
-func (x *XMLNode) SetObjectValue(objectValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-}
-
 // StringValue sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
-func (x *XMLNode) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (xn *XMLNode) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetStringValue wraps the corresponding Objective-C method.
-func (x *XMLNode) SetStringValue(stringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-}
-
-// Index a node's index amongst its siblings.
-func (x *XMLNode) Index() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+// Index returns a node's index amongst its siblings.
+func (xn *XMLNode) Index() int {
+	_r := objc.Send[int](objref.IDOf(xn), objc.RegisterName("index"))
 	return _r
 }
 
-// Level the depth of the node within the tree. Documents and standalone nodes are level 0.
-func (x *XMLNode) Level() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("level"))
+// Level returns the depth of the node within the tree. Documents and standalone nodes are level 0.
+func (xn *XMLNode) Level() int {
+	_r := objc.Send[int](objref.IDOf(xn), objc.RegisterName("level"))
 	return _r
 }
 
-// RootDocument the encompassing document or nil.
-func (x *XMLNode) RootDocument() *XMLDocument {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootDocument"))
+// RootDocument returns the encompassing document or nil.
+func (xn *XMLNode) RootDocument() *XMLDocument {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("rootDocument"))
 	return XMLDocumentFromID(_r)
 }
 
-// Parent the parent of this node. Documents and standalone Nodes have a nil parent; there is not a 1-to-1 relationship between parent and children, eg a namespace cannot be a child but has a parent element.
-func (x *XMLNode) Parent() *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+// Parent returns the parent of this node. Documents and standalone Nodes have a nil parent; there is not a 1-to-1 relationship between parent and children, eg a namespace cannot be a child but has a parent element.
+func (xn *XMLNode) Parent() *XMLNode {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("parent"))
 	return XMLNodeFromID(_r)
 }
 
-// ChildCount the amount of children, relevant for documents, elements, and document type declarations. Use this instead of [[self children] count].
-func (x *XMLNode) ChildCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("childCount"))
+// ChildCount returns the amount of children, relevant for documents, elements, and document type declarations. Use this instead of [[self children] count].
+func (xn *XMLNode) ChildCount() int {
+	_r := objc.Send[int](objref.IDOf(xn), objc.RegisterName("childCount"))
 	return _r
 }
 
-// Children an immutable array of child nodes. Relevant for documents, elements, and document type declarations.
+// Children returns an immutable array of child nodes. Relevant for documents, elements, and document type declarations.
 //
 // Children returns the collection as a Go slice.
-func (x *XMLNode) Children() []*XMLNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+func (xn *XMLNode) Children() []*XMLNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *XMLNode { return XMLNodeFromID(_id) })
 }
 
 // PreviousSibling returns the previous sibling, or nil if there isn't one.
-func (x *XMLNode) PreviousSibling() *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousSibling"))
+func (xn *XMLNode) PreviousSibling() *XMLNode {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("previousSibling"))
 	return XMLNodeFromID(_r)
 }
 
 // NextSibling returns the next sibling, or nil if there isn't one.
-func (x *XMLNode) NextSibling() *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextSibling"))
+func (xn *XMLNode) NextSibling() *XMLNode {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("nextSibling"))
 	return XMLNodeFromID(_r)
 }
 
 // PreviousNode returns the previous node in document order. This can be used to walk the tree backwards.
-func (x *XMLNode) PreviousNode() *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousNode"))
+func (xn *XMLNode) PreviousNode() *XMLNode {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("previousNode"))
 	return XMLNodeFromID(_r)
 }
 
 // NextNode returns the next node in document order. This can be used to walk the tree forwards.
-func (x *XMLNode) NextNode() *XMLNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextNode"))
+func (xn *XMLNode) NextNode() *XMLNode {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("nextNode"))
 	return XMLNodeFromID(_r)
 }
 
 // XPath returns the XPath to this node, for example foo/bar[2]/baz.
-func (x *XMLNode) XPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("XPath"))
+func (xn *XMLNode) XPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("XPath"))
 	if _r == 0 {
 		return ""
 	}
@@ -295,8 +281,8 @@ func (x *XMLNode) XPath() string {
 }
 
 // LocalName returns the local name bar if this attribute or element's name is foo:bar
-func (x *XMLNode) LocalName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localName"))
+func (xn *XMLNode) LocalName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("localName"))
 	if _r == 0 {
 		return ""
 	}
@@ -304,8 +290,8 @@ func (x *XMLNode) LocalName() string {
 }
 
 // Prefix returns the prefix foo if this attribute or element's name if foo:bar
-func (x *XMLNode) Prefix() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prefix"))
+func (xn *XMLNode) Prefix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("prefix"))
 	if _r == 0 {
 		return ""
 	}
@@ -313,74 +299,26 @@ func (x *XMLNode) Prefix() string {
 }
 
 // URI set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-func (x *XMLNode) URI() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URI"))
+func (xn *XMLNode) URI() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("URI"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetURI wraps the corresponding Objective-C method.
-func (x *XMLNode) SetURI(uRI string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), purego.NSString(uRI))
-}
-
-// XMLString the representation of this node as it would appear in an XML document.
-func (x *XMLNode) XMLString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("XMLString"))
+// XMLString returns the representation of this node as it would appear in an XML document.
+func (xn *XMLNode) XMLString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("XMLString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// XMLNodeable is the interface implemented by [XMLNode], for mocking and DI.
-type XMLNodeable interface {
-	obj.Object
-	WithName(name StringProvider) *XMLNode
-	WithObjectValue(objectValue obj.Object) *XMLNode
-	WithStringValue(stringValue StringProvider) *XMLNode
-	WithURI(uRI StringProvider) *XMLNode
-	WithScriptingProperties(scriptingProperties obj.Object) *XMLNode
-	SetStringValueResolvingEntities(string_ string, resolve bool)
-	ChildAtIndex(index int) *XMLNode
-	Detach()
-	XMLStringWithOptions(options XMLNodeOptions) string
-	CanonicalXMLStringPreservingComments(comments bool) string
-	NodesForXPathError(xpath string) (result []*XMLNode, err error)
-	ObjectsForXQueryConstantsError(xquery string, constants obj.Object) (result obj.Object, err error)
-	ObjectsForXQueryError(xquery string) (result obj.Object, err error)
-	Kind() XMLNodeKind
-	Name() string
-	SetName(name string)
-	ObjectValue() obj.Object
-	SetObjectValue(objectValue obj.Object)
-	StringValue() string
-	SetStringValue(stringValue string)
-	Index() int
-	Level() int
-	RootDocument() *XMLDocument
-	Parent() *XMLNode
-	ChildCount() int
-	Children() []*XMLNode
-	PreviousSibling() *XMLNode
-	NextSibling() *XMLNode
-	PreviousNode() *XMLNode
-	NextNode() *XMLNode
-	XPath() string
-	LocalName() string
-	Prefix() string
-	URI() string
-	SetURI(uRI string)
-	XMLString() string
-}
-
-var _ XMLNodeable = (*XMLNode)(nil)
 
 // isXMLNode marks XMLNode — and, by embedding promotion, its
 // subclasses — as a member of the XMLNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *XMLNode) isXMLNode() {}
+func (xn *XMLNode) isXMLNode() {}
 
 var _ XMLNodeProvider = (*XMLNode)(nil)

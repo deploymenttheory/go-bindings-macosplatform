@@ -46,24 +46,24 @@ func uRLProtectionSpaceAdopt(id objc.ID) *URLProtectionSpace {
 }
 
 // Description returns the object's -description text.
-func (x *URLProtectionSpace) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ups *URLProtectionSpace) Description() string {
+	return rt.Description(objref.IDOf(ups))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLProtectionSpace) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ups *URLProtectionSpace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ups), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLProtectionSpace) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ups *URLProtectionSpace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ups), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLProtectionSpace) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ups *URLProtectionSpace) String() string {
+	return rt.Description(objref.IDOf(ups))
 }
 
 // NewURLProtectionSpaceWithHostPortProtocolRealmAuthenticationMethod initialize a protection space representing an origin server, or a realm on one
@@ -81,35 +81,35 @@ func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host st
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLProtectionSpace) WithScriptingProperties(scriptingProperties obj.Object) *URLProtectionSpace {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ups *URLProtectionSpace) WithScriptingProperties(scriptingProperties obj.Object) *URLProtectionSpace {
+	objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ups
 }
 
 // Realm get the authentication realm for which the protection space that needs authentication This is generally only available for http authentication, and may be nil otherwise.
-func (x *URLProtectionSpace) Realm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realm"))
+func (ups *URLProtectionSpace) Realm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("realm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ReceivesCredentialSecurely determine if the password for this protection space can be sent securely
-func (x *URLProtectionSpace) ReceivesCredentialSecurely() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("receivesCredentialSecurely"))
+// ReceivesCredentialSecurely reports whether determine if the password for this protection space can be sent securely
+func (ups *URLProtectionSpace) ReceivesCredentialSecurely() bool {
+	_r := objc.Send[bool](objref.IDOf(ups), objc.RegisterName("receivesCredentialSecurely"))
 	return _r
 }
 
-// IsProxy determine if this authenticating protection space is a proxy server
-func (x *URLProtectionSpace) IsProxy() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isProxy"))
+// IsProxy reports whether determine if this authenticating protection space is a proxy server
+func (ups *URLProtectionSpace) IsProxy() bool {
+	_r := objc.Send[bool](objref.IDOf(ups), objc.RegisterName("isProxy"))
 	return _r
 }
 
 // Host get the proxy host if this is a proxy authentication, or the host from the URL.
-func (x *URLProtectionSpace) Host() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+func (ups *URLProtectionSpace) Host() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
 	}
@@ -117,14 +117,14 @@ func (x *URLProtectionSpace) Host() string {
 }
 
 // Port get the proxy port if this is a proxy authentication, or the port from the URL.
-func (x *URLProtectionSpace) Port() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+func (ups *URLProtectionSpace) Port() int {
+	_r := objc.Send[int](objref.IDOf(ups), objc.RegisterName("port"))
 	return _r
 }
 
 // ProxyType get the type of this protection space, if a proxy
-func (x *URLProtectionSpace) ProxyType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxyType"))
+func (ups *URLProtectionSpace) ProxyType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("proxyType"))
 	if _r == 0 {
 		return ""
 	}
@@ -132,8 +132,8 @@ func (x *URLProtectionSpace) ProxyType() string {
 }
 
 // Protocol get the protocol of this protection space, if not a proxy
-func (x *URLProtectionSpace) Protocol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+func (ups *URLProtectionSpace) Protocol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("protocol"))
 	if _r == 0 {
 		return ""
 	}
@@ -141,8 +141,8 @@ func (x *URLProtectionSpace) Protocol() string {
 }
 
 // AuthenticationMethod get the authentication method to be used for this protection space
-func (x *URLProtectionSpace) AuthenticationMethod() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationMethod"))
+func (ups *URLProtectionSpace) AuthenticationMethod() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("authenticationMethod"))
 	if _r == 0 {
 		return ""
 	}
@@ -152,31 +152,13 @@ func (x *URLProtectionSpace) AuthenticationMethod() string {
 // DistinguishedNames wraps the corresponding Objective-C method.
 //
 // DistinguishedNames returns the collection as a Go slice.
-func (x *URLProtectionSpace) DistinguishedNames() []*Data {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distinguishedNames"))
+func (ups *URLProtectionSpace) DistinguishedNames() []*Data {
+	_arr := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("distinguishedNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
 }
 
 // ServerTrust wraps the corresponding Objective-C method.
-func (x *URLProtectionSpace) ServerTrust() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverTrust"))
+func (ups *URLProtectionSpace) ServerTrust() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("serverTrust"))
 	return obj.Wrap(_r)
 }
-
-// URLProtectionSpaceable is the interface implemented by [URLProtectionSpace], for mocking and DI.
-type URLProtectionSpaceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLProtectionSpace
-	Realm() string
-	ReceivesCredentialSecurely() bool
-	IsProxy() bool
-	Host() string
-	Port() int
-	ProxyType() string
-	Protocol() string
-	AuthenticationMethod() string
-	DistinguishedNames() []*Data
-	ServerTrust() obj.Object
-}
-
-var _ URLProtectionSpaceable = (*URLProtectionSpace)(nil)

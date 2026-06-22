@@ -46,24 +46,24 @@ func virtioConsolePortArrayAdopt(id objc.ID) *VirtioConsolePortArray {
 }
 
 // Description returns the object's -description text.
-func (x *VirtioConsolePortArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcpa *VirtioConsolePortArray) Description() string {
+	return rt.Description(objref.IDOf(vcpa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioConsolePortArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcpa *VirtioConsolePortArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcpa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioConsolePortArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcpa *VirtioConsolePortArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcpa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtioConsolePortArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcpa *VirtioConsolePortArray) String() string {
+	return rt.Description(objref.IDOf(vcpa))
 }
 
 // NewVirtioConsolePortArray creates a new VirtioConsolePortArray.
@@ -73,22 +73,13 @@ func NewVirtioConsolePortArray() *VirtioConsolePortArray {
 }
 
 // ObjectAtIndexedSubscript returns the Virtio console port at the specified index.
-func (x *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
+func (vcpa *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort {
+	_r := objc.Send[objc.ID](objref.IDOf(vcpa), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
 	return VirtioConsolePortFromID(_r)
 }
 
 // MaximumPortCount wraps the corresponding Objective-C method.
-func (x *VirtioConsolePortArray) MaximumPortCount() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("maximumPortCount"))
+func (vcpa *VirtioConsolePortArray) MaximumPortCount() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(vcpa), objc.RegisterName("maximumPortCount"))
 	return _r
 }
-
-// VirtioConsolePortArrayable is the interface implemented by [VirtioConsolePortArray], for mocking and DI.
-type VirtioConsolePortArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort
-	MaximumPortCount() uint32
-}
-
-var _ VirtioConsolePortArrayable = (*VirtioConsolePortArray)(nil)

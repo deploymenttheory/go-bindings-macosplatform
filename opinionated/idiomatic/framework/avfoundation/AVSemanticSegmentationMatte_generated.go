@@ -46,24 +46,24 @@ func semanticSegmentationMatteAdopt(id objc.ID) *SemanticSegmentationMatte {
 }
 
 // Description returns the object's -description text.
-func (x *SemanticSegmentationMatte) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ssm *SemanticSegmentationMatte) Description() string {
+	return rt.Description(objref.IDOf(ssm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SemanticSegmentationMatte) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ssm *SemanticSegmentationMatte) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ssm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SemanticSegmentationMatte) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ssm *SemanticSegmentationMatte) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ssm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SemanticSegmentationMatte) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ssm *SemanticSegmentationMatte) String() string {
+	return rt.Description(objref.IDOf(ssm))
 }
 
 // NewSemanticSegmentationMatte creates a new SemanticSegmentationMatte.
@@ -73,29 +73,19 @@ func NewSemanticSegmentationMatte() *SemanticSegmentationMatte {
 }
 
 // DictionaryRepresentationForAuxiliaryDataType returns a dictionary of primitive map information to use when writing an image file with a semantic segmentation matte.
-func (x *SemanticSegmentationMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
+func (ssm *SemanticSegmentationMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
 // MatteType specifies the receiver's semantic segmentation matting image type. An AVSemanticSegmentationMatte's matteType is immutable for the life of the object.
-func (x *SemanticSegmentationMatte) MatteType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matteType"))
+func (ssm *SemanticSegmentationMatte) MatteType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("matteType"))
 	return obj.Wrap(_r)
 }
 
 // PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
-func (x *SemanticSegmentationMatte) PixelFormatType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
+func (ssm *SemanticSegmentationMatte) PixelFormatType() int {
+	_r := objc.Send[int](objref.IDOf(ssm), objc.RegisterName("pixelFormatType"))
 	return _r
 }
-
-// SemanticSegmentationMatteable is the interface implemented by [SemanticSegmentationMatte], for mocking and DI.
-type SemanticSegmentationMatteable interface {
-	obj.Object
-	DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object
-	MatteType() obj.Object
-	PixelFormatType() int
-}
-
-var _ SemanticSegmentationMatteable = (*SemanticSegmentationMatte)(nil)

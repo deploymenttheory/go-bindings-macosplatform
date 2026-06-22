@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,114 +51,82 @@ func NewRenderPassDepthAttachmentDescriptor() *RenderPassDepthAttachmentDescript
 	return renderPassDepthAttachmentDescriptorAdopt(_id)
 }
 
-// WithClearDepth the depth to use when clearing the depth attachment.
-func (x *RenderPassDepthAttachmentDescriptor) WithClearDepth(clearDepth float64) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearDepth:"), clearDepth)
-	return x
+// WithClearDepth sets the depth to use when clearing the depth attachment.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithClearDepth(clearDepth float64) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setClearDepth:"), clearDepth)
+	return rpdad
 }
 
-// WithDepthResolveFilter the filter used for an MSAA depth resolve operation.
-func (x *RenderPassDepthAttachmentDescriptor) WithDepthResolveFilter(depthResolveFilter MultisampleDepthResolveFilter) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthResolveFilter:"), depthResolveFilter)
-	return x
+// WithDepthResolveFilter sets the filter used for an MSAA depth resolve operation.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithDepthResolveFilter(depthResolveFilter MultisampleDepthResolveFilter) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setDepthResolveFilter:"), depthResolveFilter)
+	return rpdad
 }
 
-// WithLevel the mipmap level of the texture used for rendering to the attachment.
-func (x *RenderPassDepthAttachmentDescriptor) WithLevel(level int) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets the mipmap level of the texture used for rendering to the attachment.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithLevel(level int) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setLevel:"), level)
+	return rpdad
 }
 
-// WithSlice the slice of the texture used for rendering to the attachment.
-func (x *RenderPassDepthAttachmentDescriptor) WithSlice(slice int) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlice:"), slice)
-	return x
+// WithSlice sets the slice of the texture used for rendering to the attachment.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithSlice(slice int) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setSlice:"), slice)
+	return rpdad
 }
 
-// WithDepthPlane the depth plane of the texture used for rendering to the attachment.
-func (x *RenderPassDepthAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthPlane:"), depthPlane)
-	return x
+// WithDepthPlane sets the depth plane of the texture used for rendering to the attachment.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setDepthPlane:"), depthPlane)
+	return rpdad
 }
 
-// WithResolveLevel the mipmap level of the texture used for the multisample resolve action.
-func (x *RenderPassDepthAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveLevel:"), resolveLevel)
-	return x
+// WithResolveLevel sets the mipmap level of the texture used for the multisample resolve action.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setResolveLevel:"), resolveLevel)
+	return rpdad
 }
 
-// WithResolveSlice the slice of the texture used for the multisample resolve action.
-func (x *RenderPassDepthAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveSlice:"), resolveSlice)
-	return x
+// WithResolveSlice sets the slice of the texture used for the multisample resolve action.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setResolveSlice:"), resolveSlice)
+	return rpdad
 }
 
-// WithResolveDepthPlane the depth plane of the texture used for the multisample resolve action.
-func (x *RenderPassDepthAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
-	return x
+// WithResolveDepthPlane sets the depth plane of the texture used for the multisample resolve action.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
+	return rpdad
 }
 
-// WithLoadAction the action performed by this attachment at the start of a rendering pass for a render command encoder.
-func (x *RenderPassDepthAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadAction:"), loadAction)
-	return x
+// WithLoadAction sets the action performed by this attachment at the start of a rendering pass for a render command encoder.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setLoadAction:"), loadAction)
+	return rpdad
 }
 
-// WithStoreAction the action performed by this attachment at the end of a rendering pass for a render command encoder.
-func (x *RenderPassDepthAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAction:"), storeAction)
-	return x
+// WithStoreAction sets the action performed by this attachment at the end of a rendering pass for a render command encoder.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setStoreAction:"), storeAction)
+	return rpdad
 }
 
-// WithStoreActionOptions the options that modify the store action performed by this attachment.
-func (x *RenderPassDepthAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassDepthAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
-	return x
+// WithStoreActionOptions sets the options that modify the store action performed by this attachment.
+func (rpdad *RenderPassDepthAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassDepthAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpdad), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
+	return rpdad
 }
 
-// ClearDepth the clear depth value to be used if the loadAction property is MTLLoadActionClear
-func (x *RenderPassDepthAttachmentDescriptor) ClearDepth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("clearDepth"))
+// ClearDepth returns the clear depth value to be used if the loadAction property is MTLLoadActionClear
+func (rpdad *RenderPassDepthAttachmentDescriptor) ClearDepth() float64 {
+	_r := objc.Send[float64](objref.IDOf(rpdad), objc.RegisterName("clearDepth"))
 	return _r
 }
 
-// SetClearDepth wraps the corresponding Objective-C method.
-func (x *RenderPassDepthAttachmentDescriptor) SetClearDepth(clearDepth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearDepth:"), clearDepth)
-}
-
-// DepthResolveFilter the filter to be used for depth multisample resolve.  Defaults to MTLMultisampleDepthResolveFilterSample0.
-func (x *RenderPassDepthAttachmentDescriptor) DepthResolveFilter() MultisampleDepthResolveFilter {
-	_r := objc.Send[MultisampleDepthResolveFilter](objref.IDOf(x), objc.RegisterName("depthResolveFilter"))
+// DepthResolveFilter returns the filter to be used for depth multisample resolve.  Defaults to MTLMultisampleDepthResolveFilterSample0.
+func (rpdad *RenderPassDepthAttachmentDescriptor) DepthResolveFilter() MultisampleDepthResolveFilter {
+	_r := objc.Send[MultisampleDepthResolveFilter](objref.IDOf(rpdad), objc.RegisterName("depthResolveFilter"))
 	return _r
 }
-
-// SetDepthResolveFilter wraps the corresponding Objective-C method.
-func (x *RenderPassDepthAttachmentDescriptor) SetDepthResolveFilter(depthResolveFilter MultisampleDepthResolveFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthResolveFilter:"), depthResolveFilter)
-}
-
-// RenderPassDepthAttachmentDescriptorable is the interface implemented by [RenderPassDepthAttachmentDescriptor], for mocking and DI.
-type RenderPassDepthAttachmentDescriptorable interface {
-	obj.Object
-	WithClearDepth(clearDepth float64) *RenderPassDepthAttachmentDescriptor
-	WithDepthResolveFilter(depthResolveFilter MultisampleDepthResolveFilter) *RenderPassDepthAttachmentDescriptor
-	WithLevel(level int) *RenderPassDepthAttachmentDescriptor
-	WithSlice(slice int) *RenderPassDepthAttachmentDescriptor
-	WithDepthPlane(depthPlane int) *RenderPassDepthAttachmentDescriptor
-	WithResolveLevel(resolveLevel int) *RenderPassDepthAttachmentDescriptor
-	WithResolveSlice(resolveSlice int) *RenderPassDepthAttachmentDescriptor
-	WithResolveDepthPlane(resolveDepthPlane int) *RenderPassDepthAttachmentDescriptor
-	WithLoadAction(loadAction LoadAction) *RenderPassDepthAttachmentDescriptor
-	WithStoreAction(storeAction StoreAction) *RenderPassDepthAttachmentDescriptor
-	WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassDepthAttachmentDescriptor
-	ClearDepth() float64
-	SetClearDepth(clearDepth float64)
-	DepthResolveFilter() MultisampleDepthResolveFilter
-	SetDepthResolveFilter(depthResolveFilter MultisampleDepthResolveFilter)
-}
-
-var _ RenderPassDepthAttachmentDescriptorable = (*RenderPassDepthAttachmentDescriptor)(nil)
 
 var _ RenderPassAttachmentDescriptorProvider = (*RenderPassDepthAttachmentDescriptor)(nil)

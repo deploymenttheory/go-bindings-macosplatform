@@ -44,24 +44,24 @@ func shareAccessRequesterAdopt(id objc.ID) *ShareAccessRequester {
 }
 
 // Description returns the object's -description text.
-func (x *ShareAccessRequester) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sar *ShareAccessRequester) Description() string {
+	return rt.Description(objref.IDOf(sar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareAccessRequester) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sar *ShareAccessRequester) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareAccessRequester) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sar *ShareAccessRequester) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareAccessRequester) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sar *ShareAccessRequester) String() string {
+	return rt.Description(objref.IDOf(sar))
 }
 
 // NewShareAccessRequester creates a new ShareAccessRequester.
@@ -70,30 +70,20 @@ func NewShareAccessRequester() *ShareAccessRequester {
 	return shareAccessRequesterAdopt(_id)
 }
 
-// UserIdentity the identity of the user requesting access to the share.
-func (x *ShareAccessRequester) UserIdentity() *UserIdentity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
+// UserIdentity returns the identity of the user requesting access to the share.
+func (sar *ShareAccessRequester) UserIdentity() *UserIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(sar), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// ParticipantLookupInfo lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
-func (x *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participantLookupInfo"))
+// ParticipantLookupInfo returns lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
+func (sar *ShareAccessRequester) ParticipantLookupInfo() *UserIdentityLookupInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(sar), objc.RegisterName("participantLookupInfo"))
 	return UserIdentityLookupInfoFromID(_r)
 }
 
-// Contact a displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
-func (x *ShareAccessRequester) Contact() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+// Contact returns a displayable CNContact representing the requester. If the requester doesn't exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted requester information suitable for display in the application's UI.
+func (sar *ShareAccessRequester) Contact() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sar), objc.RegisterName("contact"))
 	return obj.Wrap(_r)
 }
-
-// ShareAccessRequesterable is the interface implemented by [ShareAccessRequester], for mocking and DI.
-type ShareAccessRequesterable interface {
-	obj.Object
-	UserIdentity() *UserIdentity
-	ParticipantLookupInfo() *UserIdentityLookupInfo
-	Contact() obj.Object
-}
-
-var _ ShareAccessRequesterable = (*ShareAccessRequester)(nil)

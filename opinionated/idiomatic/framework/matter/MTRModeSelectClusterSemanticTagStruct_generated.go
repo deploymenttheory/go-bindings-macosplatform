@@ -46,76 +46,53 @@ func mTRModeSelectClusterSemanticTagStructAdopt(id objc.ID) *MTRModeSelectCluste
 }
 
 // Description returns the object's -description text.
-func (x *MTRModeSelectClusterSemanticTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mmscsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRModeSelectClusterSemanticTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmscsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRModeSelectClusterSemanticTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmscsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRModeSelectClusterSemanticTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) String() string {
+	return rt.Description(objref.IDOf(mmscsts))
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRModeSelectClusterSemanticTagStruct) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mmscsts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRModeSelectClusterSemanticTagStruct) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mmscsts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterSemanticTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterSemanticTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterSemanticTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRModeSelectClusterSemanticTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRModeSelectClusterSemanticTagStructable is the interface implemented by [MTRModeSelectClusterSemanticTagStruct], for mocking and DI.
-type MTRModeSelectClusterSemanticTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTagStruct
-	WithValue(value obj.Object) *MTRModeSelectClusterSemanticTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRModeSelectClusterSemanticTagStructable = (*MTRModeSelectClusterSemanticTagStruct)(nil)
 
 // isMTRModeSelectClusterSemanticTagStruct marks MTRModeSelectClusterSemanticTagStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRModeSelectClusterSemanticTagStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRModeSelectClusterSemanticTagStruct) isMTRModeSelectClusterSemanticTagStruct() {}
+func (mmscsts *MTRModeSelectClusterSemanticTagStruct) isMTRModeSelectClusterSemanticTagStruct() {}
 
 var _ MTRModeSelectClusterSemanticTagStructProvider = (*MTRModeSelectClusterSemanticTagStruct)(nil)

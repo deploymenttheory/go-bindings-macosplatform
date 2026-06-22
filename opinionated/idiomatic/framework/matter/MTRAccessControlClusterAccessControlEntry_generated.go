@@ -51,31 +51,21 @@ func NewMTRAccessControlClusterAccessControlEntry() *MTRAccessControlClusterAcce
 }
 
 // WithPrivilege sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlEntry) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
-	return x
+func (maccace *MTRAccessControlClusterAccessControlEntry) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntry {
+	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
+	return maccace
 }
 
 // WithAuthMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlEntry) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
-	return x
+func (maccace *MTRAccessControlClusterAccessControlEntry) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntry {
+	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
+	return maccace
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (maccace *MTRAccessControlClusterAccessControlEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntry {
+	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return maccace
 }
-
-// MTRAccessControlClusterAccessControlEntryable is the interface implemented by [MTRAccessControlClusterAccessControlEntry], for mocking and DI.
-type MTRAccessControlClusterAccessControlEntryable interface {
-	obj.Object
-	WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntry
-	WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntry
-	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntry
-}
-
-var _ MTRAccessControlClusterAccessControlEntryable = (*MTRAccessControlClusterAccessControlEntry)(nil)
 
 var _ MTRAccessControlClusterAccessControlEntryStructProvider = (*MTRAccessControlClusterAccessControlEntry)(nil)

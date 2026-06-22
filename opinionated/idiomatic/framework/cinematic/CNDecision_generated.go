@@ -46,24 +46,24 @@ func decisionAdopt(id objc.ID) *Decision {
 }
 
 // Description returns the object's -description text.
-func (x *Decision) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Decision) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Decision) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Decision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Decision) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Decision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Decision) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Decision) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDecision creates a new Decision.
@@ -72,44 +72,32 @@ func NewDecision() *Decision {
 	return decisionAdopt(_id)
 }
 
-// DetectionID the detectionID of the detection to focus on if this is not a group decision.
-func (x *Decision) DetectionID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
+// DetectionID returns the detectionID of the detection to focus on if this is not a group decision.
+func (d *Decision) DetectionID() int64 {
+	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionID"))
 	return _r
 }
 
-// DetectionGroupID the detectionGroupID of the detection to focus on if this is a group decision.
-func (x *Decision) DetectionGroupID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
+// DetectionGroupID returns the detectionGroupID of the detection to focus on if this is a group decision.
+func (d *Decision) DetectionGroupID() int64 {
+	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionGroupID"))
 	return _r
 }
 
-// IsUserDecision whether this is a user-created decision, or a base decision.
-func (x *Decision) IsUserDecision() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserDecision"))
+// IsUserDecision reports whether this is a user-created decision, or a base decision.
+func (d *Decision) IsUserDecision() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isUserDecision"))
 	return _r
 }
 
-// IsGroupDecision whether this is a group decision or not.
-func (x *Decision) IsGroupDecision() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGroupDecision"))
+// IsGroupDecision reports whether this is a group decision or not.
+func (d *Decision) IsGroupDecision() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isGroupDecision"))
 	return _r
 }
 
-// IsStrongDecision whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
-func (x *Decision) IsStrongDecision() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStrongDecision"))
+// IsStrongDecision reports whether this is a strong decision or not. A strong decision keeps focus for as long as possible.
+func (d *Decision) IsStrongDecision() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isStrongDecision"))
 	return _r
 }
-
-// Decisionable is the interface implemented by [Decision], for mocking and DI.
-type Decisionable interface {
-	obj.Object
-	DetectionID() int64
-	DetectionGroupID() int64
-	IsUserDecision() bool
-	IsGroupDecision() bool
-	IsStrongDecision() bool
-}
-
-var _ Decisionable = (*Decision)(nil)

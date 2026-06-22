@@ -46,24 +46,24 @@ func geometrySourceAdopt(id objc.ID) *GeometrySource {
 }
 
 // Description returns the object's -description text.
-func (x *GeometrySource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gs *GeometrySource) Description() string {
+	return rt.Description(objref.IDOf(gs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeometrySource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gs *GeometrySource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeometrySource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gs *GeometrySource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GeometrySource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gs *GeometrySource) String() string {
+	return rt.Description(objref.IDOf(gs))
 }
 
 // NewGeometrySource creates a new GeometrySource.
@@ -72,65 +72,50 @@ func NewGeometrySource() *GeometrySource {
 	return geometrySourceAdopt(_id)
 }
 
-// Data the data for the geometry source
-func (x *GeometrySource) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data for the geometry source
+func (gs *GeometrySource) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// Semantic the semantic of the geometry source
-func (x *GeometrySource) Semantic() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semantic"))
+// Semantic returns the semantic of the geometry source
+func (gs *GeometrySource) Semantic() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("semantic"))
 	return obj.Wrap(_r)
 }
 
-// VectorCount the number of vectors in the data.
-func (x *GeometrySource) VectorCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorCount"))
+// VectorCount returns the number of vectors in the data.
+func (gs *GeometrySource) VectorCount() int {
+	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("vectorCount"))
 	return _r
 }
 
-// FloatComponents a flag that indicates if vector components are floating point values.
-func (x *GeometrySource) FloatComponents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("floatComponents"))
+// FloatComponents reports whether a flag that indicates if vector components are floating point values.
+func (gs *GeometrySource) FloatComponents() bool {
+	_r := objc.Send[bool](objref.IDOf(gs), objc.RegisterName("floatComponents"))
 	return _r
 }
 
-// ComponentsPerVector the number of scalar components in each vector.
-func (x *GeometrySource) ComponentsPerVector() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("componentsPerVector"))
+// ComponentsPerVector returns the number of scalar components in each vector.
+func (gs *GeometrySource) ComponentsPerVector() int {
+	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("componentsPerVector"))
 	return _r
 }
 
-// BytesPerComponent the size of a vector component in bytes.
-func (x *GeometrySource) BytesPerComponent() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerComponent"))
+// BytesPerComponent returns the size of a vector component in bytes.
+func (gs *GeometrySource) BytesPerComponent() int {
+	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("bytesPerComponent"))
 	return _r
 }
 
-// DataOffset the offset from the beginning of the data. In bytes.
-func (x *GeometrySource) DataOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataOffset"))
+// DataOffset returns the offset from the beginning of the data. In bytes.
+func (gs *GeometrySource) DataOffset() int {
+	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("dataOffset"))
 	return _r
 }
 
-// DataStride the number of bytes from a vector to the next one in the data.
-func (x *GeometrySource) DataStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataStride"))
+// DataStride returns the number of bytes from a vector to the next one in the data.
+func (gs *GeometrySource) DataStride() int {
+	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("dataStride"))
 	return _r
 }
-
-// GeometrySourceable is the interface implemented by [GeometrySource], for mocking and DI.
-type GeometrySourceable interface {
-	obj.Object
-	Data() obj.Object
-	Semantic() obj.Object
-	VectorCount() int
-	FloatComponents() bool
-	ComponentsPerVector() int
-	BytesPerComponent() int
-	DataOffset() int
-	DataStride() int
-}
-
-var _ GeometrySourceable = (*GeometrySource)(nil)

@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewMacOSVirtualMachineStartOptions() *MacOSVirtualMachineStartOptions {
 	return macOSVirtualMachineStartOptionsAdopt(_id)
 }
 
-// WithStartUpFromMacOSRecovery a Boolean value that indicates whether the macOS guest should start in recovery mode.
-func (x *MacOSVirtualMachineStartOptions) WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
-	return x
+// WithStartUpFromMACOSRecovery sets a Boolean value that indicates whether the macOS guest should start in recovery mode.
+func (movmso *MacOSVirtualMachineStartOptions) WithStartUpFromMACOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions {
+	objc.Send[objc.ID](objref.IDOf(movmso), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
+	return movmso
 }
 
-// StartUpFromMacOSRecovery wraps the corresponding Objective-C method.
-func (x *MacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startUpFromMacOSRecovery"))
+// StartUpFromMACOSRecovery wraps the corresponding Objective-C method.
+func (movmso *MacOSVirtualMachineStartOptions) StartUpFromMACOSRecovery() bool {
+	_r := objc.Send[bool](objref.IDOf(movmso), objc.RegisterName("startUpFromMacOSRecovery"))
 	return _r
 }
-
-// SetStartUpFromMacOSRecovery wraps the corresponding Objective-C method.
-func (x *MacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
-}
-
-// MacOSVirtualMachineStartOptionsable is the interface implemented by [MacOSVirtualMachineStartOptions], for mocking and DI.
-type MacOSVirtualMachineStartOptionsable interface {
-	obj.Object
-	WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions
-	StartUpFromMacOSRecovery() bool
-	SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool)
-}
-
-var _ MacOSVirtualMachineStartOptionsable = (*MacOSVirtualMachineStartOptions)(nil)
 
 var _ VirtualMachineStartOptionsProvider = (*MacOSVirtualMachineStartOptions)(nil)

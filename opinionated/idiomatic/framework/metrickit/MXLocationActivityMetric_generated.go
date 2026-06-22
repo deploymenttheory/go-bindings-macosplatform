@@ -52,53 +52,40 @@ func NewLocationActivityMetric() *LocationActivityMetric {
 	return locationActivityMetricAdopt(_id)
 }
 
-// CumulativeBestAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyBest. Dimensioned as NSUnitDuration.
-func (x *LocationActivityMetric) CumulativeBestAccuracyTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBestAccuracyTime"))
+// CumulativeBestAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyBest. Dimensioned as NSUnitDuration.
+func (lam *LocationActivityMetric) CumulativeBestAccuracyTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeBestAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeBestAccuracyForNavigationTime cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. Dimensioned as NSUnitDuration.
-func (x *LocationActivityMetric) CumulativeBestAccuracyForNavigationTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBestAccuracyForNavigationTime"))
+// CumulativeBestAccuracyForNavigationTime returns cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. Dimensioned as NSUnitDuration.
+func (lam *LocationActivityMetric) CumulativeBestAccuracyForNavigationTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeBestAccuracyForNavigationTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeNearestTenMetersAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. Dimensioned as NSUnitDuration.
-func (x *LocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeNearestTenMetersAccuracyTime"))
+// CumulativeNearestTenMetersAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. Dimensioned as NSUnitDuration.
+func (lam *LocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeNearestTenMetersAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeHundredMetersAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. Dimensioned as NSUnitDuration.
-func (x *LocationActivityMetric) CumulativeHundredMetersAccuracyTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeHundredMetersAccuracyTime"))
+// CumulativeHundredMetersAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. Dimensioned as NSUnitDuration.
+func (lam *LocationActivityMetric) CumulativeHundredMetersAccuracyTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeHundredMetersAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeKilometerAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyKilometer. Dimensioned as NSUnitDuration.
-func (x *LocationActivityMetric) CumulativeKilometerAccuracyTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeKilometerAccuracyTime"))
+// CumulativeKilometerAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyKilometer. Dimensioned as NSUnitDuration.
+func (lam *LocationActivityMetric) CumulativeKilometerAccuracyTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeKilometerAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
-// CumulativeThreeKilometersAccuracyTime cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. Dimensioned as NSUnitDuration.
-func (x *LocationActivityMetric) CumulativeThreeKilometersAccuracyTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeThreeKilometersAccuracyTime"))
+// CumulativeThreeKilometersAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. Dimensioned as NSUnitDuration.
+func (lam *LocationActivityMetric) CumulativeThreeKilometersAccuracyTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeThreeKilometersAccuracyTime"))
 	return obj.Wrap(_r)
 }
-
-// LocationActivityMetricable is the interface implemented by [LocationActivityMetric], for mocking and DI.
-type LocationActivityMetricable interface {
-	obj.Object
-	CumulativeBestAccuracyTime() obj.Object
-	CumulativeBestAccuracyForNavigationTime() obj.Object
-	CumulativeNearestTenMetersAccuracyTime() obj.Object
-	CumulativeHundredMetersAccuracyTime() obj.Object
-	CumulativeKilometerAccuracyTime() obj.Object
-	CumulativeThreeKilometersAccuracyTime() obj.Object
-}
-
-var _ LocationActivityMetricable = (*LocationActivityMetric)(nil)
 
 var _ MetricProvider = (*LocationActivityMetric)(nil)

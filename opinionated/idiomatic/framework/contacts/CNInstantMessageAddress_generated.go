@@ -46,24 +46,24 @@ func instantMessageAddressAdopt(id objc.ID) *InstantMessageAddress {
 }
 
 // Description returns the object's -description text.
-func (x *InstantMessageAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ima *InstantMessageAddress) Description() string {
+	return rt.Description(objref.IDOf(ima))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InstantMessageAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ima *InstantMessageAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ima), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InstantMessageAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ima *InstantMessageAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ima), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InstantMessageAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ima *InstantMessageAddress) String() string {
+	return rt.Description(objref.IDOf(ima))
 }
 
 // NewInstantMessageAddressWithUsernameService returns a CNInstantMessageAddress object initialized with the specified user name and service.
@@ -74,8 +74,8 @@ func NewInstantMessageAddressWithUsernameService(username string, service string
 }
 
 // Username wraps the corresponding Objective-C method.
-func (x *InstantMessageAddress) Username() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+func (ima *InstantMessageAddress) Username() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ima), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,19 +83,10 @@ func (x *InstantMessageAddress) Username() string {
 }
 
 // Service wraps the corresponding Objective-C method.
-func (x *InstantMessageAddress) Service() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
+func (ima *InstantMessageAddress) Service() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ima), objc.RegisterName("service"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// InstantMessageAddressable is the interface implemented by [InstantMessageAddress], for mocking and DI.
-type InstantMessageAddressable interface {
-	obj.Object
-	Username() string
-	Service() string
-}
-
-var _ InstantMessageAddressable = (*InstantMessageAddress)(nil)

@@ -51,31 +51,21 @@ func NewMTROtaSoftwareUpdateRequestorClusterProviderLocation() *MTROtaSoftwareUp
 }
 
 // WithProviderNodeID sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
-	return x
+func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
+	return mosurcpl
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return mosurcpl
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mosurcpl
 }
-
-// MTROtaSoftwareUpdateRequestorClusterProviderLocationable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterProviderLocation], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterProviderLocationable interface {
-	obj.Object
-	WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
-	WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
-	WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation
-}
-
-var _ MTROtaSoftwareUpdateRequestorClusterProviderLocationable = (*MTROtaSoftwareUpdateRequestorClusterProviderLocation)(nil)
 
 var _ MTROTASoftwareUpdateRequestorClusterProviderLocationProvider = (*MTROtaSoftwareUpdateRequestorClusterProviderLocation)(nil)

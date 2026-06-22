@@ -46,24 +46,24 @@ func qCPlugInViewControllerAdopt(id objc.ID) *QCPlugInViewController {
 }
 
 // Description returns the object's -description text.
-func (x *QCPlugInViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qpivc *QCPlugInViewController) Description() string {
+	return rt.Description(objref.IDOf(qpivc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCPlugInViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qpivc *QCPlugInViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qpivc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCPlugInViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qpivc *QCPlugInViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qpivc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCPlugInViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qpivc *QCPlugInViewController) String() string {
+	return rt.Description(objref.IDOf(qpivc))
 }
 
 // NewQCPlugInViewControllerWithPlugInViewNibName creates and initializes a controller for the specified QCPlugIn object and nib file.
@@ -74,15 +74,7 @@ func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *QCPlugIn, name strin
 }
 
 // PlugIn returns the QCPlugIn object associated with the view controller for the custom patch.
-func (x *QCPlugInViewController) PlugIn() *QCPlugIn {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plugIn"))
+func (qpivc *QCPlugInViewController) PlugIn() *QCPlugIn {
+	_r := objc.Send[objc.ID](objref.IDOf(qpivc), objc.RegisterName("plugIn"))
 	return QCPlugInFromID(_r)
 }
-
-// QCPlugInViewControllerable is the interface implemented by [QCPlugInViewController], for mocking and DI.
-type QCPlugInViewControllerable interface {
-	obj.Object
-	PlugIn() *QCPlugIn
-}
-
-var _ QCPlugInViewControllerable = (*QCPlugInViewController)(nil)

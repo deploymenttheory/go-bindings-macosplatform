@@ -44,24 +44,24 @@ func mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventAdopt(id objc.ID) *M
 }
 
 // Description returns the object's -description text.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Description() string {
+	return rt.Description(objref.IDOf(mwfndcafe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwfndcafe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwfndcafe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) String() string {
+	return rt.Description(objref.IDOf(mwfndcafe))
 }
 
 // NewMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent creates a new MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent.
@@ -71,68 +71,37 @@ func NewMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent() *MTRWiFiNetwor
 }
 
 // WithAssociationFailureCause sets the property and returns the receiver so calls can be chained.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailureCause(associationFailureCause obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
-	return x
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailureCause(associationFailureCause obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
+	return mwfndcafe
 }
 
 // WithAssociationFailure sets the property and returns the receiver so calls can be chained.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailure(associationFailure obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
-	return x
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailure(associationFailure obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
+	return mwfndcafe
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithStatus(status obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithStatus(status obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return mwfndcafe
 }
 
 // AssociationFailureCause wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associationFailureCause"))
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("associationFailureCause"))
 	return obj.Wrap(_r)
-}
-
-// SetAssociationFailureCause wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociationFailureCause(associationFailureCause obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
 }
 
 // AssociationFailure wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associationFailure"))
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("associationFailure"))
 	return obj.Wrap(_r)
-}
-
-// SetAssociationFailure wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociationFailure(associationFailure obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
-
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
-// MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent], for mocking and DI.
-type MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable interface {
-	obj.Object
-	WithAssociationFailureCause(associationFailureCause obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
-	WithAssociationFailure(associationFailure obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
-	WithStatus(status obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent
-	AssociationFailureCause() obj.Object
-	SetAssociationFailureCause(associationFailureCause obj.Object)
-	AssociationFailure() obj.Object
-	SetAssociationFailure(associationFailure obj.Object)
-	Status() obj.Object
-	SetStatus(status obj.Object)
-}
-
-var _ MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable = (*MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent)(nil)

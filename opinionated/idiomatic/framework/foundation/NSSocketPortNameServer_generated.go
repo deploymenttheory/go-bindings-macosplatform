@@ -52,52 +52,34 @@ func NewSocketPortNameServer() *SocketPortNameServer {
 	return socketPortNameServerAdopt(_id)
 }
 
-// WithDefaultNameServerPortNumber returns the port number used to contact the name server.
-func (x *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultNameServerPortNumber:"), defaultNameServerPortNumber)
-	return x
+// WithDefaultNameServerPortNumber sets returns the port number used to contact the name server.
+func (spns *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer {
+	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setDefaultNameServerPortNumber:"), defaultNameServerPortNumber)
+	return spns
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *SocketPortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (spns *SocketPortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer {
+	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return spns
 }
 
 // PortForNameHostNameServerPortNumber looks up and returns the port registered under the specified name on a specified host.
-func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:host:nameServerPortNumber:"), purego.NSString(name), purego.NSString(host), portNumber)
+func (spns *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("portForName:host:nameServerPortNumber:"), purego.NSString(name), purego.NSString(host), portNumber)
 	return PortFromID(_r)
 }
 
 // RegisterPortNameNameServerPortNumber registers a given port as a network service with the specified name in the local domain.
-func (x *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *Port, name string, portNumber uint16) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerPort:name:nameServerPortNumber:"), objref.IDOf(port), purego.NSString(name), portNumber)
+func (spns *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *Port, name string, portNumber uint16) bool {
+	_r := objc.Send[bool](objref.IDOf(spns), objc.RegisterName("registerPort:name:nameServerPortNumber:"), objref.IDOf(port), purego.NSString(name), portNumber)
 	return _r
 }
 
 // DefaultNameServerPortNumber wraps the corresponding Objective-C method.
-func (x *SocketPortNameServer) DefaultNameServerPortNumber() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("defaultNameServerPortNumber"))
+func (spns *SocketPortNameServer) DefaultNameServerPortNumber() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(spns), objc.RegisterName("defaultNameServerPortNumber"))
 	return _r
 }
-
-// SetDefaultNameServerPortNumber wraps the corresponding Objective-C method.
-func (x *SocketPortNameServer) SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultNameServerPortNumber:"), defaultNameServerPortNumber)
-}
-
-// SocketPortNameServerable is the interface implemented by [SocketPortNameServer], for mocking and DI.
-type SocketPortNameServerable interface {
-	obj.Object
-	WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer
-	WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer
-	PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port
-	RegisterPortNameNameServerPortNumber(port *Port, name string, portNumber uint16) bool
-	DefaultNameServerPortNumber() uint16
-	SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16)
-}
-
-var _ SocketPortNameServerable = (*SocketPortNameServer)(nil)
 
 var _ PortNameServerProvider = (*SocketPortNameServer)(nil)

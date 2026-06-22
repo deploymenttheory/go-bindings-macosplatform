@@ -47,24 +47,24 @@ func captionConversionWarningAdopt(id objc.ID) *CaptionConversionWarning {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionConversionWarning) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ccw *CaptionConversionWarning) Description() string {
+	return rt.Description(objref.IDOf(ccw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionConversionWarning) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ccw *CaptionConversionWarning) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ccw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionConversionWarning) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ccw *CaptionConversionWarning) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ccw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionConversionWarning) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ccw *CaptionConversionWarning) String() string {
+	return rt.Description(objref.IDOf(ccw))
 }
 
 // NewCaptionConversionWarning creates a new CaptionConversionWarning.
@@ -74,29 +74,19 @@ func NewCaptionConversionWarning() *CaptionConversionWarning {
 }
 
 // WarningType indicates the type of warning provided by the receiver.
-func (x *CaptionConversionWarning) WarningType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("warningType"))
+func (ccw *CaptionConversionWarning) WarningType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ccw), objc.RegisterName("warningType"))
 	return obj.Wrap(_r)
 }
 
 // RangeOfCaptions indicates the range of captions in the validator's captions array for which the specified warning has been issued. Only captions with the same start time and duration will be referenced. If captions with different start times and durations exhibit similar problems, a separate instance of AVCaptionConversionWarning will be used to indicate each problematic case. If the referenced captions have multiple problems, a separate instance of AVCaptionConversionWarning will be issued to indicate each problem.
-func (x *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("rangeOfCaptions"))
+func (ccw *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ccw), objc.RegisterName("rangeOfCaptions"))
 	return _r
 }
 
 // Adjustment indicates an adjustment to the indicated captions that can be applied in order to correct the problem. If the value of adjustment is not nil and the conversion operation is performed without correcting the problem, the adjustment will be applied during conversion. If the value of adjustment is nil and the conversion operation is performed without correcting the problem, the indicated captions will be omitted from the output media data.
-func (x *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustment"))
+func (ccw *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
+	_r := objc.Send[objc.ID](objref.IDOf(ccw), objc.RegisterName("adjustment"))
 	return CaptionConversionAdjustmentFromID(_r)
 }
-
-// CaptionConversionWarningable is the interface implemented by [CaptionConversionWarning], for mocking and DI.
-type CaptionConversionWarningable interface {
-	obj.Object
-	WarningType() obj.Object
-	RangeOfCaptions() foundation.NSRange
-	Adjustment() *CaptionConversionAdjustment
-}
-
-var _ CaptionConversionWarningable = (*CaptionConversionWarning)(nil)

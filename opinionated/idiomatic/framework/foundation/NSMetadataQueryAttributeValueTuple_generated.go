@@ -46,24 +46,24 @@ func metadataQueryAttributeValueTupleAdopt(id objc.ID) *MetadataQueryAttributeVa
 }
 
 // Description returns the object's -description text.
-func (x *MetadataQueryAttributeValueTuple) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mqavt *MetadataQueryAttributeValueTuple) Description() string {
+	return rt.Description(objref.IDOf(mqavt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataQueryAttributeValueTuple) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mqavt *MetadataQueryAttributeValueTuple) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mqavt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataQueryAttributeValueTuple) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mqavt *MetadataQueryAttributeValueTuple) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mqavt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataQueryAttributeValueTuple) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mqavt *MetadataQueryAttributeValueTuple) String() string {
+	return rt.Description(objref.IDOf(mqavt))
 }
 
 // NewMetadataQueryAttributeValueTuple creates a new MetadataQueryAttributeValueTuple.
@@ -73,14 +73,14 @@ func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mqavt *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple {
+	objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mqavt
 }
 
 // Attribute wraps the corresponding Objective-C method.
-func (x *MetadataQueryAttributeValueTuple) Attribute() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("attribute"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,24 +88,13 @@ func (x *MetadataQueryAttributeValueTuple) Attribute() string {
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MetadataQueryAttributeValueTuple) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mqavt *MetadataQueryAttributeValueTuple) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *MetadataQueryAttributeValueTuple) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (mqavt *MetadataQueryAttributeValueTuple) Count() int {
+	_r := objc.Send[int](objref.IDOf(mqavt), objc.RegisterName("count"))
 	return _r
 }
-
-// MetadataQueryAttributeValueTupleable is the interface implemented by [MetadataQueryAttributeValueTuple], for mocking and DI.
-type MetadataQueryAttributeValueTupleable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple
-	Attribute() string
-	Value() obj.Object
-	Count() int
-}
-
-var _ MetadataQueryAttributeValueTupleable = (*MetadataQueryAttributeValueTuple)(nil)

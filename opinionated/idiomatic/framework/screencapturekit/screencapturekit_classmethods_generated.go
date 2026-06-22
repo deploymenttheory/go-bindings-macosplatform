@@ -6,6 +6,7 @@ package screencapturekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -14,13 +15,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedPicker sharedPicker the singleton shared picker for the application
+// SharedPicker returns sharedPicker the singleton shared picker for the application
 func SharedPicker() *ContentSharingPicker {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCContentSharingPicker")), objc.RegisterName("sharedPicker"))
 	return ContentSharingPickerFromID(_r)
 }
 
-// SupportedContentTypes an array of UTTypes that corresponds to the file formats that are supported. ScreenCaptureKit can save the CGImage into heic, jpeg, and png
+// SupportedContentTypes returns an array of UTTypes that corresponds to the file formats that are supported. ScreenCaptureKit can save the CGImage into heic, jpeg, and png
 //
 // SupportedContentTypes returns the collection as a Go slice.
 func SupportedContentTypes() []obj.Object {

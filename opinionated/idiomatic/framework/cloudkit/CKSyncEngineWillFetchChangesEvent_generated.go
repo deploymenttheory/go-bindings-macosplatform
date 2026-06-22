@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewSyncEngineWillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
 }
 
 // Context wraps the corresponding Objective-C method.
-func (x *SyncEngineWillFetchChangesEvent) Context() *SyncEngineFetchChangesContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+func (sewfce *SyncEngineWillFetchChangesEvent) Context() *SyncEngineFetchChangesContext {
+	_r := objc.Send[objc.ID](objref.IDOf(sewfce), objc.RegisterName("context"))
 	return SyncEngineFetchChangesContextFromID(_r)
 }
-
-// SyncEngineWillFetchChangesEventable is the interface implemented by [SyncEngineWillFetchChangesEvent], for mocking and DI.
-type SyncEngineWillFetchChangesEventable interface {
-	obj.Object
-	Context() *SyncEngineFetchChangesContext
-}
-
-var _ SyncEngineWillFetchChangesEventable = (*SyncEngineWillFetchChangesEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineWillFetchChangesEvent)(nil)

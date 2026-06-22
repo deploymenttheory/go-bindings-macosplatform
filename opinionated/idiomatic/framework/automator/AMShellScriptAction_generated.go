@@ -52,27 +52,27 @@ func NewShellScriptAction() *ShellScriptAction {
 	return shellScriptActionAdopt(_id)
 }
 
-// WithParameters the action’s parameters.
-func (x *ShellScriptAction) WithParameters(parameters obj.Object) *ShellScriptAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
-	return x
+// WithParameters sets the action’s parameters.
+func (ssa *ShellScriptAction) WithParameters(parameters obj.Object) *ShellScriptAction {
+	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
+	return ssa
 }
 
-// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
-func (x *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
-	return x
+// WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
+func (ssa *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
+	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setProgressValue:"), progressValue)
+	return ssa
 }
 
 // RemapLineEndings wraps the corresponding Objective-C method.
-func (x *ShellScriptAction) RemapLineEndings() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("remapLineEndings"))
+func (ssa *ShellScriptAction) RemapLineEndings() bool {
+	_r := objc.Send[bool](objref.IDOf(ssa), objc.RegisterName("remapLineEndings"))
 	return _r
 }
 
 // InputFieldSeparator wraps the corresponding Objective-C method.
-func (x *ShellScriptAction) InputFieldSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputFieldSeparator"))
+func (ssa *ShellScriptAction) InputFieldSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("inputFieldSeparator"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,25 +80,13 @@ func (x *ShellScriptAction) InputFieldSeparator() string {
 }
 
 // OutputFieldSeparator wraps the corresponding Objective-C method.
-func (x *ShellScriptAction) OutputFieldSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFieldSeparator"))
+func (ssa *ShellScriptAction) OutputFieldSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("outputFieldSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ShellScriptActionable is the interface implemented by [ShellScriptAction], for mocking and DI.
-type ShellScriptActionable interface {
-	obj.Object
-	WithParameters(parameters obj.Object) *ShellScriptAction
-	WithProgressValue(progressValue float64) *ShellScriptAction
-	RemapLineEndings() bool
-	InputFieldSeparator() string
-	OutputFieldSeparator() string
-}
-
-var _ ShellScriptActionable = (*ShellScriptAction)(nil)
 
 var _ BundleActionProvider = (*ShellScriptAction)(nil)
 

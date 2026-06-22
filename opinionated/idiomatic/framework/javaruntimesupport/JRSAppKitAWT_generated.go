@@ -44,24 +44,24 @@ func appKitAWTAdopt(id objc.ID) *AppKitAWT {
 }
 
 // Description returns the object's -description text.
-func (x *AppKitAWT) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aka *AppKitAWT) Description() string {
+	return rt.Description(objref.IDOf(aka))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppKitAWT) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aka *AppKitAWT) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aka), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppKitAWT) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aka *AppKitAWT) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aka), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppKitAWT) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aka *AppKitAWT) String() string {
+	return rt.Description(objref.IDOf(aka))
 }
 
 // NewAppKitAWT creates a new AppKitAWT.
@@ -69,10 +69,3 @@ func NewAppKitAWT() *AppKitAWT {
 	_id := objc.Send[objc.ID](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("new"))
 	return appKitAWTAdopt(_id)
 }
-
-// AppKitAWTable is the interface implemented by [AppKitAWT], for mocking and DI.
-type AppKitAWTable interface {
-	obj.Object
-}
-
-var _ AppKitAWTable = (*AppKitAWT)(nil)

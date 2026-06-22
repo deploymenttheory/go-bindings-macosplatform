@@ -46,24 +46,24 @@ func modelStructurePipelineAdopt(id objc.ID) *ModelStructurePipeline {
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructurePipeline) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msp *ModelStructurePipeline) Description() string {
+	return rt.Description(objref.IDOf(msp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructurePipeline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msp *ModelStructurePipeline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructurePipeline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msp *ModelStructurePipeline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructurePipeline) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msp *ModelStructurePipeline) String() string {
+	return rt.Description(objref.IDOf(msp))
 }
 
 // NewModelStructurePipeline creates a new ModelStructurePipeline.
@@ -72,27 +72,18 @@ func NewModelStructurePipeline() *ModelStructurePipeline {
 	return modelStructurePipelineAdopt(_id)
 }
 
-// SubModelNames the names of the sub models in the pipeline.
+// SubModelNames returns the names of the sub models in the pipeline.
 //
 // SubModelNames returns the collection as a Go slice.
-func (x *ModelStructurePipeline) SubModelNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subModelNames"))
+func (msp *ModelStructurePipeline) SubModelNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("subModelNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SubModels the structure of the sub models in the pipeline.
+// SubModels returns the structure of the sub models in the pipeline.
 //
 // SubModels returns the collection as a Go slice.
-func (x *ModelStructurePipeline) SubModels() []*ModelStructure {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subModels"))
+func (msp *ModelStructurePipeline) SubModels() []*ModelStructure {
+	_arr := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("subModels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructure { return ModelStructureFromID(_id) })
 }
-
-// ModelStructurePipelineable is the interface implemented by [ModelStructurePipeline], for mocking and DI.
-type ModelStructurePipelineable interface {
-	obj.Object
-	SubModelNames() []string
-	SubModels() []*ModelStructure
-}
-
-var _ ModelStructurePipelineable = (*ModelStructurePipeline)(nil)

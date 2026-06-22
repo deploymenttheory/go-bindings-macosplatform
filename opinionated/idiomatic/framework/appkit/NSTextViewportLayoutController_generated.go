@@ -47,24 +47,24 @@ func textViewportLayoutControllerAdopt(id objc.ID) *TextViewportLayoutController
 }
 
 // Description returns the object's -description text.
-func (x *TextViewportLayoutController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tvlc *TextViewportLayoutController) Description() string {
+	return rt.Description(objref.IDOf(tvlc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextViewportLayoutController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tvlc *TextViewportLayoutController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tvlc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextViewportLayoutController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tvlc *TextViewportLayoutController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tvlc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextViewportLayoutController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tvlc *TextViewportLayoutController) String() string {
+	return rt.Description(objref.IDOf(tvlc))
 }
 
 // NewTextViewportLayoutControllerWithTextLayoutManager creates a new instance with the text layout manager you provide.
@@ -75,41 +75,29 @@ func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *Tex
 }
 
 // LayoutViewport performs layout in the viewport.
-func (x *TextViewportLayoutController) LayoutViewport() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutViewport"))
+func (tvlc *TextViewportLayoutController) LayoutViewport() {
+	objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("layoutViewport"))
 }
 
 // AdjustViewportByVerticalOffset adjusts the viewport rect by the specified offset if needed.
-func (x *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
+func (tvlc *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
+	objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
 }
 
 // TextLayoutManager wraps the corresponding Objective-C method.
-func (x *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
+func (tvlc *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
+	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // ViewportBounds wraps the corresponding Objective-C method.
-func (x *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("viewportBounds"))
+func (tvlc *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tvlc), objc.RegisterName("viewportBounds"))
 	return _r
 }
 
 // ViewportRange wraps the corresponding Objective-C method.
-func (x *TextViewportLayoutController) ViewportRange() *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewportRange"))
+func (tvlc *TextViewportLayoutController) ViewportRange() *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("viewportRange"))
 	return TextRangeFromID(_r)
 }
-
-// TextViewportLayoutControllerable is the interface implemented by [TextViewportLayoutController], for mocking and DI.
-type TextViewportLayoutControllerable interface {
-	obj.Object
-	LayoutViewport()
-	AdjustViewportByVerticalOffset(verticalOffset float64)
-	TextLayoutManager() *TextLayoutManager
-	ViewportBounds() corefoundation.CGRect
-	ViewportRange() *TextRange
-}
-
-var _ TextViewportLayoutControllerable = (*TextViewportLayoutController)(nil)

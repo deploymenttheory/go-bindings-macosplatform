@@ -47,24 +47,24 @@ func sampleCursorChunkAdopt(id objc.ID) *SampleCursorChunk {
 }
 
 // Description returns the object's -description text.
-func (x *SampleCursorChunk) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scc *SampleCursorChunk) Description() string {
+	return rt.Description(objref.IDOf(scc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleCursorChunk) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scc *SampleCursorChunk) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleCursorChunk) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scc *SampleCursorChunk) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleCursorChunk) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scc *SampleCursorChunk) String() string {
+	return rt.Description(objref.IDOf(scc))
 }
 
 // NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk creates a new sample cursor chunk with byte source and chunk data that you provide.
@@ -74,37 +74,26 @@ func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWith
 	return sampleCursorChunkAdopt(_id)
 }
 
-// ByteSource the MEByteSource to be used to read the data for the sample.
-func (x *SampleCursorChunk) ByteSource() *ByteSource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
+// ByteSource returns the MEByteSource to be used to read the data for the sample.
+func (scc *SampleCursorChunk) ByteSource() *ByteSource {
+	_r := objc.Send[objc.ID](objref.IDOf(scc), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
 }
 
-// ChunkStorageRange the offset location and length of the sample's chunk, in bytes, within the MEByteSource. The length should be set to 0 if there is no chunk associated with the sample.
-func (x *SampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("chunkStorageRange"))
+// ChunkStorageRange returns the offset location and length of the sample's chunk, in bytes, within the MEByteSource. The length should be set to 0 if there is no chunk associated with the sample.
+func (scc *SampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(scc), objc.RegisterName("chunkStorageRange"))
 	return _r
 }
 
 // ChunkInfo provides information about the chunk of media samples.
-func (x *SampleCursorChunk) ChunkInfo() avfoundation.AVSampleCursorChunkInfo {
-	_r := objc.Send[avfoundation.AVSampleCursorChunkInfo](objref.IDOf(x), objc.RegisterName("chunkInfo"))
+func (scc *SampleCursorChunk) ChunkInfo() avfoundation.AVSampleCursorChunkInfo {
+	_r := objc.Send[avfoundation.AVSampleCursorChunkInfo](objref.IDOf(scc), objc.RegisterName("chunkInfo"))
 	return _r
 }
 
-// SampleIndexWithinChunk the offset of the sample within the chunk, in samples. Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
-func (x *SampleCursorChunk) SampleIndexWithinChunk() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleIndexWithinChunk"))
+// SampleIndexWithinChunk returns the offset of the sample within the chunk, in samples. Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
+func (scc *SampleCursorChunk) SampleIndexWithinChunk() int {
+	_r := objc.Send[int](objref.IDOf(scc), objc.RegisterName("sampleIndexWithinChunk"))
 	return _r
 }
-
-// SampleCursorChunkable is the interface implemented by [SampleCursorChunk], for mocking and DI.
-type SampleCursorChunkable interface {
-	obj.Object
-	ByteSource() *ByteSource
-	ChunkStorageRange() avfoundation.AVSampleCursorStorageRange
-	ChunkInfo() avfoundation.AVSampleCursorChunkInfo
-	SampleIndexWithinChunk() int
-}
-
-var _ SampleCursorChunkable = (*SampleCursorChunk)(nil)

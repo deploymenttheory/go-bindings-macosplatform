@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,52 +50,39 @@ func NewMTRContentLauncherClusterBrandingInformation() *MTRContentLauncherCluste
 }
 
 // WithProviderName sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterBrandingInformation) WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderName:"), purego.NSString(providerName))
-	return x
+func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setProviderName:"), purego.NSString(providerName))
+	return mclcbi
 }
 
 // WithBackground sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterBrandingInformation) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackground:"), objref.IDOf(background))
-	return x
+func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setBackground:"), objref.IDOf(background))
+	return mclcbi
 }
 
 // WithLogo sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterBrandingInformation) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLogo:"), objref.IDOf(logo))
-	return x
+func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setLogo:"), objref.IDOf(logo))
+	return mclcbi
 }
 
 // WithProgressBar sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterBrandingInformation) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
-	return x
+func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
+	return mclcbi
 }
 
 // WithSplash sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterBrandingInformation) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSplash:"), objref.IDOf(splash))
-	return x
+func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setSplash:"), objref.IDOf(splash))
+	return mclcbi
 }
 
 // WithWaterMark sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterBrandingInformation) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
-	return x
+func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
+	return mclcbi
 }
-
-// MTRContentLauncherClusterBrandingInformationable is the interface implemented by [MTRContentLauncherClusterBrandingInformation], for mocking and DI.
-type MTRContentLauncherClusterBrandingInformationable interface {
-	obj.Object
-	WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation
-	WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
-	WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
-	WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
-	WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
-	WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation
-}
-
-var _ MTRContentLauncherClusterBrandingInformationable = (*MTRContentLauncherClusterBrandingInformation)(nil)
 
 var _ MTRContentLauncherClusterBrandingInformationStructProvider = (*MTRContentLauncherClusterBrandingInformation)(nil)

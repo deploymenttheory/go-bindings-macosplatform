@@ -51,31 +51,21 @@ func NewMTRTestClusterClusterTestNullableOptionalRequestParams() *MTRTestCluster
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mtcctnorp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcctnorp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtcctnorp
 }
-
-// MTRTestClusterClusterTestNullableOptionalRequestParamsable is the interface implemented by [MTRTestClusterClusterTestNullableOptionalRequestParams], for mocking and DI.
-type MTRTestClusterClusterTestNullableOptionalRequestParamsable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams
-}
-
-var _ MTRTestClusterClusterTestNullableOptionalRequestParamsable = (*MTRTestClusterClusterTestNullableOptionalRequestParams)(nil)
 
 var _ MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider = (*MTRTestClusterClusterTestNullableOptionalRequestParams)(nil)

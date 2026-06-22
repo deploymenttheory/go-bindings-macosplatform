@@ -46,24 +46,24 @@ func vSAccountMetadataAdopt(id objc.ID) *VSAccountMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *VSAccountMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vam *VSAccountMetadata) Description() string {
+	return rt.Description(objref.IDOf(vam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAccountMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vam *VSAccountMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAccountMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vam *VSAccountMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAccountMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vam *VSAccountMetadata) String() string {
+	return rt.Description(objref.IDOf(vam))
 }
 
 // NewVSAccountMetadata creates a new VSAccountMetadata.
@@ -72,9 +72,9 @@ func NewVSAccountMetadata() *VSAccountMetadata {
 	return vSAccountMetadataAdopt(_id)
 }
 
-// AccountProviderIdentifier a value that uniquely identifies the account provider. You may use this value to brand your app.
-func (x *VSAccountMetadata) AccountProviderIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountProviderIdentifier"))
+// AccountProviderIdentifier returns a value that uniquely identifies the account provider. You may use this value to brand your app.
+func (vam *VSAccountMetadata) AccountProviderIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("accountProviderIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,40 +82,28 @@ func (x *VSAccountMetadata) AccountProviderIdentifier() string {
 }
 
 // AuthenticationExpirationDate specifies when the user might need to re-authenticate with the account provider. The value might be nil if the user is not currently authenticated.
-func (x *VSAccountMetadata) AuthenticationExpirationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationExpirationDate"))
+func (vam *VSAccountMetadata) AuthenticationExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("authenticationExpirationDate"))
 	return obj.Wrap(_r)
 }
 
-// VerificationData an opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
-func (x *VSAccountMetadata) VerificationData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verificationData"))
+// VerificationData returns an opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
+func (vam *VSAccountMetadata) VerificationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("verificationData"))
 	return obj.Wrap(_r)
 }
 
-// SAMLAttributeQueryResponse the SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
-func (x *VSAccountMetadata) SAMLAttributeQueryResponse() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("SAMLAttributeQueryResponse"))
+// SAMLAttributeQueryResponse returns the SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
+func (vam *VSAccountMetadata) SAMLAttributeQueryResponse() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("SAMLAttributeQueryResponse"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AccountProviderResponse the response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
-func (x *VSAccountMetadata) AccountProviderResponse() *VSAccountProviderResponse {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountProviderResponse"))
+// AccountProviderResponse returns the response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
+func (vam *VSAccountMetadata) AccountProviderResponse() *VSAccountProviderResponse {
+	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("accountProviderResponse"))
 	return VSAccountProviderResponseFromID(_r)
 }
-
-// VSAccountMetadataable is the interface implemented by [VSAccountMetadata], for mocking and DI.
-type VSAccountMetadataable interface {
-	obj.Object
-	AccountProviderIdentifier() string
-	AuthenticationExpirationDate() obj.Object
-	VerificationData() obj.Object
-	SAMLAttributeQueryResponse() string
-	AccountProviderResponse() *VSAccountProviderResponse
-}
-
-var _ VSAccountMetadataable = (*VSAccountMetadata)(nil)

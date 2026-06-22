@@ -47,24 +47,24 @@ func projectRegionOfInterestAdopt(id objc.ID) *ProjectRegionOfInterest {
 }
 
 // Description returns the object's -description text.
-func (x *ProjectRegionOfInterest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (proi *ProjectRegionOfInterest) Description() string {
+	return rt.Description(objref.IDOf(proi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectRegionOfInterest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (proi *ProjectRegionOfInterest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(proi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectRegionOfInterest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (proi *ProjectRegionOfInterest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(proi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProjectRegionOfInterest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (proi *ProjectRegionOfInterest) String() string {
+	return rt.Description(objref.IDOf(proi))
 }
 
 // NewProjectRegionOfInterest creates a new ProjectRegionOfInterest.
@@ -74,36 +74,25 @@ func NewProjectRegionOfInterest() *ProjectRegionOfInterest {
 }
 
 // Rect wraps the corresponding Objective-C method.
-func (x *ProjectRegionOfInterest) Rect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rect"))
+func (proi *ProjectRegionOfInterest) Rect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(proi), objc.RegisterName("rect"))
 	return _r
 }
 
-// Weight significance of the regionOfInterest in the overall project context is provided as a weight score. All regions of interest with the same identifier in the project have the same weight. For projects doing things like animation or transition between assets, focusing on the highest weighted regions of interest will ensure that the presentation represents something that is most meaningful to the user. Value range is a double between 0.0 and 1.0. Default is 0.5.
-func (x *ProjectRegionOfInterest) Weight() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weight"))
+// Weight returns significance of the regionOfInterest in the overall project context is provided as a weight score. All regions of interest with the same identifier in the project have the same weight. For projects doing things like animation or transition between assets, focusing on the highest weighted regions of interest will ensure that the presentation represents something that is most meaningful to the user. Value range is a double between 0.0 and 1.0. Default is 0.5.
+func (proi *ProjectRegionOfInterest) Weight() float64 {
+	_r := objc.Send[float64](objref.IDOf(proi), objc.RegisterName("weight"))
 	return _r
 }
 
-// Quality quality of the represented region of interest in the asset. Different regions of interest with the same identifier may have different quality values. If the project wants to decide between multiple assets containing the same region of interest, the quality score can be used to pick the best representation of the region of interest. Value range is a double between 0.0 and 1.0.
-func (x *ProjectRegionOfInterest) Quality() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("quality"))
+// Quality returns quality of the represented region of interest in the asset. Different regions of interest with the same identifier may have different quality values. If the project wants to decide between multiple assets containing the same region of interest, the quality score can be used to pick the best representation of the region of interest. Value range is a double between 0.0 and 1.0.
+func (proi *ProjectRegionOfInterest) Quality() float64 {
+	_r := objc.Send[float64](objref.IDOf(proi), objc.RegisterName("quality"))
 	return _r
 }
 
-// Identifier identifier of the region of interest. Regions representing the same person or object will have the same identifier across multiple assets.
-func (x *ProjectRegionOfInterest) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns identifier of the region of interest. Regions representing the same person or object will have the same identifier across multiple assets.
+func (proi *ProjectRegionOfInterest) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(proi), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
-
-// ProjectRegionOfInterestable is the interface implemented by [ProjectRegionOfInterest], for mocking and DI.
-type ProjectRegionOfInterestable interface {
-	obj.Object
-	Rect() corefoundation.CGRect
-	Weight() float64
-	Quality() float64
-	Identifier() obj.Object
-}
-
-var _ ProjectRegionOfInterestable = (*ProjectRegionOfInterest)(nil)

@@ -46,36 +46,36 @@ func socialProfileAdopt(id objc.ID) *SocialProfile {
 }
 
 // Description returns the object's -description text.
-func (x *SocialProfile) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *SocialProfile) Description() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SocialProfile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sp *SocialProfile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SocialProfile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sp *SocialProfile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SocialProfile) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *SocialProfile) String() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
-// NewSocialProfileWithUrlStringUsernameUserIdentifierService initializes a new social profile object with the specified URL.
-func NewSocialProfileWithUrlStringUsernameUserIdentifierService(urlString string, username string, userIdentifier string, service string) *SocialProfile {
+// NewSocialProfileWithURLStringUsernameUserIdentifierService initializes a new social profile object with the specified URL.
+func NewSocialProfileWithURLStringUsernameUserIdentifierService(urlString string, username string, userIdentifier string, service string) *SocialProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNSocialProfile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUrlString:username:userIdentifier:service:"), purego.NSString(urlString), purego.NSString(username), purego.NSString(userIdentifier), purego.NSString(service))
 	return socialProfileAdopt(_id)
 }
 
-// UrlString wraps the corresponding Objective-C method.
-func (x *SocialProfile) UrlString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("urlString"))
+// URLString wraps the corresponding Objective-C method.
+func (sp *SocialProfile) URLString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("urlString"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *SocialProfile) UrlString() string {
 }
 
 // Username wraps the corresponding Objective-C method.
-func (x *SocialProfile) Username() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+func (sp *SocialProfile) Username() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +92,8 @@ func (x *SocialProfile) Username() string {
 }
 
 // UserIdentifier wraps the corresponding Objective-C method.
-func (x *SocialProfile) UserIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentifier"))
+func (sp *SocialProfile) UserIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("userIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,21 +101,10 @@ func (x *SocialProfile) UserIdentifier() string {
 }
 
 // Service wraps the corresponding Objective-C method.
-func (x *SocialProfile) Service() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
+func (sp *SocialProfile) Service() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("service"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SocialProfileable is the interface implemented by [SocialProfile], for mocking and DI.
-type SocialProfileable interface {
-	obj.Object
-	UrlString() string
-	Username() string
-	UserIdentifier() string
-	Service() string
-}
-
-var _ SocialProfileable = (*SocialProfile)(nil)

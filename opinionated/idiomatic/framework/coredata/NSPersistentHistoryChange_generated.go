@@ -46,24 +46,24 @@ func persistentHistoryChangeAdopt(id objc.ID) *PersistentHistoryChange {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentHistoryChange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (phc *PersistentHistoryChange) Description() string {
+	return rt.Description(objref.IDOf(phc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentHistoryChange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (phc *PersistentHistoryChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(phc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentHistoryChange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (phc *PersistentHistoryChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(phc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentHistoryChange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (phc *PersistentHistoryChange) String() string {
+	return rt.Description(objref.IDOf(phc))
 }
 
 // NewPersistentHistoryChange creates a new PersistentHistoryChange.
@@ -73,50 +73,37 @@ func NewPersistentHistoryChange() *PersistentHistoryChange {
 }
 
 // ChangeID wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChange) ChangeID() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("changeID"))
+func (phc *PersistentHistoryChange) ChangeID() int64 {
+	_r := objc.Send[int64](objref.IDOf(phc), objc.RegisterName("changeID"))
 	return _r
 }
 
 // ChangedObjectID wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedObjectID"))
+func (phc *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("changedObjectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
 // ChangeType wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChange) ChangeType() PersistentHistoryChangeType {
-	_r := objc.Send[PersistentHistoryChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
+func (phc *PersistentHistoryChange) ChangeType() PersistentHistoryChangeType {
+	_r := objc.Send[PersistentHistoryChangeType](objref.IDOf(phc), objc.RegisterName("changeType"))
 	return _r
 }
 
 // Tombstone wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChange) Tombstone() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tombstone"))
+func (phc *PersistentHistoryChange) Tombstone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("tombstone"))
 	return obj.Wrap(_r)
 }
 
 // Transaction wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChange) Transaction() *PersistentHistoryTransaction {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transaction"))
+func (phc *PersistentHistoryChange) Transaction() *PersistentHistoryTransaction {
+	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("transaction"))
 	return PersistentHistoryTransactionFromID(_r)
 }
 
 // UpdatedProperties wraps the corresponding Objective-C method.
-func (x *PersistentHistoryChange) UpdatedProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedProperties"))
+func (phc *PersistentHistoryChange) UpdatedProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("updatedProperties"))
 	return obj.Wrap(_r)
 }
-
-// PersistentHistoryChangeable is the interface implemented by [PersistentHistoryChange], for mocking and DI.
-type PersistentHistoryChangeable interface {
-	obj.Object
-	ChangeID() int64
-	ChangedObjectID() *ManagedObjectID
-	ChangeType() PersistentHistoryChangeType
-	Tombstone() obj.Object
-	Transaction() *PersistentHistoryTransaction
-	UpdatedProperties() obj.Object
-}
-
-var _ PersistentHistoryChangeable = (*PersistentHistoryChange)(nil)

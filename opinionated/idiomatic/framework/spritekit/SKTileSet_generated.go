@@ -47,24 +47,24 @@ func tileSetAdopt(id objc.ID) *TileSet {
 }
 
 // Description returns the object's -description text.
-func (x *TileSet) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TileSet) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TileSet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TileSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TileSet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TileSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TileSet) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TileSet) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTileSetWithTileGroups initializes a new tile set with an array of tile groups and rectangular grid layout.
@@ -81,115 +81,68 @@ func NewTileSetWithTileGroupsTileSetType(tileGroups []*TileGroup, tileSetType Ti
 	return tileSetAdopt(_id)
 }
 
-// WithTileGroups the tile set’s array of tile group objects.
-func (x *TileSet) WithTileGroups(items ...*TileGroup) *TileSet {
+// WithTileGroups sets the tile set’s array of tile group objects.
+func (ts *TileSet) WithTileGroups(items ...*TileGroup) *TileSet {
 	_arr := purego.SliceToNSArray(items, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileGroups:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTileGroups:"), _arr)
+	return ts
 }
 
-// WithName a name associated with the tile set.
-func (x *TileSet) WithName(name string) *TileSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a name associated with the tile set.
+func (ts *TileSet) WithName(name string) *TileSet {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setName:"), purego.NSString(name))
+	return ts
 }
 
-// WithType the tile set’s type.
-func (x *TileSet) WithType(type_ TileSetType) *TileSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the tile set’s type.
+func (ts *TileSet) WithType(type_ TileSetType) *TileSet {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setType:"), type_)
+	return ts
 }
 
-// WithDefaultTileGroup the tile set’s default tile group.
-func (x *TileSet) WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTileGroup:"), objref.IDOf(defaultTileGroup))
-	return x
+// WithDefaultTileGroup sets the tile set’s default tile group.
+func (ts *TileSet) WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setDefaultTileGroup:"), objref.IDOf(defaultTileGroup))
+	return ts
 }
 
-// WithDefaultTileSize the tile set’s default tile size.
-func (x *TileSet) WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTileSize:"), defaultTileSize)
-	return x
+// WithDefaultTileSize sets the tile set’s default tile size.
+func (ts *TileSet) WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setDefaultTileSize:"), defaultTileSize)
+	return ts
 }
 
-// TileGroups the tile groups that this set provides for use.
+// TileGroups returns the tile groups that this set provides for use.
 //
 // TileGroups returns the collection as a Go slice.
-func (x *TileSet) TileGroups() []*TileGroup {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tileGroups"))
+func (ts *TileSet) TileGroups() []*TileGroup {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("tileGroups"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileGroup { return TileGroupFromID(_id) })
 }
 
-// SetTileGroups wraps the corresponding Objective-C method.
-func (x *TileSet) SetTileGroups(tileGroups []*TileGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileGroups:"), purego.SliceToNSArray(tileGroups, func(_v *TileGroup) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Name client-assignable name for the tile set. Defaults to nil.
-func (x *TileSet) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns client-assignable name for the tile set. Defaults to nil.
+func (ts *TileSet) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *TileSet) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// Type the tile set type specifies how the tiles in the set will be arranged when placed in a tile map. Defaults to SKTileSetTypeGrid.
-func (x *TileSet) Type() TileSetType {
-	_r := objc.Send[TileSetType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the tile set type specifies how the tiles in the set will be arranged when placed in a tile map. Defaults to SKTileSetTypeGrid.
+func (ts *TileSet) Type() TileSetType {
+	_r := objc.Send[TileSetType](objref.IDOf(ts), objc.RegisterName("type"))
 	return _r
-}
-
-// SetType wraps the corresponding Objective-C method.
-func (x *TileSet) SetType(type_ TileSetType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
 // DefaultTileGroup wraps the corresponding Objective-C method.
-func (x *TileSet) DefaultTileGroup() *TileGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultTileGroup"))
+func (ts *TileSet) DefaultTileGroup() *TileGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("defaultTileGroup"))
 	return TileGroupFromID(_r)
 }
 
-// SetDefaultTileGroup wraps the corresponding Objective-C method.
-func (x *TileSet) SetDefaultTileGroup(defaultTileGroup *TileGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTileGroup:"), objref.IDOf(defaultTileGroup))
-}
-
-// DefaultTileSize the default tile size is the value an SKTileMapNode will use for it's tiles when the tile set is assigned to it.
-func (x *TileSet) DefaultTileSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("defaultTileSize"))
+// DefaultTileSize returns the default tile size is the value an SKTileMapNode will use for it's tiles when the tile set is assigned to it.
+func (ts *TileSet) DefaultTileSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ts), objc.RegisterName("defaultTileSize"))
 	return _r
 }
-
-// SetDefaultTileSize wraps the corresponding Objective-C method.
-func (x *TileSet) SetDefaultTileSize(defaultTileSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTileSize:"), defaultTileSize)
-}
-
-// TileSetable is the interface implemented by [TileSet], for mocking and DI.
-type TileSetable interface {
-	obj.Object
-	WithTileGroups(items ...*TileGroup) *TileSet
-	WithName(name string) *TileSet
-	WithType(type_ TileSetType) *TileSet
-	WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet
-	WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet
-	TileGroups() []*TileGroup
-	SetTileGroups(tileGroups []*TileGroup)
-	Name() string
-	SetName(name string)
-	Type() TileSetType
-	SetType(type_ TileSetType)
-	DefaultTileGroup() *TileGroup
-	SetDefaultTileGroup(defaultTileGroup *TileGroup)
-	DefaultTileSize() corefoundation.CGSize
-	SetDefaultTileSize(defaultTileSize corefoundation.CGSize)
-}
-
-var _ TileSetable = (*TileSet)(nil)

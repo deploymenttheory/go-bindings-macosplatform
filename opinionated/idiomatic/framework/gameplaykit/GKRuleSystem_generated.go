@@ -46,24 +46,24 @@ func ruleSystemAdopt(id objc.ID) *RuleSystem {
 }
 
 // Description returns the object's -description text.
-func (x *RuleSystem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RuleSystem) Description() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RuleSystem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rs *RuleSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RuleSystem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rs *RuleSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RuleSystem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RuleSystem) String() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // NewRuleSystem creates a new RuleSystem.
@@ -73,93 +73,74 @@ func NewRuleSystem() *RuleSystem {
 }
 
 // Evaluate evaluates the rule system, executing the list of rules in its agenda.
-func (x *RuleSystem) Evaluate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate"))
+func (rs *RuleSystem) Evaluate() {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("evaluate"))
 }
 
 // AddRule adds the specified rule to the system.
-func (x *RuleSystem) AddRule(rule *Rule) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRule:"), objref.IDOf(rule))
+func (rs *RuleSystem) AddRule(rule *Rule) {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("addRule:"), objref.IDOf(rule))
 }
 
 // AddRulesFromArray adds the specified list of rules to the system.
-func (x *RuleSystem) AddRulesFromArray(rules []*Rule) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRulesFromArray:"), purego.SliceToNSArray(rules, func(_v *Rule) objc.ID { return objref.IDOf(_v) }))
+func (rs *RuleSystem) AddRulesFromArray(rules []*Rule) {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("addRulesFromArray:"), purego.SliceToNSArray(rules, func(_v *Rule) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveAllRules removes all rules from the system.
-func (x *RuleSystem) RemoveAllRules() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRules"))
+func (rs *RuleSystem) RemoveAllRules() {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("removeAllRules"))
 }
 
 // MinimumGradeForFacts returns the lowest membership grade among the specified facts.
-func (x *RuleSystem) MinimumGradeForFacts(facts obj.Object) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumGradeForFacts:"), objref.IDOf(facts))
+func (rs *RuleSystem) MinimumGradeForFacts(facts obj.Object) float32 {
+	_r := objc.Send[float32](objref.IDOf(rs), objc.RegisterName("minimumGradeForFacts:"), objref.IDOf(facts))
 	return _r
 }
 
 // MaximumGradeForFacts returns the highest membership grade among the specified facts.
-func (x *RuleSystem) MaximumGradeForFacts(facts obj.Object) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumGradeForFacts:"), objref.IDOf(facts))
+func (rs *RuleSystem) MaximumGradeForFacts(facts obj.Object) float32 {
+	_r := objc.Send[float32](objref.IDOf(rs), objc.RegisterName("maximumGradeForFacts:"), objref.IDOf(facts))
 	return _r
 }
 
 // Reset returns the rule system to its original agenda and clears all facts.
-func (x *RuleSystem) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (rs *RuleSystem) Reset() {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("reset"))
 }
 
-// State the implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes.
-func (x *RuleSystem) State() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes.
+func (rs *RuleSystem) State() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// Rules the current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets.
+// Rules returns the current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets.
 //
 // Rules returns the collection as a Go slice.
-func (x *RuleSystem) Rules() []*Rule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+func (rs *RuleSystem) Rules() []*Rule {
+	_arr := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("rules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// Agenda the current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets.
+// Agenda returns the current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets.
 //
 // Agenda returns the collection as a Go slice.
-func (x *RuleSystem) Agenda() []*Rule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("agenda"))
+func (rs *RuleSystem) Agenda() []*Rule {
+	_arr := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("agenda"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// Executed the current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets.
+// Executed returns the current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets.
 //
 // Executed returns the collection as a Go slice.
-func (x *RuleSystem) Executed() []*Rule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executed"))
+func (rs *RuleSystem) Executed() []*Rule {
+	_arr := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("executed"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
-// Facts the current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact:
-func (x *RuleSystem) Facts() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("facts"))
+// Facts returns the current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact:
+func (rs *RuleSystem) Facts() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("facts"))
 	return obj.Wrap(_r)
 }
-
-// RuleSystemable is the interface implemented by [RuleSystem], for mocking and DI.
-type RuleSystemable interface {
-	obj.Object
-	Evaluate()
-	AddRule(rule *Rule)
-	AddRulesFromArray(rules []*Rule)
-	RemoveAllRules()
-	MinimumGradeForFacts(facts obj.Object) float32
-	MaximumGradeForFacts(facts obj.Object) float32
-	Reset()
-	State() obj.Object
-	Rules() []*Rule
-	Agenda() []*Rule
-	Executed() []*Rule
-	Facts() obj.Object
-}
-
-var _ RuleSystemable = (*RuleSystem)(nil)

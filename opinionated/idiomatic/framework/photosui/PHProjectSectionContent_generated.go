@@ -46,24 +46,24 @@ func projectSectionContentAdopt(id objc.ID) *ProjectSectionContent {
 }
 
 // Description returns the object's -description text.
-func (x *ProjectSectionContent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (psc *ProjectSectionContent) Description() string {
+	return rt.Description(objref.IDOf(psc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectSectionContent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (psc *ProjectSectionContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(psc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectSectionContent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (psc *ProjectSectionContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(psc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProjectSectionContent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (psc *ProjectSectionContent) String() string {
+	return rt.Description(objref.IDOf(psc))
 }
 
 // NewProjectSectionContent creates a new ProjectSectionContent.
@@ -72,48 +72,36 @@ func NewProjectSectionContent() *ProjectSectionContent {
 	return projectSectionContentAdopt(_id)
 }
 
-// Elements array of asset, text, or journal entry elements contained in the content.
+// Elements returns array of asset, text, or journal entry elements contained in the content.
 //
 // Elements returns the collection as a Go slice.
-func (x *ProjectSectionContent) Elements() []*ProjectElement {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+func (psc *ProjectSectionContent) Elements() []*ProjectElement {
+	_arr := objc.Send[objc.ID](objref.IDOf(psc), objc.RegisterName("elements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectElement { return ProjectElementFromID(_id) })
 }
 
-// NumberOfColumns the suggested layout of the content is provided in resolution-independent "grid space" units where one grid space is the width of the defined project canvas divided by numberOfColumns. If a project represents a "fixed layout" (e.g., it was created from an existing Apple Book, Card, or Calendar) the specified numberOfColumns will always be 1.
-func (x *ProjectSectionContent) NumberOfColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+// NumberOfColumns returns the suggested layout of the content is provided in resolution-independent "grid space" units where one grid space is the width of the defined project canvas divided by numberOfColumns. If a project represents a "fixed layout" (e.g., it was created from an existing Apple Book, Card, or Calendar) the specified numberOfColumns will always be 1.
+func (psc *ProjectSectionContent) NumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(psc), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// AspectRatio overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
-func (x *ProjectSectionContent) AspectRatio() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("aspectRatio"))
+// AspectRatio returns overall aspect ratio of the full content layout (width/height) to enable faithful replication in the project's layout.
+func (psc *ProjectSectionContent) AspectRatio() float64 {
+	_r := objc.Send[float64](objref.IDOf(psc), objc.RegisterName("aspectRatio"))
 	return _r
 }
 
-// CloudAssetIdentifiers convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
+// CloudAssetIdentifiers returns convenience for getting a single array of all cloud asset identifiers referenced in the content without needing to enumerate elements.
 //
 // CloudAssetIdentifiers returns the collection as a Go slice.
-func (x *ProjectSectionContent) CloudAssetIdentifiers() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudAssetIdentifiers"))
+func (psc *ProjectSectionContent) CloudAssetIdentifiers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(psc), objc.RegisterName("cloudAssetIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// BackgroundColor background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product
-func (x *ProjectSectionContent) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+// BackgroundColor returns background color of the section content. This property is only used when the user creates a new project from an existing Apple Print Product
+func (psc *ProjectSectionContent) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(psc), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
-
-// ProjectSectionContentable is the interface implemented by [ProjectSectionContent], for mocking and DI.
-type ProjectSectionContentable interface {
-	obj.Object
-	Elements() []*ProjectElement
-	NumberOfColumns() int
-	AspectRatio() float64
-	CloudAssetIdentifiers() []obj.Object
-	BackgroundColor() obj.Object
-}
-
-var _ ProjectSectionContentable = (*ProjectSectionContent)(nil)

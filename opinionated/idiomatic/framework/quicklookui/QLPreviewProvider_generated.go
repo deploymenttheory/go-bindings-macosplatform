@@ -46,24 +46,24 @@ func previewProviderAdopt(id objc.ID) *PreviewProvider {
 }
 
 // Description returns the object's -description text.
-func (x *PreviewProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PreviewProvider) Description() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PreviewProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pp *PreviewProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PreviewProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pp *PreviewProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PreviewProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PreviewProvider) String() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // NewPreviewProvider creates a new PreviewProvider.
@@ -71,10 +71,3 @@ func NewPreviewProvider() *PreviewProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("QLPreviewProvider")), objc.RegisterName("new"))
 	return previewProviderAdopt(_id)
 }
-
-// PreviewProviderable is the interface implemented by [PreviewProvider], for mocking and DI.
-type PreviewProviderable interface {
-	obj.Object
-}
-
-var _ PreviewProviderable = (*PreviewProvider)(nil)

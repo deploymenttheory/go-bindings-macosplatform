@@ -46,24 +46,24 @@ func rangeAdopt(id objc.ID) *Range {
 }
 
 // Description returns the object's -description text.
-func (x *Range) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Range) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Range) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Range) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Range) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Range) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Range) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Range) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRangeWithLowerLimitUpperLimit initializes a new range object.
@@ -73,49 +73,26 @@ func NewRangeWithLowerLimitUpperLimit(lower float64, upper float64) *Range {
 	return rangeAdopt(_id)
 }
 
-// WithLowerLimit the minimum possible value.
-func (x *Range) WithLowerLimit(lowerLimit float64) *Range {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerLimit:"), lowerLimit)
-	return x
+// WithLowerLimit sets the minimum possible value.
+func (r *Range) WithLowerLimit(lowerLimit float64) *Range {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setLowerLimit:"), lowerLimit)
+	return r
 }
 
-// WithUpperLimit the maximum possible value.
-func (x *Range) WithUpperLimit(upperLimit float64) *Range {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperLimit:"), upperLimit)
-	return x
+// WithUpperLimit sets the maximum possible value.
+func (r *Range) WithUpperLimit(upperLimit float64) *Range {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setUpperLimit:"), upperLimit)
+	return r
 }
 
 // LowerLimit wraps the corresponding Objective-C method.
-func (x *Range) LowerLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerLimit"))
+func (r *Range) LowerLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("lowerLimit"))
 	return _r
-}
-
-// SetLowerLimit wraps the corresponding Objective-C method.
-func (x *Range) SetLowerLimit(lowerLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerLimit:"), lowerLimit)
 }
 
 // UpperLimit wraps the corresponding Objective-C method.
-func (x *Range) UpperLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperLimit"))
+func (r *Range) UpperLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("upperLimit"))
 	return _r
 }
-
-// SetUpperLimit wraps the corresponding Objective-C method.
-func (x *Range) SetUpperLimit(upperLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperLimit:"), upperLimit)
-}
-
-// Rangeable is the interface implemented by [Range], for mocking and DI.
-type Rangeable interface {
-	obj.Object
-	WithLowerLimit(lowerLimit float64) *Range
-	WithUpperLimit(upperLimit float64) *Range
-	LowerLimit() float64
-	SetLowerLimit(lowerLimit float64)
-	UpperLimit() float64
-	SetUpperLimit(upperLimit float64)
-}
-
-var _ Rangeable = (*Range)(nil)

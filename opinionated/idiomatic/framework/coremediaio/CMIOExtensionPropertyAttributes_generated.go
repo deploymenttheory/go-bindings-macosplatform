@@ -46,24 +46,24 @@ func extensionPropertyAttributesAdopt(id objc.ID) *ExtensionPropertyAttributes {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionPropertyAttributes) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (epa *ExtensionPropertyAttributes) Description() string {
+	return rt.Description(objref.IDOf(epa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionPropertyAttributes) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (epa *ExtensionPropertyAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(epa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionPropertyAttributes) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (epa *ExtensionPropertyAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(epa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionPropertyAttributes) String() string {
-	return rt.Description(objref.IDOf(x))
+func (epa *ExtensionPropertyAttributes) String() string {
+	return rt.Description(objref.IDOf(epa))
 }
 
 // NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a property attributes object with the specified configuration.
@@ -73,37 +73,26 @@ func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minVa
 	return extensionPropertyAttributesAdopt(_id)
 }
 
-// MinValue the minimum value of a property.
-func (x *ExtensionPropertyAttributes) MinValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minValue"))
+// MinValue returns the minimum value of a property.
+func (epa *ExtensionPropertyAttributes) MinValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(epa), objc.RegisterName("minValue"))
 	return obj.Wrap(_r)
 }
 
-// MaxValue the maximum value of a property.
-func (x *ExtensionPropertyAttributes) MaxValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxValue"))
+// MaxValue returns the maximum value of a property.
+func (epa *ExtensionPropertyAttributes) MaxValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(epa), objc.RegisterName("maxValue"))
 	return obj.Wrap(_r)
 }
 
-// ValidValues an array of valid values.
-func (x *ExtensionPropertyAttributes) ValidValues() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validValues"))
+// ValidValues returns an array of valid values.
+func (epa *ExtensionPropertyAttributes) ValidValues() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(epa), objc.RegisterName("validValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsReadOnly the readOnly flag attribute.
-func (x *ExtensionPropertyAttributes) IsReadOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+// IsReadOnly reports whether the readOnly flag attribute.
+func (epa *ExtensionPropertyAttributes) IsReadOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(epa), objc.RegisterName("isReadOnly"))
 	return _r
 }
-
-// ExtensionPropertyAttributesable is the interface implemented by [ExtensionPropertyAttributes], for mocking and DI.
-type ExtensionPropertyAttributesable interface {
-	obj.Object
-	MinValue() obj.Object
-	MaxValue() obj.Object
-	ValidValues() []obj.Object
-	IsReadOnly() bool
-}
-
-var _ ExtensionPropertyAttributesable = (*ExtensionPropertyAttributes)(nil)

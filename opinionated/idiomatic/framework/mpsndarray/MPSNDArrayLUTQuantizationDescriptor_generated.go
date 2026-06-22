@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewArrayLUTQuantizationDescriptor() *ArrayLUTQuantizationDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("new"))
 	return arrayLUTQuantizationDescriptorAdopt(_id)
 }
-
-// ArrayLUTQuantizationDescriptorable is the interface implemented by [ArrayLUTQuantizationDescriptor], for mocking and DI.
-type ArrayLUTQuantizationDescriptorable interface {
-	obj.Object
-}
-
-var _ ArrayLUTQuantizationDescriptorable = (*ArrayLUTQuantizationDescriptor)(nil)
 
 var _ ArrayQuantizationDescriptorProvider = (*ArrayLUTQuantizationDescriptor)(nil)

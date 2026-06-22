@@ -46,24 +46,24 @@ func playerItemSegmentAdopt(id objc.ID) *PlayerItemSegment {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemSegment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pis *PlayerItemSegment) Description() string {
+	return rt.Description(objref.IDOf(pis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemSegment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pis *PlayerItemSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemSegment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pis *PlayerItemSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemSegment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pis *PlayerItemSegment) String() string {
+	return rt.Description(objref.IDOf(pis))
 }
 
 // NewPlayerItemSegment creates a new PlayerItemSegment.
@@ -72,39 +72,28 @@ func NewPlayerItemSegment() *PlayerItemSegment {
 	return playerItemSegmentAdopt(_id)
 }
 
-// SegmentType the type of content this segment represents.
-func (x *PlayerItemSegment) SegmentType() PlayerItemSegmentType {
-	_r := objc.Send[PlayerItemSegmentType](objref.IDOf(x), objc.RegisterName("segmentType"))
+// SegmentType returns the type of content this segment represents.
+func (pis *PlayerItemSegment) SegmentType() PlayerItemSegmentType {
+	_r := objc.Send[PlayerItemSegmentType](objref.IDOf(pis), objc.RegisterName("segmentType"))
 	return _r
 }
 
-// LoadedTimeRanges this property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
+// LoadedTimeRanges returns this property provides a collection of time ranges for the segment if media data is readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges. Loaded time ranges will be within the timeMapping's target timeRange. Loaded time ranges will be empty for interstitial events that occupy a single point in time.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *PlayerItemSegment) LoadedTimeRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+func (pis *PlayerItemSegment) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pis), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// StartDate the date this segment starts at. The date this segment starts at. This value will be nil if the primary item does not contain dates.
-func (x *PlayerItemSegment) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns the date this segment starts at. The date this segment starts at. This value will be nil if the primary item does not contain dates.
+func (pis *PlayerItemSegment) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pis), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// InterstitialEvent the associated interstitial event for this segment. The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
-func (x *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interstitialEvent"))
+// InterstitialEvent returns the associated interstitial event for this segment. The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
+func (pis *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(pis), objc.RegisterName("interstitialEvent"))
 	return PlayerInterstitialEventFromID(_r)
 }
-
-// PlayerItemSegmentable is the interface implemented by [PlayerItemSegment], for mocking and DI.
-type PlayerItemSegmentable interface {
-	obj.Object
-	SegmentType() PlayerItemSegmentType
-	LoadedTimeRanges() []obj.Object
-	StartDate() obj.Object
-	InterstitialEvent() *PlayerInterstitialEvent
-}
-
-var _ PlayerItemSegmentable = (*PlayerItemSegment)(nil)

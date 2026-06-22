@@ -44,24 +44,24 @@ func mTRServiceAreaClusterLandmarkInfoStructAdopt(id objc.ID) *MTRServiceAreaClu
 }
 
 // Description returns the object's -description text.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(msaclis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msaclis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msaclis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) String() string {
+	return rt.Description(objref.IDOf(msaclis))
 }
 
 // NewMTRServiceAreaClusterLandmarkInfoStruct creates a new MTRServiceAreaClusterLandmarkInfoStruct.
@@ -71,48 +71,25 @@ func NewMTRServiceAreaClusterLandmarkInfoStruct() *MTRServiceAreaClusterLandmark
 }
 
 // WithLandmarkTag sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
-	return x
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
+	return msaclis
 }
 
 // WithRelativePositionTag sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
-	return x
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
+	return msaclis
 }
 
 // LandmarkTag wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarkTag"))
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("landmarkTag"))
 	return obj.Wrap(_r)
-}
-
-// SetLandmarkTag wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetLandmarkTag(landmarkTag obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 }
 
 // RelativePositionTag wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativePositionTag"))
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("relativePositionTag"))
 	return obj.Wrap(_r)
 }
-
-// SetRelativePositionTag wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetRelativePositionTag(relativePositionTag obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
-}
-
-// MTRServiceAreaClusterLandmarkInfoStructable is the interface implemented by [MTRServiceAreaClusterLandmarkInfoStruct], for mocking and DI.
-type MTRServiceAreaClusterLandmarkInfoStructable interface {
-	obj.Object
-	WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct
-	WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct
-	LandmarkTag() obj.Object
-	SetLandmarkTag(landmarkTag obj.Object)
-	RelativePositionTag() obj.Object
-	SetRelativePositionTag(relativePositionTag obj.Object)
-}
-
-var _ MTRServiceAreaClusterLandmarkInfoStructable = (*MTRServiceAreaClusterLandmarkInfoStruct)(nil)

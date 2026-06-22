@@ -48,66 +48,50 @@ func metaParameterAdopt(id objc.ID) *MetaParameter {
 }
 
 // Description returns the object's -description text.
-func (x *MetaParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MetaParameter) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetaParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MetaParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetaParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MetaParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetaParameter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MetaParameter) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
-// WithValue a value for the metaparameter.
-func (x *MetaParameter) WithValue(value obj.Object) *MetaParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+// WithValue sets a value for the metaparameter.
+func (mp *MetaParameter) WithValue(value obj.Object) *MetaParameter {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mp
 }
 
-// Identifier the identifier that uniquely represents this metaparameter.
-func (x *MetaParameter) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier that uniquely represents this metaparameter.
+func (mp *MetaParameter) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Value the value of this metaparameter
-func (x *MetaParameter) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the value of this metaparameter
+func (mp *MetaParameter) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MetaParameter) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MetaParameterable is the interface implemented by [MetaParameter], for mocking and DI.
-type MetaParameterable interface {
-	obj.Object
-	WithValue(value obj.Object) *MetaParameter
-	Identifier() string
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MetaParameterable = (*MetaParameter)(nil)
 
 // isMetaParameter marks MetaParameter — and, by embedding promotion, its
 // subclasses — as a member of the MetaParameter hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetaParameter) isMetaParameter() {}
+func (mp *MetaParameter) isMetaParameter() {}
 
 var _ MetaParameterProvider = (*MetaParameter)(nil)

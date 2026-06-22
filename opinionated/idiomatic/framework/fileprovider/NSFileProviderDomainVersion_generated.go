@@ -46,24 +46,24 @@ func fileProviderDomainVersionAdopt(id objc.ID) *FileProviderDomainVersion {
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderDomainVersion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpdv *FileProviderDomainVersion) Description() string {
+	return rt.Description(objref.IDOf(fpdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderDomainVersion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpdv *FileProviderDomainVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderDomainVersion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpdv *FileProviderDomainVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderDomainVersion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpdv *FileProviderDomainVersion) String() string {
+	return rt.Description(objref.IDOf(fpdv))
 }
 
 // NewFileProviderDomainVersion creates a new FileProviderDomainVersion.
@@ -73,15 +73,7 @@ func NewFileProviderDomainVersion() *FileProviderDomainVersion {
 }
 
 // Next creates a new version that supersedes the current version.
-func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("next"))
+func (fpdv *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
+	_r := objc.Send[objc.ID](objref.IDOf(fpdv), objc.RegisterName("next"))
 	return FileProviderDomainVersionFromID(_r)
 }
-
-// FileProviderDomainVersionable is the interface implemented by [FileProviderDomainVersion], for mocking and DI.
-type FileProviderDomainVersionable interface {
-	obj.Object
-	Next() *FileProviderDomainVersion
-}
-
-var _ FileProviderDomainVersionable = (*FileProviderDomainVersion)(nil)

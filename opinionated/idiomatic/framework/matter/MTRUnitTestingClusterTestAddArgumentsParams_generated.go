@@ -46,117 +46,78 @@ func mTRUnitTestingClusterTestAddArgumentsParamsAdopt(id objc.ID) *MTRUnitTestin
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) Description() string {
+	return rt.Description(objref.IDOf(mutctaap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctaap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctaap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) String() string {
+	return rt.Description(objref.IDOf(mutctaap))
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
+	objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mutctaap
 }
 
 // WithArg2 sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
-	return x
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
+	objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
+	return mutctaap
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
+	objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mutctaap
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
+	objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mutctaap
 }
 
 // Arg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) Arg1() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) Arg1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
-}
-
-// SetArg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetArg1(arg1 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
 // Arg2 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) Arg2() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg2"))
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) Arg2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("arg2"))
 	return obj.Wrap(_r)
 }
 
-// SetArg2 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetArg2(arg2 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRUnitTestingClusterTestAddArgumentsParamsable is the interface implemented by [MTRUnitTestingClusterTestAddArgumentsParams], for mocking and DI.
-type MTRUnitTestingClusterTestAddArgumentsParamsable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams
-	WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams
-	Arg1() obj.Object
-	SetArg1(arg1 obj.Object)
-	Arg2() obj.Object
-	SetArg2(arg2 obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestAddArgumentsParamsable = (*MTRUnitTestingClusterTestAddArgumentsParams)(nil)
 
 // isMTRUnitTestingClusterTestAddArgumentsParams marks MTRUnitTestingClusterTestAddArgumentsParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestAddArgumentsParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestAddArgumentsParams) isMTRUnitTestingClusterTestAddArgumentsParams() {
+func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) isMTRUnitTestingClusterTestAddArgumentsParams() {
 }
 
 var _ MTRUnitTestingClusterTestAddArgumentsParamsProvider = (*MTRUnitTestingClusterTestAddArgumentsParams)(nil)

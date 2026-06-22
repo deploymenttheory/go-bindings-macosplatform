@@ -46,24 +46,24 @@ func networkSessionAdopt(id objc.ID) *NetworkSession {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NetworkSession) Description() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ns *NetworkSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ns *NetworkSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NetworkSession) String() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // NewNetworkSession creates a new NetworkSession.
@@ -72,86 +72,81 @@ func NewNetworkSession() *NetworkSession {
 	return networkSessionAdopt(_id)
 }
 
-// WithEnabled a Boolean value that determines whether the session is enabled.
-func (x *NetworkSession) WithEnabled(enabled bool) *NetworkSession {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that determines whether the session is enabled.
+func (ns *NetworkSession) WithEnabled(enabled bool) *NetworkSession {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setEnabled:"), enabled)
+	return ns
 }
 
-// WithConnectionPolicy the policy that determines who can connect to this session.
-func (x *NetworkSession) WithConnectionPolicy(connectionPolicy NetworkConnectionPolicy) *NetworkSession {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionPolicy:"), connectionPolicy)
-	return x
+// WithConnectionPolicy sets the policy that determines who can connect to this session.
+func (ns *NetworkSession) WithConnectionPolicy(connectionPolicy NetworkConnectionPolicy) *NetworkSession {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setConnectionPolicy:"), connectionPolicy)
+	return ns
 }
 
 // Contacts returns the array of network hosts.
-func (x *NetworkSession) Contacts() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contacts"))
+func (ns *NetworkSession) Contacts() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("contacts"))
 	return obj.Wrap(_r)
 }
 
 // AddContact adds a host as a contact.
-func (x *NetworkSession) AddContact(contact *NetworkHost) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addContact:"), objref.IDOf(contact))
+func (ns *NetworkSession) AddContact(contact *NetworkHost) bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("addContact:"), objref.IDOf(contact))
 	return _r
 }
 
 // RemoveContact removes a host as a contact.
-func (x *NetworkSession) RemoveContact(contact *NetworkHost) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeContact:"), objref.IDOf(contact))
+func (ns *NetworkSession) RemoveContact(contact *NetworkHost) bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("removeContact:"), objref.IDOf(contact))
 	return _r
 }
 
 // Connections returns the session’s set of MIDI network connections.
-func (x *NetworkSession) Connections() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connections"))
+func (ns *NetworkSession) Connections() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("connections"))
 	return obj.Wrap(_r)
 }
 
 // AddConnection adds a new connection to this session.
-func (x *NetworkSession) AddConnection(connection *NetworkConnection) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addConnection:"), objref.IDOf(connection))
+func (ns *NetworkSession) AddConnection(connection *NetworkConnection) bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("addConnection:"), objref.IDOf(connection))
 	return _r
 }
 
 // RemoveConnection removes a connection from this session.
-func (x *NetworkSession) RemoveConnection(connection *NetworkConnection) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeConnection:"), objref.IDOf(connection))
+func (ns *NetworkSession) RemoveConnection(connection *NetworkConnection) bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("removeConnection:"), objref.IDOf(connection))
 	return _r
 }
 
 // SourceEndpoint returns the session’s source endpoint.
-func (x *NetworkSession) SourceEndpoint() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceEndpoint"))
+func (ns *NetworkSession) SourceEndpoint() int {
+	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("sourceEndpoint"))
 	return _r
 }
 
 // DestinationEndpoint returns the session’s destination endpoint.
-func (x *NetworkSession) DestinationEndpoint() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destinationEndpoint"))
+func (ns *NetworkSession) DestinationEndpoint() int {
+	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("destinationEndpoint"))
 	return _r
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *NetworkSession) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (ns *NetworkSession) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *NetworkSession) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
 // NetworkPort wraps the corresponding Objective-C method.
-func (x *NetworkSession) NetworkPort() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("networkPort"))
+func (ns *NetworkSession) NetworkPort() int {
+	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("networkPort"))
 	return _r
 }
 
 // NetworkName wraps the corresponding Objective-C method.
-func (x *NetworkSession) NetworkName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
+func (ns *NetworkSession) NetworkName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
 	}
@@ -159,8 +154,8 @@ func (x *NetworkSession) NetworkName() string {
 }
 
 // LocalName wraps the corresponding Objective-C method.
-func (x *NetworkSession) LocalName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localName"))
+func (ns *NetworkSession) LocalName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("localName"))
 	if _r == 0 {
 		return ""
 	}
@@ -168,36 +163,7 @@ func (x *NetworkSession) LocalName() string {
 }
 
 // ConnectionPolicy wraps the corresponding Objective-C method.
-func (x *NetworkSession) ConnectionPolicy() NetworkConnectionPolicy {
-	_r := objc.Send[NetworkConnectionPolicy](objref.IDOf(x), objc.RegisterName("connectionPolicy"))
+func (ns *NetworkSession) ConnectionPolicy() NetworkConnectionPolicy {
+	_r := objc.Send[NetworkConnectionPolicy](objref.IDOf(ns), objc.RegisterName("connectionPolicy"))
 	return _r
 }
-
-// SetConnectionPolicy wraps the corresponding Objective-C method.
-func (x *NetworkSession) SetConnectionPolicy(connectionPolicy NetworkConnectionPolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionPolicy:"), connectionPolicy)
-}
-
-// NetworkSessionable is the interface implemented by [NetworkSession], for mocking and DI.
-type NetworkSessionable interface {
-	obj.Object
-	WithEnabled(enabled bool) *NetworkSession
-	WithConnectionPolicy(connectionPolicy NetworkConnectionPolicy) *NetworkSession
-	Contacts() obj.Object
-	AddContact(contact *NetworkHost) bool
-	RemoveContact(contact *NetworkHost) bool
-	Connections() obj.Object
-	AddConnection(connection *NetworkConnection) bool
-	RemoveConnection(connection *NetworkConnection) bool
-	SourceEndpoint() int
-	DestinationEndpoint() int
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	NetworkPort() int
-	NetworkName() string
-	LocalName() string
-	ConnectionPolicy() NetworkConnectionPolicy
-	SetConnectionPolicy(connectionPolicy NetworkConnectionPolicy)
-}
-
-var _ NetworkSessionable = (*NetworkSession)(nil)

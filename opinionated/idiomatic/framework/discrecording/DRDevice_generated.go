@@ -44,24 +44,24 @@ func deviceAdopt(id objc.ID) *Device {
 }
 
 // Description returns the object's -description text.
-func (x *Device) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Device) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Device) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Device) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDevice creates a new Device.
@@ -70,221 +70,185 @@ func NewDevice() *Device {
 	return deviceAdopt(_id)
 }
 
-// IsValid returns whether or not the device represented by the receiver is still attached to the computer. Because of the way some physical interconnects work, a device which is unplugged and replugged in does not necessarily look like the same device to the computer and would be invalid in that instance.
-func (x *Device) IsValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
+// IsValid reports whether the device represented by the receiver is still attached to the computer. Because of the way some physical interconnects work, a device which is unplugged and replugged in does not necessarily look like the same device to the computer and would be invalid in that instance.
+func (d *Device) IsValid() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isValid"))
 	return _r
 }
 
 // Info returns a dictionary of information describing the device. The information returned include the types of media the device can write to, how it's connected and its identifying information such as the vendor and product name.
-func (x *Device) Info() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("info"))
+func (d *Device) Info() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("info"))
 	return obj.Wrap(_r)
 }
 
 // Status returns a dictionary of information describing the media in the device. In addition to information about the media (type, space available/used, etc), the dictionary returned includes those pieces of information about the device itself which are in part determined by the media (i.e., maximum burn speed).
-func (x *Device) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (d *Device) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// OpenTray commands the device to open its tray. Does nothing if the device does not have a tray (slotload). If there is media in the drive this method will do nothing and return false. In this case use
-func (x *Device) OpenTray() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openTray"))
+// OpenTray reports whether commands the device to open its tray. Does nothing if the device does not have a tray (slotload). If there is media in the drive this method will do nothing and return false. In this case use
+func (d *Device) OpenTray() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("openTray"))
 	return _r
 }
 
-// CloseTray commands the device to close its tray. Does nothing if the device does not have a tray (slotload).
-func (x *Device) CloseTray() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("closeTray"))
+// CloseTray reports whether commands the device to close its tray. Does nothing if the device does not have a tray (slotload).
+func (d *Device) CloseTray() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("closeTray"))
 	return _r
 }
 
-// EjectMedia commands the device to eject the media. This command first unmounts any volumes associated with the media and then ejects the media from the drive. If the media could not be ejected, most likely this is because a volume associated with the media could not be unmounted.
-func (x *Device) EjectMedia() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ejectMedia"))
+// EjectMedia reports whether commands the device to eject the media. This command first unmounts any volumes associated with the media and then ejects the media from the drive. If the media could not be ejected, most likely this is because a volume associated with the media could not be unmounted.
+func (d *Device) EjectMedia() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("ejectMedia"))
 	return _r
 }
 
-// AcquireExclusiveAccess attempts to acquire an exclusive access session with the device. Acquiring exclusive access to the device prevents any process other than the one acquiring access from communicating with the device. So once exclusive access is granted, the device is unusable by any other process. Because of this all volumes mounted from media in the drive must be unmounted before exclusive access can be granted. Exclusive access can be acquired multiple times. Each time this method is called, a call to
-func (x *Device) AcquireExclusiveAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acquireExclusiveAccess"))
+// AcquireExclusiveAccess reports whether attempts to acquire an exclusive access session with the device. Acquiring exclusive access to the device prevents any process other than the one acquiring access from communicating with the device. So once exclusive access is granted, the device is unusable by any other process. Because of this all volumes mounted from media in the drive must be unmounted before exclusive access can be granted. Exclusive access can be acquired multiple times. Each time this method is called, a call to
+func (d *Device) AcquireExclusiveAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("acquireExclusiveAccess"))
 	return _r
 }
 
 // ReleaseExclusiveAccess releases the latest exclusive access request for the device. A call to this method must be made for every call to
-func (x *Device) ReleaseExclusiveAccess() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseExclusiveAccess"))
+func (d *Device) ReleaseExclusiveAccess() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("releaseExclusiveAccess"))
 }
 
 // AcquireMediaReservation indicate an interest in the blank media reservation. Blank media participates in a reservation system that allows applications to express their claim on blank media to other applications.  Indicating an interest in the reservation isn't enough to assume it's been acquired, as there are likely to be other applications in the system who have also indicated an interest in the blank media reservation.  You will receive a
-func (x *Device) AcquireMediaReservation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acquireMediaReservation"))
+func (d *Device) AcquireMediaReservation() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("acquireMediaReservation"))
 }
 
 // ReleaseMediaReservation releases any media reservation that might be in place for the device. If media is inserted and reserved, then the reservation will be passed on to the next process with a reservation request.
-func (x *Device) ReleaseMediaReservation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseMediaReservation"))
+func (d *Device) ReleaseMediaReservation() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("releaseMediaReservation"))
 }
 
 // IsEqualToDevice compares the receiver to another device.
-func (x *Device) IsEqualToDevice(otherDevice *Device) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToDevice:"), objref.IDOf(otherDevice))
+func (d *Device) IsEqualToDevice(otherDevice *Device) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToDevice:"), objref.IDOf(otherDevice))
 	return _r
 }
 
-// WritesCD reports the device's ability to burn to CD-type media.
-func (x *Device) WritesCD() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writesCD"))
+// WritesCD reports whether reports the device's ability to burn to CD-type media.
+func (d *Device) WritesCD() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writesCD"))
 	return _r
 }
 
-// WritesDVD reports the device's ability to burn to DVD-type media.
-func (x *Device) WritesDVD() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writesDVD"))
+// WritesDVD reports whether reports the device's ability to burn to DVD-type media.
+func (d *Device) WritesDVD() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writesDVD"))
 	return _r
 }
 
 // DisplayName returns an NSString suitable for display in the user interface.
-func (x *Device) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+func (d *Device) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IoRegistryEntryPath returns the path to the device in the IO Registry.
-func (x *Device) IoRegistryEntryPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ioRegistryEntryPath"))
+// IORegistryEntryPath returns the path to the device in the IO Registry.
+func (d *Device) IORegistryEntryPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("ioRegistryEntryPath"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MediaIsPresent reports the presence of the media.
-func (x *Device) MediaIsPresent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsPresent"))
+// MediaIsPresent reports whether reports the presence of the media.
+func (d *Device) MediaIsPresent() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsPresent"))
 	return _r
 }
 
-// MediaIsTransitioning returns <i>YES</i> if the media is in transition (spinning up or down for example).
-func (x *Device) MediaIsTransitioning() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsTransitioning"))
+// MediaIsTransitioning reports whether returns <i>YES</i> if the media is in transition (spinning up or down for example).
+func (d *Device) MediaIsTransitioning() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsTransitioning"))
 	return _r
 }
 
-// MediaIsBusy returns <i>YES</i> if the media is in use by some process - even the one making this call.
-func (x *Device) MediaIsBusy() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsBusy"))
+// MediaIsBusy reports whether returns <i>YES</i> if the media is in use by some process - even the one making this call.
+func (d *Device) MediaIsBusy() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsBusy"))
 	return _r
 }
 
 // MediaType returns the type of media currently inserted into the device.
-func (x *Device) MediaType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+func (d *Device) MediaType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("mediaType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MediaIsBlank returns <i>YES</i> the media in the device is blank.
-func (x *Device) MediaIsBlank() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsBlank"))
+// MediaIsBlank reports whether returns <i>YES</i> the media in the device is blank.
+func (d *Device) MediaIsBlank() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsBlank"))
 	return _r
 }
 
-// MediaIsAppendable returns <i>YES</i> if the media in the device can have more data appended to any existing data.
-func (x *Device) MediaIsAppendable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsAppendable"))
+// MediaIsAppendable reports whether returns <i>YES</i> if the media in the device can have more data appended to any existing data.
+func (d *Device) MediaIsAppendable() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsAppendable"))
 	return _r
 }
 
-// MediaIsOverwritable returns <i>YES</i> if the media in the device can be fully (re)written.
-func (x *Device) MediaIsOverwritable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsOverwritable"))
+// MediaIsOverwritable reports whether returns <i>YES</i> if the media in the device can be fully (re)written.
+func (d *Device) MediaIsOverwritable() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsOverwritable"))
 	return _r
 }
 
-// MediaIsErasable returns <i>YES</i> if the media can be erased (i.e., CD-RW, DVD-RW, etc).
-func (x *Device) MediaIsErasable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsErasable"))
+// MediaIsErasable reports whether returns <i>YES</i> if the media can be erased (i.e., CD-RW, DVD-RW, etc).
+func (d *Device) MediaIsErasable() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsErasable"))
 	return _r
 }
 
-// MediaIsReserved returns <i>YES</i> if the application calling this method currently holds the reservation on the media.
-func (x *Device) MediaIsReserved() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaIsReserved"))
+// MediaIsReserved reports whether returns <i>YES</i> if the application calling this method currently holds the reservation on the media.
+func (d *Device) MediaIsReserved() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("mediaIsReserved"))
 	return _r
 }
 
 // MediaSpaceOverwritable returns the amount of writable space on the media.
-func (x *Device) MediaSpaceOverwritable() *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSpaceOverwritable"))
+func (d *Device) MediaSpaceOverwritable() *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("mediaSpaceOverwritable"))
 	return MSFFromID(_r)
 }
 
 // MediaSpaceUsed returns the amount of used space on the media.
-func (x *Device) MediaSpaceUsed() *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSpaceUsed"))
+func (d *Device) MediaSpaceUsed() *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("mediaSpaceUsed"))
 	return MSFFromID(_r)
 }
 
 // MediaSpaceFree returns the amount of free space on the media.
-func (x *Device) MediaSpaceFree() *MSF {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSpaceFree"))
+func (d *Device) MediaSpaceFree() *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("mediaSpaceFree"))
 	return MSFFromID(_r)
 }
 
-// TrayIsOpen reports the tray state of the device.
-func (x *Device) TrayIsOpen() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trayIsOpen"))
+// TrayIsOpen reports whether reports the tray state of the device.
+func (d *Device) TrayIsOpen() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("trayIsOpen"))
 	return _r
 }
 
-// BsdName returns the bsd /dev node name.
-func (x *Device) BsdName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bsdName"))
+// BSDName returns the bsd /dev node name.
+func (d *Device) BSDName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("bsdName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Deviceable is the interface implemented by [Device], for mocking and DI.
-type Deviceable interface {
-	obj.Object
-	IsValid() bool
-	Info() obj.Object
-	Status() obj.Object
-	OpenTray() bool
-	CloseTray() bool
-	EjectMedia() bool
-	AcquireExclusiveAccess() bool
-	ReleaseExclusiveAccess()
-	AcquireMediaReservation()
-	ReleaseMediaReservation()
-	IsEqualToDevice(otherDevice *Device) bool
-	WritesCD() bool
-	WritesDVD() bool
-	DisplayName() string
-	IoRegistryEntryPath() string
-	MediaIsPresent() bool
-	MediaIsTransitioning() bool
-	MediaIsBusy() bool
-	MediaType() string
-	MediaIsBlank() bool
-	MediaIsAppendable() bool
-	MediaIsOverwritable() bool
-	MediaIsErasable() bool
-	MediaIsReserved() bool
-	MediaSpaceOverwritable() *MSF
-	MediaSpaceUsed() *MSF
-	MediaSpaceFree() *MSF
-	TrayIsOpen() bool
-	BsdName() string
-}
-
-var _ Deviceable = (*Device)(nil)

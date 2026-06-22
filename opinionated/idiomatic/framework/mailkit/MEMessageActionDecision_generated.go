@@ -46,24 +46,24 @@ func messageActionDecisionAdopt(id objc.ID) *MessageActionDecision {
 }
 
 // Description returns the object's -description text.
-func (x *MessageActionDecision) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mad *MessageActionDecision) Description() string {
+	return rt.Description(objref.IDOf(mad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MessageActionDecision) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mad *MessageActionDecision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MessageActionDecision) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mad *MessageActionDecision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MessageActionDecision) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mad *MessageActionDecision) String() string {
+	return rt.Description(objref.IDOf(mad))
 }
 
 // NewMessageActionDecision creates a new MessageActionDecision.
@@ -71,10 +71,3 @@ func NewMessageActionDecision() *MessageActionDecision {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("new"))
 	return messageActionDecisionAdopt(_id)
 }
-
-// MessageActionDecisionable is the interface implemented by [MessageActionDecision], for mocking and DI.
-type MessageActionDecisionable interface {
-	obj.Object
-}
-
-var _ MessageActionDecisionable = (*MessageActionDecision)(nil)

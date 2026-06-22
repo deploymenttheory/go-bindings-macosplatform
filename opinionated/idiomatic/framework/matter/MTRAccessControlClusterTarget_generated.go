@@ -51,31 +51,21 @@ func NewMTRAccessControlClusterTarget() *MTRAccessControlClusterTarget {
 }
 
 // WithCluster sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterTarget) WithCluster(cluster obj.Object) *MTRAccessControlClusterTarget {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
-	return x
+func (macct *MTRAccessControlClusterTarget) WithCluster(cluster obj.Object) *MTRAccessControlClusterTarget {
+	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
+	return macct
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterTarget) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterTarget {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (macct *MTRAccessControlClusterTarget) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterTarget {
+	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return macct
 }
 
 // WithDeviceType sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterTarget) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterTarget {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
-	return x
+func (macct *MTRAccessControlClusterTarget) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterTarget {
+	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
+	return macct
 }
-
-// MTRAccessControlClusterTargetable is the interface implemented by [MTRAccessControlClusterTarget], for mocking and DI.
-type MTRAccessControlClusterTargetable interface {
-	obj.Object
-	WithCluster(cluster obj.Object) *MTRAccessControlClusterTarget
-	WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterTarget
-	WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterTarget
-}
-
-var _ MTRAccessControlClusterTargetable = (*MTRAccessControlClusterTarget)(nil)
 
 var _ MTRAccessControlClusterAccessControlTargetStructProvider = (*MTRAccessControlClusterTarget)(nil)

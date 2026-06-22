@@ -48,46 +48,38 @@ func matchAdopt(id objc.ID) *Match {
 }
 
 // Description returns the object's -description text.
-func (x *Match) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Match) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Match) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Match) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Match) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Match) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Match) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Match) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
-// MatchedString a substring that the data detection system identifies from an original string as a common type of data. Use `DDMatch` subclasses that the data detection system provides for a semantic interpretation of this string.
-func (x *Match) MatchedString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchedString"))
+// MatchedString returns a substring that the data detection system identifies from an original string as a common type of data. Use `DDMatch` subclasses that the data detection system provides for a semantic interpretation of this string.
+func (m *Match) MatchedString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("matchedString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Matchable is the interface implemented by [Match], for mocking and DI.
-type Matchable interface {
-	obj.Object
-	MatchedString() string
-}
-
-var _ Matchable = (*Match)(nil)
-
 // isMatch marks Match — and, by embedding promotion, its
 // subclasses — as a member of the Match hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Match) isMatch() {}
+func (m *Match) isMatch() {}
 
 var _ MatchProvider = (*Match)(nil)

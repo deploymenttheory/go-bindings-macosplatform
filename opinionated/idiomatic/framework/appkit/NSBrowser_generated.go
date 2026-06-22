@@ -5,13 +5,14 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Browser is an idiomatic wrapper over the Objective-C class NSBrowser.
@@ -55,634 +56,634 @@ func NewBrowser() *Browser {
 	return browserAdopt(_id)
 }
 
-// WithCellPrototype the prototype NSCell for displaying items in the matrices in the columns of the browser.
-func (x *Browser) WithCellPrototype(cellPrototype obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellPrototype:"), objref.IDOf(cellPrototype))
-	return x
+// WithCellPrototype sets the prototype NSCell for displaying items in the matrices in the columns of the browser.
+func (b *Browser) WithCellPrototype(cellPrototype obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCellPrototype:"), objref.IDOf(cellPrototype))
+	return b
 }
 
-// WithReusesColumns a Boolean that indicates whether the browser reuses matrix objects after their columns are unloaded.
-func (x *Browser) WithReusesColumns(reusesColumns bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReusesColumns:"), reusesColumns)
-	return x
+// WithReusesColumns sets a Boolean that indicates whether the browser reuses matrix objects after their columns are unloaded.
+func (b *Browser) WithReusesColumns(reusesColumns bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setReusesColumns:"), reusesColumns)
+	return b
 }
 
-// WithHasHorizontalScroller a Boolean that indicates whether the browser has a horizontal scroller.
-func (x *Browser) WithHasHorizontalScroller(hasHorizontalScroller bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
-	return x
+// WithHasHorizontalScroller sets a Boolean that indicates whether the browser has a horizontal scroller.
+func (b *Browser) WithHasHorizontalScroller(hasHorizontalScroller bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
+	return b
 }
 
-// WithAutohidesScroller a Boolean that indicates whether the browser automatically hides its scroller.
-func (x *Browser) WithAutohidesScroller(autohidesScroller bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutohidesScroller:"), autohidesScroller)
-	return x
+// WithAutohidesScroller sets a Boolean that indicates whether the browser automatically hides its scroller.
+func (b *Browser) WithAutohidesScroller(autohidesScroller bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutohidesScroller:"), autohidesScroller)
+	return b
 }
 
-// WithSeparatesColumns a Boolean that indicates whether columns are separated by bezeled borders.
-func (x *Browser) WithSeparatesColumns(separatesColumns bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeparatesColumns:"), separatesColumns)
-	return x
+// WithSeparatesColumns sets a Boolean that indicates whether columns are separated by bezeled borders.
+func (b *Browser) WithSeparatesColumns(separatesColumns bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSeparatesColumns:"), separatesColumns)
+	return b
 }
 
-// WithTitled a Boolean that indicates whether columns display titles.
-func (x *Browser) WithTitled(titled bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitled:"), titled)
-	return x
+// WithTitled sets a Boolean that indicates whether columns display titles.
+func (b *Browser) WithTitled(titled bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitled:"), titled)
+	return b
 }
 
-// WithMinColumnWidth the minimum column width, in pixels.
-func (x *Browser) WithMinColumnWidth(minColumnWidth float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinColumnWidth:"), minColumnWidth)
-	return x
+// WithMinColumnWidth sets the minimum column width, in pixels.
+func (b *Browser) WithMinColumnWidth(minColumnWidth float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMinColumnWidth:"), minColumnWidth)
+	return b
 }
 
-// WithMaxVisibleColumns the maximum number of visible columns.
-func (x *Browser) WithMaxVisibleColumns(maxVisibleColumns int) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVisibleColumns:"), maxVisibleColumns)
-	return x
+// WithMaxVisibleColumns sets the maximum number of visible columns.
+func (b *Browser) WithMaxVisibleColumns(maxVisibleColumns int) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMaxVisibleColumns:"), maxVisibleColumns)
+	return b
 }
 
-// WithAllowsMultipleSelection a Boolean that indicates whether the user can select multiple items.
-func (x *Browser) WithAllowsMultipleSelection(allowsMultipleSelection bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
-	return x
+// WithAllowsMultipleSelection sets a Boolean that indicates whether the user can select multiple items.
+func (b *Browser) WithAllowsMultipleSelection(allowsMultipleSelection bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
+	return b
 }
 
-// WithAllowsBranchSelection a Boolean that indicates whether the user can select branch items.
-func (x *Browser) WithAllowsBranchSelection(allowsBranchSelection bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsBranchSelection:"), allowsBranchSelection)
-	return x
+// WithAllowsBranchSelection sets a Boolean that indicates whether the user can select branch items.
+func (b *Browser) WithAllowsBranchSelection(allowsBranchSelection bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowsBranchSelection:"), allowsBranchSelection)
+	return b
 }
 
-// WithAllowsEmptySelection a Boolean that indicates whether there can be nothing selected.
-func (x *Browser) WithAllowsEmptySelection(allowsEmptySelection bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
-	return x
+// WithAllowsEmptySelection sets a Boolean that indicates whether there can be nothing selected.
+func (b *Browser) WithAllowsEmptySelection(allowsEmptySelection bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
+	return b
 }
 
-// WithTakesTitleFromPreviousColumn a Boolean that indicates whether a column takes its title from the selected cell in the previous column.
-func (x *Browser) WithTakesTitleFromPreviousColumn(takesTitleFromPreviousColumn bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTakesTitleFromPreviousColumn:"), takesTitleFromPreviousColumn)
-	return x
+// WithTakesTitleFromPreviousColumn sets a Boolean that indicates whether a column takes its title from the selected cell in the previous column.
+func (b *Browser) WithTakesTitleFromPreviousColumn(takesTitleFromPreviousColumn bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTakesTitleFromPreviousColumn:"), takesTitleFromPreviousColumn)
+	return b
 }
 
-// WithSendsActionOnArrowKeys a Boolean that indicates whether pressing an arrow key causes an action message to be sent.
-func (x *Browser) WithSendsActionOnArrowKeys(sendsActionOnArrowKeys bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnArrowKeys:"), sendsActionOnArrowKeys)
-	return x
+// WithSendsActionOnArrowKeys sets a Boolean that indicates whether pressing an arrow key causes an action message to be sent.
+func (b *Browser) WithSendsActionOnArrowKeys(sendsActionOnArrowKeys bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSendsActionOnArrowKeys:"), sendsActionOnArrowKeys)
+	return b
 }
 
-// WithPathSeparator the path separator.
-func (x *Browser) WithPathSeparator(pathSeparator string) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathSeparator:"), purego.NSString(pathSeparator))
-	return x
+// WithPathSeparator sets the path separator.
+func (b *Browser) WithPathSeparator(pathSeparator string) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPathSeparator:"), purego.NSString(pathSeparator))
+	return b
 }
 
-// WithSelectionIndexPath the index path of the item selected in the browser.
-func (x *Browser) WithSelectionIndexPath(selectionIndexPath obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(selectionIndexPath))
-	return x
+// WithSelectionIndexPath sets the index path of the item selected in the browser.
+func (b *Browser) WithSelectionIndexPath(selectionIndexPath obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(selectionIndexPath))
+	return b
 }
 
-// WithSelectionIndexPaths an array containing the index paths of all items selected in the browser.
-func (x *Browser) WithSelectionIndexPaths(items ...obj.Object) *Browser {
+// WithSelectionIndexPaths sets an array containing the index paths of all items selected in the browser.
+func (b *Browser) WithSelectionIndexPaths(items ...obj.Object) *Browser {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexPaths:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSelectionIndexPaths:"), _arr)
+	return b
 }
 
-// WithLastColumn the index of the last column loaded.
-func (x *Browser) WithLastColumn(lastColumn int) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastColumn:"), lastColumn)
-	return x
+// WithLastColumn sets the index of the last column loaded.
+func (b *Browser) WithLastColumn(lastColumn int) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLastColumn:"), lastColumn)
+	return b
 }
 
-// WithColumnResizingType a constant indicating the browser’s column resizing type.
-func (x *Browser) WithColumnResizingType(columnResizingType BrowserColumnResizingType) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnResizingType:"), columnResizingType)
-	return x
+// WithColumnResizingType sets a constant indicating the browser’s column resizing type.
+func (b *Browser) WithColumnResizingType(columnResizingType BrowserColumnResizingType) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setColumnResizingType:"), columnResizingType)
+	return b
 }
 
-// WithPrefersAllColumnUserResizing a Boolean that indicates whether the browser is set to resize all columns simultaneously rather than resizing a single column at a time.
-func (x *Browser) WithPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersAllColumnUserResizing:"), prefersAllColumnUserResizing)
-	return x
+// WithPrefersAllColumnUserResizing sets a Boolean that indicates whether the browser is set to resize all columns simultaneously rather than resizing a single column at a time.
+func (b *Browser) WithPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPrefersAllColumnUserResizing:"), prefersAllColumnUserResizing)
+	return b
 }
 
-// WithRowHeight the height of the browser’s rows.
-func (x *Browser) WithRowHeight(rowHeight float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
-	return x
+// WithRowHeight sets the height of the browser’s rows.
+func (b *Browser) WithRowHeight(rowHeight float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setRowHeight:"), rowHeight)
+	return b
 }
 
-// WithColumnsAutosaveName the name used to automatically save the browser’s column configuration.
-func (x *Browser) WithColumnsAutosaveName(columnsAutosaveName obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnsAutosaveName:"), objref.IDOf(columnsAutosaveName))
-	return x
+// WithColumnsAutosaveName sets the name used to automatically save the browser’s column configuration.
+func (b *Browser) WithColumnsAutosaveName(columnsAutosaveName obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setColumnsAutosaveName:"), objref.IDOf(columnsAutosaveName))
+	return b
 }
 
-// WithAllowsTypeSelect a Boolean that indicates whether the browser allows keystroke-based selection (type select).
-func (x *Browser) WithAllowsTypeSelect(allowsTypeSelect bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTypeSelect:"), allowsTypeSelect)
-	return x
+// WithAllowsTypeSelect sets a Boolean that indicates whether the browser allows keystroke-based selection (type select).
+func (b *Browser) WithAllowsTypeSelect(allowsTypeSelect bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowsTypeSelect:"), allowsTypeSelect)
+	return b
 }
 
-// WithBackgroundColor the browser’s background color.
-func (x *Browser) WithBackgroundColor(backgroundColor *Color) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the browser’s background color.
+func (b *Browser) WithBackgroundColor(backgroundColor *Color) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return b
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *Browser) WithTarget(target obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (b *Browser) WithTarget(target obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return b
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *Browser) WithTag(tag int) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (b *Browser) WithTag(tag int) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTag:"), tag)
+	return b
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *Browser) WithIgnoresMultiClick(ignoresMultiClick bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (b *Browser) WithIgnoresMultiClick(ignoresMultiClick bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return b
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *Browser) WithContinuous(continuous bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (b *Browser) WithContinuous(continuous bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContinuous:"), continuous)
+	return b
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *Browser) WithEnabled(enabled bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (b *Browser) WithEnabled(enabled bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setEnabled:"), enabled)
+	return b
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *Browser) WithRefusesFirstResponder(refusesFirstResponder bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (b *Browser) WithRefusesFirstResponder(refusesFirstResponder bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return b
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *Browser) WithHighlighted(highlighted bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (b *Browser) WithHighlighted(highlighted bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHighlighted:"), highlighted)
+	return b
 }
 
-// WithControlSize the size of the control.
-func (x *Browser) WithControlSize(controlSize ControlSize) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (b *Browser) WithControlSize(controlSize ControlSize) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setControlSize:"), controlSize)
+	return b
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *Browser) WithFormatter(formatter obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (b *Browser) WithFormatter(formatter obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return b
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *Browser) WithObjectValue(objectValue obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (b *Browser) WithObjectValue(objectValue obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return b
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *Browser) WithStringValue(stringValue string) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (b *Browser) WithStringValue(stringValue string) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return b
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *Browser) WithAttributedStringValue(attributedStringValue obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (b *Browser) WithAttributedStringValue(attributedStringValue obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return b
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *Browser) WithIntValue(intValue int) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (b *Browser) WithIntValue(intValue int) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setIntValue:"), intValue)
+	return b
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *Browser) WithIntegerValue(integerValue int) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (b *Browser) WithIntegerValue(integerValue int) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setIntegerValue:"), integerValue)
+	return b
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *Browser) WithFloatValue(floatValue float32) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (b *Browser) WithFloatValue(floatValue float32) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFloatValue:"), floatValue)
+	return b
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *Browser) WithDoubleValue(doubleValue float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (b *Browser) WithDoubleValue(doubleValue float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return b
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *Browser) WithFont(font *Font) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (b *Browser) WithFont(font *Font) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return b
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *Browser) WithUsesSingleLineMode(usesSingleLineMode bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (b *Browser) WithUsesSingleLineMode(usesSingleLineMode bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return b
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *Browser) WithLineBreakMode(lineBreakMode LineBreakMode) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (b *Browser) WithLineBreakMode(lineBreakMode LineBreakMode) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return b
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *Browser) WithAlignment(alignment TextAlignment) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (b *Browser) WithAlignment(alignment TextAlignment) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlignment:"), alignment)
+	return b
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *Browser) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (b *Browser) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return b
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *Browser) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (b *Browser) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return b
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithCell(cell CellProvider) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (b *Browser) WithCell(cell CellProvider) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return b
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithSubviews(items ...ViewProvider) *Browser {
+func (b *Browser) WithSubviews(items ...ViewProvider) *Browser {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSubviews:"), _arr)
+	return b
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithHidden(hidden bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (b *Browser) WithHidden(hidden bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHidden:"), hidden)
+	return b
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (b *Browser) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return b
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithAutoresizesSubviews(autoresizesSubviews bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (b *Browser) WithAutoresizesSubviews(autoresizesSubviews bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return b
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (b *Browser) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return b
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Browser) WithFrame(frame corefoundation.CGRect) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (b *Browser) WithFrame(frame corefoundation.CGRect) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrame:"), frame)
+	return b
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithFrameRotation(frameRotation float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (b *Browser) WithFrameRotation(frameRotation float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return b
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithFrameCenterRotation(frameCenterRotation float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (b *Browser) WithFrameCenterRotation(frameCenterRotation float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return b
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithBoundsRotation(boundsRotation float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (b *Browser) WithBoundsRotation(boundsRotation float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return b
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Browser) WithBounds(bounds corefoundation.CGRect) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (b *Browser) WithBounds(bounds corefoundation.CGRect) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBounds:"), bounds)
+	return b
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithCanDrawConcurrently(canDrawConcurrently bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (b *Browser) WithCanDrawConcurrently(canDrawConcurrently bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return b
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Browser) WithNeedsDisplay(needsDisplay bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (b *Browser) WithNeedsDisplay(needsDisplay bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return b
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (b *Browser) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return b
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithWantsRestingTouches(wantsRestingTouches bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (b *Browser) WithWantsRestingTouches(wantsRestingTouches bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return b
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (b *Browser) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return b
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (b *Browser) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return b
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithWantsLayer(wantsLayer bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (b *Browser) WithWantsLayer(wantsLayer bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return b
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithLayer(layer obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (b *Browser) WithLayer(layer obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return b
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (b *Browser) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return b
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithNeedsLayout(needsLayout bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (b *Browser) WithNeedsLayout(needsLayout bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return b
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithAlphaValue(alphaValue float64) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (b *Browser) WithAlphaValue(alphaValue float64) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return b
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (b *Browser) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return b
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithBackgroundFilters(items ...obj.Object) *Browser {
+func (b *Browser) WithBackgroundFilters(items ...obj.Object) *Browser {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return b
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithCompositingFilter(compositingFilter obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (b *Browser) WithCompositingFilter(compositingFilter obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return b
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithContentFilters(items ...obj.Object) *Browser {
+func (b *Browser) WithContentFilters(items ...obj.Object) *Browser {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentFilters:"), _arr)
+	return b
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithShadow(shadow *Shadow) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (b *Browser) WithShadow(shadow *Shadow) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return b
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithClipsToBounds(clipsToBounds bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (b *Browser) WithClipsToBounds(clipsToBounds bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return b
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (b *Browser) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return b
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithToolTip(toolTip string) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (b *Browser) WithToolTip(toolTip string) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return b
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (b *Browser) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return b
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (b *Browser) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return b
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithNextKeyView(nextKeyView ViewProvider) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (b *Browser) WithNextKeyView(nextKeyView ViewProvider) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return b
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithFocusRingType(focusRingType FocusRingType) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (b *Browser) WithFocusRingType(focusRingType FocusRingType) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return b
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser {
+func (b *Browser) WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return b
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (b *Browser) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return b
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (b *Browser) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return b
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Browser) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (b *Browser) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return b
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (b *Browser) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return b
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (b *Browser) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return b
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (b *Browser) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return b
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (b *Browser) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return b
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (b *Browser) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return b
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (b *Browser) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return b
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (b *Browser) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return b
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Browser) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (b *Browser) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return b
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Browser) WithNextResponder(nextResponder ResponderProvider) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (b *Browser) WithNextResponder(nextResponder ResponderProvider) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return b
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Browser) WithMenu(menu *Menu) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (b *Browser) WithMenu(menu *Menu) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return b
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Browser) WithUserActivity(userActivity obj.Object) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (b *Browser) WithUserActivity(userActivity obj.Object) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return b
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Browser) WithTouchBar(touchBar *TouchBar) *Browser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (b *Browser) WithTouchBar(touchBar *TouchBar) *Browser {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return b
 }
 
 // LoadColumnZero loads column 0; unloads previously loaded columns.
-func (x *Browser) LoadColumnZero() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadColumnZero"))
+func (b *Browser) LoadColumnZero() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("loadColumnZero"))
 }
 
 // ItemAtIndexPath returns the item at the specified index path.
-func (x *Browser) ItemAtIndexPath(indexPath obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtIndexPath:"), objref.IDOf(indexPath))
+func (b *Browser) ItemAtIndexPath(indexPath obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("itemAtIndexPath:"), objref.IDOf(indexPath))
 	return obj.Wrap(_r)
 }
 
 // ItemAtRowInColumn returns the item located at the specified row and column.
-func (x *Browser) ItemAtRowInColumn(row int, column int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtRow:inColumn:"), row, column)
+func (b *Browser) ItemAtRowInColumn(row int, column int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("itemAtRow:inColumn:"), row, column)
 	return obj.Wrap(_r)
 }
 
 // IndexPathForColumn returns the index path of the item whose children are displayed in the given column.
-func (x *Browser) IndexPathForColumn(column int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathForColumn:"), column)
+func (b *Browser) IndexPathForColumn(column int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("indexPathForColumn:"), column)
 	return obj.Wrap(_r)
 }
 
 // IsLeafItem returns whether the specified item is a leaf item.
-func (x *Browser) IsLeafItem(item obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLeafItem:"), objref.IDOf(item))
+func (b *Browser) IsLeafItem(item obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isLeafItem:"), objref.IDOf(item))
 	return _r
 }
 
 // ReloadDataForRowIndexesInColumn updates the rows in the column with the specified column index with indexes in the specified set.
-func (x *Browser) ReloadDataForRowIndexesInColumn(rowIndexes obj.Object, column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadDataForRowIndexes:inColumn:"), objref.IDOf(rowIndexes), column)
+func (b *Browser) ReloadDataForRowIndexesInColumn(rowIndexes obj.Object, column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("reloadDataForRowIndexes:inColumn:"), objref.IDOf(rowIndexes), column)
 }
 
 // ParentForItemsInColumn returns the item that contains the children located in the specified column.
-func (x *Browser) ParentForItemsInColumn(column int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentForItemsInColumn:"), column)
+func (b *Browser) ParentForItemsInColumn(column int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("parentForItemsInColumn:"), column)
 	return obj.Wrap(_r)
 }
 
 // ScrollRowToVisibleInColumn scrolls the specified row to be visible within the specified column.
-func (x *Browser) ScrollRowToVisibleInColumn(row int, column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollRowToVisible:inColumn:"), row, column)
+func (b *Browser) ScrollRowToVisibleInColumn(row int, column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollRowToVisible:inColumn:"), row, column)
 }
 
 // SetTitleOfColumn sets the title of the given column.
-func (x *Browser) SetTitleOfColumn(string_ string, column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:ofColumn:"), purego.NSString(string_), column)
+func (b *Browser) SetTitleOfColumn(string_ string, column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitle:ofColumn:"), purego.NSString(string_), column)
 }
 
 // TitleOfColumn returns the title displayed for the given column.
-func (x *Browser) TitleOfColumn(column int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleOfColumn:"), column)
+func (b *Browser) TitleOfColumn(column int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("titleOfColumn:"), column)
 	if _r == 0 {
 		return ""
 	}
@@ -690,14 +691,14 @@ func (x *Browser) TitleOfColumn(column int) string {
 }
 
 // SetPath sets the path to be displayed by the browser.
-func (x *Browser) SetPath(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
+func (b *Browser) SetPath(path string) bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("setPath:"), purego.NSString(path))
 	return _r
 }
 
 // Path returns a string representing the browser’s current path.
-func (x *Browser) Path() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (b *Browser) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
 	}
@@ -705,8 +706,8 @@ func (x *Browser) Path() string {
 }
 
 // PathToColumn returns a string representing the path from the first column up to, but not including, the column at the given index.
-func (x *Browser) PathToColumn(column int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathToColumn:"), column)
+func (b *Browser) PathToColumn(column int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathToColumn:"), column)
 	if _r == 0 {
 		return ""
 	}
@@ -714,754 +715,428 @@ func (x *Browser) PathToColumn(column int) string {
 }
 
 // SelectedCellInColumn returns the last (lowest) cell selected in the given column.
-func (x *Browser) SelectedCellInColumn(column int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedCellInColumn:"), column)
+func (b *Browser) SelectedCellInColumn(column int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectedCellInColumn:"), column)
 	return obj.Wrap(_r)
 }
 
 // SelectRowInColumn selects the cell at the specified row and column index.
-func (x *Browser) SelectRowInColumn(row int, column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectRow:inColumn:"), row, column)
+func (b *Browser) SelectRowInColumn(row int, column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectRow:inColumn:"), row, column)
 }
 
 // SelectedRowInColumn returns the row index of the selected cell in the specified column.
-func (x *Browser) SelectedRowInColumn(column int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedRowInColumn:"), column)
+func (b *Browser) SelectedRowInColumn(column int) int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("selectedRowInColumn:"), column)
 	return _r
 }
 
 // SelectRowIndexesInColumn specifies the selected rows in a given column of the browser.
-func (x *Browser) SelectRowIndexesInColumn(indexes obj.Object, column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectRowIndexes:inColumn:"), objref.IDOf(indexes), column)
+func (b *Browser) SelectRowIndexesInColumn(indexes obj.Object, column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectRowIndexes:inColumn:"), objref.IDOf(indexes), column)
 }
 
 // SelectedRowIndexesInColumn provides the indexes of the selected rows in a given column of the browser.
-func (x *Browser) SelectedRowIndexesInColumn(column int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedRowIndexesInColumn:"), column)
+func (b *Browser) SelectedRowIndexesInColumn(column int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectedRowIndexesInColumn:"), column)
 	return obj.Wrap(_r)
 }
 
 // ReloadColumn reloads the given column.
-func (x *Browser) ReloadColumn(column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadColumn:"), column)
+func (b *Browser) ReloadColumn(column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("reloadColumn:"), column)
 }
 
 // ValidateVisibleColumns validates the browser’s visible columns.
-func (x *Browser) ValidateVisibleColumns() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateVisibleColumns"))
+func (b *Browser) ValidateVisibleColumns() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("validateVisibleColumns"))
 }
 
 // ScrollColumnsRightBy scrolls columns right by the specified number of columns.
-func (x *Browser) ScrollColumnsRightBy(shiftAmount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollColumnsRightBy:"), shiftAmount)
+func (b *Browser) ScrollColumnsRightBy(shiftAmount int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollColumnsRightBy:"), shiftAmount)
 }
 
 // ScrollColumnsLeftBy scrolls columns left by the specified number of columns.
-func (x *Browser) ScrollColumnsLeftBy(shiftAmount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollColumnsLeftBy:"), shiftAmount)
+func (b *Browser) ScrollColumnsLeftBy(shiftAmount int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollColumnsLeftBy:"), shiftAmount)
 }
 
 // ScrollColumnToVisible scrolls to make the specified column visible.
-func (x *Browser) ScrollColumnToVisible(column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollColumnToVisible:"), column)
+func (b *Browser) ScrollColumnToVisible(column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollColumnToVisible:"), column)
 }
 
 // AddColumn adds a column to the right of the last column.
-func (x *Browser) AddColumn() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addColumn"))
+func (b *Browser) AddColumn() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("addColumn"))
 }
 
 // LoadedCellAtRowColumn loads, if necessary, and returns the cell at the specified row and column location.
-func (x *Browser) LoadedCellAtRowColumn(row int, col int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedCellAtRow:column:"), row, col)
+func (b *Browser) LoadedCellAtRowColumn(row int, col int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("loadedCellAtRow:column:"), row, col)
 	return obj.Wrap(_r)
 }
 
 // SelectAll selects all cells in the last column of the browser.
-func (x *Browser) SelectAll(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectAll:"), objref.IDOf(sender))
+func (b *Browser) SelectAll(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 }
 
 // Tile adjusts the various subviews of the browser—scrollers, columns, titles, and so on—without redrawing.
-func (x *Browser) Tile() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tile"))
+func (b *Browser) Tile() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("tile"))
 }
 
 // DoClick responds to (single) mouse clicks in a column of the browser.
-func (x *Browser) DoClick(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doClick:"), objref.IDOf(sender))
+func (b *Browser) DoClick(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("doClick:"), objref.IDOf(sender))
 }
 
 // DoDoubleClick responds to double clicks in a column of the browser.
-func (x *Browser) DoDoubleClick(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doDoubleClick:"), objref.IDOf(sender))
+func (b *Browser) DoDoubleClick(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("doDoubleClick:"), objref.IDOf(sender))
 }
 
-// SendAction sends the action message to the target.
-func (x *Browser) SendAction() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendAction"))
+// SendAction reports whether sends the action message to the target.
+func (b *Browser) SendAction() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("sendAction"))
 	return _r
 }
 
 // TitleFrameOfColumn returns the bounds of the title frame for the specified column.
-func (x *Browser) TitleFrameOfColumn(column int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("titleFrameOfColumn:"), column)
+func (b *Browser) TitleFrameOfColumn(column int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("titleFrameOfColumn:"), column)
 	return _r
 }
 
 // DrawTitleOfColumnInRect draws the title for the specified column within the given rectangle.
-func (x *Browser) DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawTitleOfColumn:inRect:"), column, rect)
+func (b *Browser) DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("drawTitleOfColumn:inRect:"), column, rect)
 }
 
 // FrameOfColumn returns the rectangle containing the given column.
-func (x *Browser) FrameOfColumn(column int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameOfColumn:"), column)
+func (b *Browser) FrameOfColumn(column int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("frameOfColumn:"), column)
 	return _r
 }
 
 // FrameOfInsideOfColumn returns the rectangle containing the specified column, not including borders.
-func (x *Browser) FrameOfInsideOfColumn(column int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameOfInsideOfColumn:"), column)
+func (b *Browser) FrameOfInsideOfColumn(column int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("frameOfInsideOfColumn:"), column)
 	return _r
 }
 
 // FrameOfRowInColumn returns the frame of the cell at the specified location, including the expandable arrow.
-func (x *Browser) FrameOfRowInColumn(row int, column int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameOfRow:inColumn:"), row, column)
+func (b *Browser) FrameOfRowInColumn(row int, column int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(b), objc.RegisterName("frameOfRow:inColumn:"), row, column)
 	return _r
 }
 
 // GetRowColumnForPoint gets the row and column coordinates for the specified point, if a cell exists at that point.
-func (x *Browser) GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, column int64) {
+func (b *Browser) GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, column int64) {
 	var _out0 int64
 	var _out1 int64
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getRow:column:forPoint:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), point)
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("getRow:column:forPoint:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), point)
 	return _r, _out0, _out1
 }
 
 // ColumnWidthForColumnContentWidth returns the column width for the width of the given column’s content.
-func (x *Browser) ColumnWidthForColumnContentWidth(columnContentWidth float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("columnWidthForColumnContentWidth:"), columnContentWidth)
+func (b *Browser) ColumnWidthForColumnContentWidth(columnContentWidth float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("columnWidthForColumnContentWidth:"), columnContentWidth)
 	return _r
 }
 
 // ColumnContentWidthForColumnWidth returns the content width for a given column width.
-func (x *Browser) ColumnContentWidthForColumnWidth(columnWidth float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("columnContentWidthForColumnWidth:"), columnWidth)
+func (b *Browser) ColumnContentWidthForColumnWidth(columnWidth float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("columnContentWidthForColumnWidth:"), columnWidth)
 	return _r
 }
 
 // SetWidthOfColumn sets the width of the specified column.
-func (x *Browser) SetWidthOfColumn(columnWidth float64, columnIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:ofColumn:"), columnWidth, columnIndex)
+func (b *Browser) SetWidthOfColumn(columnWidth float64, columnIndex int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWidth:ofColumn:"), columnWidth, columnIndex)
 }
 
 // WidthOfColumn returns the width of the specified column.
-func (x *Browser) WidthOfColumn(column int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("widthOfColumn:"), column)
+func (b *Browser) WidthOfColumn(column int) float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("widthOfColumn:"), column)
 	return _r
 }
 
 // NoteHeightOfRowsWithIndexesChangedInColumn immediately retiles the browser’s columns using row heights specified by the browser’s delegate.
-func (x *Browser) NoteHeightOfRowsWithIndexesChangedInColumn(indexSet obj.Object, columnIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteHeightOfRowsWithIndexesChanged:inColumn:"), objref.IDOf(indexSet), columnIndex)
+func (b *Browser) NoteHeightOfRowsWithIndexesChangedInColumn(indexSet obj.Object, columnIndex int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("noteHeightOfRowsWithIndexesChanged:inColumn:"), objref.IDOf(indexSet), columnIndex)
 }
 
 // SetDefaultColumnWidth sets the default column width for new browser columns that do not otherwise have an initial width from defaults or the browser’s delegate.
-func (x *Browser) SetDefaultColumnWidth(columnWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultColumnWidth:"), columnWidth)
+func (b *Browser) SetDefaultColumnWidth(columnWidth float64) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDefaultColumnWidth:"), columnWidth)
 }
 
 // DefaultColumnWidth returns the default column width of the browser’s columns.
-func (x *Browser) DefaultColumnWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("defaultColumnWidth"))
+func (b *Browser) DefaultColumnWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("defaultColumnWidth"))
 	return _r
 }
 
 // CanDragRowsWithIndexesInColumnWithEvent indicates whether the browser can attempt to initiate a drag of the given rows for the given event.
-func (x *Browser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes obj.Object, column int, event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDragRowsWithIndexes:inColumn:withEvent:"), objref.IDOf(rowIndexes), column, objref.IDOf(event))
+func (b *Browser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes obj.Object, column int, event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("canDragRowsWithIndexes:inColumn:withEvent:"), objref.IDOf(rowIndexes), column, objref.IDOf(event))
 	return _r
 }
 
 // SetDraggingSourceOperationMaskForLocal specifies the drag-operation mask for dragging operations with local or external destinations.
-func (x *Browser) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
+func (b *Browser) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
 }
 
 // EditItemAtIndexPathWithEventSelect begins editing the item at the specified path.
-func (x *Browser) EditItemAtIndexPathWithEventSelect(indexPath obj.Object, event *Event, select_ bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editItemAtIndexPath:withEvent:select:"), objref.IDOf(indexPath), objref.IDOf(event), select_)
+func (b *Browser) EditItemAtIndexPathWithEventSelect(indexPath obj.Object, event *Event, select_ bool) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("editItemAtIndexPath:withEvent:select:"), objref.IDOf(indexPath), objref.IDOf(event), select_)
 }
 
 // IsLoaded wraps the corresponding Objective-C method.
-func (x *Browser) IsLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoaded"))
+func (b *Browser) IsLoaded() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isLoaded"))
 	return _r
 }
 
 // CellPrototype wraps the corresponding Objective-C method.
-func (x *Browser) CellPrototype() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellPrototype"))
+func (b *Browser) CellPrototype() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("cellPrototype"))
 	return obj.Wrap(_r)
 }
 
-// SetCellPrototype wraps the corresponding Objective-C method.
-func (x *Browser) SetCellPrototype(cellPrototype obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellPrototype:"), objref.IDOf(cellPrototype))
-}
-
 // ReusesColumns wraps the corresponding Objective-C method.
-func (x *Browser) ReusesColumns() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reusesColumns"))
+func (b *Browser) ReusesColumns() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("reusesColumns"))
 	return _r
-}
-
-// SetReusesColumns wraps the corresponding Objective-C method.
-func (x *Browser) SetReusesColumns(reusesColumns bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReusesColumns:"), reusesColumns)
 }
 
 // HasHorizontalScroller wraps the corresponding Objective-C method.
-func (x *Browser) HasHorizontalScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHorizontalScroller"))
+func (b *Browser) HasHorizontalScroller() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("hasHorizontalScroller"))
 	return _r
-}
-
-// SetHasHorizontalScroller wraps the corresponding Objective-C method.
-func (x *Browser) SetHasHorizontalScroller(hasHorizontalScroller bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
 }
 
 // AutohidesScroller wraps the corresponding Objective-C method.
-func (x *Browser) AutohidesScroller() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autohidesScroller"))
+func (b *Browser) AutohidesScroller() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("autohidesScroller"))
 	return _r
-}
-
-// SetAutohidesScroller wraps the corresponding Objective-C method.
-func (x *Browser) SetAutohidesScroller(autohidesScroller bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutohidesScroller:"), autohidesScroller)
 }
 
 // SeparatesColumns wraps the corresponding Objective-C method.
-func (x *Browser) SeparatesColumns() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("separatesColumns"))
+func (b *Browser) SeparatesColumns() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("separatesColumns"))
 	return _r
-}
-
-// SetSeparatesColumns wraps the corresponding Objective-C method.
-func (x *Browser) SetSeparatesColumns(separatesColumns bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeparatesColumns:"), separatesColumns)
 }
 
 // IsTitled wraps the corresponding Objective-C method.
-func (x *Browser) IsTitled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTitled"))
+func (b *Browser) IsTitled() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isTitled"))
 	return _r
-}
-
-// SetTitled wraps the corresponding Objective-C method.
-func (x *Browser) SetTitled(titled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitled:"), titled)
 }
 
 // MinColumnWidth wraps the corresponding Objective-C method.
-func (x *Browser) MinColumnWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minColumnWidth"))
+func (b *Browser) MinColumnWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("minColumnWidth"))
 	return _r
-}
-
-// SetMinColumnWidth wraps the corresponding Objective-C method.
-func (x *Browser) SetMinColumnWidth(minColumnWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinColumnWidth:"), minColumnWidth)
 }
 
 // MaxVisibleColumns wraps the corresponding Objective-C method.
-func (x *Browser) MaxVisibleColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxVisibleColumns"))
+func (b *Browser) MaxVisibleColumns() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("maxVisibleColumns"))
 	return _r
-}
-
-// SetMaxVisibleColumns wraps the corresponding Objective-C method.
-func (x *Browser) SetMaxVisibleColumns(maxVisibleColumns int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxVisibleColumns:"), maxVisibleColumns)
 }
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
-func (x *Browser) AllowsMultipleSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
+func (b *Browser) AllowsMultipleSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("allowsMultipleSelection"))
 	return _r
-}
-
-// SetAllowsMultipleSelection wraps the corresponding Objective-C method.
-func (x *Browser) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 }
 
 // AllowsBranchSelection wraps the corresponding Objective-C method.
-func (x *Browser) AllowsBranchSelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsBranchSelection"))
+func (b *Browser) AllowsBranchSelection() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("allowsBranchSelection"))
 	return _r
-}
-
-// SetAllowsBranchSelection wraps the corresponding Objective-C method.
-func (x *Browser) SetAllowsBranchSelection(allowsBranchSelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsBranchSelection:"), allowsBranchSelection)
 }
 
 // AllowsEmptySelection wraps the corresponding Objective-C method.
-func (x *Browser) AllowsEmptySelection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEmptySelection"))
+func (b *Browser) AllowsEmptySelection() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("allowsEmptySelection"))
 	return _r
-}
-
-// SetAllowsEmptySelection wraps the corresponding Objective-C method.
-func (x *Browser) SetAllowsEmptySelection(allowsEmptySelection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), allowsEmptySelection)
 }
 
 // TakesTitleFromPreviousColumn wraps the corresponding Objective-C method.
-func (x *Browser) TakesTitleFromPreviousColumn() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("takesTitleFromPreviousColumn"))
+func (b *Browser) TakesTitleFromPreviousColumn() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("takesTitleFromPreviousColumn"))
 	return _r
-}
-
-// SetTakesTitleFromPreviousColumn wraps the corresponding Objective-C method.
-func (x *Browser) SetTakesTitleFromPreviousColumn(takesTitleFromPreviousColumn bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTakesTitleFromPreviousColumn:"), takesTitleFromPreviousColumn)
 }
 
 // SendsActionOnArrowKeys wraps the corresponding Objective-C method.
-func (x *Browser) SendsActionOnArrowKeys() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsActionOnArrowKeys"))
+func (b *Browser) SendsActionOnArrowKeys() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("sendsActionOnArrowKeys"))
 	return _r
 }
 
-// SetSendsActionOnArrowKeys wraps the corresponding Objective-C method.
-func (x *Browser) SetSendsActionOnArrowKeys(sendsActionOnArrowKeys bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnArrowKeys:"), sendsActionOnArrowKeys)
-}
-
 // PathSeparator wraps the corresponding Objective-C method.
-func (x *Browser) PathSeparator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathSeparator"))
+func (b *Browser) PathSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("pathSeparator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPathSeparator wraps the corresponding Objective-C method.
-func (x *Browser) SetPathSeparator(pathSeparator string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathSeparator:"), purego.NSString(pathSeparator))
-}
-
 // ClickedColumn wraps the corresponding Objective-C method.
-func (x *Browser) ClickedColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clickedColumn"))
+func (b *Browser) ClickedColumn() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("clickedColumn"))
 	return _r
 }
 
 // ClickedRow wraps the corresponding Objective-C method.
-func (x *Browser) ClickedRow() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clickedRow"))
+func (b *Browser) ClickedRow() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("clickedRow"))
 	return _r
 }
 
 // SelectedColumn wraps the corresponding Objective-C method.
-func (x *Browser) SelectedColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedColumn"))
+func (b *Browser) SelectedColumn() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("selectedColumn"))
 	return _r
 }
 
 // SelectedCells wraps the corresponding Objective-C method.
 //
 // SelectedCells returns the collection as a Go slice.
-func (x *Browser) SelectedCells() []*Cell {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedCells"))
+func (b *Browser) SelectedCells() []*Cell {
+	_arr := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectedCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Cell { return CellFromID(_id) })
 }
 
 // SelectionIndexPath wraps the corresponding Objective-C method.
-func (x *Browser) SelectionIndexPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexPath"))
+func (b *Browser) SelectionIndexPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectionIndexPath"))
 	return obj.Wrap(_r)
-}
-
-// SetSelectionIndexPath wraps the corresponding Objective-C method.
-func (x *Browser) SetSelectionIndexPath(selectionIndexPath obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(selectionIndexPath))
 }
 
 // SelectionIndexPaths wraps the corresponding Objective-C method.
 //
 // SelectionIndexPaths returns the collection as a Go slice.
-func (x *Browser) SelectionIndexPaths() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionIndexPaths"))
+func (b *Browser) SelectionIndexPaths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectionIndexPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSelectionIndexPaths wraps the corresponding Objective-C method.
-func (x *Browser) SetSelectionIndexPaths(selectionIndexPaths []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionIndexPaths:"), purego.SliceToNSArray(selectionIndexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // LastColumn wraps the corresponding Objective-C method.
-func (x *Browser) LastColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lastColumn"))
+func (b *Browser) LastColumn() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("lastColumn"))
 	return _r
 }
 
-// SetLastColumn wraps the corresponding Objective-C method.
-func (x *Browser) SetLastColumn(lastColumn int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastColumn:"), lastColumn)
-}
-
 // NumberOfVisibleColumns wraps the corresponding Objective-C method.
-func (x *Browser) NumberOfVisibleColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVisibleColumns"))
+func (b *Browser) NumberOfVisibleColumns() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("numberOfVisibleColumns"))
 	return _r
 }
 
 // FirstVisibleColumn wraps the corresponding Objective-C method.
-func (x *Browser) FirstVisibleColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("firstVisibleColumn"))
+func (b *Browser) FirstVisibleColumn() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("firstVisibleColumn"))
 	return _r
 }
 
 // LastVisibleColumn wraps the corresponding Objective-C method.
-func (x *Browser) LastVisibleColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lastVisibleColumn"))
+func (b *Browser) LastVisibleColumn() int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("lastVisibleColumn"))
 	return _r
 }
 
 // TitleHeight wraps the corresponding Objective-C method.
-func (x *Browser) TitleHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("titleHeight"))
+func (b *Browser) TitleHeight() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("titleHeight"))
 	return _r
 }
 
 // ColumnResizingType wraps the corresponding Objective-C method.
-func (x *Browser) ColumnResizingType() BrowserColumnResizingType {
-	_r := objc.Send[BrowserColumnResizingType](objref.IDOf(x), objc.RegisterName("columnResizingType"))
+func (b *Browser) ColumnResizingType() BrowserColumnResizingType {
+	_r := objc.Send[BrowserColumnResizingType](objref.IDOf(b), objc.RegisterName("columnResizingType"))
 	return _r
-}
-
-// SetColumnResizingType wraps the corresponding Objective-C method.
-func (x *Browser) SetColumnResizingType(columnResizingType BrowserColumnResizingType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnResizingType:"), columnResizingType)
 }
 
 // PrefersAllColumnUserResizing wraps the corresponding Objective-C method.
-func (x *Browser) PrefersAllColumnUserResizing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersAllColumnUserResizing"))
+func (b *Browser) PrefersAllColumnUserResizing() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("prefersAllColumnUserResizing"))
 	return _r
-}
-
-// SetPrefersAllColumnUserResizing wraps the corresponding Objective-C method.
-func (x *Browser) SetPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersAllColumnUserResizing:"), prefersAllColumnUserResizing)
 }
 
 // RowHeight wraps the corresponding Objective-C method.
-func (x *Browser) RowHeight() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rowHeight"))
+func (b *Browser) RowHeight() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("rowHeight"))
 	return _r
-}
-
-// SetRowHeight wraps the corresponding Objective-C method.
-func (x *Browser) SetRowHeight(rowHeight float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
 }
 
 // ColumnsAutosaveName wraps the corresponding Objective-C method.
-func (x *Browser) ColumnsAutosaveName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("columnsAutosaveName"))
+func (b *Browser) ColumnsAutosaveName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("columnsAutosaveName"))
 	return obj.Wrap(_r)
 }
 
-// SetColumnsAutosaveName wraps the corresponding Objective-C method.
-func (x *Browser) SetColumnsAutosaveName(columnsAutosaveName obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnsAutosaveName:"), objref.IDOf(columnsAutosaveName))
-}
-
 // AllowsTypeSelect wraps the corresponding Objective-C method.
-func (x *Browser) AllowsTypeSelect() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTypeSelect"))
+func (b *Browser) AllowsTypeSelect() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("allowsTypeSelect"))
 	return _r
 }
 
-// SetAllowsTypeSelect wraps the corresponding Objective-C method.
-func (x *Browser) SetAllowsTypeSelect(allowsTypeSelect bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTypeSelect:"), allowsTypeSelect)
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *Browser) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (b *Browser) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *Browser) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // SetAcceptsArrowKeys specifies whether the browser allows navigation using the arrow keys.
-func (x *Browser) SetAcceptsArrowKeys(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsArrowKeys:"), flag)
+func (b *Browser) SetAcceptsArrowKeys(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsArrowKeys:"), flag)
 }
 
-// AcceptsArrowKeys indicates whether the browser allows navigation using the arrow keys.
-func (x *Browser) AcceptsArrowKeys() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsArrowKeys"))
+// AcceptsArrowKeys reports whether the browser allows navigation using the arrow keys.
+func (b *Browser) AcceptsArrowKeys() bool {
+	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("acceptsArrowKeys"))
 	return _r
 }
 
 // DisplayColumn updates the browser to display the given column.
-func (x *Browser) DisplayColumn(column int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayColumn:"), column)
+func (b *Browser) DisplayColumn(column int) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("displayColumn:"), column)
 }
 
 // DisplayAllColumns updates the browser to display all loaded columns.
-func (x *Browser) DisplayAllColumns() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayAllColumns"))
+func (b *Browser) DisplayAllColumns() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("displayAllColumns"))
 }
 
 // ScrollViaScroller scrolls columns left or right based on an NSScroller.
-func (x *Browser) ScrollViaScroller(sender *Scroller) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollViaScroller:"), objref.IDOf(sender))
+func (b *Browser) ScrollViaScroller(sender *Scroller) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollViaScroller:"), objref.IDOf(sender))
 }
 
 // UpdateScroller updates the horizontal scroller to reflect column positions.
-func (x *Browser) UpdateScroller() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateScroller"))
+func (b *Browser) UpdateScroller() {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("updateScroller"))
 }
 
 // ColumnOfMatrix returns the column number in which the given matrix is located.
-func (x *Browser) ColumnOfMatrix(matrix *Matrix) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnOfMatrix:"), objref.IDOf(matrix))
+func (b *Browser) ColumnOfMatrix(matrix *Matrix) int {
+	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("columnOfMatrix:"), objref.IDOf(matrix))
 	return _r
 }
 
 // MatrixInColumn returns the matrix located in the specified column.
-func (x *Browser) MatrixInColumn(column int) *Matrix {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matrixInColumn:"), column)
+func (b *Browser) MatrixInColumn(column int) *Matrix {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("matrixInColumn:"), column)
 	return MatrixFromID(_r)
 }
-
-// Browserable is the interface implemented by [Browser], for mocking and DI.
-type Browserable interface {
-	obj.Object
-	WithCellPrototype(cellPrototype obj.Object) *Browser
-	WithReusesColumns(reusesColumns bool) *Browser
-	WithHasHorizontalScroller(hasHorizontalScroller bool) *Browser
-	WithAutohidesScroller(autohidesScroller bool) *Browser
-	WithSeparatesColumns(separatesColumns bool) *Browser
-	WithTitled(titled bool) *Browser
-	WithMinColumnWidth(minColumnWidth float64) *Browser
-	WithMaxVisibleColumns(maxVisibleColumns int) *Browser
-	WithAllowsMultipleSelection(allowsMultipleSelection bool) *Browser
-	WithAllowsBranchSelection(allowsBranchSelection bool) *Browser
-	WithAllowsEmptySelection(allowsEmptySelection bool) *Browser
-	WithTakesTitleFromPreviousColumn(takesTitleFromPreviousColumn bool) *Browser
-	WithSendsActionOnArrowKeys(sendsActionOnArrowKeys bool) *Browser
-	WithPathSeparator(pathSeparator string) *Browser
-	WithSelectionIndexPath(selectionIndexPath obj.Object) *Browser
-	WithSelectionIndexPaths(items ...obj.Object) *Browser
-	WithLastColumn(lastColumn int) *Browser
-	WithColumnResizingType(columnResizingType BrowserColumnResizingType) *Browser
-	WithPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool) *Browser
-	WithRowHeight(rowHeight float64) *Browser
-	WithColumnsAutosaveName(columnsAutosaveName obj.Object) *Browser
-	WithAllowsTypeSelect(allowsTypeSelect bool) *Browser
-	WithBackgroundColor(backgroundColor *Color) *Browser
-	WithTarget(target obj.Object) *Browser
-	WithTag(tag int) *Browser
-	WithIgnoresMultiClick(ignoresMultiClick bool) *Browser
-	WithContinuous(continuous bool) *Browser
-	WithEnabled(enabled bool) *Browser
-	WithRefusesFirstResponder(refusesFirstResponder bool) *Browser
-	WithHighlighted(highlighted bool) *Browser
-	WithControlSize(controlSize ControlSize) *Browser
-	WithFormatter(formatter obj.Object) *Browser
-	WithObjectValue(objectValue obj.Object) *Browser
-	WithStringValue(stringValue string) *Browser
-	WithAttributedStringValue(attributedStringValue obj.Object) *Browser
-	WithIntValue(intValue int) *Browser
-	WithIntegerValue(integerValue int) *Browser
-	WithFloatValue(floatValue float32) *Browser
-	WithDoubleValue(doubleValue float64) *Browser
-	WithFont(font *Font) *Browser
-	WithUsesSingleLineMode(usesSingleLineMode bool) *Browser
-	WithLineBreakMode(lineBreakMode LineBreakMode) *Browser
-	WithAlignment(alignment TextAlignment) *Browser
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Browser
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Browser
-	WithCell(cell CellProvider) *Browser
-	WithSubviews(items ...ViewProvider) *Browser
-	WithHidden(hidden bool) *Browser
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Browser
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Browser
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Browser
-	WithFrame(frame corefoundation.CGRect) *Browser
-	WithFrameRotation(frameRotation float64) *Browser
-	WithFrameCenterRotation(frameCenterRotation float64) *Browser
-	WithBoundsRotation(boundsRotation float64) *Browser
-	WithBounds(bounds corefoundation.CGRect) *Browser
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Browser
-	WithNeedsDisplay(needsDisplay bool) *Browser
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Browser
-	WithWantsRestingTouches(wantsRestingTouches bool) *Browser
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Browser
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Browser
-	WithWantsLayer(wantsLayer bool) *Browser
-	WithLayer(layer obj.Object) *Browser
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Browser
-	WithNeedsLayout(needsLayout bool) *Browser
-	WithAlphaValue(alphaValue float64) *Browser
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Browser
-	WithBackgroundFilters(items ...obj.Object) *Browser
-	WithCompositingFilter(compositingFilter obj.Object) *Browser
-	WithContentFilters(items ...obj.Object) *Browser
-	WithShadow(shadow *Shadow) *Browser
-	WithClipsToBounds(clipsToBounds bool) *Browser
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser
-	WithToolTip(toolTip string) *Browser
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Browser
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Browser
-	WithNextKeyView(nextKeyView ViewProvider) *Browser
-	WithFocusRingType(focusRingType FocusRingType) *Browser
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Browser
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Browser
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Browser
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Browser
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Browser
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Browser
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Browser
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Browser
-	WithNextResponder(nextResponder ResponderProvider) *Browser
-	WithMenu(menu *Menu) *Browser
-	WithUserActivity(userActivity obj.Object) *Browser
-	WithTouchBar(touchBar *TouchBar) *Browser
-	LoadColumnZero()
-	ItemAtIndexPath(indexPath obj.Object) obj.Object
-	ItemAtRowInColumn(row int, column int) obj.Object
-	IndexPathForColumn(column int) obj.Object
-	IsLeafItem(item obj.Object) bool
-	ReloadDataForRowIndexesInColumn(rowIndexes obj.Object, column int)
-	ParentForItemsInColumn(column int) obj.Object
-	ScrollRowToVisibleInColumn(row int, column int)
-	SetTitleOfColumn(string_ string, column int)
-	TitleOfColumn(column int) string
-	SetPath(path string) bool
-	Path() string
-	PathToColumn(column int) string
-	SelectedCellInColumn(column int) obj.Object
-	SelectRowInColumn(row int, column int)
-	SelectedRowInColumn(column int) int
-	SelectRowIndexesInColumn(indexes obj.Object, column int)
-	SelectedRowIndexesInColumn(column int) obj.Object
-	ReloadColumn(column int)
-	ValidateVisibleColumns()
-	ScrollColumnsRightBy(shiftAmount int)
-	ScrollColumnsLeftBy(shiftAmount int)
-	ScrollColumnToVisible(column int)
-	AddColumn()
-	LoadedCellAtRowColumn(row int, col int) obj.Object
-	SelectAll(sender obj.Object)
-	Tile()
-	DoClick(sender obj.Object)
-	DoDoubleClick(sender obj.Object)
-	SendAction() bool
-	TitleFrameOfColumn(column int) corefoundation.CGRect
-	DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect)
-	FrameOfColumn(column int) corefoundation.CGRect
-	FrameOfInsideOfColumn(column int) corefoundation.CGRect
-	FrameOfRowInColumn(row int, column int) corefoundation.CGRect
-	GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, column int64)
-	ColumnWidthForColumnContentWidth(columnContentWidth float64) float64
-	ColumnContentWidthForColumnWidth(columnWidth float64) float64
-	SetWidthOfColumn(columnWidth float64, columnIndex int)
-	WidthOfColumn(column int) float64
-	NoteHeightOfRowsWithIndexesChangedInColumn(indexSet obj.Object, columnIndex int)
-	SetDefaultColumnWidth(columnWidth float64)
-	DefaultColumnWidth() float64
-	CanDragRowsWithIndexesInColumnWithEvent(rowIndexes obj.Object, column int, event *Event) bool
-	SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool)
-	EditItemAtIndexPathWithEventSelect(indexPath obj.Object, event *Event, select_ bool)
-	IsLoaded() bool
-	CellPrototype() obj.Object
-	SetCellPrototype(cellPrototype obj.Object)
-	ReusesColumns() bool
-	SetReusesColumns(reusesColumns bool)
-	HasHorizontalScroller() bool
-	SetHasHorizontalScroller(hasHorizontalScroller bool)
-	AutohidesScroller() bool
-	SetAutohidesScroller(autohidesScroller bool)
-	SeparatesColumns() bool
-	SetSeparatesColumns(separatesColumns bool)
-	IsTitled() bool
-	SetTitled(titled bool)
-	MinColumnWidth() float64
-	SetMinColumnWidth(minColumnWidth float64)
-	MaxVisibleColumns() int
-	SetMaxVisibleColumns(maxVisibleColumns int)
-	AllowsMultipleSelection() bool
-	SetAllowsMultipleSelection(allowsMultipleSelection bool)
-	AllowsBranchSelection() bool
-	SetAllowsBranchSelection(allowsBranchSelection bool)
-	AllowsEmptySelection() bool
-	SetAllowsEmptySelection(allowsEmptySelection bool)
-	TakesTitleFromPreviousColumn() bool
-	SetTakesTitleFromPreviousColumn(takesTitleFromPreviousColumn bool)
-	SendsActionOnArrowKeys() bool
-	SetSendsActionOnArrowKeys(sendsActionOnArrowKeys bool)
-	PathSeparator() string
-	SetPathSeparator(pathSeparator string)
-	ClickedColumn() int
-	ClickedRow() int
-	SelectedColumn() int
-	SelectedCells() []*Cell
-	SelectionIndexPath() obj.Object
-	SetSelectionIndexPath(selectionIndexPath obj.Object)
-	SelectionIndexPaths() []obj.Object
-	SetSelectionIndexPaths(selectionIndexPaths []obj.Object)
-	LastColumn() int
-	SetLastColumn(lastColumn int)
-	NumberOfVisibleColumns() int
-	FirstVisibleColumn() int
-	LastVisibleColumn() int
-	TitleHeight() float64
-	ColumnResizingType() BrowserColumnResizingType
-	SetColumnResizingType(columnResizingType BrowserColumnResizingType)
-	PrefersAllColumnUserResizing() bool
-	SetPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool)
-	RowHeight() float64
-	SetRowHeight(rowHeight float64)
-	ColumnsAutosaveName() obj.Object
-	SetColumnsAutosaveName(columnsAutosaveName obj.Object)
-	AllowsTypeSelect() bool
-	SetAllowsTypeSelect(allowsTypeSelect bool)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	SetAcceptsArrowKeys(flag bool)
-	AcceptsArrowKeys() bool
-	DisplayColumn(column int)
-	DisplayAllColumns()
-	ScrollViaScroller(sender *Scroller)
-	UpdateScroller()
-	ColumnOfMatrix(matrix *Matrix) int
-	MatrixInColumn(column int) *Matrix
-}
-
-var _ Browserable = (*Browser)(nil)
 
 var _ ControlProvider = (*Browser)(nil)
 

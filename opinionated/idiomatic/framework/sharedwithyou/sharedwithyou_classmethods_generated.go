@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// HighlightCollectionTitle localized title to display with a collection of highlights Use this string as the title for a collection of shared highlight links displayed to the user.
+// HighlightCollectionTitle returns localized title to display with a collection of highlights Use this string as the title for a collection of shared highlight links displayed to the user.
 func HighlightCollectionTitle() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWHighlightCenter")), objc.RegisterName("highlightCollectionTitle"))
 	if _r == 0 {
@@ -20,7 +20,7 @@ func HighlightCollectionTitle() string {
 	return purego.GoString(_r)
 }
 
-// IsSystemCollaborationSupportAvailable whether the current software version has full support for Messages collaboration features. Use this property at runtime to conditionally enable Messages collaboration features in your app. This property will be permantently set to YES on a software version with full support for these features.
+// IsSystemCollaborationSupportAvailable reports whether the current software version has full support for Messages collaboration features. Use this property at runtime to conditionally enable Messages collaboration features in your app. This property will be permantently set to true on a software version with full support for these features.
 func IsSystemCollaborationSupportAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("SWHighlightCenter")), objc.RegisterName("isSystemCollaborationSupportAvailable"))
 	return _r

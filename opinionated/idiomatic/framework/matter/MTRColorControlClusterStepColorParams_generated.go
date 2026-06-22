@@ -44,24 +44,24 @@ func mTRColorControlClusterStepColorParamsAdopt(id objc.ID) *MTRColorControlClus
 }
 
 // Description returns the object's -description text.
-func (x *MTRColorControlClusterStepColorParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccscp *MTRColorControlClusterStepColorParams) Description() string {
+	return rt.Description(objref.IDOf(mcccscp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRColorControlClusterStepColorParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcccscp *MTRColorControlClusterStepColorParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcccscp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRColorControlClusterStepColorParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcccscp *MTRColorControlClusterStepColorParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcccscp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRColorControlClusterStepColorParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccscp *MTRColorControlClusterStepColorParams) String() string {
+	return rt.Description(objref.IDOf(mcccscp))
 }
 
 // NewMTRColorControlClusterStepColorParams creates a new MTRColorControlClusterStepColorParams.
@@ -71,148 +71,85 @@ func NewMTRColorControlClusterStepColorParams() *MTRColorControlClusterStepColor
 }
 
 // WithStepX sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterStepColorParams) WithStepX(stepX obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepX:"), objref.IDOf(stepX))
-	return x
+func (mcccscp *MTRColorControlClusterStepColorParams) WithStepX(stepX obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setStepX:"), objref.IDOf(stepX))
+	return mcccscp
 }
 
 // WithStepY sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterStepColorParams) WithStepY(stepY obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepY:"), objref.IDOf(stepY))
-	return x
+func (mcccscp *MTRColorControlClusterStepColorParams) WithStepY(stepY obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setStepY:"), objref.IDOf(stepY))
+	return mcccscp
 }
 
 // WithTransitionTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterStepColorParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-	return x
+func (mcccscp *MTRColorControlClusterStepColorParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
+	return mcccscp
 }
 
 // WithOptionsMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterStepColorParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
-	return x
+func (mcccscp *MTRColorControlClusterStepColorParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
+	return mcccscp
 }
 
 // WithOptionsOverride sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterStepColorParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-	return x
+func (mcccscp *MTRColorControlClusterStepColorParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
+	return mcccscp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterStepColorParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccscp *MTRColorControlClusterStepColorParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mcccscp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterStepColorParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStepColorParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccscp *MTRColorControlClusterStepColorParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStepColorParams {
+	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mcccscp
 }
 
 // StepX wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) StepX() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepX"))
+func (mcccscp *MTRColorControlClusterStepColorParams) StepX() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("stepX"))
 	return obj.Wrap(_r)
-}
-
-// SetStepX wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetStepX(stepX obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepX:"), objref.IDOf(stepX))
 }
 
 // StepY wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) StepY() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepY"))
+func (mcccscp *MTRColorControlClusterStepColorParams) StepY() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("stepY"))
 	return obj.Wrap(_r)
-}
-
-// SetStepY wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetStepY(stepY obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepY:"), objref.IDOf(stepY))
 }
 
 // TransitionTime wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) TransitionTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+func (mcccscp *MTRColorControlClusterStepColorParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
-}
-
-// SetTransitionTime wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetTransitionTime(transitionTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
 // OptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) OptionsMask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+func (mcccscp *MTRColorControlClusterStepColorParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetOptionsMask(optionsMask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
 // OptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) OptionsOverride() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+func (mcccscp *MTRColorControlClusterStepColorParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetOptionsOverride(optionsOverride obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterStepColorParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccscp *MTRColorControlClusterStepColorParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterStepColorParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccscp *MTRColorControlClusterStepColorParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterStepColorParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRColorControlClusterStepColorParamsable is the interface implemented by [MTRColorControlClusterStepColorParams], for mocking and DI.
-type MTRColorControlClusterStepColorParamsable interface {
-	obj.Object
-	WithStepX(stepX obj.Object) *MTRColorControlClusterStepColorParams
-	WithStepY(stepY obj.Object) *MTRColorControlClusterStepColorParams
-	WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorParams
-	WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorParams
-	WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStepColorParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStepColorParams
-	StepX() obj.Object
-	SetStepX(stepX obj.Object)
-	StepY() obj.Object
-	SetStepY(stepY obj.Object)
-	TransitionTime() obj.Object
-	SetTransitionTime(transitionTime obj.Object)
-	OptionsMask() obj.Object
-	SetOptionsMask(optionsMask obj.Object)
-	OptionsOverride() obj.Object
-	SetOptionsOverride(optionsOverride obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRColorControlClusterStepColorParamsable = (*MTRColorControlClusterStepColorParams)(nil)

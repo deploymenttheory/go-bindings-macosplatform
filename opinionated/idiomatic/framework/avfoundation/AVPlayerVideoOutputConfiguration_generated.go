@@ -47,24 +47,24 @@ func playerVideoOutputConfigurationAdopt(id objc.ID) *PlayerVideoOutputConfigura
 }
 
 // Description returns the object's -description text.
-func (x *PlayerVideoOutputConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pvoc *PlayerVideoOutputConfiguration) Description() string {
+	return rt.Description(objref.IDOf(pvoc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerVideoOutputConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pvoc *PlayerVideoOutputConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pvoc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerVideoOutputConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pvoc *PlayerVideoOutputConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pvoc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerVideoOutputConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pvoc *PlayerVideoOutputConfiguration) String() string {
+	return rt.Description(objref.IDOf(pvoc))
 }
 
 // NewPlayerVideoOutputConfiguration creates a new PlayerVideoOutputConfiguration.
@@ -73,30 +73,20 @@ func NewPlayerVideoOutputConfiguration() *PlayerVideoOutputConfiguration {
 	return playerVideoOutputConfigurationAdopt(_id)
 }
 
-// SourcePlayerItem the AVPlayerItem which is the source of this configuration. This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
-func (x *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePlayerItem"))
+// SourcePlayerItem returns the AVPlayerItem which is the source of this configuration. This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
+func (pvoc *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
+	_r := objc.Send[objc.ID](objref.IDOf(pvoc), objc.RegisterName("sourcePlayerItem"))
 	return PlayerItemFromID(_r)
 }
 
-// DataChannelDescriptions list of data channels, represented as CMTagCollections, selected for this configuration. Returns an Array of CMTagCollections
-func (x *PlayerVideoOutputConfiguration) DataChannelDescriptions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataChannelDescriptions"))
+// DataChannelDescriptions returns list of data channels, represented as CMTagCollections, selected for this configuration. Returns an Array of CMTagCollections
+func (pvoc *PlayerVideoOutputConfiguration) DataChannelDescriptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pvoc), objc.RegisterName("dataChannelDescriptions"))
 	return obj.Wrap(_r)
 }
 
-// PreferredTransform the preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
-func (x *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+// PreferredTransform returns the preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
+func (pvoc *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(pvoc), objc.RegisterName("preferredTransform"))
 	return _r
 }
-
-// PlayerVideoOutputConfigurationable is the interface implemented by [PlayerVideoOutputConfiguration], for mocking and DI.
-type PlayerVideoOutputConfigurationable interface {
-	obj.Object
-	SourcePlayerItem() *PlayerItem
-	DataChannelDescriptions() obj.Object
-	PreferredTransform() corefoundation.CGAffineTransform
-}
-
-var _ PlayerVideoOutputConfigurationable = (*PlayerVideoOutputConfiguration)(nil)

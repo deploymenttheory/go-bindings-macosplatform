@@ -46,24 +46,24 @@ func scriptFrameAdopt(id objc.ID) *ScriptFrame {
 }
 
 // Description returns the object's -description text.
-func (x *ScriptFrame) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sf *ScriptFrame) Description() string {
+	return rt.Description(objref.IDOf(sf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScriptFrame) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sf *ScriptFrame) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScriptFrame) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sf *ScriptFrame) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScriptFrame) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sf *ScriptFrame) String() string {
+	return rt.Description(objref.IDOf(sf))
 }
 
 // NewScriptFrame creates a new ScriptFrame.
@@ -72,46 +72,34 @@ func NewScriptFrame() *ScriptFrame {
 	return scriptFrameAdopt(_id)
 }
 
-// FocusDisparity the disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
-func (x *ScriptFrame) FocusDisparity() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+// FocusDisparity returns the disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
+func (sf *ScriptFrame) FocusDisparity() float32 {
+	_r := objc.Send[float32](objref.IDOf(sf), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
-// FocusDetection the detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
-func (x *ScriptFrame) FocusDetection() *Detection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusDetection"))
+// FocusDetection returns the detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
+func (sf *ScriptFrame) FocusDetection() *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("focusDetection"))
 	return DetectionFromID(_r)
 }
 
-// AllDetections all detected objects in this frame.
+// AllDetections returns all detected objects in this frame.
 //
 // AllDetections returns the collection as a Go slice.
-func (x *ScriptFrame) AllDetections() []*Detection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDetections"))
+func (sf *ScriptFrame) AllDetections() []*Detection {
+	_arr := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("allDetections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
 
 // DetectionForID the detection in the frame with the given detection ID, if any.
-func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionForID:"), detectionID)
+func (sf *ScriptFrame) DetectionForID(detectionID int64) *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("detectionForID:"), detectionID)
 	return DetectionFromID(_r)
 }
 
 // BestDetectionForGroupID the best detection to focus on in a frame among those within the given detection group.
-func (x *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestDetectionForGroupID:"), detectionGroupID)
+func (sf *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("bestDetectionForGroupID:"), detectionGroupID)
 	return DetectionFromID(_r)
 }
-
-// ScriptFrameable is the interface implemented by [ScriptFrame], for mocking and DI.
-type ScriptFrameable interface {
-	obj.Object
-	FocusDisparity() float32
-	FocusDetection() *Detection
-	AllDetections() []*Detection
-	DetectionForID(detectionID int64) *Detection
-	BestDetectionForGroupID(detectionGroupID int64) *Detection
-}
-
-var _ ScriptFrameable = (*ScriptFrame)(nil)

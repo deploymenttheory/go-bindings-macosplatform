@@ -52,48 +52,36 @@ func NewReductionLayer() *ReductionLayer {
 	return reductionLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ReductionLayer) WithLabel(label string) *ReductionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (rl *ReductionLayer) WithLabel(label string) *ReductionLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (rl *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return rl
 }
 
-// ReductionType the reduction type
-func (x *ReductionLayer) ReductionType() ReductionType {
-	_r := objc.Send[ReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+// ReductionType returns the reduction type
+func (rl *ReductionLayer) ReductionType() ReductionType {
+	_r := objc.Send[ReductionType](objref.IDOf(rl), objc.RegisterName("reductionType"))
 	return _r
 }
 
-// Dimension the dimension over which to perform the reduction operation
-func (x *ReductionLayer) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the dimension over which to perform the reduction operation
+func (rl *ReductionLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(rl), objc.RegisterName("dimension"))
 	return _r
 }
 
-// Dimensions the dimensions over which to perform the reduction operation
+// Dimensions returns the dimensions over which to perform the reduction operation
 //
 // Dimensions returns the collection as a Go slice.
-func (x *ReductionLayer) Dimensions() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
+func (rl *ReductionLayer) Dimensions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("dimensions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ReductionLayerable is the interface implemented by [ReductionLayer], for mocking and DI.
-type ReductionLayerable interface {
-	obj.Object
-	WithLabel(label string) *ReductionLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer
-	ReductionType() ReductionType
-	Dimension() int
-	Dimensions() []obj.Object
-}
-
-var _ ReductionLayerable = (*ReductionLayer)(nil)
 
 var _ LayerProvider = (*ReductionLayer)(nil)

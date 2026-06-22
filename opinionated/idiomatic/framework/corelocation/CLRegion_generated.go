@@ -48,41 +48,41 @@ func regionAdopt(id objc.ID) *Region {
 }
 
 // Description returns the object's -description text.
-func (x *Region) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Region) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Region) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Region) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Region) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Region) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Region) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Region) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
-// WithNotifyOnEntry a Boolean indicating that notifications are generated upon entry into the region.
-func (x *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
-	return x
+// WithNotifyOnEntry sets a Boolean indicating that notifications are generated upon entry into the region.
+func (r *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
+	return r
 }
 
-// WithNotifyOnExit a Boolean indicating that notifications are generated upon exit from the region.
-func (x *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
-	return x
+// WithNotifyOnExit sets a Boolean indicating that notifications are generated upon exit from the region.
+func (r *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
+	return r
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *Region) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (r *Region) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,44 +90,20 @@ func (x *Region) Identifier() string {
 }
 
 // NotifyOnEntry wraps the corresponding Objective-C method.
-func (x *Region) NotifyOnEntry() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyOnEntry"))
+func (r *Region) NotifyOnEntry() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("notifyOnEntry"))
 	return _r
-}
-
-// SetNotifyOnEntry wraps the corresponding Objective-C method.
-func (x *Region) SetNotifyOnEntry(notifyOnEntry bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 }
 
 // NotifyOnExit wraps the corresponding Objective-C method.
-func (x *Region) NotifyOnExit() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyOnExit"))
+func (r *Region) NotifyOnExit() bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("notifyOnExit"))
 	return _r
 }
-
-// SetNotifyOnExit wraps the corresponding Objective-C method.
-func (x *Region) SetNotifyOnExit(notifyOnExit bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
-}
-
-// Regionable is the interface implemented by [Region], for mocking and DI.
-type Regionable interface {
-	obj.Object
-	WithNotifyOnEntry(notifyOnEntry bool) *Region
-	WithNotifyOnExit(notifyOnExit bool) *Region
-	Identifier() string
-	NotifyOnEntry() bool
-	SetNotifyOnEntry(notifyOnEntry bool)
-	NotifyOnExit() bool
-	SetNotifyOnExit(notifyOnExit bool)
-}
-
-var _ Regionable = (*Region)(nil)
 
 // isRegion marks Region — and, by embedding promotion, its
 // subclasses — as a member of the Region hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Region) isRegion() {}
+func (r *Region) isRegion() {}
 
 var _ RegionProvider = (*Region)(nil)

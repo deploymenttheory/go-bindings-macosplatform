@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -12,7 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Drawing is an idiomatic wrapper over the Objective-C class PKDrawing.
@@ -49,24 +50,24 @@ func drawingAdopt(id objc.ID) *Drawing {
 }
 
 // Description returns the object's -description text.
-func (x *Drawing) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Drawing) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Drawing) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Drawing) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Drawing) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Drawing) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Drawing) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Drawing) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDrawing creates a new Drawing.
@@ -93,67 +94,52 @@ func NewDrawingWithDataError(data obj.Object) (result *Drawing, err error) {
 	return drawingAdopt(_id), nil
 }
 
-// DataRepresentation generate a data representation of the drawing.
-func (x *Drawing) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+// DataRepresentation returns generate a data representation of the drawing.
+func (d *Drawing) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // ImageFromRectScale wraps the corresponding Objective-C method.
-func (x *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageFromRect:scale:"), rect, scale)
+func (d *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("imageFromRect:scale:"), rect, scale)
 	return obj.Wrap(_r)
 }
 
 // DrawingByApplyingTransform returns a new drawing with `transform` applied.
-func (x *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawingByApplyingTransform:"), transform)
+func (d *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByApplyingTransform:"), transform)
 	return DrawingFromID(_r)
 }
 
 // DrawingByAppendingDrawing returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents.
-func (x *Drawing) DrawingByAppendingDrawing(drawing *Drawing) *Drawing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawingByAppendingDrawing:"), objref.IDOf(drawing))
+func (d *Drawing) DrawingByAppendingDrawing(drawing *Drawing) *Drawing {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByAppendingDrawing:"), objref.IDOf(drawing))
 	return DrawingFromID(_r)
 }
 
 // DrawingByAppendingStrokes create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing.
-func (x *Drawing) DrawingByAppendingStrokes(strokes []*Stroke) *Drawing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawingByAppendingStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
+func (d *Drawing) DrawingByAppendingStrokes(strokes []*Stroke) *Drawing {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("drawingByAppendingStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
 	return DrawingFromID(_r)
 }
 
-// Strokes the strokes that this drawing contains.
+// Strokes returns the strokes that this drawing contains.
 //
 // Strokes returns the collection as a Go slice.
-func (x *Drawing) Strokes() []*Stroke {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokes"))
+func (d *Drawing) Strokes() []*Stroke {
+	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("strokes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Stroke { return StrokeFromID(_id) })
 }
 
-// Bounds the bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
-func (x *Drawing) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+// Bounds returns the bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
+func (d *Drawing) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("bounds"))
 	return _r
 }
 
-// RequiredContentVersion the PencilKit version required to use this drawing.
-func (x *Drawing) RequiredContentVersion() ContentVersion {
-	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+// RequiredContentVersion returns the PencilKit version required to use this drawing.
+func (d *Drawing) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(d), objc.RegisterName("requiredContentVersion"))
 	return _r
 }
-
-// Drawingable is the interface implemented by [Drawing], for mocking and DI.
-type Drawingable interface {
-	obj.Object
-	DataRepresentation() obj.Object
-	ImageFromRectScale(rect corefoundation.CGRect, scale float64) obj.Object
-	DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing
-	DrawingByAppendingDrawing(drawing *Drawing) *Drawing
-	DrawingByAppendingStrokes(strokes []*Stroke) *Drawing
-	Strokes() []*Stroke
-	Bounds() corefoundation.CGRect
-	RequiredContentVersion() ContentVersion
-}
-
-var _ Drawingable = (*Drawing)(nil)

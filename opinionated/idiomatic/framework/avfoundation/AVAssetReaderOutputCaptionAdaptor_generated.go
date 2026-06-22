@@ -46,24 +46,24 @@ func assetReaderOutputCaptionAdaptorAdopt(id objc.ID) *AssetReaderOutputCaptionA
 }
 
 // Description returns the object's -description text.
-func (x *AssetReaderOutputCaptionAdaptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aroca *AssetReaderOutputCaptionAdaptor) Description() string {
+	return rt.Description(objref.IDOf(aroca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetReaderOutputCaptionAdaptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aroca *AssetReaderOutputCaptionAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aroca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetReaderOutputCaptionAdaptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aroca *AssetReaderOutputCaptionAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aroca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetReaderOutputCaptionAdaptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aroca *AssetReaderOutputCaptionAdaptor) String() string {
+	return rt.Description(objref.IDOf(aroca))
 }
 
 // NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a caption adaptor that reads from a track output.
@@ -74,29 +74,19 @@ func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *A
 }
 
 // NextCaptionGroup returns the next caption group.
-func (x *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextCaptionGroup"))
+func (aroca *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(aroca), objc.RegisterName("nextCaptionGroup"))
 	return CaptionGroupFromID(_r)
 }
 
 // CaptionsNotPresentInPreviousGroupsInCaptionGroup returns the set of captions in the caption group that weren’t vended by the adaptor.
-func (x *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:"), objref.IDOf(captionGroup))
+func (aroca *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption {
+	_r := objc.Send[objc.ID](objref.IDOf(aroca), objc.RegisterName("captionsNotPresentInPreviousGroupsInCaptionGroup:"), objref.IDOf(captionGroup))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// AssetReaderTrackOutput the track output used to create the receiver.
-func (x *AssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderTrackOutput"))
+// AssetReaderTrackOutput returns the track output used to create the receiver.
+func (aroca *AssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(aroca), objc.RegisterName("assetReaderTrackOutput"))
 	return AssetReaderTrackOutputFromID(_r)
 }
-
-// AssetReaderOutputCaptionAdaptorable is the interface implemented by [AssetReaderOutputCaptionAdaptor], for mocking and DI.
-type AssetReaderOutputCaptionAdaptorable interface {
-	obj.Object
-	NextCaptionGroup() *CaptionGroup
-	CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *CaptionGroup) []*Caption
-	AssetReaderTrackOutput() *AssetReaderTrackOutput
-}
-
-var _ AssetReaderOutputCaptionAdaptorable = (*AssetReaderOutputCaptionAdaptor)(nil)

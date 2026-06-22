@@ -5,12 +5,13 @@
 package passkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PaymentRequestShippingContactUpdate is an idiomatic wrapper over the Objective-C class PKPaymentRequestShippingContactUpdate.
@@ -55,81 +56,65 @@ func NewPaymentRequestShippingContactUpdateWithErrorsPaymentSummaryItemsShipping
 	return paymentRequestShippingContactUpdateAdopt(_id)
 }
 
-// WithStatus the status of the payment request that indicates whether authorization succeeds or fails.
-func (x *PaymentRequestShippingContactUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingContactUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status of the payment request that indicates whether authorization succeeds or fails.
+func (prscu *PaymentRequestShippingContactUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingContactUpdate {
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setStatus:"), status)
+	return prscu
 }
 
-// WithPaymentSummaryItems the list of payment summary items for the instance.
-func (x *PaymentRequestShippingContactUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingContactUpdate {
+// WithPaymentSummaryItems sets the list of payment summary items for the instance.
+func (prscu *PaymentRequestShippingContactUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingContactUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setPaymentSummaryItems:"), _arr)
+	return prscu
 }
 
-// WithShippingMethods the list of shipping methods available for a payment request.
-func (x *PaymentRequestShippingContactUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingContactUpdate {
+// WithShippingMethods sets the list of shipping methods available for a payment request.
+func (prscu *PaymentRequestShippingContactUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingContactUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setShippingMethods:"), _arr)
+	return prscu
 }
 
-// WithMultiTokenContexts an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
-func (x *PaymentRequestShippingContactUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingContactUpdate {
+// WithMultiTokenContexts sets an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
+func (prscu *PaymentRequestShippingContactUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingContactUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setMultiTokenContexts:"), _arr)
+	return prscu
 }
 
-// WithRecurringPaymentRequest the recurring payment request to update the payment request with.
-func (x *PaymentRequestShippingContactUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
-	return x
+// WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
+func (prscu *PaymentRequestShippingContactUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate {
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
+	return prscu
 }
 
-// WithAutomaticReloadPaymentRequest the automatic reload payment request to update the payment request with.
-func (x *PaymentRequestShippingContactUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
-	return x
+// WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
+func (prscu *PaymentRequestShippingContactUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate {
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
+	return prscu
 }
 
-// WithDeferredPaymentRequest the deferred payment request to update the payment request with.
-func (x *PaymentRequestShippingContactUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
-	return x
+// WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
+func (prscu *PaymentRequestShippingContactUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate {
+	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
+	return prscu
 }
 
 // Errors wraps the corresponding Objective-C method.
-func (x *PaymentRequestShippingContactUpdate) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
+func (prscu *PaymentRequestShippingContactUpdate) Errors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
-func (x *PaymentRequestShippingContactUpdate) SetErrors() error {
+func (prscu *PaymentRequestShippingContactUpdate) SetErrors() error {
 	var _nsErr uintptr
-	_ = objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// PaymentRequestShippingContactUpdateable is the interface implemented by [PaymentRequestShippingContactUpdate], for mocking and DI.
-type PaymentRequestShippingContactUpdateable interface {
-	obj.Object
-	WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingContactUpdate
-	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingContactUpdate
-	WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingContactUpdate
-	WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingContactUpdate
-	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate
-	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate
-	Errors() []obj.Object
-	SetErrors() error
-}
-
-var _ PaymentRequestShippingContactUpdateable = (*PaymentRequestShippingContactUpdate)(nil)
 
 var _ PaymentRequestUpdateProvider = (*PaymentRequestShippingContactUpdate)(nil)

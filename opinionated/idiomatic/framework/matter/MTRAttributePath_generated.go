@@ -51,17 +51,9 @@ func NewMTRAttributePath() *MTRAttributePath {
 }
 
 // Attribute wraps the corresponding Objective-C method.
-func (x *MTRAttributePath) Attribute() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+func (map_ *MTRAttributePath) Attribute() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(map_), objc.RegisterName("attribute"))
 	return obj.Wrap(_r)
 }
-
-// MTRAttributePathable is the interface implemented by [MTRAttributePath], for mocking and DI.
-type MTRAttributePathable interface {
-	obj.Object
-	Attribute() obj.Object
-}
-
-var _ MTRAttributePathable = (*MTRAttributePath)(nil)
 
 var _ MTRClusterPathProvider = (*MTRAttributePath)(nil)

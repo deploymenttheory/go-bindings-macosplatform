@@ -7,7 +7,6 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,82 +51,55 @@ func NewLeaderboardViewController() *LeaderboardViewController {
 	return leaderboardViewControllerAdopt(_id)
 }
 
-// WithTimeScope a time filter used to restrict which scores are displayed to the player.
-func (x *LeaderboardViewController) WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
-	return x
+// WithTimeScope sets a time filter used to restrict which scores are displayed to the player.
+func (lvc *LeaderboardViewController) WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setTimeScope:"), timeScope)
+	return lvc
 }
 
-// WithCategory the named leaderboard that is displayed by the view controller.
-func (x *LeaderboardViewController) WithCategory(category string) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-	return x
+// WithCategory sets the named leaderboard that is displayed by the view controller.
+func (lvc *LeaderboardViewController) WithCategory(category string) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setCategory:"), purego.NSString(category))
+	return lvc
 }
 
 // WithViewState sets the property and returns the receiver so calls can be chained.
-func (x *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
-	return x
+func (lvc *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setViewState:"), viewState)
+	return lvc
 }
 
 // WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
-func (x *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
-	return x
+func (lvc *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
+	return lvc
 }
 
 // WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *LeaderboardViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
-	return x
+func (lvc *LeaderboardViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
+	return lvc
 }
 
 // WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
-func (x *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
-	return x
+func (lvc *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
+	return lvc
 }
 
 // TimeScope wraps the corresponding Objective-C method.
-func (x *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
-	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(x), objc.RegisterName("timeScope"))
+func (lvc *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
+	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(lvc), objc.RegisterName("timeScope"))
 	return _r
 }
 
-// SetTimeScope wraps the corresponding Objective-C method.
-func (x *LeaderboardViewController) SetTimeScope(timeScope LeaderboardTimeScope) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
-}
-
 // Category wraps the corresponding Objective-C method.
-func (x *LeaderboardViewController) Category() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+func (lvc *LeaderboardViewController) Category() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetCategory wraps the corresponding Objective-C method.
-func (x *LeaderboardViewController) SetCategory(category string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-}
-
-// LeaderboardViewControllerable is the interface implemented by [LeaderboardViewController], for mocking and DI.
-type LeaderboardViewControllerable interface {
-	obj.Object
-	WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController
-	WithCategory(category string) *LeaderboardViewController
-	WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController
-	WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController
-	WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController
-	TimeScope() LeaderboardTimeScope
-	SetTimeScope(timeScope LeaderboardTimeScope)
-	Category() string
-	SetCategory(category string)
-}
-
-var _ LeaderboardViewControllerable = (*LeaderboardViewController)(nil)
 
 var _ GameCenterViewControllerProvider = (*LeaderboardViewController)(nil)

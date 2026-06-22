@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNDArrayStridedSliceGradient() *NDArrayStridedSliceGradient {
 	return nDArrayStridedSliceGradientAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayStridedSliceGradient) WithLabel(label string) *NDArrayStridedSliceGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nassg *NDArrayStridedSliceGradient) WithLabel(label string) *NDArrayStridedSliceGradient {
+	objc.Send[objc.ID](objref.IDOf(nassg), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nassg
 }
-
-// NDArrayStridedSliceGradientable is the interface implemented by [NDArrayStridedSliceGradient], for mocking and DI.
-type NDArrayStridedSliceGradientable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayStridedSliceGradient
-}
-
-var _ NDArrayStridedSliceGradientable = (*NDArrayStridedSliceGradient)(nil)
 
 var _ NDArrayUnaryGradientKernelProvider = (*NDArrayStridedSliceGradient)(nil)
 

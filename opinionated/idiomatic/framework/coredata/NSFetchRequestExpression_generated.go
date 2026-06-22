@@ -46,24 +46,24 @@ func fetchRequestExpressionAdopt(id objc.ID) *FetchRequestExpression {
 }
 
 // Description returns the object's -description text.
-func (x *FetchRequestExpression) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fre *FetchRequestExpression) Description() string {
+	return rt.Description(objref.IDOf(fre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchRequestExpression) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fre *FetchRequestExpression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchRequestExpression) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fre *FetchRequestExpression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FetchRequestExpression) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fre *FetchRequestExpression) String() string {
+	return rt.Description(objref.IDOf(fre))
 }
 
 // NewFetchRequestExpression creates a new FetchRequestExpression.
@@ -73,29 +73,19 @@ func NewFetchRequestExpression() *FetchRequestExpression {
 }
 
 // RequestExpression wraps the corresponding Objective-C method.
-func (x *FetchRequestExpression) RequestExpression() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestExpression"))
+func (fre *FetchRequestExpression) RequestExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fre), objc.RegisterName("requestExpression"))
 	return obj.Wrap(_r)
 }
 
 // ContextExpression wraps the corresponding Objective-C method.
-func (x *FetchRequestExpression) ContextExpression() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextExpression"))
+func (fre *FetchRequestExpression) ContextExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fre), objc.RegisterName("contextExpression"))
 	return obj.Wrap(_r)
 }
 
 // IsCountOnlyRequest wraps the corresponding Objective-C method.
-func (x *FetchRequestExpression) IsCountOnlyRequest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCountOnlyRequest"))
+func (fre *FetchRequestExpression) IsCountOnlyRequest() bool {
+	_r := objc.Send[bool](objref.IDOf(fre), objc.RegisterName("isCountOnlyRequest"))
 	return _r
 }
-
-// FetchRequestExpressionable is the interface implemented by [FetchRequestExpression], for mocking and DI.
-type FetchRequestExpressionable interface {
-	obj.Object
-	RequestExpression() obj.Object
-	ContextExpression() obj.Object
-	IsCountOnlyRequest() bool
-}
-
-var _ FetchRequestExpressionable = (*FetchRequestExpression)(nil)

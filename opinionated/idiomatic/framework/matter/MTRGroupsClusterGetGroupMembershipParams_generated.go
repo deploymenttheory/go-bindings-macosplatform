@@ -44,24 +44,24 @@ func mTRGroupsClusterGetGroupMembershipParamsAdopt(id objc.ID) *MTRGroupsCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRGroupsClusterGetGroupMembershipParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) Description() string {
+	return rt.Description(objref.IDOf(mgcggmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGroupsClusterGetGroupMembershipParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgcggmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGroupsClusterGetGroupMembershipParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgcggmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGroupsClusterGetGroupMembershipParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) String() string {
+	return rt.Description(objref.IDOf(mgcggmp))
 }
 
 // NewMTRGroupsClusterGetGroupMembershipParams creates a new MTRGroupsClusterGetGroupMembershipParams.
@@ -70,62 +70,37 @@ func NewMTRGroupsClusterGetGroupMembershipParams() *MTRGroupsClusterGetGroupMemb
 	return mTRGroupsClusterGetGroupMembershipParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGroupsClusterGetGroupMembershipParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterGetGroupMembershipParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterGetGroupMembershipParams {
+	objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mgcggmp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGroupsClusterGetGroupMembershipParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupsClusterGetGroupMembershipParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupsClusterGetGroupMembershipParams {
+	objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mgcggmp
 }
 
 // GroupList wraps the corresponding Objective-C method.
-func (x *MTRGroupsClusterGetGroupMembershipParams) GroupList() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupList"))
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) GroupList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("groupList"))
 	return obj.Wrap(_r)
 }
 
 // SetGroupList wraps the corresponding Objective-C method.
-func (x *MTRGroupsClusterGetGroupMembershipParams) SetGroupList(groupList obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupList:"), objref.IDOf(groupList))
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) SetGroupList(groupList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("setGroupList:"), objref.IDOf(groupList))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRGroupsClusterGetGroupMembershipParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRGroupsClusterGetGroupMembershipParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRGroupsClusterGetGroupMembershipParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRGroupsClusterGetGroupMembershipParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRGroupsClusterGetGroupMembershipParamsable is the interface implemented by [MTRGroupsClusterGetGroupMembershipParams], for mocking and DI.
-type MTRGroupsClusterGetGroupMembershipParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterGetGroupMembershipParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupsClusterGetGroupMembershipParams
-	GroupList() obj.Object
-	SetGroupList(groupList obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRGroupsClusterGetGroupMembershipParamsable = (*MTRGroupsClusterGetGroupMembershipParams)(nil)

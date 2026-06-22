@@ -46,24 +46,24 @@ func logEnumeratorAdopt(id objc.ID) *LogEnumerator {
 }
 
 // Description returns the object's -description text.
-func (x *LogEnumerator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (le *LogEnumerator) Description() string {
+	return rt.Description(objref.IDOf(le))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogEnumerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (le *LogEnumerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(le), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogEnumerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (le *LogEnumerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(le), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LogEnumerator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (le *LogEnumerator) String() string {
+	return rt.Description(objref.IDOf(le))
 }
 
 // NewLogEnumerator creates a new LogEnumerator.
@@ -71,10 +71,3 @@ func NewLogEnumerator() *LogEnumerator {
 	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEnumerator")), objc.RegisterName("new"))
 	return logEnumeratorAdopt(_id)
 }
-
-// LogEnumeratorable is the interface implemented by [LogEnumerator], for mocking and DI.
-type LogEnumeratorable interface {
-	obj.Object
-}
-
-var _ LogEnumeratorable = (*LogEnumerator)(nil)

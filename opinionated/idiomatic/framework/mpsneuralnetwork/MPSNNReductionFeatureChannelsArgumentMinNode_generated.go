@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionFeatureChannelsArgumentMinNode() *NNReductionFeatureChannelsA
 	return nNReductionFeatureChannelsArgumentMinNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionFeatureChannelsArgumentMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrfcamn *NNReductionFeatureChannelsArgumentMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcamn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrfcamn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionFeatureChannelsArgumentMinNode) WithLabel(label string) *NNReductionFeatureChannelsArgumentMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrfcamn *NNReductionFeatureChannelsArgumentMinNode) WithLabel(label string) *NNReductionFeatureChannelsArgumentMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcamn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrfcamn
 }
-
-// NNReductionFeatureChannelsArgumentMinNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMinNode], for mocking and DI.
-type NNReductionFeatureChannelsArgumentMinNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMinNode
-	WithLabel(label string) *NNReductionFeatureChannelsArgumentMinNode
-}
-
-var _ NNReductionFeatureChannelsArgumentMinNodeable = (*NNReductionFeatureChannelsArgumentMinNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsArgumentMinNode)(nil)
 

@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +50,16 @@ func NewNDArrayGatherGradientState() *NDArrayGatherGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *NDArrayGatherGradientState) WithReadCount(readCount int) *NDArrayGatherGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (naggs *NDArrayGatherGradientState) WithReadCount(readCount int) *NDArrayGatherGradientState {
+	objc.Send[objc.ID](objref.IDOf(naggs), objc.RegisterName("setReadCount:"), readCount)
+	return naggs
 }
 
-// WithLabel a string to help identify this object.
-func (x *NDArrayGatherGradientState) WithLabel(label string) *NDArrayGatherGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (naggs *NDArrayGatherGradientState) WithLabel(label string) *NDArrayGatherGradientState {
+	objc.Send[objc.ID](objref.IDOf(naggs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return naggs
 }
-
-// NDArrayGatherGradientStateable is the interface implemented by [NDArrayGatherGradientState], for mocking and DI.
-type NDArrayGatherGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *NDArrayGatherGradientState
-	WithLabel(label string) *NDArrayGatherGradientState
-}
-
-var _ NDArrayGatherGradientStateable = (*NDArrayGatherGradientState)(nil)
 
 var _ NDArrayGradientStateProvider = (*NDArrayGatherGradientState)(nil)
 

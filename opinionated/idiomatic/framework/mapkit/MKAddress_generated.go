@@ -46,24 +46,24 @@ func addressAdopt(id objc.ID) *Address {
 }
 
 // Description returns the object's -description text.
-func (x *Address) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Address) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Address) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Address) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Address) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Address) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Address) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Address) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAddressWithFullAddressShortAddress initializes a new address with a location’s full address using a string and a short address that provides an abbreviated form of the address such as a street address.
@@ -74,8 +74,8 @@ func NewAddressWithFullAddressShortAddress(fullAddress string, shortAddress stri
 }
 
 // FullAddress wraps the corresponding Objective-C method.
-func (x *Address) FullAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullAddress"))
+func (a *Address) FullAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fullAddress"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,19 +83,10 @@ func (x *Address) FullAddress() string {
 }
 
 // ShortAddress wraps the corresponding Objective-C method.
-func (x *Address) ShortAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortAddress"))
+func (a *Address) ShortAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("shortAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Addressable is the interface implemented by [Address], for mocking and DI.
-type Addressable interface {
-	obj.Object
-	FullAddress() string
-	ShortAddress() string
-}
-
-var _ Addressable = (*Address)(nil)

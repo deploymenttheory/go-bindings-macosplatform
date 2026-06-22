@@ -46,24 +46,24 @@ func previewReplyAttachmentAdopt(id objc.ID) *PreviewReplyAttachment {
 }
 
 // Description returns the object's -description text.
-func (x *PreviewReplyAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pra *PreviewReplyAttachment) Description() string {
+	return rt.Description(objref.IDOf(pra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PreviewReplyAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pra *PreviewReplyAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PreviewReplyAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pra *PreviewReplyAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PreviewReplyAttachment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pra *PreviewReplyAttachment) String() string {
+	return rt.Description(objref.IDOf(pra))
 }
 
 // NewPreviewReplyAttachmentWithDataContentType creates a preview reply attachment with the specified type.
@@ -73,23 +73,14 @@ func NewPreviewReplyAttachmentWithDataContentType(data obj.Object, contentType o
 	return previewReplyAttachmentAdopt(_id)
 }
 
-// Data the data content of an html preview
-func (x *PreviewReplyAttachment) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data content of an html preview
+func (pra *PreviewReplyAttachment) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pra), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// ContentType the content type of the attachment for an html preview
-func (x *PreviewReplyAttachment) ContentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+// ContentType returns the content type of the attachment for an html preview
+func (pra *PreviewReplyAttachment) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pra), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
-
-// PreviewReplyAttachmentable is the interface implemented by [PreviewReplyAttachment], for mocking and DI.
-type PreviewReplyAttachmentable interface {
-	obj.Object
-	Data() obj.Object
-	ContentType() obj.Object
-}
-
-var _ PreviewReplyAttachmentable = (*PreviewReplyAttachment)(nil)

@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewMetricPlayerItemSeekEvent() *MetricPlayerItemSeekEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemSeekEvent")), objc.RegisterName("new"))
 	return metricPlayerItemSeekEventAdopt(_id)
 }
-
-// MetricPlayerItemSeekEventable is the interface implemented by [MetricPlayerItemSeekEvent], for mocking and DI.
-type MetricPlayerItemSeekEventable interface {
-	obj.Object
-}
-
-var _ MetricPlayerItemSeekEventable = (*MetricPlayerItemSeekEvent)(nil)
 
 var _ MetricPlayerItemRateChangeEventProvider = (*MetricPlayerItemSeekEvent)(nil)
 

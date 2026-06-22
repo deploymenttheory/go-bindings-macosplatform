@@ -46,24 +46,24 @@ func flightAdopt(id objc.ID) *Flight {
 }
 
 // Description returns the object's -description text.
-func (x *Flight) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Flight) Description() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Flight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (f *Flight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Flight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (f *Flight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Flight) String() string {
-	return rt.Description(objref.IDOf(x))
+func (f *Flight) String() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportGateArrivalAirportGate creates a new object containing information about a flight.
@@ -74,14 +74,14 @@ func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportG
 }
 
 // Airline wraps the corresponding Objective-C method.
-func (x *Flight) Airline() *Airline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airline"))
+func (f *Flight) Airline() *Airline {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("airline"))
 	return AirlineFromID(_r)
 }
 
 // FlightNumber wraps the corresponding Objective-C method.
-func (x *Flight) FlightNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightNumber"))
+func (f *Flight) FlightNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("flightNumber"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,38 +89,25 @@ func (x *Flight) FlightNumber() string {
 }
 
 // BoardingTime wraps the corresponding Objective-C method.
-func (x *Flight) BoardingTime() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boardingTime"))
+func (f *Flight) BoardingTime() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("boardingTime"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // FlightDuration wraps the corresponding Objective-C method.
-func (x *Flight) FlightDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightDuration"))
+func (f *Flight) FlightDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("flightDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureAirportGate wraps the corresponding Objective-C method.
-func (x *Flight) DepartureAirportGate() *AirportGate {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureAirportGate"))
+func (f *Flight) DepartureAirportGate() *AirportGate {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("departureAirportGate"))
 	return AirportGateFromID(_r)
 }
 
 // ArrivalAirportGate wraps the corresponding Objective-C method.
-func (x *Flight) ArrivalAirportGate() *AirportGate {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalAirportGate"))
+func (f *Flight) ArrivalAirportGate() *AirportGate {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("arrivalAirportGate"))
 	return AirportGateFromID(_r)
 }
-
-// Flightable is the interface implemented by [Flight], for mocking and DI.
-type Flightable interface {
-	obj.Object
-	Airline() *Airline
-	FlightNumber() string
-	BoardingTime() *DateComponentsRange
-	FlightDuration() *DateComponentsRange
-	DepartureAirportGate() *AirportGate
-	ArrivalAirportGate() *AirportGate
-}
-
-var _ Flightable = (*Flight)(nil)

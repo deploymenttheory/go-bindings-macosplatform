@@ -44,24 +44,24 @@ func mTRDistinguishedNameInfoAdopt(id objc.ID) *MTRDistinguishedNameInfo {
 }
 
 // Description returns the object's -description text.
-func (x *MTRDistinguishedNameInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdni *MTRDistinguishedNameInfo) Description() string {
+	return rt.Description(objref.IDOf(mdni))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDistinguishedNameInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdni *MTRDistinguishedNameInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdni), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDistinguishedNameInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdni *MTRDistinguishedNameInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdni), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDistinguishedNameInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdni *MTRDistinguishedNameInfo) String() string {
+	return rt.Description(objref.IDOf(mdni))
 }
 
 // NewMTRDistinguishedNameInfo creates a new MTRDistinguishedNameInfo.
@@ -70,44 +70,32 @@ func NewMTRDistinguishedNameInfo() *MTRDistinguishedNameInfo {
 	return mTRDistinguishedNameInfoAdopt(_id)
 }
 
-// NodeID the Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
-func (x *MTRDistinguishedNameInfo) NodeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+// NodeID returns the Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
+func (mdni *MTRDistinguishedNameInfo) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("nodeID"))
 	return obj.Wrap(_r)
 }
 
-// FabricID the Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
-func (x *MTRDistinguishedNameInfo) FabricID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
+// FabricID returns the Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
+func (mdni *MTRDistinguishedNameInfo) FabricID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("fabricID"))
 	return obj.Wrap(_r)
 }
 
-// RootCACertificateID the `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
-func (x *MTRDistinguishedNameInfo) RootCACertificateID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCACertificateID"))
+// RootCACertificateID returns the `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
+func (mdni *MTRDistinguishedNameInfo) RootCACertificateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("rootCACertificateID"))
 	return obj.Wrap(_r)
 }
 
-// IntermediateCACertificateID the `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
-func (x *MTRDistinguishedNameInfo) IntermediateCACertificateID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCACertificateID"))
+// IntermediateCACertificateID returns the `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
+func (mdni *MTRDistinguishedNameInfo) IntermediateCACertificateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("intermediateCACertificateID"))
 	return obj.Wrap(_r)
 }
 
-// CaseAuthenticatedTags the set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
-func (x *MTRDistinguishedNameInfo) CaseAuthenticatedTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseAuthenticatedTags"))
+// CaseAuthenticatedTags returns the set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
+func (mdni *MTRDistinguishedNameInfo) CaseAuthenticatedTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdni), objc.RegisterName("caseAuthenticatedTags"))
 	return obj.Wrap(_r)
 }
-
-// MTRDistinguishedNameInfoable is the interface implemented by [MTRDistinguishedNameInfo], for mocking and DI.
-type MTRDistinguishedNameInfoable interface {
-	obj.Object
-	NodeID() obj.Object
-	FabricID() obj.Object
-	RootCACertificateID() obj.Object
-	IntermediateCACertificateID() obj.Object
-	CaseAuthenticatedTags() obj.Object
-}
-
-var _ MTRDistinguishedNameInfoable = (*MTRDistinguishedNameInfo)(nil)

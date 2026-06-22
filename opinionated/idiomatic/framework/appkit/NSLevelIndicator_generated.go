@@ -54,854 +54,645 @@ func NewLevelIndicator() *LevelIndicator {
 	return levelIndicatorAdopt(_id)
 }
 
-// WithLevelIndicatorStyle the appearance of the indicator.
-func (x *LevelIndicator) WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
-	return x
+// WithLevelIndicatorStyle sets the appearance of the indicator.
+func (li *LevelIndicator) WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
+	return li
 }
 
 // WithEditable sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithEditable(editable bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+func (li *LevelIndicator) WithEditable(editable bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setEditable:"), editable)
+	return li
 }
 
-// WithMinValue the receiver’s minimum value.
-func (x *LevelIndicator) WithMinValue(minValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
-	return x
+// WithMinValue sets the receiver’s minimum value.
+func (li *LevelIndicator) WithMinValue(minValue float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMinValue:"), minValue)
+	return li
 }
 
-// WithMaxValue the receiver’s maximum value.
-func (x *LevelIndicator) WithMaxValue(maxValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
-	return x
+// WithMaxValue sets the receiver’s maximum value.
+func (li *LevelIndicator) WithMaxValue(maxValue float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMaxValue:"), maxValue)
+	return li
 }
 
-// WithWarningValue the receiver’s warning value.
-func (x *LevelIndicator) WithWarningValue(warningValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWarningValue:"), warningValue)
-	return x
+// WithWarningValue sets the receiver’s warning value.
+func (li *LevelIndicator) WithWarningValue(warningValue float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningValue:"), warningValue)
+	return li
 }
 
-// WithCriticalValue the receiver’s critical value.
-func (x *LevelIndicator) WithCriticalValue(criticalValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriticalValue:"), criticalValue)
-	return x
+// WithCriticalValue sets the receiver’s critical value.
+func (li *LevelIndicator) WithCriticalValue(criticalValue float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalValue:"), criticalValue)
+	return li
 }
 
-// WithTickMarkPosition determines how the receiver’s tick marks are aligned with it.
-func (x *LevelIndicator) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
-	return x
+// WithTickMarkPosition sets determines how the receiver’s tick marks are aligned with it.
+func (li *LevelIndicator) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	return li
 }
 
-// WithNumberOfTickMarks the number of tick marks associated with the receiver.
-func (x *LevelIndicator) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
-	return x
+// WithNumberOfTickMarks sets the number of tick marks associated with the receiver.
+func (li *LevelIndicator) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	return li
 }
 
-// WithNumberOfMajorTickMarks the number of major tick marks associated with the receiver.
-func (x *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
-	return x
+// WithNumberOfMajorTickMarks sets the number of major tick marks associated with the receiver.
+func (li *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
+	return li
 }
 
-// WithFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing the “normal” state, and by the rating indicator when drawing stars.
-func (x *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing the “normal” state, and by the rating indicator when drawing stars.
+func (li *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return li
 }
 
-// WithWarningFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “warning” threshold.
-func (x *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWarningFillColor:"), objref.IDOf(warningFillColor))
-	return x
+// WithWarningFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “warning” threshold.
+func (li *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWarningFillColor:"), objref.IDOf(warningFillColor))
+	return li
 }
 
-// WithCriticalFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “critical” threshold.
-func (x *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriticalFillColor:"), objref.IDOf(criticalFillColor))
-	return x
+// WithCriticalFillColor sets sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “critical” threshold.
+func (li *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCriticalFillColor:"), objref.IDOf(criticalFillColor))
+	return li
 }
 
 // WithDrawsTieredCapacityLevels sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsTieredCapacityLevels:"), drawsTieredCapacityLevels)
-	return x
+func (li *LevelIndicator) WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDrawsTieredCapacityLevels:"), drawsTieredCapacityLevels)
+	return li
 }
 
-// WithPlaceholderVisibility for a rating-style indicator, sets the conditions under which rating placeholders are displayed.
-func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility LevelIndicatorPlaceholderVisibility) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderVisibility:"), placeholderVisibility)
-	return x
+// WithPlaceholderVisibility sets for a rating-style indicator, sets the conditions under which rating placeholders are displayed.
+func (li *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility LevelIndicatorPlaceholderVisibility) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPlaceholderVisibility:"), placeholderVisibility)
+	return li
 }
 
-// WithRatingImage sets the image used by the rating indicator style in place of the default star image.
-func (x *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatingImage:"), objref.IDOf(ratingImage))
-	return x
+// WithRatingImage sets sets the image used by the rating indicator style in place of the default star image.
+func (li *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingImage:"), objref.IDOf(ratingImage))
+	return li
 }
 
-// WithRatingPlaceholderImage sets the image used by the rating indicator style in place of the default faded placeholder image.
-func (x *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatingPlaceholderImage:"), objref.IDOf(ratingPlaceholderImage))
-	return x
+// WithRatingPlaceholderImage sets sets the image used by the rating indicator style in place of the default faded placeholder image.
+func (li *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRatingPlaceholderImage:"), objref.IDOf(ratingPlaceholderImage))
+	return li
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *LevelIndicator) WithTarget(target obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (li *LevelIndicator) WithTarget(target obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return li
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *LevelIndicator) WithTag(tag int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (li *LevelIndicator) WithTag(tag int) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTag:"), tag)
+	return li
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *LevelIndicator) WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (li *LevelIndicator) WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return li
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *LevelIndicator) WithContinuous(continuous bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (li *LevelIndicator) WithContinuous(continuous bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setContinuous:"), continuous)
+	return li
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *LevelIndicator) WithEnabled(enabled bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (li *LevelIndicator) WithEnabled(enabled bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setEnabled:"), enabled)
+	return li
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *LevelIndicator) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (li *LevelIndicator) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return li
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *LevelIndicator) WithHighlighted(highlighted bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (li *LevelIndicator) WithHighlighted(highlighted bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHighlighted:"), highlighted)
+	return li
 }
 
-// WithControlSize the size of the control.
-func (x *LevelIndicator) WithControlSize(controlSize ControlSize) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (li *LevelIndicator) WithControlSize(controlSize ControlSize) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setControlSize:"), controlSize)
+	return li
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *LevelIndicator) WithFormatter(formatter obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (li *LevelIndicator) WithFormatter(formatter obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return li
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *LevelIndicator) WithObjectValue(objectValue obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (li *LevelIndicator) WithObjectValue(objectValue obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return li
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *LevelIndicator) WithStringValue(stringValue string) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (li *LevelIndicator) WithStringValue(stringValue string) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return li
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *LevelIndicator) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (li *LevelIndicator) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return li
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *LevelIndicator) WithIntValue(intValue int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (li *LevelIndicator) WithIntValue(intValue int) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIntValue:"), intValue)
+	return li
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *LevelIndicator) WithIntegerValue(integerValue int) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (li *LevelIndicator) WithIntegerValue(integerValue int) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setIntegerValue:"), integerValue)
+	return li
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *LevelIndicator) WithFloatValue(floatValue float32) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (li *LevelIndicator) WithFloatValue(floatValue float32) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFloatValue:"), floatValue)
+	return li
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (li *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return li
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *LevelIndicator) WithFont(font *Font) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (li *LevelIndicator) WithFont(font *Font) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return li
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *LevelIndicator) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (li *LevelIndicator) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return li
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *LevelIndicator) WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (li *LevelIndicator) WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return li
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *LevelIndicator) WithAlignment(alignment TextAlignment) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (li *LevelIndicator) WithAlignment(alignment TextAlignment) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAlignment:"), alignment)
+	return li
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *LevelIndicator) WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (li *LevelIndicator) WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return li
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *LevelIndicator) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (li *LevelIndicator) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return li
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithCell(cell CellProvider) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (li *LevelIndicator) WithCell(cell CellProvider) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return li
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithSubviews(items ...ViewProvider) *LevelIndicator {
+func (li *LevelIndicator) WithSubviews(items ...ViewProvider) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setSubviews:"), _arr)
+	return li
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithHidden(hidden bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (li *LevelIndicator) WithHidden(hidden bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHidden:"), hidden)
+	return li
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (li *LevelIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return li
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (li *LevelIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return li
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (li *LevelIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return li
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *LevelIndicator) WithFrame(frame corefoundation.CGRect) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (li *LevelIndicator) WithFrame(frame corefoundation.CGRect) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrame:"), frame)
+	return li
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithFrameRotation(frameRotation float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (li *LevelIndicator) WithFrameRotation(frameRotation float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return li
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (li *LevelIndicator) WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return li
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithBoundsRotation(boundsRotation float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (li *LevelIndicator) WithBoundsRotation(boundsRotation float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return li
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *LevelIndicator) WithBounds(bounds corefoundation.CGRect) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (li *LevelIndicator) WithBounds(bounds corefoundation.CGRect) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBounds:"), bounds)
+	return li
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (li *LevelIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return li
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *LevelIndicator) WithNeedsDisplay(needsDisplay bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (li *LevelIndicator) WithNeedsDisplay(needsDisplay bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return li
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (li *LevelIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return li
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (li *LevelIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return li
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (li *LevelIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return li
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (li *LevelIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return li
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithWantsLayer(wantsLayer bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (li *LevelIndicator) WithWantsLayer(wantsLayer bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return li
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithLayer(layer obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (li *LevelIndicator) WithLayer(layer obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return li
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (li *LevelIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return li
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithNeedsLayout(needsLayout bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (li *LevelIndicator) WithNeedsLayout(needsLayout bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return li
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithAlphaValue(alphaValue float64) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (li *LevelIndicator) WithAlphaValue(alphaValue float64) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return li
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (li *LevelIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return li
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithBackgroundFilters(items ...obj.Object) *LevelIndicator {
+func (li *LevelIndicator) WithBackgroundFilters(items ...obj.Object) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return li
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithCompositingFilter(compositingFilter obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (li *LevelIndicator) WithCompositingFilter(compositingFilter obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return li
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithContentFilters(items ...obj.Object) *LevelIndicator {
+func (li *LevelIndicator) WithContentFilters(items ...obj.Object) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setContentFilters:"), _arr)
+	return li
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithShadow(shadow *Shadow) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (li *LevelIndicator) WithShadow(shadow *Shadow) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return li
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithClipsToBounds(clipsToBounds bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (li *LevelIndicator) WithClipsToBounds(clipsToBounds bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return li
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (li *LevelIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return li
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithToolTip(toolTip string) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (li *LevelIndicator) WithToolTip(toolTip string) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return li
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (li *LevelIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return li
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (li *LevelIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return li
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (li *LevelIndicator) WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return li
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithFocusRingType(focusRingType FocusRingType) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (li *LevelIndicator) WithFocusRingType(focusRingType FocusRingType) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return li
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator {
+func (li *LevelIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return li
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (li *LevelIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return li
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (li *LevelIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return li
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (li *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return li
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (li *LevelIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return li
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (li *LevelIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return li
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (li *LevelIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return li
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (li *LevelIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return li
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (li *LevelIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return li
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (li *LevelIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return li
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (li *LevelIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return li
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *LevelIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (li *LevelIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return li
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (li *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return li
 }
 
-// WithMenu returns the responder’s menu.
-func (x *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (li *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return li
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *LevelIndicator) WithUserActivity(userActivity obj.Object) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (li *LevelIndicator) WithUserActivity(userActivity obj.Object) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return li
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (li *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
+	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return li
 }
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at the specified index (the minimum-value tick mark has an index of 0).
-func (x *LevelIndicator) TickMarkValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tickMarkValueAtIndex:"), index)
+func (li *LevelIndicator) TickMarkValueAtIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("tickMarkValueAtIndex:"), index)
 	return _r
 }
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark identified by the specified index (the minimum-value tick mark is at index 0).
-func (x *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+func (li *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(li), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
 	return _r
 }
 
 // LevelIndicatorStyle wraps the corresponding Objective-C method.
-func (x *LevelIndicator) LevelIndicatorStyle() LevelIndicatorStyle {
-	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(x), objc.RegisterName("levelIndicatorStyle"))
+func (li *LevelIndicator) LevelIndicatorStyle() LevelIndicatorStyle {
+	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(li), objc.RegisterName("levelIndicatorStyle"))
 	return _r
-}
-
-// SetLevelIndicatorStyle wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
 }
 
 // IsEditable wraps the corresponding Objective-C method.
-func (x *LevelIndicator) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+func (li *LevelIndicator) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(li), objc.RegisterName("isEditable"))
 	return _r
-}
-
-// SetEditable wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetEditable(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
 // MinValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+func (li *LevelIndicator) MinValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("minValue"))
 	return _r
-}
-
-// SetMinValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetMinValue(minValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
 // MaxValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+func (li *LevelIndicator) MaxValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("maxValue"))
 	return _r
-}
-
-// SetMaxValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetMaxValue(maxValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
 // WarningValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) WarningValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("warningValue"))
+func (li *LevelIndicator) WarningValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("warningValue"))
 	return _r
-}
-
-// SetWarningValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetWarningValue(warningValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWarningValue:"), warningValue)
 }
 
 // CriticalValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) CriticalValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("criticalValue"))
+func (li *LevelIndicator) CriticalValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("criticalValue"))
 	return _r
-}
-
-// SetCriticalValue wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetCriticalValue(criticalValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriticalValue:"), criticalValue)
 }
 
 // TickMarkPosition wraps the corresponding Objective-C method.
-func (x *LevelIndicator) TickMarkPosition() TickMarkPosition {
-	_r := objc.Send[TickMarkPosition](objref.IDOf(x), objc.RegisterName("tickMarkPosition"))
+func (li *LevelIndicator) TickMarkPosition() TickMarkPosition {
+	_r := objc.Send[TickMarkPosition](objref.IDOf(li), objc.RegisterName("tickMarkPosition"))
 	return _r
-}
-
-// SetTickMarkPosition wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetTickMarkPosition(tickMarkPosition TickMarkPosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
 }
 
 // NumberOfTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicator) NumberOfTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTickMarks"))
+func (li *LevelIndicator) NumberOfTickMarks() int {
+	_r := objc.Send[int](objref.IDOf(li), objc.RegisterName("numberOfTickMarks"))
 	return _r
-}
-
-// SetNumberOfTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetNumberOfTickMarks(numberOfTickMarks int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
 }
 
 // NumberOfMajorTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicator) NumberOfMajorTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfMajorTickMarks"))
+func (li *LevelIndicator) NumberOfMajorTickMarks() int {
+	_r := objc.Send[int](objref.IDOf(li), objc.RegisterName("numberOfMajorTickMarks"))
 	return _r
-}
-
-// SetNumberOfMajorTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
 }
 
 // FillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
-func (x *LevelIndicator) FillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+func (li *LevelIndicator) FillColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("fillColor"))
 	return ColorFromID(_r)
-}
-
-// SetFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
-func (x *LevelIndicator) SetFillColor(fillColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
 // WarningFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
-func (x *LevelIndicator) WarningFillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("warningFillColor"))
+func (li *LevelIndicator) WarningFillColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("warningFillColor"))
 	return ColorFromID(_r)
-}
-
-// SetWarningFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
-func (x *LevelIndicator) SetWarningFillColor(warningFillColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWarningFillColor:"), objref.IDOf(warningFillColor))
 }
 
 // CriticalFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
-func (x *LevelIndicator) CriticalFillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("criticalFillColor"))
+func (li *LevelIndicator) CriticalFillColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("criticalFillColor"))
 	return ColorFromID(_r)
 }
 
-// SetCriticalFillColor sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
-func (x *LevelIndicator) SetCriticalFillColor(criticalFillColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriticalFillColor:"), objref.IDOf(criticalFillColor))
-}
-
 // DrawsTieredCapacityLevels wraps the corresponding Objective-C method.
-func (x *LevelIndicator) DrawsTieredCapacityLevels() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsTieredCapacityLevels"))
+func (li *LevelIndicator) DrawsTieredCapacityLevels() bool {
+	_r := objc.Send[bool](objref.IDOf(li), objc.RegisterName("drawsTieredCapacityLevels"))
 	return _r
 }
 
-// SetDrawsTieredCapacityLevels wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsTieredCapacityLevels:"), drawsTieredCapacityLevels)
-}
-
-// PlaceholderVisibility for a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
-func (x *LevelIndicator) PlaceholderVisibility() LevelIndicatorPlaceholderVisibility {
-	_r := objc.Send[LevelIndicatorPlaceholderVisibility](objref.IDOf(x), objc.RegisterName("placeholderVisibility"))
+// PlaceholderVisibility returns for a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
+func (li *LevelIndicator) PlaceholderVisibility() LevelIndicatorPlaceholderVisibility {
+	_r := objc.Send[LevelIndicatorPlaceholderVisibility](objref.IDOf(li), objc.RegisterName("placeholderVisibility"))
 	return _r
-}
-
-// SetPlaceholderVisibility for a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
-func (x *LevelIndicator) SetPlaceholderVisibility(placeholderVisibility LevelIndicatorPlaceholderVisibility) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderVisibility:"), placeholderVisibility)
 }
 
 // RatingImage sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
-func (x *LevelIndicator) RatingImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ratingImage"))
+func (li *LevelIndicator) RatingImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("ratingImage"))
 	return ImageFromID(_r)
-}
-
-// SetRatingImage sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
-func (x *LevelIndicator) SetRatingImage(ratingImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatingImage:"), objref.IDOf(ratingImage))
 }
 
 // RatingPlaceholderImage wraps the corresponding Objective-C method.
-func (x *LevelIndicator) RatingPlaceholderImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ratingPlaceholderImage"))
+func (li *LevelIndicator) RatingPlaceholderImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("ratingPlaceholderImage"))
 	return ImageFromID(_r)
 }
-
-// SetRatingPlaceholderImage wraps the corresponding Objective-C method.
-func (x *LevelIndicator) SetRatingPlaceholderImage(ratingPlaceholderImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRatingPlaceholderImage:"), objref.IDOf(ratingPlaceholderImage))
-}
-
-// LevelIndicatorable is the interface implemented by [LevelIndicator], for mocking and DI.
-type LevelIndicatorable interface {
-	obj.Object
-	WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicator
-	WithEditable(editable bool) *LevelIndicator
-	WithMinValue(minValue float64) *LevelIndicator
-	WithMaxValue(maxValue float64) *LevelIndicator
-	WithWarningValue(warningValue float64) *LevelIndicator
-	WithCriticalValue(criticalValue float64) *LevelIndicator
-	WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicator
-	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator
-	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator
-	WithFillColor(fillColor *Color) *LevelIndicator
-	WithWarningFillColor(warningFillColor *Color) *LevelIndicator
-	WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator
-	WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) *LevelIndicator
-	WithPlaceholderVisibility(placeholderVisibility LevelIndicatorPlaceholderVisibility) *LevelIndicator
-	WithRatingImage(ratingImage *Image) *LevelIndicator
-	WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator
-	WithTarget(target obj.Object) *LevelIndicator
-	WithTag(tag int) *LevelIndicator
-	WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator
-	WithContinuous(continuous bool) *LevelIndicator
-	WithEnabled(enabled bool) *LevelIndicator
-	WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator
-	WithHighlighted(highlighted bool) *LevelIndicator
-	WithControlSize(controlSize ControlSize) *LevelIndicator
-	WithFormatter(formatter obj.Object) *LevelIndicator
-	WithObjectValue(objectValue obj.Object) *LevelIndicator
-	WithStringValue(stringValue string) *LevelIndicator
-	WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicator
-	WithIntValue(intValue int) *LevelIndicator
-	WithIntegerValue(integerValue int) *LevelIndicator
-	WithFloatValue(floatValue float32) *LevelIndicator
-	WithDoubleValue(doubleValue float64) *LevelIndicator
-	WithFont(font *Font) *LevelIndicator
-	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator
-	WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicator
-	WithAlignment(alignment TextAlignment) *LevelIndicator
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicator
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator
-	WithCell(cell CellProvider) *LevelIndicator
-	WithSubviews(items ...ViewProvider) *LevelIndicator
-	WithHidden(hidden bool) *LevelIndicator
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator
-	WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *LevelIndicator
-	WithFrame(frame corefoundation.CGRect) *LevelIndicator
-	WithFrameRotation(frameRotation float64) *LevelIndicator
-	WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator
-	WithBoundsRotation(boundsRotation float64) *LevelIndicator
-	WithBounds(bounds corefoundation.CGRect) *LevelIndicator
-	WithCanDrawConcurrently(canDrawConcurrently bool) *LevelIndicator
-	WithNeedsDisplay(needsDisplay bool) *LevelIndicator
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator
-	WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *LevelIndicator
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *LevelIndicator
-	WithWantsLayer(wantsLayer bool) *LevelIndicator
-	WithLayer(layer obj.Object) *LevelIndicator
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator
-	WithNeedsLayout(needsLayout bool) *LevelIndicator
-	WithAlphaValue(alphaValue float64) *LevelIndicator
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *LevelIndicator
-	WithBackgroundFilters(items ...obj.Object) *LevelIndicator
-	WithCompositingFilter(compositingFilter obj.Object) *LevelIndicator
-	WithContentFilters(items ...obj.Object) *LevelIndicator
-	WithShadow(shadow *Shadow) *LevelIndicator
-	WithClipsToBounds(clipsToBounds bool) *LevelIndicator
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator
-	WithToolTip(toolTip string) *LevelIndicator
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicator
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator
-	WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator
-	WithFocusRingType(focusRingType FocusRingType) *LevelIndicator
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *LevelIndicator
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *LevelIndicator
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *LevelIndicator
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *LevelIndicator
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *LevelIndicator
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *LevelIndicator
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *LevelIndicator
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *LevelIndicator
-	WithNextResponder(nextResponder ResponderProvider) *LevelIndicator
-	WithMenu(menu *Menu) *LevelIndicator
-	WithUserActivity(userActivity obj.Object) *LevelIndicator
-	WithTouchBar(touchBar *TouchBar) *LevelIndicator
-	TickMarkValueAtIndex(index int) float64
-	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
-	LevelIndicatorStyle() LevelIndicatorStyle
-	SetLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle)
-	IsEditable() bool
-	SetEditable(editable bool)
-	MinValue() float64
-	SetMinValue(minValue float64)
-	MaxValue() float64
-	SetMaxValue(maxValue float64)
-	WarningValue() float64
-	SetWarningValue(warningValue float64)
-	CriticalValue() float64
-	SetCriticalValue(criticalValue float64)
-	TickMarkPosition() TickMarkPosition
-	SetTickMarkPosition(tickMarkPosition TickMarkPosition)
-	NumberOfTickMarks() int
-	SetNumberOfTickMarks(numberOfTickMarks int)
-	NumberOfMajorTickMarks() int
-	SetNumberOfMajorTickMarks(numberOfMajorTickMarks int)
-	FillColor() *Color
-	SetFillColor(fillColor *Color)
-	WarningFillColor() *Color
-	SetWarningFillColor(warningFillColor *Color)
-	CriticalFillColor() *Color
-	SetCriticalFillColor(criticalFillColor *Color)
-	DrawsTieredCapacityLevels() bool
-	SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool)
-	PlaceholderVisibility() LevelIndicatorPlaceholderVisibility
-	SetPlaceholderVisibility(placeholderVisibility LevelIndicatorPlaceholderVisibility)
-	RatingImage() *Image
-	SetRatingImage(ratingImage *Image)
-	RatingPlaceholderImage() *Image
-	SetRatingPlaceholderImage(ratingPlaceholderImage *Image)
-}
-
-var _ LevelIndicatorable = (*LevelIndicator)(nil)
 
 var _ ControlProvider = (*LevelIndicator)(nil)
 

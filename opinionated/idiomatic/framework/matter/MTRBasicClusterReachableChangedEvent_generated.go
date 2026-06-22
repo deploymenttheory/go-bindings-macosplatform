@@ -51,17 +51,9 @@ func NewMTRBasicClusterReachableChangedEvent() *MTRBasicClusterReachableChangedE
 }
 
 // WithReachableNewValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicClusterReachableChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
-	return x
+func (mbcrce *MTRBasicClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicClusterReachableChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mbcrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
+	return mbcrce
 }
-
-// MTRBasicClusterReachableChangedEventable is the interface implemented by [MTRBasicClusterReachableChangedEvent], for mocking and DI.
-type MTRBasicClusterReachableChangedEventable interface {
-	obj.Object
-	WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicClusterReachableChangedEvent
-}
-
-var _ MTRBasicClusterReachableChangedEventable = (*MTRBasicClusterReachableChangedEvent)(nil)
 
 var _ MTRBasicInformationClusterReachableChangedEventProvider = (*MTRBasicClusterReachableChangedEvent)(nil)

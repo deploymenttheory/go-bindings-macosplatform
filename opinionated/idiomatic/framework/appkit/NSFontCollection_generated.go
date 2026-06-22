@@ -48,84 +48,71 @@ func fontCollectionAdopt(id objc.ID) *FontCollection {
 }
 
 // Description returns the object's -description text.
-func (x *FontCollection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fc *FontCollection) Description() string {
+	return rt.Description(objref.IDOf(fc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FontCollection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fc *FontCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FontCollection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fc *FontCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FontCollection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fc *FontCollection) String() string {
+	return rt.Description(objref.IDOf(fc))
 }
 
 // MatchingDescriptorsWithOptions returns an array of font descriptors matching the logical descriptors with the given options.
-func (x *FontCollection) MatchingDescriptorsWithOptions(options obj.Object) []*FontDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchingDescriptorsWithOptions:"), objref.IDOf(options))
+func (fc *FontCollection) MatchingDescriptorsWithOptions(options obj.Object) []*FontDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptorsWithOptions:"), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // MatchingDescriptorsForFamily returns an array of font descriptors matching the logical descriptors for the given font family.
-func (x *FontCollection) MatchingDescriptorsForFamily(family string) []*FontDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchingDescriptorsForFamily:"), purego.NSString(family))
+func (fc *FontCollection) MatchingDescriptorsForFamily(family string) []*FontDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptorsForFamily:"), purego.NSString(family))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // MatchingDescriptorsForFamilyOptions returns an array of font descriptors matching the logical descriptors for the given font family and options.
-func (x *FontCollection) MatchingDescriptorsForFamilyOptions(family string, options obj.Object) []*FontDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchingDescriptorsForFamily:options:"), purego.NSString(family), objref.IDOf(options))
+func (fc *FontCollection) MatchingDescriptorsForFamilyOptions(family string, options obj.Object) []*FontDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptorsForFamily:options:"), purego.NSString(family), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // QueryDescriptors wraps the corresponding Objective-C method.
 //
 // QueryDescriptors returns the collection as a Go slice.
-func (x *FontCollection) QueryDescriptors() []*FontDescriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryDescriptors"))
+func (fc *FontCollection) QueryDescriptors() []*FontDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("queryDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // ExclusionDescriptors wraps the corresponding Objective-C method.
 //
 // ExclusionDescriptors returns the collection as a Go slice.
-func (x *FontCollection) ExclusionDescriptors() []*FontDescriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exclusionDescriptors"))
+func (fc *FontCollection) ExclusionDescriptors() []*FontDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("exclusionDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // MatchingDescriptors wraps the corresponding Objective-C method.
 //
 // MatchingDescriptors returns the collection as a Go slice.
-func (x *FontCollection) MatchingDescriptors() []*FontDescriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchingDescriptors"))
+func (fc *FontCollection) MatchingDescriptors() []*FontDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
-
-// FontCollectionable is the interface implemented by [FontCollection], for mocking and DI.
-type FontCollectionable interface {
-	obj.Object
-	MatchingDescriptorsWithOptions(options obj.Object) []*FontDescriptor
-	MatchingDescriptorsForFamily(family string) []*FontDescriptor
-	MatchingDescriptorsForFamilyOptions(family string, options obj.Object) []*FontDescriptor
-	QueryDescriptors() []*FontDescriptor
-	ExclusionDescriptors() []*FontDescriptor
-	MatchingDescriptors() []*FontDescriptor
-}
-
-var _ FontCollectionable = (*FontCollection)(nil)
 
 // isFontCollection marks FontCollection — and, by embedding promotion, its
 // subclasses — as a member of the FontCollection hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *FontCollection) isFontCollection() {}
+func (fc *FontCollection) isFontCollection() {}
 
 var _ FontCollectionProvider = (*FontCollection)(nil)

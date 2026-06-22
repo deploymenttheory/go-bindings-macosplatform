@@ -46,24 +46,24 @@ func hapticEventParameterAdopt(id objc.ID) *HapticEventParameter {
 }
 
 // Description returns the object's -description text.
-func (x *HapticEventParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hep *HapticEventParameter) Description() string {
+	return rt.Description(objref.IDOf(hep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HapticEventParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hep *HapticEventParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HapticEventParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hep *HapticEventParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HapticEventParameter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hep *HapticEventParameter) String() string {
+	return rt.Description(objref.IDOf(hep))
 }
 
 // NewHapticEventParameterWithParameterIDValue creates a haptic event parameter from its ID and value.
@@ -73,36 +73,20 @@ func NewHapticEventParameterWithParameterIDValue(parameterID obj.Object, value f
 	return hapticEventParameterAdopt(_id)
 }
 
-// WithValue the value of the parameter.
-func (x *HapticEventParameter) WithValue(value float32) *HapticEventParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the value of the parameter.
+func (hep *HapticEventParameter) WithValue(value float32) *HapticEventParameter {
+	objc.Send[objc.ID](objref.IDOf(hep), objc.RegisterName("setValue:"), value)
+	return hep
 }
 
 // ParameterID wraps the corresponding Objective-C method.
-func (x *HapticEventParameter) ParameterID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
+func (hep *HapticEventParameter) ParameterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hep), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *HapticEventParameter) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+func (hep *HapticEventParameter) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(hep), objc.RegisterName("value"))
 	return _r
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *HapticEventParameter) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// HapticEventParameterable is the interface implemented by [HapticEventParameter], for mocking and DI.
-type HapticEventParameterable interface {
-	obj.Object
-	WithValue(value float32) *HapticEventParameter
-	ParameterID() obj.Object
-	Value() float32
-	SetValue(value float32)
-}
-
-var _ HapticEventParameterable = (*HapticEventParameter)(nil)

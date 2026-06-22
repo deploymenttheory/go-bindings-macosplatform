@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,75 +53,59 @@ func NewNNResizeBilinear() *NNResizeBilinear {
 	return nNResizeBilinearAdopt(_id)
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *NNResizeBilinear) WithOffset(offset mpscore.MPSOffset) *NNResizeBilinear {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (nrb *NNResizeBilinear) WithOffset(offset mpscore.MPSOffset) *NNResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(nrb), objc.RegisterName("setOffset:"), offset)
+	return nrb
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *NNResizeBilinear) WithClipRect(clipRect metal.MTLRegion) *NNResizeBilinear {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (nrb *NNResizeBilinear) WithClipRect(clipRect metal.MTLRegion) *NNResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(nrb), objc.RegisterName("setClipRect:"), clipRect)
+	return nrb
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *NNResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNResizeBilinear {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (nrb *NNResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(nrb), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return nrb
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *NNResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNResizeBilinear {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (nrb *NNResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(nrb), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return nrb
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *NNResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNResizeBilinear {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (nrb *NNResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(nrb), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return nrb
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NNResizeBilinear) WithLabel(label string) *NNResizeBilinear {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nrb *NNResizeBilinear) WithLabel(label string) *NNResizeBilinear {
+	objc.Send[objc.ID](objref.IDOf(nrb), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrb
 }
 
-// ResizeWidth the resize width.
-func (x *NNResizeBilinear) ResizeWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizeWidth"))
+// ResizeWidth returns the resize width.
+func (nrb *NNResizeBilinear) ResizeWidth() int {
+	_r := objc.Send[int](objref.IDOf(nrb), objc.RegisterName("resizeWidth"))
 	return _r
 }
 
-// ResizeHeight the resize height.
-func (x *NNResizeBilinear) ResizeHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resizeHeight"))
+// ResizeHeight returns the resize height.
+func (nrb *NNResizeBilinear) ResizeHeight() int {
+	_r := objc.Send[int](objref.IDOf(nrb), objc.RegisterName("resizeHeight"))
 	return _r
 }
 
-// AlignCorners if YES, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is NO.
-func (x *NNResizeBilinear) AlignCorners() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignCorners"))
+// AlignCorners reports whether if true, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is false.
+func (nrb *NNResizeBilinear) AlignCorners() bool {
+	_r := objc.Send[bool](objref.IDOf(nrb), objc.RegisterName("alignCorners"))
 	return _r
 }
-
-// NNResizeBilinearable is the interface implemented by [NNResizeBilinear], for mocking and DI.
-type NNResizeBilinearable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *NNResizeBilinear
-	WithClipRect(clipRect metal.MTLRegion) *NNResizeBilinear
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNResizeBilinear
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNResizeBilinear
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNResizeBilinear
-	WithLabel(label string) *NNResizeBilinear
-	ResizeWidth() int
-	ResizeHeight() int
-	AlignCorners() bool
-}
-
-var _ NNResizeBilinearable = (*NNResizeBilinear)(nil)
 
 var _ CNNKernelProvider = (*NNResizeBilinear)(nil)
 

@@ -47,65 +47,51 @@ func uRLSessionDataTaskAdopt(id objc.ID) *URLSessionDataTask {
 }
 
 // WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
-	return x
+func (usdt *URLSessionDataTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
+	return usdt
 }
 
 // WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
-	return x
+func (usdt *URLSessionDataTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
+	return usdt
 }
 
 // WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
-	return x
+func (usdt *URLSessionDataTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
+	return usdt
 }
 
 // WithTaskDescription sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
-	return x
+func (usdt *URLSessionDataTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
+	return usdt
 }
 
 // WithPriority sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithPriority(priority float32) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
-	return x
+func (usdt *URLSessionDataTask) WithPriority(priority float32) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setPriority:"), priority)
+	return usdt
 }
 
 // WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
-	return x
+func (usdt *URLSessionDataTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return usdt
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionDataTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (usdt *URLSessionDataTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return usdt
 }
-
-// URLSessionDataTaskable is the interface implemented by [URLSessionDataTask], for mocking and DI.
-type URLSessionDataTaskable interface {
-	obj.Object
-	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask
-	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDataTask
-	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDataTask
-	WithTaskDescription(taskDescription StringProvider) *URLSessionDataTask
-	WithPriority(priority float32) *URLSessionDataTask
-	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDataTask
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDataTask
-}
-
-var _ URLSessionDataTaskable = (*URLSessionDataTask)(nil)
 
 // isURLSessionDataTask marks URLSessionDataTask — and, by embedding promotion, its
 // subclasses — as a member of the URLSessionDataTask hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *URLSessionDataTask) isURLSessionDataTask() {}
+func (usdt *URLSessionDataTask) isURLSessionDataTask() {}
 
 var _ URLSessionDataTaskProvider = (*URLSessionDataTask)(nil)
 

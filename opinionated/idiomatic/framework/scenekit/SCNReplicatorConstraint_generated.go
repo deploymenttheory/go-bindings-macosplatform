@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,112 +49,70 @@ func NewReplicatorConstraint() *ReplicatorConstraint {
 	return replicatorConstraintAdopt(_id)
 }
 
-// WithTarget defines the target node to replicate
-func (x *ReplicatorConstraint) WithTarget(target NodeProvider) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets defines the target node to replicate
+func (rc *ReplicatorConstraint) WithTarget(target NodeProvider) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return rc
 }
 
-// WithReplicatesOrientation defines whether or not the constraint should replicate the target orientation. Defaults to YES.
-func (x *ReplicatorConstraint) WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesOrientation:"), replicatesOrientation)
-	return x
+// WithReplicatesOrientation sets defines whether or not the constraint should replicate the target orientation. Defaults to YES.
+func (rc *ReplicatorConstraint) WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setReplicatesOrientation:"), replicatesOrientation)
+	return rc
 }
 
-// WithReplicatesPosition defines whether or not the constraint should replicate the target position. Defaults to YES.
-func (x *ReplicatorConstraint) WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesPosition:"), replicatesPosition)
-	return x
+// WithReplicatesPosition sets defines whether or not the constraint should replicate the target position. Defaults to YES.
+func (rc *ReplicatorConstraint) WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setReplicatesPosition:"), replicatesPosition)
+	return rc
 }
 
-// WithReplicatesScale defines whether or not the constraint should replicate the target scale. Defaults to YES.
-func (x *ReplicatorConstraint) WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesScale:"), replicatesScale)
-	return x
+// WithReplicatesScale sets defines whether or not the constraint should replicate the target scale. Defaults to YES.
+func (rc *ReplicatorConstraint) WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setReplicatesScale:"), replicatesScale)
+	return rc
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (rc *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setEnabled:"), enabled)
+	return rc
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *ReplicatorConstraint) WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (rc *ReplicatorConstraint) WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return rc
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *ReplicatorConstraint) WithIncremental(incremental bool) *ReplicatorConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (rc *ReplicatorConstraint) WithIncremental(incremental bool) *ReplicatorConstraint {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setIncremental:"), incremental)
+	return rc
 }
 
 // Target defines the target node to replicate
-func (x *ReplicatorConstraint) Target() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (rc *ReplicatorConstraint) Target() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *ReplicatorConstraint) SetTarget(target *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// ReplicatesOrientation defines whether or not the constraint should replicate the target orientation. Defaults to YES.
-func (x *ReplicatorConstraint) ReplicatesOrientation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replicatesOrientation"))
+// ReplicatesOrientation reports whether defines whether or not the constraint should replicate the target orientation. Defaults to true.
+func (rc *ReplicatorConstraint) ReplicatesOrientation() bool {
+	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesOrientation"))
 	return _r
 }
 
-// SetReplicatesOrientation wraps the corresponding Objective-C method.
-func (x *ReplicatorConstraint) SetReplicatesOrientation(replicatesOrientation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesOrientation:"), replicatesOrientation)
-}
-
-// ReplicatesPosition defines whether or not the constraint should replicate the target position. Defaults to YES.
-func (x *ReplicatorConstraint) ReplicatesPosition() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replicatesPosition"))
+// ReplicatesPosition reports whether defines whether or not the constraint should replicate the target position. Defaults to true.
+func (rc *ReplicatorConstraint) ReplicatesPosition() bool {
+	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesPosition"))
 	return _r
 }
 
-// SetReplicatesPosition wraps the corresponding Objective-C method.
-func (x *ReplicatorConstraint) SetReplicatesPosition(replicatesPosition bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesPosition:"), replicatesPosition)
-}
-
-// ReplicatesScale defines whether or not the constraint should replicate the target scale. Defaults to YES.
-func (x *ReplicatorConstraint) ReplicatesScale() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replicatesScale"))
+// ReplicatesScale reports whether defines whether or not the constraint should replicate the target scale. Defaults to true.
+func (rc *ReplicatorConstraint) ReplicatesScale() bool {
+	_r := objc.Send[bool](objref.IDOf(rc), objc.RegisterName("replicatesScale"))
 	return _r
 }
-
-// SetReplicatesScale wraps the corresponding Objective-C method.
-func (x *ReplicatorConstraint) SetReplicatesScale(replicatesScale bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesScale:"), replicatesScale)
-}
-
-// ReplicatorConstraintable is the interface implemented by [ReplicatorConstraint], for mocking and DI.
-type ReplicatorConstraintable interface {
-	obj.Object
-	WithTarget(target NodeProvider) *ReplicatorConstraint
-	WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint
-	WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint
-	WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint
-	WithEnabled(enabled bool) *ReplicatorConstraint
-	WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint
-	WithIncremental(incremental bool) *ReplicatorConstraint
-	Target() *Node
-	SetTarget(target *Node)
-	ReplicatesOrientation() bool
-	SetReplicatesOrientation(replicatesOrientation bool)
-	ReplicatesPosition() bool
-	SetReplicatesPosition(replicatesPosition bool)
-	ReplicatesScale() bool
-	SetReplicatesScale(replicatesScale bool)
-}
-
-var _ ReplicatorConstraintable = (*ReplicatorConstraint)(nil)
 
 var _ ConstraintProvider = (*ReplicatorConstraint)(nil)

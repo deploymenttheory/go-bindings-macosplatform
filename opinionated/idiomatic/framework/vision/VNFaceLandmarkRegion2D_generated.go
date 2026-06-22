@@ -52,27 +52,18 @@ func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	return faceLandmarkRegion2DAdopt(_id)
 }
 
-// PrecisionEstimatesPerPoint obtains the array of accuracy placement estimates per landmark point. Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations
+// PrecisionEstimatesPerPoint returns obtains the array of accuracy placement estimates per landmark point. Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations
 //
 // PrecisionEstimatesPerPoint returns the collection as a Go slice.
-func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("precisionEstimatesPerPoint"))
+func (flrd *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(flrd), objc.RegisterName("precisionEstimatesPerPoint"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PointsClassification describes how to interpret the points provided by the region.
-func (x *FaceLandmarkRegion2D) PointsClassification() PointsClassification {
-	_r := objc.Send[PointsClassification](objref.IDOf(x), objc.RegisterName("pointsClassification"))
+func (flrd *FaceLandmarkRegion2D) PointsClassification() PointsClassification {
+	_r := objc.Send[PointsClassification](objref.IDOf(flrd), objc.RegisterName("pointsClassification"))
 	return _r
 }
-
-// FaceLandmarkRegion2Dable is the interface implemented by [FaceLandmarkRegion2D], for mocking and DI.
-type FaceLandmarkRegion2Dable interface {
-	obj.Object
-	PrecisionEstimatesPerPoint() []obj.Object
-	PointsClassification() PointsClassification
-}
-
-var _ FaceLandmarkRegion2Dable = (*FaceLandmarkRegion2D)(nil)
 
 var _ FaceLandmarkRegionProvider = (*FaceLandmarkRegion2D)(nil)

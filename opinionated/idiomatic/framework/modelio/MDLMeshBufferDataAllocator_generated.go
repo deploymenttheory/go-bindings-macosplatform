@@ -46,24 +46,24 @@ func meshBufferDataAllocatorAdopt(id objc.ID) *MeshBufferDataAllocator {
 }
 
 // Description returns the object's -description text.
-func (x *MeshBufferDataAllocator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbda *MeshBufferDataAllocator) Description() string {
+	return rt.Description(objref.IDOf(mbda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshBufferDataAllocator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbda *MeshBufferDataAllocator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshBufferDataAllocator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbda *MeshBufferDataAllocator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MeshBufferDataAllocator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbda *MeshBufferDataAllocator) String() string {
+	return rt.Description(objref.IDOf(mbda))
 }
 
 // NewMeshBufferDataAllocator creates a new MeshBufferDataAllocator.
@@ -71,10 +71,3 @@ func NewMeshBufferDataAllocator() *MeshBufferDataAllocator {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferDataAllocator")), objc.RegisterName("new"))
 	return meshBufferDataAllocatorAdopt(_id)
 }
-
-// MeshBufferDataAllocatorable is the interface implemented by [MeshBufferDataAllocator], for mocking and DI.
-type MeshBufferDataAllocatorable interface {
-	obj.Object
-}
-
-var _ MeshBufferDataAllocatorable = (*MeshBufferDataAllocator)(nil)

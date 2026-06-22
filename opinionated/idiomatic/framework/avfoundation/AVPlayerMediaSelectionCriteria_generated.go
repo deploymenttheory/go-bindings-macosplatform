@@ -46,24 +46,24 @@ func playerMediaSelectionCriteriaAdopt(id objc.ID) *PlayerMediaSelectionCriteria
 }
 
 // Description returns the object's -description text.
-func (x *PlayerMediaSelectionCriteria) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pmsc *PlayerMediaSelectionCriteria) Description() string {
+	return rt.Description(objref.IDOf(pmsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerMediaSelectionCriteria) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pmsc *PlayerMediaSelectionCriteria) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pmsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerMediaSelectionCriteria) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pmsc *PlayerMediaSelectionCriteria) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pmsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerMediaSelectionCriteria) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pmsc *PlayerMediaSelectionCriteria) String() string {
+	return rt.Description(objref.IDOf(pmsc))
 }
 
 // NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics creates media selection criteria with the preferred languages and media characteristics.
@@ -83,33 +83,23 @@ func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLa
 // PreferredLanguages wraps the corresponding Objective-C method.
 //
 // PreferredLanguages returns the collection as a Go slice.
-func (x *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLanguages"))
+func (pmsc *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(pmsc), objc.RegisterName("preferredLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // PreferredMediaCharacteristics wraps the corresponding Objective-C method.
 //
 // PreferredMediaCharacteristics returns the collection as a Go slice.
-func (x *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredMediaCharacteristics"))
+func (pmsc *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pmsc), objc.RegisterName("preferredMediaCharacteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PrincipalMediaCharacteristics wraps the corresponding Objective-C method.
 //
 // PrincipalMediaCharacteristics returns the collection as a Go slice.
-func (x *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("principalMediaCharacteristics"))
+func (pmsc *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pmsc), objc.RegisterName("principalMediaCharacteristics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// PlayerMediaSelectionCriteriaable is the interface implemented by [PlayerMediaSelectionCriteria], for mocking and DI.
-type PlayerMediaSelectionCriteriaable interface {
-	obj.Object
-	PreferredLanguages() []string
-	PreferredMediaCharacteristics() []obj.Object
-	PrincipalMediaCharacteristics() []obj.Object
-}
-
-var _ PlayerMediaSelectionCriteriaable = (*PlayerMediaSelectionCriteria)(nil)

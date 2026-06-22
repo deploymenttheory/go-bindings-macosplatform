@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,35 +52,25 @@ func NewClinicalRecord() *ClinicalRecord {
 }
 
 // ClinicalType wraps the corresponding Objective-C method.
-func (x *ClinicalRecord) ClinicalType() *ClinicalType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clinicalType"))
+func (cr *ClinicalRecord) ClinicalType() *ClinicalType {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("clinicalType"))
 	return ClinicalTypeFromID(_r)
 }
 
-// DisplayName the primary display name used in Health. The display name is not localized, and is generally expected to be US English.
-func (x *ClinicalRecord) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns the primary display name used in Health. The display name is not localized, and is generally expected to be US English.
+func (cr *ClinicalRecord) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FHIRResource the FHIR resource (where applicable) backing this sample.
-func (x *ClinicalRecord) FHIRResource() *FHIRResource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRResource"))
+// FHIRResource returns the FHIR resource (where applicable) backing this sample.
+func (cr *ClinicalRecord) FHIRResource() *FHIRResource {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("FHIRResource"))
 	return FHIRResourceFromID(_r)
 }
-
-// ClinicalRecordable is the interface implemented by [ClinicalRecord], for mocking and DI.
-type ClinicalRecordable interface {
-	obj.Object
-	ClinicalType() *ClinicalType
-	DisplayName() string
-	FHIRResource() *FHIRResource
-}
-
-var _ ClinicalRecordable = (*ClinicalRecord)(nil)
 
 var _ SampleProvider = (*ClinicalRecord)(nil)
 

@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,58 +49,34 @@ func NewCNNBatchNormalizationNode() *CNNBatchNormalizationNode {
 	return cNNBatchNormalizationNodeAdopt(_id)
 }
 
-// WithFlags options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
-func (x *CNNBatchNormalizationNode) WithFlags(flags CNNBatchNormalizationFlags) *CNNBatchNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
-	return x
+// WithFlags sets options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
+func (cbnn *CNNBatchNormalizationNode) WithFlags(flags CNNBatchNormalizationFlags) *CNNBatchNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cbnn), objc.RegisterName("setFlags:"), flags)
+	return cbnn
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBatchNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (cbnn *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBatchNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cbnn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return cbnn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbnn *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cbnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbnn
 }
 
-// Flags options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
-func (x *CNNBatchNormalizationNode) Flags() CNNBatchNormalizationFlags {
-	_r := objc.Send[CNNBatchNormalizationFlags](objref.IDOf(x), objc.RegisterName("flags"))
+// Flags returns options controlling how batch normalization is calculated Default: MPSCNNBatchNormalizationFlagsDefault
+func (cbnn *CNNBatchNormalizationNode) Flags() CNNBatchNormalizationFlags {
+	_r := objc.Send[CNNBatchNormalizationFlags](objref.IDOf(cbnn), objc.RegisterName("flags"))
 	return _r
 }
 
-// SetFlags wraps the corresponding Objective-C method.
-func (x *CNNBatchNormalizationNode) SetFlags(flags CNNBatchNormalizationFlags) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
-}
-
-// TrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNBatchNormalizationNode) TrainingStyle() NNTrainingStyle {
-	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
+// TrainingStyle returns the training style of the forward node will be propagated to gradient nodes made from it
+func (cbnn *CNNBatchNormalizationNode) TrainingStyle() NNTrainingStyle {
+	_r := objc.Send[NNTrainingStyle](objref.IDOf(cbnn), objc.RegisterName("trainingStyle"))
 	return _r
 }
-
-// SetTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNBatchNormalizationNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-}
-
-// CNNBatchNormalizationNodeable is the interface implemented by [CNNBatchNormalizationNode], for mocking and DI.
-type CNNBatchNormalizationNodeable interface {
-	obj.Object
-	WithFlags(flags CNNBatchNormalizationFlags) *CNNBatchNormalizationNode
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBatchNormalizationNode
-	WithLabel(label string) *CNNBatchNormalizationNode
-	Flags() CNNBatchNormalizationFlags
-	SetFlags(flags CNNBatchNormalizationFlags)
-	TrainingStyle() NNTrainingStyle
-	SetTrainingStyle(trainingStyle NNTrainingStyle)
-}
-
-var _ CNNBatchNormalizationNodeable = (*CNNBatchNormalizationNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNBatchNormalizationNode)(nil)

@@ -46,24 +46,24 @@ func authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(id objc.ID) *A
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Description() string {
+	return rt.Description(objref.IDOf(askpkcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(askpkcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(askpkcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) String() string {
+	return rt.Description(objref.IDOf(askpkcr))
 }
 
 // NewAuthorizationSecurityKeyPublicKeyCredentialRegistration creates a new AuthorizationSecurityKeyPublicKeyCredentialRegistration.
@@ -72,25 +72,16 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialRegistration() *Authorization
 	return authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(_id)
 }
 
-// Transports a list of transports that the authenticator is believed to support, if this could be determined.
+// Transports returns a list of transports that the authenticator is believed to support, if this could be determined.
 //
 // Transports returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transports"))
+func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(askpkcr), objc.RegisterName("transports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Prf wraps the corresponding Objective-C method.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(askpkcr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)
 }
-
-// AuthorizationSecurityKeyPublicKeyCredentialRegistrationable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialRegistration], for mocking and DI.
-type AuthorizationSecurityKeyPublicKeyCredentialRegistrationable interface {
-	obj.Object
-	Transports() []obj.Object
-	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput
-}
-
-var _ AuthorizationSecurityKeyPublicKeyCredentialRegistrationable = (*AuthorizationSecurityKeyPublicKeyCredentialRegistration)(nil)

@@ -46,24 +46,24 @@ func visionPrismAdopt(id objc.ID) *VisionPrism {
 }
 
 // Description returns the object's -description text.
-func (x *VisionPrism) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vp *VisionPrism) Description() string {
+	return rt.Description(objref.IDOf(vp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VisionPrism) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vp *VisionPrism) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VisionPrism) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vp *VisionPrism) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VisionPrism) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vp *VisionPrism) String() string {
+	return rt.Description(objref.IDOf(vp))
 }
 
 // NewVisionPrismWithAmountAngleEye creates a new vision prism object, using a single quantity and an alignment angle.
@@ -80,58 +80,44 @@ func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseE
 	return visionPrismAdopt(_id)
 }
 
-// Amount the compensation in prism diopters to correct eye misalignment [polar coordinates]
-func (x *VisionPrism) Amount() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+// Amount returns the compensation in prism diopters to correct eye misalignment [polar coordinates]
+func (vp *VisionPrism) Amount() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("amount"))
 	return QuantityFromID(_r)
 }
 
-// Angle the direction of the prism base [polar coordinates]
-func (x *VisionPrism) Angle() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("angle"))
+// Angle returns the direction of the prism base [polar coordinates]
+func (vp *VisionPrism) Angle() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("angle"))
 	return QuantityFromID(_r)
 }
 
-// VerticalAmount the vertical component of compensation in prism diopters [rectangular coordinates]
-func (x *VisionPrism) VerticalAmount() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verticalAmount"))
+// VerticalAmount returns the vertical component of compensation in prism diopters [rectangular coordinates]
+func (vp *VisionPrism) VerticalAmount() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("verticalAmount"))
 	return QuantityFromID(_r)
 }
 
-// HorizontalAmount the horizontal component of compensation in prism diopters [rectangular coordinates]
-func (x *VisionPrism) HorizontalAmount() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontalAmount"))
+// HorizontalAmount returns the horizontal component of compensation in prism diopters [rectangular coordinates]
+func (vp *VisionPrism) HorizontalAmount() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("horizontalAmount"))
 	return QuantityFromID(_r)
 }
 
-// VerticalBase the direction of the prism base relative to the vertical axis of the lens; base up or base down. [rectangular coordinates]
-func (x *VisionPrism) VerticalBase() PrismBase {
-	_r := objc.Send[PrismBase](objref.IDOf(x), objc.RegisterName("verticalBase"))
+// VerticalBase returns the direction of the prism base relative to the vertical axis of the lens; base up or base down. [rectangular coordinates]
+func (vp *VisionPrism) VerticalBase() PrismBase {
+	_r := objc.Send[PrismBase](objref.IDOf(vp), objc.RegisterName("verticalBase"))
 	return _r
 }
 
-// HorizontalBase the direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). [rectangular coordinates]
-func (x *VisionPrism) HorizontalBase() PrismBase {
-	_r := objc.Send[PrismBase](objref.IDOf(x), objc.RegisterName("horizontalBase"))
+// HorizontalBase returns the direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). [rectangular coordinates]
+func (vp *VisionPrism) HorizontalBase() PrismBase {
+	_r := objc.Send[PrismBase](objref.IDOf(vp), objc.RegisterName("horizontalBase"))
 	return _r
 }
 
-// Eye which eye (left or right)
-func (x *VisionPrism) Eye() VisionEye {
-	_r := objc.Send[VisionEye](objref.IDOf(x), objc.RegisterName("eye"))
+// Eye returns which eye (left or right)
+func (vp *VisionPrism) Eye() VisionEye {
+	_r := objc.Send[VisionEye](objref.IDOf(vp), objc.RegisterName("eye"))
 	return _r
 }
-
-// VisionPrismable is the interface implemented by [VisionPrism], for mocking and DI.
-type VisionPrismable interface {
-	obj.Object
-	Amount() *Quantity
-	Angle() *Quantity
-	VerticalAmount() *Quantity
-	HorizontalAmount() *Quantity
-	VerticalBase() PrismBase
-	HorizontalBase() PrismBase
-	Eye() VisionEye
-}
-
-var _ VisionPrismable = (*VisionPrism)(nil)

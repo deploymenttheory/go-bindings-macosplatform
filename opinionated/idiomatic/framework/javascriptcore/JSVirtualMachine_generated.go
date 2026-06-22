@@ -46,24 +46,24 @@ func virtualMachineAdopt(id objc.ID) *VirtualMachine {
 }
 
 // Description returns the object's -description text.
-func (x *VirtualMachine) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vm *VirtualMachine) Description() string {
+	return rt.Description(objref.IDOf(vm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualMachine) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vm *VirtualMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualMachine) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vm *VirtualMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualMachine) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vm *VirtualMachine) String() string {
+	return rt.Description(objref.IDOf(vm))
 }
 
 // NewVirtualMachine creates a new VirtualMachine.
@@ -73,20 +73,11 @@ func NewVirtualMachine() *VirtualMachine {
 }
 
 // AddManagedReferenceWithOwner notifies the JavaScriptCore virtual machine of an external object relationship.
-func (x *VirtualMachine) AddManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
+func (vm *VirtualMachine) AddManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("addManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
 }
 
 // RemoveManagedReferenceWithOwner notifies the JavaScriptCore virtual machine that a previously registered object relationship no longer exists.
-func (x *VirtualMachine) RemoveManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
+func (vm *VirtualMachine) RemoveManagedReferenceWithOwner(object obj.Object, owner obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(vm), objc.RegisterName("removeManagedReference:withOwner:"), objref.IDOf(object), objref.IDOf(owner))
 }
-
-// VirtualMachineable is the interface implemented by [VirtualMachine], for mocking and DI.
-type VirtualMachineable interface {
-	obj.Object
-	AddManagedReferenceWithOwner(object obj.Object, owner obj.Object)
-	RemoveManagedReferenceWithOwner(object obj.Object, owner obj.Object)
-}
-
-var _ VirtualMachineable = (*VirtualMachine)(nil)

@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,71 +43,46 @@ func cNNConvolutionNodeAdopt(id objc.ID) *CNNConvolutionNode {
 	return x
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNConvolutionNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (ccn *CNNConvolutionNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return ccn
 }
 
-// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
-	return x
+// WithAccumulatorPrecision sets set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (ccn *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return ccn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ccn *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ccn
 }
 
-// TrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNConvolutionNode) TrainingStyle() NNTrainingStyle {
-	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
+// TrainingStyle returns the training style of the forward node will be propagated to gradient nodes made from it
+func (ccn *CNNConvolutionNode) TrainingStyle() NNTrainingStyle {
+	_r := objc.Send[NNTrainingStyle](objref.IDOf(ccn), objc.RegisterName("trainingStyle"))
 	return _r
-}
-
-// SetTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNConvolutionNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 }
 
 // AccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNConvolutionNode) AccumulatorPrecision() NNConvolutionAccumulatorPrecisionOption {
-	_r := objc.Send[NNConvolutionAccumulatorPrecisionOption](objref.IDOf(x), objc.RegisterName("accumulatorPrecision"))
+func (ccn *CNNConvolutionNode) AccumulatorPrecision() NNConvolutionAccumulatorPrecisionOption {
+	_r := objc.Send[NNConvolutionAccumulatorPrecisionOption](objref.IDOf(ccn), objc.RegisterName("accumulatorPrecision"))
 	return _r
 }
 
-// SetAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
-}
-
-// ConvolutionGradientState a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
-func (x *CNNConvolutionNode) ConvolutionGradientState() *CNNConvolutionGradientStateNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionGradientState"))
+// ConvolutionGradientState returns a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
+func (ccn *CNNConvolutionNode) ConvolutionGradientState() *CNNConvolutionGradientStateNode {
+	_r := objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("convolutionGradientState"))
 	return CNNConvolutionGradientStateNodeFromID(_r)
 }
-
-// CNNConvolutionNodeable is the interface implemented by [CNNConvolutionNode], for mocking and DI.
-type CNNConvolutionNodeable interface {
-	obj.Object
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionNode
-	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
-	WithLabel(label string) *CNNConvolutionNode
-	TrainingStyle() NNTrainingStyle
-	SetTrainingStyle(trainingStyle NNTrainingStyle)
-	AccumulatorPrecision() NNConvolutionAccumulatorPrecisionOption
-	SetAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption)
-	ConvolutionGradientState() *CNNConvolutionGradientStateNode
-}
-
-var _ CNNConvolutionNodeable = (*CNNConvolutionNode)(nil)
 
 // isCNNConvolutionNode marks CNNConvolutionNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNConvolutionNode) isCNNConvolutionNode() {}
+func (ccn *CNNConvolutionNode) isCNNConvolutionNode() {}
 
 var _ CNNConvolutionNodeProvider = (*CNNConvolutionNode)(nil)
 

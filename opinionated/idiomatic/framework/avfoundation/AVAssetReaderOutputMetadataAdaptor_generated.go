@@ -46,24 +46,24 @@ func assetReaderOutputMetadataAdaptorAdopt(id objc.ID) *AssetReaderOutputMetadat
 }
 
 // Description returns the object's -description text.
-func (x *AssetReaderOutputMetadataAdaptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aroma *AssetReaderOutputMetadataAdaptor) Description() string {
+	return rt.Description(objref.IDOf(aroma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetReaderOutputMetadataAdaptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aroma *AssetReaderOutputMetadataAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aroma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetReaderOutputMetadataAdaptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aroma *AssetReaderOutputMetadataAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aroma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetReaderOutputMetadataAdaptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aroma *AssetReaderOutputMetadataAdaptor) String() string {
+	return rt.Description(objref.IDOf(aroma))
 }
 
 // NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput creates an object that reads timed metadata groups from an asset reader output.
@@ -74,22 +74,13 @@ func NewAssetReaderOutputMetadataAdaptorWithAssetReaderTrackOutput(trackOutput *
 }
 
 // NextTimedMetadataGroup returns the next timed metadata group for the asset reader output.
-func (x *AssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *TimedMetadataGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTimedMetadataGroup"))
+func (aroma *AssetReaderOutputMetadataAdaptor) NextTimedMetadataGroup() *TimedMetadataGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(aroma), objc.RegisterName("nextTimedMetadataGroup"))
 	return TimedMetadataGroupFromID(_r)
 }
 
-// AssetReaderTrackOutput the asset reader track output from which the receiver pulls timed metadata groups.
-func (x *AssetReaderOutputMetadataAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderTrackOutput"))
+// AssetReaderTrackOutput returns the asset reader track output from which the receiver pulls timed metadata groups.
+func (aroma *AssetReaderOutputMetadataAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(aroma), objc.RegisterName("assetReaderTrackOutput"))
 	return AssetReaderTrackOutputFromID(_r)
 }
-
-// AssetReaderOutputMetadataAdaptorable is the interface implemented by [AssetReaderOutputMetadataAdaptor], for mocking and DI.
-type AssetReaderOutputMetadataAdaptorable interface {
-	obj.Object
-	NextTimedMetadataGroup() *TimedMetadataGroup
-	AssetReaderTrackOutput() *AssetReaderTrackOutput
-}
-
-var _ AssetReaderOutputMetadataAdaptorable = (*AssetReaderOutputMetadataAdaptor)(nil)

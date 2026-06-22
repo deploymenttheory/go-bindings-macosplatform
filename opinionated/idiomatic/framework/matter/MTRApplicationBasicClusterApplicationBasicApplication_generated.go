@@ -51,38 +51,15 @@ func NewMTRApplicationBasicClusterApplicationBasicApplication() *MTRApplicationB
 }
 
 // WithCatalogVendorID sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
-	return x
-}
-
-// WithCatalogVendorId sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorId:"), objref.IDOf(catalogVendorId))
-	return x
+func (mabcaba *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication {
+	objc.Send[objc.ID](objref.IDOf(mabcaba), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
+	return mabcaba
 }
 
 // WithApplicationID sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
-	return x
+func (mabcaba *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication {
+	objc.Send[objc.ID](objref.IDOf(mabcaba), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
+	return mabcaba
 }
-
-// WithApplicationId sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationBasicApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationId:"), purego.NSString(applicationId))
-	return x
-}
-
-// MTRApplicationBasicClusterApplicationBasicApplicationable is the interface implemented by [MTRApplicationBasicClusterApplicationBasicApplication], for mocking and DI.
-type MTRApplicationBasicClusterApplicationBasicApplicationable interface {
-	obj.Object
-	WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication
-	WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication
-	WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication
-	WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationBasicApplication
-}
-
-var _ MTRApplicationBasicClusterApplicationBasicApplicationable = (*MTRApplicationBasicClusterApplicationBasicApplication)(nil)
 
 var _ MTRApplicationBasicClusterApplicationStructProvider = (*MTRApplicationBasicClusterApplicationBasicApplication)(nil)

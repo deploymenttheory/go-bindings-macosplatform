@@ -46,24 +46,24 @@ func scrollEdgeEffectStyleAdopt(id objc.ID) *ScrollEdgeEffectStyle {
 }
 
 // Description returns the object's -description text.
-func (x *ScrollEdgeEffectStyle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sees *ScrollEdgeEffectStyle) Description() string {
+	return rt.Description(objref.IDOf(sees))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScrollEdgeEffectStyle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sees *ScrollEdgeEffectStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sees), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScrollEdgeEffectStyle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sees *ScrollEdgeEffectStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sees), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScrollEdgeEffectStyle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sees *ScrollEdgeEffectStyle) String() string {
+	return rt.Description(objref.IDOf(sees))
 }
 
 // NewScrollEdgeEffectStyle creates a new ScrollEdgeEffectStyle.
@@ -71,10 +71,3 @@ func NewScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("new"))
 	return scrollEdgeEffectStyleAdopt(_id)
 }
-
-// ScrollEdgeEffectStyleable is the interface implemented by [ScrollEdgeEffectStyle], for mocking and DI.
-type ScrollEdgeEffectStyleable interface {
-	obj.Object
-}
-
-var _ ScrollEdgeEffectStyleable = (*ScrollEdgeEffectStyle)(nil)

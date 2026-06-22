@@ -7,7 +7,6 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewObjectPlaceholder() *ObjectPlaceholder {
 	_id := objc.Send[objc.ID](objc.ID(_class("PHObjectPlaceholder")), objc.RegisterName("new"))
 	return objectPlaceholderAdopt(_id)
 }
-
-// ObjectPlaceholderable is the interface implemented by [ObjectPlaceholder], for mocking and DI.
-type ObjectPlaceholderable interface {
-	obj.Object
-}
-
-var _ ObjectPlaceholderable = (*ObjectPlaceholder)(nil)
 
 var _ ObjectProvider = (*ObjectPlaceholder)(nil)

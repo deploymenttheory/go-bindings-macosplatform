@@ -53,72 +53,52 @@ func NewNEOnDemandRuleEvaluateConnection() *NEOnDemandRuleEvaluateConnection {
 	return nEOnDemandRuleEvaluateConnectionAdopt(_id)
 }
 
-// WithConnectionRules an array of NEEvaluateConnectionRule objects
-func (x *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection {
+// WithConnectionRules sets an array of NEEvaluateConnectionRule objects
+func (nodrec *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v *NEEvaluateConnectionRule) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("setConnectionRules:"), _arr)
+	return nodrec
 }
 
-// WithDNSSearchDomainMatch DNS search domains that identify a network.
-func (x *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
+// WithDNSSearchDomainMatch sets DNS search domains that identify a network.
+func (nodrec *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
+	return nodrec
 }
 
-// WithDNSServerAddressMatch DNS server addresses that identify a network.
-func (x *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
+// WithDNSServerAddressMatch sets DNS server addresses that identify a network.
+func (nodrec *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
+	return nodrec
 }
 
-// WithInterfaceTypeMatch an interface type to identify a network.
-func (x *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
-	return x
+// WithInterfaceTypeMatch sets an interface type to identify a network.
+func (nodrec *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection {
+	objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
+	return nodrec
 }
 
-// WithSSIDMatch SSIDs that identify a network.
-func (x *NEOnDemandRuleEvaluateConnection) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
+// WithSSIDMatch sets SSIDs that identify a network.
+func (nodrec *NEOnDemandRuleEvaluateConnection) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("setSSIDMatch:"), _arr)
+	return nodrec
 }
 
-// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
-func (x *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
-	return x
+// WithProbeURL sets a URL to probe when all other network identifiers match to validate that an expected resource is available.
+func (nodrec *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection {
+	objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
+	return nodrec
 }
 
 // ConnectionRules wraps the corresponding Objective-C method.
 //
 // ConnectionRules returns the collection as a Go slice.
-func (x *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*NEEvaluateConnectionRule {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionRules"))
+func (nodrec *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*NEEvaluateConnectionRule {
+	_arr := objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("connectionRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEEvaluateConnectionRule { return NEEvaluateConnectionRuleFromID(_id) })
 }
-
-// SetConnectionRules wraps the corresponding Objective-C method.
-func (x *NEOnDemandRuleEvaluateConnection) SetConnectionRules(connectionRules []*NEEvaluateConnectionRule) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionRules:"), purego.SliceToNSArray(connectionRules, func(_v *NEEvaluateConnectionRule) objc.ID { return objref.IDOf(_v) }))
-}
-
-// NEOnDemandRuleEvaluateConnectionable is the interface implemented by [NEOnDemandRuleEvaluateConnection], for mocking and DI.
-type NEOnDemandRuleEvaluateConnectionable interface {
-	obj.Object
-	WithConnectionRules(items ...*NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection
-	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection
-	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection
-	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection
-	WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleEvaluateConnection
-	WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection
-	ConnectionRules() []*NEEvaluateConnectionRule
-	SetConnectionRules(connectionRules []*NEEvaluateConnectionRule)
-}
-
-var _ NEOnDemandRuleEvaluateConnectionable = (*NEOnDemandRuleEvaluateConnection)(nil)
 
 var _ NEOnDemandRuleProvider = (*NEOnDemandRuleEvaluateConnection)(nil)

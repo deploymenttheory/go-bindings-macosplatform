@@ -47,24 +47,24 @@ func pDFInfoAdopt(id objc.ID) *PDFInfo {
 }
 
 // Description returns the object's -description text.
-func (x *PDFInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PDFInfo) Description() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PDFInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pi *PDFInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PDFInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pi *PDFInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PDFInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PDFInfo) String() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // NewPDFInfo creates a new PDFInfo.
@@ -73,119 +73,71 @@ func NewPDFInfo() *PDFInfo {
 	return pDFInfoAdopt(_id)
 }
 
-// WithURL the URL identifying the location at which the PDF file will be created.
-func (x *PDFInfo) WithURL(uRL string) *PDFInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the URL identifying the location at which the PDF file will be created.
+func (pi *PDFInfo) WithURL(uRL string) *PDFInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return pi
 }
 
-// WithFileExtensionHidden a Boolean value that indicates whether the file extension should appear after the filename.
-func (x *PDFInfo) WithFileExtensionHidden(fileExtensionHidden bool) *PDFInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileExtensionHidden:"), fileExtensionHidden)
-	return x
+// WithFileExtensionHidden sets a Boolean value that indicates whether the file extension should appear after the filename.
+func (pi *PDFInfo) WithFileExtensionHidden(fileExtensionHidden bool) *PDFInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFileExtensionHidden:"), fileExtensionHidden)
+	return pi
 }
 
-// WithTagNames an array of tag names that should be applied to the PDF file after it’s created.
-func (x *PDFInfo) WithTagNames(items ...obj.Object) *PDFInfo {
+// WithTagNames sets an array of tag names that should be applied to the PDF file after it’s created.
+func (pi *PDFInfo) WithTagNames(items ...obj.Object) *PDFInfo {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTagNames:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTagNames:"), _arr)
+	return pi
 }
 
-// WithOrientation the paper orientation to use when exporting content as a PDF file.
-func (x *PDFInfo) WithOrientation(orientation PaperOrientation) *PDFInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
-	return x
+// WithOrientation sets the paper orientation to use when exporting content as a PDF file.
+func (pi *PDFInfo) WithOrientation(orientation PaperOrientation) *PDFInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setOrientation:"), orientation)
+	return pi
 }
 
-// WithPaperSize the paper size to use when exporting content as a PDF file.
-func (x *PDFInfo) WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaperSize:"), paperSize)
-	return x
+// WithPaperSize sets the paper size to use when exporting content as a PDF file.
+func (pi *PDFInfo) WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPaperSize:"), paperSize)
+	return pi
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *PDFInfo) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (pi *PDFInfo) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// SetURL wraps the corresponding Objective-C method.
-func (x *PDFInfo) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
 // IsFileExtensionHidden wraps the corresponding Objective-C method.
-func (x *PDFInfo) IsFileExtensionHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFileExtensionHidden"))
+func (pi *PDFInfo) IsFileExtensionHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isFileExtensionHidden"))
 	return _r
-}
-
-// SetFileExtensionHidden wraps the corresponding Objective-C method.
-func (x *PDFInfo) SetFileExtensionHidden(fileExtensionHidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileExtensionHidden:"), fileExtensionHidden)
 }
 
 // TagNames wraps the corresponding Objective-C method.
 //
 // TagNames returns the collection as a Go slice.
-func (x *PDFInfo) TagNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagNames"))
+func (pi *PDFInfo) TagNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("tagNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetTagNames wraps the corresponding Objective-C method.
-func (x *PDFInfo) SetTagNames(tagNames []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTagNames:"), purego.SliceToNSArray(tagNames, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // Orientation wraps the corresponding Objective-C method.
-func (x *PDFInfo) Orientation() PaperOrientation {
-	_r := objc.Send[PaperOrientation](objref.IDOf(x), objc.RegisterName("orientation"))
+func (pi *PDFInfo) Orientation() PaperOrientation {
+	_r := objc.Send[PaperOrientation](objref.IDOf(pi), objc.RegisterName("orientation"))
 	return _r
-}
-
-// SetOrientation wraps the corresponding Objective-C method.
-func (x *PDFInfo) SetOrientation(orientation PaperOrientation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
 }
 
 // PaperSize wraps the corresponding Objective-C method.
-func (x *PDFInfo) PaperSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("paperSize"))
+func (pi *PDFInfo) PaperSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pi), objc.RegisterName("paperSize"))
 	return _r
 }
 
-// SetPaperSize wraps the corresponding Objective-C method.
-func (x *PDFInfo) SetPaperSize(paperSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaperSize:"), paperSize)
-}
-
 // Attributes wraps the corresponding Objective-C method.
-func (x *PDFInfo) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (pi *PDFInfo) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
-
-// PDFInfoable is the interface implemented by [PDFInfo], for mocking and DI.
-type PDFInfoable interface {
-	obj.Object
-	WithURL(uRL string) *PDFInfo
-	WithFileExtensionHidden(fileExtensionHidden bool) *PDFInfo
-	WithTagNames(items ...obj.Object) *PDFInfo
-	WithOrientation(orientation PaperOrientation) *PDFInfo
-	WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo
-	URL() obj.Object
-	SetURL(uRL string)
-	IsFileExtensionHidden() bool
-	SetFileExtensionHidden(fileExtensionHidden bool)
-	TagNames() []string
-	SetTagNames(tagNames []string)
-	Orientation() PaperOrientation
-	SetOrientation(orientation PaperOrientation)
-	PaperSize() corefoundation.CGSize
-	SetPaperSize(paperSize corefoundation.CGSize)
-	Attributes() obj.Object
-}
-
-var _ PDFInfoable = (*PDFInfo)(nil)

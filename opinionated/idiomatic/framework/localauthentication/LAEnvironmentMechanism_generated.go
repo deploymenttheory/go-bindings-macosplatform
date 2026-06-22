@@ -46,63 +46,53 @@ func environmentMechanismAdopt(id objc.ID) *EnvironmentMechanism {
 }
 
 // Description returns the object's -description text.
-func (x *EnvironmentMechanism) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (em *EnvironmentMechanism) Description() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnvironmentMechanism) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (em *EnvironmentMechanism) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(em), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnvironmentMechanism) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (em *EnvironmentMechanism) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(em), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EnvironmentMechanism) String() string {
-	return rt.Description(objref.IDOf(x))
+func (em *EnvironmentMechanism) String() string {
+	return rt.Description(objref.IDOf(em))
 }
 
-// IsUsable whether the mechanism is available for use, i.e. whether the relevant preflight call of
-func (x *EnvironmentMechanism) IsUsable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUsable"))
+// IsUsable reports whether the mechanism is available for use, i.e. whether the relevant preflight call of
+func (em *EnvironmentMechanism) IsUsable() bool {
+	_r := objc.Send[bool](objref.IDOf(em), objc.RegisterName("isUsable"))
 	return _r
 }
 
-// LocalizedName the localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
-func (x *EnvironmentMechanism) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns the localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
+func (em *EnvironmentMechanism) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IconSystemName name of the SF Symbol representing this authentication mechanism.
-func (x *EnvironmentMechanism) IconSystemName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconSystemName"))
+// IconSystemName returns name of the SF Symbol representing this authentication mechanism.
+func (em *EnvironmentMechanism) IconSystemName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("iconSystemName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// EnvironmentMechanismable is the interface implemented by [EnvironmentMechanism], for mocking and DI.
-type EnvironmentMechanismable interface {
-	obj.Object
-	IsUsable() bool
-	LocalizedName() string
-	IconSystemName() string
-}
-
-var _ EnvironmentMechanismable = (*EnvironmentMechanism)(nil)
 
 // isEnvironmentMechanism marks EnvironmentMechanism — and, by embedding promotion, its
 // subclasses — as a member of the EnvironmentMechanism hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *EnvironmentMechanism) isEnvironmentMechanism() {}
+func (em *EnvironmentMechanism) isEnvironmentMechanism() {}
 
 var _ EnvironmentMechanismProvider = (*EnvironmentMechanism)(nil)

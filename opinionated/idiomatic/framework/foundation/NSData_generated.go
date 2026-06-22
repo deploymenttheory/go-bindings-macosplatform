@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Data is an idiomatic wrapper over the Objective-C class NSData.
@@ -50,24 +51,24 @@ func dataAdopt(id objc.ID) *Data {
 }
 
 // Description returns the object's -description text.
-func (x *Data) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Data) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Data) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Data) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Data) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Data) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Data) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Data) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDataWithContentsOfFileOptionsError initializes a data object with the content of the file at a given path.
@@ -142,39 +143,39 @@ func NewDataWithBase64Encoding(base64String string) *Data {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (d *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return d
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *Data) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (d *Data) Length() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("length"))
 	return _r
 }
 
 // IsEqualToData returns a Boolean value indicating whether this data object is the same as another.
-func (x *Data) IsEqualToData(other *Data) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToData:"), objref.IDOf(other))
+func (d *Data) IsEqualToData(other *Data) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToData:"), objref.IDOf(other))
 	return _r
 }
 
 // WriteToFileAtomically writes the data object’s bytes to the file specified by a given path.
-func (x *Data) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
+func (d *Data) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
 // WriteToURLAtomically writes the data object’s bytes to the location specified by a given URL.
-func (x *Data) WriteToURLAtomically(url string, atomically bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
+func (d *Data) WriteToURLAtomically(url string, atomically bool) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
 // WriteToFileOptions writes the data object’s bytes to the file specified by a given path.
-func (x *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptions) error {
+func (d *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptions) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:options:error:"), purego.NSString(path), writeOptionsMask, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:options:error:"), purego.NSString(path), writeOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -182,9 +183,9 @@ func (x *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptio
 }
 
 // WriteToURLOptions writes the data object’s bytes to the location specified by a given URL.
-func (x *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions) error {
+func (d *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:options:error:"), rt.FileURL(url), writeOptionsMask, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:options:error:"), rt.FileURL(url), writeOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -192,8 +193,8 @@ func (x *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions
 }
 
 // Base64EncodedStringWithOptions creates a Base64 encoded string from the string using the given options.
-func (x *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("base64EncodedStringWithOptions:"), options)
+func (d *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions) string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("base64EncodedStringWithOptions:"), options)
 	if _r == 0 {
 		return ""
 	}
@@ -201,15 +202,15 @@ func (x *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions)
 }
 
 // Base64EncodedDataWithOptions creates a Base64, UTF-8 encoded data object from the string using the given options.
-func (x *Data) Base64EncodedDataWithOptions(options DataBase64EncodingOptions) *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("base64EncodedDataWithOptions:"), options)
+func (d *Data) Base64EncodedDataWithOptions(options DataBase64EncodingOptions) *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("base64EncodedDataWithOptions:"), options)
 	return DataFromID(_r)
 }
 
 // DecompressedDataUsingAlgorithmError returns a new data object by decompressing data object’s bytes.
-func (x *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
+func (d *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decompressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("decompressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -217,46 +218,27 @@ func (x *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgo
 }
 
 // CompressedDataUsingAlgorithmError returns a new data object by compressing the data object’s bytes.
-func (x *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
+func (d *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("compressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return DataFromID(_r), nil
 }
 
-// Base64Encoding initializes a Base64 encoded string from the string.
-func (x *Data) Base64Encoding() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("base64Encoding"))
+// Base64Encoding returns initializes a Base64 encoded string from the string.
+func (d *Data) Base64Encoding() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("base64Encoding"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Dataable is the interface implemented by [Data], for mocking and DI.
-type Dataable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Data
-	Length() int
-	IsEqualToData(other *Data) bool
-	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
-	WriteToURLAtomically(url string, atomically bool) bool
-	WriteToFileOptions(path string, writeOptionsMask DataWritingOptions) error
-	WriteToURLOptions(url string, writeOptionsMask DataWritingOptions) error
-	Base64EncodedStringWithOptions(options DataBase64EncodingOptions) string
-	Base64EncodedDataWithOptions(options DataBase64EncodingOptions) *Data
-	DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error)
-	CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error)
-	Base64Encoding() string
-}
-
-var _ Dataable = (*Data)(nil)
-
 // isData marks Data — and, by embedding promotion, its
 // subclasses — as a member of the Data hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Data) isData() {}
+func (d *Data) isData() {}
 
 var _ DataProvider = (*Data)(nil)

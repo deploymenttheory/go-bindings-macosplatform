@@ -6,6 +6,7 @@ package gamesave
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func syncedDirectoryAdopt(id objc.ID) *SyncedDirectory {
 }
 
 // Description returns the object's -description text.
-func (x *SyncedDirectory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SyncedDirectory) Description() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncedDirectory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sd *SyncedDirectory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncedDirectory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sd *SyncedDirectory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncedDirectory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *SyncedDirectory) String() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // NewSyncedDirectory creates a new SyncedDirectory.
@@ -74,29 +75,29 @@ func NewSyncedDirectory() *SyncedDirectory {
 }
 
 // Close closes the directory, and resumes syncing the directory to the cloud.
-func (x *SyncedDirectory) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (sd *SyncedDirectory) Close() {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("close"))
 }
 
 // TriggerPendingUploadWithCompletionHandler triggers an upload of the directory for any changes that were pending.
-func (x *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerPendingUploadWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+func (sd *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("triggerPendingUploadWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // ResolveConflictsWithVersion indicates that you resolved a conflict.
-func (x *SyncedDirectory) ResolveConflictsWithVersion(version *SyncedDirectoryVersion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveConflictsWithVersion:"), objref.IDOf(version))
+func (sd *SyncedDirectory) ResolveConflictsWithVersion(version *SyncedDirectoryVersion) {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("resolveConflictsWithVersion:"), objref.IDOf(version))
 }
 
 // FinishSyncing waits for the directory sync to complete, without showing any user interface.
 //
 // FinishSyncing blocks until the operation completes or ctx is cancelled.
-func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
+func (sd *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSyncingWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("finishSyncingWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -105,20 +106,8 @@ func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 	}
 }
 
-// DirectoryState the state of the directory.
-func (x *SyncedDirectory) DirectoryState() *SyncedDirectoryState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryState"))
+// DirectoryState returns the state of the directory.
+func (sd *SyncedDirectory) DirectoryState() *SyncedDirectoryState {
+	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("directoryState"))
 	return SyncedDirectoryStateFromID(_r)
 }
-
-// SyncedDirectoryable is the interface implemented by [SyncedDirectory], for mocking and DI.
-type SyncedDirectoryable interface {
-	obj.Object
-	Close()
-	TriggerPendingUploadWithCompletionHandler(completion func(bool))
-	ResolveConflictsWithVersion(version *SyncedDirectoryVersion)
-	FinishSyncing(ctx context.Context) error
-	DirectoryState() *SyncedDirectoryState
-}
-
-var _ SyncedDirectoryable = (*SyncedDirectory)(nil)

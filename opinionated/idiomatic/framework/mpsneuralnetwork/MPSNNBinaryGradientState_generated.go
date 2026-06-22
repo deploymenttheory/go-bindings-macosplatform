@@ -46,36 +46,29 @@ func nNBinaryGradientStateAdopt(id objc.ID) *NNBinaryGradientState {
 }
 
 // Description returns the object's -description text.
-func (x *NNBinaryGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nbgs *NNBinaryGradientState) Description() string {
+	return rt.Description(objref.IDOf(nbgs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNBinaryGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nbgs *NNBinaryGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nbgs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNBinaryGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nbgs *NNBinaryGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nbgs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNBinaryGradientState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nbgs *NNBinaryGradientState) String() string {
+	return rt.Description(objref.IDOf(nbgs))
 }
-
-// NNBinaryGradientStateable is the interface implemented by [NNBinaryGradientState], for mocking and DI.
-type NNBinaryGradientStateable interface {
-	obj.Object
-}
-
-var _ NNBinaryGradientStateable = (*NNBinaryGradientState)(nil)
 
 // isNNBinaryGradientState marks NNBinaryGradientState — and, by embedding promotion, its
 // subclasses — as a member of the NNBinaryGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNBinaryGradientState) isNNBinaryGradientState() {}
+func (nbgs *NNBinaryGradientState) isNNBinaryGradientState() {}
 
 var _ NNBinaryGradientStateProvider = (*NNBinaryGradientState)(nil)

@@ -46,24 +46,24 @@ func productSubscriptionPeriodAdopt(id objc.ID) *ProductSubscriptionPeriod {
 }
 
 // Description returns the object's -description text.
-func (x *ProductSubscriptionPeriod) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (psp *ProductSubscriptionPeriod) Description() string {
+	return rt.Description(objref.IDOf(psp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProductSubscriptionPeriod) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (psp *ProductSubscriptionPeriod) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(psp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProductSubscriptionPeriod) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (psp *ProductSubscriptionPeriod) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(psp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProductSubscriptionPeriod) String() string {
-	return rt.Description(objref.IDOf(x))
+func (psp *ProductSubscriptionPeriod) String() string {
+	return rt.Description(objref.IDOf(psp))
 }
 
 // NewProductSubscriptionPeriod creates a new ProductSubscriptionPeriod.
@@ -73,22 +73,13 @@ func NewProductSubscriptionPeriod() *ProductSubscriptionPeriod {
 }
 
 // NumberOfUnits wraps the corresponding Objective-C method.
-func (x *ProductSubscriptionPeriod) NumberOfUnits() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfUnits"))
+func (psp *ProductSubscriptionPeriod) NumberOfUnits() int {
+	_r := objc.Send[int](objref.IDOf(psp), objc.RegisterName("numberOfUnits"))
 	return _r
 }
 
 // Unit wraps the corresponding Objective-C method.
-func (x *ProductSubscriptionPeriod) Unit() ProductPeriodUnit {
-	_r := objc.Send[ProductPeriodUnit](objref.IDOf(x), objc.RegisterName("unit"))
+func (psp *ProductSubscriptionPeriod) Unit() ProductPeriodUnit {
+	_r := objc.Send[ProductPeriodUnit](objref.IDOf(psp), objc.RegisterName("unit"))
 	return _r
 }
-
-// ProductSubscriptionPeriodable is the interface implemented by [ProductSubscriptionPeriod], for mocking and DI.
-type ProductSubscriptionPeriodable interface {
-	obj.Object
-	NumberOfUnits() int
-	Unit() ProductPeriodUnit
-}
-
-var _ ProductSubscriptionPeriodable = (*ProductSubscriptionPeriod)(nil)

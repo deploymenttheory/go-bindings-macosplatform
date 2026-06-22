@@ -46,24 +46,24 @@ func cloudIdentifierMappingAdopt(id objc.ID) *CloudIdentifierMapping {
 }
 
 // Description returns the object's -description text.
-func (x *CloudIdentifierMapping) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cim *CloudIdentifierMapping) Description() string {
+	return rt.Description(objref.IDOf(cim))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CloudIdentifierMapping) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cim *CloudIdentifierMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cim), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CloudIdentifierMapping) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cim *CloudIdentifierMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cim), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CloudIdentifierMapping) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cim *CloudIdentifierMapping) String() string {
+	return rt.Description(objref.IDOf(cim))
 }
 
 // NewCloudIdentifierMapping creates a new CloudIdentifierMapping.
@@ -72,16 +72,8 @@ func NewCloudIdentifierMapping() *CloudIdentifierMapping {
 	return cloudIdentifierMappingAdopt(_id)
 }
 
-// CloudIdentifier the cloud identifier of the resource found for this local identifier
-func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifier"))
+// CloudIdentifier returns the cloud identifier of the resource found for this local identifier
+func (cim *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("cloudIdentifier"))
 	return CloudIdentifierFromID(_r)
 }
-
-// CloudIdentifierMappingable is the interface implemented by [CloudIdentifierMapping], for mocking and DI.
-type CloudIdentifierMappingable interface {
-	obj.Object
-	CloudIdentifier() *CloudIdentifier
-}
-
-var _ CloudIdentifierMappingable = (*CloudIdentifierMapping)(nil)

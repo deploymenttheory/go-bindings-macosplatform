@@ -52,41 +52,25 @@ func NewChangePlaybackRateCommand() *ChangePlaybackRateCommand {
 	return changePlaybackRateCommandAdopt(_id)
 }
 
-// WithSupportedPlaybackRates the supported playback rates for a media item.
-func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...obj.Object) *ChangePlaybackRateCommand {
+// WithSupportedPlaybackRates sets the supported playback rates for a media item.
+func (cprc *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...obj.Object) *ChangePlaybackRateCommand {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedPlaybackRates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cprc), objc.RegisterName("setSupportedPlaybackRates:"), _arr)
+	return cprc
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlaybackRateCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (cprc *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlaybackRateCommand {
+	objc.Send[objc.ID](objref.IDOf(cprc), objc.RegisterName("setEnabled:"), enabled)
+	return cprc
 }
 
 // SupportedPlaybackRates wraps the corresponding Objective-C method.
 //
 // SupportedPlaybackRates returns the collection as a Go slice.
-func (x *ChangePlaybackRateCommand) SupportedPlaybackRates() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPlaybackRates"))
+func (cprc *ChangePlaybackRateCommand) SupportedPlaybackRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(cprc), objc.RegisterName("supportedPlaybackRates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetSupportedPlaybackRates wraps the corresponding Objective-C method.
-func (x *ChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackRates []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedPlaybackRates:"), purego.SliceToNSArray(supportedPlaybackRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ChangePlaybackRateCommandable is the interface implemented by [ChangePlaybackRateCommand], for mocking and DI.
-type ChangePlaybackRateCommandable interface {
-	obj.Object
-	WithSupportedPlaybackRates(items ...obj.Object) *ChangePlaybackRateCommand
-	WithEnabled(enabled bool) *ChangePlaybackRateCommand
-	SupportedPlaybackRates() []obj.Object
-	SetSupportedPlaybackRates(supportedPlaybackRates []obj.Object)
-}
-
-var _ ChangePlaybackRateCommandable = (*ChangePlaybackRateCommand)(nil)
 
 var _ RemoteCommandProvider = (*ChangePlaybackRateCommand)(nil)

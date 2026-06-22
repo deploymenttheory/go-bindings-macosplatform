@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,26 +51,17 @@ func NewGeodesicPolyline() *GeodesicPolyline {
 	return geodesicPolylineAdopt(_id)
 }
 
-// WithTitle the title of the shape annotation.
-func (x *GeodesicPolyline) WithTitle(title string) *GeodesicPolyline {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (gp *GeodesicPolyline) WithTitle(title string) *GeodesicPolyline {
+	objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return gp
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *GeodesicPolyline) WithSubtitle(subtitle string) *GeodesicPolyline {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (gp *GeodesicPolyline) WithSubtitle(subtitle string) *GeodesicPolyline {
+	objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return gp
 }
-
-// GeodesicPolylineable is the interface implemented by [GeodesicPolyline], for mocking and DI.
-type GeodesicPolylineable interface {
-	obj.Object
-	WithTitle(title string) *GeodesicPolyline
-	WithSubtitle(subtitle string) *GeodesicPolyline
-}
-
-var _ GeodesicPolylineable = (*GeodesicPolyline)(nil)
 
 var _ PolylineProvider = (*GeodesicPolyline)(nil)
 

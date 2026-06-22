@@ -53,32 +53,22 @@ func NewCNNDropoutGradientState() *CNNDropoutGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNDropoutGradientState) WithReadCount(readCount int) *CNNDropoutGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cdgs *CNNDropoutGradientState) WithReadCount(readCount int) *CNNDropoutGradientState {
+	objc.Send[objc.ID](objref.IDOf(cdgs), objc.RegisterName("setReadCount:"), readCount)
+	return cdgs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNDropoutGradientState) WithLabel(label string) *CNNDropoutGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cdgs *CNNDropoutGradientState) WithLabel(label string) *CNNDropoutGradientState {
+	objc.Send[objc.ID](objref.IDOf(cdgs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cdgs
 }
 
-// MaskData mask data accessor method.
-func (x *CNNDropoutGradientState) MaskData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maskData"))
+// MaskData returns mask data accessor method.
+func (cdgs *CNNDropoutGradientState) MaskData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdgs), objc.RegisterName("maskData"))
 	return obj.Wrap(_r)
 }
-
-// CNNDropoutGradientStateable is the interface implemented by [CNNDropoutGradientState], for mocking and DI.
-type CNNDropoutGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNDropoutGradientState
-	WithLabel(label string) *CNNDropoutGradientState
-	MaskData() obj.Object
-}
-
-var _ CNNDropoutGradientStateable = (*CNNDropoutGradientState)(nil)
 
 var _ NNGradientStateProvider = (*CNNDropoutGradientState)(nil)
 

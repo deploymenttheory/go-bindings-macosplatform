@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func cNNConvolutionGradientNodeAdopt(id objc.ID) *CNNConvolutionGradientNode {
 	return x
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionGradientNode) WithLabel(label string) *CNNConvolutionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ccgn *CNNConvolutionGradientNode) WithLabel(label string) *CNNConvolutionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(ccgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ccgn
 }
-
-// CNNConvolutionGradientNodeable is the interface implemented by [CNNConvolutionGradientNode], for mocking and DI.
-type CNNConvolutionGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNConvolutionGradientNode
-}
-
-var _ CNNConvolutionGradientNodeable = (*CNNConvolutionGradientNode)(nil)
 
 // isCNNConvolutionGradientNode marks CNNConvolutionGradientNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionGradientNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNConvolutionGradientNode) isCNNConvolutionGradientNode() {}
+func (ccgn *CNNConvolutionGradientNode) isCNNConvolutionGradientNode() {}
 
 var _ CNNConvolutionGradientNodeProvider = (*CNNConvolutionGradientNode)(nil)
 

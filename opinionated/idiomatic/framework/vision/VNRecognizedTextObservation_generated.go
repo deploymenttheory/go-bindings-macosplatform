@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewRecognizedTextObservation() *RecognizedTextObservation {
 }
 
 // TopCandidates requests the n top candidates for a recognized text string.
-func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount int) []*RecognizedText {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topCandidates:"), maxCandidateCount)
+func (rto *RecognizedTextObservation) TopCandidates(maxCandidateCount int) []*RecognizedText {
+	_r := objc.Send[objc.ID](objref.IDOf(rto), objc.RegisterName("topCandidates:"), maxCandidateCount)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RecognizedText { return RecognizedTextFromID(_id) })
 }
-
-// RecognizedTextObservationable is the interface implemented by [RecognizedTextObservation], for mocking and DI.
-type RecognizedTextObservationable interface {
-	obj.Object
-	TopCandidates(maxCandidateCount int) []*RecognizedText
-}
-
-var _ RecognizedTextObservationable = (*RecognizedTextObservation)(nil)
 
 var _ RectangleObservationProvider = (*RecognizedTextObservation)(nil)
 

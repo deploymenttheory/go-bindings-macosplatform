@@ -48,36 +48,29 @@ func point3DAdopt(id objc.ID) *Point3D {
 }
 
 // Description returns the object's -description text.
-func (x *Point3D) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *Point3D) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Point3D) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *Point3D) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Point3D) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *Point3D) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Point3D) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *Point3D) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
-
-// Point3Dable is the interface implemented by [Point3D], for mocking and DI.
-type Point3Dable interface {
-	obj.Object
-}
-
-var _ Point3Dable = (*Point3D)(nil)
 
 // isPoint3D marks Point3D — and, by embedding promotion, its
 // subclasses — as a member of the Point3D hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Point3D) isPoint3D() {}
+func (pd *Point3D) isPoint3D() {}
 
 var _ Point3DProvider = (*Point3D)(nil)

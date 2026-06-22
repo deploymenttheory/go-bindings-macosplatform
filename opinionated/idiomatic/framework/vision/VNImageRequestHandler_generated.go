@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ImageRequestHandler is an idiomatic wrapper over the Objective-C class VNImageRequestHandler.
@@ -48,24 +49,24 @@ func imageRequestHandlerAdopt(id objc.ID) *ImageRequestHandler {
 }
 
 // Description returns the object's -description text.
-func (x *ImageRequestHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (irh *ImageRequestHandler) Description() string {
+	return rt.Description(objref.IDOf(irh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageRequestHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (irh *ImageRequestHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(irh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageRequestHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (irh *ImageRequestHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(irh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageRequestHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (irh *ImageRequestHandler) String() string {
+	return rt.Description(objref.IDOf(irh))
 }
 
 // NewImageRequestHandlerWithCGImageOptions creates a handler to be used for performing requests on Core Graphics images.
@@ -104,19 +105,11 @@ func NewImageRequestHandlerWithCMSampleBufferOptions(sampleBuffer obj.Object, op
 }
 
 // PerformRequests schedules Vision requests to perform.
-func (x *ImageRequestHandler) PerformRequests(requests []*Request) error {
+func (irh *ImageRequestHandler) PerformRequests(requests []*Request) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performRequests:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(irh), objc.RegisterName("performRequests:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// ImageRequestHandlerable is the interface implemented by [ImageRequestHandler], for mocking and DI.
-type ImageRequestHandlerable interface {
-	obj.Object
-	PerformRequests(requests []*Request) error
-}
-
-var _ ImageRequestHandlerable = (*ImageRequestHandler)(nil)

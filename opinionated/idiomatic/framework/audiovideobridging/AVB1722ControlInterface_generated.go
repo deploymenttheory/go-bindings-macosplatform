@@ -46,24 +46,24 @@ func aVB1722ControlInterfaceAdopt(id objc.ID) *AVB1722ControlInterface {
 }
 
 // Description returns the object's -description text.
-func (x *AVB1722ControlInterface) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aci *AVB1722ControlInterface) Description() string {
+	return rt.Description(objref.IDOf(aci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AVB1722ControlInterface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aci *AVB1722ControlInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AVB1722ControlInterface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aci *AVB1722ControlInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AVB1722ControlInterface) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aci *AVB1722ControlInterface) String() string {
+	return rt.Description(objref.IDOf(aci))
 }
 
 // NewAVB1722ControlInterfaceWithInterfaceName initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
@@ -81,32 +81,23 @@ func NewAVB1722ControlInterfaceWithInterface(anInterface *Interface) *AVB1722Con
 }
 
 // InterfaceName wraps the corresponding Objective-C method.
-func (x *AVB1722ControlInterface) InterfaceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
+func (aci *AVB1722ControlInterface) InterfaceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("interfaceName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Interface the AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
-func (x *AVB1722ControlInterface) Interface() *Interface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
+// Interface returns the AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+func (aci *AVB1722ControlInterface) Interface() *Interface {
+	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
 }
-
-// AVB1722ControlInterfaceable is the interface implemented by [AVB1722ControlInterface], for mocking and DI.
-type AVB1722ControlInterfaceable interface {
-	obj.Object
-	InterfaceName() string
-	Interface() *Interface
-}
-
-var _ AVB1722ControlInterfaceable = (*AVB1722ControlInterface)(nil)
 
 // isAVB1722ControlInterface marks AVB1722ControlInterface — and, by embedding promotion, its
 // subclasses — as a member of the AVB1722ControlInterface hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AVB1722ControlInterface) isAVB1722ControlInterface() {}
+func (aci *AVB1722ControlInterface) isAVB1722ControlInterface() {}
 
 var _ AVB1722ControlInterfaceProvider = (*AVB1722ControlInterface)(nil)

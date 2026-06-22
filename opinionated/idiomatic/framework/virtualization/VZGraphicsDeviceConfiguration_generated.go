@@ -48,36 +48,29 @@ func graphicsDeviceConfigurationAdopt(id objc.ID) *GraphicsDeviceConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *GraphicsDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gdc *GraphicsDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(gdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GraphicsDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gdc *GraphicsDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GraphicsDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gdc *GraphicsDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GraphicsDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gdc *GraphicsDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(gdc))
 }
-
-// GraphicsDeviceConfigurationable is the interface implemented by [GraphicsDeviceConfiguration], for mocking and DI.
-type GraphicsDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ GraphicsDeviceConfigurationable = (*GraphicsDeviceConfiguration)(nil)
 
 // isGraphicsDeviceConfiguration marks GraphicsDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the GraphicsDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *GraphicsDeviceConfiguration) isGraphicsDeviceConfiguration() {}
+func (gdc *GraphicsDeviceConfiguration) isGraphicsDeviceConfiguration() {}
 
 var _ GraphicsDeviceConfigurationProvider = (*GraphicsDeviceConfiguration)(nil)

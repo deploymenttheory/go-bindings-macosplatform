@@ -44,24 +44,24 @@ func cNNYOLOLossDescriptorAdopt(id objc.ID) *CNNYOLOLossDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *CNNYOLOLossDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cld *CNNYOLOLossDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNYOLOLossDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cld *CNNYOLOLossDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNYOLOLossDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cld *CNNYOLOLossDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CNNYOLOLossDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cld *CNNYOLOLossDescriptor) String() string {
+	return rt.Description(objref.IDOf(cld))
 }
 
 // NewCNNYOLOLossDescriptor creates a new CNNYOLOLossDescriptor.
@@ -70,329 +70,194 @@ func NewCNNYOLOLossDescriptor() *CNNYOLOLossDescriptor {
 	return cNNYOLOLossDescriptorAdopt(_id)
 }
 
-// WithXYLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) WithXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXYLossDescriptor:"), objref.IDOf(xYLossDescriptor))
-	return x
+// WithXYLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) WithXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setXYLossDescriptor:"), objref.IDOf(xYLossDescriptor))
+	return cld
 }
 
-// WithWHLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWHLossDescriptor:"), objref.IDOf(wHLossDescriptor))
-	return x
+// WithWHLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setWHLossDescriptor:"), objref.IDOf(wHLossDescriptor))
+	return cld
 }
 
-// WithConfidenceLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidenceLossDescriptor:"), objref.IDOf(confidenceLossDescriptor))
-	return x
+// WithConfidenceLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setConfidenceLossDescriptor:"), objref.IDOf(confidenceLossDescriptor))
+	return cld
 }
 
-// WithClassesLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassesLossDescriptor:"), objref.IDOf(classesLossDescriptor))
-	return x
+// WithClassesLossDescriptor sets the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setClassesLossDescriptor:"), objref.IDOf(classesLossDescriptor))
+	return cld
 }
 
-// WithReductionType reductionType shared accross all losses (so they may generate same sized output)
-func (x *CNNYOLOLossDescriptor) WithReductionType(reductionType CNNReductionType) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReductionType:"), reductionType)
-	return x
+// WithReductionType sets reductionType shared accross all losses (so they may generate same sized output)
+func (cld *CNNYOLOLossDescriptor) WithReductionType(reductionType CNNReductionType) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setReductionType:"), reductionType)
+	return cld
 }
 
-// WithReduceAcrossBatch if set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
-func (x *CNNYOLOLossDescriptor) WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReduceAcrossBatch:"), reduceAcrossBatch)
-	return x
+// WithReduceAcrossBatch sets if set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
+func (cld *CNNYOLOLossDescriptor) WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setReduceAcrossBatch:"), reduceAcrossBatch)
+	return cld
 }
 
-// WithRescore rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is YES
-func (x *CNNYOLOLossDescriptor) WithRescore(rescore bool) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRescore:"), rescore)
-	return x
+// WithRescore sets rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is YES
+func (cld *CNNYOLOLossDescriptor) WithRescore(rescore bool) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setRescore:"), rescore)
+	return cld
 }
 
-// WithScaleXY scale factor for XY loss and loss gradient default is 10.0
-func (x *CNNYOLOLossDescriptor) WithScaleXY(scaleXY float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleXY:"), scaleXY)
-	return x
+// WithScaleXY sets scale factor for XY loss and loss gradient default is 10.0
+func (cld *CNNYOLOLossDescriptor) WithScaleXY(scaleXY float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setScaleXY:"), scaleXY)
+	return cld
 }
 
-// WithScaleWH scale factor for WH loss and loss gradient default is 10.0
-func (x *CNNYOLOLossDescriptor) WithScaleWH(scaleWH float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleWH:"), scaleWH)
-	return x
+// WithScaleWH sets scale factor for WH loss and loss gradient default is 10.0
+func (cld *CNNYOLOLossDescriptor) WithScaleWH(scaleWH float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setScaleWH:"), scaleWH)
+	return cld
 }
 
-// WithScaleNoObject scale factor for no object confidence loss and loss gradient default is 5.0
-func (x *CNNYOLOLossDescriptor) WithScaleNoObject(scaleNoObject float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleNoObject:"), scaleNoObject)
-	return x
+// WithScaleNoObject sets scale factor for no object confidence loss and loss gradient default is 5.0
+func (cld *CNNYOLOLossDescriptor) WithScaleNoObject(scaleNoObject float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setScaleNoObject:"), scaleNoObject)
+	return cld
 }
 
-// WithScaleObject scale factor for no object confidence loss and loss gradient default is 100.0
-func (x *CNNYOLOLossDescriptor) WithScaleObject(scaleObject float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleObject:"), scaleObject)
-	return x
+// WithScaleObject sets scale factor for no object confidence loss and loss gradient default is 100.0
+func (cld *CNNYOLOLossDescriptor) WithScaleObject(scaleObject float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setScaleObject:"), scaleObject)
+	return cld
 }
 
-// WithScaleClass scale factor for no object classes loss and loss gradient default is 2.0
-func (x *CNNYOLOLossDescriptor) WithScaleClass(scaleClass float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleClass:"), scaleClass)
-	return x
+// WithScaleClass sets scale factor for no object classes loss and loss gradient default is 2.0
+func (cld *CNNYOLOLossDescriptor) WithScaleClass(scaleClass float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setScaleClass:"), scaleClass)
+	return cld
 }
 
-// WithMinIOUForObjectPresence if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
-func (x *CNNYOLOLossDescriptor) WithMinIOUForObjectPresence(minIOUForObjectPresence float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinIOUForObjectPresence:"), minIOUForObjectPresence)
-	return x
+// WithMinIOUForObjectPresence sets if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
+func (cld *CNNYOLOLossDescriptor) WithMinIOUForObjectPresence(minIOUForObjectPresence float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setMinIOUForObjectPresence:"), minIOUForObjectPresence)
+	return cld
 }
 
-// WithMaxIOUForObjectAbsence if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
-func (x *CNNYOLOLossDescriptor) WithMaxIOUForObjectAbsence(maxIOUForObjectAbsence float32) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxIOUForObjectAbsence:"), maxIOUForObjectAbsence)
-	return x
+// WithMaxIOUForObjectAbsence sets if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
+func (cld *CNNYOLOLossDescriptor) WithMaxIOUForObjectAbsence(maxIOUForObjectAbsence float32) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setMaxIOUForObjectAbsence:"), maxIOUForObjectAbsence)
+	return cld
 }
 
-// WithNumberOfAnchorBoxes number of anchor boxes used to detect object per grid cell
-func (x *CNNYOLOLossDescriptor) WithNumberOfAnchorBoxes(numberOfAnchorBoxes int) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfAnchorBoxes:"), numberOfAnchorBoxes)
-	return x
+// WithNumberOfAnchorBoxes sets number of anchor boxes used to detect object per grid cell
+func (cld *CNNYOLOLossDescriptor) WithNumberOfAnchorBoxes(numberOfAnchorBoxes int) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setNumberOfAnchorBoxes:"), numberOfAnchorBoxes)
+	return cld
 }
 
-// WithAnchorBoxes NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box.
-func (x *CNNYOLOLossDescriptor) WithAnchorBoxes(anchorBoxes obj.Object) *CNNYOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorBoxes:"), objref.IDOf(anchorBoxes))
-	return x
+// WithAnchorBoxes sets NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box.
+func (cld *CNNYOLOLossDescriptor) WithAnchorBoxes(anchorBoxes obj.Object) *CNNYOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("setAnchorBoxes:"), objref.IDOf(anchorBoxes))
+	return cld
 }
 
-// XYLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) XYLossDescriptor() *CNNLossDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("XYLossDescriptor"))
+// XYLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) XYLossDescriptor() *CNNLossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("XYLossDescriptor"))
 	return CNNLossDescriptorFromID(_r)
 }
 
-// SetXYLossDescriptor wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXYLossDescriptor:"), objref.IDOf(xYLossDescriptor))
-}
-
-// WHLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) WHLossDescriptor() *CNNLossDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("WHLossDescriptor"))
+// WHLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) WHLossDescriptor() *CNNLossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("WHLossDescriptor"))
 	return CNNLossDescriptorFromID(_r)
 }
 
-// SetWHLossDescriptor wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWHLossDescriptor:"), objref.IDOf(wHLossDescriptor))
-}
-
-// ConfidenceLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) ConfidenceLossDescriptor() *CNNLossDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("confidenceLossDescriptor"))
+// ConfidenceLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) ConfidenceLossDescriptor() *CNNLossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("confidenceLossDescriptor"))
 	return CNNLossDescriptorFromID(_r)
 }
 
-// SetConfidenceLossDescriptor wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidenceLossDescriptor:"), objref.IDOf(confidenceLossDescriptor))
-}
-
-// ClassesLossDescriptor the type of a loss filter. This parameter specifies the type of a loss filter.
-func (x *CNNYOLOLossDescriptor) ClassesLossDescriptor() *CNNLossDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classesLossDescriptor"))
+// ClassesLossDescriptor returns the type of a loss filter. This parameter specifies the type of a loss filter.
+func (cld *CNNYOLOLossDescriptor) ClassesLossDescriptor() *CNNLossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("classesLossDescriptor"))
 	return CNNLossDescriptorFromID(_r)
 }
 
-// SetClassesLossDescriptor wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassesLossDescriptor:"), objref.IDOf(classesLossDescriptor))
-}
-
-// ReductionType reductionType shared accross all losses (so they may generate same sized output)
-func (x *CNNYOLOLossDescriptor) ReductionType() CNNReductionType {
-	_r := objc.Send[CNNReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+// ReductionType returns reductionType shared accross all losses (so they may generate same sized output)
+func (cld *CNNYOLOLossDescriptor) ReductionType() CNNReductionType {
+	_r := objc.Send[CNNReductionType](objref.IDOf(cld), objc.RegisterName("reductionType"))
 	return _r
 }
 
-// SetReductionType wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetReductionType(reductionType CNNReductionType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReductionType:"), reductionType)
-}
-
-// ReduceAcrossBatch if set to YES then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to NO, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to YES and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is NO.
-func (x *CNNYOLOLossDescriptor) ReduceAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+// ReduceAcrossBatch reports whether if set to true then the reduction operation is applied also across the batch-index dimension, ie. the loss value is summed over images in the batch and the result of the reduction is written on the first loss image in the batch while the other loss images will be set to zero. If set to false, then no reductions are performed across the batch dimension and each image in the batch will contain the loss value associated with that one particular image. NOTE: If reductionType == MPSCNNReductionTypeNone, then this flag has no effect on results, that is no reductions are done in this case. NOTE: If reduceAcrossBatch is set to true and reductionType == MPSCNNReductionTypeMean then the final forward loss value is computed by first summing over the components and then by dividing the result with: number of feature channels * width * height * number of images in the batch. The default value is false.
+func (cld *CNNYOLOLossDescriptor) ReduceAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
-// SetReduceAcrossBatch wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetReduceAcrossBatch(reduceAcrossBatch bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReduceAcrossBatch:"), reduceAcrossBatch)
-}
-
-// Rescore rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is YES
-func (x *CNNYOLOLossDescriptor) Rescore() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rescore"))
+// Rescore reports whether rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. Default is true
+func (cld *CNNYOLOLossDescriptor) Rescore() bool {
+	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("rescore"))
 	return _r
 }
 
-// SetRescore wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetRescore(rescore bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRescore:"), rescore)
-}
-
-// ScaleXY scale factor for XY loss and loss gradient default is 10.0
-func (x *CNNYOLOLossDescriptor) ScaleXY() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleXY"))
+// ScaleXY returns scale factor for XY loss and loss gradient default is 10.0
+func (cld *CNNYOLOLossDescriptor) ScaleXY() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleXY"))
 	return _r
 }
 
-// SetScaleXY wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetScaleXY(scaleXY float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleXY:"), scaleXY)
-}
-
-// ScaleWH scale factor for WH loss and loss gradient default is 10.0
-func (x *CNNYOLOLossDescriptor) ScaleWH() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleWH"))
+// ScaleWH returns scale factor for WH loss and loss gradient default is 10.0
+func (cld *CNNYOLOLossDescriptor) ScaleWH() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleWH"))
 	return _r
 }
 
-// SetScaleWH wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetScaleWH(scaleWH float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleWH:"), scaleWH)
-}
-
-// ScaleNoObject scale factor for no object confidence loss and loss gradient default is 5.0
-func (x *CNNYOLOLossDescriptor) ScaleNoObject() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleNoObject"))
+// ScaleNoObject returns scale factor for no object confidence loss and loss gradient default is 5.0
+func (cld *CNNYOLOLossDescriptor) ScaleNoObject() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleNoObject"))
 	return _r
 }
 
-// SetScaleNoObject wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetScaleNoObject(scaleNoObject float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleNoObject:"), scaleNoObject)
-}
-
-// ScaleObject scale factor for no object confidence loss and loss gradient default is 100.0
-func (x *CNNYOLOLossDescriptor) ScaleObject() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleObject"))
+// ScaleObject returns scale factor for no object confidence loss and loss gradient default is 100.0
+func (cld *CNNYOLOLossDescriptor) ScaleObject() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleObject"))
 	return _r
 }
 
-// SetScaleObject wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetScaleObject(scaleObject float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleObject:"), scaleObject)
-}
-
-// ScaleClass scale factor for no object classes loss and loss gradient default is 2.0
-func (x *CNNYOLOLossDescriptor) ScaleClass() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleClass"))
+// ScaleClass returns scale factor for no object classes loss and loss gradient default is 2.0
+func (cld *CNNYOLOLossDescriptor) ScaleClass() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("scaleClass"))
 	return _r
 }
 
-// SetScaleClass wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetScaleClass(scaleClass float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleClass:"), scaleClass)
-}
-
-// MinIOUForObjectPresence if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
-func (x *CNNYOLOLossDescriptor) MinIOUForObjectPresence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minIOUForObjectPresence"))
+// MinIOUForObjectPresence returns if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, default is 0.7
+func (cld *CNNYOLOLossDescriptor) MinIOUForObjectPresence() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("minIOUForObjectPresence"))
 	return _r
 }
 
-// SetMinIOUForObjectPresence wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetMinIOUForObjectPresence(minIOUForObjectPresence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinIOUForObjectPresence:"), minIOUForObjectPresence)
-}
-
-// MaxIOUForObjectAbsence if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
-func (x *CNNYOLOLossDescriptor) MaxIOUForObjectAbsence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxIOUForObjectAbsence"))
+// MaxIOUForObjectAbsence returns if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence, default is 0.3
+func (cld *CNNYOLOLossDescriptor) MaxIOUForObjectAbsence() float32 {
+	_r := objc.Send[float32](objref.IDOf(cld), objc.RegisterName("maxIOUForObjectAbsence"))
 	return _r
 }
 
-// SetMaxIOUForObjectAbsence wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetMaxIOUForObjectAbsence(maxIOUForObjectAbsence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxIOUForObjectAbsence:"), maxIOUForObjectAbsence)
-}
-
-// NumberOfAnchorBoxes number of anchor boxes used to detect object per grid cell
-func (x *CNNYOLOLossDescriptor) NumberOfAnchorBoxes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfAnchorBoxes"))
+// NumberOfAnchorBoxes returns number of anchor boxes used to detect object per grid cell
+func (cld *CNNYOLOLossDescriptor) NumberOfAnchorBoxes() int {
+	_r := objc.Send[int](objref.IDOf(cld), objc.RegisterName("numberOfAnchorBoxes"))
 	return _r
 }
 
-// SetNumberOfAnchorBoxes wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetNumberOfAnchorBoxes(numberOfAnchorBoxes int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfAnchorBoxes:"), numberOfAnchorBoxes)
-}
-
-// AnchorBoxes NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box.
-func (x *CNNYOLOLossDescriptor) AnchorBoxes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorBoxes"))
+// AnchorBoxes returns NSData containing the width and height for numberOfAnchorBoxes anchor boxes This NSData should have 2 float values per anchor box which represent the width and height of the anchor box.
+func (cld *CNNYOLOLossDescriptor) AnchorBoxes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cld), objc.RegisterName("anchorBoxes"))
 	return obj.Wrap(_r)
 }
-
-// SetAnchorBoxes wraps the corresponding Objective-C method.
-func (x *CNNYOLOLossDescriptor) SetAnchorBoxes(anchorBoxes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorBoxes:"), objref.IDOf(anchorBoxes))
-}
-
-// CNNYOLOLossDescriptorable is the interface implemented by [CNNYOLOLossDescriptor], for mocking and DI.
-type CNNYOLOLossDescriptorable interface {
-	obj.Object
-	WithXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithReductionType(reductionType CNNReductionType) *CNNYOLOLossDescriptor
-	WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNYOLOLossDescriptor
-	WithRescore(rescore bool) *CNNYOLOLossDescriptor
-	WithScaleXY(scaleXY float32) *CNNYOLOLossDescriptor
-	WithScaleWH(scaleWH float32) *CNNYOLOLossDescriptor
-	WithScaleNoObject(scaleNoObject float32) *CNNYOLOLossDescriptor
-	WithScaleObject(scaleObject float32) *CNNYOLOLossDescriptor
-	WithScaleClass(scaleClass float32) *CNNYOLOLossDescriptor
-	WithMinIOUForObjectPresence(minIOUForObjectPresence float32) *CNNYOLOLossDescriptor
-	WithMaxIOUForObjectAbsence(maxIOUForObjectAbsence float32) *CNNYOLOLossDescriptor
-	WithNumberOfAnchorBoxes(numberOfAnchorBoxes int) *CNNYOLOLossDescriptor
-	WithAnchorBoxes(anchorBoxes obj.Object) *CNNYOLOLossDescriptor
-	XYLossDescriptor() *CNNLossDescriptor
-	SetXYLossDescriptor(xYLossDescriptor *CNNLossDescriptor)
-	WHLossDescriptor() *CNNLossDescriptor
-	SetWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor)
-	ConfidenceLossDescriptor() *CNNLossDescriptor
-	SetConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor)
-	ClassesLossDescriptor() *CNNLossDescriptor
-	SetClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor)
-	ReductionType() CNNReductionType
-	SetReductionType(reductionType CNNReductionType)
-	ReduceAcrossBatch() bool
-	SetReduceAcrossBatch(reduceAcrossBatch bool)
-	Rescore() bool
-	SetRescore(rescore bool)
-	ScaleXY() float32
-	SetScaleXY(scaleXY float32)
-	ScaleWH() float32
-	SetScaleWH(scaleWH float32)
-	ScaleNoObject() float32
-	SetScaleNoObject(scaleNoObject float32)
-	ScaleObject() float32
-	SetScaleObject(scaleObject float32)
-	ScaleClass() float32
-	SetScaleClass(scaleClass float32)
-	MinIOUForObjectPresence() float32
-	SetMinIOUForObjectPresence(minIOUForObjectPresence float32)
-	MaxIOUForObjectAbsence() float32
-	SetMaxIOUForObjectAbsence(maxIOUForObjectAbsence float32)
-	NumberOfAnchorBoxes() int
-	SetNumberOfAnchorBoxes(numberOfAnchorBoxes int)
-	AnchorBoxes() obj.Object
-	SetAnchorBoxes(anchorBoxes obj.Object)
-}
-
-var _ CNNYOLOLossDescriptorable = (*CNNYOLOLossDescriptor)(nil)

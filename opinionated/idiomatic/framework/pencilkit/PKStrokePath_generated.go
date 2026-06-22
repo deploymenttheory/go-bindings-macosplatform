@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -12,7 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // StrokePath is an idiomatic wrapper over the Objective-C class PKStrokePath.
@@ -49,24 +50,24 @@ func strokePathAdopt(id objc.ID) *StrokePath {
 }
 
 // Description returns the object's -description text.
-func (x *StrokePath) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *StrokePath) Description() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StrokePath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sp *StrokePath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StrokePath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sp *StrokePath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StrokePath) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *StrokePath) String() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // NewStrokePathWithControlPointsCreationDate create a stroke path value with the given cubic B-spline control points.
@@ -77,83 +78,65 @@ func NewStrokePathWithControlPointsCreationDate(controlPoints []*StrokePoint, cr
 }
 
 // PointAtIndex returns B-spline control point at index `i`.
-func (x *StrokePath) PointAtIndex(i int) *StrokePoint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointAtIndex:"), i)
+func (sp *StrokePath) PointAtIndex(i int) *StrokePoint {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("pointAtIndex:"), i)
 	return StrokePointFromID(_r)
 }
 
 // ObjectAtIndexedSubscript returns B-spline control point at index `i`.
-func (x *StrokePath) ObjectAtIndexedSubscript(i int) *StrokePoint {
-	errkit.CheckIndex(i, x.Count())
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), i)
+func (sp *StrokePath) ObjectAtIndexedSubscript(i int) *StrokePoint {
+	errkit.CheckIndex(i, sp.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("objectAtIndexedSubscript:"), i)
 	return StrokePointFromID(_r)
 }
 
 // InterpolatedLocationAt the on-curve location for the floating point [0, count-1] `parametricValue` parameter. This has better performance than `[self interpolatedPointAt: parametricValue].location` for when only the location is required.
-func (x *StrokePath) InterpolatedLocationAt(parametricValue float64) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("interpolatedLocationAt:"), parametricValue)
+func (sp *StrokePath) InterpolatedLocationAt(parametricValue float64) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(sp), objc.RegisterName("interpolatedLocationAt:"), parametricValue)
 	return _r
 }
 
 // InterpolatedPointAt the on-curve point for the floating point [0, count-1] `parametricValue` parameter.
-func (x *StrokePath) InterpolatedPointAt(parametricValue float64) *StrokePoint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpolatedPointAt:"), parametricValue)
+func (sp *StrokePath) InterpolatedPointAt(parametricValue float64) *StrokePoint {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("interpolatedPointAt:"), parametricValue)
 	return StrokePointFromID(_r)
 }
 
 // EnumerateInterpolatedPointsInRangeStrideByDistanceUsing executes a given block using each point in a range with a distance step.
-func (x *StrokePath) EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(range_ *FloatRange, distanceStep float64, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateInterpolatedPointsInRange:strideByDistance:usingBlock:"), objref.IDOf(range_), distanceStep, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (sp *StrokePath) EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(range_ *FloatRange, distanceStep float64, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("enumerateInterpolatedPointsInRange:strideByDistance:usingBlock:"), objref.IDOf(range_), distanceStep, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // EnumerateInterpolatedPointsInRangeStrideByTimeUsing executes a given block using each point in a range with a time step.
-func (x *StrokePath) EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range_ *FloatRange, timeStep float64, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateInterpolatedPointsInRange:strideByTime:usingBlock:"), objref.IDOf(range_), timeStep, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (sp *StrokePath) EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range_ *FloatRange, timeStep float64, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("enumerateInterpolatedPointsInRange:strideByTime:usingBlock:"), objref.IDOf(range_), timeStep, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing executes a given block using each point in a range with a parametric step.
-func (x *StrokePath) EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing(range_ *FloatRange, parametricStep float64, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateInterpolatedPointsInRange:strideByParametricStep:usingBlock:"), objref.IDOf(range_), parametricStep, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (sp *StrokePath) EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing(range_ *FloatRange, parametricStep float64, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("enumerateInterpolatedPointsInRange:strideByParametricStep:usingBlock:"), objref.IDOf(range_), parametricStep, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // ParametricValueOffsetByDistance returns a parametric value on the B-spline that is a specified distance from the given parametric value.
-func (x *StrokePath) ParametricValueOffsetByDistance(parametricValue float64, distanceStep float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("parametricValue:offsetByDistance:"), parametricValue, distanceStep)
+func (sp *StrokePath) ParametricValueOffsetByDistance(parametricValue float64, distanceStep float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("parametricValue:offsetByDistance:"), parametricValue, distanceStep)
 	return _r
 }
 
 // ParametricValueOffsetByTime returns a parametric value on the B-spline that is a specified time from the given parametric value.
-func (x *StrokePath) ParametricValueOffsetByTime(parametricValue float64, timeStep float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("parametricValue:offsetByTime:"), parametricValue, timeStep)
+func (sp *StrokePath) ParametricValueOffsetByTime(parametricValue float64, timeStep float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("parametricValue:offsetByTime:"), parametricValue, timeStep)
 	return _r
 }
 
-// Count the number of control points in this stroke path.
-func (x *StrokePath) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of control points in this stroke path.
+func (sp *StrokePath) Count() int {
+	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("count"))
 	return _r
 }
 
-// CreationDate the time at which this stroke path was started. The `timeOffset` of contained PKStrokePoints is relative to this date.
-func (x *StrokePath) CreationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+// CreationDate returns the time at which this stroke path was started. The `timeOffset` of contained PKStrokePoints is relative to this date.
+func (sp *StrokePath) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
-
-// StrokePathable is the interface implemented by [StrokePath], for mocking and DI.
-type StrokePathable interface {
-	obj.Object
-	PointAtIndex(i int) *StrokePoint
-	ObjectAtIndexedSubscript(i int) *StrokePoint
-	InterpolatedLocationAt(parametricValue float64) corefoundation.CGPoint
-	InterpolatedPointAt(parametricValue float64) *StrokePoint
-	EnumerateInterpolatedPointsInRangeStrideByDistanceUsing(range_ *FloatRange, distanceStep float64, block func(obj.Object, *bool))
-	EnumerateInterpolatedPointsInRangeStrideByTimeUsing(range_ *FloatRange, timeStep float64, block func(obj.Object, *bool))
-	EnumerateInterpolatedPointsInRangeStrideByParametricStepUsing(range_ *FloatRange, parametricStep float64, block func(obj.Object, *bool))
-	ParametricValueOffsetByDistance(parametricValue float64, distanceStep float64) float64
-	ParametricValueOffsetByTime(parametricValue float64, timeStep float64) float64
-	Count() int
-	CreationDate() obj.Object
-}
-
-var _ StrokePathable = (*StrokePath)(nil)

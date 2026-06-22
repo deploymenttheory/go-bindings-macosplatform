@@ -46,24 +46,24 @@ func contentKeyResponseAdopt(id objc.ID) *ContentKeyResponse {
 }
 
 // Description returns the object's -description text.
-func (x *ContentKeyResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ckr *ContentKeyResponse) Description() string {
+	return rt.Description(objref.IDOf(ckr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentKeyResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ckr *ContentKeyResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ckr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentKeyResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ckr *ContentKeyResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ckr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentKeyResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ckr *ContentKeyResponse) String() string {
+	return rt.Description(objref.IDOf(ckr))
 }
 
 // NewContentKeyResponse creates a new ContentKeyResponse.
@@ -71,10 +71,3 @@ func NewContentKeyResponse() *ContentKeyResponse {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVContentKeyResponse")), objc.RegisterName("new"))
 	return contentKeyResponseAdopt(_id)
 }
-
-// ContentKeyResponseable is the interface implemented by [ContentKeyResponse], for mocking and DI.
-type ContentKeyResponseable interface {
-	obj.Object
-}
-
-var _ ContentKeyResponseable = (*ContentKeyResponse)(nil)

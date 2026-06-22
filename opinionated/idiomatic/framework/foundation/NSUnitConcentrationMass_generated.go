@@ -53,18 +53,10 @@ func NewUnitConcentrationMass() *UnitConcentrationMass {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitConcentrationMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ucm *UnitConcentrationMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass {
+	objc.Send[objc.ID](objref.IDOf(ucm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ucm
 }
-
-// UnitConcentrationMassable is the interface implemented by [UnitConcentrationMass], for mocking and DI.
-type UnitConcentrationMassable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass
-}
-
-var _ UnitConcentrationMassable = (*UnitConcentrationMass)(nil)
 
 var _ DimensionProvider = (*UnitConcentrationMass)(nil)
 

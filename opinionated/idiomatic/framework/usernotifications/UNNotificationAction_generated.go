@@ -48,29 +48,29 @@ func notificationActionAdopt(id objc.ID) *NotificationAction {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NotificationAction) Description() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (na *NotificationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(na), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (na *NotificationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(na), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NotificationAction) String() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *NotificationAction) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (na *NotificationAction) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -78,8 +78,8 @@ func (x *NotificationAction) Identifier() string {
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *NotificationAction) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (na *NotificationAction) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,31 +87,20 @@ func (x *NotificationAction) Title() string {
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *NotificationAction) Options() NotificationActionOptions {
-	_r := objc.Send[NotificationActionOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (na *NotificationAction) Options() NotificationActionOptions {
+	_r := objc.Send[NotificationActionOptions](objref.IDOf(na), objc.RegisterName("options"))
 	return _r
 }
 
 // Icon wraps the corresponding Objective-C method.
-func (x *NotificationAction) Icon() *NotificationActionIcon {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+func (na *NotificationAction) Icon() *NotificationActionIcon {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("icon"))
 	return NotificationActionIconFromID(_r)
 }
-
-// NotificationActionable is the interface implemented by [NotificationAction], for mocking and DI.
-type NotificationActionable interface {
-	obj.Object
-	Identifier() string
-	Title() string
-	Options() NotificationActionOptions
-	Icon() *NotificationActionIcon
-}
-
-var _ NotificationActionable = (*NotificationAction)(nil)
 
 // isNotificationAction marks NotificationAction — and, by embedding promotion, its
 // subclasses — as a member of the NotificationAction hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NotificationAction) isNotificationAction() {}
+func (na *NotificationAction) isNotificationAction() {}
 
 var _ NotificationActionProvider = (*NotificationAction)(nil)

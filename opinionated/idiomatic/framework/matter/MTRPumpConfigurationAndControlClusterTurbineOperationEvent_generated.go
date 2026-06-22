@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterTurbineOperationEventAdopt(id objc.ID)
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcacctoe *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcacctoe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcacctoe *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcacctoe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcacctoe *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcacctoe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcacctoe *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) String() string {
+	return rt.Description(objref.IDOf(mpcacctoe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent creates a new MTRPumpConfigurationAndControlClusterTurbineOperationEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent() *MTRPumpCon
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterTurbineOperationEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterTurbineOperationEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterTurbineOperationEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterTurbineOperationEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterTurbineOperationEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterTurbineOperationEventable = (*MTRPumpConfigurationAndControlClusterTurbineOperationEvent)(nil)

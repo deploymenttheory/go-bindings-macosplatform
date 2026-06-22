@@ -46,24 +46,24 @@ func speechSynthesisProviderAudioUnitAdopt(id objc.ID) *SpeechSynthesisProviderA
 }
 
 // Description returns the object's -description text.
-func (x *SpeechSynthesisProviderAudioUnit) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sspau *SpeechSynthesisProviderAudioUnit) Description() string {
+	return rt.Description(objref.IDOf(sspau))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechSynthesisProviderAudioUnit) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sspau *SpeechSynthesisProviderAudioUnit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sspau), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechSynthesisProviderAudioUnit) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sspau *SpeechSynthesisProviderAudioUnit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sspau), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechSynthesisProviderAudioUnit) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sspau *SpeechSynthesisProviderAudioUnit) String() string {
+	return rt.Description(objref.IDOf(sspau))
 }
 
 // NewSpeechSynthesisProviderAudioUnit creates a new SpeechSynthesisProviderAudioUnit.
@@ -72,44 +72,27 @@ func NewSpeechSynthesisProviderAudioUnit() *SpeechSynthesisProviderAudioUnit {
 	return speechSynthesisProviderAudioUnitAdopt(_id)
 }
 
-// WithSpeechVoices a list of voices the audio unit provides to the system.
-func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*SpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit {
+// WithSpeechVoices sets a list of voices the audio unit provides to the system.
+func (sspau *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*SpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit {
 	_arr := purego.SliceToNSArray(items, func(_v *SpeechSynthesisProviderVoice) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeechVoices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("setSpeechVoices:"), _arr)
+	return sspau
 }
 
 // SynthesizeSpeechRequest sets the text to synthesize and the voice to use.
-func (x *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synthesizeSpeechRequest:"), objref.IDOf(speechRequest))
+func (sspau *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest) {
+	objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("synthesizeSpeechRequest:"), objref.IDOf(speechRequest))
 }
 
 // CancelSpeechRequest informs the audio unit to discard the speech request.
-func (x *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelSpeechRequest"))
+func (sspau *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
+	objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("cancelSpeechRequest"))
 }
 
 // SpeechVoices returns the voices this audio unit has available and ready for synthesis. This method should fetch and return the voices ready to synthesize that a user can select from (usually through Settings). Required for speech synthesizer audio unit extensions. An audio unit with a dynamic list of voices can override this property's getter to perform a more complex fetch.
 //
 // SpeechVoices returns the collection as a Go slice.
-func (x *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*SpeechSynthesisProviderVoice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechVoices"))
+func (sspau *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*SpeechSynthesisProviderVoice {
+	_arr := objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("speechVoices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeechSynthesisProviderVoice { return SpeechSynthesisProviderVoiceFromID(_id) })
 }
-
-// SetSpeechVoices wraps the corresponding Objective-C method.
-func (x *SpeechSynthesisProviderAudioUnit) SetSpeechVoices(speechVoices []*SpeechSynthesisProviderVoice) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeechVoices:"), purego.SliceToNSArray(speechVoices, func(_v *SpeechSynthesisProviderVoice) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SpeechSynthesisProviderAudioUnitable is the interface implemented by [SpeechSynthesisProviderAudioUnit], for mocking and DI.
-type SpeechSynthesisProviderAudioUnitable interface {
-	obj.Object
-	WithSpeechVoices(items ...*SpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit
-	SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest)
-	CancelSpeechRequest()
-	SpeechVoices() []*SpeechSynthesisProviderVoice
-	SetSpeechVoices(speechVoices []*SpeechSynthesisProviderVoice)
-}
-
-var _ SpeechSynthesisProviderAudioUnitable = (*SpeechSynthesisProviderAudioUnit)(nil)

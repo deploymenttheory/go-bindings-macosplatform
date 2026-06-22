@@ -47,24 +47,24 @@ func thumbnailRepresentationAdopt(id objc.ID) *ThumbnailRepresentation {
 }
 
 // Description returns the object's -description text.
-func (x *ThumbnailRepresentation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *ThumbnailRepresentation) Description() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ThumbnailRepresentation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tr *ThumbnailRepresentation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ThumbnailRepresentation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tr *ThumbnailRepresentation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ThumbnailRepresentation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *ThumbnailRepresentation) String() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // NewThumbnailRepresentation creates a new ThumbnailRepresentation.
@@ -74,29 +74,19 @@ func NewThumbnailRepresentation() *ThumbnailRepresentation {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *ThumbnailRepresentation) Type() ThumbnailRepresentationType {
-	_r := objc.Send[ThumbnailRepresentationType](objref.IDOf(x), objc.RegisterName("type"))
+func (tr *ThumbnailRepresentation) Type() ThumbnailRepresentationType {
+	_r := objc.Send[ThumbnailRepresentationType](objref.IDOf(tr), objc.RegisterName("type"))
 	return _r
 }
 
 // CGImage returns the CGImage representation of the thumbnail.
-func (x *ThumbnailRepresentation) CGImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImage"))
+func (tr *ThumbnailRepresentation) CGImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
 }
 
 // ContentRect returns the the effective rect within the thumbnail image representing the content of the document. In icon mode, this is the part of the image without all the image decorations.
-func (x *ThumbnailRepresentation) ContentRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("contentRect"))
+func (tr *ThumbnailRepresentation) ContentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tr), objc.RegisterName("contentRect"))
 	return _r
 }
-
-// ThumbnailRepresentationable is the interface implemented by [ThumbnailRepresentation], for mocking and DI.
-type ThumbnailRepresentationable interface {
-	obj.Object
-	Type() ThumbnailRepresentationType
-	CGImage() obj.Object
-	ContentRect() corefoundation.CGRect
-}
-
-var _ ThumbnailRepresentationable = (*ThumbnailRepresentation)(nil)

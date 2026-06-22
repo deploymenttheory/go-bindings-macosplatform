@@ -44,24 +44,24 @@ func fontAssetRequestAdopt(id objc.ID) *FontAssetRequest {
 }
 
 // Description returns the object's -description text.
-func (x *FontAssetRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (far *FontAssetRequest) Description() string {
+	return rt.Description(objref.IDOf(far))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FontAssetRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (far *FontAssetRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(far), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FontAssetRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (far *FontAssetRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(far), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FontAssetRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (far *FontAssetRequest) String() string {
+	return rt.Description(objref.IDOf(far))
 }
 
 // NewFontAssetRequestWithFontDescriptorsOptions creates a new FontAssetRequest.
@@ -74,22 +74,13 @@ func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescri
 // DownloadedFontDescriptors wraps the corresponding Objective-C method.
 //
 // DownloadedFontDescriptors returns the collection as a Go slice.
-func (x *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadedFontDescriptors"))
+func (far *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
+	_arr := objc.Send[objc.ID](objref.IDOf(far), objc.RegisterName("downloadedFontDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // Progress wraps the corresponding Objective-C method.
-func (x *FontAssetRequest) Progress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
+func (far *FontAssetRequest) Progress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(far), objc.RegisterName("progress"))
 	return obj.Wrap(_r)
 }
-
-// FontAssetRequestable is the interface implemented by [FontAssetRequest], for mocking and DI.
-type FontAssetRequestable interface {
-	obj.Object
-	DownloadedFontDescriptors() []*FontDescriptor
-	Progress() obj.Object
-}
-
-var _ FontAssetRequestable = (*FontAssetRequest)(nil)

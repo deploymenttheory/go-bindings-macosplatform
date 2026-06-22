@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,17 +50,9 @@ func NewAnimatedQuaternion() *AnimatedQuaternion {
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedQuaternion) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (aq *AnimatedQuaternion) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternion {
+	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("setInterpolation:"), interpolation)
+	return aq
 }
-
-// AnimatedQuaternionable is the interface implemented by [AnimatedQuaternion], for mocking and DI.
-type AnimatedQuaternionable interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternion
-}
-
-var _ AnimatedQuaternionable = (*AnimatedQuaternion)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedQuaternion)(nil)

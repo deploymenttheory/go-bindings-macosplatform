@@ -46,24 +46,24 @@ func aggregateAssetDownloadTaskAdopt(id objc.ID) *AggregateAssetDownloadTask {
 }
 
 // Description returns the object's -description text.
-func (x *AggregateAssetDownloadTask) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aadt *AggregateAssetDownloadTask) Description() string {
+	return rt.Description(objref.IDOf(aadt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AggregateAssetDownloadTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aadt *AggregateAssetDownloadTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aadt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AggregateAssetDownloadTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aadt *AggregateAssetDownloadTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aadt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AggregateAssetDownloadTask) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aadt *AggregateAssetDownloadTask) String() string {
+	return rt.Description(objref.IDOf(aadt))
 }
 
 // NewAggregateAssetDownloadTask creates a new AggregateAssetDownloadTask.
@@ -72,16 +72,8 @@ func NewAggregateAssetDownloadTask() *AggregateAssetDownloadTask {
 	return aggregateAssetDownloadTaskAdopt(_id)
 }
 
-// URLAsset the asset supplied to the download task upon initialization.
-func (x *AggregateAssetDownloadTask) URLAsset() *URLAsset {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAsset"))
+// URLAsset returns the asset supplied to the download task upon initialization.
+func (aadt *AggregateAssetDownloadTask) URLAsset() *URLAsset {
+	_r := objc.Send[objc.ID](objref.IDOf(aadt), objc.RegisterName("URLAsset"))
 	return URLAssetFromID(_r)
 }
-
-// AggregateAssetDownloadTaskable is the interface implemented by [AggregateAssetDownloadTask], for mocking and DI.
-type AggregateAssetDownloadTaskable interface {
-	obj.Object
-	URLAsset() *URLAsset
-}
-
-var _ AggregateAssetDownloadTaskable = (*AggregateAssetDownloadTask)(nil)

@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewPolygonObstacle() *PolygonObstacle {
 	return polygonObstacleAdopt(_id)
 }
 
-// VertexCount number of vertices on this polygon
-func (x *PolygonObstacle) VertexCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
+// VertexCount returns number of vertices on this polygon
+func (po *PolygonObstacle) VertexCount() int {
+	_r := objc.Send[int](objref.IDOf(po), objc.RegisterName("vertexCount"))
 	return _r
 }
-
-// PolygonObstacleable is the interface implemented by [PolygonObstacle], for mocking and DI.
-type PolygonObstacleable interface {
-	obj.Object
-	VertexCount() int
-}
-
-var _ PolygonObstacleable = (*PolygonObstacle)(nil)
 
 var _ ObstacleProvider = (*PolygonObstacle)(nil)

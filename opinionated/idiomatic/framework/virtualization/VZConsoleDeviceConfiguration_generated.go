@@ -48,36 +48,29 @@ func consoleDeviceConfigurationAdopt(id objc.ID) *ConsoleDeviceConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *ConsoleDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdc *ConsoleDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(cdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConsoleDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdc *ConsoleDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConsoleDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdc *ConsoleDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ConsoleDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdc *ConsoleDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(cdc))
 }
-
-// ConsoleDeviceConfigurationable is the interface implemented by [ConsoleDeviceConfiguration], for mocking and DI.
-type ConsoleDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ ConsoleDeviceConfigurationable = (*ConsoleDeviceConfiguration)(nil)
 
 // isConsoleDeviceConfiguration marks ConsoleDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the ConsoleDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ConsoleDeviceConfiguration) isConsoleDeviceConfiguration() {}
+func (cdc *ConsoleDeviceConfiguration) isConsoleDeviceConfiguration() {}
 
 var _ ConsoleDeviceConfigurationProvider = (*ConsoleDeviceConfiguration)(nil)

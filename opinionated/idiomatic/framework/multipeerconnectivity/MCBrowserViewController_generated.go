@@ -46,24 +46,24 @@ func browserViewControllerAdopt(id objc.ID) *BrowserViewController {
 }
 
 // Description returns the object's -description text.
-func (x *BrowserViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bvc *BrowserViewController) Description() string {
+	return rt.Description(objref.IDOf(bvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BrowserViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bvc *BrowserViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BrowserViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bvc *BrowserViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BrowserViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bvc *BrowserViewController) String() string {
+	return rt.Description(objref.IDOf(bvc))
 }
 
 // NewBrowserViewControllerWithServiceTypeSession initializes a browser view controller using the provided service type and session.
@@ -80,63 +80,38 @@ func NewBrowserViewControllerWithBrowserSession(browser *NearbyServiceBrowser, s
 	return browserViewControllerAdopt(_id)
 }
 
-// WithMinimumNumberOfPeers the minimum number of peers that need to be in a session, including the local peer.
-func (x *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
-	return x
+// WithMinimumNumberOfPeers sets the minimum number of peers that need to be in a session, including the local peer.
+func (bvc *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController {
+	objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
+	return bvc
 }
 
-// WithMaximumNumberOfPeers the maximum number of peers allowed in a session, including the local peer.
-func (x *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
-	return x
+// WithMaximumNumberOfPeers sets the maximum number of peers allowed in a session, including the local peer.
+func (bvc *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController {
+	objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
+	return bvc
 }
 
 // Browser wraps the corresponding Objective-C method.
-func (x *BrowserViewController) Browser() *NearbyServiceBrowser {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("browser"))
+func (bvc *BrowserViewController) Browser() *NearbyServiceBrowser {
+	_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("browser"))
 	return NearbyServiceBrowserFromID(_r)
 }
 
 // Session wraps the corresponding Objective-C method.
-func (x *BrowserViewController) Session() *Session {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+func (bvc *BrowserViewController) Session() *Session {
+	_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
 // MinimumNumberOfPeers wraps the corresponding Objective-C method.
-func (x *BrowserViewController) MinimumNumberOfPeers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumNumberOfPeers"))
+func (bvc *BrowserViewController) MinimumNumberOfPeers() int {
+	_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("minimumNumberOfPeers"))
 	return _r
-}
-
-// SetMinimumNumberOfPeers wraps the corresponding Objective-C method.
-func (x *BrowserViewController) SetMinimumNumberOfPeers(minimumNumberOfPeers int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
 }
 
 // MaximumNumberOfPeers wraps the corresponding Objective-C method.
-func (x *BrowserViewController) MaximumNumberOfPeers() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfPeers"))
+func (bvc *BrowserViewController) MaximumNumberOfPeers() int {
+	_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("maximumNumberOfPeers"))
 	return _r
 }
-
-// SetMaximumNumberOfPeers wraps the corresponding Objective-C method.
-func (x *BrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
-}
-
-// BrowserViewControllerable is the interface implemented by [BrowserViewController], for mocking and DI.
-type BrowserViewControllerable interface {
-	obj.Object
-	WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController
-	WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController
-	Browser() *NearbyServiceBrowser
-	Session() *Session
-	MinimumNumberOfPeers() int
-	SetMinimumNumberOfPeers(minimumNumberOfPeers int)
-	MaximumNumberOfPeers() int
-	SetMaximumNumberOfPeers(maximumNumberOfPeers int)
-}
-
-var _ BrowserViewControllerable = (*BrowserViewController)(nil)

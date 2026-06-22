@@ -52,25 +52,16 @@ func NewHangDiagnostic() *HangDiagnostic {
 	return hangDiagnosticAdopt(_id)
 }
 
-// CallStackTree the application call stack tree associated with the hang.
-func (x *HangDiagnostic) CallStackTree() *CallStackTree {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+// CallStackTree returns the application call stack tree associated with the hang.
+func (hd *HangDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(hd), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// HangDuration total hang duration for this diagnostic. Dimensioned as NSUnitDuration.
-func (x *HangDiagnostic) HangDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hangDuration"))
+// HangDuration returns total hang duration for this diagnostic. Dimensioned as NSUnitDuration.
+func (hd *HangDiagnostic) HangDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hd), objc.RegisterName("hangDuration"))
 	return obj.Wrap(_r)
 }
-
-// HangDiagnosticable is the interface implemented by [HangDiagnostic], for mocking and DI.
-type HangDiagnosticable interface {
-	obj.Object
-	CallStackTree() *CallStackTree
-	HangDuration() obj.Object
-}
-
-var _ HangDiagnosticable = (*HangDiagnostic)(nil)
 
 var _ DiagnosticProvider = (*HangDiagnostic)(nil)

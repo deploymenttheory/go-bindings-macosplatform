@@ -46,24 +46,24 @@ func mediumAdopt(id objc.ID) *Medium {
 }
 
 // Description returns the object's -description text.
-func (x *Medium) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Medium) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Medium) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Medium) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Medium) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Medium) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Medium) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Medium) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMediumWithEnginePreset creates a medium.
@@ -72,10 +72,3 @@ func NewMediumWithEnginePreset(engine *Engine, preset MediumPreset) *Medium {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), objref.IDOf(engine), preset)
 	return mediumAdopt(_id)
 }
-
-// Mediumable is the interface implemented by [Medium], for mocking and DI.
-type Mediumable interface {
-	obj.Object
-}
-
-var _ Mediumable = (*Medium)(nil)

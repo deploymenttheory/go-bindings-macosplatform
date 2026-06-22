@@ -53,69 +53,54 @@ func NewParticipant() *Participant {
 }
 
 // ABPersonInAddressBook returns the address book record that represents the participant.
-func (x *Participant) ABPersonInAddressBook(addressBook obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ABPersonInAddressBook:"), objref.IDOf(addressBook))
+func (p *Participant) ABPersonInAddressBook(addressBook obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("ABPersonInAddressBook:"), objref.IDOf(addressBook))
 	return obj.Wrap(_r)
 }
 
-// URL URL representing this participant.
-func (x *Participant) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns URL representing this participant.
+func (p *Participant) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Name name of this participant.
-func (x *Participant) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of this participant.
+func (p *Participant) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ParticipantStatus the status of the attendee. Returns the status of the attendee as a EKParticipantStatus value.
-func (x *Participant) ParticipantStatus() ParticipantStatus {
-	_r := objc.Send[ParticipantStatus](objref.IDOf(x), objc.RegisterName("participantStatus"))
+// ParticipantStatus returns the status of the attendee. Returns the status of the attendee as a EKParticipantStatus value.
+func (p *Participant) ParticipantStatus() ParticipantStatus {
+	_r := objc.Send[ParticipantStatus](objref.IDOf(p), objc.RegisterName("participantStatus"))
 	return _r
 }
 
-// ParticipantRole the role of the attendee. Returns the role of the attendee as a EKParticipantRole value.
-func (x *Participant) ParticipantRole() ParticipantRole {
-	_r := objc.Send[ParticipantRole](objref.IDOf(x), objc.RegisterName("participantRole"))
+// ParticipantRole returns the role of the attendee. Returns the role of the attendee as a EKParticipantRole value.
+func (p *Participant) ParticipantRole() ParticipantRole {
+	_r := objc.Send[ParticipantRole](objref.IDOf(p), objc.RegisterName("participantRole"))
 	return _r
 }
 
-// ParticipantType the type of the attendee. Returns the type of the attendee as a EKParticipantType value.
-func (x *Participant) ParticipantType() ParticipantType {
-	_r := objc.Send[ParticipantType](objref.IDOf(x), objc.RegisterName("participantType"))
+// ParticipantType returns the type of the attendee. Returns the type of the attendee as a EKParticipantType value.
+func (p *Participant) ParticipantType() ParticipantType {
+	_r := objc.Send[ParticipantType](objref.IDOf(p), objc.RegisterName("participantType"))
 	return _r
 }
 
-// IsCurrentUser a boolean indicating whether this participant represents the owner of this account.
-func (x *Participant) IsCurrentUser() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCurrentUser"))
+// IsCurrentUser reports whether a boolean indicating whether this participant represents the owner of this account.
+func (p *Participant) IsCurrentUser() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCurrentUser"))
 	return _r
 }
 
 // ContactPredicate returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
-func (x *Participant) ContactPredicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactPredicate"))
+func (p *Participant) ContactPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contactPredicate"))
 	return obj.Wrap(_r)
 }
-
-// Participantable is the interface implemented by [Participant], for mocking and DI.
-type Participantable interface {
-	obj.Object
-	ABPersonInAddressBook(addressBook obj.Object) obj.Object
-	URL() obj.Object
-	Name() string
-	ParticipantStatus() ParticipantStatus
-	ParticipantRole() ParticipantRole
-	ParticipantType() ParticipantType
-	IsCurrentUser() bool
-	ContactPredicate() obj.Object
-}
-
-var _ Participantable = (*Participant)(nil)
 
 var _ ObjectProvider = (*Participant)(nil)

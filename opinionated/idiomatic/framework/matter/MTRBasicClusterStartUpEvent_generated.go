@@ -51,17 +51,9 @@ func NewMTRBasicClusterStartUpEvent() *MTRBasicClusterStartUpEvent {
 }
 
 // WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicClusterStartUpEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+func (mbcsue *MTRBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicClusterStartUpEvent {
+	objc.Send[objc.ID](objref.IDOf(mbcsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return mbcsue
 }
-
-// MTRBasicClusterStartUpEventable is the interface implemented by [MTRBasicClusterStartUpEvent], for mocking and DI.
-type MTRBasicClusterStartUpEventable interface {
-	obj.Object
-	WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicClusterStartUpEvent
-}
-
-var _ MTRBasicClusterStartUpEventable = (*MTRBasicClusterStartUpEvent)(nil)
 
 var _ MTRBasicInformationClusterStartUpEventProvider = (*MTRBasicClusterStartUpEvent)(nil)

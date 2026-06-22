@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewMathExpressionTableCellWithExpressions(expressions []*MathExpression) *M
 // Expressions wraps the corresponding Objective-C method.
 //
 // Expressions returns the collection as a Go slice.
-func (x *MathExpressionTableCell) Expressions() []*MathExpression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
+func (metc *MathExpressionTableCell) Expressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(metc), objc.RegisterName("expressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
-
-// MathExpressionTableCellable is the interface implemented by [MathExpressionTableCell], for mocking and DI.
-type MathExpressionTableCellable interface {
-	obj.Object
-	Expressions() []*MathExpression
-}
-
-var _ MathExpressionTableCellable = (*MathExpressionTableCell)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionTableCell)(nil)

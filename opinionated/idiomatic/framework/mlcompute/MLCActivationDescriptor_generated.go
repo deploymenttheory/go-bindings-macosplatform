@@ -46,24 +46,24 @@ func activationDescriptorAdopt(id objc.ID) *ActivationDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ActivationDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *ActivationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActivationDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ad *ActivationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActivationDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ad *ActivationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ActivationDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ad *ActivationDescriptor) String() string {
+	return rt.Description(objref.IDOf(ad))
 }
 
 // NewActivationDescriptor creates a new ActivationDescriptor.
@@ -72,37 +72,26 @@ func NewActivationDescriptor() *ActivationDescriptor {
 	return activationDescriptorAdopt(_id)
 }
 
-// ActivationType the type of activation function
-func (x *ActivationDescriptor) ActivationType() ActivationType {
-	_r := objc.Send[ActivationType](objref.IDOf(x), objc.RegisterName("activationType"))
+// ActivationType returns the type of activation function
+func (ad *ActivationDescriptor) ActivationType() ActivationType {
+	_r := objc.Send[ActivationType](objref.IDOf(ad), objc.RegisterName("activationType"))
 	return _r
 }
 
-// A parameter to the activation function
-func (x *ActivationDescriptor) A() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
+// A returns parameter to the activation function
+func (ad *ActivationDescriptor) A() float32 {
+	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("a"))
 	return _r
 }
 
-// B parameter to the activation function
-func (x *ActivationDescriptor) B() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
+// B returns parameter to the activation function
+func (ad *ActivationDescriptor) B() float32 {
+	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("b"))
 	return _r
 }
 
-// C parameter to the activation function
-func (x *ActivationDescriptor) C() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
+// C returns parameter to the activation function
+func (ad *ActivationDescriptor) C() float32 {
+	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("c"))
 	return _r
 }
-
-// ActivationDescriptorable is the interface implemented by [ActivationDescriptor], for mocking and DI.
-type ActivationDescriptorable interface {
-	obj.Object
-	ActivationType() ActivationType
-	A() float32
-	B() float32
-	C() float32
-}
-
-var _ ActivationDescriptorable = (*ActivationDescriptor)(nil)

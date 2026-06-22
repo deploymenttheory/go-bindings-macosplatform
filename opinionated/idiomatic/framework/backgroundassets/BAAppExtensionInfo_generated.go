@@ -44,24 +44,24 @@ func appExtensionInfoAdopt(id objc.ID) *AppExtensionInfo {
 }
 
 // Description returns the object's -description text.
-func (x *AppExtensionInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aei *AppExtensionInfo) Description() string {
+	return rt.Description(objref.IDOf(aei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppExtensionInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aei *AppExtensionInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppExtensionInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aei *AppExtensionInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppExtensionInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aei *AppExtensionInfo) String() string {
+	return rt.Description(objref.IDOf(aei))
 }
 
 // NewAppExtensionInfo creates a new AppExtensionInfo.
@@ -70,23 +70,14 @@ func NewAppExtensionInfo() *AppExtensionInfo {
 	return appExtensionInfoAdopt(_id)
 }
 
-// RestrictedDownloadSizeRemaining the number of bytes remaining that can be scheduled if the total download size is restricted. When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
-func (x *AppExtensionInfo) RestrictedDownloadSizeRemaining() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictedDownloadSizeRemaining"))
+// RestrictedDownloadSizeRemaining returns the number of bytes remaining that can be scheduled if the total download size is restricted. When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
+func (aei *AppExtensionInfo) RestrictedDownloadSizeRemaining() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aei), objc.RegisterName("restrictedDownloadSizeRemaining"))
 	return obj.Wrap(_r)
 }
 
-// RestrictedEssentialDownloadSizeRemaining the number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
-func (x *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictedEssentialDownloadSizeRemaining"))
+// RestrictedEssentialDownloadSizeRemaining returns the number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
+func (aei *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aei), objc.RegisterName("restrictedEssentialDownloadSizeRemaining"))
 	return obj.Wrap(_r)
 }
-
-// AppExtensionInfoable is the interface implemented by [AppExtensionInfo], for mocking and DI.
-type AppExtensionInfoable interface {
-	obj.Object
-	RestrictedDownloadSizeRemaining() obj.Object
-	RestrictedEssentialDownloadSizeRemaining() obj.Object
-}
-
-var _ AppExtensionInfoable = (*AppExtensionInfo)(nil)

@@ -46,24 +46,24 @@ func assetWriterInputTaggedPixelBufferGroupAdaptorAdopt(id objc.ID) *AssetWriter
 }
 
 // Description returns the object's -description text.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) Description() string {
+	return rt.Description(objref.IDOf(awitpbga))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(awitpbga), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(awitpbga), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) String() string {
+	return rt.Description(objref.IDOf(awitpbga))
 }
 
 // NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes creates an object that appends tagged buffer groups to an asset writer input.
@@ -73,30 +73,20 @@ func NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourceP
 	return assetWriterInputTaggedPixelBufferGroupAdaptorAdopt(_id)
 }
 
-// AssetWriterInput the asset writer input to which the receiver should append tagged buffer groups.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) AssetWriterInput() *AssetWriterInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInput"))
+// AssetWriterInput returns the asset writer input to which the receiver should append tagged buffer groups.
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := objc.Send[objc.ID](objref.IDOf(awitpbga), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)
 }
 
-// SourcePixelBufferAttributes the pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool. The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) SourcePixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+// SourcePixelBufferAttributes returns the pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool. The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(awitpbga), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// PixelBufferPool a pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects of tagged buffer groups that can be appended to the receiver. For maximum efficiency, clients should create CVPixelBuffer objects of tagged buffer groups for appendTaggedPixelBufferGroup:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function. The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. Clients should read this property after -[AVAssetWriter startWriting] calling to get a non-NULL value. This property is not key value observable.
-func (x *AssetWriterInputTaggedPixelBufferGroupAdaptor) PixelBufferPool() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelBufferPool"))
+// PixelBufferPool returns a pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects of tagged buffer groups that can be appended to the receiver. For maximum efficiency, clients should create CVPixelBuffer objects of tagged buffer groups for appendTaggedPixelBufferGroup:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function. The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. Clients should read this property after -[AVAssetWriter startWriting] calling to get a non-NULL value. This property is not key value observable.
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) PixelBufferPool() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(awitpbga), objc.RegisterName("pixelBufferPool"))
 	return obj.Wrap(_r)
 }
-
-// AssetWriterInputTaggedPixelBufferGroupAdaptorable is the interface implemented by [AssetWriterInputTaggedPixelBufferGroupAdaptor], for mocking and DI.
-type AssetWriterInputTaggedPixelBufferGroupAdaptorable interface {
-	obj.Object
-	AssetWriterInput() *AssetWriterInput
-	SourcePixelBufferAttributes() obj.Object
-	PixelBufferPool() obj.Object
-}
-
-var _ AssetWriterInputTaggedPixelBufferGroupAdaptorable = (*AssetWriterInputTaggedPixelBufferGroupAdaptor)(nil)
